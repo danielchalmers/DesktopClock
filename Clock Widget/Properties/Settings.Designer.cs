@@ -34,5 +34,16 @@ namespace Clock_Widget.Properties {
                 this["ShouldUpgrade"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::WpfWindowPlacement.WindowPlacement Placement {
+            get {
+                return ((global::WpfWindowPlacement.WindowPlacement)(this["Placement"]));
+            }
+            set {
+                this["Placement"] = value;
+            }
+        }
     }
 }

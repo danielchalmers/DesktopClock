@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clock_Widget"
+        xmlns:p="clr-namespace:Clock_Widget.Properties"
+        xmlns:wp="clr-namespace:WpfWindowPlacement;assembly=WpfWindowPlacement"
         mc:Ignorable="d"
         Title="{x:Static local:App.Title}"
         Height="350"
-        Width="525">
+        Width="525"
+        wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}}"
+        wp:WindowPlacementProperties.TrackPlacement="True">
     <Grid>
     </Grid>
 </Window>
