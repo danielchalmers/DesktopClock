@@ -12,6 +12,9 @@
         Width="525"
         wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}}"
         wp:WindowPlacementProperties.TrackPlacement="True">
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
     <Grid>
     </Grid>
 </Window>
