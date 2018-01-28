@@ -8,13 +8,64 @@
         xmlns:wp="clr-namespace:WpfWindowPlacement;assembly=WpfWindowPlacement"
         mc:Ignorable="d"
         Title="{x:Static local:App.Title}"
-        Height="350"
-        Width="525"
+        Topmost="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        UseLayoutRounding="True"
+        FontFamily="Consolas"
         wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}}"
-        wp:WindowPlacementProperties.TrackPlacement="True">
+        wp:WindowPlacementProperties.TrackPlacement="True"
+        MouseDown="Window_MouseDown">
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
-    <Grid>
-    </Grid>
+
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Stay on _top"
+                      IsCheckable="True"
+                      IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+
+            <MenuItem Header="_Show in taskbar"
+                      IsCheckable="True"
+                      IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Height: " />
+
+                        <Slider Width="64"
+                                Value="{Binding Height, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                Minimum="16"
+                                Maximum="80"
+                                TickFrequency="2"
+                                IsSnapToTickEnabled="True"
+                                AutoToolTipPlacement="TopLeft" />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+
+            <Separator />
+
+            <MenuItem Header="E_xit"
+                      Click="MenuItemExit_OnClick" />
+        </ContextMenu>
+    </Window.ContextMenu>
+
+    <Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+        <Grid>
+            <Grid.Background>
+                <SolidColorBrush Color="White"
+                                 Opacity="0.85" />
+            </Grid.Background>
+
+            <TextBlock Text="{Binding CurrentTimeString}"
+                       Margin="2,0,2,0" />
+        </Grid>
+    </Viewbox>
 </Window>
