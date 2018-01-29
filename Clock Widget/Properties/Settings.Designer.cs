@@ -81,5 +81,17 @@ namespace Clock_Widget.Properties {
                 this["Height"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TimeZone {
+            get {
+                return ((string)(this["TimeZone"]));
+            }
+            set {
+                this["TimeZone"] = value;
+            }
+        }
     }
 }

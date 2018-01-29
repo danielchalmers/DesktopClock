@@ -50,6 +50,19 @@
                 </MenuItem.Header>
             </MenuItem>
 
+            <MenuItem Header="Time Zone"
+                      ItemsSource="{x:Static local:TimeZoneHelper.TimeZones}">
+                <MenuItem.Resources>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Command"
+                                Value="{Binding DataContext.SetTimeZoneCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+
+                        <Setter Property="CommandParameter"
+                                Value="{Binding}" />
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
+
             <Separator />
 
             <MenuItem Header="E_xit"
