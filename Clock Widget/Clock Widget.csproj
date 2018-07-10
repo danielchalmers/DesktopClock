@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MvvmLightLibsStd10">
-      <Version>5.4.0.1-alpha</Version>
+      <Version>5.4.1</Version>
     </PackageReference>
     <PackageReference Include="WpfWindowPlacement">
       <Version>2.0.0</Version>
