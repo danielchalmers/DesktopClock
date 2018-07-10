@@ -1,25 +1,25 @@
 ﻿<Window x:Class="Clock_Widget.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clock_Widget"
         xmlns:p="clr-namespace:Clock_Widget.Properties"
         xmlns:wp="clr-namespace:WpfWindowPlacement;assembly=WpfWindowPlacement"
         mc:Ignorable="d"
         Title="{x:Static local:App.Title}"
-        Topmost="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-        ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-        SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize"
-        WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        UseLayoutRounding="True"
         FontFamily="Consolas"
+        MouseDown="Window_MouseDown"
+        ResizeMode="NoResize"
+        ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        SizeToContent="WidthAndHeight"
+        Topmost="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        UseLayoutRounding="True"
+        WindowStyle="None"
         wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}}"
-        wp:WindowPlacementProperties.TrackPlacement="True"
-        MouseDown="Window_MouseDown">
+        wp:WindowPlacementProperties.TrackPlacement="True">
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
@@ -40,12 +40,12 @@
                         <TextBlock Text="Height: " />
 
                         <Slider Width="64"
-                                Value="{Binding Height, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                Minimum="16"
-                                Maximum="80"
-                                TickFrequency="2"
+                                AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True"
-                                AutoToolTipPlacement="TopLeft" />
+                                Maximum="80"
+                                Minimum="16"
+                                TickFrequency="2"
+                                Value="{Binding Height, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
@@ -65,20 +65,20 @@
 
             <Separator />
 
-            <MenuItem Header="E_xit"
-                      Click="MenuItemExit_OnClick" />
+            <MenuItem Click="MenuItemExit_OnClick"
+                      Header="E_xit" />
         </ContextMenu>
     </Window.ContextMenu>
 
     <Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
         <Grid>
             <Grid.Background>
-                <SolidColorBrush Color="White"
-                                 Opacity="0.85" />
+                <SolidColorBrush Opacity="0.85"
+                                 Color="White" />
             </Grid.Background>
 
-            <TextBlock Text="{Binding CurrentTimeInSelectedTimeZone}"
-                       Margin="2,0,2,0" />
+            <TextBlock Margin="2,0,2,0"
+                       Text="{Binding CurrentTimeInSelectedTimeZone}" />
         </Grid>
     </Viewbox>
 </Window>
