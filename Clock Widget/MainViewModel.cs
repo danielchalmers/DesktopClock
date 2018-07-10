@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
+using Clock_Widget.Properties;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -7,23 +9,43 @@ namespace Clock_Widget
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly SystemClockTimer SystemClockTimer = new SystemClockTimer();
+        private readonly SystemClockTimer _systemClockTimer;
+        private TimeZoneInfo _timeZone;
 
         public MainViewModel()
         {
-            SystemClockTimer.Tick += SystemClockTimer_Tick;
+            _systemClockTimer = new SystemClockTimer();
+            _systemClockTimer.Tick += SystemClockTimer_Tick;
+
+            _timeZone = SettingsHelper.GetTimeZone();
+
+            Settings.Default.PropertyChanged += Settings_PropertyChanged;
         }
 
-        public string CurrentTimeString => TimeZoneHelper.GetCurrentTimeInSelectedTimeZone().ToString();
+        /// <summary>
+        /// The current time in the selected time zone.
+        /// </summary>
+        public DateTimeOffset CurrentTimeInSelectedTimeZone => TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
 
         /// <summary>
         /// Set time zone ID in settings to parameter's time zone ID.
         /// </summary>
-        public ICommand SetTimeZoneCommand { get; } = new RelayCommand<TimeZoneInfo>(TimeZoneHelper.SetSelectedTimeZone);
+        public ICommand SetTimeZoneCommand { get; } = new RelayCommand<TimeZoneInfo>(SettingsHelper.SetTimeZone);
+
+        private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Settings.Default.TimeZone):
+                    _timeZone = SettingsHelper.GetTimeZone();
+                    RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZone));
+                    break;
+            }
+        }
 
         private void SystemClockTimer_Tick(object sender, EventArgs e)
         {
-            RaisePropertyChanged(nameof(CurrentTimeString));
+            RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZone));
         }
     }
 }

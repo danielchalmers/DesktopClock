@@ -6,31 +6,46 @@ namespace Clock_Widget
     /// <summary>
     /// A timer that ticks when the second changes on the system clock.
     /// </summary>
-    public class SystemClockTimer : IDisposable
+    public sealed class SystemClockTimer : IDisposable
     {
         private Timer _timer;
 
         public SystemClockTimer()
         {
-            _timer = new Timer(Timer_Callback);
-            SyncAndStart();
+            _timer = new Timer((o) => OnTick());
+
+            ScheduleTickForNextSecond();
         }
 
-        private int GetMillisecondsUntilNextSecond => 1000 - DateTime.Now.Millisecond;
+        /// <summary>
+        /// Occurs when the next second of the system clock passes.
+        /// </summary>
+        public event EventHandler<EventArgs> Tick;
 
-        public void Dispose() => _timer.Dispose();
+        /// <summary>
+        /// Number of milliseconds until the next second passes.
+        /// </summary>
+        private int MillisecondsUntilNextSecond => 1000 - DateTimeOffset.Now.Millisecond;
 
-        private void SyncAndStart() => _timer.Change(GetMillisecondsUntilNextSecond, Timeout.Infinite);
-
-        private void Timer_Callback(object state)
+        /// <summary>
+        /// Releases all resources used by the current instance of <see cref="SystemClockTimer" />.
+        /// </summary>
+        public void Dispose()
         {
-            SyncAndStart();
+            _timer.Dispose();
+        }
+
+        private void OnTick()
+        {
+            ScheduleTickForNextSecond();
 
             Tick?.Invoke(this, new EventArgs());
         }
 
-        public delegate void TickHandler(object sender, EventArgs e);
-
-        public event TickHandler Tick;
+        /// <summary>
+        /// Start the timer so tick will elapse with the next second.
+        /// </summary>
+        private void ScheduleTickForNextSecond() =>
+            _timer.Change(MillisecondsUntilNextSecond, Timeout.Infinite);
     }
 }
