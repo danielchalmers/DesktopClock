@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using Clock_Widget.Properties;
+using DesktopClock.Properties;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
-namespace Clock_Widget
+namespace DesktopClock
 {
     public class MainViewModel : ViewModelBase
     {

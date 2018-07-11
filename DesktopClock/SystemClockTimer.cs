@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Clock_Widget
+namespace DesktopClock
 {
     /// <summary>
     /// A timer that ticks when the second changes on the system clock.

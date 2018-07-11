@@ -1,7 +1,7 @@
 ﻿using System;
-using Clock_Widget.Properties;
+using DesktopClock.Properties;
 
-namespace Clock_Widget
+namespace DesktopClock
 {
     public static class SettingsHelper
     {

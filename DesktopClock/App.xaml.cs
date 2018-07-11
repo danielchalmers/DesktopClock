@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Windows;
-using Clock_Widget.Properties;
+using DesktopClock.Properties;
 
-namespace Clock_Widget
+namespace DesktopClock
 {
     /// <summary>
     /// Interaction logic for App.xaml

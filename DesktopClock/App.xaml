@@ -1,4 +1,4 @@
-﻿<Application x:Class="Clock_Widget.App"
+﻿<Application x:Class="DesktopClock.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Exit="Application_Exit"

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace Clock_Widget
+namespace DesktopClock
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

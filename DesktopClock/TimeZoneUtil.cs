@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Clock_Widget
+namespace DesktopClock
 {
     public static class TimeZoneUtil
     {

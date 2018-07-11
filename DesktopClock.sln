@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clock Widget", "Clock Widget\Clock Widget.csproj", "{E3E9D465-6F11-4B31-A1AA-CE85BCC8175E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClock", "DesktopClock\DesktopClock.csproj", "{E3E9D465-6F11-4B31-A1AA-CE85BCC8175E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

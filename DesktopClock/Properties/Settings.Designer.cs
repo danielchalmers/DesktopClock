@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Clock_Widget.Properties {
+namespace DesktopClock.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
