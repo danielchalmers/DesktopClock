@@ -23,14 +23,24 @@ namespace DesktopClock
         }
 
         /// <summary>
-        /// The current time in the selected time zone.
+        /// The current date and time in the selected time zone as a formatted string.
         /// </summary>
-        public DateTimeOffset CurrentTimeInSelectedTimeZone => TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
+        public string CurrentTimeInSelectedTimeZoneString => CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
+
+        /// <summary>
+        /// Set format string in settings to parameter's string.
+        /// </summary>
+        public ICommand SetFormatCommand { get; } = new RelayCommand<string>((f) => Settings.Default.Format = f);
 
         /// <summary>
         /// Set time zone ID in settings to parameter's time zone ID.
         /// </summary>
         public ICommand SetTimeZoneCommand { get; } = new RelayCommand<TimeZoneInfo>(SettingsHelper.SetTimeZone);
+
+        /// <summary>
+        /// The current date and time in the selected time zone.
+        /// </summary>
+        private DateTimeOffset CurrentTimeInSelectedTimeZone => TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
 
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -38,14 +48,18 @@ namespace DesktopClock
             {
                 case nameof(Settings.Default.TimeZone):
                     _timeZone = SettingsHelper.GetTimeZone();
-                    RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZone));
+                    RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZoneString));
+                    break;
+
+                case nameof(Settings.Default.Format):
+                    RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZoneString));
                     break;
             }
         }
 
         private void SystemClockTimer_Tick(object sender, EventArgs e)
         {
-            RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZone));
+            RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZoneString));
         }
     }
 }

@@ -51,7 +51,7 @@
             </MenuItem>
 
             <MenuItem Header="Time Zone"
-                      ItemsSource="{x:Static local:TimeZoneUtil.TimeZones}">
+                      ItemsSource="{x:Static local:DateTimeUtil.TimeZones}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
                         <Setter Property="Command"
@@ -59,6 +59,22 @@
 
                         <Setter Property="CommandParameter"
                                 Value="{Binding}" />
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
+
+            <MenuItem Header="Format"
+                      ItemsSource="{x:Static local:DateTimeUtil.StandardDateTimeFormatsAndExamples}">
+                <MenuItem.Resources>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Command"
+                                Value="{Binding DataContext.SetFormatCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+
+                        <Setter Property="CommandParameter"
+                                Value="{Binding Key}" />
+
+                        <Setter Property="DisplayMemberPath"
+                                Value="Value" />
                     </Style>
                 </MenuItem.Resources>
             </MenuItem>
@@ -78,7 +94,7 @@
             </Grid.Background>
 
             <TextBlock Margin="2,0,2,0"
-                       Text="{Binding CurrentTimeInSelectedTimeZone}" />
+                       Text="{Binding CurrentTimeInSelectedTimeZoneString}" />
         </Grid>
     </Viewbox>
 </Window>

@@ -56,7 +56,7 @@
     </ApplicationDefinition>
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="SystemClockTimer.cs" />
-    <Compile Include="TimeZoneUtil.cs" />
+    <Compile Include="DateTimeUtil.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

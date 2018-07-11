@@ -20,5 +20,8 @@
     <Setting Name="TimeZone" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="Format" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
