@@ -105,5 +105,53 @@ namespace DesktopClock.Properties {
                 this["Format"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
+        public global::System.Windows.Media.Color Color {
+            get {
+                return ((global::System.Windows.Media.Color)(this["Color"]));
+            }
+            set {
+                this["Color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.85")]
+        public double Opacity {
+            get {
+                return ((double)(this["Opacity"]));
+            }
+            set {
+                this["Opacity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
+        public global::System.Windows.Media.Color TextColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["TextColor"]));
+            }
+            set {
+                this["TextColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Consolas")]
+        public string FontFamily {
+            get {
+                return ((string)(this["FontFamily"]));
+            }
+            set {
+                this["FontFamily"] = value;
+            }
+        }
     }
 }

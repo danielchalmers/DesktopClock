@@ -10,7 +10,7 @@
         Title="{x:Static local:App.Title}"
         AllowsTransparency="True"
         Background="Transparent"
-        FontFamily="Consolas"
+        FontFamily="{Binding FontFamily, Source={x:Static p:Settings.Default}, Mode=OneWay}"
         MouseDown="Window_MouseDown"
         ResizeMode="NoResize"
         ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
@@ -89,12 +89,16 @@
     <Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
         <Grid>
             <Grid.Background>
-                <SolidColorBrush Opacity="0.85"
-                                 Color="White" />
+                <SolidColorBrush Opacity="{Binding Opacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                 Color="{Binding Color, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
             </Grid.Background>
 
             <TextBlock Margin="2,0,2,0"
-                       Text="{Binding CurrentTimeInSelectedTimeZoneString}" />
+                       Text="{Binding CurrentTimeInSelectedTimeZoneString}">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                </TextBlock.Foreground>
+            </TextBlock>
         </Grid>
     </Viewbox>
 </Window>
