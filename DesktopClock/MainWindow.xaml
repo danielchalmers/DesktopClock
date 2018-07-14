@@ -42,9 +42,9 @@
                         <Slider Width="64"
                                 AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True"
-                                Maximum="80"
+                                Maximum="160"
                                 Minimum="16"
-                                TickFrequency="2"
+                                TickFrequency="4"
                                 Value="{Binding Height, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
                     </StackPanel>
                 </MenuItem.Header>
