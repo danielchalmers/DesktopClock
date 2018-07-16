@@ -81,6 +81,9 @@
 
             <Separator />
 
+            <MenuItem Click="MenuItemAbout_OnClick"
+                      Header="_About..." />
+
             <MenuItem Click="MenuItemExit_OnClick"
                       Header="E_xit" />
         </ContextMenu>
