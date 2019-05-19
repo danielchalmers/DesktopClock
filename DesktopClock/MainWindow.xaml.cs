@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using DesktopClock.Properties;
 using WpfAboutView;
 
 namespace DesktopClock
@@ -22,6 +24,12 @@ namespace DesktopClock
             {
                 DragMove();
             }
+        }
+
+        private void MenuItemSettings_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Open settings file in notepad.
+            Process.Start("notepad", Settings.Path);
         }
 
         private void MenuItemAbout_OnClick(object sender, RoutedEventArgs e)
