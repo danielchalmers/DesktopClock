@@ -33,6 +33,8 @@ namespace DesktopClock.Properties
         public int Height { get; set; } = 40;
         public string TimeZone { get; set; } = string.Empty;
         public string Format { get; set; } = "F";
+        public string Title { get; set; } = string.Empty;
+        public Color TitleColor { get; set; } = Colors.Blue;
         public Color BackgroundColor { get; set; } = Colors.White;
         public double Opacity { get; set; } = 0.85;
         public Color TextColor { get; set; } = Colors.Black;

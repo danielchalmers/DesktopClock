@@ -94,12 +94,35 @@
                                  Color="{Binding BackgroundColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
             </Grid.Background>
 
-            <TextBlock Margin="2,0,2,0"
-                       Text="{Binding CurrentTimeInSelectedTimeZoneString}">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-                </TextBlock.Foreground>
-            </TextBlock>
+            <StackPanel Margin="2,0,2,0">
+                <TextBlock HorizontalAlignment="Center"
+                           Text="{Binding Title, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{Binding TitleColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                    </TextBlock.Foreground>
+
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Title, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                             Value="">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Center"
+                           Text="{Binding CurrentTimeInSelectedTimeZoneString}">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                    </TextBlock.Foreground>
+                </TextBlock>
+            </StackPanel>
         </Grid>
     </Viewbox>
 </Window>
