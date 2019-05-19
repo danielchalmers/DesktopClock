@@ -25,9 +25,12 @@ namespace DesktopClock
         }
 
         /// <summary>
-        /// The current date and time in the selected time zone as a formatted string.
+        /// The current date and time in the selected time zone or countdown as a formatted string.
         /// </summary>
-        public string CurrentTimeInSelectedTimeZoneString => CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
+        public string CurrentTimeOrCountdownString =>
+            IsCountdown ?
+            (Settings.Default.DateToCountdownTo - DateTimeOffset.Now).ToString(Settings.Default.Format) :
+            CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
 
         /// <summary>
         /// Sets format string in settings to parameter's string.
@@ -43,6 +46,11 @@ namespace DesktopClock
         /// The current date and time in the selected time zone.
         /// </summary>
         private DateTimeOffset CurrentTimeInSelectedTimeZone => TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
+
+        /// <summary>
+        /// Should the clock be a countdown?
+        /// </summary>
+        private bool IsCountdown => Settings.Default.DateToCountdownTo > DateTimeOffset.MinValue;
 
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -64,6 +72,6 @@ namespace DesktopClock
             UpdateTimeString();
         }
 
-        private void UpdateTimeString() => RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZoneString));
+        private void UpdateTimeString() => RaisePropertyChanged(nameof(CurrentTimeOrCountdownString));
     }
 }

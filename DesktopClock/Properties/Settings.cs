@@ -39,6 +39,7 @@ namespace DesktopClock.Properties
         public double Opacity { get; set; } = 0.85;
         public Color TextColor { get; set; } = Colors.Black;
         public string FontFamily { get; set; } = "Consolas";
+        public DateTimeOffset DateToCountdownTo { get; set; } = DateTimeOffset.MinValue;
 
         #endregion "Properties"
 

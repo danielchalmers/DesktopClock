@@ -117,7 +117,7 @@
                 </TextBlock>
 
                 <TextBlock HorizontalAlignment="Center"
-                           Text="{Binding CurrentTimeInSelectedTimeZoneString}">
+                           Text="{Binding CurrentTimeOrCountdownString}">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                     </TextBlock.Foreground>
