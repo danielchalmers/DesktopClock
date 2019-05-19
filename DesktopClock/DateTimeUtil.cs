@@ -7,19 +7,18 @@ namespace DesktopClock
     public static class DateTimeUtil
     {
         /// <summary>
-        /// List of standard date and time format strings.
+        /// Standard date and time formatting strings that are compatible with both <see cref="DateTime"/> and <see cref="DateTimeOffset"/>.
         /// </summary>
         /// <remarks>
-        /// Not including `U` specifier as it's not compatible with <see cref="DateTimeOffset"/>.
+        /// https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings
         /// </remarks>
         public static IReadOnlyList<string> StandardDateTimeFormats { get; } = new[] { "d", "D", "f", "F", "g", "G", "M", "O", "R", "s", "t", "T", "u", "Y" };
 
         /// <summary>
-        /// Dictionary of common date time formats and their example string.
+        /// Common date time formatting strings and an example string for each.
         /// </summary>
         public static IReadOnlyDictionary<string, string> StandardDateTimeFormatsAndExamples { get; } =
-            StandardDateTimeFormats.
-            ToDictionary(f => f, f => DateTime.Now.ToString(f));
+            StandardDateTimeFormats.ToDictionary(f => f, f => DateTimeOffset.Now.ToString(f));
 
         public static IReadOnlyCollection<TimeZoneInfo> TimeZones { get; } = TimeZoneInfo.GetSystemTimeZones();
 

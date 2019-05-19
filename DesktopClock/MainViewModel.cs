@@ -15,11 +15,13 @@ namespace DesktopClock
         public MainViewModel()
         {
             _systemClockTimer = new SystemClockTimer();
-            _systemClockTimer.Tick += SystemClockTimer_Tick;
+            _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
 
             _timeZone = SettingsHelper.GetTimeZone();
 
             Settings.Default.PropertyChanged += Settings_PropertyChanged;
+
+            _systemClockTimer.Start();
         }
 
         /// <summary>
@@ -28,12 +30,12 @@ namespace DesktopClock
         public string CurrentTimeInSelectedTimeZoneString => CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
 
         /// <summary>
-        /// Set format string in settings to parameter's string.
+        /// Sets format string in settings to parameter's string.
         /// </summary>
         public ICommand SetFormatCommand { get; } = new RelayCommand<string>((f) => Settings.Default.Format = f);
 
         /// <summary>
-        /// Set time zone ID in settings to parameter's time zone ID.
+        /// Sets time zone ID in settings to parameter's time zone ID.
         /// </summary>
         public ICommand SetTimeZoneCommand { get; } = new RelayCommand<TimeZoneInfo>(SettingsHelper.SetTimeZone);
 
@@ -48,18 +50,20 @@ namespace DesktopClock
             {
                 case nameof(Settings.Default.TimeZone):
                     _timeZone = SettingsHelper.GetTimeZone();
-                    RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZoneString));
+                    UpdateTimeString();
                     break;
 
                 case nameof(Settings.Default.Format):
-                    RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZoneString));
+                    UpdateTimeString();
                     break;
             }
         }
 
-        private void SystemClockTimer_Tick(object sender, EventArgs e)
+        private void SystemClockTimer_SecondChanged(object sender, EventArgs e)
         {
-            RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZoneString));
+            UpdateTimeString();
         }
+
+        private void UpdateTimeString() => RaisePropertyChanged(nameof(CurrentTimeInSelectedTimeZoneString));
     }
 }

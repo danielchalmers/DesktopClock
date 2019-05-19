@@ -4,26 +4,24 @@ using System.Threading;
 namespace DesktopClock
 {
     /// <summary>
-    /// A timer that ticks when the second changes on the system clock.
+    /// A timer, synced with the system clock.
     /// </summary>
     public sealed class SystemClockTimer : IDisposable
     {
-        private Timer _timer;
+        private readonly Timer _timer;
 
         public SystemClockTimer()
         {
-            _timer = new Timer((o) => OnTick());
-
-            ScheduleTickForNextSecond();
+            _timer = new Timer((_) => OnTick());
         }
 
         /// <summary>
-        /// Occurs when the next second of the system clock passes.
+        /// Occurs after the second of the system clock changes.
         /// </summary>
-        public event EventHandler<EventArgs> Tick;
+        public event EventHandler<EventArgs> SecondChanged;
 
         /// <summary>
-        /// Number of milliseconds until the next second passes.
+        /// Number of milliseconds until the next second on the system clock.
         /// </summary>
         private int MillisecondsUntilNextSecond => 1000 - DateTimeOffset.Now.Millisecond;
 
@@ -35,15 +33,19 @@ namespace DesktopClock
             _timer.Dispose();
         }
 
+        public void Start() => ScheduleTickForNextSecond();
+
+        public void Stop() => _timer.Change(Timeout.Infinite, Timeout.Infinite);
+
         private void OnTick()
         {
             ScheduleTickForNextSecond();
 
-            Tick?.Invoke(this, new EventArgs());
+            SecondChanged?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
-        /// Start the timer so tick will elapse with the next second.
+        /// Starts the timer and schedules the tick for the next second on the system clock.
         /// </summary>
         private void ScheduleTickForNextSecond() =>
             _timer.Change(MillisecondsUntilNextSecond, Timeout.Infinite);

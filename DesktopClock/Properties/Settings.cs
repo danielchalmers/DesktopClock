@@ -9,8 +9,8 @@ namespace DesktopClock.Properties
 {
     public sealed class Settings : INotifyPropertyChanged
     {
+        public static readonly string Path = "DesktopClock.settings";
         private static readonly Lazy<Settings> _default = new Lazy<Settings>(() => LoadOrCreate());
-        private const string _path = "DesktopClock.settings";
 
         private static readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
@@ -41,29 +41,29 @@ namespace DesktopClock.Properties
         #endregion "Properties"
 
         /// <summary>
-        /// Save to the default path in JSON format.
+        /// Saves to the default path in JSON format.
         /// </summary>
         public void Save()
         {
-            using (var fileStream = new FileStream(_path, FileMode.Create))
+            using (var fileStream = new FileStream(Path, FileMode.Create))
             using (var streamWriter = new StreamWriter(fileStream))
             using (var jsonWriter = new JsonTextWriter(streamWriter))
                 JsonSerializer.Create(_jsonSerializerSettings).Serialize(jsonWriter, this);
         }
 
         /// <summary>
-        /// Load from the default path in JSON format.
+        /// Loads from the default path in JSON format.
         /// </summary>
         private static Settings Load()
         {
-            using (var fileStream = new FileStream(_path, FileMode.Open))
+            using (var fileStream = new FileStream(Path, FileMode.Open))
             using (var streamReader = new StreamReader(fileStream))
             using (var jsonReader = new JsonTextReader(streamReader))
                 return JsonSerializer.Create(_jsonSerializerSettings).Deserialize<Settings>(jsonReader);
         }
 
         /// <summary>
-        /// Load from the default path or return a new instance if it fails.
+        /// Loads from the default path or return a new instance if it fails.
         /// </summary>
         private static Settings LoadOrCreate()
         {

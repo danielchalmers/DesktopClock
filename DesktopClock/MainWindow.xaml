@@ -1,7 +1,7 @@
 ﻿<Window x:Class="DesktopClock.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopClock"
         xmlns:p="clr-namespace:DesktopClock.Properties"
@@ -54,11 +54,9 @@
                       ItemsSource="{x:Static local:DateTimeUtil.TimeZones}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
-                        <Setter Property="Command"
-                                Value="{Binding DataContext.SetTimeZoneCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+                        <Setter Property="Command" Value="{Binding DataContext.SetTimeZoneCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
 
-                        <Setter Property="CommandParameter"
-                                Value="{Binding}" />
+                        <Setter Property="CommandParameter" Value="{Binding}" />
                     </Style>
                 </MenuItem.Resources>
             </MenuItem>
@@ -67,14 +65,11 @@
                       ItemsSource="{x:Static local:DateTimeUtil.StandardDateTimeFormatsAndExamples}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
-                        <Setter Property="Command"
-                                Value="{Binding DataContext.SetFormatCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+                        <Setter Property="Command" Value="{Binding DataContext.SetFormatCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
 
-                        <Setter Property="CommandParameter"
-                                Value="{Binding Key}" />
+                        <Setter Property="CommandParameter" Value="{Binding Key}" />
 
-                        <Setter Property="DisplayMemberPath"
-                                Value="Value" />
+                        <Setter Property="DisplayMemberPath" Value="Value" />
                     </Style>
                 </MenuItem.Resources>
             </MenuItem>
