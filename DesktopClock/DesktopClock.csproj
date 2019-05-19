@@ -96,19 +96,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Costura.Fody">
-      <Version>3.1.0</Version>
+      <Version>3.1.6</Version>
     </PackageReference>
     <PackageReference Include="MvvmLightLibsStd10">
-      <Version>5.4.1</Version>
+      <Version>5.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.2</Version>
+      <Version>12.0.2</Version>
     </PackageReference>
     <PackageReference Include="PropertyChanged.Fody">
-      <Version>2.5.8</Version>
+      <Version>2.5.14</Version>
     </PackageReference>
     <PackageReference Include="WpfAboutView">
-      <Version>1.2.0</Version>
+      <Version>1.2.1</Version>
     </PackageReference>
     <PackageReference Include="WpfWindowPlacement">
       <Version>2.0.0</Version>
