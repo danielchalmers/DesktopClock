@@ -12,7 +12,7 @@ namespace DesktopClock.Properties
         private DateTime _fileLastUsed = DateTime.UtcNow;
 
         public static readonly string Path = "DesktopClock.settings";
-        private static readonly Lazy<Settings> _default = new Lazy<Settings>(() => LoadOrCreate());
+        private static readonly Lazy<Settings> _default = new Lazy<Settings>(() => TryLoad() ?? new Settings());
 
         private static readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
@@ -75,9 +75,9 @@ namespace DesktopClock.Properties
         }
 
         /// <summary>
-        /// Loads from the default path or return a new instance if it fails.
+        /// Returns loaded settings from the default path or null if it fails.
         /// </summary>
-        private static Settings LoadOrCreate()
+        private static Settings TryLoad()
         {
             try
             {
@@ -85,7 +85,7 @@ namespace DesktopClock.Properties
             }
             catch
             {
-                return new Settings();
+                return null;
             }
         }
     }
