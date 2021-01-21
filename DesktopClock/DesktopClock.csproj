@@ -9,6 +9,7 @@
 
   <PropertyGroup>
     <Company>Daniel Chalmers</Company>
+    <Description>A configurable clock for your desktop</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/danielchalmers/DesktopClock</RepositoryUrl>
     <Copyright>© Daniel Chalmers 2021</Copyright>
