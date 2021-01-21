@@ -38,6 +38,8 @@ namespace DesktopClock
 
         private void MenuItemSettings_OnClick(object sender, RoutedEventArgs e)
         {
+            Settings.Default.Save();
+
             // Open settings file in notepad.
             Process.Start("notepad", Settings.Path);
         }
