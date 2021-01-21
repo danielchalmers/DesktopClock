@@ -40,6 +40,10 @@
                       IsCheckable="True"
                       IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
+            <MenuItem Header="Show _background"
+                      IsCheckable="True"
+                      IsChecked="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+
             <MenuItem>
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -95,19 +99,54 @@
 
     <Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
         <Border CornerRadius="2">
-            <Border.Background>
-                <SolidColorBrush Opacity="{Binding Opacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Opacity="{Binding Opacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
                                  Color="{Binding BackgroundColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-            </Border.Background>
+                        </Setter.Value>
+                    </Setter>
 
-            <TextBlock x:Name="TimeTextBlock"
-                        Margin="2,1,2,1"
-                        HorizontalAlignment="Center"
-                        Text="{Binding CurrentTimeOrCountdownString}">
-                <TextBlock.Foreground>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                             Value="False">
+                            <DataTrigger.Setters>
+                                <Setter Property="Background" Value="Transparent" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <local:OutlinedTextBlock x:Name="TimeTextBlock"
+                                     Margin="1"
+                                     HorizontalAlignment="Center"
+                                     Text="{Binding CurrentTimeOrCountdownString}"
+                                     StrokeThickness="0.75">
+
+                <local:OutlinedTextBlock.Fill>
                     <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-                </TextBlock.Foreground>
-            </TextBlock>
+                </local:OutlinedTextBlock.Fill>
+
+                <local:OutlinedTextBlock.Style>
+                    <Style TargetType="local:OutlinedTextBlock">
+                        <Setter Property="Stroke" Value="Transparent" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                             Value="False">
+                                <DataTrigger.Setters>
+                                    <Setter Property="Stroke">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="{Binding BackgroundColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </local:OutlinedTextBlock.Style>
+            </local:OutlinedTextBlock>
         </Border>
     </Viewbox>
 </Window>

@@ -33,6 +33,7 @@ namespace DesktopClock.Properties
         public int Height { get; set; } = 48;
         public string TimeZone { get; set; } = string.Empty;
         public string Format { get; set; } = "dddd, MMM dd, HH:mm:ss";
+        public bool BackgroundEnabled { get; set; } = false;
         public Color BackgroundColor { get; set; } = Colors.White;
         public double Opacity { get; set; } = 0.90;
         public Color TextColor { get; set; } = Colors.Black;
