@@ -100,10 +100,11 @@
                                  Color="{Binding BackgroundColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
             </Border.Background>
 
-            <StackPanel Margin="2,0,2,0">
+            <StackPanel Margin="2,1,2,1">
                 <TextBlock HorizontalAlignment="Center"
                            Text="{Binding Title, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                           FontWeight="DemiBold">
+                           FontWeight="DemiBold"
+                           Margin="0,0,0,1">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{Binding TitleColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                     </TextBlock.Foreground>
