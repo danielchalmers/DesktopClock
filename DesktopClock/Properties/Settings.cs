@@ -33,13 +33,10 @@ namespace DesktopClock.Properties
         public int Height { get; set; } = 48;
         public string TimeZone { get; set; } = string.Empty;
         public string Format { get; set; } = "dddd, MMM dd, HH:mm:ss";
-        public string Title { get; set; } = string.Empty;
-        public Color TitleColor { get; set; } = Colors.Blue;
         public Color BackgroundColor { get; set; } = Colors.White;
         public double Opacity { get; set; } = 0.90;
         public Color TextColor { get; set; } = Colors.Black;
         public string FontFamily { get; set; } = "Arial";
-        public int CornerRadius { get; set; } = 2;
         public DateTimeOffset DateToCountdownTo { get; set; } = DateTimeOffset.MinValue;
 
         #endregion "Properties"

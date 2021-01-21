@@ -94,44 +94,20 @@
     </Window.ContextMenu>
 
     <Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-        <Border CornerRadius="{Binding CornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+        <Border CornerRadius="2">
             <Border.Background>
                 <SolidColorBrush Opacity="{Binding Opacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
                                  Color="{Binding BackgroundColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
             </Border.Background>
 
-            <StackPanel Margin="2,1,2,1">
-                <TextBlock HorizontalAlignment="Center"
-                           Text="{Binding Title, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                           FontWeight="DemiBold"
-                           Margin="0,0,0,1">
-                    <TextBlock.Foreground>
-                        <SolidColorBrush Color="{Binding TitleColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-                    </TextBlock.Foreground>
-
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Visibility" Value="Visible" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Title, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                             Value="">
-                                    <DataTrigger.Setters>
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </DataTrigger.Setters>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-
-                <TextBlock x:Name="TimeTextBlock"
-                           HorizontalAlignment="Center"
-                           Text="{Binding CurrentTimeOrCountdownString}">
-                    <TextBlock.Foreground>
-                        <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-                    </TextBlock.Foreground>
-                </TextBlock>
-            </StackPanel>
+            <TextBlock x:Name="TimeTextBlock"
+                        Margin="2,1,2,1"
+                        HorizontalAlignment="Center"
+                        Text="{Binding CurrentTimeOrCountdownString}">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                </TextBlock.Foreground>
+            </TextBlock>
         </Border>
     </Viewbox>
 </Window>
