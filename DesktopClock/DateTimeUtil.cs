@@ -7,18 +7,33 @@ namespace DesktopClock
     public static class DateTimeUtil
     {
         /// <summary>
-        /// Standard date and time formatting strings that are compatible with both <see cref="DateTime"/> and <see cref="DateTimeOffset"/>.
+        /// A collection of DateTime formatting strings.
         /// </summary>
-        /// <remarks>
-        /// https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings
-        /// </remarks>
-        public static IReadOnlyList<string> StandardDateTimeFormats { get; } = new[] { "d", "D", "f", "F", "g", "G", "M", "O", "R", "s", "t", "T", "u", "Y" };
+        public static IReadOnlyList<string> DateTimeFormats { get; } = new[]
+        {
+            "M",
+            "dddd, MMMM dd",
+            "dddd, MMMM dd, HH:mm",
+            "dddd, MMM dd, HH:mm",
+            "dddd, MMM dd, HH:mm:ss",
+            "ddd, MMMM dd, HH:mm",
+            "ddd, MMMM dd, HH:mm:ss",
+            "ddd, MMM dd, HH:mm",
+            "ddd, MMM dd, HH:mm:ss",
+            "ddd, MMM dd, HH:mm K",
+            "d",
+            "g",
+            "G",
+            "t",
+            "T",
+            "O",
+        };
 
         /// <summary>
         /// Common date time formatting strings and an example string for each.
         /// </summary>
-        public static IReadOnlyDictionary<string, string> StandardDateTimeFormatsAndExamples { get; } =
-            StandardDateTimeFormats.ToDictionary(f => f, f => DateTimeOffset.Now.ToString(f));
+        public static IReadOnlyDictionary<string, string> DateTimeFormatsAndExamples { get; } =
+            DateTimeFormats.ToDictionary(f => f, f => DateTimeOffset.Now.ToString(f));
 
         public static IReadOnlyCollection<TimeZoneInfo> TimeZones { get; } = TimeZoneInfo.GetSystemTimeZones();
 

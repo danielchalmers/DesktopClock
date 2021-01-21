@@ -68,7 +68,7 @@
             </MenuItem>
 
             <MenuItem Header="Format"
-                      ItemsSource="{x:Static local:DateTimeUtil.StandardDateTimeFormatsAndExamples}">
+                      ItemsSource="{x:Static local:DateTimeUtil.DateTimeFormatsAndExamples}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
                         <Setter Property="Command" Value="{Binding DataContext.SetFormatCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
