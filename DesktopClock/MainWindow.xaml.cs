@@ -103,6 +103,11 @@ namespace DesktopClock
             }.ShowDialog();
         }
 
+        private void MenuItemCheckForUpdates_OnClick(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/danielchalmers/DesktopClock/releases");
+        }
+
         private void MenuItemExit_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
