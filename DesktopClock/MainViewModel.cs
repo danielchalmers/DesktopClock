@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Windows.Media;
 using DesktopClock.Properties;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -36,7 +35,7 @@ namespace DesktopClock
         /// <summary>
         /// Sets app theme to parameter's value.
         /// </summary>
-        public ICommand SetThemeCommand { get; } = new RelayCommand<Theme>(SetTheme);
+        public ICommand SetThemeCommand { get; } = new RelayCommand<Theme>((t) => Settings.Default.Theme = t);
 
         /// <summary>
         /// Sets format string in settings to parameter's string.
@@ -79,11 +78,5 @@ namespace DesktopClock
         }
 
         private void UpdateTimeString() => RaisePropertyChanged(nameof(CurrentTimeOrCountdownString));
-
-        private static void SetTheme(Theme theme)
-        {
-            Settings.Default.TextColor = (Color)ColorConverter.ConvertFromString(theme.PrimaryColor);
-            Settings.Default.OuterColor = (Color)ColorConverter.ConvertFromString(theme.SecondaryColor);
-        }
     }
 }

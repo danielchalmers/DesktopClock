@@ -14,7 +14,7 @@ namespace DesktopClock
         public static string Title { get; } = Assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title;
 
         // https://www.materialui.co/colors
-        public static IReadOnlyCollection<Theme> Themes { get; } = new Theme[]
+        public static IReadOnlyList<Theme> Themes { get; } = new Theme[]
         {
             new Theme("White", "#FFFFFF", "#000000"),
             new Theme("Black", "#000000", "#9E9E9E"),

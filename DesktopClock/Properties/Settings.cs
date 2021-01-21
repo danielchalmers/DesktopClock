@@ -21,6 +21,10 @@ namespace DesktopClock.Properties
 
         private Settings()
         {
+            var random = new Random();
+
+            // Random default theme.
+            Theme = App.Themes[random.Next(0, App.Themes.Count)];
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -37,10 +41,21 @@ namespace DesktopClock.Properties
         public string Format { get; set; } = "dddd, MMM dd, HH:mm:ss";
         public bool BackgroundEnabled { get; set; } = false;
         public double BackgroundOpacity { get; set; } = 0.90;
-        public Color OuterColor { get; set; } = Colors.DarkGray;
-        public Color TextColor { get; set; } = Colors.Black;
+        public Color OuterColor { get; set; }
+        public Color TextColor { get; set; }
         public string FontFamily { get; set; } = "Arial";
         public DateTimeOffset CountdownTo { get; set; } = DateTimeOffset.MinValue;
+
+        [JsonIgnore]
+        public Theme Theme
+        {
+            get => new Theme("Custom", TextColor.ToString(), OuterColor.ToString());
+            set
+            {
+                TextColor = (Color)ColorConverter.ConvertFromString(value.PrimaryColor);
+                OuterColor = (Color)ColorConverter.ConvertFromString(value.SecondaryColor);
+            }
+        }
 
         #endregion "Properties"
 
