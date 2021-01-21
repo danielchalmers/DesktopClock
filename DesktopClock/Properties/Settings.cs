@@ -30,9 +30,9 @@ namespace DesktopClock.Properties
         public WindowPlacement Placement { get; set; }
         public bool Topmost { get; set; } = true;
         public bool ShowInTaskbar { get; set; } = true;
-        public int Height { get; set; } = 40;
+        public int Height { get; set; } = 48;
         public string TimeZone { get; set; } = string.Empty;
-        public string Format { get; set; } = "F";
+        public string Format { get; set; } = "dddd, MMM dd, HH:mm:ss";
         public string Title { get; set; } = string.Empty;
         public Color TitleColor { get; set; } = Colors.Blue;
         public Color BackgroundColor { get; set; } = Colors.White;
