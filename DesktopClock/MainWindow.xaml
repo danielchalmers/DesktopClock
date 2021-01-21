@@ -1,7 +1,7 @@
 ﻿<Window x:Class="DesktopClock.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopClock"
         xmlns:p="clr-namespace:DesktopClock.Properties"
@@ -37,9 +37,9 @@
             <MenuItem>
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Height: " />
+                        <TextBlock Text="Size: " />
 
-                        <Slider Width="64"
+                        <Slider Width="80"
                                 AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True"
                                 Maximum="160"
@@ -96,7 +96,8 @@
 
             <StackPanel Margin="2,0,2,0">
                 <TextBlock HorizontalAlignment="Center"
-                           Text="{Binding Title, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+                           Text="{Binding Title, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                           FontWeight="DemiBold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{Binding TitleColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                     </TextBlock.Foreground>

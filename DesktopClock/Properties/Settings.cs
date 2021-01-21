@@ -36,10 +36,10 @@ namespace DesktopClock.Properties
         public string Title { get; set; } = string.Empty;
         public Color TitleColor { get; set; } = Colors.Blue;
         public Color BackgroundColor { get; set; } = Colors.White;
-        public double Opacity { get; set; } = 0.85;
+        public double Opacity { get; set; } = 0.90;
         public Color TextColor { get; set; } = Colors.Black;
-        public string FontFamily { get; set; } = "Consolas";
-        public int CornerRadius { get; set; } = 4;
+        public string FontFamily { get; set; } = "Arial";
+        public int CornerRadius { get; set; } = 2;
         public DateTimeOffset DateToCountdownTo { get; set; } = DateTimeOffset.MinValue;
 
         #endregion "Properties"
