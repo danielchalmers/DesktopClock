@@ -36,7 +36,7 @@
                       IsCheckable="True"
                       IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-            <MenuItem Header="_Show in taskbar"
+            <MenuItem Header="Show in tas_kbar"
                       IsCheckable="True"
                       IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
@@ -60,7 +60,7 @@
                 </MenuItem.Header>
             </MenuItem>
 
-            <MenuItem Header="Time Zone"
+            <MenuItem Header="Time _Zone"
                       ItemsSource="{x:Static local:DateTimeUtil.TimeZones}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
@@ -71,7 +71,7 @@
                 </MenuItem.Resources>
             </MenuItem>
 
-            <MenuItem Header="Format"
+            <MenuItem Header="_Format"
                       ItemsSource="{x:Static local:DateTimeUtil.DateTimeFormatsAndExamples}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
