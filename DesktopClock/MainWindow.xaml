@@ -136,7 +136,7 @@
                                      Margin="1"
                                      HorizontalAlignment="Center"
                                      Text="{Binding CurrentTimeOrCountdownString}"
-                                     StrokeThickness="0.75">
+                                     StrokeThickness="0.5">
 
                 <local:OutlinedTextBlock.Fill>
                     <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
