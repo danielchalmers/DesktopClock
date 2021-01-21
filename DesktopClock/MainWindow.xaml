@@ -60,6 +60,19 @@
                 </MenuItem.Header>
             </MenuItem>
 
+            <MenuItem Header="T_heme"
+                      ItemsSource="{x:Static local:App.Themes}">
+                <MenuItem.Resources>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Command" Value="{Binding DataContext.SetThemeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+
+                        <Setter Property="CommandParameter" Value="{Binding}" />
+
+                        <Setter Property="DisplayMemberPath" Value="Name" />
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
+
             <MenuItem Header="Time _Zone"
                       ItemsSource="{x:Static local:DateTimeUtil.TimeZones}">
                 <MenuItem.Resources>
