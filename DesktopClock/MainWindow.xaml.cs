@@ -26,6 +26,19 @@ namespace DesktopClock
             }
         }
 
+        private void CopyToClipboard() =>
+            Clipboard.SetText(TimeTextBlock.Text);
+
+        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            CopyToClipboard();
+        }
+
+        private void MenuItemCopy_OnClick(object sender, RoutedEventArgs e)
+        {
+            CopyToClipboard();
+        }
+
         private void MenuItemSettings_OnClick(object sender, RoutedEventArgs e)
         {
             // Open settings file in notepad.
