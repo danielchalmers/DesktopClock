@@ -12,13 +12,13 @@ namespace DesktopClock
 
         public SystemClockTimer()
         {
-            _timer = new Timer((_) => OnTick());
+            _timer = new Timer(_ => OnTick());
         }
 
         /// <summary>
         /// Occurs after the second of the system clock changes.
         /// </summary>
-        public event EventHandler<EventArgs> SecondChanged;
+        public event EventHandler SecondChanged;
 
         /// <summary>
         /// Number of milliseconds until the next second on the system clock.
@@ -41,7 +41,7 @@ namespace DesktopClock
         {
             ScheduleTickForNextSecond();
 
-            SecondChanged?.Invoke(this, new EventArgs());
+            SecondChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
