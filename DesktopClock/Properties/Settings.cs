@@ -34,11 +34,11 @@ namespace DesktopClock.Properties
         public string TimeZone { get; set; } = string.Empty;
         public string Format { get; set; } = "dddd, MMM dd, HH:mm:ss";
         public bool BackgroundEnabled { get; set; } = false;
-        public Color BackgroundColor { get; set; } = Colors.DarkGray;
-        public double Opacity { get; set; } = 0.90;
+        public double BackgroundOpacity { get; set; } = 0.90;
+        public Color OuterColor { get; set; } = Colors.DarkGray;
         public Color TextColor { get; set; } = Colors.Black;
         public string FontFamily { get; set; } = "Arial";
-        public DateTimeOffset DateToCountdownTo { get; set; } = DateTimeOffset.MinValue;
+        public DateTimeOffset CountdownTo { get; set; } = DateTimeOffset.MinValue;
 
         #endregion "Properties"
 

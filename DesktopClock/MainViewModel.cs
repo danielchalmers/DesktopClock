@@ -29,7 +29,7 @@ namespace DesktopClock
         /// </summary>
         public string CurrentTimeOrCountdownString =>
             IsCountdown ?
-            (Settings.Default.DateToCountdownTo - DateTimeOffset.Now).ToString(Settings.Default.Format) :
+            (Settings.Default.CountdownTo - DateTimeOffset.Now).ToString(Settings.Default.Format) :
             CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace DesktopClock
         /// <summary>
         /// Should the clock be a countdown?
         /// </summary>
-        private bool IsCountdown => Settings.Default.DateToCountdownTo > DateTimeOffset.MinValue;
+        private bool IsCountdown => Settings.Default.CountdownTo > DateTimeOffset.MinValue;
 
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

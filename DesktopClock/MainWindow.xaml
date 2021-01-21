@@ -36,7 +36,7 @@
                       IsCheckable="True"
                       IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-            <MenuItem Header="Show in tas_kbar"
+            <MenuItem Header="Show tas_kbar icon"
                       IsCheckable="True"
                       IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
@@ -103,8 +103,8 @@
                 <Style TargetType="Border">
                     <Setter Property="Background">
                         <Setter.Value>
-                            <SolidColorBrush Opacity="{Binding Opacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                 Color="{Binding BackgroundColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                            <SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                 Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                         </Setter.Value>
                     </Setter>
 
@@ -138,7 +138,7 @@
                                 <DataTrigger.Setters>
                                     <Setter Property="Stroke">
                                         <Setter.Value>
-                                            <SolidColorBrush Color="{Binding BackgroundColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                            <SolidColorBrush Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger.Setters>
