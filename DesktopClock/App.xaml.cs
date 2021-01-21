@@ -14,7 +14,8 @@ namespace DesktopClock
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            Settings.Default.Save();
+            if (!Settings.Default.CheckIfModifiedExternally())
+                Settings.Default.Save();
         }
     }
 }

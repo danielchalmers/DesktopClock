@@ -9,6 +9,8 @@ namespace DesktopClock.Properties
 {
     public sealed class Settings : INotifyPropertyChanged
     {
+        private DateTime _fileLastUsed = DateTime.UtcNow;
+
         public static readonly string Path = "DesktopClock.settings";
         private static readonly Lazy<Settings> _default = new Lazy<Settings>(() => LoadOrCreate());
 
@@ -51,7 +53,15 @@ namespace DesktopClock.Properties
             using (var streamWriter = new StreamWriter(fileStream))
             using (var jsonWriter = new JsonTextWriter(streamWriter))
                 JsonSerializer.Create(_jsonSerializerSettings).Serialize(jsonWriter, this);
+
+            _fileLastUsed = DateTime.UtcNow;
         }
+
+        /// <summary>
+        /// Determines if the settings file has been modified externally since the last time it was used.
+        /// </summary>
+        public bool CheckIfModifiedExternally() =>
+            File.GetLastWriteTimeUtc(Path) > _fileLastUsed;
 
         /// <summary>
         /// Loads from the default path in JSON format.
