@@ -39,7 +39,7 @@ namespace DesktopClock.Properties
         public int Height { get; set; } = 48;
         public string TimeZone { get; set; } = string.Empty;
         public string Format { get; set; } = "dddd, MMM dd, HH:mm:ss";
-        public bool BackgroundEnabled { get; set; } = false;
+        public bool BackgroundEnabled { get; set; } = true;
         public double BackgroundOpacity { get; set; } = 0.90;
         public Color OuterColor { get; set; }
         public Color TextColor { get; set; }
