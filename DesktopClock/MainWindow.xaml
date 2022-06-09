@@ -19,8 +19,7 @@
         Topmost="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
         UseLayoutRounding="True"
         WindowStyle="None"
-        wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}}"
-        wp:WindowPlacementProperties.TrackPlacement="True">
+        wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}}">
 	<Window.DataContext>
 		<local:MainViewModel />
 	</Window.DataContext>
