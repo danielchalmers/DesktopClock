@@ -12,9 +12,9 @@ namespace DesktopClock.Properties
         private DateTime _fileLastUsed = DateTime.UtcNow;
 
         public static readonly string Path = "DesktopClock.settings";
-        private static readonly Lazy<Settings> _default = new Lazy<Settings>(() => TryLoad() ?? new Settings());
+        private static readonly Lazy<Settings> _default = new(() => TryLoad() ?? new Settings());
 
-        private static readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
         {
             Formatting = Formatting.Indented
         };
@@ -27,7 +27,9 @@ namespace DesktopClock.Properties
             Theme = App.Themes[random.Next(0, App.Themes.Count)];
         }
 
+#pragma warning disable CS0067 // The event 'Settings.PropertyChanged' is never used
         public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067 // The event 'Settings.PropertyChanged' is never used
 
         public static Settings Default => _default.Value;
 
@@ -49,7 +51,7 @@ namespace DesktopClock.Properties
         [JsonIgnore]
         public Theme Theme
         {
-            get => new Theme("Custom", TextColor.ToString(), OuterColor.ToString());
+            get => new("Custom", TextColor.ToString(), OuterColor.ToString());
             set
             {
                 TextColor = (Color)ColorConverter.ConvertFromString(value.PrimaryColor);
@@ -60,7 +62,7 @@ namespace DesktopClock.Properties
         #endregion "Properties"
 
         /// <summary>
-        /// Saves to the default path in JSON format.
+        /// Saves to the default path.
         /// </summary>
         public void Save()
         {
@@ -79,7 +81,7 @@ namespace DesktopClock.Properties
             File.GetLastWriteTimeUtc(Path) > _fileLastUsed;
 
         /// <summary>
-        /// Loads from the default path in JSON format.
+        /// Loads from the default path.
         /// </summary>
         private static Settings Load()
         {
