@@ -10,9 +10,6 @@ namespace DesktopClock;
 /// </summary>
 public partial class App : Application
 {
-    public static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
-    public static string Title { get; } = Assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title;
-
     // https://www.materialui.co/colors
     public static IReadOnlyList<Theme> Themes { get; } = new Theme[]
     {
