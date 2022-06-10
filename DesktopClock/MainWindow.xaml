@@ -93,8 +93,10 @@
 				</MenuItem.Resources>
 			</MenuItem>
 
-			<Separator />
+			<MenuItem Click="MenuItemCountdown_OnClick" Header="_Countdown to..." />
 
+			<Separator />
+			
 			<MenuItem Click="MenuItemSettings_OnClick" Header="_Settings..." />
 
 			<MenuItem Click="MenuItemCheckForUpdates_OnClick" Header="Check for _updates..." />

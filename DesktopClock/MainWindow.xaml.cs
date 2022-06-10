@@ -50,6 +50,13 @@ public partial class MainWindow : Window
         CopyToClipboard();
     }
 
+    private void MenuItemCountdown_OnClick(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(this, 
+            $"Go to settings, change the {nameof(Settings.Default.CountdownTo)} option, and restart.\n\n" +
+            $"Get the clock back by deleting everything between the quotes.");
+    }
+
     private void MenuItemSettings_OnClick(object sender, RoutedEventArgs e)
     {
         Settings.Default.Save();
