@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using DesktopClock.Properties;
@@ -29,6 +30,19 @@ public partial class MainWindow : Window
     private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         CopyToClipboard();
+    }
+
+    private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        if (Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            var newSize = Settings.Default.Height + e.Delta;
+
+            newSize = Math.Max(newSize, 16);
+            newSize = Math.Min(newSize, 160);
+
+            Settings.Default.Height = newSize;
+        }
     }
 
     private void MenuItemCopy_OnClick(object sender, RoutedEventArgs e)

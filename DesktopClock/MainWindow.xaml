@@ -13,6 +13,7 @@
         FontFamily="{Binding FontFamily, Source={x:Static p:Settings.Default}, Mode=OneWay}"
         MouseDown="Window_MouseDown"
         MouseDoubleClick="Window_MouseDoubleClick"
+		MouseWheel="Window_MouseWheel"
         ResizeMode="NoResize"
         ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
         SizeToContent="WidthAndHeight"
