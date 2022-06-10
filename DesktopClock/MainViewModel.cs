@@ -4,6 +4,7 @@ using System.Windows.Input;
 using DesktopClock.Properties;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Humanizer;
 
 namespace DesktopClock;
 
@@ -29,7 +30,7 @@ public class MainViewModel : ViewModelBase
     /// </summary>
     public string CurrentTimeOrCountdownString =>
         IsCountdown ?
-        (Settings.Default.CountdownTo - DateTimeOffset.Now).ToString(Settings.Default.Format) :
+        Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone) :
         CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
 
     /// <summary>
