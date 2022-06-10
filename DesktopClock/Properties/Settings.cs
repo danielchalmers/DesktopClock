@@ -45,7 +45,7 @@ public sealed class Settings : INotifyPropertyChanged
     public double BackgroundOpacity { get; set; } = 0.90;
     public Color OuterColor { get; set; }
     public Color TextColor { get; set; }
-    public string FontFamily { get; set; } = "Arial";
+    public string FontFamily { get; set; } = "Consolas";
     public DateTimeOffset CountdownTo { get; set; } = DateTimeOffset.MinValue;
 
     [JsonIgnore]
