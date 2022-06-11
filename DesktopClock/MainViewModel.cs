@@ -15,13 +15,12 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
-        _systemClockTimer = new SystemClockTimer();
-        _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
-
         _timeZone = SettingsHelper.GetTimeZone();
 
         Settings.Default.PropertyChanged += Settings_PropertyChanged;
 
+        _systemClockTimer = new();
+        _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
         _systemClockTimer.Start();
     }
 

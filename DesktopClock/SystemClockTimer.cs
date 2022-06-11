@@ -4,7 +4,7 @@ using System.Threading;
 namespace DesktopClock;
 
 /// <summary>
-/// A timer, synced with the system clock.
+/// A timer that is synced with the system clock.
 /// </summary>
 public sealed class SystemClockTimer : IDisposable
 {
@@ -25,13 +25,7 @@ public sealed class SystemClockTimer : IDisposable
     /// </summary>
     private int MillisecondsUntilNextSecond => 1000 - DateTimeOffset.Now.Millisecond;
 
-    /// <summary>
-    /// Releases all resources used by the current instance of <see cref="SystemClockTimer" />.
-    /// </summary>
-    public void Dispose()
-    {
-        _timer.Dispose();
-    }
+    public void Dispose() => _timer.Dispose();
 
     public void Start() => ScheduleTickForNextSecond();
 

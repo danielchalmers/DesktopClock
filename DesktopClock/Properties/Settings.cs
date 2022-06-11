@@ -62,6 +62,12 @@ public sealed class Settings : INotifyPropertyChanged
     #endregion "Properties"
 
     /// <summary>
+    /// Determines if the settings file has been modified externally since the last time it was used.
+    /// </summary>
+    public bool CheckIfModifiedExternally() =>
+        File.GetLastWriteTimeUtc(Path) > _fileLastUsed;
+
+    /// <summary>
     /// Saves to the default path.
     /// </summary>
     public void Save()
@@ -75,10 +81,13 @@ public sealed class Settings : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Determines if the settings file has been modified externally since the last time it was used.
+    /// Saves to the default path unless a save has already happened from an external source.
     /// </summary>
-    public bool CheckIfModifiedExternally() =>
-        File.GetLastWriteTimeUtc(Path) > _fileLastUsed;
+    public void SaveIfNotModifiedExternally()
+    {
+        if (!CheckIfModifiedExternally())
+            Save();
+    }
 
     /// <summary>
     /// Loads from the default path.

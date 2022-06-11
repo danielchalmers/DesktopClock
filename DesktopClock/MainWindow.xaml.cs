@@ -52,7 +52,7 @@ public partial class MainWindow : Window
 
     private void MenuItemCountdown_OnClick(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show(this, 
+        MessageBox.Show(this,
             $"Go to settings, change the {nameof(Settings.Default.CountdownTo)} option, and restart.\n\n" +
             $"Get the clock back by deleting everything between the quotes.");
     }

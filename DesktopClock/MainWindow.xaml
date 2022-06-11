@@ -10,16 +10,16 @@
         Title="DesktopClock"
         AllowsTransparency="True"
         Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        UseLayoutRounding="True"
+        Topmost="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
         FontFamily="{Binding FontFamily, Source={x:Static p:Settings.Default}, Mode=OneWay}"
         MouseDown="Window_MouseDown"
         MouseDoubleClick="Window_MouseDoubleClick"
-		MouseWheel="Window_MouseWheel"
-        ResizeMode="NoResize"
-        ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-        SizeToContent="WidthAndHeight"
-        Topmost="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-        UseLayoutRounding="True"
-        WindowStyle="None"
+        MouseWheel="Window_MouseWheel"
         wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}}">
 	<Window.DataContext>
 		<local:MainViewModel />
@@ -96,7 +96,7 @@
 			<MenuItem Click="MenuItemCountdown_OnClick" Header="_Countdown to..." />
 
 			<Separator />
-			
+
 			<MenuItem Click="MenuItemSettings_OnClick" Header="_Settings..." />
 
 			<MenuItem Click="MenuItemCheckForUpdates_OnClick" Header="Check for _updates..." />

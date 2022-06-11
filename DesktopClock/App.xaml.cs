@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using System.Windows;
 using DesktopClock.Properties;
 
@@ -11,7 +10,7 @@ namespace DesktopClock;
 public partial class App : Application
 {
     // https://www.materialui.co/colors
-    public static IReadOnlyList<Theme> Themes { get; } = new Theme[]
+    public static IReadOnlyList<Theme> Themes { get; } = new[]
     {
         new Theme("White", "#FFFFFF", "#000000"),
         new Theme("Black", "#000000", "#9E9E9E"),
@@ -36,7 +35,6 @@ public partial class App : Application
 
     private void Application_Exit(object sender, ExitEventArgs e)
     {
-        if (!Settings.Default.CheckIfModifiedExternally())
-            Settings.Default.Save();
+        Settings.Default.SaveIfNotModifiedExternally();
     }
 }
