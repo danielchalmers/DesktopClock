@@ -12,25 +12,16 @@ public partial class App : Application
     // https://www.materialui.co/colors
     public static IReadOnlyList<Theme> Themes { get; } = new[]
     {
-        new Theme("White", "#FFFFFF", "#000000"),
-        new Theme("Black", "#000000", "#9E9E9E"),
-        new Theme("Grey", "#9E9E9E", "#000000"),
-        new Theme("Red", "#ff5252", "#212121"),
-        new Theme("Pink", "#FF4081", "#212121"),
-        new Theme("Purple", "#E040FB", "#212121"),
-        new Theme("Deep Purple", "#7C4DFF", "#212121"),
-        new Theme("Indigo", "#536DFE", "#212121"),
-        new Theme("Blue", "#448AFF", "#212121"),
-        new Theme("Light Blue", "#40C4FF", "#212121"),
-        new Theme("Cyan", "#18FFFF", "#212121"),
-        new Theme("Teal", "#64FFDA", "#212121"),
-        new Theme("Green", "#69F0AE", "#212121"),
-        new Theme("Light Green", "#B2FF59", "#212121"),
-        new Theme("Lime", "#EEFF41", "#212121"),
-        new Theme("Yellow", "#FFFF00", "#212121"),
-        new Theme("Amber", "#FFD740", "#212121"),
-        new Theme("Orange", "#FFAB40", "#212121"),
-        new Theme("Deep Orange", "#FF6E40", "#212121"),
+        new Theme("Light", "#F5F5F5", "#212121"),
+        new Theme("Dark", "#212121", "#F5F5F5"),
+        new Theme("Red", "#D50000", "#FF8A80"),
+        new Theme("Pink", "#C51162", "#FF80AB"),
+        new Theme("Purple", "#AA00FF", "#EA80FC"),
+        new Theme("Blue", "#2962FF", "#82B1FF"),
+        new Theme("Cyan", "#00B8D4", "#84FFFF"),
+        new Theme("Green", "#00C853", "#B9F6CA"),
+        new Theme("Amber", "#FFAB00", "#FFE57F"),
+        new Theme("Orange", "#FF6D00", "#FFD180"),
     };
 
     private void Application_Exit(object sender, ExitEventArgs e)
