@@ -20,7 +20,7 @@ public partial class App : Application
         new Theme("Blue", "#2962FF", "#82B1FF"),
         new Theme("Cyan", "#00B8D4", "#84FFFF"),
         new Theme("Green", "#00C853", "#B9F6CA"),
-        new Theme("Amber", "#FFAB00", "#FFE57F"),
+        new Theme("Yellow", "#FFD600", "#FFFF8D"),
         new Theme("Orange", "#FF6D00", "#FFD180"),
     };
 
