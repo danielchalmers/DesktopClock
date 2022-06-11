@@ -105,7 +105,7 @@
 	</Window.ContextMenu>
 
 	<Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-		<Border CornerRadius="2">
+		<Border CornerRadius="1">
 			<Border.Style>
 				<Style TargetType="Border">
 					<Setter Property="Background">
