@@ -35,18 +35,18 @@ public sealed class Settings : INotifyPropertyChanged
 
     #region "Properties"
 
-    public WindowPlacement Placement { get; set; }
+    public DateTimeOffset CountdownTo { get; set; } = DateTimeOffset.MinValue;
+    public string Format { get; set; } = "dddd, MMM dd, HH:mm:ss";
+    public string TimeZone { get; set; } = string.Empty;
+    public string FontFamily { get; set; } = "Consolas";
+    public Color TextColor { get; set; }
+    public Color OuterColor { get; set; }
+    public bool BackgroundEnabled { get; set; } = true;
+    public double BackgroundOpacity { get; set; } = 0.90;
     public bool Topmost { get; set; } = true;
     public bool ShowInTaskbar { get; set; } = true;
     public double Height { get; set; } = 48;
-    public string TimeZone { get; set; } = string.Empty;
-    public string Format { get; set; } = "dddd, MMM dd, HH:mm:ss";
-    public bool BackgroundEnabled { get; set; } = true;
-    public double BackgroundOpacity { get; set; } = 0.90;
-    public Color OuterColor { get; set; }
-    public Color TextColor { get; set; }
-    public string FontFamily { get; set; } = "Consolas";
-    public DateTimeOffset CountdownTo { get; set; } = DateTimeOffset.MinValue;
+    public WindowPlacement Placement { get; set; }
 
     [JsonIgnore]
     public Theme Theme
