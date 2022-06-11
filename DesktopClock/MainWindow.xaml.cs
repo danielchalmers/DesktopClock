@@ -39,7 +39,7 @@ public partial class MainWindow : Window
             // Scale size based on scroll amount, with one notch on a default PC mouse being a change of 15%.
             var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
             var change = Settings.Default.Height * steps * 0.15;
-            Settings.Default.Height = Math.Min(Math.Max(Settings.Default.Height + change, 16), 160);
+            Settings.Default.Height = (int)Math.Min(Math.Max(Settings.Default.Height + change, 16), 160);
         }
     }
 

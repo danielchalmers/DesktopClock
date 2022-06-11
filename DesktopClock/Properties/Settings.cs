@@ -45,7 +45,7 @@ public sealed class Settings : INotifyPropertyChanged
     public double BackgroundOpacity { get; set; } = 0.90;
     public bool Topmost { get; set; } = true;
     public bool ShowInTaskbar { get; set; } = true;
-    public double Height { get; set; } = 48;
+    public int Height { get; set; } = 48;
     public WindowPlacement Placement { get; set; }
 
     [JsonIgnore]
