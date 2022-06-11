@@ -1,14 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
 using Humanizer;
 
 namespace DesktopClock;
 
-public class MainViewModel : ViewModelBase
+public class MainViewModel : ObservableRecipient
 {
     private readonly SystemClockTimer _systemClockTimer;
     private TimeZoneInfo _timeZone;
@@ -77,5 +77,5 @@ public class MainViewModel : ViewModelBase
         UpdateTimeString();
     }
 
-    private void UpdateTimeString() => RaisePropertyChanged(nameof(CurrentTimeOrCountdownString));
+    private void UpdateTimeString() => OnPropertyChanged(nameof(CurrentTimeOrCountdownString));
 }
