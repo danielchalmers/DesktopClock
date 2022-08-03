@@ -19,9 +19,12 @@ jobs:
       - name: Create installer
         run: |
           dotnet tool install --global wix --version 4.0.0-preview.0
-          wix build Product.wxs -o "publish/Install.msi"
+          wix build Product.wxs -o "publish/Install DesktopClock.msi"
 
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          files: "publish/*"
+          artifacts: "publish/*.exe,publish/*.msi"
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          prerelease: contains(github.ref, 'beta')
