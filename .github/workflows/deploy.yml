@@ -16,6 +16,11 @@ jobs:
       - name: Build
         run: dotnet publish -o "publish" -c Release -r win-x64
 
+      - name: Create installer
+        run: |
+          dotnet tool install --global wix --version 4.0.0-preview.0
+          wix build Product.wxs -o "publish/Install.msi"
+
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
