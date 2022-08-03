@@ -98,7 +98,7 @@
 
 			<MenuItem Click="MenuItemSettings_OnClick" Header="_Settings..." />
 
-			<MenuItem Click="MenuItemCheckForUpdates_OnClick" Header="Check for _updates..." />
+			<MenuItem Click="MenuItemCheckForUpdates_OnClick" Header="_Releases..." />
 
 			<MenuItem Click="MenuItemExit_OnClick" Header="E_xit" />
 		</ContextMenu>
