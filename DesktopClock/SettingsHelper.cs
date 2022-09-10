@@ -1,5 +1,6 @@
 ﻿using System;
 using DesktopClock.Properties;
+using Microsoft.Win32;
 
 namespace DesktopClock;
 
@@ -16,4 +17,14 @@ public static class SettingsHelper
     /// </summary>
     public static void SetTimeZone(TimeZoneInfo timeZone) =>
         Settings.Default.TimeZone = timeZone.Id;
+
+    public static void SetRunOnStartup(bool runOnStartup)
+    {
+        using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+
+        if (runOnStartup)
+            key?.SetValue("DesktopClock", App.ResourceAssembly.Location);
+        else
+            key?.DeleteValue("DesktopClock", false);
+    }
 }

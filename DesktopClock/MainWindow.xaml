@@ -92,6 +92,10 @@
 				</MenuItem.Resources>
 			</MenuItem>
 
+			<MenuItem Header="_Run on startup"
+			          IsCheckable="True"
+			          IsChecked="{Binding RunOnStartup, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+
 			<MenuItem Click="MenuItemCountdown_OnClick" Header="_Countdown to..." />
 
 			<Separator />

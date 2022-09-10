@@ -46,6 +46,7 @@ public sealed class Settings : INotifyPropertyChanged
     public bool Topmost { get; set; } = true;
     public bool ShowInTaskbar { get; set; } = true;
     public int Height { get; set; } = 48;
+    public bool RunOnStartup { get; set; } = false;
     public WindowPlacement Placement { get; set; }
 
     [JsonIgnore]
