@@ -33,7 +33,7 @@ public static class DateTimeUtil
     /// Common date time formatting strings and an example string for each.
     /// </summary>
     public static IReadOnlyDictionary<string, string> DateTimeFormatsAndExamples { get; } =
-        DateTimeFormats.ToDictionary(f => f, f => DateTimeOffset.Now.ToString(f));
+        DateTimeFormats.ToDictionary(f => f, DateTimeOffset.Now.ToString);
 
     public static IReadOnlyCollection<TimeZoneInfo> TimeZones { get; } = TimeZoneInfo.GetSystemTimeZones();
 
