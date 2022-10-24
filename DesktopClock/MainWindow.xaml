@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopClock"
         xmlns:p="clr-namespace:DesktopClock.Properties"
-        xmlns:wp="clr-namespace:WpfWindowPlacement;assembly=WpfWindowPlacement"
         mc:Ignorable="d"
         Title="DesktopClock"
         AllowsTransparency="True"
@@ -20,7 +19,8 @@
         MouseDown="Window_MouseDown"
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
-        wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}}">
+		SourceInitialized="Window_SourceInitialized"
+		Closing="Window_Closing">
 	<Window.DataContext>
 		<local:MainViewModel />
 	</Window.DataContext>

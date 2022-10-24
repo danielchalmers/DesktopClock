@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using DesktopClock.Properties;
 
 namespace DesktopClock;
 
@@ -23,11 +22,4 @@ public partial class App : Application
         new Theme("Yellow", "#FFD600", "#FFFF8D"),
         new Theme("Orange", "#FF6D00", "#FFD180"),
     };
-
-    private void Application_Exit(object sender, ExitEventArgs e)
-    {
-        Settings.Default.SaveIfNotModifiedExternally();
-
-        SettingsHelper.SetRunOnStartup(Settings.Default.RunOnStartup);
-    }
 }

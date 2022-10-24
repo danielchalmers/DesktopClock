@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using DesktopClock.Properties;
+using WpfWindowPlacement;
 
 namespace DesktopClock;
 
@@ -71,5 +72,19 @@ public partial class MainWindow : Window
     private void MenuItemExit_OnClick(object sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private void Window_SourceInitialized(object sender, EventArgs e)
+    {
+        WindowPlacementFunctions.SetPlacement(this, Settings.Default.Placement);
+    }
+
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        Settings.Default.Placement = WindowPlacementFunctions.GetPlacement(this);
+
+        Settings.Default.SaveIfNotModifiedExternally();
+
+        SettingsHelper.SetRunOnStartup(Settings.Default.RunOnStartup);
     }
 }
