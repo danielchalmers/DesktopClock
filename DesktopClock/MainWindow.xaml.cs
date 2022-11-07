@@ -52,9 +52,14 @@ public partial class MainWindow : Window
 
     private void MenuItemCountdown_OnClick(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show(this,
-            $"Go to settings, change the {nameof(Settings.Default.CountdownTo)} option, and restart.\n\n" +
-            $"Get the clock back by deleting everything between the quotes.");
+        var result = MessageBox.Show(this,
+            $"In advanced settings: change {nameof(Settings.Default.CountdownTo)}, then restart.\n" +
+            $"Go back by deleting everything between the quotes.\n\n" +
+            "Open advanced settings now?",
+            Title, MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes);
+
+        if (result == MessageBoxResult.Yes)
+            MenuItemSettings_OnClick(this, new RoutedEventArgs());
     }
 
     private void MenuItemSettings_OnClick(object sender, RoutedEventArgs e)

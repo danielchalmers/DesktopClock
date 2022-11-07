@@ -19,8 +19,8 @@
         MouseDown="Window_MouseDown"
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
-		SourceInitialized="Window_SourceInitialized"
-		Closing="Window_Closing">
+        SourceInitialized="Window_SourceInitialized"
+        Closing="Window_Closing">
 	<Window.DataContext>
 		<local:MainViewModel />
 	</Window.DataContext>
@@ -38,6 +38,10 @@
 			<MenuItem Header="Show tas_kbar icon"
 			          IsCheckable="True"
 			          IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+
+			<MenuItem Header="Start with _PC"
+			          IsCheckable="True"
+			          IsChecked="{Binding RunOnStartup, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
 			<MenuItem Header="Show _background"
 			          IsCheckable="True"
@@ -92,17 +96,13 @@
 				</MenuItem.Resources>
 			</MenuItem>
 
-			<MenuItem Header="_Run on startup"
-			          IsCheckable="True"
-			          IsChecked="{Binding RunOnStartup, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+			<Separator />
 
 			<MenuItem Click="MenuItemCountdown_OnClick" Header="_Countdown to..." />
 
-			<Separator />
+			<MenuItem Click="MenuItemSettings_OnClick" Header="Advanced _settings..." />
 
-			<MenuItem Click="MenuItemSettings_OnClick" Header="_Settings..." />
-
-			<MenuItem Click="MenuItemCheckForUpdates_OnClick" Header="_Releases..." />
+			<MenuItem Click="MenuItemCheckForUpdates_OnClick" Header="Check for _updates..." />
 
 			<MenuItem Click="MenuItemExit_OnClick" Header="E_xit" />
 		</ContextMenu>
