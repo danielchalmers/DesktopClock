@@ -66,7 +66,18 @@ public partial class MainWindow : Window
             Settings.Default.Save();
 
         // Open settings file in notepad.
-        Process.Start("notepad", Settings.Path);
+        try
+        {
+            Process.Start("notepad", Settings.Path);
+        }
+        catch (Exception ex)
+        {
+            // Lazy scammers on the Microsoft Store may reupload without realizing it's sandboxed, which makes it unable to start the Notepad process.
+            MessageBox.Show(this,
+                "Couldn't open settings file.\n\n" +
+                "This app may have be reuploaded without permission. If you paid for it, ask for a refund and download it for free from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
+                $"If it still doesn't work, report it as an issue at that link with details on what happened and include this error: \"{ex.Message}\"");
+        }
     }
 
     private void MenuItemCheckForUpdates_OnClick(object sender, RoutedEventArgs e)
