@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using DesktopClock.Properties;
@@ -59,6 +60,10 @@ public partial class MainWindow : Window
     private void MenuItemSettings_OnClick(object sender, RoutedEventArgs e)
     {
         Settings.Default.Save();
+
+        // Re-create the settings file if it got deleted.
+        if (!File.Exists(Settings.Path))
+            Settings.Default.Save();
 
         // Open settings file in notepad.
         Process.Start("notepad", Settings.Path);
