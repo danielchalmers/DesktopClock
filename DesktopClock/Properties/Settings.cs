@@ -11,7 +11,7 @@ public sealed class Settings : INotifyPropertyChanged
 {
     private DateTime _fileLastUsed = DateTime.UtcNow;
 
-    public static readonly string Path = "DesktopClock.settings";
+    public static readonly string Path = System.Diagnostics.Process.GetCurrentProcess().ProcessName + ".settings";
     private static readonly Lazy<Settings> _default = new(() => TryLoad() ?? new Settings());
 
     private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
