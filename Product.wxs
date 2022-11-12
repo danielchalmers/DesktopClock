@@ -33,7 +33,7 @@
 
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
     <Upgrade Id="$(var.Guid)">
-      <UpgradeVersion Minimum="0.0.0.0" Maximum="999.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
+      <UpgradeVersion Minimum="0.0.0.0" Maximum="255.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
     </Upgrade>
 
     <CustomAction Id="RunMainExe" Directory="INSTALLFOLDER" ExeCommand="[INSTALLFOLDER]$(var.Name).exe" Execute="commit" Return="asyncNoWait" />
