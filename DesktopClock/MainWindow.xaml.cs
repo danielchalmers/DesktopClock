@@ -55,9 +55,9 @@ public partial class MainWindow : Window
         var result = MessageBox.Show(this,
             $"This will make a copy of the executable and start it with new settings.\n\n" +
             $"Continue?",
-            Title, MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes);
+            Title, MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
 
-        if (result != MessageBoxResult.Yes)
+        if (result != MessageBoxResult.OK)
             return;
 
         var exeFileInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
@@ -72,9 +72,9 @@ public partial class MainWindow : Window
             $"In advanced settings: change {nameof(Settings.Default.CountdownTo)}, then restart.\n" +
             $"Go back by deleting everything between the quotes.\n\n" +
             "Open advanced settings now?",
-            Title, MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes);
+            Title, MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
 
-        if (result == MessageBoxResult.Yes)
+        if (result == MessageBoxResult.OK)
             MenuItemSettings_OnClick(this, new RoutedEventArgs());
     }
 
