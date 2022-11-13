@@ -50,6 +50,22 @@ public partial class MainWindow : Window
         CopyToClipboard();
     }
 
+    private void MenuItemNew_OnClick(object sender, RoutedEventArgs e)
+    {
+        var result = MessageBox.Show(this,
+            $"This will make a copy of the executable and start it with new settings.\n\n" +
+            $"Continue?",
+            Title, MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.Yes);
+
+        if (result != MessageBoxResult.Yes)
+            return;
+
+        var exeFileInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
+        var newExePath = Path.Combine(exeFileInfo.DirectoryName, Guid.NewGuid().ToString() + exeFileInfo.Name);
+        File.Copy(exeFileInfo.FullName, newExePath);
+        Process.Start(newExePath);
+    }
+
     private void MenuItemCountdown_OnClick(object sender, RoutedEventArgs e)
     {
         var result = MessageBox.Show(this,
