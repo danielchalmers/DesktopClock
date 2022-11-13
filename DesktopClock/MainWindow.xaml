@@ -98,6 +98,8 @@
 
 			<Separator />
 
+			<MenuItem Click="MenuItemNew_OnClick" Header="_New clock..." />
+
 			<MenuItem Click="MenuItemCountdown_OnClick" Header="_Countdown to..." />
 
 			<MenuItem Click="MenuItemSettings_OnClick" Header="Advanced _settings..." />
