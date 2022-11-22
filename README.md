@@ -1,6 +1,6 @@
 # DesktopClock
 
-[![Release](https://img.shields.io/github/release/danielchalmers/DesktopClock)](https://github.com/danielchalmers/DesktopClock/releases/latest)
+[![Release](https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases)](https://github.com/danielchalmers/DesktopClock/releases/latest)
 [![License](https://img.shields.io/github/license/danielchalmers/DesktopClock)](LICENSE)
 
 A configurable digital clock for your desktop
