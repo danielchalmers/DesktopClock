@@ -11,7 +11,7 @@ public sealed class Settings : INotifyPropertyChanged
 {
     private DateTime _fileLastUsed = DateTime.UtcNow;
 
-    public static readonly string Path = System.Diagnostics.Process.GetCurrentProcess().ProcessName + ".settings";
+    public static readonly string Path = GetSettingsPath();
     private static readonly Lazy<Settings> _default = new(() => TryLoad() ?? new Settings());
 
     private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
@@ -115,5 +115,12 @@ public sealed class Settings : INotifyPropertyChanged
         {
             return null;
         }
+    }
+
+    private static string GetSettingsPath()
+    {
+        var exeInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
+        var exeNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(exeInfo.FullName);
+        return System.IO.Path.Combine(exeInfo.DirectoryName, exeNameWithoutExtension + ".settings");
     }
 }
