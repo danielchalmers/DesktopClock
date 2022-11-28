@@ -43,6 +43,7 @@ public sealed class Settings : INotifyPropertyChanged
     public Color OuterColor { get; set; }
     public bool BackgroundEnabled { get; set; } = true;
     public double BackgroundOpacity { get; set; } = 0.90;
+    public double OutlineThickness { get; set; } = 0.2;
     public bool Topmost { get; set; } = true;
     public bool ShowInTaskbar { get; set; } = true;
     public int Height { get; set; } = 48;
