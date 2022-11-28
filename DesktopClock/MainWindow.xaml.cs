@@ -55,7 +55,7 @@ public partial class MainWindow : Window
         var result = MessageBox.Show(this,
             $"This will make a copy of the executable and start it with new settings.\n\n" +
             $"Continue?",
-            Title, MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
+            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
         if (result != MessageBoxResult.OK)
             return;
@@ -72,7 +72,7 @@ public partial class MainWindow : Window
             $"In advanced settings: change {nameof(Settings.Default.CountdownTo)}, then restart.\n" +
             "Go back by replacing it with \"0001-01-01T00:00:00+00:00\".\n\n" +
             "Open advanced settings now?",
-            Title, MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
+            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
         if (result == MessageBoxResult.OK)
             MenuItemSettings_OnClick(this, new RoutedEventArgs());
