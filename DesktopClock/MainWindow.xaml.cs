@@ -70,7 +70,7 @@ public partial class MainWindow : Window
     {
         var result = MessageBox.Show(this,
             $"In advanced settings: change {nameof(Settings.Default.CountdownTo)}, then restart.\n" +
-            $"Go back by deleting everything between the quotes.\n\n" +
+            "Go back by replacing it with \"0001-01-01T00:00:00+00:00\".\n\n" +
             "Open advanced settings now?",
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.OK);
 
