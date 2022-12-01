@@ -7,12 +7,11 @@ using WpfWindowPlacement;
 
 namespace DesktopClock.Properties;
 
-public sealed class Settings : INotifyPropertyChanged
+public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
-    private DateTime _fileLastUsed = DateTime.UtcNow;
-
-    public static readonly string Path = GetSettingsPath();
-    private static readonly Lazy<Settings> _default = new(() => TryLoad() ?? new Settings());
+    private readonly FileSystemWatcher _watcher;
+    private DateTime _fileDate = DateTime.UtcNow;
+    private static readonly Lazy<Settings> _default = new(() => Load() ?? new Settings());
 
     private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
     {
@@ -21,9 +20,20 @@ public sealed class Settings : INotifyPropertyChanged
 
     private Settings()
     {
-        var random = new Random();
+        // Settings file path from same directory as the executable.
+        var exeInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
+        var settingsFileName = Path.GetFileNameWithoutExtension(exeInfo.FullName) + ".settings";
+        FilePath = Path.Combine(exeInfo.DirectoryName, settingsFileName);
+
+        // Watch for changes.
+        _watcher = new(exeInfo.DirectoryName, settingsFileName)
+        {
+            EnableRaisingEvents = true
+        };
+        _watcher.Changed += OnFileChanged;
 
         // Random default theme.
+        var random = new Random();
         Theme = App.Themes[random.Next(0, App.Themes.Count)];
     }
 
@@ -32,6 +42,8 @@ public sealed class Settings : INotifyPropertyChanged
 #pragma warning restore CS0067 // The event 'Settings.PropertyChanged' is never used
 
     public static Settings Default => _default.Value;
+
+    public static string FilePath { get; private set; }
 
     #region "Properties"
 
@@ -67,19 +79,19 @@ public sealed class Settings : INotifyPropertyChanged
     /// Determines if the settings file has been modified externally since the last time it was used.
     /// </summary>
     public bool CheckIfModifiedExternally() =>
-        File.GetLastWriteTimeUtc(Path) > _fileLastUsed;
+        File.GetLastWriteTimeUtc(FilePath) > _fileDate;
 
     /// <summary>
     /// Saves to the default path.
     /// </summary>
     public void Save()
     {
-        using (var fileStream = new FileStream(Path, FileMode.Create))
+        using (var fileStream = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
         using (var streamWriter = new StreamWriter(fileStream))
         using (var jsonWriter = new JsonTextWriter(streamWriter))
             JsonSerializer.Create(_jsonSerializerSettings).Serialize(jsonWriter, this);
 
-        _fileLastUsed = DateTime.UtcNow;
+        _fileDate = DateTime.UtcNow;
     }
 
     /// <summary>
@@ -92,25 +104,27 @@ public sealed class Settings : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Loads from the default path.
+    /// Populates the given settings with values from the default path.
     /// </summary>
-    private static Settings Load()
+    private static void Populate(Settings settings)
     {
-        using var fileStream = new FileStream(Path, FileMode.Open);
+        using var fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         using var streamReader = new StreamReader(fileStream);
         using var jsonReader = new JsonTextReader(streamReader);
 
-        return JsonSerializer.Create(_jsonSerializerSettings).Deserialize<Settings>(jsonReader);
+        JsonSerializer.Create(_jsonSerializerSettings).Populate(jsonReader, settings);
     }
 
     /// <summary>
     /// Returns loaded settings from the default path or null if it fails.
     /// </summary>
-    private static Settings TryLoad()
+    private static Settings Load()
     {
         try
         {
-            return Load();
+            var settings = new Settings();
+            Populate(settings);
+            return settings;
         }
         catch
         {
@@ -118,10 +132,19 @@ public sealed class Settings : INotifyPropertyChanged
         }
     }
 
-    private static string GetSettingsPath()
+    private void OnFileChanged(object sender, FileSystemEventArgs e)
     {
-        var exeInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
-        var exeNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(exeInfo.FullName);
-        return System.IO.Path.Combine(exeInfo.DirectoryName, exeNameWithoutExtension + ".settings");
+        try
+        {
+            Populate(this);
+        }
+        catch
+        {
+        }
+    }
+
+    public void Dispose()
+    {
+        _watcher?.Dispose();
     }
 }

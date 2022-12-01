@@ -83,13 +83,13 @@ public partial class MainWindow : Window
         Settings.Default.Save();
 
         // Re-create the settings file if it got deleted.
-        if (!File.Exists(Settings.Path))
+        if (!File.Exists(Settings.FilePath))
             Settings.Default.Save();
 
         // Open settings file in notepad.
         try
         {
-            Process.Start("notepad", Settings.Path);
+            Process.Start("notepad", Settings.FilePath);
         }
         catch (Exception ex)
         {
@@ -123,5 +123,7 @@ public partial class MainWindow : Window
         Settings.Default.SaveIfNotModifiedExternally();
 
         SettingsHelper.SetRunOnStartup(Settings.Default.RunOnStartup);
+
+        Settings.Default.Dispose();
     }
 }
