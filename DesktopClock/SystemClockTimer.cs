@@ -4,7 +4,7 @@ using System.Threading;
 namespace DesktopClock;
 
 /// <summary>
-/// A timer that is synced with the system clock.
+/// A timer that syncs with the system clock.
 /// </summary>
 public sealed class SystemClockTimer : IDisposable
 {
@@ -16,7 +16,7 @@ public sealed class SystemClockTimer : IDisposable
     }
 
     /// <summary>
-    /// Occurs after the second of the system clock changes.
+    /// Occurs after the second changes on the system clock.
     /// </summary>
     public event EventHandler SecondChanged;
 

@@ -11,6 +11,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
     private readonly FileSystemWatcher _watcher;
     private DateTime _fileDate = DateTime.UtcNow;
+
     private static readonly Lazy<Settings> _default = new(() => Load() ?? new Settings());
 
     private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
@@ -30,7 +31,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         {
             EnableRaisingEvents = true
         };
-        _watcher.Changed += OnFileChanged;
+        _watcher.Changed += FileChanged;
 
         // Random default theme.
         var random = new Random();
@@ -132,7 +133,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         }
     }
 
-    private void OnFileChanged(object sender, FileSystemEventArgs e)
+    private void FileChanged(object sender, FileSystemEventArgs e)
     {
         try
         {

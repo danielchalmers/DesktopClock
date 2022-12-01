@@ -21,13 +21,9 @@
         MouseWheel="Window_MouseWheel"
         SourceInitialized="Window_SourceInitialized"
         Closing="Window_Closing">
-	<Window.DataContext>
-		<local:MainViewModel />
-	</Window.DataContext>
-
 	<Window.ContextMenu>
 		<ContextMenu>
-			<MenuItem Click="MenuItemCopy_OnClick" Header="_Copy" />
+			<MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
 
 			<Separator />
 
@@ -98,15 +94,15 @@
 
 			<Separator />
 
-			<MenuItem Click="MenuItemNew_OnClick" Header="_New clock..." />
+			<MenuItem Command="{Binding NewClockCommand}" Header="_New clock..." />
 
-			<MenuItem Click="MenuItemCountdown_OnClick" Header="_Countdown to..." />
+			<MenuItem Command="{Binding CountdownToCommand}" Header="_Countdown to..." />
 
-			<MenuItem Click="MenuItemSettings_OnClick" Header="Advanced _settings..." />
+			<MenuItem Command="{Binding OpenSettingsCommand}" Header="Advanced _settings..." />
 
-			<MenuItem Click="MenuItemCheckForUpdates_OnClick" Header="Check for _updates..." />
+			<MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates..." />
 
-			<MenuItem Click="MenuItemExit_OnClick" Header="E_xit" />
+			<MenuItem Command="{Binding ExitCommand}" Header="E_xit" />
 		</ContextMenu>
 	</Window.ContextMenu>
 

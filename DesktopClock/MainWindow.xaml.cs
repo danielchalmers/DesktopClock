@@ -1,9 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
+using Humanizer;
 using WpfWindowPlacement;
 
 namespace DesktopClock;
@@ -11,62 +15,91 @@ namespace DesktopClock;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
+[ObservableObject]
 public partial class MainWindow : Window
 {
+    private readonly SystemClockTimer _systemClockTimer;
+    private TimeZoneInfo _timeZone;
+
     public MainWindow()
     {
         InitializeComponent();
+        DataContext = this;
+
+        _timeZone = App.GetTimeZone();
+
+        Settings.Default.PropertyChanged += Settings_PropertyChanged;
+
+        _systemClockTimer = new();
+        _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
+        _systemClockTimer.Start();
     }
 
-    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-        {
-            DragMove();
-        }
-    }
+    /// <summary>
+    /// The current date and time in the selected time zone.
+    /// </summary>
+    private DateTimeOffset CurrentTimeInSelectedTimeZone => TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
 
-    private void CopyToClipboard() =>
+    /// <summary>
+    /// Should the clock be a countdown?
+    /// </summary>
+    private bool IsCountdown => Settings.Default.CountdownTo > DateTimeOffset.MinValue;
+
+    /// <summary>
+    /// The current date and time in the selected time zone or countdown as a formatted string.
+    /// </summary>
+    public string CurrentTimeOrCountdownString =>
+        IsCountdown ?
+        Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone) :
+        CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
+
+    [RelayCommand]
+    public void CopyToClipboard() =>
         Clipboard.SetText(TimeTextBlock.Text);
 
-    private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        CopyToClipboard();
-    }
+    /// <summary>
+    /// Sets app theme to parameter's value.
+    /// </summary>
+    [RelayCommand]
+    public void SetTheme(Theme theme) => Settings.Default.Theme = theme;
 
-    private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
-    {
-        if (Keyboard.Modifiers == ModifierKeys.Control)
-        {
-            // Scale size based on scroll amount, with one notch on a default PC mouse being a change of 15%.
-            var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
-            var change = Settings.Default.Height * steps * 0.15;
-            Settings.Default.Height = (int)Math.Min(Math.Max(Settings.Default.Height + change, 16), 160);
-        }
-    }
+    /// <summary>
+    /// Sets format string in settings to parameter's string.
+    /// </summary>
+    [RelayCommand]
+    public void SetFormat(string format) => Settings.Default.Format = format;
 
-    private void MenuItemCopy_OnClick(object sender, RoutedEventArgs e)
-    {
-        CopyToClipboard();
-    }
+    /// <summary>
+    /// Sets time zone ID in settings to parameter's time zone ID.
+    /// </summary>
+    [RelayCommand]
+    public void SetTimeZone(TimeZoneInfo tzi) => App.SetTimeZone(tzi);
 
-    private void MenuItemNew_OnClick(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Creates a new clock.
+    /// </summary>
+    [RelayCommand]
+    public void NewClock()
     {
         var result = MessageBox.Show(this,
-            $"This will make a copy of the executable and start it with new settings.\n\n" +
+            $"This will copy the executable and start it with new settings.\n\n" +
             $"Continue?",
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
         if (result != MessageBoxResult.OK)
             return;
 
-        var exeFileInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
-        var newExePath = Path.Combine(exeFileInfo.DirectoryName, Guid.NewGuid().ToString() + exeFileInfo.Name);
-        File.Copy(exeFileInfo.FullName, newExePath);
+        var exeInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
+        var newExePath = Path.Combine(exeInfo.DirectoryName, Guid.NewGuid().ToString() + exeInfo.Name);
+        File.Copy(exeInfo.FullName, newExePath);
         Process.Start(newExePath);
     }
 
-    private void MenuItemCountdown_OnClick(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Explains how to enable countdown mode.
+    /// </summary>
+    [RelayCommand]
+    public void CountdownTo()
     {
         var result = MessageBox.Show(this,
             $"In advanced settings: change {nameof(Settings.Default.CountdownTo)}, then restart.\n" +
@@ -75,10 +108,14 @@ public partial class MainWindow : Window
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
         if (result == MessageBoxResult.OK)
-            MenuItemSettings_OnClick(this, new RoutedEventArgs());
+            OpenSettings();
     }
 
-    private void MenuItemSettings_OnClick(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Opens the settings file in Notepad.
+    /// </summary>
+    [RelayCommand]
+    public void OpenSettings()
     {
         Settings.Default.Save();
 
@@ -101,14 +138,65 @@ public partial class MainWindow : Window
         }
     }
 
-    private void MenuItemCheckForUpdates_OnClick(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Checks for updates.
+    /// </summary>
+    [RelayCommand]
+    public void CheckForUpdates()
     {
         Process.Start("https://github.com/danielchalmers/DesktopClock/releases");
     }
 
-    private void MenuItemExit_OnClick(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Exits the program.
+    /// </summary>
+    [RelayCommand]
+    public void Exit() => Close();
+
+    private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        Close();
+        switch (e.PropertyName)
+        {
+            case nameof(Settings.Default.TimeZone):
+                _timeZone = App.GetTimeZone();
+                UpdateTimeString();
+                break;
+
+            case nameof(Settings.Default.Format):
+                UpdateTimeString();
+                break;
+        }
+    }
+
+    private void SystemClockTimer_SecondChanged(object sender, EventArgs e)
+    {
+        UpdateTimeString();
+    }
+
+    private void UpdateTimeString() => OnPropertyChanged(nameof(CurrentTimeOrCountdownString));
+
+    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == MouseButton.Left)
+        {
+            DragMove();
+        }
+    }
+
+    private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        CopyToClipboard();
+    }
+
+    private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        if (Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            // Scale size based on scroll amount, with one notch on a default PC mouse being a change of 15%.
+            var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
+            var change = Settings.Default.Height * steps * 0.15;
+            Settings.Default.Height = (int)Math.Min(Math.Max(Settings.Default.Height + change, 16), 160);
+        }
     }
 
     private void Window_SourceInitialized(object sender, EventArgs e)
@@ -116,13 +204,13 @@ public partial class MainWindow : Window
         WindowPlacementFunctions.SetPlacement(this, Settings.Default.Placement);
     }
 
-    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    private void Window_Closing(object sender, CancelEventArgs e)
     {
         Settings.Default.Placement = WindowPlacementFunctions.GetPlacement(this);
 
         Settings.Default.SaveIfNotModifiedExternally();
 
-        SettingsHelper.SetRunOnStartup(Settings.Default.RunOnStartup);
+        App.SetRunOnStartup(Settings.Default.RunOnStartup);
 
         Settings.Default.Dispose();
     }
