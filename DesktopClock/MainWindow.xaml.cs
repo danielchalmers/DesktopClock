@@ -102,7 +102,7 @@ public partial class MainWindow : Window
     public void CountdownTo()
     {
         var result = MessageBox.Show(this,
-            $"In advanced settings: change {nameof(Settings.Default.CountdownTo)}, then restart.\n" +
+            $"In advanced settings: change {nameof(Settings.Default.CountdownTo)}, then save.\n" +
             "Go back by replacing it with \"0001-01-01T00:00:00+00:00\".\n\n" +
             "Open advanced settings now?",
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
