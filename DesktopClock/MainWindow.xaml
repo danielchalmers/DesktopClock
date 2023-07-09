@@ -107,7 +107,7 @@
 	</Window.ContextMenu>
 
 	<Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-		<Border CornerRadius="1">
+		<Border>
 			<Border.Style>
 				<Style TargetType="Border">
 					<Setter Property="Background">
@@ -116,10 +116,18 @@
 						</Setter.Value>
 					</Setter>
 
+					<Setter Property="CornerRadius" Value="1"/>
+
 					<Style.Triggers>
 						<DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="False">
 							<DataTrigger.Setters>
 								<Setter Property="Background" Value="Transparent" />
+							</DataTrigger.Setters>
+						</DataTrigger>
+
+						<DataTrigger Binding="{Binding RoundedCorners, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="False">
+							<DataTrigger.Setters>
+								<Setter Property="CornerRadius" Value="0" />
 							</DataTrigger.Setters>
 						</DataTrigger>
 					</Style.Triggers>
