@@ -3,10 +3,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
+using H.NotifyIcon;
 using Humanizer;
 using WpfWindowPlacement;
 
@@ -19,6 +21,7 @@ namespace DesktopClock;
 public partial class MainWindow : Window
 {
     private readonly SystemClockTimer _systemClockTimer;
+    private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
 
     public MainWindow()
@@ -33,6 +36,10 @@ public partial class MainWindow : Window
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
         _systemClockTimer.Start();
+
+        ContextMenu = Resources["MainContextMenu"] as ContextMenu;
+
+        CreateOrDestroyTrayIcon(!Settings.Default.ShowInTaskbar, true);
     }
 
     /// <summary>
@@ -153,6 +160,28 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void Exit() => Close();
 
+    private void CreateOrDestroyTrayIcon(bool showTrayIcon, bool firstLaunch)
+    {
+        if (showTrayIcon)
+        {
+            if (_trayIcon == null)
+            {
+                _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
+                _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
+                _trayIcon.ContextMenu.DataContext = this;
+                _trayIcon.ForceCreate();
+            }
+
+            if (!firstLaunch)
+                _trayIcon.ShowNotification("Hidden from taskbar", "Icon was moved to the tray");
+        }
+        else
+        {
+            _trayIcon?.Dispose();
+            _trayIcon = null;
+        }
+    }
+
     private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
@@ -164,6 +193,10 @@ public partial class MainWindow : Window
 
             case nameof(Settings.Default.Format):
                 UpdateTimeString();
+                break;
+
+            case nameof(Settings.Default.ShowInTaskbar):
+                CreateOrDestroyTrayIcon(!Settings.Default.ShowInTaskbar, false);
                 break;
         }
     }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopClock"
         xmlns:p="clr-namespace:DesktopClock.Properties"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Title="DesktopClock"
         AllowsTransparency="True"
@@ -21,8 +22,8 @@
         MouseWheel="Window_MouseWheel"
         SourceInitialized="Window_SourceInitialized"
         Closing="Window_Closing">
-	<Window.ContextMenu>
-		<ContextMenu>
+	<Window.Resources>
+		<ContextMenu x:Key="MainContextMenu" x:Shared="False">
 			<MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
 
 			<Separator />
@@ -31,7 +32,7 @@
 			          IsCheckable="True"
 			          IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-			<MenuItem Header="Show tas_kbar icon"
+			<MenuItem Header="Show icon in tas_kbar"
 			          IsCheckable="True"
 			          IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
@@ -104,7 +105,13 @@
 
 			<MenuItem Command="{Binding ExitCommand}" Header="E_xit" />
 		</ContextMenu>
-	</Window.ContextMenu>
+
+		<tb:TaskbarIcon x:Key="TrayIcon"
+		                x:Shared="False"
+		                IconSource="DesktopClock.ico"
+		                ToolTipText="DesktopClock"
+		                MenuActivation="LeftOrRightClick" />
+	</Window.Resources>
 
 	<Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
 		<Border CornerRadius="{Binding CornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}">
