@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,6 +21,7 @@ namespace DesktopClock;
 [ObservableObject]
 public partial class MainWindow : Window
 {
+    private readonly Regex _tokenizerRegex = new("{([^{}]+)}", RegexOptions.Compiled);
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
@@ -55,10 +57,30 @@ public partial class MainWindow : Window
     /// <summary>
     /// The current date and time in the selected time zone or countdown as a formatted string.
     /// </summary>
-    public string CurrentTimeOrCountdownString =>
-        IsCountdown ?
-        Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone) :
-        CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
+    public string CurrentTimeOrCountdownString
+    {
+        get
+        {
+            if (IsCountdown)
+            {
+                return Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone);
+            }
+            else
+            {
+                if (Settings.Default.Format.Contains("}"))
+                {
+                    // Use the datetime formatter on every string between { and } and leave the rest alone.
+                    return _tokenizerRegex.Replace(Settings.Default.Format, (m) =>
+                    {
+                        return CurrentTimeInSelectedTimeZone.ToString(m.Value);
+                    }).Replace("{", "").Replace("}", "");
+                }
+
+                // Use basic formatter if no special formatting tokens are present.
+                return CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
+            }
+        }
+    }
 
     [RelayCommand]
     public void CopyToClipboard() =>
