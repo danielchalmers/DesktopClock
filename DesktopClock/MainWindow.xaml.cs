@@ -118,9 +118,11 @@ public partial class MainWindow : Window
         if (result != MessageBoxResult.OK)
             return;
 
-        var exeInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
-        var newExePath = Path.Combine(exeInfo.DirectoryName, Guid.NewGuid().ToString() + exeInfo.Name);
-        File.Copy(exeInfo.FullName, newExePath);
+        var currentExe = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
+        var newExePath = Path.Combine(currentExe.DirectoryName, currentExe.GetFileAtNextIndex().Name);
+
+        // Copy and start the new clock.
+        File.Copy(currentExe.FullName, newExePath);
         Process.Start(newExePath);
     }
 
