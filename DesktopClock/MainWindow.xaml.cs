@@ -65,7 +65,24 @@ public partial class MainWindow : Window
             {
                 try
                 {
-                    return Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone);
+                    if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
+                    {
+                        return Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone);
+                    }
+                    else
+                    {
+                        if (Settings.Default.CountdownFormat.Contains("}"))
+                        {
+                            return _tokenizerRegex.Replace(Settings.Default.CountdownFormat, (m) =>
+                            {
+                                var formatString = m.Value.Replace("{", "").Replace("}", "");
+                                return (Settings.Default.CountdownTo - CurrentTimeInSelectedTimeZone).ToString(formatString);
+                            });
+                        }
+
+                        // Use basic formatter if no special formatting tokens are present.
+                        return (Settings.Default.CountdownTo - CurrentTimeInSelectedTimeZone).ToString(Settings.Default.CountdownFormat);
+                    }
                 }
                 catch
                 {
@@ -82,8 +99,9 @@ public partial class MainWindow : Window
                         // Use the datetime formatter on every string between { and } and leave the rest alone.
                         return _tokenizerRegex.Replace(Settings.Default.Format, (m) =>
                         {
-                            return CurrentTimeInSelectedTimeZone.ToString(m.Value);
-                        }).Replace("{", "").Replace("}", "");
+                            var formatString = m.Value.Replace("{", "").Replace("}", "");
+                            return CurrentTimeInSelectedTimeZone.ToString(formatString);
+                        });
                     }
 
                     // Use basic formatter if no special formatting tokens are present.

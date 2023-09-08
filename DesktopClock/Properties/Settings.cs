@@ -48,8 +48,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
     #region "Properties"
 
-    public DateTimeOffset CountdownTo { get; set; } = DateTimeOffset.MinValue;
     public string Format { get; set; } = "{dddd}, {MMM dd}, {HH:mm:ss}";
+    public string CountdownFormat { get; set; } = "";
+    public DateTimeOffset CountdownTo { get; set; } = DateTimeOffset.MinValue;
     public string TimeZone { get; set; } = string.Empty;
     public string FontFamily { get; set; } = "Consolas";
     public Color TextColor { get; set; }
