@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -26,6 +27,18 @@ public partial class MainWindow : Window
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
 
+    /// <summary>
+    /// Should the clock be a countdown?
+    /// </summary>
+    [ObservableProperty]
+    private bool _isCountdown;
+
+    /// <summary>
+    /// The current date and time in the selected time zone or countdown as a formatted string.
+    /// </summary>
+    [ObservableProperty]
+    private string _currentTimeOrCountdownString;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -44,81 +57,8 @@ public partial class MainWindow : Window
         CreateOrDestroyTrayIcon(!Settings.Default.ShowInTaskbar, true);
     }
 
-    /// <summary>
-    /// The current date and time in the selected time zone.
-    /// </summary>
-    private DateTimeOffset CurrentTimeInSelectedTimeZone => TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
-
-    /// <summary>
-    /// Should the clock be a countdown?
-    /// </summary>
-    private bool IsCountdown => Settings.Default.CountdownTo > DateTimeOffset.MinValue;
-
-    /// <summary>
-    /// The current date and time in the selected time zone or countdown as a formatted string.
-    /// </summary>
-    public string CurrentTimeOrCountdownString
-    {
-        get
-        {
-            if (IsCountdown)
-            {
-                try
-                {
-                    if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
-                    {
-                        return Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone);
-                    }
-                    else
-                    {
-                        if (Settings.Default.CountdownFormat.Contains("}"))
-                        {
-                            return _tokenizerRegex.Replace(Settings.Default.CountdownFormat, (m) =>
-                            {
-                                var formatString = m.Value.Replace("{", "").Replace("}", "");
-                                return (Settings.Default.CountdownTo - CurrentTimeInSelectedTimeZone).ToString(formatString);
-                            });
-                        }
-
-                        // Use basic formatter if no special formatting tokens are present.
-                        return (Settings.Default.CountdownTo - CurrentTimeInSelectedTimeZone).ToString(Settings.Default.CountdownFormat);
-                    }
-                }
-                catch
-                {
-                    // Fallback to a default format without any countdown.
-                    return Settings.Default.CountdownTo.ToString();
-                }
-            }
-            else
-            {
-                try
-                {
-                    if (Settings.Default.Format.Contains("}"))
-                    {
-                        // Use the datetime formatter on every string between { and } and leave the rest alone.
-                        return _tokenizerRegex.Replace(Settings.Default.Format, (m) =>
-                        {
-                            var formatString = m.Value.Replace("{", "").Replace("}", "");
-                            return CurrentTimeInSelectedTimeZone.ToString(formatString);
-                        });
-                    }
-
-                    // Use basic formatter if no special formatting tokens are present.
-                    return CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
-                }
-                catch
-                {
-                    // Fallback to a default format.
-                    return CurrentTimeInSelectedTimeZone.ToString();
-                }
-            }
-        }
-    }
-
     [RelayCommand]
-    public void CopyToClipboard() =>
-        Clipboard.SetText(TimeTextBlock.Text);
+    public void CopyToClipboard() => Clipboard.SetText(CurrentTimeOrCountdownString);
 
     /// <summary>
     /// Sets app theme to parameter's value.
@@ -139,7 +79,7 @@ public partial class MainWindow : Window
     public void SetTimeZone(TimeZoneInfo tzi) => App.SetTimeZone(tzi);
 
     /// <summary>
-    /// Creates a new clock.
+    /// Creates a new clock executable and starts it.
     /// </summary>
     [RelayCommand]
     public void NewClock()
@@ -161,7 +101,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Explains how to enable countdown mode.
+    /// Explains how to enable countdown mode, then asks user if they want to go to Advanced settings to do so.
     /// </summary>
     [RelayCommand]
     public void CountdownTo()
@@ -195,16 +135,16 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            // Lazy scammers on the Microsoft Store may reupload without realizing it's sandboxed, which makes it unable to start the Notepad process.
+            // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
             MessageBox.Show(this,
                 "Couldn't open settings file.\n\n" +
                 "This app may have be reuploaded without permission. If you paid for it, ask for a refund and download it for free from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If it still doesn't work, report it as an issue at that link with details on what happened and include this error: \"{ex.Message}\"");
+                $"If it still doesn't work, create a new Issue at that link with details on what happened and include this error: \"{ex.Message}\"");
         }
     }
 
     /// <summary>
-    /// Checks for updates.
+    /// Opens the GitHub Releases page.
     /// </summary>
     [RelayCommand]
     public void CheckForUpdates()
@@ -216,7 +156,10 @@ public partial class MainWindow : Window
     /// Exits the program.
     /// </summary>
     [RelayCommand]
-    public void Exit() => Close();
+    public void Exit()
+    {
+        Close();
+    }
 
     private void CreateOrDestroyTrayIcon(bool showTrayIcon, bool firstLaunch)
     {
@@ -256,6 +199,10 @@ public partial class MainWindow : Window
             case nameof(Settings.Default.ShowInTaskbar):
                 CreateOrDestroyTrayIcon(!Settings.Default.ShowInTaskbar, false);
                 break;
+
+            case nameof(Settings.Default.CountdownTo):
+                IsCountdown = Settings.Default.CountdownTo > DateTimeOffset.MinValue;
+                break;
         }
     }
 
@@ -264,7 +211,50 @@ public partial class MainWindow : Window
         UpdateTimeString();
     }
 
-    private void UpdateTimeString() => OnPropertyChanged(nameof(CurrentTimeOrCountdownString));
+    private void UpdateTimeString()
+    {
+        string FormatWithTokenizerOrFallBack(IFormattable formattable, string format)
+        {
+            try
+            {
+                if (format.Contains("}"))
+                {
+                    return _tokenizerRegex.Replace(format, (m) =>
+                    {
+                        var formatString = m.Value.Replace("{", "").Replace("}", "");
+                        return formattable.ToString(formatString, CultureInfo.DefaultThreadCurrentCulture);
+                    });
+                }
+
+                // Use basic formatter if no special formatting tokens are present.
+                return formattable.ToString(format, CultureInfo.DefaultThreadCurrentCulture);
+            }
+            catch
+            {
+                // Fallback to the default format.
+                return formattable.ToString();
+            }
+        }
+
+        string GetTimeString()
+        {
+            var timeInSelectedZone = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
+
+            if (IsCountdown)
+            {
+                if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
+                    return Settings.Default.CountdownTo.Humanize(timeInSelectedZone);
+
+                return FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - timeInSelectedZone, Settings.Default.CountdownFormat);
+            }
+            else
+            {
+                return FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format);
+            }
+        }
+
+        CurrentTimeOrCountdownString = GetTimeString();
+    }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {

@@ -133,8 +133,7 @@
 				</Style>
 			</Border.Style>
 
-			<local:OutlinedTextBlock x:Name="TimeTextBlock"
-			                         Margin="1,0,1,0"
+			<local:OutlinedTextBlock Margin="1,0,1,0"
 			                         HorizontalAlignment="Center"
 			                         Text="{Binding CurrentTimeOrCountdownString}"
 			                         StrokeThickness="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}">
