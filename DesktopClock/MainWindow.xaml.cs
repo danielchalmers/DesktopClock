@@ -63,21 +63,37 @@ public partial class MainWindow : Window
         {
             if (IsCountdown)
             {
-                return Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone);
+                try
+                {
+                    return Settings.Default.CountdownTo.Humanize(CurrentTimeInSelectedTimeZone);
+                }
+                catch
+                {
+                    // Fallback to a default format without any countdown.
+                    return Settings.Default.CountdownTo.ToString();
+                }
             }
             else
             {
-                if (Settings.Default.Format.Contains("}"))
+                try
                 {
-                    // Use the datetime formatter on every string between { and } and leave the rest alone.
-                    return _tokenizerRegex.Replace(Settings.Default.Format, (m) =>
+                    if (Settings.Default.Format.Contains("}"))
                     {
-                        return CurrentTimeInSelectedTimeZone.ToString(m.Value);
-                    }).Replace("{", "").Replace("}", "");
-                }
+                        // Use the datetime formatter on every string between { and } and leave the rest alone.
+                        return _tokenizerRegex.Replace(Settings.Default.Format, (m) =>
+                        {
+                            return CurrentTimeInSelectedTimeZone.ToString(m.Value);
+                        }).Replace("{", "").Replace("}", "");
+                    }
 
-                // Use basic formatter if no special formatting tokens are present.
-                return CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
+                    // Use basic formatter if no special formatting tokens are present.
+                    return CurrentTimeInSelectedTimeZone.ToString(Settings.Default.Format);
+                }
+                catch
+                {
+                    // Fallback to a default format.
+                    return CurrentTimeInSelectedTimeZone.ToString();
+                }
             }
         }
     }
