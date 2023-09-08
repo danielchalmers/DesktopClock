@@ -16,7 +16,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
     private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
     {
-        Formatting = Formatting.Indented
+        Formatting = Formatting.Indented,
+        Error = (_, e) =>
+        {
+            e.ErrorContext.Handled = true;
+        },
     };
 
     private Settings()
