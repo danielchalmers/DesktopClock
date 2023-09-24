@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,7 +21,6 @@ namespace DesktopClock;
 [ObservableObject]
 public partial class MainWindow : Window
 {
-    private readonly Regex _tokenizerRegex = new("{([^{}]+)}", RegexOptions.Compiled);
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
@@ -213,29 +211,6 @@ public partial class MainWindow : Window
 
     private void UpdateTimeString()
     {
-        string FormatWithTokenizerOrFallBack(IFormattable formattable, string format)
-        {
-            try
-            {
-                if (format.Contains("}"))
-                {
-                    return _tokenizerRegex.Replace(format, (m) =>
-                    {
-                        var formatString = m.Value.Replace("{", "").Replace("}", "");
-                        return formattable.ToString(formatString, CultureInfo.DefaultThreadCurrentCulture);
-                    });
-                }
-
-                // Use basic formatter if no special formatting tokens are present.
-                return formattable.ToString(format, CultureInfo.DefaultThreadCurrentCulture);
-            }
-            catch
-            {
-                // Fallback to the default format.
-                return formattable.ToString();
-            }
-        }
-
         string GetTimeString()
         {
             var timeInSelectedZone = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
@@ -245,11 +220,11 @@ public partial class MainWindow : Window
                 if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
                     return Settings.Default.CountdownTo.Humanize(timeInSelectedZone);
 
-                return FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - timeInSelectedZone, Settings.Default.CountdownFormat);
+                return Tokenizer.FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - timeInSelectedZone, Settings.Default.CountdownFormat, CultureInfo.DefaultThreadCurrentCulture);
             }
             else
             {
-                return FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format);
+                return Tokenizer.FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format, CultureInfo.DefaultThreadCurrentCulture);
             }
         }
 
