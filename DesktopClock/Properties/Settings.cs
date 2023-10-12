@@ -78,7 +78,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
     #endregion "Properties"
 
-    /// <summary>
+    /// <summary >
     /// Determines if the settings file has been modified externally since the last time it was used.
     /// </summary>
     public bool CheckIfModifiedExternally() =>
