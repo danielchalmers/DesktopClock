@@ -15,7 +15,7 @@ using WpfWindowPlacement;
 
 namespace DesktopClock;
 
-/// <summary>
+/// <summary >
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 [ObservableObject]
