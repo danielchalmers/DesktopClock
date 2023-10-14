@@ -272,4 +272,13 @@ public partial class MainWindow : Window
 
         Settings.Default.Dispose();
     }
+
+    private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (e.WidthChanged && Settings.Default.RightAligned)
+        {
+            var previousRight = Left + e.PreviousSize.Width;
+            Left = previousRight - ActualWidth;
+        }
+    }
 }

@@ -21,7 +21,8 @@
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
         SourceInitialized="Window_SourceInitialized"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+		SizeChanged="Window_SizeChanged">
 	<Window.Resources>
 		<ContextMenu x:Key="MainContextMenu" x:Shared="False">
 			<MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
