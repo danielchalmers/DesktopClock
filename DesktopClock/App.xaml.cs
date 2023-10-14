@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using DesktopClock.Properties;
 using Microsoft.Win32;
@@ -11,6 +12,8 @@ namespace DesktopClock;
 /// </summary>
 public partial class App : Application
 {
+    public static string FilePath = Process.GetCurrentProcess().MainModule.FileName;
+
     // https://www.materialui.co/colors - A100, A700.
     public static IReadOnlyList<Theme> Themes { get; } = new[]
     {
@@ -43,12 +46,11 @@ public partial class App : Application
     /// <param name="runOnStartup"></param>
     public static void SetRunOnStartup(bool runOnStartup)
     {
-        var exePath = ResourceAssembly.Location;
-        var keyName = GetSha256Hash(exePath);
+        var keyName = GetSha256Hash(FilePath);
         using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
         if (runOnStartup)
-            key?.SetValue(keyName, exePath); // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
+            key?.SetValue(keyName, FilePath); // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
         else
             key?.DeleteValue(keyName, false);
     }

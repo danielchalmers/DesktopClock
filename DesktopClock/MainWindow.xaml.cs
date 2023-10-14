@@ -90,7 +90,7 @@ public partial class MainWindow : Window
         if (result != MessageBoxResult.OK)
             return;
 
-        var currentExe = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
+        var currentExe = new FileInfo(App.FilePath);
         var newExePath = Path.Combine(currentExe.DirectoryName, currentExe.GetFileAtNextIndex().Name);
 
         // Copy and start the new clock.

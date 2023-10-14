@@ -26,7 +26,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     private Settings()
     {
         // Settings file path from same directory as the executable.
-        var exeInfo = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location);
+        var exeInfo = new FileInfo(App.FilePath);
         var settingsFileName = Path.GetFileNameWithoutExtension(exeInfo.FullName) + ".settings";
         FilePath = Path.Combine(exeInfo.DirectoryName, settingsFileName);
 
