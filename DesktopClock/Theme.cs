@@ -1,6 +1,6 @@
 ﻿namespace DesktopClock;
 
-public readonly struct Theme
+public readonly record struct Theme
 {
     public string Name { get; }
     public string PrimaryColor { get; }

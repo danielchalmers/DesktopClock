@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using DesktopClock.Properties;
 using Microsoft.Win32;
@@ -12,20 +13,20 @@ namespace DesktopClock;
 /// </summary>
 public partial class App : Application
 {
-    public static string FilePath = Process.GetCurrentProcess().MainModule.FileName;
+    public static FileInfo MainFileInfo = new(Process.GetCurrentProcess().MainModule.FileName);
 
     // https://www.materialui.co/colors - A100, A700.
-    public static IReadOnlyList<Theme> Themes { get; } = new[]
+    public static IReadOnlyList<Theme> Themes { get; } = new Theme[]
     {
-        new Theme("Light Text", "#F5F5F5", "#212121"),
-        new Theme("Dark Text", "#212121", "#F5F5F5"),
-        new Theme("Red", "#D50000", "#FF8A80"),
-        new Theme("Pink", "#C51162", "#FF80AB"),
-        new Theme("Purple", "#AA00FF", "#EA80FC"),
-        new Theme("Blue", "#2962FF", "#82B1FF"),
-        new Theme("Cyan", "#00B8D4", "#84FFFF"),
-        new Theme("Green", "#00C853", "#B9F6CA"),
-        new Theme("Orange", "#FF6D00", "#FFD180"),
+        new("Light Text", "#F5F5F5", "#212121"),
+        new("Dark Text", "#212121", "#F5F5F5"),
+        new("Red", "#D50000", "#FF8A80"),
+        new("Pink", "#C51162", "#FF80AB"),
+        new("Purple", "#AA00FF", "#EA80FC"),
+        new("Blue", "#2962FF", "#82B1FF"),
+        new("Cyan", "#00B8D4", "#84FFFF"),
+        new("Green", "#00C853", "#B9F6CA"),
+        new("Orange", "#FF6D00", "#FFD180"),
     };
 
     /// <summary>
@@ -35,22 +36,21 @@ public partial class App : Application
         DateTimeUtil.TryGetTimeZoneById(Settings.Default.TimeZone, out var timeZoneInfo) ? timeZoneInfo : TimeZoneInfo.Local;
 
     /// <summary>
-    /// Selects a time zone to use.
+    /// Sets the time zone to be used.
     /// </summary>
     public static void SetTimeZone(TimeZoneInfo timeZone) =>
         Settings.Default.TimeZone = timeZone.Id;
 
     /// <summary>
-    /// Sets a value in the registry determining whether the current executable should run on system startup.
+    /// Sets or deletes a value in the registry which enables the current executable to run on system startup.
     /// </summary>
-    /// <param name="runOnStartup"></param>
     public static void SetRunOnStartup(bool runOnStartup)
     {
-        var keyName = GetSha256Hash(FilePath);
+        var keyName = GetSha256Hash(MainFileInfo.FullName);
         using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
         if (runOnStartup)
-            key?.SetValue(keyName, FilePath); // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
+            key?.SetValue(keyName, MainFileInfo.FullName); // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
         else
             key?.DeleteValue(keyName, false);
     }

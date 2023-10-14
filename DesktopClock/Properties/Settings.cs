@@ -26,12 +26,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     private Settings()
     {
         // Settings file path from same directory as the executable.
-        var exeInfo = new FileInfo(App.FilePath);
-        var settingsFileName = Path.GetFileNameWithoutExtension(exeInfo.FullName) + ".settings";
-        FilePath = Path.Combine(exeInfo.DirectoryName, settingsFileName);
+        var settingsFileName = Path.GetFileNameWithoutExtension(App.MainFileInfo.FullName) + ".settings";
+        FilePath = Path.Combine(App.MainFileInfo.DirectoryName, settingsFileName);
 
         // Watch for changes.
-        _watcher = new(exeInfo.DirectoryName, settingsFileName)
+        _watcher = new(App.MainFileInfo.DirectoryName, settingsFileName)
         {
             EnableRaisingEvents = true
         };

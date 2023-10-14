@@ -26,7 +26,7 @@ public partial class MainWindow : Window
     private TimeZoneInfo _timeZone;
 
     /// <summary>
-    /// Should the clock be a countdown?
+    /// Indicates whether the clock should be shown as a countdown.
     /// </summary>
     [ObservableProperty]
     private bool _isCountdown;
@@ -52,26 +52,26 @@ public partial class MainWindow : Window
 
         ContextMenu = Resources["MainContextMenu"] as ContextMenu;
 
-        CreateOrDestroyTrayIcon(!Settings.Default.ShowInTaskbar, true);
+        ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, true);
     }
 
     [RelayCommand]
     public void CopyToClipboard() => Clipboard.SetText(CurrentTimeOrCountdownString);
 
     /// <summary>
-    /// Sets app theme to parameter's value.
+    /// Sets app's theme to given value.
     /// </summary>
     [RelayCommand]
     public void SetTheme(Theme theme) => Settings.Default.Theme = theme;
 
     /// <summary>
-    /// Sets format string in settings to parameter's string.
+    /// Sets format string in settings to given string.
     /// </summary>
     [RelayCommand]
     public void SetFormat(string format) => Settings.Default.Format = format;
 
     /// <summary>
-    /// Sets time zone ID in settings to parameter's time zone ID.
+    /// Sets time zone ID in settings to given time zone ID.
     /// </summary>
     [RelayCommand]
     public void SetTimeZone(TimeZoneInfo tzi) => App.SetTimeZone(tzi);
@@ -90,16 +90,15 @@ public partial class MainWindow : Window
         if (result != MessageBoxResult.OK)
             return;
 
-        var currentExe = new FileInfo(App.FilePath);
-        var newExePath = Path.Combine(currentExe.DirectoryName, currentExe.GetFileAtNextIndex().Name);
+        var newExePath = Path.Combine(App.MainFileInfo.DirectoryName, App.MainFileInfo.GetFileAtNextIndex().Name);
 
         // Copy and start the new clock.
-        File.Copy(currentExe.FullName, newExePath);
+        File.Copy(App.MainFileInfo.FullName, newExePath);
         Process.Start(newExePath);
     }
 
     /// <summary>
-    /// Explains how to enable countdown mode, then asks user if they want to go to Advanced settings to do so.
+    /// Explains how to enable countdown mode, then asks user if they want to view Advanced settings to do so.
     /// </summary>
     [RelayCommand]
     public void CountdownTo()
@@ -110,8 +109,10 @@ public partial class MainWindow : Window
             "Open advanced settings now?",
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
-        if (result == MessageBoxResult.OK)
-            OpenSettings();
+        if (result != MessageBoxResult.OK)
+            return;
+
+        OpenSettings();
     }
 
     /// <summary>
@@ -159,9 +160,9 @@ public partial class MainWindow : Window
         Close();
     }
 
-    private void CreateOrDestroyTrayIcon(bool showTrayIcon, bool firstLaunch)
+    private void ConfigureTrayIcon(bool showIcon, bool firstLaunch)
     {
-        if (showTrayIcon)
+        if (showIcon)
         {
             if (_trayIcon == null)
             {
@@ -195,7 +196,7 @@ public partial class MainWindow : Window
                 break;
 
             case nameof(Settings.Default.ShowInTaskbar):
-                CreateOrDestroyTrayIcon(!Settings.Default.ShowInTaskbar, false);
+                ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, false);
                 break;
 
             case nameof(Settings.Default.CountdownTo):
@@ -251,6 +252,7 @@ public partial class MainWindow : Window
             // Scale size based on scroll amount, with one notch on a default PC mouse being a change of 15%.
             var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
             var change = Settings.Default.Height * steps * 0.15;
+
             Settings.Default.Height = (int)Math.Min(Math.Max(Settings.Default.Height + change, 16), 160);
         }
     }

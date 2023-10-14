@@ -50,6 +50,7 @@ dotnet_style_null_propagation = true
 dotnet_style_object_initializer = true:silent
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 dotnet_style_prefer_auto_properties = true:suggestion
+dotnet_style_prefer_collection_expression = true
 dotnet_style_prefer_compound_assignment = true
 dotnet_style_prefer_conditional_expression_over_assignment = true
 dotnet_style_prefer_conditional_expression_over_return = true
@@ -104,12 +105,15 @@ csharp_style_conditional_delegate_call = true
 # Modifier preferences
 csharp_prefer_static_local_function = true:warning
 csharp_preferred_modifier_order = public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async
+csharp_style_prefer_readonly_struct = true
+csharp_style_prefer_readonly_struct_member = true
 
 # Code-block preferences
 csharp_prefer_braces = when_multiline:warning
 csharp_prefer_simple_using_statement = true:silent
 csharp_style_namespace_declarations = file_scoped
 csharp_style_prefer_method_group_conversion = true
+csharp_style_prefer_primary_constructors = true
 csharp_style_prefer_top_level_statements = true
 
 # Expression-level preferences
@@ -124,7 +128,7 @@ csharp_style_prefer_range_operator = true
 csharp_style_prefer_tuple_swap = true:silent
 csharp_style_prefer_utf8_string_literals = true
 csharp_style_throw_expression = true
-csharp_style_unused_value_assignment_preference = discard_variable:warning
+csharp_style_unused_value_assignment_preference = discard_variable
 csharp_style_unused_value_expression_statement_preference = discard_variable
 
 # 'using' directive preferences
@@ -132,6 +136,8 @@ csharp_using_directive_placement = outside_namespace:error
 
 # New line preferences
 csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true
+csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental = true
+csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental = true
 csharp_style_allow_blank_lines_between_consecutive_braces_experimental = false
 csharp_style_allow_embedded_statements_on_same_line_experimental = false:warning
 
