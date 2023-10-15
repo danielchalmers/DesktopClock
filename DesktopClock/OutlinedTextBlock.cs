@@ -184,7 +184,7 @@ public class OutlinedTextBlock : FrameworkElement
     public OutlinedTextBlock()
     {
         UpdatePen();
-        TextDecorations = [];
+        TextDecorations = new();
     }
 
     protected override void OnRender(DrawingContext drawingContext)
