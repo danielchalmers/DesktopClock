@@ -43,6 +43,7 @@ public partial class MainWindow : Window
         DataContext = this;
 
         _timeZone = App.GetTimeZone();
+        UpdateIsCountdown();
 
         Settings.Default.PropertyChanged += Settings_PropertyChanged;
 
@@ -200,7 +201,7 @@ public partial class MainWindow : Window
                 break;
 
             case nameof(Settings.Default.CountdownTo):
-                IsCountdown = Settings.Default.CountdownTo > DateTimeOffset.MinValue;
+                UpdateIsCountdown();
                 break;
         }
     }
@@ -209,6 +210,8 @@ public partial class MainWindow : Window
     {
         UpdateTimeString();
     }
+
+    private void UpdateIsCountdown() => IsCountdown = Settings.Default.CountdownTo > DateTimeOffset.MinValue;
 
     private void UpdateTimeString()
     {
