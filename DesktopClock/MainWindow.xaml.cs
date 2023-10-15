@@ -265,10 +265,13 @@ public partial class MainWindow : Window
         WindowPlacementFunctions.SetPlacement(this, Settings.Default.Placement);
     }
 
-    private void Window_Closing(object sender, CancelEventArgs e)
+    private void Window_Deactivated(object sender, EventArgs e)
     {
         Settings.Default.Placement = WindowPlacementFunctions.GetPlacement(this);
+    }
 
+    private void Window_Closed(object sender, EventArgs e)
+    {
         Settings.Default.SaveIfNotModifiedExternally();
 
         App.SetRunOnStartup(Settings.Default.RunOnStartup);

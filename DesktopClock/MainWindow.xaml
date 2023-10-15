@@ -21,7 +21,8 @@
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
         SourceInitialized="Window_SourceInitialized"
-        Closing="Window_Closing"
+		Deactivated="Window_Deactivated"
+		Closed="Window_Closed"
 		SizeChanged="Window_SizeChanged">
 	<Window.Resources>
 		<ContextMenu x:Key="MainContextMenu" x:Shared="False">
