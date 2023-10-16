@@ -170,7 +170,7 @@ public partial class MainWindow : Window
                 _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
                 _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
                 _trayIcon.ContextMenu.DataContext = this;
-                _trayIcon.ForceCreate();
+                _trayIcon.ForceCreate(enablesEfficiencyMode: false);
             }
 
             if (!firstLaunch)
