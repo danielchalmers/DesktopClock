@@ -45,7 +45,7 @@ public partial class MainWindow : Window
         _timeZone = App.GetTimeZone();
         UpdateIsCountdown();
 
-        Settings.Default.PropertyChanged += Settings_PropertyChanged;
+        Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
 
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
