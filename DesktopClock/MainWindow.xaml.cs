@@ -171,6 +171,7 @@ public partial class MainWindow : Window
                 _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
                 _trayIcon.ContextMenu.DataContext = this;
                 _trayIcon.ForceCreate(enablesEfficiencyMode: false);
+                _trayIcon.TrayLeftMouseDoubleClick += (_, _) => Activate();
             }
 
             if (!firstLaunch)
