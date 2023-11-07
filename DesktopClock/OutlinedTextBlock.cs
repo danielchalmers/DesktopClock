@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace DesktopClock;
 
-// https://stackoverflow.com/a/35262509
+// https://stackoverflow.com/a/49636033
 [ContentProperty("Text")]
 public class OutlinedTextBlock : FrameworkElement
 {
@@ -22,8 +22,25 @@ public class OutlinedTextBlock : FrameworkElement
             StartLineCap = PenLineCap.Round
         };
 
+        if (StrokePosition is StrokePosition.Outside or StrokePosition.Inside)
+        {
+            _Pen.Thickness = StrokeThickness * 2;
+        }
+
         InvalidateVisual();
     }
+
+    public StrokePosition StrokePosition
+    {
+        get => (StrokePosition)GetValue(StrokePositionProperty);
+        set => SetValue(StrokePositionProperty, value);
+    }
+
+    public static readonly DependencyProperty StrokePositionProperty =
+        DependencyProperty.Register("StrokePosition",
+            typeof(StrokePosition),
+            typeof(OutlinedTextBlock),
+            new FrameworkPropertyMetadata(StrokePosition.Outside, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
       "Fill",
@@ -35,18 +52,13 @@ public class OutlinedTextBlock : FrameworkElement
       "Stroke",
       typeof(Brush),
       typeof(OutlinedTextBlock),
-      new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender, StrokePropertyChangedCallback));
-
-    private static void StrokePropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
-    {
-        (dependencyObject as OutlinedTextBlock)?.UpdatePen();
-    }
+      new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
       "StrokeThickness",
       typeof(double),
       typeof(OutlinedTextBlock),
-      new FrameworkPropertyMetadata(1d, FrameworkPropertyMetadataOptions.AffectsRender, StrokePropertyChangedCallback));
+      new FrameworkPropertyMetadata(1d, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty FontFamilyProperty = TextElement.FontFamilyProperty.AddOwner(
       typeof(OutlinedTextBlock),
@@ -101,6 +113,7 @@ public class OutlinedTextBlock : FrameworkElement
     private FormattedText _FormattedText;
     private Geometry _TextGeometry;
     private Pen _Pen;
+    private PathGeometry _clipGeometry;
 
     public Brush Fill
     {
@@ -184,15 +197,30 @@ public class OutlinedTextBlock : FrameworkElement
     public OutlinedTextBlock()
     {
         UpdatePen();
-        TextDecorations = new();
+        TextDecorations = [];
     }
 
     protected override void OnRender(DrawingContext drawingContext)
     {
         EnsureGeometry();
 
-        drawingContext.DrawGeometry(null, _Pen, _TextGeometry);
         drawingContext.DrawGeometry(Fill, null, _TextGeometry);
+
+        if (StrokePosition == StrokePosition.Outside)
+        {
+            drawingContext.PushClip(_clipGeometry);
+        }
+        else if (StrokePosition == StrokePosition.Inside)
+        {
+            drawingContext.PushClip(_TextGeometry);
+        }
+
+        drawingContext.DrawGeometry(null, _Pen, _TextGeometry);
+
+        if (StrokePosition is StrokePosition.Outside or StrokePosition.Inside)
+        {
+            drawingContext.Pop();
+        }
     }
 
     protected override Size MeasureOverride(Size availableSize)
@@ -223,6 +251,7 @@ public class OutlinedTextBlock : FrameworkElement
 
         // need to re-generate the geometry now that the dimensions have changed
         _TextGeometry = null;
+        UpdatePen();
 
         return finalSize;
     }
@@ -257,12 +286,12 @@ public class OutlinedTextBlock : FrameworkElement
 
 #pragma warning disable CS0618 // Type or member is obsolete
         _FormattedText = new FormattedText(
-            Text ?? "",
-            CultureInfo.CurrentUICulture,
-            FlowDirection,
-            new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
-            FontSize,
-            Brushes.Black);
+          Text ?? "",
+          CultureInfo.CurrentUICulture,
+          FlowDirection,
+          new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
+          FontSize,
+          Brushes.Black);
 #pragma warning restore CS0618 // Type or member is obsolete
 
         UpdateFormattedText();
@@ -296,5 +325,20 @@ public class OutlinedTextBlock : FrameworkElement
 
         EnsureFormattedText();
         _TextGeometry = _FormattedText.BuildGeometry(new Point(0, 0));
+
+        if (StrokePosition == StrokePosition.Outside)
+        {
+            // https://stackoverflow.com/questions/93650/apply-stroke-to-a-textblock-in-wpf/35262509#comment106994536_49636033.
+            //var boundsGeo = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
+            var boundsGeo = new RectangleGeometry(new Rect(-(2 * StrokeThickness), -(2 * StrokeThickness), ActualWidth + (4 * StrokeThickness), ActualHeight + (4 * StrokeThickness)));
+            _clipGeometry = Geometry.Combine(boundsGeo, _TextGeometry, GeometryCombineMode.Exclude, null);
+        }
     }
+}
+
+public enum StrokePosition
+{
+    Center,
+    Outside,
+    Inside
 }
