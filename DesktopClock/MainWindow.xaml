@@ -21,9 +21,9 @@
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
         SourceInitialized="Window_SourceInitialized"
-		Deactivated="Window_Deactivated"
-		Closed="Window_Closed"
-		SizeChanged="Window_SizeChanged">
+        Deactivated="Window_Deactivated"
+        Closed="Window_Closed"
+        SizeChanged="Window_SizeChanged">
 	<Window.Resources>
 		<ContextMenu x:Key="MainContextMenu" x:Shared="False">
 			<MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
@@ -116,7 +116,7 @@
 	</Window.Resources>
 
 	<Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-		<Border CornerRadius="{Binding CornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+		<Border CornerRadius="{Binding CornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}" Padding="1,0,1,0">
 			<Border.Style>
 				<Style TargetType="Border">
 					<Setter Property="Background">
@@ -135,10 +135,10 @@
 				</Style>
 			</Border.Style>
 
-			<local:OutlinedTextBlock Margin="1,0,1,0"
-			                         HorizontalAlignment="Center"
+			<local:OutlinedTextBlock HorizontalAlignment="Center"
 			                         Text="{Binding CurrentTimeOrCountdownString}"
-			                         StrokeThickness="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+			                         StrokeThickness="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+			                         Margin="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}">
 
 				<local:OutlinedTextBlock.Fill>
 					<SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
