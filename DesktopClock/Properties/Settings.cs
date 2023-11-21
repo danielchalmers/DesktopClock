@@ -86,18 +86,18 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Determines if the settings file has been modified externally since the last time it was used.
     /// </summary>
-    public bool CheckIfModifiedExternally() =>
-        File.GetLastWriteTimeUtc(FilePath) > _fileDate;
+    public bool CheckIfModifiedExternally() => File.GetLastWriteTimeUtc(FilePath) > _fileDate;
 
     /// <summary>
     /// Saves to the default path.
     /// </summary>
     public void Save()
     {
-        using (var fileStream = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
-        using (var streamWriter = new StreamWriter(fileStream))
-        using (var jsonWriter = new JsonTextWriter(streamWriter))
-            JsonSerializer.Create(_jsonSerializerSettings).Serialize(jsonWriter, this);
+        using var fileStream = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+        using var streamWriter = new StreamWriter(fileStream);
+        using var jsonWriter = new JsonTextWriter(streamWriter);
+
+        JsonSerializer.Create(_jsonSerializerSettings).Serialize(jsonWriter, this);
 
         _fileDate = DateTime.UtcNow;
     }
