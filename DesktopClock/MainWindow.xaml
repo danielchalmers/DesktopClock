@@ -47,6 +47,10 @@
 			          IsCheckable="True"
 			          IsChecked="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
+			<MenuItem Header="Drag to _move"
+			          IsCheckable="True"
+			          IsChecked="{Binding DragToMove, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+
 			<MenuItem>
 				<MenuItem.Header>
 					<StackPanel Orientation="Horizontal">
