@@ -11,7 +11,6 @@ using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using H.NotifyIcon;
 using Humanizer;
-using WpfWindowPlacement;
 
 namespace DesktopClock;
 
@@ -21,6 +20,7 @@ namespace DesktopClock;
 [ObservableObject]
 public partial class MainWindow : Window
 {
+    private bool _hasInitiallyChangedSize;
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
@@ -269,14 +269,9 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Window_SourceInitialized(object sender, EventArgs e)
+    private void Window_ContentRendered(object sender, EventArgs e)
     {
-        WindowPlacementFunctions.SetPlacement(this, Settings.Default.Placement);
-    }
-
-    private void Window_Deactivated(object sender, EventArgs e)
-    {
-        Settings.Default.Placement = WindowPlacementFunctions.GetPlacement(this);
+        SizeChanged += Window_SizeChanged;
     }
 
     private void Window_Closed(object sender, EventArgs e)
@@ -290,10 +285,13 @@ public partial class MainWindow : Window
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if (e.WidthChanged && Settings.Default.RightAligned)
+        if (_hasInitiallyChangedSize && e.WidthChanged && Settings.Default.RightAligned)
         {
             var previousRight = Left + e.PreviousSize.Width;
             Left = previousRight - ActualWidth;
         }
+
+        // Use this to ignore the change when the window is loaded at the beginning.
+        _hasInitiallyChangedSize = true;
     }
 }

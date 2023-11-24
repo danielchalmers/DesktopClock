@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DesktopClock"
         xmlns:p="clr-namespace:DesktopClock.Properties"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:wp="clr-namespace:WpfWindowPlacement;assembly=WpfWindowPlacement"
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         mc:Ignorable="d"
         Title="DesktopClock"
@@ -21,10 +22,9 @@
         MouseDown="Window_MouseDown"
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
-        SourceInitialized="Window_SourceInitialized"
-        Deactivated="Window_Deactivated"
+		ContentRendered="Window_ContentRendered"
         Closed="Window_Closed"
-        SizeChanged="Window_SizeChanged">
+        wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
 	<Window.Resources>
 		<ContextMenu x:Key="MainContextMenu" x:Shared="False">
 			<MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
