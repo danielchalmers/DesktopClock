@@ -26,10 +26,10 @@ public partial class MainWindow : Window
     private TimeZoneInfo _timeZone;
 
     /// <summary>
-    /// Indicates whether the clock should be shown as a countdown.
+    /// The date and time to countdown to, or null if regular clock is desired.
     /// </summary>
     [ObservableProperty]
-    private bool _isCountdown;
+    private DateTimeOffset? _countdownTo;
 
     /// <summary>
     /// The current date and time in the selected time zone or countdown as a formatted string.
@@ -43,7 +43,7 @@ public partial class MainWindow : Window
         DataContext = this;
 
         _timeZone = App.GetTimeZone();
-        UpdateIsCountdown();
+        UpdateCountdown();
 
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
 
@@ -102,12 +102,11 @@ public partial class MainWindow : Window
     /// Explains how to enable countdown mode, then asks user if they want to view Advanced settings to do so.
     /// </summary>
     [RelayCommand]
-    public void CountdownTo()
+    public void CountdownWizard()
     {
         var result = MessageBox.Show(this,
-            $"In advanced settings: change {nameof(Settings.Default.CountdownTo)}, then save.\n" +
-            "Go back by replacing it with \"0001-01-01T00:00:00+00:00\".\n\n" +
-            "Open advanced settings now?",
+            $"In advanced settings: change \"{nameof(Settings.Default.CountdownTo)}\" in the format of \"{default(DateTime)}\", then save." +
+            "\n\nOpen advanced settings now?",
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
         if (result != MessageBoxResult.OK)
@@ -202,7 +201,7 @@ public partial class MainWindow : Window
                 break;
 
             case nameof(Settings.Default.CountdownTo):
-                UpdateIsCountdown();
+                UpdateCountdown();
                 break;
         }
     }
@@ -212,7 +211,16 @@ public partial class MainWindow : Window
         UpdateTimeString();
     }
 
-    private void UpdateIsCountdown() => IsCountdown = Settings.Default.CountdownTo > DateTimeOffset.MinValue;
+    private void UpdateCountdown()
+    {
+        if (Settings.Default.CountdownTo == null || Settings.Default.CountdownTo == default(DateTime))
+        {
+            CountdownTo = null;
+            return;
+        }
+
+        CountdownTo = new DateTimeOffset(Settings.Default.CountdownTo.Value, _timeZone.BaseUtcOffset);
+    }
 
     private void UpdateTimeString()
     {
@@ -220,16 +228,16 @@ public partial class MainWindow : Window
         {
             var timeInSelectedZone = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
 
-            if (IsCountdown)
+            if (CountdownTo == null)
             {
-                if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
-                    return Settings.Default.CountdownTo.Humanize(timeInSelectedZone);
-
-                return Tokenizer.FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - timeInSelectedZone, Settings.Default.CountdownFormat, CultureInfo.DefaultThreadCurrentCulture);
+                return Tokenizer.FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format, CultureInfo.DefaultThreadCurrentCulture);
             }
             else
             {
-                return Tokenizer.FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format, CultureInfo.DefaultThreadCurrentCulture);
+                if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
+                    return CountdownTo.Humanize(timeInSelectedZone);
+
+                return Tokenizer.FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - timeInSelectedZone, Settings.Default.CountdownFormat, CultureInfo.DefaultThreadCurrentCulture);
             }
         }
 

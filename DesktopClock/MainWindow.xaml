@@ -104,7 +104,7 @@
 
 			<MenuItem Command="{Binding NewClockCommand}" Header="_New clock..." />
 
-			<MenuItem Command="{Binding CountdownToCommand}" Header="_Countdown to..." />
+			<MenuItem Command="{Binding CountdownWizardCommand}" Header="_Countdown to..." />
 
 			<MenuItem Command="{Binding OpenSettingsCommand}" Header="Advanced _settings..." />
 
