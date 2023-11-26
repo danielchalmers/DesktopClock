@@ -283,12 +283,13 @@ public partial class MainWindow : Window
 
     private void Window_Closed(object sender, EventArgs e)
     {
+        // Stop the file watcher before saving.
+        Settings.Default.Dispose();
+
         if (Settings.CanBeSaved)
             Settings.Default.Save();
 
         App.SetRunOnStartup(Settings.Default.RunOnStartup);
-
-        Settings.Default.Dispose();
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
