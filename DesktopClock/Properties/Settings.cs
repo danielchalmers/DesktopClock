@@ -11,7 +11,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
     private readonly FileSystemWatcher _watcher;
 
-    private static readonly Lazy<Settings> _default = new(() => Load() ?? new Settings());
+    private static readonly Lazy<Settings> _default = new(LoadAndAttemptSave);
 
     private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
     {
@@ -47,6 +47,8 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public static Settings Default => _default.Value;
 
     public static string FilePath { get; private set; }
+
+    public static bool CanBeSaved { get; private set; }
 
     #region "Properties"
 
@@ -106,10 +108,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         JsonSerializer.Create(_jsonSerializerSettings).Populate(jsonReader, settings);
     }
 
-    /// <summary>
-    /// Returns loaded settings from the default path or null if it fails.
-    /// </summary>
-    private static Settings Load()
+    private static Settings LoadFromFile()
     {
         try
         {
@@ -119,8 +118,30 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         }
         catch
         {
-            return null;
+            return new();
         }
+    }
+
+    private static Settings LoadAndAttemptSave()
+    {
+        var settings = LoadFromFile();
+
+        try
+        {
+            settings.Save();
+
+            CanBeSaved = true;
+        }
+        catch (UnauthorizedAccessException)
+        {
+            CanBeSaved = false;
+        }
+        catch (IOException)
+        {
+            CanBeSaved = false;
+        }
+
+        return settings;
     }
 
     private void FileChanged(object sender, FileSystemEventArgs e)

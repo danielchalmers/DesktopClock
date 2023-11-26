@@ -272,11 +272,19 @@ public partial class MainWindow : Window
     private void Window_ContentRendered(object sender, EventArgs e)
     {
         SizeChanged += Window_SizeChanged;
+
+        if (!Settings.CanBeSaved)
+        {
+            MessageBox.Show(this,
+                "Settings won't be saved. Make sure you have DesktopClock in a folder that can be written to without administrator privileges!",
+                "Access denied", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        Settings.Default.Save();
+        if (Settings.CanBeSaved)
+            Settings.Default.Save();
 
         App.SetRunOnStartup(Settings.Default.RunOnStartup);
 
