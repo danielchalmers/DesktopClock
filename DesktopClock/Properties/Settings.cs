@@ -10,7 +10,6 @@ namespace DesktopClock.Properties;
 public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
     private readonly FileSystemWatcher _watcher;
-    private DateTime _fileDate = DateTime.UtcNow;
 
     private static readonly Lazy<Settings> _default = new(() => Load() ?? new Settings());
 
@@ -84,11 +83,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     #endregion "Properties"
 
     /// <summary>
-    /// Determines if the settings file has been modified externally since the last time it was used.
-    /// </summary>
-    public bool CheckIfModifiedExternally() => File.GetLastWriteTimeUtc(FilePath) > _fileDate;
-
-    /// <summary>
     /// Saves to the default path.
     /// </summary>
     public void Save()
@@ -98,17 +92,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         using var jsonWriter = new JsonTextWriter(streamWriter);
 
         JsonSerializer.Create(_jsonSerializerSettings).Serialize(jsonWriter, this);
-
-        _fileDate = DateTime.UtcNow;
-    }
-
-    /// <summary>
-    /// Saves to the default path unless a save has already happened from an external source.
-    /// </summary>
-    public void SaveIfNotModifiedExternally()
-    {
-        if (!CheckIfModifiedExternally())
-            Save();
     }
 
     /// <summary>

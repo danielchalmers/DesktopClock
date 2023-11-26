@@ -276,7 +276,7 @@ public partial class MainWindow : Window
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        Settings.Default.SaveIfNotModifiedExternally();
+        Settings.Default.Save();
 
         App.SetRunOnStartup(Settings.Default.RunOnStartup);
 
