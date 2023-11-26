@@ -43,7 +43,7 @@ public partial class MainWindow : Window
         DataContext = this;
 
         _timeZone = App.GetTimeZone();
-        UpdateCountdown();
+        UpdateCountdownEnabled();
 
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
 
@@ -121,11 +121,8 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void OpenSettings()
     {
+        // Save first so it's up-to-date.
         Settings.Default.Save();
-
-        // Re-create the settings file if it got deleted.
-        if (!File.Exists(Settings.FilePath))
-            Settings.Default.Save();
 
         // Open settings file in notepad.
         try
@@ -138,7 +135,8 @@ public partial class MainWindow : Window
             MessageBox.Show(this,
                 "Couldn't open settings file.\n\n" +
                 "This app may have be reuploaded without permission. If you paid for it, ask for a refund and download it for free from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If it still doesn't work, create a new Issue at that link with details on what happened and include this error: \"{ex.Message}\"");
+                $"If it still doesn't work, create a new Issue at that link with details on what happened and include this error: \"{ex.Message}\"",
+                Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -201,7 +199,7 @@ public partial class MainWindow : Window
                 break;
 
             case nameof(Settings.Default.CountdownTo):
-                UpdateCountdown();
+                UpdateCountdownEnabled();
                 break;
         }
     }
@@ -211,7 +209,7 @@ public partial class MainWindow : Window
         UpdateTimeString();
     }
 
-    private void UpdateCountdown()
+    private void UpdateCountdownEnabled()
     {
         if (Settings.Default.CountdownTo == null || Settings.Default.CountdownTo == default(DateTime))
         {
@@ -276,8 +274,8 @@ public partial class MainWindow : Window
         if (!Settings.CanBeSaved)
         {
             MessageBox.Show(this,
-                "Settings won't be saved. Make sure you have DesktopClock in a folder that can be written to without administrator privileges!",
-                "Access denied", MessageBoxButton.OK, MessageBoxImage.Warning);
+                $"Settings won't be saved because of an access error. Make sure {Title} is in a folder that can be written to without administrator privileges!",
+                Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 
