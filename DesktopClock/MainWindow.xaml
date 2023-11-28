@@ -115,9 +115,9 @@
 
 			<MenuItem Command="{Binding CountdownWizardCommand}" Header="_Countdown to..." />
 
-			<MenuItem Command="{Binding OpenSettingsCommand}" Header="Advanced _settings..." />
+			<MenuItem Command="{Binding OpenSettingsCommand}" Header="Advanced _settings" />
 
-			<MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates..." />
+			<MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates" />
 
 			<MenuItem Command="{Binding ExitCommand}" Header="E_xit" />
 		</ContextMenu>
