@@ -22,7 +22,7 @@
         MouseDown="Window_MouseDown"
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
-		ContentRendered="Window_ContentRendered"
+        ContentRendered="Window_ContentRendered"
         Closed="Window_Closed"
         wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
 	<Window.Resources>
@@ -59,7 +59,7 @@
 						<Slider Width="80"
 						        AutoToolTipPlacement="TopLeft"
 						        IsSnapToTickEnabled="True"
-						        Maximum="160"
+						        Maximum="240"
 						        Minimum="16"
 						        Value="{Binding Height, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 					</StackPanel>
@@ -146,7 +146,9 @@
 				</Style>
 			</Border.Style>
 
-			<local:OutlinedTextBlock Text="{Binding CurrentTimeOrCountdownString}" StrokeThickness="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+			<local:OutlinedTextBlock Text="{Binding CurrentTimeOrCountdownString}"
+			                         StrokeThickness="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+			                         TextWrapping="Wrap">
 
 				<local:OutlinedTextBlock.Fill>
 					<SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
