@@ -85,15 +85,12 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     #endregion "Properties"
 
     /// <summary>
-    /// Saves to the default path.
+    /// Saves to the default path in JSON format.
     /// </summary>
     public void Save()
     {
-        using var fileStream = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
-        using var streamWriter = new StreamWriter(fileStream);
-        using var jsonWriter = new JsonTextWriter(streamWriter);
-
-        JsonSerializer.Create(_jsonSerializerSettings).Serialize(jsonWriter, this);
+        var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
+        File.WriteAllText(FilePath, json);
     }
 
     /// <summary>
