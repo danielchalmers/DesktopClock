@@ -87,10 +87,26 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Saves to the default path in JSON format.
     /// </summary>
-    public void Save()
+    public bool Save()
     {
         var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
-        File.WriteAllText(FilePath, json);
+
+        // Attempt to save up to 4 times.
+        for (var i = 0; i < 4; i++)
+        {
+            try
+            {
+                File.WriteAllText(FilePath, json);
+                return true;
+            }
+            catch
+            {
+                // Wait before next attempt to read.
+                System.Threading.Thread.Sleep(250);
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -123,20 +139,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     {
         var settings = LoadFromFile();
 
-        try
-        {
-            settings.Save();
-
-            CanBeSaved = true;
-        }
-        catch (UnauthorizedAccessException)
-        {
-            CanBeSaved = false;
-        }
-        catch (IOException)
-        {
-            CanBeSaved = false;
-        }
+        CanBeSaved = settings.Save();
 
         return settings;
     }
