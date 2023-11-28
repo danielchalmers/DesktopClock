@@ -56,8 +56,20 @@ public partial class MainWindow : Window
         ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, true);
     }
 
+    /// <summary>
+    /// Copies the current time string to the clipboard.
+    /// </summary>
     [RelayCommand]
     public void CopyToClipboard() => Clipboard.SetText(CurrentTimeOrCountdownString);
+
+    /// <summary>
+    /// Hides the window until it's activated again.
+    /// </summary>
+    [RelayCommand]
+    public void HideForNow()
+    {
+        Opacity = 0;
+    }
 
     /// <summary>
     /// Sets app's theme to given value.
@@ -295,6 +307,12 @@ public partial class MainWindow : Window
                 $"Settings won't be saved because of an access error. Make sure {Title} is in a folder that can be written to without administrator privileges!",
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+    }
+
+    private void Window_Activated(object sender, EventArgs e)
+    {
+        // Reverse "Hide for now".
+        Opacity = 1;
     }
 
     private void Window_Closed(object sender, EventArgs e)
