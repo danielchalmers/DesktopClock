@@ -52,7 +52,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
     #region "Properties"
 
-    public string Format { get; set; } = "{dddd}, {MMM dd}, {HH:mm:ss}";
+    public string Format { get; set; } = "{ddd}, {MMM dd}, {h:mm:ss tt}";
     public string CountdownFormat { get; set; } = "";
     public DateTime? CountdownTo { get; set; } = default(DateTime);
     public string TimeZone { get; set; } = string.Empty;
