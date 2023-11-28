@@ -15,6 +15,8 @@ public record DateFormatExample
     public string Format { get; }
     public string Example { get; }
 
+    public static DateFormatExample Tutorial => new("", "Create my own format...");
+
     /// <summary>
     /// Creates a <see cref="DateFormatExample" /> from the given format.
     /// </summary>
@@ -34,10 +36,6 @@ public record DateFormatExample
         "dddd, MMM dd, hh:mm tt",
         "dddd, MMM dd, HH:mm:ss",
         "dddd, MMM dd, hh:mm:ss tt",
-        "ddd, MMMM dd, HH:mm",
-        "ddd, MMMM dd, hh:mm tt",
-        "ddd, MMMM dd, HH:mm:ss",
-        "ddd, MMMM dd, hh:mm:ss tt",
         "ddd, MMM dd, HH:mm",
         "ddd, MMM dd, hh:mm tt",
         "ddd, MMM dd, HH:mm:ss",
@@ -50,5 +48,5 @@ public record DateFormatExample
         "t",
         "T",
         "O",
-    }.Select(FromFormat).ToList();
+    }.Select(FromFormat).Append(Tutorial).ToList();
 }
