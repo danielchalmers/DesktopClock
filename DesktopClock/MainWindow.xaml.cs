@@ -63,19 +63,19 @@ public partial class MainWindow : Window
     public void CopyToClipboard() => Clipboard.SetText(CurrentTimeOrCountdownString);
 
     /// <summary>
-    /// Hides the window until it's activated again.
+    /// Minimizes the window.
     /// </summary>
     [RelayCommand]
     public void HideForNow()
     {
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.HideForNow))
         {
-            MessageBox.Show(this, "Clock will be hidden until you open it again from the taskbar or system tray.", Title);
+            MessageBox.Show(this, "Clock will be minimized and can be opened again from the taskbar or system tray (if enabled).", Title);
 
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
         }
 
-        Opacity = 0;
+        WindowState = WindowState.Minimized;
     }
 
     /// <summary>
@@ -342,12 +342,6 @@ public partial class MainWindow : Window
                 $"Settings won't be saved because of an access error. Make sure {Title} is in a folder that can be written to without administrator privileges!",
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-    }
-
-    private void Window_Activated(object sender, EventArgs e)
-    {
-        // Reverse "Hide for now".
-        Opacity = 1;
     }
 
     private void Window_Closed(object sender, EventArgs e)
