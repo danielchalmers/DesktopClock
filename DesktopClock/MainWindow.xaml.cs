@@ -68,6 +68,13 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void HideForNow()
     {
+        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.HideForNow))
+        {
+            MessageBox.Show(this, "Clock will be hidden until you open it again from the taskbar or system tray.", Title);
+
+            Settings.Default.TipsShown |= TeachingTips.HideForNow;
+        }
+
         Opacity = 0;
     }
 
@@ -113,13 +120,18 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void NewClock()
     {
-        var result = MessageBox.Show(this,
-            $"This will copy the executable and start it with new settings.\n\n" +
-            $"Continue?",
-            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
+        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.NewClock))
+        {
+            var result = MessageBox.Show(this,
+                $"This will copy the executable and start it with new settings.\n\n" +
+                $"Continue?",
+                Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
-        if (result != MessageBoxResult.OK)
-            return;
+            if (result != MessageBoxResult.OK)
+                return;
+
+            Settings.Default.TipsShown |= TeachingTips.NewClock;
+        }
 
         var newExePath = Path.Combine(App.MainFileInfo.DirectoryName, App.MainFileInfo.GetFileAtNextIndex().Name);
 
@@ -154,6 +166,16 @@ public partial class MainWindow : Window
         // Save first so it's up-to-date.
         Settings.Default.Save();
 
+        // Teach user.
+        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
+        {
+            MessageBox.Show(this,
+                "Settings are stored in JSON format and will be opened in Notepad. Simply save the file to see your changes instantly appear on the clock. To start fresh, delete your '.settings' file.",
+                Title);
+
+            Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
+        }
+
         // Open settings file in notepad.
         try
         {
@@ -176,6 +198,19 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void CheckForUpdates()
     {
+        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.CheckForUpdates))
+        {
+            var result = MessageBox.Show(this,
+                $"This will take you to a website to view the latest release.\n\n" +
+                $"Continue?",
+                Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
+
+            if (result != MessageBoxResult.OK)
+                return;
+
+            Settings.Default.TipsShown |= TeachingTips.CheckForUpdates;
+        }
+
         Process.Start("https://github.com/danielchalmers/DesktopClock/releases");
     }
 

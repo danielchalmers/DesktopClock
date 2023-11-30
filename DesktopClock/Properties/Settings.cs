@@ -69,6 +69,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool RunOnStartup { get; set; } = false;
     public bool DragToMove { get; set; } = true;
     public bool RightAligned { get; set; } = false;
+    public TeachingTips TipsShown { get; set; }
     public WindowPlacement Placement { get; set; }
 
     [JsonIgnore]
