@@ -70,7 +70,8 @@ public partial class MainWindow : Window
     {
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.HideForNow))
         {
-            MessageBox.Show(this, "Clock will be minimized and can be opened again from the taskbar or system tray (if enabled).", Title);
+            MessageBox.Show(this, "Clock will be minimized and can be opened again from the taskbar or system tray (if enabled).",
+                Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
         }
@@ -123,8 +124,8 @@ public partial class MainWindow : Window
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.NewClock))
         {
             var result = MessageBox.Show(this,
-                $"This will copy the executable and start it with new settings.\n\n" +
-                $"Continue?",
+                "This will copy the executable and start it with new settings.\n\n" +
+                "Continue?",
                 Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
             if (result != MessageBoxResult.OK)
@@ -170,8 +171,8 @@ public partial class MainWindow : Window
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
         {
             MessageBox.Show(this,
-                "Settings are stored in JSON format and will be opened in Notepad. Simply save the file to see your changes instantly appear on the clock. To start fresh, delete your '.settings' file.",
-                Title);
+                "Settings are stored in JSON format and will be opened in Notepad. Simply save the file to see your changes appear on the clock. To start fresh, delete your '.settings' file.",
+                Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
         }
@@ -201,8 +202,8 @@ public partial class MainWindow : Window
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.CheckForUpdates))
         {
             var result = MessageBox.Show(this,
-                $"This will take you to a website to view the latest release.\n\n" +
-                $"Continue?",
+                "This will take you to a website to view the latest release.\n\n" +
+                "Continue?",
                 Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
             if (result != MessageBoxResult.OK)

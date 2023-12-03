@@ -8,13 +8,12 @@ public static class Tokenizer
     private static readonly Regex _tokenizerRegex = new("{([^{}]+)}", RegexOptions.Compiled);
 
     /// <summary>
-    /// Formats with a tokenized format in mind, or treats it as a regular formatting string.
-    /// Falls back to the default format on any exception.
+    /// <para>Returns a string formatted using a tokenized format or the default formatting method.</para>
+    /// <para>Falls back to the default format on any exception.</para>
     /// </summary>
     /// <param name="formattable">The object to format.</param>
     /// <param name="format">The format to use.</param>
     /// <param name="formatProvider">The format provider.</param>
-    /// <returns></returns>
     public static string FormatWithTokenizerOrFallBack(IFormattable formattable, string format, IFormatProvider formatProvider)
     {
         try

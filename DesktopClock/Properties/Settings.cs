@@ -16,10 +16,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
     {
         Formatting = Formatting.Indented,
-        Error = (_, e) =>
-        {
-            e.ErrorContext.Handled = true;
-        },
+        Error = (_, e) => e.ErrorContext.Handled = true,
     };
 
     private Settings()
@@ -31,13 +28,12 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         // Watch for changes.
         _watcher = new(App.MainFileInfo.DirectoryName, settingsFileName)
         {
-            EnableRaisingEvents = true
+            EnableRaisingEvents = true,
         };
         _watcher.Changed += FileChanged;
 
-        // Random default theme.
-        var random = new Random();
-        Theme = App.Themes[random.Next(0, App.Themes.Count)];
+        // Random default theme before getting overwritten.
+        Theme = Theme.GetRandomDefaultTheme();
     }
 
 #pragma warning disable CS0067 // The event 'Settings.PropertyChanged' is never used
@@ -92,7 +88,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     {
         var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
 
-        // Attempt to save up to 4 times.
+        // Attempt to save multiple times.
         for (var i = 0; i < 4; i++)
         {
             try
@@ -122,6 +118,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         JsonSerializer.Create(_jsonSerializerSettings).Populate(jsonReader, settings);
     }
 
+    /// <summary>
+    /// Loads from the default path in JSON format.
+    /// </summary>
     private static Settings LoadFromFile()
     {
         try
@@ -136,6 +135,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         }
     }
 
+    /// <summary>
+    /// Loads from the default path in JSON format then attempts to save in order to check if it can be done.
+    /// </summary>
     private static Settings LoadAndAttemptSave()
     {
         var settings = LoadFromFile();
@@ -145,6 +147,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         return settings;
     }
 
+    /// <summary>
+    /// Occurs after the watcher detects a change in the settings file.
+    /// </summary>
     private void FileChanged(object sender, FileSystemEventArgs e)
     {
         try

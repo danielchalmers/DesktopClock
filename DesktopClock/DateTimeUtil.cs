@@ -7,7 +7,7 @@ public static class DateTimeUtil
 {
     public static IReadOnlyCollection<TimeZoneInfo> TimeZones { get; } = TimeZoneInfo.GetSystemTimeZones();
 
-    public static bool TryGetTimeZoneById(string timeZoneId, out TimeZoneInfo timeZoneInfo)
+    public static bool TryFindSystemTimeZoneById(string timeZoneId, out TimeZoneInfo timeZoneInfo)
     {
         try
         {

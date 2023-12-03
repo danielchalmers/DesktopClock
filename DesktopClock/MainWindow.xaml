@@ -28,7 +28,7 @@
 	<Window.Resources>
 		<ContextMenu x:Key="MainContextMenu" x:Shared="False">
 			<MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
-			
+
 			<MenuItem Command="{Binding HideForNowCommand}" Header="_Hide for now" />
 
 			<Separator />
@@ -68,7 +68,7 @@
 				</MenuItem.Header>
 			</MenuItem>
 
-			<MenuItem Header="The_me" ItemsSource="{x:Static local:App.Themes}">
+			<MenuItem Header="The_me" ItemsSource="{x:Static local:Theme.DefaultThemes}">
 				<MenuItem.Resources>
 					<Style TargetType="MenuItem">
 						<Setter Property="Command" Value="{Binding DataContext.SetThemeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
