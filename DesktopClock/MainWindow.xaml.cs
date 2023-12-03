@@ -164,10 +164,15 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void OpenSettings()
     {
-        // Save first so it's up-to-date.
-        Settings.Default.Save();
+        // Save first if we can so it's up-to-date.
+        if (Settings.CanBeSaved)
+            Settings.Default.Save();
 
-        // Teach user.
+        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
+        if (!Settings.Exists)
+            return;
+
+        // Teach user how it works.
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
         {
             MessageBox.Show(this,
@@ -340,7 +345,10 @@ public partial class MainWindow : Window
         if (!Settings.CanBeSaved)
         {
             MessageBox.Show(this,
-                $"Settings won't be saved because of an access error. Make sure {Title} is in a folder that can be written to without administrator privileges!",
+                "Settings can't be saved because of an access error.\n\n" +
+                $"Make sure {Title} is in a folder that doesn't require admin privileges, " +
+                "and that you got it from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
+                "If the problem still persists, feel free to create a new Issue at the above link with as many details as possible.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }

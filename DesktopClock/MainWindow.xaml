@@ -96,6 +96,8 @@
 						<Style.Triggers>
 							<DataTrigger Binding="{Binding}" Value="{x:Static local:DateFormatExample.Tutorial}">
 								<Setter Property="Command" Value="{Binding DataContext.FormatWizardCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+
+								<Setter Property="IsEnabled" Value="{x:Static p:Settings.CanBeSaved}" />
 							</DataTrigger>
 						</Style.Triggers>
 
@@ -110,11 +112,11 @@
 
 			<Separator />
 
-			<MenuItem Command="{Binding NewClockCommand}" Header="_New clock..." />
+			<MenuItem Command="{Binding NewClockCommand}" Header="_New clock..." IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
-			<MenuItem Command="{Binding CountdownWizardCommand}" Header="_Countdown to..." />
+			<MenuItem Command="{Binding CountdownWizardCommand}" Header="_Countdown to..." IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
-			<MenuItem Command="{Binding OpenSettingsCommand}" Header="Advanced _settings" />
+			<MenuItem Command="{Binding OpenSettingsCommand}" Header="Advanced _settings" IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
 			<MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates" />
 

@@ -42,9 +42,20 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
     public static Settings Default => _default.Value;
 
+    /// <summary>
+    /// The full path to the settings file.
+    /// </summary>
     public static string FilePath { get; private set; }
 
+    /// <summary>
+    /// Can the settings file be saved to?
+    /// </summary>
     public static bool CanBeSaved { get; private set; }
+
+    /// <summary>
+    /// Does the settings file exist on the disk?
+    /// </summary>
+    public static bool Exists => File.Exists(FilePath);
 
     #region "Properties"
 
