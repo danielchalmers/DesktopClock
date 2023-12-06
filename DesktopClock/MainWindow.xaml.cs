@@ -37,8 +37,8 @@ public partial class MainWindow : Window
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
 
-    public static readonly double MaxSizeLog = 7;
-    public static readonly double MinSizeLog = 2.5;
+    public static readonly double MaxSizeLog = 6.5;
+    public static readonly double MinSizeLog = 2.7;
 
     public MainWindow()
     {
