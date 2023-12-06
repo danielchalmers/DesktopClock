@@ -59,11 +59,9 @@
 						<TextBlock Text="Size: " />
 
 						<Slider Width="80"
-						        AutoToolTipPlacement="TopLeft"
-						        IsSnapToTickEnabled="True"
-						        Maximum="240"
-						        Minimum="16"
-						        Value="{Binding Height, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+						        Maximum="{x:Static local:MainWindow.MaxSizeLog}"
+						        Minimum="{x:Static local:MainWindow.MinSizeLog}"
+						        Value="{Binding Height, Converter={local:LogScaleConverter}, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 					</StackPanel>
 				</MenuItem.Header>
 			</MenuItem>
@@ -112,11 +110,17 @@
 
 			<Separator />
 
-			<MenuItem Command="{Binding NewClockCommand}" Header="_New clock..." IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+			<MenuItem Command="{Binding NewClockCommand}"
+			          Header="_New clock..."
+			          IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
-			<MenuItem Command="{Binding CountdownWizardCommand}" Header="_Countdown to..." IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+			<MenuItem Command="{Binding CountdownWizardCommand}"
+			          Header="_Countdown to..."
+			          IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
-			<MenuItem Command="{Binding OpenSettingsCommand}" Header="Advanced _settings" IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+			<MenuItem Command="{Binding OpenSettingsCommand}"
+			          Header="Advanced _settings"
+			          IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
 			<MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates" />
 

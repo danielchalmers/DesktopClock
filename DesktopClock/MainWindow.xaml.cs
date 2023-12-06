@@ -37,6 +37,9 @@ public partial class MainWindow : Window
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
 
+    public static readonly double MaxSizeLog = 7;
+    public static readonly double MinSizeLog = 2.5;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -330,11 +333,16 @@ public partial class MainWindow : Window
     {
         if (Keyboard.Modifiers == ModifierKeys.Control)
         {
-            // Scale size based on scroll amount, with one notch on a default PC mouse being a change of 15%.
+            // Amount of scroll that occurred and whether it was positive or negative.
             var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
-            var change = Settings.Default.Height * steps * 0.15;
 
-            Settings.Default.Height = (int)Math.Min(Math.Max(Settings.Default.Height + change, 16), 160);
+            // Convert the height, adjust it, then convert back in the same way as the slider.
+            var newHeightLog = Math.Log(Settings.Default.Height) + (steps * 0.15);
+            var newHeightLogClamped = Math.Min(Math.Max(newHeightLog, MinSizeLog), MaxSizeLog);
+            var exp = Math.Exp(newHeightLogClamped);
+
+            // Apply the new height as an integer to make it easier for the user.
+            Settings.Default.Height = (int)exp;
         }
     }
 
