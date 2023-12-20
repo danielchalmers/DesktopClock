@@ -97,6 +97,8 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     public bool Save()
     {
+        try
+        {
         var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
 
         // Attempt to save multiple times.
@@ -112,6 +114,10 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
                 // Wait before next attempt to read.
                 System.Threading.Thread.Sleep(250);
             }
+        }
+        }
+        catch (JsonSerializationException)
+        {
         }
 
         return false;
