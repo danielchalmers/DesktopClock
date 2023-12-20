@@ -20,6 +20,7 @@
         ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
         FontFamily="{Binding FontFamily, Source={x:Static p:Settings.Default}, Mode=OneWay}"
         MouseDown="Window_MouseDown"
+		MouseUp="Window_MouseUp"
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
         ContentRendered="Window_ContentRendered"
