@@ -10,6 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using H.NotifyIcon;
+using H.NotifyIcon.EfficiencyMode;
 using Humanizer;
 
 namespace DesktopClock;
@@ -406,5 +407,17 @@ public partial class MainWindow : Window
 
         // Use this to ignore the change when the window is loaded at the beginning.
         _hasInitiallyChangedSize = true;
+    }
+
+    private void Window_StateChanged(object sender, EventArgs e)
+    {
+        if (WindowState == WindowState.Minimized)
+        {
+            EfficiencyModeUtilities.SetEfficiencyMode(true);
+        }
+        else
+        {
+            EfficiencyModeUtilities.SetEfficiencyMode(false);
+        }
     }
 }
