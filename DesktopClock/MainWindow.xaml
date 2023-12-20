@@ -23,6 +23,7 @@
         MouseWheel="Window_MouseWheel"
         ContentRendered="Window_ContentRendered"
         Closed="Window_Closed"
+		SizeChanged="Window_SizeChanged"
 		StateChanged="Window_StateChanged"
         wp:WindowPlacementProperties.Placement="{Binding Placement, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
 	<Window.Resources>

@@ -21,9 +21,9 @@ namespace DesktopClock;
 [ObservableObject]
 public partial class MainWindow : Window
 {
-    private bool _hasInitiallyChangedSize;
-    private bool _isDragging;
     private readonly SystemClockTimer _systemClockTimer;
+    private bool _isDragging;
+    private double _rightAnchor;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
 
@@ -50,10 +50,13 @@ public partial class MainWindow : Window
         _timeZone = App.GetTimeZone();
         UpdateCountdownEnabled();
 
+        Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
+
         // Not done through binding due to what's explained in the comment in HideForNow().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
 
-        Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
+        // Used to rightward-align the clock.
+        _rightAnchor = Settings.Default.Placement.NormalBounds.Right;
 
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
@@ -341,6 +344,8 @@ public partial class MainWindow : Window
             _isDragging = true;
             DragMove();
             _isDragging = false;
+
+            _rightAnchor = Left + ActualWidth;
         }
     }
 
@@ -368,8 +373,6 @@ public partial class MainWindow : Window
 
     private void Window_ContentRendered(object sender, EventArgs e)
     {
-        SizeChanged += Window_SizeChanged;
-
         if (!Settings.CanBeSaved)
         {
             MessageBox.Show(this,
@@ -394,14 +397,10 @@ public partial class MainWindow : Window
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if (_hasInitiallyChangedSize && !_isDragging && e.WidthChanged && Settings.Default.RightAligned)
+        if (e.WidthChanged && !_isDragging && Settings.Default.RightAligned)
         {
-            var previousRight = Left + e.PreviousSize.Width;
-            Left = previousRight - ActualWidth;
+            Left = _rightAnchor - ActualWidth;
         }
-
-        // Use this to ignore the change when the window is loaded at the beginning.
-        _hasInitiallyChangedSize = true;
     }
 
     private void Window_StateChanged(object sender, EventArgs e)
