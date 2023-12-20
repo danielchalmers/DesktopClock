@@ -168,14 +168,6 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void OpenSettings()
     {
-        // Save first if we can so it's up-to-date.
-        if (Settings.CanBeSaved)
-            Settings.Default.Save();
-
-        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
-        if (!Settings.Exists)
-            return;
-
         // Teach user how it works.
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
         {
@@ -184,6 +176,19 @@ public partial class MainWindow : Window
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
+        }
+
+        // Save first if we can so it's up-to-date.
+        if (Settings.CanBeSaved)
+            Settings.Default.Save();
+
+        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
+        if (!Settings.Exists)
+        {
+            MessageBox.Show(this,
+                "Settings file doesn't exist and couldn't be created.",
+                Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
         }
 
         // Open settings file in notepad.
