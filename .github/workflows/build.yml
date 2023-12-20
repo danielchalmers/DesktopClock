@@ -17,3 +17,8 @@ jobs:
 
       - name: Test
         run: dotnet test
+        
+      - uses: actions/upload-artifact@v4
+        with:
+          path: |
+            publish
