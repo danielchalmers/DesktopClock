@@ -17,7 +17,6 @@
         SizeToContent="WidthAndHeight"
         UseLayoutRounding="True"
         Topmost="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-        ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
         FontFamily="{Binding FontFamily, Source={x:Static p:Settings.Default}, Mode=OneWay}"
         MouseDown="Window_MouseDown"
 		MouseUp="Window_MouseUp"

@@ -49,6 +49,9 @@ public partial class MainWindow : Window
         _timeZone = App.GetTimeZone();
         UpdateCountdownEnabled();
 
+        // Not done through binding due to what's explained in the comment in HideForNow().
+        ShowInTaskbar = Settings.Default.ShowInTaskbar;
+
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
 
         _systemClockTimer = new();
@@ -80,7 +83,10 @@ public partial class MainWindow : Window
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
         }
 
+        // https://stackoverflow.com/a/28239057.
+        ShowInTaskbar = true;
         WindowState = WindowState.Minimized;
+        ShowInTaskbar = Settings.Default.ShowInTaskbar;
     }
 
     /// <summary>
@@ -248,7 +254,11 @@ public partial class MainWindow : Window
                 _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
                 _trayIcon.ContextMenu.DataContext = this;
                 _trayIcon.ForceCreate(enablesEfficiencyMode: false);
-                _trayIcon.TrayLeftMouseDoubleClick += (_, _) => Activate();
+                _trayIcon.TrayLeftMouseDoubleClick += (_, _) =>
+                {
+                    WindowState = WindowState.Normal;
+                    Activate();
+                };
             }
 
             if (!firstLaunch)
@@ -275,6 +285,7 @@ public partial class MainWindow : Window
                 break;
 
             case nameof(Settings.Default.ShowInTaskbar):
+                ShowInTaskbar = Settings.Default.ShowInTaskbar;
                 ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, false);
                 break;
 
