@@ -68,6 +68,11 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
+    /// If the clock is right-aligned we grow the clock's invisible bounds and align it here to make it smoother than just forcing the position.
+    /// </summary>
+    public HorizontalAlignment ViewboxHorizontalAlignment => Settings.Default.RightAligned ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+
+    /// <summary>
     /// Copies the current time string to the clipboard.
     /// </summary>
     [RelayCommand]
@@ -296,6 +301,10 @@ public partial class MainWindow : Window
             case nameof(Settings.Default.CountdownTo):
                 UpdateCountdownEnabled();
                 break;
+
+            case nameof(Settings.Default.RightAligned):
+                OnPropertyChanged(nameof(ViewboxHorizontalAlignment));
+                break;
         }
     }
 
@@ -399,6 +408,10 @@ public partial class MainWindow : Window
     {
         if (e.WidthChanged && !_isDragging && Settings.Default.RightAligned)
         {
+            // Keep the width high so next time the clock changes we won't have to re-align the window, which can look jarring.
+            MinWidth = Math.Max(MinWidth, ActualWidth);
+
+            // Align to the anchor from settings or dragging the window.
             Left = _rightAnchor - ActualWidth;
         }
     }

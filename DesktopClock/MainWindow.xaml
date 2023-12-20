@@ -135,7 +135,7 @@
 		                MenuActivation="LeftOrRightClick" />
 	</Window.Resources>
 
-	<Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+	<Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}" HorizontalAlignment="{Binding ViewboxHorizontalAlignment}">
 		<Border CornerRadius="{Binding BackgroundCornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}" Padding="1,0,1,0">
 			<Border.Style>
 				<Style TargetType="Border">
