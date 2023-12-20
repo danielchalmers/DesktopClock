@@ -407,10 +407,13 @@ public partial class MainWindow : Window
     {
         if (WindowState == WindowState.Minimized)
         {
+            _systemClockTimer.Stop();
             EfficiencyModeUtilities.SetEfficiencyMode(true);
         }
         else
         {
+            UpdateTimeString();
+            _systemClockTimer.Start();
             EfficiencyModeUtilities.SetEfficiencyMode(false);
         }
     }
