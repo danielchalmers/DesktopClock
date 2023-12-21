@@ -99,22 +99,22 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     {
         try
         {
-        var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
+            var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
 
-        // Attempt to save multiple times.
-        for (var i = 0; i < 4; i++)
-        {
-            try
+            // Attempt to save multiple times.
+            for (var i = 0; i < 4; i++)
             {
-                File.WriteAllText(FilePath, json);
-                return true;
+                try
+                {
+                    File.WriteAllText(FilePath, json);
+                    return true;
+                }
+                catch
+                {
+                    // Wait before next attempt to read.
+                    System.Threading.Thread.Sleep(250);
+                }
             }
-            catch
-            {
-                // Wait before next attempt to read.
-                System.Threading.Thread.Sleep(250);
-            }
-        }
         }
         catch (JsonSerializationException)
         {
@@ -180,6 +180,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
     public void Dispose()
     {
-        _watcher?.Dispose();
+        // We don't dispose of the watcher anymore because it would actually hang indefinitely if you had multiple instances of the same clock open.
+        //_watcher?.Dispose();
     }
 }
