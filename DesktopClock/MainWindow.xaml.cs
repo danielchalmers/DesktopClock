@@ -23,7 +23,6 @@ public partial class MainWindow : Window
 {
     private readonly SystemClockTimer _systemClockTimer;
     private bool _isDragging;
-    private double _rightAnchor;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
 
@@ -54,9 +53,6 @@ public partial class MainWindow : Window
 
         // Not done through binding due to what's explained in the comment in HideForNow().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
-
-        // Used to rightward-align the clock.
-        _rightAnchor = Settings.Default.Placement.NormalBounds.Right;
 
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
@@ -344,8 +340,6 @@ public partial class MainWindow : Window
             _isDragging = true;
             DragMove();
             _isDragging = false;
-
-            _rightAnchor = Left + ActualWidth;
         }
     }
 
@@ -373,6 +367,8 @@ public partial class MainWindow : Window
 
     private void Window_ContentRendered(object sender, EventArgs e)
     {
+        SizeChanged += Window_SizeChanged;
+
         if (!Settings.CanBeSaved)
         {
             MessageBox.Show(this,
@@ -399,7 +395,8 @@ public partial class MainWindow : Window
     {
         if (e.WidthChanged && !_isDragging && Settings.Default.RightAligned)
         {
-            Left = _rightAnchor - ActualWidth;
+            var widthChange = e.NewSize.Width - e.PreviousSize.Width;
+            Left -= widthChange;
         }
     }
 
