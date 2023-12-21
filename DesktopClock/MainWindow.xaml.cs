@@ -12,6 +12,7 @@ using DesktopClock.Properties;
 using H.NotifyIcon;
 using H.NotifyIcon.EfficiencyMode;
 using Humanizer;
+using WpfWindowPlacement;
 
 namespace DesktopClock;
 
@@ -53,11 +54,8 @@ public partial class MainWindow : Window
         // Not done through binding due to what's explained in the comment in HideForNow().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
 
-        UpdateTimeString();
-
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
-        _systemClockTimer.Start();
 
         ContextMenu = Resources["MainContextMenu"] as ContextMenu;
 
@@ -367,11 +365,21 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Window_ContentRendered(object sender, EventArgs e)
+    private void Window_SourceInitialized(object sender, EventArgs e)
     {
+        UpdateTimeString();
+
+        this.SetPlacement(Settings.Default.Placement);
+
         if (Settings.Default.RightAligned)
             Left = Settings.Default.Placement.NormalBounds.Right - ActualWidth;
+    }
 
+    private void Window_ContentRendered(object sender, EventArgs e)
+    {
+        _systemClockTimer.Start();
+
+        // Now that everything's been initially rendered and laid out, we can start listening for changes to the size to keep the window right-aligned.
         SizeChanged += Window_SizeChanged;
 
         if (!Settings.CanBeSaved)
@@ -385,8 +393,10 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Window_Closed(object sender, EventArgs e)
+    private void Window_Closing(object sender, CancelEventArgs e)
     {
+        Settings.Default.Placement = this.GetPlacement();
+
         // Stop the file watcher before saving.
         Settings.Default.Dispose();
 
