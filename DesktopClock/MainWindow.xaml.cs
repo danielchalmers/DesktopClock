@@ -53,6 +53,8 @@ public partial class MainWindow : Window
         // Not done through binding due to what's explained in the comment in HideForNow().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
 
+        UpdateTimeString();
+
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
         _systemClockTimer.Start();
@@ -367,6 +369,9 @@ public partial class MainWindow : Window
 
     private void Window_ContentRendered(object sender, EventArgs e)
     {
+        if (Settings.Default.RightAligned)
+            Left = Settings.Default.Placement.NormalBounds.Right - ActualWidth;
+
         SizeChanged += Window_SizeChanged;
 
         if (!Settings.CanBeSaved)
