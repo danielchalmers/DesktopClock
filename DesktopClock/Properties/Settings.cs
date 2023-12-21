@@ -77,6 +77,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool DragToMove { get; set; } = true;
     public bool RightAligned { get; set; } = false;
     public TeachingTips TipsShown { get; set; }
+    public string LastDisplay { get; set; }
     public WindowPlacement Placement { get; set; }
 
     [JsonIgnore]
