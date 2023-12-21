@@ -22,7 +22,6 @@ namespace DesktopClock;
 public partial class MainWindow : Window
 {
     private readonly SystemClockTimer _systemClockTimer;
-    private bool _isDragging;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
 
@@ -337,9 +336,10 @@ public partial class MainWindow : Window
     {
         if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove)
         {
-            _isDragging = true;
+            _systemClockTimer.Stop();
             DragMove();
-            _isDragging = false;
+            UpdateTimeString();
+            _systemClockTimer.Start();
         }
     }
 
@@ -393,7 +393,7 @@ public partial class MainWindow : Window
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if (e.WidthChanged && !_isDragging && Settings.Default.RightAligned)
+        if (e.WidthChanged && Settings.Default.RightAligned)
         {
             var widthChange = e.NewSize.Width - e.PreviousSize.Width;
             Left -= widthChange;
