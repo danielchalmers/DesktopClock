@@ -1,13 +1,13 @@
-name: Standard
+name: Build
 
 on:
   push:
   pull_request:
 
 jobs:
-  Standard:
+  build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       
-      - uses: ./.github/build-for-release-action.yml
+      - uses: ./.github/actions/prepare-for-release
