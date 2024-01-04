@@ -17,7 +17,7 @@ runs:
 
     - name: Publish
       shell: bash
-      run: dotnet publish .\DesktopClock\DesktopClock.csproj -o "publish" -c Release -r win-x64
+      run: dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish" -c Release -r win-x64
 
     - name: Create installer
       shell: bash
