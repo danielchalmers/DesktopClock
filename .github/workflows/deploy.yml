@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - uses: ./.github/workflows/build-action.yml
+      - uses: ./.github/build-for-release-action.yml
 
       - name: Create GitHub release
         uses: ncipollo/release-action@v1

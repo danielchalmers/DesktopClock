@@ -1,13 +1,13 @@
-name: Pipeline
+name: Standard
 
 on:
   push:
   pull_request:
 
 jobs:
-  deploy:
+  Standard:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       
-      - uses: ./.github/workflows/build-action.yml
+      - uses: ./.github/build-for-release-action.yml
