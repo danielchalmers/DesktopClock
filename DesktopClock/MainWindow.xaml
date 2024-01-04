@@ -20,10 +20,10 @@
         MouseDown="Window_MouseDown"
         MouseDoubleClick="Window_MouseDoubleClick"
         MouseWheel="Window_MouseWheel"
-		SourceInitialized="Window_SourceInitialized"
+        SourceInitialized="Window_SourceInitialized"
         ContentRendered="Window_ContentRendered"
-		Closing="Window_Closing"
-		StateChanged="Window_StateChanged">
+        Closing="Window_Closing"
+        StateChanged="Window_StateChanged">
 	<Window.Resources>
 		<ContextMenu x:Key="MainContextMenu" x:Shared="False">
 			<MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
@@ -139,7 +139,7 @@
 				<Style TargetType="Border">
 					<Setter Property="Background">
 						<Setter.Value>
-							<SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}" Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+							<ImageBrush ImageSource="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
 						</Setter.Value>
 					</Setter>
 
@@ -147,6 +147,16 @@
 						<DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="False">
 							<DataTrigger.Setters>
 								<Setter Property="Background" Value="Transparent" />
+							</DataTrigger.Setters>
+						</DataTrigger>
+
+						<DataTrigger Binding="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="">
+							<DataTrigger.Setters>
+								<Setter Property="Background">
+									<Setter.Value>
+										<SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}" Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+									</Setter.Value>
+								</Setter>
 							</DataTrigger.Setters>
 						</DataTrigger>
 					</Style.Triggers>
