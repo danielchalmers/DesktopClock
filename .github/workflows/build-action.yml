@@ -1,0 +1,25 @@
+name: Build
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-dotnet@v2
+
+    - name: Build
+      run: dotnet build
+
+    - name: Test
+      run: dotnet test
+
+    - name: Publish
+      run: dotnet publish .\DesktopClock\DesktopClock.csproj -o "publish" -c Release -r win-x64
+
+    - name: Create installer
+      run: |
+        dotnet tool install --global wix --version 4.0.3
+        wix build Product.wxs -o "publish/Install DesktopClock.msi"
+      
+    - uses: actions/upload-artifact@v4
+      with:
+        path: |
+          publish
