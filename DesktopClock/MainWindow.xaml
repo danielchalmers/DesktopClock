@@ -137,28 +137,33 @@
 		<Border CornerRadius="{Binding BackgroundCornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}" Padding="1,0,1,0">
 			<Border.Style>
 				<Style TargetType="Border">
-					<Setter Property="Background">
-						<Setter.Value>
-							<ImageBrush ImageSource="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-						</Setter.Value>
-					</Setter>
+					<Setter Property="Background" Value="Transparent" />
 
 					<Style.Triggers>
-						<DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="False">
+						<DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="True">
 							<DataTrigger.Setters>
-								<Setter Property="Background" Value="Transparent" />
+								<Setter Property="Background">
+									<Setter.Value>
+										<ImageBrush ImageSource="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+									</Setter.Value>
+								</Setter>
 							</DataTrigger.Setters>
 						</DataTrigger>
+						
+						<MultiDataTrigger>
+							<MultiDataTrigger.Conditions>
+								<Condition Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="True" />
+								<Condition Binding="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="" />
+							</MultiDataTrigger.Conditions>
 
-						<DataTrigger Binding="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="">
-							<DataTrigger.Setters>
+							<MultiDataTrigger.Setters>
 								<Setter Property="Background">
 									<Setter.Value>
 										<SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}" Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
 									</Setter.Value>
 								</Setter>
-							</DataTrigger.Setters>
-						</DataTrigger>
+							</MultiDataTrigger.Setters>
+						</MultiDataTrigger>
 					</Style.Triggers>
 				</Style>
 			</Border.Style>
