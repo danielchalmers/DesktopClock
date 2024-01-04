@@ -1,24 +1,30 @@
 name: Prepare for release
 
+description: Builds, tests, and creates an installer that's ready for release.
+
 runs:
   using: "composite"
   steps:
     - uses: actions/setup-dotnet@v2
 
     - name: Build
+      shell: bash
       run: dotnet build
 
     - name: Test
+      shell: bash
       run: dotnet test
 
     - name: Publish
+      shell: bash
       run: dotnet publish .\DesktopClock\DesktopClock.csproj -o "publish" -c Release -r win-x64
 
     - name: Create installer
+      shell: bash
       run: |
         dotnet tool install --global wix --version 4.0.3
         wix build Product.wxs -o "publish/Install DesktopClock.msi"
-      
+
     - uses: actions/upload-artifact@v4
       with:
         path: |
