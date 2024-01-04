@@ -18,5 +18,8 @@ jobs:
         with:
           artifacts: "publish/*.exe,publish/*.msi"
           allowUpdates: true
+          removeArtifacts: true
+          replacesArtifacts: true
           artifactErrorsFailBuild: true
+          makeLatest: true
           prerelease: contains(github.ref, 'beta')
