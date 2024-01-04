@@ -76,6 +76,8 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool RunOnStartup { get; set; } = false;
     public bool DragToMove { get; set; } = true;
     public bool RightAligned { get; set; } = false;
+    public string WavFilePath { get; set; } = string.Empty;
+    public TimeSpan WavFileInterval { get; set; }
     public TeachingTips TipsShown { get; set; }
     public string LastDisplay { get; set; }
     public WindowPlacement Placement { get; set; }

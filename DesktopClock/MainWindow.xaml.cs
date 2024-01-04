@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +26,7 @@ public partial class MainWindow : Window
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
+    private SoundPlayer _soundPlayer;
 
     /// <summary>
     /// The date and time to countdown to, or null if regular clock is desired.
@@ -62,6 +64,8 @@ public partial class MainWindow : Window
         ContextMenu = Resources["MainContextMenu"] as ContextMenu;
 
         ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, true);
+
+        UpdateSoundPlayerEnabled();
     }
 
     /// <summary>
@@ -293,12 +297,19 @@ public partial class MainWindow : Window
             case nameof(Settings.Default.CountdownTo):
                 UpdateCountdownEnabled();
                 break;
+
+            case nameof(Settings.Default.WavFilePath):
+            case nameof(Settings.Default.WavFileInterval):
+                UpdateSoundPlayerEnabled();
+                break;
         }
     }
 
     private void SystemClockTimer_SecondChanged(object sender, EventArgs e)
     {
         UpdateTimeString();
+
+        TryPlaySound();
     }
 
     private void UpdateCountdownEnabled()
@@ -310,6 +321,39 @@ public partial class MainWindow : Window
         }
 
         CountdownTo = Settings.Default.CountdownTo.Value.ToDateTimeOffset(_timeZone.BaseUtcOffset);
+    }
+
+    private void UpdateSoundPlayerEnabled()
+    {
+        var soundPlayerEnabled =
+            !string.IsNullOrWhiteSpace(Settings.Default.WavFilePath) &&
+            Settings.Default.WavFileInterval != default &&
+            File.Exists(Settings.Default.WavFilePath);
+
+        _soundPlayer = soundPlayerEnabled ? new() : null;
+    }
+
+    private void TryPlaySound()
+    {
+        if (_soundPlayer == null)
+            return;
+
+        var isOnInterval = CountdownTo == null ?
+            (int)DateTimeOffset.Now.TimeOfDay.TotalSeconds % (int)Settings.Default.WavFileInterval.TotalSeconds == 0 :
+            (int)(CountdownTo.Value - DateTimeOffset.Now).TotalSeconds % (int)Settings.Default.WavFileInterval.TotalSeconds == 0;
+
+        if (!isOnInterval)
+            return;
+
+        try
+        {
+            _soundPlayer.SoundLocation = Settings.Default.WavFilePath;
+            _soundPlayer.Play();
+        }
+        catch
+        {
+            // Ignore errors.
+        }
     }
 
     private void UpdateTimeString()
