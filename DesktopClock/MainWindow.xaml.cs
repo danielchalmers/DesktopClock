@@ -309,7 +309,7 @@ public partial class MainWindow : Window
             return;
         }
 
-        CountdownTo = new DateTimeOffset(Settings.Default.CountdownTo.Value, _timeZone.BaseUtcOffset);
+        CountdownTo = Settings.Default.CountdownTo.Value.ToDateTimeOffset(_timeZone.BaseUtcOffset);
     }
 
     private void UpdateTimeString()
