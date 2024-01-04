@@ -286,6 +286,7 @@ public partial class MainWindow : Window
                 break;
 
             case nameof(Settings.Default.Format):
+            case nameof(Settings.Default.CountdownFormat):
                 UpdateTimeString();
                 break;
 
@@ -296,6 +297,7 @@ public partial class MainWindow : Window
 
             case nameof(Settings.Default.CountdownTo):
                 UpdateCountdownEnabled();
+                UpdateTimeString();
                 break;
 
             case nameof(Settings.Default.WavFilePath):
