@@ -360,3 +360,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/DesktopClock/bin/Debug/net48/DesktopClock.settings
