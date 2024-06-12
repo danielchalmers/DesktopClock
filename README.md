@@ -13,15 +13,19 @@ A digital clock app for your Windows desktop that stays on screen, ready wheneve
 - "Advanced settings" provides additional configuration options using JSON format.
 - Includes a countdown mode to set a timer for any specific date.
 
-Got an idea or found a bug? Submit an [issue](https://github.com/danielchalmers/DesktopClock/issues)!
-
 ## Discover More
 
-Explore my other apps:
+Explore my other apps (Free):
 
-[Network Monitor](https://github.com/danielchalmers/Network-Monitor) - View live network latency and bandwidth usage on your desktop like the clock.
+🛜[Network Monitor](https://github.com/danielchalmers/Network-Monitor) - View live network latency and bandwidth usage on your desktop with a widget like the clock.
 
-[JournalApp](https://github.com/danielchalmers/JournalApp) - Write notes & keep track of your mood, medications, and more with a versatile journaling app.
+💟[JournalApp](https://github.com/danielchalmers/JournalApp) - Write notes & keep track of your mood, medications, and more with a versatile journaling app for Android.
+
+## Contributions
+
+Got an idea or found a bug? Submit an [issue](https://github.com/danielchalmers/DesktopClock/issues)!
+
+If you are gracious enough to contribute code, kindly try to align with the current formatting and keep features simple if possible.
 
 ## Credits
 
