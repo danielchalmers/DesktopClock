@@ -40,6 +40,9 @@ public partial class MainWindow : Window
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
 
+    [ObservableProperty]
+    private bool _isMouseDown = false;
+
     public static readonly double MaxSizeLog = 6.5;
     public static readonly double MinSizeLog = 2.7;
 
@@ -52,6 +55,10 @@ public partial class MainWindow : Window
         UpdateCountdownEnabled();
 
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
+        if (Settings.Default.Bounce != null)
+        {
+            Settings.Default.Bounce.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Bounce_PropertyChanged(s, e));
+        }
 
         // Not done through binding due to what's explained in the comment in HideForNow().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
@@ -311,6 +318,8 @@ public partial class MainWindow : Window
     {
         UpdateTimeString();
 
+        UpdateBounce();
+
         TryPlaySound();
     }
 
@@ -382,6 +391,7 @@ public partial class MainWindow : Window
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
+        this.IsMouseDown = true;
         if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove)
         {
             _systemClockTimer.Stop();
@@ -389,6 +399,11 @@ public partial class MainWindow : Window
             UpdateTimeString();
             _systemClockTimer.Start();
         }
+    }
+
+        private void Window_MouseUp(object sender, MouseButtonEventArgs e)
+    {
+        this.IsMouseDown = false;
     }
 
     private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -474,4 +489,55 @@ public partial class MainWindow : Window
             EfficiencyModeUtilities.SetEfficiencyMode(false);
         }
     }
+
+    //#region "Bounce - to prevent burn in"
+
+    [ObservableProperty]
+    private Thickness _bounceMargin = new(0);
+
+
+    //Random.Shared is not available in .NET48
+    private readonly Random _rnd = new();
+    private DateTime _lastBounce;
+
+    private void UpdateBounce()
+    {
+
+        if (
+            (!(Settings.Default.Bounce?.Enabled).GetValueOrDefault()) ||
+            Settings.Default.Bounce.Interval.TotalSeconds < 1
+            )
+        {
+            //if Bounce is not enabled or the interval is invalid, effectively disbable the bounce
+            this.BounceMargin = new Thickness(0);
+        }
+        else
+        {
+
+            if (this._lastBounce.Add(Settings.Default.Bounce.Interval) < DateTime.UtcNow)
+            {
+                //- note: it would be more elegant to use a modulus based interval detection
+                //-       but that introduces a whole set of issues around rounding and possibly missing the exact second
+
+
+                var h = Math.Max(10.0, Settings.Default.Bounce.HorizontalBounce);
+                var v = Math.Max(10.0, Settings.Default.Bounce.VerticalBounce);
+
+                var l = this._rnd.NextDouble() * h;
+                var t = this._rnd.NextDouble() * v;
+
+                this.BounceMargin = new Thickness(l, t, h - l, v - t);
+                Debug.WriteLine($"Bounce {this.BounceMargin.ToString()}");
+
+                this._lastBounce= DateTime.UtcNow;
+            }
+        }
+            }
+    private void Bounce_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        this._lastBounce = new DateTime(0);
+        UpdateBounce();
+    }
+
+    //#endregion
 }

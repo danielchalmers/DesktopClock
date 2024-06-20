@@ -83,6 +83,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string LastDisplay { get; set; }
     public WindowPlacement Placement { get; set; }
 
+    public BounceSettings Bounce { get; set; } = new BounceSettings();
+
+
     [JsonIgnore]
     public Theme Theme
     {
