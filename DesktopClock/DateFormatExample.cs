@@ -27,7 +27,7 @@ public record DateFormatExample
     /// <summary>
     /// Creates a <see cref="DateFormatExample" /> from the given format.
     /// </summary>
-    public static DateFormatExample FromFormat(string format) => new(format, DateTimeOffset.Now.ToString(format));
+    public static DateFormatExample FromFormat(string format, DateTimeOffset dateTimeOffset) => new(format, dateTimeOffset.ToString(format));
 
     /// <summary>
     /// Common date time formatting strings and an example string for each.
@@ -55,5 +55,5 @@ public record DateFormatExample
         "t",
         "T",
         "O",
-    }.Select(FromFormat).Append(Tutorial).ToList();
+    }.Select(f => FromFormat(f, DateTimeOffset.Now)).Append(Tutorial).ToList();
 }
