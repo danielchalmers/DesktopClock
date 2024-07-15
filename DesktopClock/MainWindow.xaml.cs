@@ -29,13 +29,13 @@ public partial class MainWindow : Window
     private SoundPlayer _soundPlayer;
 
     /// <summary>
-    /// The date and time to countdown to, or null if regular clock is desired.
+    /// The date and time to countdown to, or <c>null</c> if regular clock is desired.
     /// </summary>
     [ObservableProperty]
     private DateTimeOffset? _countdownTo;
 
     /// <summary>
-    /// The current date and time in the selected time zone or countdown as a formatted string.
+    /// The current date and time in the selected time zone, or countdown as a formatted string.
     /// </summary>
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
@@ -88,6 +88,7 @@ public partial class MainWindow : Window
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
         }
 
+        // Minimize the window and update the ShowInTaskbar property to keep it hidden if needed.
         // https://stackoverflow.com/a/28239057.
         ShowInTaskbar = true;
         WindowState = WindowState.Minimized;
@@ -95,19 +96,19 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Sets app's theme to given value.
+    /// Sets the app's theme to the given value.
     /// </summary>
     [RelayCommand]
     public void SetTheme(Theme theme) => Settings.Default.Theme = theme;
 
     /// <summary>
-    /// Sets format string in settings to given string.
+    /// Sets the format string in settings to the given string.
     /// </summary>
     [RelayCommand]
     public void SetFormat(string format) => Settings.Default.Format = format;
 
     /// <summary>
-    /// Explains how to write a format, then asks user if they want to view a website and Advanced settings to do so.
+    /// Explains how to write a format, then asks the user if they want to view a website and advanced settings to do so.
     /// </summary>
     [RelayCommand]
     public void FormatWizard()
@@ -125,7 +126,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Sets time zone ID in settings to given time zone ID.
+    /// Sets the time zone ID in settings to the given time zone ID.
     /// </summary>
     [RelayCommand]
     public void SetTimeZone(TimeZoneInfo tzi) => App.SetTimeZone(tzi);
@@ -157,7 +158,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Explains how to enable countdown mode, then asks user if they want to view Advanced settings to do so.
+    /// Explains how to enable countdown mode, then asks the user if they want to view advanced settings to do so.
     /// </summary>
     [RelayCommand]
     public void CountdownWizard()
@@ -179,7 +180,7 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void OpenSettings()
     {
-        // Teach user how it works.
+        // Inform user how it works.
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
         {
             MessageBox.Show(this,
@@ -202,17 +203,17 @@ public partial class MainWindow : Window
             return;
         }
 
-        // Open settings file in notepad.
+        // Open settings file in Notepad.
         try
         {
             Process.Start("notepad", Settings.FilePath);
         }
         catch (Exception ex)
         {
-            // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
+            // Lazy scammers on the Microsoft Store reupload without realizing it gets sandboxed, making it unable to start the Notepad process (Issues: #1, #12).
             MessageBox.Show(this,
                 "Couldn't open settings file.\n\n" +
-                "This app may have be reuploaded without permission. If you paid for it, ask for a refund and download it for free from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
+                "This app may have been reuploaded without permission. If you paid for it, ask for a refund and download it for free from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
                 $"If it still doesn't work, create a new Issue at that link with details on what happened and include this error: \"{ex.Message}\"",
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -241,7 +242,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Exits the program.
+    /// Closes the app.
     /// </summary>
     [RelayCommand]
     public void Exit()
@@ -255,6 +256,7 @@ public partial class MainWindow : Window
         {
             if (_trayIcon == null)
             {
+                // Construct the tray from the resources defined.
                 _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
                 _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
                 _trayIcon.ContextMenu.DataContext = this;
@@ -266,6 +268,7 @@ public partial class MainWindow : Window
                 };
             }
 
+            // Show a notice if the icon was moved during runtime, but not at the start because the user will already expect it.
             if (!firstLaunch)
                 _trayIcon.ShowNotification("Hidden from taskbar", "Icon was moved to the tray");
         }
@@ -276,6 +279,9 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Handles property changes in settings and updates the corresponding properties in the UI.
+    /// </summary>
     private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
@@ -307,6 +313,9 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Handles the event when the system clock timer signals a second change.
+    /// </summary>
     private void SystemClockTimer_SecondChanged(object sender, EventArgs e)
     {
         UpdateTimeString();
@@ -314,6 +323,9 @@ public partial class MainWindow : Window
         TryPlaySound();
     }
 
+    /// <summary>
+    /// Updates the countdown enabled state based on the settings.
+    /// </summary>
     private void UpdateCountdownEnabled()
     {
         if (Settings.Default.CountdownTo == null || Settings.Default.CountdownTo == default(DateTime))
@@ -325,6 +337,9 @@ public partial class MainWindow : Window
         CountdownTo = Settings.Default.CountdownTo.Value.ToDateTimeOffset(_timeZone.BaseUtcOffset);
     }
 
+    /// <summary>
+    /// Updates the sound player enabled state based on the settings.
+    /// </summary>
     private void UpdateSoundPlayerEnabled()
     {
         var soundPlayerEnabled =
@@ -335,11 +350,15 @@ public partial class MainWindow : Window
         _soundPlayer = soundPlayerEnabled ? new() : null;
     }
 
+    /// <summary>
+    /// Tries to play a sound based on the settings if it hits the specified interval and the file exists.
+    /// </summary>
     private void TryPlaySound()
     {
         if (_soundPlayer == null)
             return;
 
+        // Whether we hit the interval specified in settings, which is calculated differently in countdown mode and not.
         var isOnInterval = CountdownTo == null ?
             (int)DateTimeOffset.Now.TimeOfDay.TotalSeconds % (int)Settings.Default.WavFileInterval.TotalSeconds == 0 :
             (int)(CountdownTo.Value - DateTimeOffset.Now).TotalSeconds % (int)Settings.Default.WavFileInterval.TotalSeconds == 0;
@@ -354,7 +373,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            // Ignore errors.
+            // Ignore errors because we don't want a sound issue to crash the app.
         }
     }
 
@@ -382,11 +401,15 @@ public partial class MainWindow : Window
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
+        // Drag the window to move it.
         if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove)
         {
+            // Pause time updates to maintain placement.
             _systemClockTimer.Stop();
+
             DragMove();
             UpdateTimeString();
+
             _systemClockTimer.Start();
         }
     }
@@ -398,6 +421,7 @@ public partial class MainWindow : Window
 
     private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
     {
+        // Resize the window when scrolling if the Ctrl key is pressed.
         if (Keyboard.Modifiers == ModifierKeys.Control)
         {
             // Amount of scroll that occurred and whether it was positive or negative.
@@ -408,7 +432,7 @@ public partial class MainWindow : Window
             var newHeightLogClamped = Math.Min(Math.Max(newHeightLog, MinSizeLog), MaxSizeLog);
             var exp = Math.Exp(newHeightLogClamped);
 
-            // Apply the new height as an integer to make it easier for the user.
+            // Save the new height as an integer to make it easier for the user.
             Settings.Default.Height = (int)exp;
         }
     }
@@ -426,6 +450,7 @@ public partial class MainWindow : Window
 
     private void Window_ContentRendered(object sender, EventArgs e)
     {
+        // Make sure the user is aware that their changes will not be saved.
         if (!Settings.CanBeSaved)
         {
             MessageBox.Show(this,
@@ -439,6 +464,7 @@ public partial class MainWindow : Window
 
     private void Window_Closing(object sender, CancelEventArgs e)
     {
+        // Save the last text and the placement to preserve dimensions and position of the clock.
         Settings.Default.LastDisplay = CurrentTimeOrCountdownString;
         Settings.Default.Placement = this.GetPlacement();
 
@@ -453,6 +479,7 @@ public partial class MainWindow : Window
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
     {
+        // Adjust the window position for right-alignment.
         if (e.WidthChanged && Settings.Default.RightAligned)
         {
             var widthChange = e.NewSize.Width - e.PreviousSize.Width;
@@ -464,11 +491,13 @@ public partial class MainWindow : Window
     {
         if (WindowState == WindowState.Minimized)
         {
+            // Save resources while minimized.
             _systemClockTimer.Stop();
             EfficiencyModeUtilities.SetEfficiencyMode(true);
         }
         else
         {
+            // Run like normal without withholding resources.
             UpdateTimeString();
             _systemClockTimer.Start();
             EfficiencyModeUtilities.SetEfficiencyMode(false);

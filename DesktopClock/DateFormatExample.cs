@@ -12,7 +12,14 @@ public record DateFormatExample
         Example = example;
     }
 
+    /// <summary>
+    /// The actual format (<c>dddd, MMMM dd</c>).
+    /// </summary>
     public string Format { get; }
+
+    /// <summary>
+    /// An example of the format in action (<c>Monday, July 15</c>).
+    /// </summary>
     public string Example { get; }
 
     public static DateFormatExample Tutorial => new(string.Empty, "Create my own format...");

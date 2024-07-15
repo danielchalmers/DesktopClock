@@ -5,6 +5,9 @@ namespace DesktopClock;
 
 public static class DateTimeUtil
 {
+    /// <summary>
+    /// A cached collection of all the time zones about which information is available on the local system.
+    /// </summary>
     public static IReadOnlyCollection<TimeZoneInfo> TimeZones { get; } = TimeZoneInfo.GetSystemTimeZones();
 
     public static bool TryFindSystemTimeZoneById(string timeZoneId, out TimeZoneInfo timeZoneInfo)

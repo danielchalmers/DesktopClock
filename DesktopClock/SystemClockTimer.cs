@@ -25,10 +25,19 @@ public sealed class SystemClockTimer : IDisposable
     /// </summary>
     private int MillisecondsUntilNextSecond => 1000 - DateTimeOffset.Now.Millisecond;
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public void Dispose() => _timer.Dispose();
 
+    /// <summary>
+    /// Schedules the timer to start on the next second that elapses.
+    /// </summary>
     public void Start() => ScheduleTickForNextSecond();
 
+    /// <summary>
+    /// Immediately stops the timer.
+    /// </summary>
     public void Stop() => _timer.Change(Timeout.Infinite, Timeout.Infinite);
 
     private void OnTick()
