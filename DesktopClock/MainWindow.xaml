@@ -23,7 +23,8 @@
         SourceInitialized="Window_SourceInitialized"
         ContentRendered="Window_ContentRendered"
         Closing="Window_Closing"
-        StateChanged="Window_StateChanged">
+        StateChanged="Window_StateChanged"
+        KeyDown="Window_KeyDown">
     <Window.Resources>
         <ContextMenu x:Key="MainContextMenu" x:Shared="False">
             <MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
@@ -58,8 +59,8 @@
                         <TextBlock Text="Size: " />
 
                         <Slider Width="80"
-                                Maximum="{x:Static local:MainWindow.MaxSizeLog}"
-                                Minimum="{x:Static local:MainWindow.MinSizeLog}"
+                                Maximum="{Binding MaxSizeLog, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                Minimum="{Binding MinSizeLog, Source={x:Static p:Settings.Default}, Mode=OneWay}"
                                 Value="{Binding Height, Converter={local:LogScaleConverter}, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
                     </StackPanel>
                 </MenuItem.Header>

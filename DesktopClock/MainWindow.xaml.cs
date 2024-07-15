@@ -40,9 +40,6 @@ public partial class MainWindow : Window
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
 
-    public static readonly double MaxSizeLog = 6.5;
-    public static readonly double MinSizeLog = 2.7;
-
     public MainWindow()
     {
         InitializeComponent();
@@ -422,14 +419,7 @@ public partial class MainWindow : Window
         {
             // Amount of scroll that occurred and whether it was positive or negative.
             var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
-
-            // Convert the height, adjust it, then convert back in the same way as the slider.
-            var newHeightLog = Math.Log(Settings.Default.Height) + (steps * 0.15);
-            var newHeightLogClamped = Math.Min(Math.Max(newHeightLog, MinSizeLog), MaxSizeLog);
-            var exp = Math.Exp(newHeightLogClamped);
-
-            // Save the new height as an integer to make it easier for the user.
-            Settings.Default.Height = (int)exp;
+            Settings.Default.ScaleHeight(steps);
         }
     }
 
@@ -507,6 +497,22 @@ public partial class MainWindow : Window
             UpdateTimeString();
             _systemClockTimer.Start();
             EfficiencyModeUtilities.SetEfficiencyMode(false);
+        }
+    }
+
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            switch (e.Key)
+            {
+                case Key.OemMinus:
+                    Settings.Default.ScaleHeight(-1);
+                    break;
+                case Key.OemPlus:
+                    Settings.Default.ScaleHeight(1);
+                    break;
+            }
         }
     }
 }
