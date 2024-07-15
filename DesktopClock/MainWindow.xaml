@@ -24,179 +24,179 @@
         ContentRendered="Window_ContentRendered"
         Closing="Window_Closing"
         StateChanged="Window_StateChanged">
-	<Window.Resources>
-		<ContextMenu x:Key="MainContextMenu" x:Shared="False">
-			<MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
+    <Window.Resources>
+        <ContextMenu x:Key="MainContextMenu" x:Shared="False">
+            <MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
 
-			<MenuItem Command="{Binding HideForNowCommand}" Header="_Hide for now" />
+            <MenuItem Command="{Binding HideForNowCommand}" Header="_Hide for now" />
 
-			<Separator />
+            <Separator />
 
-			<MenuItem Header="Stay on _top"
-			          IsCheckable="True"
-			          IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+            <MenuItem Header="Stay on _top"
+                      IsCheckable="True"
+                      IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-			<MenuItem Header="Show icon in tas_kbar"
-			          IsCheckable="True"
-			          IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+            <MenuItem Header="Show icon in tas_kbar"
+                      IsCheckable="True"
+                      IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-			<MenuItem Header="Start with _PC"
-			          IsCheckable="True"
-			          IsChecked="{Binding RunOnStartup, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+            <MenuItem Header="Start with _PC"
+                      IsCheckable="True"
+                      IsChecked="{Binding RunOnStartup, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-			<MenuItem Header="Show _background"
-			          IsCheckable="True"
-			          IsChecked="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+            <MenuItem Header="Show _background"
+                      IsCheckable="True"
+                      IsChecked="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-			<MenuItem Header="_Drag to move"
-			          IsCheckable="True"
-			          IsChecked="{Binding DragToMove, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+            <MenuItem Header="_Drag to move"
+                      IsCheckable="True"
+                      IsChecked="{Binding DragToMove, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-			<MenuItem>
-				<MenuItem.Header>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Size: " />
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Size: " />
 
-						<Slider Width="80"
-						        Maximum="{x:Static local:MainWindow.MaxSizeLog}"
-						        Minimum="{x:Static local:MainWindow.MinSizeLog}"
-						        Value="{Binding Height, Converter={local:LogScaleConverter}, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
-					</StackPanel>
-				</MenuItem.Header>
-			</MenuItem>
+                        <Slider Width="80"
+                                Maximum="{x:Static local:MainWindow.MaxSizeLog}"
+                                Minimum="{x:Static local:MainWindow.MinSizeLog}"
+                                Value="{Binding Height, Converter={local:LogScaleConverter}, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
 
-			<MenuItem Header="The_me" ItemsSource="{x:Static local:Theme.DefaultThemes}">
-				<MenuItem.Resources>
-					<Style TargetType="MenuItem">
-						<Setter Property="Command" Value="{Binding DataContext.SetThemeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+            <MenuItem Header="The_me" ItemsSource="{x:Static local:Theme.DefaultThemes}">
+                <MenuItem.Resources>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Command" Value="{Binding DataContext.SetThemeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
 
-						<Setter Property="CommandParameter" Value="{Binding}" />
+                        <Setter Property="CommandParameter" Value="{Binding}" />
 
-						<Setter Property="DisplayMemberPath" Value="Name" />
-					</Style>
-				</MenuItem.Resources>
-			</MenuItem>
+                        <Setter Property="DisplayMemberPath" Value="Name" />
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
 
-			<MenuItem Header="Time _Zone" ItemsSource="{x:Static local:DateTimeUtil.TimeZones}">
-				<MenuItem.Resources>
-					<Style TargetType="MenuItem">
-						<Setter Property="Command" Value="{Binding DataContext.SetTimeZoneCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+            <MenuItem Header="Time _Zone" ItemsSource="{x:Static local:DateTimeUtil.TimeZones}">
+                <MenuItem.Resources>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Command" Value="{Binding DataContext.SetTimeZoneCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
 
-						<Setter Property="CommandParameter" Value="{Binding}" />
-					</Style>
-				</MenuItem.Resources>
-			</MenuItem>
+                        <Setter Property="CommandParameter" Value="{Binding}" />
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
 
-			<MenuItem Header="_Format" ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}">
-				<MenuItem.Resources>
-					<Style TargetType="MenuItem">
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding}" Value="{x:Static local:DateFormatExample.Tutorial}">
-								<Setter Property="Command" Value="{Binding DataContext.FormatWizardCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+            <MenuItem Header="_Format" ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}">
+                <MenuItem.Resources>
+                    <Style TargetType="MenuItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding}" Value="{x:Static local:DateFormatExample.Tutorial}">
+                                <Setter Property="Command" Value="{Binding DataContext.FormatWizardCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
 
-								<Setter Property="IsEnabled" Value="{x:Static p:Settings.CanBeSaved}" />
-							</DataTrigger>
-						</Style.Triggers>
+                                <Setter Property="IsEnabled" Value="{x:Static p:Settings.CanBeSaved}" />
+                            </DataTrigger>
+                        </Style.Triggers>
 
-						<Setter Property="Command" Value="{Binding DataContext.SetFormatCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+                        <Setter Property="Command" Value="{Binding DataContext.SetFormatCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
 
-						<Setter Property="CommandParameter" Value="{Binding Format}" />
+                        <Setter Property="CommandParameter" Value="{Binding Format}" />
 
-						<Setter Property="DisplayMemberPath" Value="Example" />
-					</Style>
-				</MenuItem.Resources>
-			</MenuItem>
+                        <Setter Property="DisplayMemberPath" Value="Example" />
+                    </Style>
+                </MenuItem.Resources>
+            </MenuItem>
 
-			<Separator />
+            <Separator />
 
-			<MenuItem Command="{Binding NewClockCommand}"
-			          Header="_New clock..."
-			          IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+            <MenuItem Command="{Binding NewClockCommand}"
+                      Header="_New clock..."
+                      IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
-			<MenuItem Command="{Binding CountdownWizardCommand}"
-			          Header="_Countdown to..."
-			          IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+            <MenuItem Command="{Binding CountdownWizardCommand}"
+                      Header="_Countdown to..."
+                      IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
-			<MenuItem Command="{Binding OpenSettingsCommand}"
-			          Header="Advanced _settings"
-			          IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+            <MenuItem Command="{Binding OpenSettingsCommand}"
+                      Header="Advanced _settings"
+                      IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
-			<MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates" />
+            <MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates" />
 
-			<MenuItem Command="{Binding ExitCommand}" Header="E_xit" />
-		</ContextMenu>
+            <MenuItem Command="{Binding ExitCommand}" Header="E_xit" />
+        </ContextMenu>
 
-		<tb:TaskbarIcon x:Key="TrayIcon"
-		                x:Shared="False"
-		                IconSource="DesktopClock.ico"
-		                ToolTipText="DesktopClock"
-		                MenuActivation="LeftOrRightClick" />
-	</Window.Resources>
+        <tb:TaskbarIcon x:Key="TrayIcon"
+                        x:Shared="False"
+                        IconSource="DesktopClock.ico"
+                        ToolTipText="DesktopClock"
+                        MenuActivation="LeftOrRightClick" />
+    </Window.Resources>
 
-	<Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-		<Border CornerRadius="{Binding BackgroundCornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}" Padding="1,0,1,0">
-			<Border.Style>
-				<Style TargetType="Border">
-					<Setter Property="Background" Value="Transparent" />
+    <Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+        <Border CornerRadius="{Binding BackgroundCornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}" Padding="1,0,1,0">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="Transparent" />
 
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="True">
-							<DataTrigger.Setters>
-								<Setter Property="Background">
-									<Setter.Value>
-										<ImageBrush ImageSource="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-									</Setter.Value>
-								</Setter>
-							</DataTrigger.Setters>
-						</DataTrigger>
-						
-						<MultiDataTrigger>
-							<MultiDataTrigger.Conditions>
-								<Condition Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="True" />
-								<Condition Binding="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="" />
-							</MultiDataTrigger.Conditions>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
 
-							<MultiDataTrigger.Setters>
-								<Setter Property="Background">
-									<Setter.Value>
-										<SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}" Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-									</Setter.Value>
-								</Setter>
-							</MultiDataTrigger.Setters>
-						</MultiDataTrigger>
-					</Style.Triggers>
-				</Style>
-			</Border.Style>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="True" />
+                                <Condition Binding="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="" />
+                            </MultiDataTrigger.Conditions>
 
-			<local:OutlinedTextBlock Text="{Binding CurrentTimeOrCountdownString}"
-			                         StrokeThickness="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-			                         TextWrapping="Wrap">
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}" Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
 
-				<local:OutlinedTextBlock.Fill>
-					<SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-				</local:OutlinedTextBlock.Fill>
+            <local:OutlinedTextBlock Text="{Binding CurrentTimeOrCountdownString}"
+                                     StrokeThickness="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                     TextWrapping="Wrap">
 
-				<local:OutlinedTextBlock.Style>
-					<Style TargetType="local:OutlinedTextBlock">
-						<Setter Property="Stroke" Value="Transparent" />
-						<Setter Property="Margin" Value="0" />
+                <local:OutlinedTextBlock.Fill>
+                    <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                </local:OutlinedTextBlock.Fill>
 
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="False">
-								<DataTrigger.Setters>
-									<Setter Property="Stroke">
-										<Setter.Value>
-											<SolidColorBrush Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-										</Setter.Value>
-									</Setter>
+                <local:OutlinedTextBlock.Style>
+                    <Style TargetType="local:OutlinedTextBlock">
+                        <Setter Property="Stroke" Value="Transparent" />
+                        <Setter Property="Margin" Value="0" />
 
-									<Setter Property="Margin" Value="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-								</DataTrigger.Setters>
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</local:OutlinedTextBlock.Style>
-			</local:OutlinedTextBlock>
-		</Border>
-	</Viewbox>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="False">
+                                <DataTrigger.Setters>
+                                    <Setter Property="Stroke">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Setter Property="Margin" Value="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </local:OutlinedTextBlock.Style>
+            </local:OutlinedTextBlock>
+        </Border>
+    </Viewbox>
 </Window>
