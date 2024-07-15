@@ -53,7 +53,7 @@ public partial class MainWindow : Window
 
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
 
-        // Not done through binding due to what's explained in the comment in HideForNow().
+        // Not done through binding due to what's explained in the comment in WindowUtil.HideFromScreen().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
 
         CurrentTimeOrCountdownString = Settings.Default.LastDisplay;
@@ -88,11 +88,7 @@ public partial class MainWindow : Window
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
         }
 
-        // Minimize the window and update the ShowInTaskbar property to keep it hidden if needed.
-        // https://stackoverflow.com/a/28239057.
-        ShowInTaskbar = true;
-        WindowState = WindowState.Minimized;
-        ShowInTaskbar = Settings.Default.ShowInTaskbar;
+        this.HideFromScreen();
     }
 
     /// <summary>
@@ -446,6 +442,16 @@ public partial class MainWindow : Window
 
         // Now that everything's been initially rendered and laid out, we can start listening for changes to the size to keep the window right-aligned.
         SizeChanged += Window_SizeChanged;
+
+        if (Settings.Default.StartHidden)
+        {
+            _trayIcon?.ShowNotification("Started hidden", "Icon is in the tray");
+            this.HideFromScreen();
+        }
+
+        // Show the window now that it's finished loading.
+        // This was mainly done to stop the StartHidden option from flashing the window briefly.
+        Opacity = 1;
     }
 
     private void Window_ContentRendered(object sender, EventArgs e)

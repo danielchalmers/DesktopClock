@@ -151,9 +151,17 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public int Height { get; set; } = 48;
 
     /// <summary>
-    /// Runs the app on startup.
+    /// Runs the app when the user logs in.
     /// </summary>
+    /// <remarks>
+    /// A registry key is created or deleted.
+    /// </remarks>
     public bool RunOnStartup { get; set; } = false;
+
+    /// <summary>
+    /// Starts the app in the "Hide for now" state.
+    /// </summary>
+    public bool StartHidden { get; set; } = false;
 
     /// <summary>
     /// Allows moving the clock by dragging.
