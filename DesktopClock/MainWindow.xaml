@@ -65,14 +65,6 @@
             <MenuItem Header="_Format" ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding}" Value="{x:Static local:DateFormatExample.Tutorial}">
-                                <Setter Property="Command" Value="{Binding DataContext.FormatWizardCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
-
-                                <Setter Property="IsEnabled" Value="{x:Static p:Settings.CanBeSaved}" />
-                            </DataTrigger>
-                        </Style.Triggers>
-
                         <Setter Property="Command" Value="{Binding DataContext.SetFormatCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
 
                         <Setter Property="CommandParameter" Value="{Binding Format}" />

@@ -13,31 +13,37 @@ public partial class SettingsWindow : Window
     public SettingsWindow()
     {
         InitializeComponent();
-        DataContext = new SettingsViewModel(Settings.Default);
+        DataContext = new SettingsWindowViewModel(Settings.Default);
     }
 
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
     {
-        OpenFileDialog openFileDialog = new OpenFileDialog
+        var openFileDialog = new OpenFileDialog
         {
             Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*"
         };
-        if (openFileDialog.ShowDialog() == true)
+
+        if (openFileDialog.ShowDialog() != true)
         {
-            ((SettingsViewModel)DataContext).Settings.BackgroundImagePath = openFileDialog.FileName;
+            return;
         }
+
+        ((SettingsWindowViewModel)DataContext).Settings.BackgroundImagePath = openFileDialog.FileName;
     }
 
     private void BrowseWavFilePath(object sender, RoutedEventArgs e)
     {
-        OpenFileDialog openFileDialog = new OpenFileDialog
+        var openFileDialog = new OpenFileDialog
         {
             Filter = "WAV files (*.wav)|*.wav|All files (*.*)|*.*"
         };
-        if (openFileDialog.ShowDialog() == true)
+
+        if (openFileDialog.ShowDialog() != true)
         {
-            ((SettingsViewModel)DataContext).Settings.WavFilePath = openFileDialog.FileName;
+            return;
         }
+
+        ((SettingsWindowViewModel)DataContext).Settings.WavFilePath = openFileDialog.FileName;
     }
 
     public static void ShowSingletonSettingsWindow(Window owner)
@@ -54,11 +60,11 @@ public partial class SettingsWindow : Window
     }
 }
 
-public class SettingsViewModel
+public class SettingsWindowViewModel
 {
     public Settings Settings { get; }
 
-    public SettingsViewModel(Settings settings)
+    public SettingsWindowViewModel(Settings settings)
     {
         Settings = settings;
         FontFamilies = Fonts.SystemFontFamilies.Select(ff => ff.Source).ToList();
