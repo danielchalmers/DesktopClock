@@ -7,6 +7,7 @@ public enum TeachingTips
 {
     None = 0,
 
+    [Obsolete("Always asks now")]
     NewClock = 1 << 0,
 
     [Obsolete("Settings were moved to a native window")]

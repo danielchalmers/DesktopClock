@@ -108,46 +108,19 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void NewClock()
     {
-        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.NewClock))
-        {
-            var result = MessageBox.Show(this,
-                "This will copy the executable and start it with new settings.\n\n" +
-                "Continue?",
-                Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
+        var result = MessageBox.Show(this,
+            "This will copy the executable and start it with new settings.\n\n" +
+            "Continue?",
+            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
-            if (result != MessageBoxResult.OK)
-                return;
-
-            Settings.Default.TipsShown |= TeachingTips.NewClock;
-        }
+        if (result != MessageBoxResult.OK)
+            return;
 
         var newExePath = Path.Combine(App.MainFileInfo.DirectoryName, App.MainFileInfo.GetFileAtNextIndex().Name);
 
         // Copy and start the new clock.
         File.Copy(App.MainFileInfo.FullName, newExePath);
         Process.Start(newExePath);
-    }
-
-    /// <summary>
-    /// Opens the GitHub Releases page.
-    /// </summary>
-    [RelayCommand]
-    public void CheckForUpdates()
-    {
-        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.CheckForUpdates))
-        {
-            var result = MessageBox.Show(this,
-                "This will take you to GitHub to view the latest releases.\n\n" +
-                "Continue?",
-                Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
-
-            if (result != MessageBoxResult.OK)
-                return;
-
-            Settings.Default.TipsShown |= TeachingTips.CheckForUpdates;
-        }
-
-        Process.Start("https://github.com/danielchalmers/DesktopClock/releases");
     }
 
     /// <summary>
