@@ -30,6 +30,8 @@
             <MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
 
             <MenuItem Command="{Binding HideForNowCommand}" Header="_Hide for now" />
+            
+            <MenuItem Command="{Binding OpenSettingsCommand}" Header="_Settings &amp; help" />
 
             <Separator />
 
@@ -64,13 +66,9 @@
 
             <Separator />
 
-            <MenuItem Command="{Binding OpenSettingsCommand}" Header="_Settings" />
-
             <MenuItem Command="{Binding NewClockCommand}"
-                      Header="_New clock"
+                      Header="Create _new clock"
                       IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-
-            <MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates" />
 
             <MenuItem Command="{Binding ExitCommand}" Header="E_xit" />
         </ContextMenu>
