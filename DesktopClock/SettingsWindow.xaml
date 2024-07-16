@@ -28,7 +28,7 @@
                               ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
                               SelectionChanged="FormatComboBox_SelectionChanged" />
                 </Grid>
-                <TextBlock Text=".NET format string for the date and time shown on the clock display."
+                <TextBlock Text=".NET format string for the time shown on the clock. Format specific parts inside { and }."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />

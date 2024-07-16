@@ -73,7 +73,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     #region "Properties"
 
     /// <summary>
-    /// .NET format string for the date and time shown on the clock.
+    /// .NET format string for the time shown on the clock. Format specific parts inside { and }.
     /// </summary>
     /// <remarks>
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings">Custom date and time format strings</see>.
@@ -81,7 +81,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string Format { get; set; } = "{ddd}, {MMM dd}, {h:mm:ss tt}";
 
     /// <summary>
-    /// .NET format string for the countdown mode. If left blank, it will be dynamic.
+    /// Format string for the countdown mode. If left blank, it will be dynamic.
     /// </summary>
     /// <remarks>
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings">Custom TimeSpan format strings</see>.
