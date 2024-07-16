@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -20,14 +19,18 @@ public partial class SettingsWindow : Window
         DataContext = new SettingsWindowViewModel(Settings.Default);
     }
 
-    private void FormatComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private SettingsWindowViewModel ViewModel => (SettingsWindowViewModel)DataContext;
+
+    private void SelectFormat(object sender, SelectionChangedEventArgs e)
     {
-        var formatExample = e.AddedItems[0] as DateFormatExample;
+        var value = e.AddedItems[0] as DateFormatExample;
 
-        if (formatExample == null)
+        if (value == null)
+        {
             return;
+        }
 
-        ((SettingsWindowViewModel)DataContext).Settings.Format = formatExample.Format;
+        ViewModel.Settings.Format = value.Format;
     }
 
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
@@ -42,7 +45,7 @@ public partial class SettingsWindow : Window
             return;
         }
 
-        ((SettingsWindowViewModel)DataContext).Settings.BackgroundImagePath = openFileDialog.FileName;
+        ViewModel.Settings.BackgroundImagePath = openFileDialog.FileName;
     }
 
     private void BrowseWavFilePath(object sender, RoutedEventArgs e)
@@ -57,7 +60,7 @@ public partial class SettingsWindow : Window
             return;
         }
 
-        ((SettingsWindowViewModel)DataContext).Settings.WavFilePath = openFileDialog.FileName;
+        ViewModel.Settings.WavFilePath = openFileDialog.FileName;
     }
 }
 
@@ -72,14 +75,24 @@ public partial class SettingsWindowViewModel : ObservableObject
         TimeZones = TimeZoneInfo.GetSystemTimeZones().Select(tz => tz.Id).ToList();
     }
 
+    /// <summary>
+    /// All available font families reported by the system.
+    /// </summary>
     public IList<string> FontFamilies { get; }
+
+    /// <summary>
+    /// All available time zones reported by the system.
+    /// </summary>
     public IList<string> TimeZones { get; }
 
     /// <summary>
-    /// Sets the format string in settings to the given string.
+    /// Sets the format string in settings.
     /// </summary>
     [RelayCommand]
-    public void SetFormat(DateFormatExample formatExample) => Settings.Default.Format = formatExample.Format;
+    public void SetFormat(DateFormatExample value)
+    {
+        Settings.Default.Format = value.Format;
+    }
 
     /// <summary>
     /// Disables countdown mode by resetting the value to default.

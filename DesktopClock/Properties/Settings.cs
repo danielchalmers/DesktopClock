@@ -328,8 +328,18 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Gets the time zone selected in settings, or local by default.
     /// </summary>
-    public TimeZoneInfo GetTimeZoneInfo() =>
-        DateTimeUtil.TryFindSystemTimeZoneById(TimeZone, out var timeZoneInfo) ? timeZoneInfo : TimeZoneInfo.Local;
+    public TimeZoneInfo GetTimeZoneInfo()
+    {
+
+        try
+        {
+            return TimeZoneInfo.FindSystemTimeZoneById(TimeZone);
+        }
+        catch (TimeZoneNotFoundException)
+        {
+            return TimeZoneInfo.Local;
+        }
+    }
 
     public void Dispose()
     {
