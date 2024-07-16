@@ -49,14 +49,17 @@ public partial class App : Application
     public static void ShowSingletonWindow<T>(Window owner) where T : Window, new()
     {
         var window = Current.Windows.OfType<T>().FirstOrDefault() ?? new T();
+        window.Owner = owner;
 
+        // Restore an existing window.
         if (window.IsVisible)
         {
+            SystemCommands.RestoreWindow(window);
             window.Activate();
             return;
         }
 
-        window.Owner = owner;
+        // Show the new window.
         window.Show();
     }
 }
