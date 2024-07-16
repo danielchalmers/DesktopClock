@@ -237,7 +237,7 @@
                         </Hyperlink>
                     </TextBlock>
                     <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/JournalApp" RequestNavigate="Hyperlink_RequestNavigate">
+                        <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp" RequestNavigate="Hyperlink_RequestNavigate">
                             JournalApp - Save notes and keep track of your well-being (Android)
                         </Hyperlink>
                     </TextBlock>
