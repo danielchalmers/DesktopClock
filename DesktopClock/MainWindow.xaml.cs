@@ -97,12 +97,6 @@ public partial class MainWindow : Window
     public void SetTheme(Theme theme) => Settings.Default.Theme = theme;
 
     /// <summary>
-    /// Sets the format string in settings to the given string.
-    /// </summary>
-    [RelayCommand]
-    public void SetFormat(string format) => Settings.Default.Format = format;
-
-    /// <summary>
     /// Opens a new settings window or activates the existing one.
     /// </summary>
     [RelayCommand]

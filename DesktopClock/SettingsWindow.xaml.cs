@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -17,6 +18,16 @@ public partial class SettingsWindow : Window
     {
         InitializeComponent();
         DataContext = new SettingsWindowViewModel(Settings.Default);
+    }
+
+    private void FormatComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var formatExample = e.AddedItems[0] as DateFormatExample;
+
+        if (formatExample == null)
+            return;
+
+        ((SettingsWindowViewModel)DataContext).Settings.Format = formatExample.Format;
     }
 
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)

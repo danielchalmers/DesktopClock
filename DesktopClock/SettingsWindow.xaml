@@ -7,7 +7,7 @@
         xmlns:p="clr-namespace:DesktopClock.Properties"
         d:DataContext="{d:DesignInstance Type=local:SettingsWindowViewModel}"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-mc:Ignorable="d"
+        mc:Ignorable="d"
         Title="DesktopClock Settings"
         Width="500"
         ResizeMode="CanMinimize"
@@ -17,24 +17,25 @@ mc:Ignorable="d"
         <TabItem Header="Format">
             <StackPanel>
                 <TextBlock Text="Date and Time Format:" />
-                <ComboBox IsEditable="True"
-              Text="{Binding Settings.Format, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-              ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <Button Content="{Binding Example}" Command="{Binding DataContext.SetFormatCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-
-                <TextBlock Text="Format string for the date and time shown on the clock display."
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}" />
+                    <ComboBox Grid.Column="1"
+                              DisplayMemberPath="Example"
+                              ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
+                              SelectionChanged="FormatComboBox_SelectionChanged" />
+                </Grid>
+                <TextBlock Text=".NET format string for the date and time shown on the clock display."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
 
                 <TextBlock Text="Countdown Format:" />
                 <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Format string for the countdown mode. If left blank, it will be dynamic."
+                <TextBlock Text=".NET format string for the countdown mode. If left blank, it will be dynamic."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
