@@ -168,48 +168,12 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Opens the settings file in Notepad.
+    /// Opens the setting configuration window.
     /// </summary>
     [RelayCommand]
     public void OpenSettings()
     {
-        // Inform user how it works.
-        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
-        {
-            MessageBox.Show(this,
-                "Settings are stored in JSON format and will be opened in Notepad. Simply save the file to see your changes appear on the clock. To start fresh, delete your '.settings' file.",
-                Title, MessageBoxButton.OK, MessageBoxImage.Information);
-
-            Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
-        }
-
-        // Save first if we can so it's up-to-date.
-        if (Settings.CanBeSaved)
-            Settings.Default.Save();
-
-        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
-        if (!Settings.Exists)
-        {
-            MessageBox.Show(this,
-                "Settings file doesn't exist and couldn't be created.",
-                Title, MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
-        }
-
-        // Open settings file in Notepad.
-        try
-        {
-            Process.Start("notepad", Settings.FilePath);
-        }
-        catch (Exception ex)
-        {
-            // Lazy scammers on the Microsoft Store reupload without realizing it gets sandboxed, making it unable to start the Notepad process (Issues: #1, #12).
-            MessageBox.Show(this,
-                "Couldn't open settings file.\n\n" +
-                "This app may have been reuploaded without permission. If you paid for it, ask for a refund and download it for free from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If it still doesn't work, create a new Issue at that link with details on what happened and include this error: \"{ex.Message}\"",
-                Title, MessageBoxButton.OK, MessageBoxImage.Error);
-        }
+        SettingsWindow.ShowSingletonSettingsWindow(this);
     }
 
     /// <summary>

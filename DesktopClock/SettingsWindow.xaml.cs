@@ -1,64 +1,70 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
-using Newtonsoft.Json;
 using DesktopClock.Properties;
+using Microsoft.Win32;
 
-namespace DesktopClock
+namespace DesktopClock;
+
+public partial class SettingsWindow : Window
 {
-    public partial class SettingsWindow : Window
+    public SettingsWindow()
     {
-        public SettingsWindow()
+        InitializeComponent();
+        DataContext = new SettingsViewModel(Settings.Default);
+    }
+
+    private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog
         {
-            InitializeComponent();
-            DataContext = Settings.Default;
+            Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*"
+        };
+        if (openFileDialog.ShowDialog() == true)
+        {
+            ((SettingsViewModel)DataContext).Settings.BackgroundImagePath = openFileDialog.FileName;
         }
     }
 
-    public class SettingsViewModel : INotifyPropertyChanged
+    private void BrowseWavFilePath(object sender, RoutedEventArgs e)
     {
-        public Settings Settings { get; }
-
-        public SettingsViewModel(Settings settings)
+        OpenFileDialog openFileDialog = new OpenFileDialog
         {
-            Settings = settings;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
+            Filter = "WAV files (*.wav)|*.wav|All files (*.*)|*.*"
+        };
+        if (openFileDialog.ShowDialog() == true)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public RelayCommand SaveCommand => new RelayCommand(SaveSettings);
-
-        private void SaveSettings(object parameter)
-        {
-            Settings.Save();
-            MessageBox.Show("Settings saved.");
+            ((SettingsViewModel)DataContext).Settings.WavFilePath = openFileDialog.FileName;
         }
     }
 
-    public class RelayCommand : System.Windows.Input.ICommand
+    public static void ShowSingletonSettingsWindow(Window owner)
     {
-        private readonly Action<object> _execute;
-        private readonly Func<object, bool> _canExecute;
+        var settingsWindow = Application.Current.Windows.OfType<SettingsWindow>().FirstOrDefault() ?? new SettingsWindow();
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        if (settingsWindow.IsVisible)
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            settingsWindow.Activate();
+            return;
         }
 
-        public bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
-
-        public void Execute(object parameter) => _execute(parameter);
-
-        public event EventHandler CanExecuteChanged
-        {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
-        }
+        settingsWindow.Show();
     }
+}
+
+public class SettingsViewModel
+{
+    public Settings Settings { get; }
+
+    public SettingsViewModel(Settings settings)
+    {
+        Settings = settings;
+        FontFamilies = Fonts.SystemFontFamilies.Select(ff => ff.Source).ToList();
+        TimeZones = TimeZoneInfo.GetSystemTimeZones().Select(tz => tz.Id).ToList();
+    }
+
+    public IList<string> FontFamilies { get; }
+    public IList<string> TimeZones { get; }
 }

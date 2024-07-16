@@ -1,72 +1,98 @@
 ﻿<Window x:Class="DesktopClock.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Settings" Height="600" Width="400">
+        Title="Settings"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel Margin="10">
-            <TextBlock Text="Format:" />
-            <TextBox Text="{Binding Format, UpdateSourceTrigger=PropertyChanged}" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+                <TextBlock Text="Format:" />
+                <TextBox Text="{Binding Settings.Format, Mode=TwoWay}" />
+                <TextBlock Text="Format string for the date and time shown on the clock display." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Countdown Format:" />
-            <TextBox Text="{Binding CountdownFormat, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Countdown Format:" />
+                <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay}" />
+                <TextBlock Text="Format string shown on the clock display when in countdown mode." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Countdown To:" />
-            <DatePicker SelectedDate="{Binding CountdownTo, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock Text="Time Zone:" />
-            <TextBox Text="{Binding TimeZone, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Countdown To:" />
+                <StackPanel Orientation="Horizontal">
+                    <DatePicker SelectedDate="{Binding Settings.CountdownTo, Mode=TwoWay}" />
+                    <TextBox Width="50" Text="{Binding Settings.CountdownTo, StringFormat=HH:mm, Mode=TwoWay}" />
+                </StackPanel>
+                <TextBlock Text="Target date and time for countdown mode." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Font Family:" />
-            <TextBox Text="{Binding FontFamily, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Time Zone:" />
+                <ComboBox ItemsSource="{Binding TimeZones}" SelectedItem="{Binding Settings.TimeZone, Mode=TwoWay}" />
+                <TextBlock Text="Time zone for the clock display." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Text Color:" />
-            <TextBox Text="{Binding TextColor, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Font Family:" />
+                <ComboBox ItemsSource="{Binding FontFamilies}" SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
+                <TextBlock Text="Font family for the clock display." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Outer Color:" />
-            <TextBox Text="{Binding OuterColor, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Text Color:" />
+                <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay}" />
+                <TextBlock Text="Text color for the clock display." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Background Enabled:" />
-            <CheckBox IsChecked="{Binding BackgroundEnabled}" />
+                <TextBlock Text="Outer Color:" />
+                <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay}" />
+                <TextBlock Text="The outer color, either for the background or the outline." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Background Opacity:" />
-            <TextBox Text="{Binding BackgroundOpacity, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Background Enabled" IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
+                <TextBlock Text="Shows a full background instead of a simple outline." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Background Corner Radius:" />
-            <TextBox Text="{Binding BackgroundCornerRadius, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Background Opacity:" />
+                <TextBox Text="{Binding Settings.BackgroundOpacity, Mode=TwoWay}" />
+                <TextBlock Text="Opacity of the background." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Background Image Path:" />
-            <TextBox Text="{Binding BackgroundImagePath, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Background Corner Radius:" />
+                <TextBox Text="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay}" />
+                <TextBlock Text="Corner radius of the background." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Outline Thickness:" />
-            <TextBox Text="{Binding OutlineThickness, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Background Image Path:" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay}" Width="200"/>
+                    <Button Content="Browse..." Click="BrowseBackgroundImagePath"/>
+                </StackPanel>
+                <TextBlock Text="Path to the background image." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Topmost:" />
-            <CheckBox IsChecked="{Binding Topmost}" />
+                <TextBlock Text="Outline Thickness:" />
+                <TextBox Text="{Binding Settings.OutlineThickness, Mode=TwoWay}" />
+                <TextBlock Text="Thickness of the outline around the clock." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Show In Taskbar:" />
-            <CheckBox IsChecked="{Binding ShowInTaskbar}" />
+                <CheckBox Content="Topmost" IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
+                <TextBlock Text="Keeps the clock on top of other windows." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Height:" />
-            <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Show In Taskbar" IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
+                <TextBlock Text="Shows the app icon in the taskbar." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Run On Startup:" />
-            <CheckBox IsChecked="{Binding RunOnStartup}" />
+                <TextBlock Text="Height:" />
+                <TextBox Text="{Binding Settings.Height, Mode=TwoWay}" />
+                <TextBlock Text="Height of the clock display." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Start Hidden:" />
-            <CheckBox IsChecked="{Binding StartHidden}" />
+                <CheckBox Content="Run On Startup" IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
+                <TextBlock Text="Runs the app when the user logs in." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Drag To Move:" />
-            <CheckBox IsChecked="{Binding DragToMove}" />
+                <CheckBox Content="Start Hidden" IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
+                <TextBlock Text="Starts the app in the 'Hide for now' state." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="Right Aligned:" />
-            <CheckBox IsChecked="{Binding RightAligned}" />
+                <CheckBox Content="Drag To Move" IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
+                <TextBlock Text="Allows moving the clock by dragging." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="WAV File Path:" />
-            <TextBox Text="{Binding WavFilePath, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Right Aligned" IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
+                <TextBlock Text="Aligns the text to the right." FontStyle="Italic" FontSize="10"/>
 
-            <TextBlock Text="WAV File Interval:" />
-            <TextBox Text="{Binding WavFileInterval, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="WAV File Path:" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding Settings.WavFilePath, Mode=TwoWay}" Width="200"/>
+                    <Button Content="Browse..." Click="BrowseWavFilePath"/>
+                </StackPanel>
+                <TextBlock Text="Path to a WAV file for audio alerts." FontStyle="Italic" FontSize="10"/>
 
-            <Button Content="Save" Command="{Binding SaveCommand}" Margin="0,10,0,0" />
-        </StackPanel>
+                <TextBlock Text="WAV File Interval:" />
+                <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
+                <TextBlock Text="Interval for playing the WAV file if one is specified and exists." FontStyle="Italic" FontSize="10"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
