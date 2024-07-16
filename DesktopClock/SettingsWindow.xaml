@@ -13,7 +13,7 @@
         ResizeMode="CanMinimize"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen">
-    <TabControl Padding="12,12,12,0" SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    <TabControl Padding="12,12,12,0" SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay}">
         <TabItem Header="Format">
             <StackPanel>
                 <TextBlock Text="Date and Time Format:" />
@@ -47,7 +47,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Text="{Binding Settings.CountdownTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" />
+                    <TextBox Text="{Binding Settings.CountdownTo, Mode=TwoWay}" Grid.Column="0" />
                     <Button Content="Reset"
                             Command="{Binding ResetCountdownCommand}"
                             Grid.Column="1" />
@@ -59,7 +59,7 @@
 
 
                 <TextBlock Text="Time Zone:" />
-                <ComboBox ItemsSource="{Binding TimeZones}" SelectedItem="{Binding Settings.TimeZone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox ItemsSource="{Binding TimeZones}" SelectedItem="{Binding Settings.TimeZone, Mode=TwoWay}" />
                 <TextBlock Text="A different time zone to be used."
                            FontStyle="Italic"
                            FontSize="10"
@@ -70,7 +70,7 @@
         <TabItem Header="Appearance">
             <StackPanel>
                 <TextBlock Text="Font Family:" />
-                <ComboBox ItemsSource="{Binding FontFamilies}" SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox ItemsSource="{Binding FontFamilies}" SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
                 <TextBlock Text="Font to use for the clock's text."
                            FontStyle="Italic"
                            FontSize="10"
@@ -90,7 +90,7 @@
                            FontSize="10"
                            Margin="0,0,0,12" />
 
-                <CheckBox Content="Enable Background" IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Enable Background" IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
                 <TextBlock Text="Shows a solid background instead of an outline."
                            FontStyle="Italic"
                            FontSize="10"
@@ -109,7 +109,7 @@
 
                 <!--  Binding doesn't format correctly and needs better documentation.  -->
                 <!--<TextBlock Text="Background Corner Radius:" />
-                <TextBox Text="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Text="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay}" />
                 <TextBlock Text="Corner radius of the background."
                            FontStyle="Italic"
                            FontSize="10"
@@ -134,7 +134,7 @@
 
                 <!--  Binding doesn't format correctly and needs better documentation.  -->
                 <!--<TextBlock Text="Outline Thickness:" />
-                <TextBox Text="{Binding Settings.OutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Text="{Binding Settings.OutlineThickness, Mode=TwoWay}" />
                 <TextBlock Text="Thickness of the outline around the clock."
                            FontStyle="Italic"
                            FontSize="10"
@@ -144,31 +144,31 @@
 
         <TabItem Header="Behavior">
             <StackPanel>
-                <CheckBox Content="Show in Taskbar" IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Show in Taskbar" IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
                 <TextBlock Text="Shows the app icon in the taskbar instead of the tray."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
 
-                <CheckBox Content="Run on Startup" IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Run on Startup" IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
                 <TextBlock Text="Opens the app when you log in."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
 
-                <CheckBox Content="Start Hidden" IsChecked="{Binding Settings.StartHidden, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Start Hidden" IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
                 <TextBlock Text="Starts the app hidden until the taskbar or tray icon is clicked."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
 
-                <CheckBox Content="Drag to Move" IsChecked="{Binding Settings.DragToMove, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Drag to Move" IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
                 <TextBlock Text="Allows moving the clock by dragging it with the cursor."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
 
-                <CheckBox Content="Right Aligned" IsChecked="{Binding Settings.RightAligned, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="Right Aligned" IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
                 <TextBlock Text="Experimental: Keeps the clock window aligned to the right when the size changes."
                            FontStyle="Italic"
                            FontSize="10"
@@ -192,7 +192,7 @@
                            Margin="0,0,0,12" />
 
                 <TextBlock Text="WAV File Interval:" />
-                <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
                 <TextBlock Text="Interval for playing the WAV file if one is specified and exists (HH:mm:ss)."
                            FontStyle="Italic"
                            FontSize="10"
