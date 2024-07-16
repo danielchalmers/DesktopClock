@@ -16,24 +16,29 @@ public static class Tokenizer
     /// <param name="formatProvider">The format provider.</param>
     public static string FormatWithTokenizerOrFallBack(IFormattable formattable, string format, IFormatProvider formatProvider)
     {
-        try
+        if (!string.IsNullOrWhiteSpace(format))
         {
-            if (format.Contains("}"))
-            {
-                return _tokenizerRegex.Replace(format, (m) =>
-                {
-                    var formatString = m.Value.Replace("{", "").Replace("}", "");
-                    return formattable.ToString(formatString, formatProvider);
-                });
-            }
 
-            // Use basic formatter if no special formatting tokens are present.
-            return formattable.ToString(format, formatProvider);
+            try
+            {
+                if (format.Contains("}"))
+                {
+                    return _tokenizerRegex.Replace(format, (m) =>
+                    {
+                        var formatString = m.Value.Replace("{", "").Replace("}", "");
+                        return formattable.ToString(formatString, formatProvider);
+                    });
+                }
+
+                // Use basic formatter if no special formatting tokens are present.
+                return formattable.ToString(format, formatProvider);
+            }
+            catch
+            {
+            }
         }
-        catch
-        {
-            // Fallback to the default format.
-            return formattable.ToString();
-        }
+
+        // Fall back to the default format.
+        return formattable.ToString();
     }
 }

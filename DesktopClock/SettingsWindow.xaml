@@ -16,7 +16,22 @@
         <TabItem Header="Format">
             <StackPanel>
                 <TextBlock Text="Date and Time Format:" />
-                <TextBox Text="{Binding Settings.Format, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox IsEditable="True"
+              Text="{Binding Settings.Format, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+              ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Example}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBox.SelectedValue>
+                        <Binding Path="Settings.Format"
+                     Mode="OneWayToSource"
+                     UpdateSourceTrigger="PropertyChanged"
+                     Converter="{local:DateFormatConverter}" />
+                    </ComboBox.SelectedValue>
+                </ComboBox>
+
                 <TextBlock Text="Format string for the date and time shown on the clock display."
                            FontStyle="Italic"
                            FontSize="10"
