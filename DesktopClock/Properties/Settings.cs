@@ -73,7 +73,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     #region "Properties"
 
     /// <summary>
-    /// Format string for the date and time shown on the clock display.
+    /// Format string for the date and time shown on the clock.
     /// </summary>
     /// <remarks>
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings">Custom date and time format strings</see>.
@@ -81,7 +81,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string Format { get; set; } = "{ddd}, {MMM dd}, {h:mm:ss tt}";
 
     /// <summary>
-    /// Format string shown on the clock display when in countdown mode.
+    /// Format string shown on the clock in countdown mode.
     /// </summary>
     /// <remarks>
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings">Custom TimeSpan format strings</see>.
@@ -89,32 +89,32 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string CountdownFormat { get; set; } = "";
 
     /// <summary>
-    /// Target date and time for countdown mode.
+    /// Date and time to countdown to. If left blank, countdown mode is not enabled.
     /// </summary>
     public DateTime? CountdownTo { get; set; } = default(DateTime);
 
     /// <summary>
-    /// Time zone for the clock display.
+    /// Time zone to be used.
     /// </summary>
     public string TimeZone { get; set; } = string.Empty;
 
     /// <summary>
-    /// Font family for the clock display.
+    /// Font used for the clock's text.
     /// </summary>
     public string FontFamily { get; set; } = "Consolas";
 
     /// <summary>
-    /// Text color for the clock display.
+    /// Text color for the clock's text.
     /// </summary>
     public Color TextColor { get; set; }
 
     /// <summary>
-    /// The outer color, either for the background or the outline..
+    /// The outer color, for either the background or the outline.
     /// </summary>
     public Color OuterColor { get; set; }
 
     /// <summary>
-    /// Shows a full background instead of a simple outline.
+    /// Shows a solid background instead of an outline.
     /// </summary>
     public bool BackgroundEnabled { get; set; } = true;
 
@@ -129,7 +129,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public double BackgroundCornerRadius { get; set; } = 1;
 
     /// <summary>
-    /// Path to the background image.
+    /// Path to the background image. If left blank, a solid color will be used.
     /// </summary>
     public string BackgroundImagePath { get; set; } = string.Empty;
 
@@ -144,35 +144,32 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool Topmost { get; set; } = true;
 
     /// <summary>
-    /// Shows the app icon in the taskbar.
+    /// Shows the app icon in the taskbar instead of the tray.
     /// </summary>
     public bool ShowInTaskbar { get; set; } = true;
 
     /// <summary>
-    /// Height of the clock display.
+    /// Height of the clock window.
     /// </summary>
     public int Height { get; set; } = 48;
 
     /// <summary>
-    /// Runs the app when the user logs in.
+    /// Opens the app when you log in.
     /// </summary>
-    /// <remarks>
-    /// A registry key is created or deleted.
-    /// </remarks>
     public bool RunOnStartup { get; set; } = false;
 
     /// <summary>
-    /// Starts the app in the "Hide for now" state.
+    /// Starts the app hidden until the taskbar or tray icon is clicked.
     /// </summary>
     public bool StartHidden { get; set; } = false;
 
     /// <summary>
-    /// Allows moving the clock by dragging.
+    /// Allows moving the clock by dragging the mouse.
     /// </summary>
     public bool DragToMove { get; set; } = true;
 
     /// <summary>
-    /// Aligns the text to the right.
+    /// Experimental: Keeps the clock window aligned to the right when the size changes.
     /// </summary>
     /// <remarks>
     /// Small glitches can happen because programs are naturally meant to be left-anchored.
@@ -180,7 +177,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool RightAligned { get; set; } = false;
 
     /// <summary>
-    /// Path to a WAV file for audio alerts.
+    /// Path to a WAV file to be played on a specified interval.
     /// </summary>
     public string WavFilePath { get; set; } = string.Empty;
 
