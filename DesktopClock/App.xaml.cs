@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using DesktopClock.Properties;
 using Microsoft.Win32;
 
 namespace DesktopClock;
@@ -13,18 +12,6 @@ namespace DesktopClock;
 public partial class App : Application
 {
     public static FileInfo MainFileInfo = new(Process.GetCurrentProcess().MainModule.FileName);
-
-    /// <summary>
-    /// Gets the time zone selected in settings, or local by default.
-    /// </summary>
-    public static TimeZoneInfo GetTimeZone() =>
-        DateTimeUtil.TryFindSystemTimeZoneById(Settings.Default.TimeZone, out var timeZoneInfo) ? timeZoneInfo : TimeZoneInfo.Local;
-
-    /// <summary>
-    /// Sets the time zone to be used.
-    /// </summary>
-    public static void SetTimeZone(TimeZoneInfo timeZone) =>
-        Settings.Default.TimeZone = timeZone.Id;
 
     /// <summary>
     /// Sets or deletes a value in the registry which enables the current executable to run on system startup.

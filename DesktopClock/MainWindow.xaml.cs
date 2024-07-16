@@ -45,7 +45,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = this;
 
-        _timeZone = App.GetTimeZone();
+        _timeZone = Settings.Default.GetTimeZoneInfo();
         UpdateCountdownEnabled();
 
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
@@ -101,28 +101,13 @@ public partial class MainWindow : Window
     public void SetFormat(string format) => Settings.Default.Format = format;
 
     /// <summary>
-    /// Explains how to write a format, then asks the user if they want to view a website and advanced settings to do so.
+    /// Opens the setting configuration window.
     /// </summary>
     [RelayCommand]
-    public void FormatWizard()
+    public void OpenSettings()
     {
-        var result = MessageBox.Show(this,
-            $"In advanced settings: edit \"{nameof(Settings.Default.Format)}\" using special \"Custom date and time format strings\", then save." +
-            "\n\nOpen advanced settings and a tutorial now?",
-            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
-
-        if (result != MessageBoxResult.OK)
-            return;
-
-        Process.Start("https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings");
-        OpenSettings();
+        SettingsWindow.ShowSingletonSettingsWindow(this);
     }
-
-    /// <summary>
-    /// Sets the time zone ID in settings to the given time zone ID.
-    /// </summary>
-    [RelayCommand]
-    public void SetTimeZone(TimeZoneInfo tzi) => App.SetTimeZone(tzi);
 
     /// <summary>
     /// Creates a new clock executable and starts it.
@@ -148,15 +133,6 @@ public partial class MainWindow : Window
         // Copy and start the new clock.
         File.Copy(App.MainFileInfo.FullName, newExePath);
         Process.Start(newExePath);
-    }
-
-    /// <summary>
-    /// Opens the setting configuration window.
-    /// </summary>
-    [RelayCommand]
-    public void OpenSettings()
-    {
-        SettingsWindow.ShowSingletonSettingsWindow(this);
     }
 
     /// <summary>
@@ -227,7 +203,7 @@ public partial class MainWindow : Window
         switch (e.PropertyName)
         {
             case nameof(Settings.Default.TimeZone):
-                _timeZone = App.GetTimeZone();
+                _timeZone = Settings.Default.GetTimeZoneInfo();
                 UpdateTimeString();
                 break;
 

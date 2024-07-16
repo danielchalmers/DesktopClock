@@ -81,7 +81,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string Format { get; set; } = "{ddd}, {MMM dd}, {h:mm:ss tt}";
 
     /// <summary>
-    /// Format string shown on the clock in countdown mode.
+    /// Format string for the countdown mode. If left blank, it will be dynamic.
     /// </summary>
     /// <remarks>
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings">Custom TimeSpan format strings</see>.
@@ -129,7 +129,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public double BackgroundCornerRadius { get; set; } = 1;
 
     /// <summary>
-    /// Path to the background image. If left blank, a solid color will be used.
+    /// Path to the background image. If left blank, solid color will be used.
     /// </summary>
     public string BackgroundImagePath { get; set; } = string.Empty;
 
@@ -324,6 +324,12 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         // Save the new height as an integer to make it easier for the user.
         Height = (int)exp;
     }
+
+    /// <summary>
+    /// Gets the time zone selected in settings, or local by default.
+    /// </summary>
+    public TimeZoneInfo GetTimeZoneInfo() =>
+        DateTimeUtil.TryFindSystemTimeZoneById(TimeZone, out var timeZoneInfo) ? timeZoneInfo : TimeZoneInfo.Local;
 
     public void Dispose()
     {

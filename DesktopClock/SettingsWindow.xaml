@@ -12,7 +12,7 @@
         ResizeMode="CanMinimize"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen">
-    <TabControl Padding="12,12,12,0" TabIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    <TabControl Padding="12,12,12,0" SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <TabItem Header="Format">
             <StackPanel>
                 <TextBlock Text="Date and Time Format:" />
@@ -24,7 +24,7 @@
 
                 <TextBlock Text="Countdown Format:" />
                 <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Format string shown on the clock display when in countdown mode."
+                <TextBlock Text="Format string for the countdown mode. If left blank, it will be dynamic."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
@@ -53,18 +53,17 @@
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
+            </StackPanel>
+        </TabItem>
 
+        <TabItem Header="Appearance">
+            <StackPanel>
                 <TextBlock Text="Font Family:" />
                 <ComboBox ItemsSource="{Binding FontFamilies}" SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Text="Font used for the clock's text."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
-            </StackPanel>
-        </TabItem>
-
-        <TabItem Header="Appearance">
-            <StackPanel>
 
                 <TextBlock Text="Text Color:" />
                 <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -117,7 +116,7 @@
                             Click="BrowseBackgroundImagePath"
                             Grid.Column="1" />
                 </Grid>
-                <TextBlock Text="Path to the background image. If left blank, a solid color will be used."
+                <TextBlock Text="Path to the background image. If left blank, solid color will be used."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
