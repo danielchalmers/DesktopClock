@@ -91,7 +91,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Date and time to countdown to. If left blank, countdown mode is not enabled.
     /// </summary>
-    public DateTime? CountdownTo { get; set; } = default(DateTime);
+    public DateTime CountdownTo { get; set; } = default;
 
     /// <summary>
     /// Time zone to be used.
@@ -185,6 +185,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// Interval for playing the WAV file if one is specified and exists.
     /// </summary>
     public TimeSpan WavFileInterval { get; set; }
+
+    /// <summary>
+    /// The index of the selected tab in the settings window.
+    /// </summary>
+    public int SettingsTabIndex { get; set; }
 
     /// <summary>
     /// Teaching tips that have already been shown to the user.

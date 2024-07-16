@@ -187,7 +187,7 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void Exit()
     {
-        Close();
+        Application.Current.Shutdown();
     }
 
     private void ConfigureTrayIcon(bool showIcon, bool firstLaunch)
@@ -268,13 +268,13 @@ public partial class MainWindow : Window
     /// </summary>
     private void UpdateCountdownEnabled()
     {
-        if (Settings.Default.CountdownTo == null || Settings.Default.CountdownTo == default(DateTime))
+        if (Settings.Default.CountdownTo == default)
         {
             CountdownTo = null;
             return;
         }
 
-        CountdownTo = Settings.Default.CountdownTo.Value.ToDateTimeOffset(_timeZone.BaseUtcOffset);
+        CountdownTo = Settings.Default.CountdownTo.ToDateTimeOffset(_timeZone.BaseUtcOffset);
     }
 
     /// <summary>

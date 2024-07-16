@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using Microsoft.Win32;
 
@@ -60,7 +62,7 @@ public partial class SettingsWindow : Window
     }
 }
 
-public class SettingsWindowViewModel
+public partial class SettingsWindowViewModel : ObservableObject
 {
     public Settings Settings { get; }
 
@@ -73,4 +75,10 @@ public class SettingsWindowViewModel
 
     public IList<string> FontFamilies { get; }
     public IList<string> TimeZones { get; }
+
+    [RelayCommand]
+    public void ResetCountdown()
+    {
+        Settings.CountdownTo = default;
+    }
 }
