@@ -1,29 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DesktopClock;
 
 public static class DateTimeUtil
 {
-    /// <summary>
-    /// A cached collection of all the time zones about which information is available on the local system.
-    /// </summary>
-    public static IReadOnlyCollection<TimeZoneInfo> TimeZones { get; } = TimeZoneInfo.GetSystemTimeZones();
-
-    public static bool TryFindSystemTimeZoneById(string timeZoneId, out TimeZoneInfo timeZoneInfo)
-    {
-        try
-        {
-            timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
-            return true;
-        }
-        catch (TimeZoneNotFoundException)
-        {
-            timeZoneInfo = null;
-            return false;
-        }
-    }
-
     /// <summary>
     /// Converts a DateTime to a DateTimeOffset, without risking any onerous exceptions
     /// the framework quite unfortunately throws within the DateTimeOffset constructor,

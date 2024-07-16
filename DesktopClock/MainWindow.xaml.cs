@@ -45,7 +45,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = this;
 
-        _timeZone = App.GetTimeZone();
+        _timeZone = Settings.Default.GetTimeZoneInfo();
         UpdateCountdownEnabled();
 
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
@@ -53,11 +53,13 @@ public partial class MainWindow : Window
         // Not done through binding due to what's explained in the comment in WindowUtil.HideFromScreen().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
 
+        // Restore the structure of the last state using the display text.
         CurrentTimeOrCountdownString = Settings.Default.LastDisplay;
 
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
 
+        // The context menu is shared between right-clicking the window and the tray icon.
         ContextMenu = Resources["MainContextMenu"] as ContextMenu;
 
         ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, true);
@@ -79,7 +81,7 @@ public partial class MainWindow : Window
     {
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.HideForNow))
         {
-            MessageBox.Show(this, "Clock will be minimized and can be opened again from the taskbar or system tray (if enabled).",
+            MessageBox.Show(this, "Clock will be minimized and can be opened again from the taskbar (or system tray if enabled).",
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
@@ -95,37 +97,13 @@ public partial class MainWindow : Window
     public void SetTheme(Theme theme) => Settings.Default.Theme = theme;
 
     /// <summary>
-    /// Sets the format string in settings to the given string.
+    /// Opens a new settings window or activates the existing one.
     /// </summary>
     [RelayCommand]
-    public void SetFormat(string format) => Settings.Default.Format = format;
+    public void OpenSettings() => App.ShowSingletonWindow<SettingsWindow>(this);
 
     /// <summary>
-    /// Explains how to write a format, then asks the user if they want to view a website and advanced settings to do so.
-    /// </summary>
-    [RelayCommand]
-    public void FormatWizard()
-    {
-        var result = MessageBox.Show(this,
-            $"In advanced settings: edit \"{nameof(Settings.Default.Format)}\" using special \"Custom date and time format strings\", then save." +
-            "\n\nOpen advanced settings and a tutorial now?",
-            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
-
-        if (result != MessageBoxResult.OK)
-            return;
-
-        Process.Start("https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings");
-        OpenSettings();
-    }
-
-    /// <summary>
-    /// Sets the time zone ID in settings to the given time zone ID.
-    /// </summary>
-    [RelayCommand]
-    public void SetTimeZone(TimeZoneInfo tzi) => App.SetTimeZone(tzi);
-
-    /// <summary>
-    /// Creates a new clock executable and starts it.
+    /// Asks the user then creates a new clock executable and starts it.
     /// </summary>
     [RelayCommand]
     public void NewClock()
@@ -151,68 +129,6 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Explains how to enable countdown mode, then asks the user if they want to view advanced settings to do so.
-    /// </summary>
-    [RelayCommand]
-    public void CountdownWizard()
-    {
-        var result = MessageBox.Show(this,
-            $"In advanced settings: change \"{nameof(Settings.Default.CountdownTo)}\" in the format of \"{default(DateTime)}\", then save." +
-            "\n\nOpen advanced settings now?",
-            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
-
-        if (result != MessageBoxResult.OK)
-            return;
-
-        OpenSettings();
-    }
-
-    /// <summary>
-    /// Opens the settings file in Notepad.
-    /// </summary>
-    [RelayCommand]
-    public void OpenSettings()
-    {
-        // Inform user how it works.
-        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
-        {
-            MessageBox.Show(this,
-                "Settings are stored in JSON format and will be opened in Notepad. Simply save the file to see your changes appear on the clock. To start fresh, delete your '.settings' file.",
-                Title, MessageBoxButton.OK, MessageBoxImage.Information);
-
-            Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
-        }
-
-        // Save first if we can so it's up-to-date.
-        if (Settings.CanBeSaved)
-            Settings.Default.Save();
-
-        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
-        if (!Settings.Exists)
-        {
-            MessageBox.Show(this,
-                "Settings file doesn't exist and couldn't be created.",
-                Title, MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
-        }
-
-        // Open settings file in Notepad.
-        try
-        {
-            Process.Start("notepad", Settings.FilePath);
-        }
-        catch (Exception ex)
-        {
-            // Lazy scammers on the Microsoft Store reupload without realizing it gets sandboxed, making it unable to start the Notepad process (Issues: #1, #12).
-            MessageBox.Show(this,
-                "Couldn't open settings file.\n\n" +
-                "This app may have been reuploaded without permission. If you paid for it, ask for a refund and download it for free from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If it still doesn't work, create a new Issue at that link with details on what happened and include this error: \"{ex.Message}\"",
-                Title, MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-    }
-
-    /// <summary>
     /// Opens the GitHub Releases page.
     /// </summary>
     [RelayCommand]
@@ -221,7 +137,7 @@ public partial class MainWindow : Window
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.CheckForUpdates))
         {
             var result = MessageBox.Show(this,
-                "This will take you to a website to view the latest release.\n\n" +
+                "This will take you to GitHub to view the latest releases.\n\n" +
                 "Continue?",
                 Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
@@ -240,7 +156,7 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void Exit()
     {
-        Close();
+        Application.Current.Shutdown();
     }
 
     private void ConfigureTrayIcon(bool showIcon, bool firstLaunch)
@@ -280,7 +196,7 @@ public partial class MainWindow : Window
         switch (e.PropertyName)
         {
             case nameof(Settings.Default.TimeZone):
-                _timeZone = App.GetTimeZone();
+                _timeZone = Settings.Default.GetTimeZoneInfo();
                 UpdateTimeString();
                 break;
 
@@ -321,17 +237,17 @@ public partial class MainWindow : Window
     /// </summary>
     private void UpdateCountdownEnabled()
     {
-        if (Settings.Default.CountdownTo == null || Settings.Default.CountdownTo == default(DateTime))
+        if (Settings.Default.CountdownTo == default)
         {
             CountdownTo = null;
             return;
         }
 
-        CountdownTo = Settings.Default.CountdownTo.Value.ToDateTimeOffset(_timeZone.BaseUtcOffset);
+        CountdownTo = Settings.Default.CountdownTo.ToDateTimeOffset(_timeZone.BaseUtcOffset);
     }
 
     /// <summary>
-    /// Updates the sound player enabled state based on the settings.
+    /// Initializes the sound player for the specified file if enabled; otherwise, sets it to <c>null</c>.
     /// </summary>
     private void UpdateSoundPlayerEnabled()
     {
@@ -340,7 +256,7 @@ public partial class MainWindow : Window
             Settings.Default.WavFileInterval != default &&
             File.Exists(Settings.Default.WavFilePath);
 
-        _soundPlayer = soundPlayerEnabled ? new() : null;
+        _soundPlayer = soundPlayerEnabled ? new(Settings.Default.WavFilePath) : null;
     }
 
     /// <summary>
@@ -361,7 +277,6 @@ public partial class MainWindow : Window
 
         try
         {
-            _soundPlayer.SoundLocation = Settings.Default.WavFilePath;
             _soundPlayer.Play();
         }
         catch

@@ -4,39 +4,6 @@ namespace DesktopClock.Tests;
 
 public class DateTimeTests
 {
-    [Fact]
-    public void TimeZones_ShouldContainSystemTimeZones()
-    {
-        // Act
-        var timeZones = DateTimeUtil.TimeZones;
-
-        // Assert
-        Assert.NotEmpty(timeZones);
-        Assert.Contains(timeZones, tz => tz.Id == "UTC");
-    }
-
-    [Theory]
-    [InlineData("UTC", true)]
-    [InlineData("Pacific Standard Time", true)]
-    [InlineData("NonExistentTimeZone", false)]
-    public void TryFindSystemTimeZoneById_ShouldReturnExpectedResult(string timeZoneId, bool expectedResult)
-    {
-        // Act
-        var result = DateTimeUtil.TryFindSystemTimeZoneById(timeZoneId, out var timeZoneInfo);
-
-        // Assert
-        Assert.Equal(expectedResult, result);
-        if (expectedResult)
-        {
-            Assert.NotNull(timeZoneInfo);
-            Assert.Equal(timeZoneId, timeZoneInfo.Id);
-        }
-        else
-        {
-            Assert.Null(timeZoneInfo);
-        }
-    }
-
     [Theory]
     [InlineData("2024-07-15T00:00:00Z", "00:00:00")]
     [InlineData("2024-07-15T00:00:00Z", "01:00:00")]
