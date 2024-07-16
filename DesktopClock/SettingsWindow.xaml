@@ -235,12 +235,12 @@
                     </TextBlock>
                     <TextBlock>
                         <Hyperlink NavigateUri="https://github.com/danielchalmers/JournalApp" RequestNavigate="Hyperlink_RequestNavigate">
-                            JournalApp - Write notes and keep track of your day (Android).
+                            JournalApp - Save notes and keep track of your well-being (Android)
                         </Hyperlink>
                     </TextBlock>
                     <TextBlock>
                         <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor" RequestNavigate="Hyperlink_RequestNavigate">
-                            Network Monitor - View latency and bandwidth usage (Windows).
+                            Network Monitor - View live latency and bandwidth usage (Windows)
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>

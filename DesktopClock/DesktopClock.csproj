@@ -10,7 +10,7 @@
 
   <PropertyGroup>
     <Company>Daniel Chalmers</Company>
-    <Description>A digital clock app for your Windows desktop that stays on screen, ready whenever you need it.</Description>
+    <Description>A digital clock for your desktop that stays on screen, ready whenever you need it.</Description>
     <Copyright>© Daniel Chalmers</Copyright>
     <Version>4.1.0</Version>
   </PropertyGroup>
