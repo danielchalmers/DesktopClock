@@ -8,7 +8,7 @@
         d:DataContext="{d:DesignInstance Type=local:SettingsWindowViewModel}"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="DesktopClock Settings"
+        Title="DesktopClock"
         Width="500"
         ResizeMode="CanMinimize"
         SizeToContent="Height"
@@ -197,6 +197,100 @@
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
+            </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Help">
+            <StackPanel>
+                <TextBlock FontWeight="Bold" FontSize="16">Shortcuts</TextBlock>
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock>
+                        <Run FontWeight="Bold">Right-click:</Run>
+                        Open the context menu</TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold">Double-click:</Run>
+                        Copy clock text to clipboard</TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold">Click and drag:</Run>
+                        Move the window</TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold">Ctrl and Mouse Wheel:</Run>
+                        Zoom</TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold">Ctrl and +:</Run>
+                        Zoom in</TextBlock>
+                    <TextBlock>
+                        <Run FontWeight="Bold">Ctrl and -:</Run>
+                        Zoom out</TextBlock>
+                </StackPanel>
+
+                <TextBlock FontWeight="Bold" FontSize="16">Links</TextBlock>
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/releases" RequestNavigate="Hyperlink_RequestNavigate">
+                            GitHub Releases (Check for updates)
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/issues" RequestNavigate="Hyperlink_RequestNavigate">
+                            GitHub Issues (Found a bug or have an idea?)
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp" RequestNavigate="Hyperlink_RequestNavigate">
+                            JournalApp - Save notes and keep track of your well-being (Android)
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor" RequestNavigate="Hyperlink_RequestNavigate">
+                            Network Monitor - View live latency and bandwidth usage (Windows)
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <TextBlock FontWeight="Bold" FontSize="16">Credits</TextBlock>
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet" RequestNavigate="Hyperlink_RequestNavigate">
+                            CommunityToolkit
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/Fody/Costura" RequestNavigate="Hyperlink_RequestNavigate">
+                            Costura.Fody
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon" RequestNavigate="Hyperlink_RequestNavigate">
+                            H.NotifyIcon.Wpf
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer" RequestNavigate="Hyperlink_RequestNavigate">
+                            Humanizer
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://www.newtonsoft.com/json" RequestNavigate="Hyperlink_RequestNavigate">
+                            Newtonsoft.Json
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged" RequestNavigate="Hyperlink_RequestNavigate">
+                            PropertyChanged.Fody
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement" RequestNavigate="Hyperlink_RequestNavigate">
+                            WpfWindowPlacement
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://www.flaticon.com/free-icon/three-o-clock-clock_13435" RequestNavigate="Hyperlink_RequestNavigate">
+                            Clock icon
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
             </StackPanel>
         </TabItem>
     </TabControl>
