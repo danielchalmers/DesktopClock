@@ -211,6 +211,9 @@
                         <Run FontWeight="Bold">Double-click:</Run>
                         Copy clock text to clipboard</TextBlock>
                     <TextBlock>
+                        <Run FontWeight="Bold">Click and drag:</Run>
+                        Move the window</TextBlock>
+                    <TextBlock>
                         <Run FontWeight="Bold">Ctrl and Mouse Wheel:</Run>
                         Zoom</TextBlock>
                     <TextBlock>
