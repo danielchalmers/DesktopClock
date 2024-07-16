@@ -37,22 +37,6 @@
                       IsCheckable="True"
                       IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
-            <MenuItem Header="Show icon in tas_kbar"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowInTaskbar, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
-
-            <MenuItem Header="Start with _PC"
-                      IsCheckable="True"
-                      IsChecked="{Binding RunOnStartup, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
-
-            <MenuItem Header="Show _background"
-                      IsCheckable="True"
-                      IsChecked="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
-
-            <MenuItem Header="_Drag to move"
-                      IsCheckable="True"
-                      IsChecked="{Binding DragToMove, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
-
             <MenuItem>
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -74,16 +58,6 @@
                         <Setter Property="CommandParameter" Value="{Binding}" />
 
                         <Setter Property="DisplayMemberPath" Value="Name" />
-                    </Style>
-                </MenuItem.Resources>
-            </MenuItem>
-
-            <MenuItem Header="Time _Zone" ItemsSource="{x:Static local:DateTimeUtil.TimeZones}">
-                <MenuItem.Resources>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="Command" Value="{Binding DataContext.SetTimeZoneCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
-
-                        <Setter Property="CommandParameter" Value="{Binding}" />
                     </Style>
                 </MenuItem.Resources>
             </MenuItem>
@@ -110,16 +84,10 @@
 
             <Separator />
 
+            <MenuItem Command="{Binding OpenSettingsCommand}" Header="_Settings" />
+
             <MenuItem Command="{Binding NewClockCommand}"
                       Header="_New clock..."
-                      IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-
-            <MenuItem Command="{Binding CountdownWizardCommand}"
-                      Header="_Countdown to..."
-                      IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-
-            <MenuItem Command="{Binding OpenSettingsCommand}"
-                      Header="Advanced _settings"
                       IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
             <MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates" />

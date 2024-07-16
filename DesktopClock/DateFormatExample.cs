@@ -22,8 +22,6 @@ public record DateFormatExample
     /// </summary>
     public string Example { get; }
 
-    public static DateFormatExample Tutorial => new(string.Empty, "Create my own format...");
-
     /// <summary>
     /// Creates a <see cref="DateFormatExample" /> from the given format.
     /// </summary>
@@ -67,5 +65,5 @@ public record DateFormatExample
         "u",                           // Universal sortable date/time pattern: 2009-06-15 13:45:30Z (DateTime)
         //"U",                         // Universal full date/time pattern: Monday, June 15, 2009 8:45:30 PM (en-US) // Not available for DateTimeOffset.
         "Y",                           // Year month pattern: June 2009 (en-US)
-    }.Select(f => FromFormat(f, DateTimeOffset.Now)).Append(Tutorial).ToList();
+    }.Select(f => FromFormat(f, DateTimeOffset.Now)).ToList();
 }

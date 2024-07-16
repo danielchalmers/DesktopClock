@@ -151,23 +151,6 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Explains how to enable countdown mode, then asks the user if they want to view advanced settings to do so.
-    /// </summary>
-    [RelayCommand]
-    public void CountdownWizard()
-    {
-        var result = MessageBox.Show(this,
-            $"In advanced settings: change \"{nameof(Settings.Default.CountdownTo)}\" in the format of \"{default(DateTime)}\", then save." +
-            "\n\nOpen advanced settings now?",
-            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
-
-        if (result != MessageBoxResult.OK)
-            return;
-
-        OpenSettings();
-    }
-
-    /// <summary>
     /// Opens the setting configuration window.
     /// </summary>
     [RelayCommand]
