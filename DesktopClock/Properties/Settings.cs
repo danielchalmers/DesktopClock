@@ -94,12 +94,12 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public DateTime CountdownTo { get; set; } = default;
 
     /// <summary>
-    /// Time zone to be used.
+    /// A different time zone to be used.
     /// </summary>
     public string TimeZone { get; set; } = string.Empty;
 
     /// <summary>
-    /// Font used for the clock's text.
+    /// Font to use for the clock's text.
     /// </summary>
     public string FontFamily { get; set; } = "Consolas";
 
@@ -129,7 +129,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public double BackgroundCornerRadius { get; set; } = 1;
 
     /// <summary>
-    /// Path to the background image. If left blank, solid color will be used.
+    /// Path to the background image. If left blank, a solid color will be used.
     /// </summary>
     public string BackgroundImagePath { get; set; } = string.Empty;
 
@@ -164,7 +164,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool StartHidden { get; set; } = false;
 
     /// <summary>
-    /// Allows moving the clock by dragging the mouse.
+    /// Allows moving the clock by dragging it with the cursor.
     /// </summary>
     public bool DragToMove { get; set; } = true;
 
@@ -182,7 +182,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string WavFilePath { get; set; } = string.Empty;
 
     /// <summary>
-    /// Interval for playing the WAV file if one is specified and exists.
+    /// Interval for playing the WAV file if one is specified and exists (HH:mm:ss).
     /// </summary>
     public TimeSpan WavFileInterval { get; set; }
 

@@ -35,7 +35,7 @@
 
                 <TextBlock Text="Countdown Format:" />
                 <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text=".NET format string for the countdown mode. If left blank, it will be dynamic."
+                <TextBlock Text="Format string for the countdown mode. If left blank, it will be dynamic."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
@@ -52,7 +52,7 @@
                             Command="{Binding ResetCountdownCommand}"
                             Grid.Column="1" />
                 </Grid>
-                <TextBlock Text="Target date and time for countdown mode."
+                <TextBlock Text="Date and time to countdown to. If left blank, countdown mode is not enabled."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
@@ -60,7 +60,7 @@
 
                 <TextBlock Text="Time Zone:" />
                 <ComboBox ItemsSource="{Binding TimeZones}" SelectedItem="{Binding Settings.TimeZone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Time zone for the clock display."
+                <TextBlock Text="A different time zone to be used."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
@@ -71,7 +71,7 @@
             <StackPanel>
                 <TextBlock Text="Font Family:" />
                 <ComboBox ItemsSource="{Binding FontFamilies}" SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Font used for the clock's text."
+                <TextBlock Text="Font to use for the clock's text."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
@@ -127,7 +127,7 @@
                             Click="BrowseBackgroundImagePath"
                             Grid.Column="1" />
                 </Grid>
-                <TextBlock Text="Path to the background image. If left blank, solid color will be used."
+                <TextBlock Text="Path to the background image. If left blank, a solid color will be used."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
@@ -163,7 +163,7 @@
                            Margin="0,0,0,12" />
 
                 <CheckBox Content="Drag to Move" IsChecked="{Binding Settings.DragToMove, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Allows moving the clock by dragging the mouse."
+                <TextBlock Text="Allows moving the clock by dragging it with the cursor."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
@@ -193,7 +193,7 @@
 
                 <TextBlock Text="WAV File Interval:" />
                 <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Interval for playing the WAV file if one is specified and exists."
+                <TextBlock Text="Interval for playing the WAV file if one is specified and exists (HH:mm:ss)."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
