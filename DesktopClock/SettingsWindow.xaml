@@ -1,0 +1,72 @@
+﻿<Window x:Class="DesktopClock.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings" Height="600" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="Format:" />
+            <TextBox Text="{Binding Format, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Countdown Format:" />
+            <TextBox Text="{Binding CountdownFormat, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Countdown To:" />
+            <DatePicker SelectedDate="{Binding CountdownTo, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Time Zone:" />
+            <TextBox Text="{Binding TimeZone, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Font Family:" />
+            <TextBox Text="{Binding FontFamily, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Text Color:" />
+            <TextBox Text="{Binding TextColor, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Outer Color:" />
+            <TextBox Text="{Binding OuterColor, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Background Enabled:" />
+            <CheckBox IsChecked="{Binding BackgroundEnabled}" />
+
+            <TextBlock Text="Background Opacity:" />
+            <TextBox Text="{Binding BackgroundOpacity, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Background Corner Radius:" />
+            <TextBox Text="{Binding BackgroundCornerRadius, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Background Image Path:" />
+            <TextBox Text="{Binding BackgroundImagePath, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Outline Thickness:" />
+            <TextBox Text="{Binding OutlineThickness, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Topmost:" />
+            <CheckBox IsChecked="{Binding Topmost}" />
+
+            <TextBlock Text="Show In Taskbar:" />
+            <CheckBox IsChecked="{Binding ShowInTaskbar}" />
+
+            <TextBlock Text="Height:" />
+            <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Run On Startup:" />
+            <CheckBox IsChecked="{Binding RunOnStartup}" />
+
+            <TextBlock Text="Start Hidden:" />
+            <CheckBox IsChecked="{Binding StartHidden}" />
+
+            <TextBlock Text="Drag To Move:" />
+            <CheckBox IsChecked="{Binding DragToMove}" />
+
+            <TextBlock Text="Right Aligned:" />
+            <CheckBox IsChecked="{Binding RightAligned}" />
+
+            <TextBlock Text="WAV File Path:" />
+            <TextBox Text="{Binding WavFilePath, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="WAV File Interval:" />
+            <TextBox Text="{Binding WavFileInterval, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Content="Save" Command="{Binding SaveCommand}" Margin="0,10,0,0" />
+        </StackPanel>
+    </Grid>
+</Window>
