@@ -253,7 +253,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Updates the sound player enabled state based on the settings.
+    /// Initializes the sound player for the specified file if enabled; otherwise, sets it to <c>null</c>.
     /// </summary>
     private void UpdateSoundPlayerEnabled()
     {
@@ -262,7 +262,7 @@ public partial class MainWindow : Window
             Settings.Default.WavFileInterval != default &&
             File.Exists(Settings.Default.WavFilePath);
 
-        _soundPlayer = soundPlayerEnabled ? new() : null;
+        _soundPlayer = soundPlayerEnabled ? new(Settings.Default.WavFilePath) : null;
     }
 
     /// <summary>
@@ -283,7 +283,6 @@ public partial class MainWindow : Window
 
         try
         {
-            _soundPlayer.SoundLocation = Settings.Default.WavFilePath;
             _soundPlayer.Play();
         }
         catch
