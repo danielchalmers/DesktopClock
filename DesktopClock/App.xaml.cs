@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -36,5 +37,26 @@ public partial class App : Application
             key?.SetValue(keyName, MainFileInfo.FullName); // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
         else
             key?.DeleteValue(keyName, false);
+    }
+
+    /// <summary>
+    /// Shows a singleton window of the specified type.
+    /// If the window is already open, it activates the existing window.
+    /// Otherwise, it creates and shows a new instance of the window.
+    /// </summary>
+    /// <typeparam name="T">The type of the window to show.</typeparam>
+    /// <param name="owner">The owner window for the singleton window.</param>
+    public static void ShowSingletonWindow<T>(Window owner) where T : Window, new()
+    {
+        var window = Current.Windows.OfType<T>().FirstOrDefault() ?? new T();
+
+        if (window.IsVisible)
+        {
+            window.Activate();
+            return;
+        }
+
+        window.Owner = owner;
+        window.Show();
     }
 }

@@ -79,7 +79,7 @@
             <MenuItem Command="{Binding OpenSettingsCommand}" Header="_Settings" />
 
             <MenuItem Command="{Binding NewClockCommand}"
-                      Header="_New clock..."
+                      Header="_New clock"
                       IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
             <MenuItem Command="{Binding CheckForUpdatesCommand}" Header="Check for _updates" />

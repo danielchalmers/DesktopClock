@@ -47,19 +47,6 @@ public partial class SettingsWindow : Window
 
         ((SettingsWindowViewModel)DataContext).Settings.WavFilePath = openFileDialog.FileName;
     }
-
-    public static void ShowSingletonSettingsWindow(Window owner)
-    {
-        var settingsWindow = Application.Current.Windows.OfType<SettingsWindow>().FirstOrDefault() ?? new SettingsWindow();
-
-        if (settingsWindow.IsVisible)
-        {
-            settingsWindow.Activate();
-            return;
-        }
-
-        settingsWindow.Show();
-    }
 }
 
 public partial class SettingsWindowViewModel : ObservableObject

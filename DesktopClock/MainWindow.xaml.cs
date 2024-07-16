@@ -53,11 +53,13 @@ public partial class MainWindow : Window
         // Not done through binding due to what's explained in the comment in WindowUtil.HideFromScreen().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
 
+        // Restore the structure of the last state using the display text.
         CurrentTimeOrCountdownString = Settings.Default.LastDisplay;
 
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
 
+        // The context menu is shared between right-clicking the window and the tray icon.
         ContextMenu = Resources["MainContextMenu"] as ContextMenu;
 
         ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, true);
@@ -79,7 +81,7 @@ public partial class MainWindow : Window
     {
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.HideForNow))
         {
-            MessageBox.Show(this, "Clock will be minimized and can be opened again from the taskbar or system tray (if enabled).",
+            MessageBox.Show(this, "Clock will be minimized and can be opened again from the taskbar (or system tray if enabled).",
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
@@ -101,16 +103,13 @@ public partial class MainWindow : Window
     public void SetFormat(string format) => Settings.Default.Format = format;
 
     /// <summary>
-    /// Opens the setting configuration window.
+    /// Opens a new settings window or activates the existing one.
     /// </summary>
     [RelayCommand]
-    public void OpenSettings()
-    {
-        SettingsWindow.ShowSingletonSettingsWindow(this);
-    }
+    public void OpenSettings() => App.ShowSingletonWindow<SettingsWindow>(this);
 
     /// <summary>
-    /// Creates a new clock executable and starts it.
+    /// Asks the user then creates a new clock executable and starts it.
     /// </summary>
     [RelayCommand]
     public void NewClock()
@@ -144,7 +143,7 @@ public partial class MainWindow : Window
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.CheckForUpdates))
         {
             var result = MessageBox.Show(this,
-                "This will take you to a website to view the latest release.\n\n" +
+                "This will take you to GitHub to view the latest releases.\n\n" +
                 "Continue?",
                 Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
