@@ -64,6 +64,15 @@ public partial class SettingsWindowViewModel : ObservableObject
     public IList<string> FontFamilies { get; }
     public IList<string> TimeZones { get; }
 
+    /// <summary>
+    /// Sets the format string in settings to the given string.
+    /// </summary>
+    [RelayCommand]
+    public void SetFormat(DateFormatExample formatExample) => Settings.Default.Format = formatExample.Format;
+
+    /// <summary>
+    /// Disables countdown mode by resetting the value to default.
+    /// </summary>
     [RelayCommand]
     public void ResetCountdown()
     {

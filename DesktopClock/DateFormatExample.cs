@@ -70,33 +70,3 @@ public record DateFormatExample
         "Y",                           // Year month pattern: June 2009 (en-US)
     }.Select(f => FromFormat(f, DateTimeOffset.Now)).ToList();
 }
-
-    public class DateFormatConverter : MarkupExtension, IValueConverter
-    {
-        private static DateFormatConverter _instance;
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return _instance ??= new DateFormatConverter();
-        }
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-        // When converting to display in the ComboBox, show the Example
-        if (value is DateFormatExample dateFormatExample)
-        {
-            return dateFormatExample.Example;
-        }
-        return value;
-    }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            // When converting back from the ComboBox selection, get the Format
-            if (value is DateFormatExample dateFormatExample)
-            {
-            return dateFormatExample.Format;
-            }
-            return value;
-        }
-    }
