@@ -214,8 +214,12 @@ public partial class MainWindow : Window
 
         if (Settings.Default.BurnInMitigation)
         {
-            _pixelShifter ??= new(this);
-            Dispatcher.Invoke(_pixelShifter.ShiftWindow);
+            _pixelShifter ??= new();
+            Dispatcher.Invoke(() =>
+            {
+                Left += _pixelShifter.ShiftX();
+                Top += _pixelShifter.ShiftY();
+            });
         }
     }
 

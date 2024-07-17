@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Windows;
 
 namespace DesktopClock.Utilities;
 
 public class PixelShifter
 {
     private readonly Random _random = new();
-    private readonly Window _window;
     private double _totalShiftX;
     private double _totalShiftY;
 
@@ -20,34 +18,31 @@ public class PixelShifter
     /// </summary>
     public int MaxTotalShift { get; set; } = 4;
 
-    public PixelShifter(Window window)
+    public double ShiftX()
     {
-        _window = window;
-    }
+        var shift = _random.Next(-ShiftAmount, ShiftAmount + 1);
+        var newTotalShiftX = _totalShiftX + shift;
 
-    /// <summary>
-    /// Shifts the location of the window randomly to help prevent screen burn-in.
-    /// </summary>
-    public void ShiftWindow()
-    {
-        double CalculateShift(ref double totalShift)
+        if (Math.Abs(newTotalShiftX) <= MaxTotalShift)
         {
-            var shift = _random.Next(-ShiftAmount, ShiftAmount + 1);
-            var newTotalShift = totalShift + shift;
-
-            if (Math.Abs(newTotalShift) <= MaxTotalShift)
-            {
-                totalShift = newTotalShift;
-                return shift;
-            }
-
-            return 0;
+            _totalShiftX = newTotalShiftX;
+            return shift;
         }
 
-        var shiftX = CalculateShift(ref _totalShiftX);
-        var shiftY = CalculateShift(ref _totalShiftY);
+        return 0;
+    }
 
-        _window.Left += shiftX;
-        _window.Top += shiftY;
+    public double ShiftY()
+    {
+        var shift = _random.Next(-ShiftAmount, ShiftAmount + 1);
+        var newTotalShiftY = _totalShiftY + shift;
+
+        if (Math.Abs(newTotalShiftY) <= MaxTotalShift)
+        {
+            _totalShiftY = newTotalShiftY;
+            return shift;
+        }
+
+        return 0;
     }
 }
