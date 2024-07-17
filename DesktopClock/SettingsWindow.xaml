@@ -13,6 +13,17 @@
         ResizeMode="CanMinimize"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="4,0"/>
+        </Style>
+        
+        <Style TargetType="TextBox">
+            <Setter Property="MinHeight" Value="23"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    
     <TabControl Padding="12,12,12,0" SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay}">
         <TabItem Header="Format">
             <StackPanel>
@@ -20,7 +31,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}" />
                     <ComboBox Grid.Column="1"
@@ -50,6 +61,7 @@
                     <TextBox Text="{Binding Settings.CountdownTo, Mode=TwoWay}" Grid.Column="0" />
                     <Button Content="Reset"
                             Command="{Binding ResetCountdownCommand}"
+                            Padding="4,0,4,0"
                             Grid.Column="1" />
                 </Grid>
                 <TextBlock Text="Date and time to countdown to. If left blank, countdown mode is not enabled."
@@ -125,6 +137,7 @@
                     <TextBox Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" />
                     <Button Content="Browse..."
                             Click="BrowseBackgroundImagePath"
+                            Padding="4,0,4,0"
                             Grid.Column="1" />
                 </Grid>
                 <TextBlock Text="Path to the background image. If left blank, a solid color will be used."
@@ -184,6 +197,7 @@
                     <TextBox Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" />
                     <Button Content="Browse..."
                             Click="BrowseWavFilePath"
+                            Padding="4,0,4,0"
                             Grid.Column="1" />
                 </Grid>
                 <TextBlock Text="Path to a WAV file to be played on a specified interval."
