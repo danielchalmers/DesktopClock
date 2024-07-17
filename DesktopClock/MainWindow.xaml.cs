@@ -10,6 +10,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
+using DesktopClock.Utilities;
 using H.NotifyIcon;
 using H.NotifyIcon.EfficiencyMode;
 using Humanizer;
@@ -27,6 +28,7 @@ public partial class MainWindow : Window
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
     private SoundPlayer _soundPlayer;
+    private PixelShifter _pixelShifter;
 
     /// <summary>
     /// The date and time to countdown to, or <c>null</c> if regular clock is desired.
@@ -39,6 +41,12 @@ public partial class MainWindow : Window
     /// </summary>
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
+
+    /// <summary>
+    /// The amount of margin applied in order to shift the clock's pixels and help prevent burn-in.
+    /// </summary>
+    [ObservableProperty]
+    private Thickness _pixelShift;
 
     public MainWindow()
     {
@@ -202,6 +210,8 @@ public partial class MainWindow : Window
     {
         UpdateTimeString();
 
+        TryShiftPixels();
+
         TryPlaySound();
     }
 
@@ -256,6 +266,20 @@ public partial class MainWindow : Window
         {
             // Ignore errors because we don't want a sound issue to crash the app.
         }
+    }
+
+    private void TryShiftPixels()
+    {
+        if (!Settings.Default.BurnInMitigation || DateTimeOffset.Now.Second != 0)
+            return;
+
+        _pixelShifter ??= new();
+
+        Dispatcher.Invoke(() =>
+        {
+            Left += _pixelShifter.ShiftX();
+            Top += _pixelShifter.ShiftY();
+        });
     }
 
     private void UpdateTimeString()
