@@ -81,7 +81,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string Format { get; set; } = "{ddd}, {MMM dd}, {h:mm:ss tt}";
 
     /// <summary>
-    /// Format string for the countdown mode. If left blank, it will be dynamic.
+    /// .NET format string for the countdown mode. If left blank, it will be dynamic.
     /// </summary>
     /// <remarks>
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings">Custom TimeSpan format strings</see>.

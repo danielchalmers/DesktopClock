@@ -15,15 +15,15 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Padding" Value="4,0"/>
+            <Setter Property="Padding" Value="4,0" />
         </Style>
-        
+
         <Style TargetType="TextBox">
-            <Setter Property="MinHeight" Value="23"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MinHeight" Value="23" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </Window.Resources>
-    
+
     <TabControl Padding="12,12,12,0" SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay}">
         <TabItem Header="Format">
             <StackPanel>
@@ -39,17 +39,25 @@
                               ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
                               SelectionChanged="SelectFormat" />
                 </Grid>
-                <TextBlock Text=".NET format string for the time shown on the clock. Format specific parts inside { and }."
-                           FontStyle="Italic"
+                <TextBlock FontStyle="Italic"
                            FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,12">
+                    <Run Text=".NET format string for the time shown on the clock. Format specific parts inside { and }." />
+                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings" RequestNavigate="Hyperlink_RequestNavigate">
+                        Learn more
+                    </Hyperlink>
+                </TextBlock>
 
                 <TextBlock Text="Countdown Format:" />
                 <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Format string for the countdown mode. If left blank, it will be dynamic."
-                           FontStyle="Italic"
+                <TextBlock FontStyle="Italic"
                            FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,12">
+                    <Run Text=".NET format string for the countdown mode. If left blank, it will be dynamic." />
+                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings" RequestNavigate="Hyperlink_RequestNavigate">
+                        Learn more
+                    </Hyperlink>
+                </TextBlock>
 
                 <TextBlock Text="Countdown To:" />
                 <Grid>
