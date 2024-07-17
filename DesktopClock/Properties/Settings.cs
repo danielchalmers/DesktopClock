@@ -25,15 +25,18 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public static readonly double MaxSizeLog = 6.5;
     public static readonly double MinSizeLog = 2.7;
 
-    // Private constructor to enforce singleton pattern.
-    private Settings()
+    static Settings()
     {
         // Settings file path from the same directory as the executable.
         var settingsFileName = Path.GetFileNameWithoutExtension(App.MainFileInfo.FullName) + ".settings";
         FilePath = Path.Combine(App.MainFileInfo.DirectoryName, settingsFileName);
+    }
 
+    // Private constructor to enforce singleton pattern.
+    private Settings()
+    {
         // Watch for changes in the settings file.
-        _watcher = new(App.MainFileInfo.DirectoryName, settingsFileName)
+        _watcher = new(App.MainFileInfo.DirectoryName, Path.GetFileName(FilePath))
         {
             EnableRaisingEvents = true,
         };
