@@ -13,8 +13,8 @@ public class PixelShifterTests
     {
         var shifter = new PixelShifter
         {
-            ShiftAmount = shiftAmount,
-            MaxTotalShift = maxTotalShift,
+            PixelsPerShift = shiftAmount,
+            MaxPixelOffset = maxTotalShift,
         };
 
         double totalShiftX = 0;
@@ -37,8 +37,8 @@ public class PixelShifterTests
     {
         var shifter = new PixelShifter
         {
-            ShiftAmount = shiftAmount,
-            MaxTotalShift = maxTotalShift,
+            PixelsPerShift = shiftAmount,
+            MaxPixelOffset = maxTotalShift,
         };
 
         double totalShiftY = 0;
