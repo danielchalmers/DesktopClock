@@ -43,6 +43,14 @@ public record DateFormatExample
     public static IReadOnlyCollection<DateFormatExample> DefaultExamples { get; } = new[]
     {
         // Custom formats
+        "{ddd}, {MMM dd}, {HH:mm}",           // Custom format: "Mon, Apr 10, 14:30"
+        "{ddd}, {MMM dd}, {h:mm tt}",         // Custom format: "Mon, Apr 10, 2:30 PM"
+        "{ddd}, {MMM dd}, {HH:mm:ss}",        // Custom format: "Mon, Apr 10, 14:30:45"
+        "{ddd}, {MMM dd}, {h:mm:ss tt}",      // Custom format: "Mon, Apr 10, 2:30:45 PM"
+        "{ddd}, {MMM dd}, {HH:mm K}",         // Custom format: "Mon, Apr 10, 14:30 +02:00"
+        "{ddd}, {MMM dd}, {h:mm tt K}",       // Custom format: "Mon, Apr 10, 2:30 PM +02:00"
+        "{ddd}, {MMM dd}, {yyyy} {HH:mm}",    // Custom format: "Mon, Apr 10, 2023 14:30"
+        "{ddd}, {MMM dd}, {yyyy} {h:mm tt}",  // Custom format: "Mon, Apr 10, 2023 14:30"
         "{dddd}, {MMMM dd}",                  // Custom format: "Monday, April 10"
         "{dddd}, {MMMM dd}, {HH:mm}",         // Custom format: "Monday, April 10, 14:30"
         "{dddd}, {MMMM dd}, {h:mm tt}",       // Custom format: "Monday, April 10, 2:30 PM"
@@ -50,12 +58,6 @@ public record DateFormatExample
         "{dddd}, {MMM dd}, {h:mm tt}",        // Custom format: "Monday, Apr 10, 2:30 PM"
         "{dddd}, {MMM dd}, {HH:mm:ss}",       // Custom format: "Monday, Apr 10, 14:30:45"
         "{dddd}, {MMM dd}, {h:mm:ss tt}",     // Custom format: "Monday, Apr 10, 2:30:45 PM"
-        "{ddd}, {MMM dd}, {HH:mm}",           // Custom format: "Mon, Apr 10, 14:30"
-        "{ddd}, {MMM dd}, {h:mm tt}",         // Custom format: "Mon, Apr 10, 2:30 PM"
-        "{ddd}, {MMM dd}, {HH:mm:ss}",        // Custom format: "Mon, Apr 10, 14:30:45"
-        "{ddd}, {MMM dd}, {h:mm:ss tt}",      // Custom format: "Mon, Apr 10, 2:30:45 PM"
-        "{ddd}, {MMM dd}, {HH:mm K}",         // Custom format: "Mon, Apr 10, 14:30 +02:00"
-        "{ddd}, {MMM dd}, {h:mm tt K}",       // Custom format: "Mon, Apr 10, 2:30 PM +02:00"
     
         // Standard formats
         "D",                                  // Long date pattern: Monday, June 15, 2009 (en-US)
@@ -72,6 +74,6 @@ public record DateFormatExample
         "u",                                  // Universal sortable date/time pattern: 2009-06-15 13:45:30Z (DateTime)
         //"U",                                // Universal full date/time pattern: Monday, June 15, 2009 8:45:30 PM (en-US) // Not available for DateTimeOffset.
         "s",                                  // Sortable date/time pattern: 2009-06-15T13:45:30
-        "O",                                // Round-trip date/time pattern: 2009-06-15T13:45:30.0000000-07:00 (DateTimeOffset)
+        //"O",                                // Round-trip date/time pattern: 2009-06-15T13:45:30.0000000-07:00 (DateTimeOffset) // Too precise with milliseconds.
     }.Select(f => FromFormat(f, DateTimeOffset.Now)).ToList();
 }
