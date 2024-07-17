@@ -210,17 +210,9 @@ public partial class MainWindow : Window
     {
         UpdateTimeString();
 
-        TryPlaySound();
+        TryShiftPixels();
 
-        if (Settings.Default.BurnInMitigation)
-        {
-            _pixelShifter ??= new();
-            Dispatcher.Invoke(() =>
-            {
-                Left += _pixelShifter.ShiftX();
-                Top += _pixelShifter.ShiftY();
-            });
-        }
+        TryPlaySound();
     }
 
     /// <summary>
@@ -274,6 +266,20 @@ public partial class MainWindow : Window
         {
             // Ignore errors because we don't want a sound issue to crash the app.
         }
+    }
+
+    private void TryShiftPixels()
+    {
+        if (!Settings.Default.BurnInMitigation || DateTimeOffset.Now.Second != 0)
+            return;
+
+        _pixelShifter ??= new();
+
+        Dispatcher.Invoke(() =>
+        {
+            Left += _pixelShifter.ShiftX();
+            Top += _pixelShifter.ShiftY();
+        });
     }
 
     private void UpdateTimeString()
