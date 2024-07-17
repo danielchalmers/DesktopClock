@@ -23,10 +23,13 @@ namespace DesktopClock;
 [ObservableObject]
 public partial class MainWindow : Window
 {
+    private readonly Random _random = new();
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
     private SoundPlayer _soundPlayer;
+    private double totalShiftX;
+    private double totalShiftY;
 
     /// <summary>
     /// The date and time to countdown to, or <c>null</c> if regular clock is desired.
@@ -39,6 +42,12 @@ public partial class MainWindow : Window
     /// </summary>
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
+
+    /// <summary>
+    /// The amount of margin applied in order to shift the clock's pixels and help prevent burn-in.
+    /// </summary>
+    [ObservableProperty]
+    private Thickness _pixelShift;
 
     public MainWindow()
     {
@@ -195,6 +204,23 @@ public partial class MainWindow : Window
         }
     }
 
+    private void ShiftWindow()
+    {
+        const int MaxTotalShift = 10;
+        const int MaxShiftPerTick = 5;
+
+        double ApplyShift(ref double totalShift)
+        {
+            var shift = _random.Next(-MaxShiftPerTick, MaxShiftPerTick + 1);
+            totalShift += shift;
+
+            return Math.Min(MaxTotalShift, totalShift);
+        }
+
+        Left += ApplyShift(ref totalShiftX);
+        Top += ApplyShift(ref totalShiftY);
+    }
+
     /// <summary>
     /// Handles the event when the system clock timer signals a second change.
     /// </summary>
@@ -203,6 +229,8 @@ public partial class MainWindow : Window
         UpdateTimeString();
 
         TryPlaySound();
+
+        Dispatcher.Invoke(ShiftWindow);
     }
 
     /// <summary>

@@ -195,6 +195,18 @@
                            FontSize="10"
                            Margin="0,0,0,12" />
 
+                <CheckBox Content="Right Aligned" IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
+                <TextBlock Text="Experimental: Keeps the clock window aligned to the right when the size changes."
+                           FontStyle="Italic"
+                           FontSize="10"
+                           Margin="0,0,0,12" />
+
+                <CheckBox Content="Burn-in Mitigation" IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
+                <TextBlock Text="Experimental: Shifts the clock's pixels and makes the background more transparent in order to prevent burn-in."
+                           FontStyle="Italic"
+                           FontSize="10"
+                           Margin="0,0,0,12" />
+
                 <TextBlock Text="WAV File Path:" />
                 <Grid>
                     <Grid.ColumnDefinitions>
