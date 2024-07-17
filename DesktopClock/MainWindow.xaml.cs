@@ -10,6 +10,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
+using DesktopClock.Utilities;
 using H.NotifyIcon;
 using H.NotifyIcon.EfficiencyMode;
 using Humanizer;
@@ -23,13 +24,11 @@ namespace DesktopClock;
 [ObservableObject]
 public partial class MainWindow : Window
 {
-    private readonly Random _random = new();
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
     private SoundPlayer _soundPlayer;
-    private double totalShiftX;
-    private double totalShiftY;
+    private PixelShifter _pixelShifter;
 
     /// <summary>
     /// The date and time to countdown to, or <c>null</c> if regular clock is desired.
@@ -204,23 +203,6 @@ public partial class MainWindow : Window
         }
     }
 
-    private void ShiftWindow()
-    {
-        const int MaxTotalShift = 10;
-        const int MaxShiftPerTick = 5;
-
-        double ApplyShift(ref double totalShift)
-        {
-            var shift = _random.Next(-MaxShiftPerTick, MaxShiftPerTick + 1);
-            totalShift += shift;
-
-            return Math.Min(MaxTotalShift, totalShift);
-        }
-
-        Left += ApplyShift(ref totalShiftX);
-        Top += ApplyShift(ref totalShiftY);
-    }
-
     /// <summary>
     /// Handles the event when the system clock timer signals a second change.
     /// </summary>
@@ -230,7 +212,11 @@ public partial class MainWindow : Window
 
         TryPlaySound();
 
-        Dispatcher.Invoke(ShiftWindow);
+        if (Settings.Default.BurnInMitigation)
+        {
+            _pixelShifter ??= new(this);
+            Dispatcher.Invoke(_pixelShifter.ShiftWindow);
+        }
     }
 
     /// <summary>
