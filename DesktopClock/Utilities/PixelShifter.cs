@@ -18,6 +18,9 @@ public class PixelShifter
     /// </summary>
     public int MaxPixelOffset { get; set; } = 4;
 
+    /// <summary>
+    /// Returns an amount to shift horizontally by while staying within the specified bounds.
+    /// </summary>
     public double ShiftX()
     {
         double pixelsToMoveBy = GetRandomShift();
@@ -26,6 +29,9 @@ public class PixelShifter
         return pixelsToMoveBy;
     }
 
+    /// <summary>
+    /// Returns an amount to shift vertically by while staying within the specified bounds.
+    /// </summary>
     public double ShiftY()
     {
         double pixelsToMoveBy = GetRandomShift();
@@ -34,8 +40,17 @@ public class PixelShifter
         return pixelsToMoveBy;
     }
 
+    /// <summary>
+    /// Returns a random amount to shift by within the specified amount.
+    /// </summary>
     private int GetRandomShift() => _random.Next(-PixelsPerShift, PixelsPerShift + 1);
 
+    /// <summary>
+    /// Returns a capped amount to shift by.
+    /// </summary>
+    /// <param name="current">The current total amount of shift that has occurred.</param>
+    /// <param name="offset">The proposed amount to shift by this time.</param>
+    /// <param name="max">The bounds to stay within in respect to the total shift.</param>
     private double GetFinalShiftAmount(double current, double offset, double max)
     {
         var newTotal = current + offset;

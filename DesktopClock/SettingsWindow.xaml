@@ -202,7 +202,7 @@
                            Margin="0,0,0,12" />
 
                 <CheckBox Content="Burn-in Mitigation" IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                <TextBlock Text="Experimental: Shifts the clock around in order to prevent screen burn-in."
+                <TextBlock Text="Experimental: Shifts the clock periodically in order to reduce screen burn-in."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />

@@ -180,7 +180,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool RightAligned { get; set; } = false;
 
     /// <summary>
-    /// Experimental: Shifts the clock around in order to prevent screen burn-in.
+    /// Experimental: Shifts the clock periodically in order to reduce screen burn-in.
     /// </summary>
     public bool BurnInMitigation { get; set; } = false;
 
