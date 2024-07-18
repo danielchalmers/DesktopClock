@@ -195,6 +195,12 @@
                            FontSize="10"
                            Margin="0,0,0,12" />
 
+                <CheckBox Content="Burn-in Mitigation" IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
+                <TextBlock Text="Experimental: Shifts the clock periodically in order to reduce screen burn-in."
+                           FontStyle="Italic"
+                           FontSize="10"
+                           Margin="0,0,0,12" />
+
                 <TextBlock Text="WAV File Path:" />
                 <Grid>
                     <Grid.ColumnDefinitions>

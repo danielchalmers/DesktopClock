@@ -180,6 +180,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool RightAligned { get; set; } = false;
 
     /// <summary>
+    /// Experimental: Shifts the clock periodically in order to reduce screen burn-in.
+    /// </summary>
+    public bool BurnInMitigation { get; set; } = false;
+
+    /// <summary>
     /// Path to a WAV file to be played on a specified interval.
     /// </summary>
     public string WavFilePath { get; set; } = string.Empty;
