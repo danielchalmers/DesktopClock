@@ -44,8 +44,8 @@
                         <TextBlock Text="Size: " />
 
                         <Slider Width="80"
-                                Maximum="{Binding MaxSizeLog, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                Minimum="{Binding MinSizeLog, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                Maximum="{x:Static p:Settings.MaxSizeLog}"
+                                Minimum="{x:Static p:Settings.MinSizeLog}"
                                 Value="{Binding Height, Converter={local:LogScaleConverter}, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
                     </StackPanel>
                 </MenuItem.Header>

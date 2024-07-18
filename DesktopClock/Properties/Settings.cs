@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Windows;
 using System.Windows.Media;
 using Newtonsoft.Json;
 using WpfWindowPlacement;
@@ -24,6 +23,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     };
 
     public static readonly double MaxSizeLog = 6.5;
+
     public static readonly double MinSizeLog = 2.7;
 
     static Settings()
