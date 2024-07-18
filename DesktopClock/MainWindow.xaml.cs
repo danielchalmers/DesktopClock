@@ -31,12 +31,6 @@ public partial class MainWindow : Window
     private PixelShifter _pixelShifter;
 
     /// <summary>
-    /// The date and time to countdown to, or <c>null</c> if regular clock is desired.
-    /// </summary>
-    [ObservableProperty]
-    private DateTimeOffset? _countdownTo;
-
-    /// <summary>
     /// The current date and time in the selected time zone, or countdown as a formatted string.
     /// </summary>
     [ObservableProperty]
@@ -54,7 +48,6 @@ public partial class MainWindow : Window
         DataContext = this;
 
         _timeZone = Settings.Default.GetTimeZoneInfo();
-        UpdateCountdownEnabled();
 
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
 
@@ -196,12 +189,12 @@ public partial class MainWindow : Window
                 break;
 
             case nameof(Settings.Default.CountdownTo):
-                UpdateCountdownEnabled();
                 UpdateTimeString();
                 break;
 
             case nameof(Settings.Default.WavFilePath):
             case nameof(Settings.Default.WavFileInterval):
+            case nameof(Settings.Default.PlaySoundOnCountdown):
                 UpdateSoundPlayerEnabled();
                 break;
         }
@@ -220,27 +213,13 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Updates the countdown enabled state based on the settings.
-    /// </summary>
-    private void UpdateCountdownEnabled()
-    {
-        if (Settings.Default.CountdownTo == default)
-        {
-            CountdownTo = null;
-            return;
-        }
-
-        CountdownTo = Settings.Default.CountdownTo.ToDateTimeOffset(_timeZone.BaseUtcOffset);
-    }
-
-    /// <summary>
     /// Initializes the sound player for the specified file if enabled; otherwise, sets it to <c>null</c>.
     /// </summary>
     private void UpdateSoundPlayerEnabled()
     {
         var soundPlayerEnabled =
             !string.IsNullOrWhiteSpace(Settings.Default.WavFilePath) &&
-            Settings.Default.WavFileInterval != default &&
+            (Settings.Default.WavFileInterval != default || Settings.Default.PlaySoundOnCountdown) &&
             File.Exists(Settings.Default.WavFilePath);
 
         _soundPlayer = soundPlayerEnabled ? new(Settings.Default.WavFilePath) : null;
@@ -254,14 +233,7 @@ public partial class MainWindow : Window
         if (_soundPlayer == null)
             return;
 
-        // Whether we hit the interval specified in settings, which is calculated differently in countdown mode and not.
-        var isOnInterval = CountdownTo == null ?
-            (int)DateTimeOffset.Now.TimeOfDay.TotalSeconds % (int)Settings.Default.WavFileInterval.TotalSeconds == 0 :
-            (int)(CountdownTo.Value - DateTimeOffset.Now).TotalSeconds % (int)Settings.Default.WavFileInterval.TotalSeconds == 0;
-
-        var isCountdownReached = DateTimeOffset.Now.AreEqualExcludingMilliseconds(Settings.Default.CountdownTo);
-
-        if (!isOnInterval && !isCountdownReached)
+        if (!DateTimeUtil.IsOnInterval(DateTime.Now, Settings.Default.CountdownTo, Settings.Default.WavFileInterval))
             return;
 
         try
@@ -294,16 +266,16 @@ public partial class MainWindow : Window
         {
             var timeInSelectedZone = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
 
-            if (CountdownTo == null)
+            if (Settings.Default.CountdownTo == default)
             {
                 return Tokenizer.FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format, CultureInfo.DefaultThreadCurrentCulture);
             }
             else
             {
                 if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
-                    return CountdownTo.Humanize(timeInSelectedZone);
+                    return Settings.Default.CountdownTo.Humanize(utcDate: false, dateToCompareAgainst: DateTime.Now);
 
-                return Tokenizer.FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - timeInSelectedZone, Settings.Default.CountdownFormat, CultureInfo.DefaultThreadCurrentCulture);
+                return Tokenizer.FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - DateTime.Now, Settings.Default.CountdownFormat, CultureInfo.DefaultThreadCurrentCulture);
             }
         }
 

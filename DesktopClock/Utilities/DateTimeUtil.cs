@@ -48,4 +48,15 @@ public static class DateTimeUtil
 
         return true;
     }
+
+    public static bool IsOnInterval(DateTimeOffset dateTime, DateTimeOffset countdownTo, TimeSpan interval)
+    {
+        var currentTime = countdownTo == default ? dateTime.TimeOfDay : countdownTo - dateTime;
+
+        var isOnInterval = interval != default && (int)currentTime.TotalSeconds % (int)interval.TotalSeconds == 0;
+
+        var isCountdownReached = dateTime.AreEqualExcludingMilliseconds(countdownTo);
+
+        return isOnInterval || isCountdownReached;
+    }
 }

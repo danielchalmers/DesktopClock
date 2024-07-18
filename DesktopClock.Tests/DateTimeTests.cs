@@ -43,6 +43,25 @@ public class DateTimeTests
     }
 
     [Theory]
+    [InlineData("2024-07-18T12:30:00Z", "2024-07-18T12:30:00Z", 60, true)] // Countdown reached
+    [InlineData("2024-07-18T12:29:00Z", "2024-07-18T12:30:00Z", 60, false)] // Not yet reached, not on interval
+    [InlineData("2024-07-18T12:30:30Z", "2024-07-18T12:30:01Z", 30, true)] // On interval
+    [InlineData("2024-07-18T12:30:01Z", "2024-07-18T12:30:00Z", 30, true)] // Countdown on interval
+    public void IsOnInterval(string dtString, string countdownToString, int intervalSeconds, bool expected)
+    {
+        // Arrange
+        var dateTime = DateTimeOffset.Parse(dtString);
+        var countdownTo = DateTimeOffset.Parse(countdownToString);
+        var interval = TimeSpan.FromSeconds(intervalSeconds);
+
+        // Act
+        var result = DateTimeUtil.IsOnInterval(dateTime, countdownTo, interval);
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    [Theory]
     [InlineData("dddd, MMMM dd", "Monday, January 01")]
     [InlineData("yyyy-MM-dd", "2024-01-01")]
     [InlineData("HH:mm:ss", "00:00:00")]
