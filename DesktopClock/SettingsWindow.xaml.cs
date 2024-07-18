@@ -80,6 +80,7 @@ public partial class SettingsWindowViewModel : ObservableObject
     {
         Settings = settings;
         FontFamilies = Fonts.SystemFontFamilies.Select(ff => ff.Source).ToList();
+        FontStyles = ["Normal", "Italic", "Oblique"];
         TimeZones = TimeZoneInfo.GetSystemTimeZones().Select(tz => tz.Id).ToList();
     }
 
@@ -87,6 +88,11 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// All available font families reported by the system.
     /// </summary>
     public IList<string> FontFamilies { get; }
+
+    /// <summary>
+    /// All available font styles.
+    /// </summary>
+    public IList<string> FontStyles { get; }
 
     /// <summary>
     /// All available time zones reported by the system.

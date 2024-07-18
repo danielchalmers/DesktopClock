@@ -95,6 +95,13 @@
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
+                
+                <TextBlock Text="Font Style:" />
+                <ComboBox ItemsSource="{Binding FontStyles}" SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
+                <TextBlock Text="Style of font to use for the clock's text."
+                           FontStyle="Italic"
+                           FontSize="10"
+                           Margin="0,0,0,12" />
 
                 <TextBlock Text="Text Color:" />
                 <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

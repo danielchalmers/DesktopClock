@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Windows;
 using System.Windows.Media;
 using Newtonsoft.Json;
 using WpfWindowPlacement;
@@ -105,6 +106,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// Font to use for the clock's text.
     /// </summary>
     public string FontFamily { get; set; } = "Consolas";
+
+    /// <summary>
+    /// Style of font to use for the clock's text.
+    /// </summary>
+    public string FontStyle { get; set; } = "Normal";
 
     /// <summary>
     /// Text color for the clock's text.
