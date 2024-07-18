@@ -259,7 +259,9 @@ public partial class MainWindow : Window
             (int)DateTimeOffset.Now.TimeOfDay.TotalSeconds % (int)Settings.Default.WavFileInterval.TotalSeconds == 0 :
             (int)(CountdownTo.Value - DateTimeOffset.Now).TotalSeconds % (int)Settings.Default.WavFileInterval.TotalSeconds == 0;
 
-        if (!isOnInterval)
+        var isCountdownReached = DateTimeOffset.Now.AreEqualExcludingMilliseconds(Settings.Default.CountdownTo);
+
+        if (!isOnInterval && !isCountdownReached)
             return;
 
         try

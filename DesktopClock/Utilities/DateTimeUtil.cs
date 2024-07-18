@@ -25,4 +25,27 @@ public static class DateTimeUtil
 
         return new DateTimeOffset(dt.Ticks, offset);
     }
+
+    public static bool AreEqualExcludingMilliseconds(this DateTimeOffset dt1, DateTimeOffset dt2)
+    {
+        if (dt1.Year != dt2.Year)
+            return false;
+
+        if (dt1.Month != dt2.Month)
+            return false;
+
+        if (dt1.Day != dt2.Day)
+            return false;
+
+        if (dt1.Hour != dt2.Hour)
+            return false;
+
+        if (dt1.Minute != dt2.Minute)
+            return false;
+
+        if (dt1.Second != dt2.Second)
+            return false;
+
+        return true;
+    }
 }

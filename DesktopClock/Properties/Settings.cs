@@ -201,6 +201,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public TimeSpan WavFileInterval { get; set; }
 
     /// <summary>
+    /// Play the WAV file when the countdown time elapses.
+    /// </summary>
+    public bool PlaySoundOnCountdown { get; set; } = true;
+
+    /// <summary>
     /// The index of the selected tab in the settings window.
     /// </summary>
     public int SettingsTabIndex { get; set; }

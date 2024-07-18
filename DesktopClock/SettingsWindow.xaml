@@ -95,7 +95,7 @@
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />
-                
+
                 <TextBlock Text="Font Style:" />
                 <ComboBox ItemsSource="{Binding FontStyles}" SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
                 <TextBlock Text="Style of font to use for the clock's text."
@@ -229,6 +229,12 @@
                 <TextBlock Text="WAV File Interval:" />
                 <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
                 <TextBlock Text="Interval for playing the WAV file if one is specified and exists (HH:mm:ss)."
+                           FontStyle="Italic"
+                           FontSize="10"
+                           Margin="0,0,0,12" />
+
+                <CheckBox Content="Play WAV File on Countdown" IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
+                <TextBlock Text="Play the WAV file when the countdown time elapses."
                            FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12" />

@@ -22,6 +22,27 @@ public class DateTimeTests
     }
 
     [Theory]
+    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-18T12:30:45.456Z", true)] // Different millisecond
+    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-18T12:30:46.123Z", false)] // Different second
+    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-18T12:31:45.123Z", false)] // Different minute
+    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-18T13:30:45.123Z", false)] // Different hour
+    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-19T12:30:45.123Z", false)] // Different day
+    [InlineData("2024-07-18T12:30:45.123Z", "2024-08-18T12:30:45.123Z", false)] // Different month
+    [InlineData("2024-07-18T12:30:45.123Z", "2025-07-18T12:30:45.123Z", false)] // Different year
+    public void AreEqualExcludingMilliseconds(string dt1String, string dt2String, bool expected)
+    {
+        // Arrange
+        var dt1 = DateTimeOffset.Parse(dt1String);
+        var dt2 = DateTimeOffset.Parse(dt2String);
+
+        // Act
+        var result = dt1.AreEqualExcludingMilliseconds(dt2);
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    [Theory]
     [InlineData("dddd, MMMM dd", "Monday, January 01")]
     [InlineData("yyyy-MM-dd", "2024-01-01")]
     [InlineData("HH:mm:ss", "00:00:00")]
