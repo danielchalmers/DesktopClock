@@ -100,7 +100,11 @@ public partial class MainWindow : Window
     /// Opens a new settings window or activates the existing one.
     /// </summary>
     [RelayCommand]
-    public void OpenSettings() => App.ShowSingletonWindow<SettingsWindow>(this);
+    public void OpenSettings(string tabIndex)
+    {
+        Settings.Default.SettingsTabIndex = int.Parse(tabIndex);
+        App.ShowSingletonWindow<SettingsWindow>(this);
+    }
 
     /// <summary>
     /// Asks the user then creates a new clock executable and starts it.

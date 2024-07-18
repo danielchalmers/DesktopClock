@@ -30,8 +30,6 @@
             <MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
 
             <MenuItem Command="{Binding HideForNowCommand}" Header="_Hide for now" />
-            
-            <MenuItem Command="{Binding OpenSettingsCommand}" Header="_Settings &amp; help" />
 
             <Separator />
 
@@ -63,6 +61,16 @@
                     </Style>
                 </MenuItem.Resources>
             </MenuItem>
+
+            <Separator />
+
+            <MenuItem Command="{Binding OpenSettingsCommand}" CommandParameter="0" Header="_Format" />
+
+            <MenuItem Command="{Binding OpenSettingsCommand}" CommandParameter="1" Header="_Appearance" />
+
+            <MenuItem Command="{Binding OpenSettingsCommand}" CommandParameter="2" Header="_Behavior" />
+
+            <MenuItem Command="{Binding OpenSettingsCommand}" CommandParameter="3" Header="H_elp" />
 
             <Separator />
 
