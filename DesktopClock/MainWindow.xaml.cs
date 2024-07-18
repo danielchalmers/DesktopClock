@@ -233,7 +233,7 @@ public partial class MainWindow : Window
         if (_soundPlayer == null)
             return;
 
-        if (!DateTimeUtil.IsOnInterval(DateTime.Now, Settings.Default.CountdownTo, Settings.Default.WavFileInterval))
+        if (!DateTimeUtil.IsEitherNowOrCountdownOnInterval(DateTime.Now, Settings.Default.CountdownTo, Settings.Default.WavFileInterval))
             return;
 
         try

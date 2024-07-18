@@ -26,7 +26,7 @@ public static class DateTimeUtil
         return new DateTimeOffset(dt.Ticks, offset);
     }
 
-    public static bool AreEqualExcludingMilliseconds(this DateTimeOffset dt1, DateTimeOffset dt2)
+    public static bool AreEqualExcludingMilliseconds(this DateTime dt1, DateTime dt2)
     {
         if (dt1.Year != dt2.Year)
             return false;
@@ -49,13 +49,13 @@ public static class DateTimeUtil
         return true;
     }
 
-    public static bool IsOnInterval(DateTimeOffset dateTime, DateTimeOffset countdownTo, TimeSpan interval)
+    public static bool IsEitherNowOrCountdownOnInterval(DateTime now, DateTime countdown, TimeSpan interval)
     {
-        var currentTime = countdownTo == default ? dateTime.TimeOfDay : countdownTo - dateTime;
+        var time = countdown == default ? now.TimeOfDay : countdown - now;
 
-        var isOnInterval = interval != default && (int)currentTime.TotalSeconds % (int)interval.TotalSeconds == 0;
+        var isOnInterval = interval != default && (int)time.TotalSeconds % (int)interval.TotalSeconds == 0;
 
-        var isCountdownReached = dateTime.AreEqualExcludingMilliseconds(countdownTo);
+        var isCountdownReached = now.AreEqualExcludingMilliseconds(countdown);
 
         return isOnInterval || isCountdownReached;
     }

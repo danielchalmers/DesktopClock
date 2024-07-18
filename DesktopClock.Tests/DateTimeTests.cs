@@ -32,8 +32,8 @@ public class DateTimeTests
     public void AreEqualExcludingMilliseconds(string dt1String, string dt2String, bool expected)
     {
         // Arrange
-        var dt1 = DateTimeOffset.Parse(dt1String);
-        var dt2 = DateTimeOffset.Parse(dt2String);
+        var dt1 = DateTime.Parse(dt1String);
+        var dt2 = DateTime.Parse(dt2String);
 
         // Act
         var result = dt1.AreEqualExcludingMilliseconds(dt2);
@@ -43,19 +43,22 @@ public class DateTimeTests
     }
 
     [Theory]
-    [InlineData("2024-07-18T12:30:00Z", "2024-07-18T12:30:00Z", 60, true)] // Countdown reached
-    [InlineData("2024-07-18T12:29:00Z", "2024-07-18T12:30:00Z", 60, false)] // Not yet reached, not on interval
-    [InlineData("2024-07-18T12:30:30Z", "2024-07-18T12:30:01Z", 30, true)] // On interval
-    [InlineData("2024-07-18T12:30:01Z", "2024-07-18T12:30:00Z", 30, true)] // Countdown on interval
-    public void IsOnInterval(string dtString, string countdownToString, int intervalSeconds, bool expected)
+    [InlineData("2024-07-18 12:30:00", "2024-07-18 12:30:00", 30, true)] // Countdown reached, on interval
+    [InlineData("2024-07-18 12:30:01", "2024-07-18 12:30:01", 30, true)] // Countdown reached, not on interval
+    [InlineData("2024-07-18 12:29:00", "2024-07-18 12:30:00", 30, true)] // Not yet reached, on interval
+    [InlineData("2024-07-18 12:29:01", "2024-07-18 12:30:01", 30, true)] // Not yet reached, on interval
+    [InlineData("2024-07-18 12:29:02", "2024-07-18 12:30:01", 30, false)] // Not yet reached, not on interval
+    [InlineData("2024-07-18 12:31:00", "2024-07-18 12:30:00", 30, true)] // Past countdown, on interval
+    [InlineData("2024-07-18 12:31:02", "2024-07-18 12:30:01", 30, false)] // Past countdown, not on interval
+    public void IsOnInterval(string nowString, string countdownString, int intervalSeconds, bool expected)
     {
         // Arrange
-        var dateTime = DateTimeOffset.Parse(dtString);
-        var countdownTo = DateTimeOffset.Parse(countdownToString);
+        var dateTime = DateTime.Parse(nowString);
+        var countdownTo = DateTime.Parse(countdownString);
         var interval = TimeSpan.FromSeconds(intervalSeconds);
 
         // Act
-        var result = DateTimeUtil.IsOnInterval(dateTime, countdownTo, interval);
+        var result = DateTimeUtil.IsEitherNowOrCountdownOnInterval(dateTime, countdownTo, interval);
 
         // Assert
         Assert.Equal(expected, result);
