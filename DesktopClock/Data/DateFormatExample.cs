@@ -26,9 +26,9 @@ public record DateFormatExample
     /// <summary>
     /// Creates a <see cref="DateFormatExample" /> for the given format.
     /// </summary>
-    public static DateFormatExample FromFormat(string format, DateTimeOffset dateTimeOffset)
+    public static DateFormatExample FromFormat(string format, DateTimeOffset dateTimeOffset, IFormatProvider formatProvider)
     {
-        var example = Tokenizer.FormatWithTokenizerOrFallBack(dateTimeOffset, format, CultureInfo.DefaultThreadCurrentCulture);
+        var example = Tokenizer.FormatWithTokenizerOrFallBack(dateTimeOffset, format, formatProvider);
         return new(format, example);
     }
 
@@ -75,5 +75,5 @@ public record DateFormatExample
         //"U",                                // Universal full date/time pattern: Monday, June 15, 2009 8:45:30 PM (en-US) // Not available for DateTimeOffset.
         "s",                                  // Sortable date/time pattern: 2009-06-15T13:45:30
         //"O",                                // Round-trip date/time pattern: 2009-06-15T13:45:30.0000000-07:00 (DateTimeOffset) // Too precise with milliseconds.
-    }.Select(f => FromFormat(f, DateTimeOffset.Now)).ToList();
+    }.Select(f => FromFormat(f, DateTimeOffset.Now, CultureInfo.DefaultThreadCurrentCulture)).ToList();
 }

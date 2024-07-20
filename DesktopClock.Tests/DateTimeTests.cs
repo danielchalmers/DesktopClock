@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace DesktopClock.Tests;
 
@@ -75,7 +76,7 @@ public class DateTimeTests
         var dateTimeOffset = new DateTime(2024, 01, 01);
 
         // Act
-        var dateFormatExample = DateFormatExample.FromFormat(format, dateTimeOffset);
+        var dateFormatExample = DateFormatExample.FromFormat(format, dateTimeOffset, CultureInfo.InvariantCulture);
 
         // Assert
         Assert.Equal(format, dateFormatExample.Format);
