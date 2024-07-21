@@ -25,7 +25,7 @@
     </Window.Resources>
 
     <TabControl Padding="12,12,12,0" SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay}">
-        <TabItem Header="Format">
+        <TabItem Header="_Format">
             <StackPanel>
                 <TextBlock Text="Date and Time Format:" />
                 <Grid>
@@ -87,7 +87,7 @@
             </StackPanel>
         </TabItem>
 
-        <TabItem Header="Appearance">
+        <TabItem Header="_Appearance">
             <StackPanel>
                 <TextBlock Text="Font Family:" />
                 <ComboBox ItemsSource="{Binding FontFamilies}" SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
@@ -170,7 +170,7 @@
             </StackPanel>
         </TabItem>
 
-        <TabItem Header="Behavior">
+        <TabItem Header="_Behavior">
             <StackPanel>
                 <CheckBox Content="Show in Taskbar" IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
                 <TextBlock Text="Shows the app icon in the taskbar instead of the tray."
@@ -241,7 +241,7 @@
             </StackPanel>
         </TabItem>
 
-        <TabItem Header="Help">
+        <TabItem Header="H_elp">
             <StackPanel>
                 <TextBlock FontWeight="Bold" FontSize="16">Shortcuts</TextBlock>
                 <StackPanel Margin="0,0,0,12">
