@@ -5,9 +5,7 @@ using System.Windows.Markup;
 
 namespace DesktopClock;
 
-/// <summary>
-/// https://stackoverflow.com/a/13850984.
-/// </summary>
+// https://stackoverflow.com/a/13850984
 public class LogScaleConverter : MarkupExtension, IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

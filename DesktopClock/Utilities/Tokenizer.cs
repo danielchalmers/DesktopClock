@@ -18,7 +18,6 @@ public static class Tokenizer
     {
         if (!string.IsNullOrWhiteSpace(format))
         {
-
             try
             {
                 if (format.Contains("}"))

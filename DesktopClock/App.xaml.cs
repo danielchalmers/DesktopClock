@@ -30,11 +30,12 @@ public partial class App : Application
             return BitConverter.ToString(hash).Replace("-", string.Empty);
         }
 
+        // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
         var keyName = GetSha256Hash(MainFileInfo.FullName);
         using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
         if (runOnStartup)
-            key?.SetValue(keyName, MainFileInfo.FullName); // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
+            key?.SetValue(keyName, MainFileInfo.FullName);
         else
             key?.DeleteValue(keyName, false);
     }

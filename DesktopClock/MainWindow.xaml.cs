@@ -137,7 +137,7 @@ public partial class MainWindow : Window
         Application.Current.Shutdown();
     }
 
-    private void ConfigureTrayIcon(bool showIcon, bool firstLaunch)
+    private void ConfigureTrayIcon(bool showIcon, bool isFirstLaunch)
     {
         if (showIcon)
         {
@@ -156,7 +156,7 @@ public partial class MainWindow : Window
             }
 
             // Show a notice if the icon was moved during runtime, but not at the start because the user will already expect it.
-            if (!firstLaunch)
+            if (!isFirstLaunch)
                 _trayIcon.ShowNotification("Hidden from taskbar", "Icon was moved to the tray");
         }
         else
@@ -167,7 +167,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Handles property changes in settings and updates the corresponding properties in the UI.
+    /// Handles setting changes.
     /// </summary>
     private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
@@ -233,7 +233,7 @@ public partial class MainWindow : Window
         if (_soundPlayer == null)
             return;
 
-        if (!DateTimeUtil.IsEitherNowOrCountdownOnInterval(DateTime.Now, Settings.Default.CountdownTo, Settings.Default.WavFileInterval))
+        if (!DateTimeUtil.IsNowOrCountdownOnInterval(DateTime.Now, Settings.Default.CountdownTo, Settings.Default.WavFileInterval))
             return;
 
         try

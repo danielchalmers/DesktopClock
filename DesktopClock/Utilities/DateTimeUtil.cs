@@ -4,29 +4,7 @@ namespace DesktopClock;
 
 public static class DateTimeUtil
 {
-    /// <summary>
-    /// Converts a DateTime to a DateTimeOffset, without risking any onerous exceptions
-    /// the framework quite unfortunately throws within the DateTimeOffset constructor,
-    /// such as they do when the source DateTime's Kind is not set to UTC. The best and
-    /// most performant way around this, which we do herein, is to simply construct the
-    /// new DateTimeOffset with the overload that excepts Ticks. Also, we will simply
-    /// return <see cref="DateTimeOffset.MinValue"/> if the source DateTime was
-    /// <see cref="DateTime.MinValue"/>.
-    /// </summary>
-    /// <remarks>https://stackoverflow.com/a/48511228</remarks>
-    /// <param name="dt">Source DateTime.</param>
-    /// <param name="offset">Offset</param>
-    public static DateTimeOffset ToDateTimeOffset(this DateTime dt, TimeSpan offset)
-    {
-        // adding negative offset to a min-datetime will throw, this is a 
-        // sufficient catch. Note however that a DateTime of just a few hours can still throw
-        if (dt == DateTime.MinValue)
-            return DateTimeOffset.MinValue;
-
-        return new DateTimeOffset(dt.Ticks, offset);
-    }
-
-    public static bool AreEqualExcludingMilliseconds(this DateTime dt1, DateTime dt2)
+    public static bool EqualExcludingMillisecond(this DateTime dt1, DateTime dt2)
     {
         if (dt1.Year != dt2.Year)
             return false;
@@ -49,13 +27,13 @@ public static class DateTimeUtil
         return true;
     }
 
-    public static bool IsEitherNowOrCountdownOnInterval(DateTime now, DateTime countdown, TimeSpan interval)
+    public static bool IsNowOrCountdownOnInterval(DateTime now, DateTime countdown, TimeSpan interval)
     {
         var time = countdown == default ? now.TimeOfDay : countdown - now;
 
         var isOnInterval = interval != default && (int)time.TotalSeconds % (int)interval.TotalSeconds == 0;
 
-        var isCountdownReached = now.AreEqualExcludingMilliseconds(countdown);
+        var isCountdownReached = now.EqualExcludingMillisecond(countdown);
 
         return isOnInterval || isCountdownReached;
     }

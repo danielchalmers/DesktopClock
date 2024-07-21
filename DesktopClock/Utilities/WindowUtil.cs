@@ -5,7 +5,7 @@ namespace DesktopClock;
 public static class WindowUtil
 {
     /// <summary>
-    /// Hides the window until the user opens it through the taskbar, tray, alt-tab, etc.
+    /// Hides the window until the user opens it again through the taskbar, tray, alt-tab, etc.
     /// </summary>
     public static void HideFromScreen(this Window window)
     {

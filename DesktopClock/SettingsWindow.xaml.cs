@@ -109,7 +109,7 @@ public partial class SettingsWindowViewModel : ObservableObject
     }
 
     /// <summary>
-    /// Disables countdown mode by resetting the value to default.
+    /// Disables countdown mode by resetting the date to default.
     /// </summary>
     [RelayCommand]
     public void ResetCountdown()

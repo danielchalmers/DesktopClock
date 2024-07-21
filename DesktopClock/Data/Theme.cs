@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace DesktopClock;
 
-/// <summary>
-/// A defined color set.
-/// </summary>
 public readonly record struct Theme
 {
     /// <summary>
@@ -36,8 +33,8 @@ public readonly record struct Theme
     /// <remarks>
     /// https://www.materialui.co/colors - A100, A700.
     /// </remarks>
-    public static IReadOnlyList<Theme> DefaultThemes { get; } = new Theme[]
-    {
+    public static IReadOnlyList<Theme> DefaultThemes { get; } =
+    [
         new("Light Text", "#F5F5F5", "#212121"),
         new("Dark Text", "#212121", "#F5F5F5"),
         new("Red", "#D50000", "#FF8A80"),
@@ -47,7 +44,7 @@ public readonly record struct Theme
         new("Cyan", "#00B8D4", "#84FFFF"),
         new("Green", "#00C853", "#B9F6CA"),
         new("Orange", "#FF6D00", "#FFD180"),
-    };
+    ];
 
     /// <summary>
     /// Returns a random theme from <see cref="DefaultThemes"/>.
@@ -55,6 +52,7 @@ public readonly record struct Theme
     public static Theme GetRandomDefaultTheme()
     {
         var random = new Random();
-        return DefaultThemes[random.Next(0, DefaultThemes.Count)];
+        var index = random.Next(0, DefaultThemes.Count);
+        return DefaultThemes[index];
     }
 }
