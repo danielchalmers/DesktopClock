@@ -33,7 +33,10 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Grid.Column="0"
+                             Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True"
+                             MaxLines="3" />
                     <ComboBox Grid.Column="1"
                               DisplayMemberPath="Example"
                               ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
@@ -49,7 +52,9 @@
                 </TextBlock>
 
                 <TextBlock Text="Countdown Format:" />
-                <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         AcceptsReturn="True"
+                         MaxLines="3" />
                 <TextBlock FontStyle="Italic"
                            FontSize="10"
                            Margin="0,0,0,12">
