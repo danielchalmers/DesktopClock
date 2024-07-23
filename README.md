@@ -8,10 +8,13 @@ A free, open-source digital clock for your desktop that stays visible on screen,
 You can fully customize its appearance and behavior, including font, time zone, format, color, or even custom sounds. Additionally, it offers a countdown feature to any specified date.
 
 **Default Clock:**  
-![Screenshot](https://github.com/danielchalmers/DesktopClock/assets/7112040/6038fa47-3a29-4b74-8f4f-fffeb8af8d0a)  
+![gif](https://github.com/danielchalmers/DesktopClock/assets/7112040/6038fa47-3a29-4b74-8f4f-fffeb8af8d0a)  
 
 **Context Menu:**  
-![Screenshot](https://user-images.githubusercontent.com/7112040/201500304-fadedaeb-fc50-47b7-9de0-80c45346c35d.png)
+![image](https://github.com/user-attachments/assets/2154f1d3-23b0-4161-9a12-02748f5941db)
+
+**Settings - Format**  
+![image](https://github.com/user-attachments/assets/a7e07b9f-a927-44e7-b406-1ab18226adfd)
 
 ## Discover More
 
