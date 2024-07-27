@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -79,7 +80,7 @@ public partial class SettingsWindowViewModel : ObservableObject
     public SettingsWindowViewModel(Settings settings)
     {
         Settings = settings;
-        FontFamilies = Fonts.SystemFontFamilies.Select(ff => ff.Source).ToList();
+        FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
         TimeZones = TimeZoneInfo.GetSystemTimeZones().Select(tz => tz.Id).ToList();
     }
@@ -115,5 +116,21 @@ public partial class SettingsWindowViewModel : ObservableObject
     public void ResetCountdown()
     {
         Settings.CountdownTo = default;
+    }
+
+    private IEnumerable<string> GetAllSystemFonts()
+    {
+        // Get fonts from WPF.
+        foreach (var fontFamily in Fonts.SystemFontFamilies)
+        {
+            yield return fontFamily.Source;
+        }
+
+        // Get fonts from System.Drawing.
+        var installedFontCollection = new InstalledFontCollection();
+        foreach (var fontFamily in installedFontCollection.Families)
+        {
+            yield return fontFamily.Name;
+        }
     }
 }
