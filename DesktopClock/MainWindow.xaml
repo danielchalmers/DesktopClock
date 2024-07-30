@@ -65,15 +65,19 @@
 
             <Separator />
 
-            <MenuItem Command="{Binding OpenSettingsCommand}" CommandParameter="0" Header="_Format" />
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}" CommandParameter="0" Header="_Format" />
 
-            <MenuItem Command="{Binding OpenSettingsCommand}" CommandParameter="1" Header="_Appearance" />
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}" CommandParameter="1" Header="_Appearance" />
 
-            <MenuItem Command="{Binding OpenSettingsCommand}" CommandParameter="2" Header="_Behavior" />
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}" CommandParameter="2" Header="_Behavior" />
 
-            <MenuItem Command="{Binding OpenSettingsCommand}" CommandParameter="3" Header="H_elp" />
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}" CommandParameter="3" Header="H_elp" />
 
             <Separator />
+
+            <MenuItem Command="{Binding OpenSettingsFileCommand}"
+			          Header="Advanced _settings"
+			          IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
             <MenuItem Command="{Binding NewClockCommand}"
                       Header="Create _new clock"
