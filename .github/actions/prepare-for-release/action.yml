@@ -29,7 +29,8 @@ runs:
         dotnet tool install --global wix --version 4.0.6
         for arch in ${{ inputs.archs }}; do
           dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/$arch" -c Release --os win --arch $arch -p:Version=${{ inputs.version }}
-          wix build Product.wxs -d MainExeSource="publish/$arch/DesktopClock.exe" -o "publish/$arch/DesktopClock-${{ inputs.version }}-${arch}.msi"
+          wix build Product.wxs -d MainExeSource="publish/$arch/DesktopClock.exe" -o "publish/$arch/DesktopClock-installer-${{ inputs.version }}-${arch}.msi"
+          zip "publish/$arch/DesktopClock-portable-${{ inputs.version }}-${arch}.zip" "publish/$arch/DesktopClock.exe"
         done
 
     - uses: actions/upload-artifact@v4

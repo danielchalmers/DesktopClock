@@ -22,6 +22,6 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         tag: "v${{ github.event.inputs.version }}"
-        artifacts: "publish/*/*.exe,publish/*/*.msi"
+        artifacts: "publish/*/*.zip,publish/*/*.msi"
         generateReleaseNotes: true
         prerelease: ${{ contains(github.event.inputs.version, 'preview') }}
