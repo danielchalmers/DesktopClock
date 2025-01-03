@@ -54,7 +54,7 @@
                 </MenuItem.Header>
             </MenuItem>
 
-            <MenuItem Header="The_me"
+            <MenuItem Header="Quick The_me"
                       ItemsSource="{x:Static local:Theme.DefaultThemes}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
