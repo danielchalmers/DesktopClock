@@ -2,6 +2,14 @@ name: Prepare for release
 
 description: Builds, tests, and creates an installer that's ready for release.
 
+inputs:
+  version:
+    description: 'Version number for the app'
+    default: '0.0.0'
+  rids:
+    description: 'Runtime identifiers for the build'
+    default: 'win-x64 win-arm64'
+
 runs:
   using: "composite"
   steps:
@@ -17,13 +25,12 @@ runs:
 
     - name: Publish
       shell: bash
-      run: dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish" -c Release -r win-x64
-
-    - name: Create installer
-      shell: bash
       run: |
-        dotnet tool install --global wix --version 4.0.5
-        wix build Product.wxs -o "publish/Install DesktopClock.msi"
+        dotnet tool install --global wix --version 4.0.6
+        for rid in ${{ inputs.rids }}; do
+          dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/$rid" -c Release -r $rid -p:Version=${{ inputs.version }}
+          wix build Product.wxs -o "publish/$rid/Install DesktopClock ${{ inputs.version }} ${rid}.msi"
+        done
 
     - uses: actions/upload-artifact@v4
       with:
