@@ -29,10 +29,7 @@ runs:
         dotnet tool install --global wix --version 4.0.6
         for rid in ${{ inputs.rids }}; do
           dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/$rid" -c Release -r $rid -p:Version=${{ inputs.version }}
-          (
-            cd "publish/$rid" &&
-            wix build Product.wxs -o "DesktopClock-${{ inputs.version }}-${rid}.msi"
-          )
+          wix build Product.wxs -d MainExeSource="publish/$rid/DesktopClock.exe" -o "publish/$rid/DesktopClock-${{ inputs.version }}-${rid}.msi"
         done
 
     - uses: actions/upload-artifact@v4
