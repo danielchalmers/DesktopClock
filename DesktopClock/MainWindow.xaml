@@ -119,7 +119,8 @@
                             <DataTrigger.Setters>
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                        <ImageBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                                    ImageSource="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger.Setters>
