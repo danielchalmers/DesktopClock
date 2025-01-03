@@ -122,6 +122,17 @@
                            FontSize="10"
                            Margin="0,0,0,12" />
 
+                <TextBlock Text="Text Opacity:" />
+                <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Minimum="0"
+                        Maximum="1"
+                        TickFrequency="0.01"
+                        IsSnapToTickEnabled="True" />
+                <TextBlock Text="Opacity of the clock's text."
+                           FontStyle="Italic"
+                           FontSize="10"
+                           Margin="0,0,0,12" />
+
                 <TextBlock Text="Outer Color:" />
                 <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Text="The outer color, for either the background or the outline."

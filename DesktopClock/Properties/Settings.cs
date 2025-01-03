@@ -118,6 +118,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public Color TextColor { get; set; }
 
     /// <summary>
+    /// Opacity of the text.
+    /// </summary>
+    public double TextOpacity { get; set; } = 1;
+
+    /// <summary>
     /// The outer color, for either the background or the outline.
     /// </summary>
     public Color OuterColor { get; set; }

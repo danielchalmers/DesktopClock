@@ -149,7 +149,8 @@
                                      TextWrapping="Wrap">
 
                 <local:OutlinedTextBlock.Fill>
-                    <SolidColorBrush Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                    <SolidColorBrush Opacity="{Binding TextOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                     Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                 </local:OutlinedTextBlock.Fill>
 
                 <local:OutlinedTextBlock.Style>
