@@ -10,7 +10,7 @@
 
   <PropertyGroup>
     <Company>Daniel Chalmers</Company>
-    <Description>A digital clock for your desktop that stays on screen, ready whenever you need it.</Description>
+    <Description>A digital clock for your desktop that's ready whenever you need it.</Description>
     <Copyright>© Daniel Chalmers</Copyright>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
