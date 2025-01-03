@@ -47,7 +47,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = this;
 
-        _timeZone = Settings.Default.GetTimeZoneInfo();
+        _timeZone = Settings.Default.TimeZoneInfo;
 
         Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
 
@@ -218,7 +218,7 @@ public partial class MainWindow : Window
         switch (e.PropertyName)
         {
             case nameof(Settings.Default.TimeZone):
-                _timeZone = Settings.Default.GetTimeZoneInfo();
+                _timeZone = Settings.Default.TimeZoneInfo;
                 UpdateTimeString();
                 break;
 

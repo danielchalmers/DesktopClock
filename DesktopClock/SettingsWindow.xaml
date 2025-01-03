@@ -89,7 +89,8 @@
 
                 <TextBlock Text="Time Zone:" />
                 <ComboBox ItemsSource="{Binding TimeZones}"
-                          SelectedItem="{Binding Settings.TimeZone, Mode=TwoWay}" />
+                          SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
+                          DisplayMemberPath="DisplayName" />
                 <TextBlock Text="A different time zone to be used."
                            FontStyle="Italic"
                            FontSize="10"

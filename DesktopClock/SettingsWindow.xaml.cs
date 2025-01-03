@@ -82,7 +82,7 @@ public partial class SettingsWindowViewModel : ObservableObject
         Settings = settings;
         FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
-        TimeZones = TimeZoneInfo.GetSystemTimeZones().Select(tz => tz.Id).ToList();
+        TimeZones = TimeZoneInfo.GetSystemTimeZones();
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// All available time zones reported by the system.
     /// </summary>
-    public IList<string> TimeZones { get; }
+    public IList<TimeZoneInfo> TimeZones { get; }
 
     /// <summary>
     /// Sets the format string in settings.

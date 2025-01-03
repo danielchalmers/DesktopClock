@@ -247,6 +247,29 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         }
     }
 
+    /// <summary>
+    /// Proxy for binding to the a timezone.
+    /// </summary>
+    [JsonIgnore]
+    public TimeZoneInfo TimeZoneInfo
+    {
+        get
+        {
+            try
+            {
+                return TimeZoneInfo.FindSystemTimeZoneById(TimeZone);
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                return TimeZoneInfo.Local;
+            }
+        }
+        set
+        {
+            TimeZone = value.Id;
+        }
+    }
+
     #endregion "Properties"
 
     /// <summary>
@@ -347,22 +370,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
         // Save the new height as an integer to make it easier for the user.
         Height = (int)exp;
-    }
-
-    /// <summary>
-    /// Gets the time zone selected in settings, or local by default.
-    /// </summary>
-    public TimeZoneInfo GetTimeZoneInfo()
-    {
-
-        try
-        {
-            return TimeZoneInfo.FindSystemTimeZoneById(TimeZone);
-        }
-        catch (TimeZoneNotFoundException)
-        {
-            return TimeZoneInfo.Local;
-        }
     }
 
     public void Dispose()
