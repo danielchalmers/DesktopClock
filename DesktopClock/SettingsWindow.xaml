@@ -332,8 +332,8 @@
                         </Hyperlink>
                     </TextBlock>
                     <TextBlock>
-                        <Hyperlink NavigateUri="https://www.flaticon.com/free-icon/three-o-clock-clock_13435" RequestNavigate="Hyperlink_RequestNavigate">
-                            Clock icon
+                        <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0VNOw7CMAy9i1m7ABISXbkCG0LITWyIcGsUJzBUvTtOl3rwk953hi9KJYN%2Bhoj5fX3RSNAzilEH%2FLxI%2BmAuTTZygEiMVQp0kIJOTmAIZPYoyXPLGlHR7MKO13PnsHGH%2FfnEx2YcNVZpwzfAKWZNsXWq%2Bf%2FRAPflD7ZvOVubAAAA" RequestNavigate="Hyperlink_RequestNavigate">
+                            IconKitchen
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>
