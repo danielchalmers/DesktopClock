@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using DesktopClock.Properties;
 
@@ -67,21 +66,5 @@ public class SettingsTests : IAsyncLifetime
         settings.ScaleHeight(-2);
 
         Assert.Equal(47, settings.Height);
-    }
-
-    [Fact(Skip = "The process cannot access the file [...] because it is being used by another process.")]
-    public void GetTimeZoneInfo_ShouldReturnExpectedTimeZoneInfo()
-    {
-        var settings = Settings.Default;
-
-        // Default TimeZone should return Local
-        var localTimeZone = TimeZoneInfo.Local;
-        var timeZoneInfo = settings.GetTimeZoneInfo();
-        Assert.Equal(localTimeZone, timeZoneInfo);
-
-        // Set to a specific time zone
-        settings.TimeZone = "Pacific Standard Time";
-        timeZoneInfo = settings.GetTimeZoneInfo();
-        Assert.Equal("Pacific Standard Time", timeZoneInfo.Id);
     }
 }
