@@ -3,26 +3,28 @@
 [![Release](https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases)](https://github.com/danielchalmers/DesktopClock/releases)
 [![License](https://img.shields.io/github/license/danielchalmers/DesktopClock)](LICENSE)
 
-A free, open-source digital clock for your desktop that stays visible on screen, showing the current date and time.
+A free digital clock for your desktop that stays visible on screen, showing the current date and time, or a countdown.
 
-You can fully customize its appearance and behavior, including font, time zone, format, color, or even custom sounds. Additionally, it offers a countdown feature to any specified date.
+You can fully customize its appearance and behavior, including font, time zone, format, color, and even custom sounds.
 
-**Default Clock:**  
-![gif](https://github.com/danielchalmers/DesktopClock/assets/7112040/6038fa47-3a29-4b74-8f4f-fffeb8af8d0a)  
+**Basic Clock:**  
+<img src="https://github.com/danielchalmers/DesktopClock/assets/7112040/6038fa47-3a29-4b74-8f4f-fffeb8af8d0a" width="400" />
 
 **Context Menu:**  
-![image](https://github.com/user-attachments/assets/2154f1d3-23b0-4161-9a12-02748f5941db)
+<img src="https://github.com/user-attachments/assets/2154f1d3-23b0-4161-9a12-02748f5941db" width="200" />
 
-**Settings - Format**  
-![image](https://github.com/user-attachments/assets/a7e07b9f-a927-44e7-b406-1ab18226adfd)
+**Settings - Format:**  
+<img src="https://github.com/user-attachments/assets/a7e07b9f-a927-44e7-b406-1ab18226adfd" width="400" />
 
 ## Discover More
 
-Explore my other free apps:
+Explore my other projects:
 
-😊[JournalApp](https://github.com/danielchalmers/JournalApp) - Stay on top of your well-being with a versatile journaling app for Android!
+😊[Journal App](https://github.com/danielchalmers/JournalApp) - Stay on top of your well-being with a versatile journaling app for Android
 
-🔄[Network Monitor](https://github.com/danielchalmers/Network-Monitor) - View live network latency and bandwidth usage on your desktop.
+🔄[Network Monitor](https://github.com/danielchalmers/Network-Monitor) - View live network latency and bandwidth usage on your desktop
+
+📷[TeslaCam Player](https://github.com/danielchalmers/TeslaCam) - Play videos from your Tesla directly on your computer
 
 ## Contributions
 
