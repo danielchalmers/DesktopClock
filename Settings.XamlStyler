@@ -1,5 +1,5 @@
 {
-    "AttributesTolerance": 2,
+    "AttributesTolerance": 1,
     "KeepFirstAttributeOnSameLine": true,
     "MaxAttributeCharactersPerLine": 40,
     "MaxAttributesPerLine": 1,

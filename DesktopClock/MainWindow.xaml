@@ -27,10 +27,13 @@
         StateChanged="Window_StateChanged"
         KeyDown="Window_KeyDown">
     <Window.Resources>
-        <ContextMenu x:Key="MainContextMenu" x:Shared="False">
-            <MenuItem Command="{Binding CopyToClipboardCommand}" Header="_Copy" />
+        <ContextMenu x:Key="MainContextMenu"
+                     x:Shared="False">
+            <MenuItem Command="{Binding CopyToClipboardCommand}"
+                      Header="_Copy" />
 
-            <MenuItem Command="{Binding HideForNowCommand}" Header="_Hide for now" />
+            <MenuItem Command="{Binding HideForNowCommand}"
+                      Header="_Hide for now" />
 
             <Separator />
 
@@ -51,7 +54,8 @@
                 </MenuItem.Header>
             </MenuItem>
 
-            <MenuItem Header="The_me" ItemsSource="{x:Static local:Theme.DefaultThemes}">
+            <MenuItem Header="The_me"
+                      ItemsSource="{x:Static local:Theme.DefaultThemes}">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
                         <Setter Property="Command" Value="{Binding DataContext.SetThemeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
@@ -65,25 +69,34 @@
 
             <Separator />
 
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}" CommandParameter="0" Header="_Format" />
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
+                      CommandParameter="0"
+                      Header="_Format" />
 
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}" CommandParameter="1" Header="_Appearance" />
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
+                      CommandParameter="1"
+                      Header="_Appearance" />
 
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}" CommandParameter="2" Header="_Behavior" />
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
+                      CommandParameter="2"
+                      Header="_Behavior" />
 
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}" CommandParameter="3" Header="H_elp" />
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
+                      CommandParameter="3"
+                      Header="H_elp" />
 
             <Separator />
 
             <MenuItem Command="{Binding OpenSettingsFileCommand}"
-			          Header="Advanced _settings"
-			          IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                      Header="Advanced _settings"
+                      IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
             <MenuItem Command="{Binding NewClockCommand}"
                       Header="Create _new clock"
                       IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
-            <MenuItem Command="{Binding ExitCommand}" Header="E_xit" />
+            <MenuItem Command="{Binding ExitCommand}"
+                      Header="E_xit" />
         </ContextMenu>
 
         <tb:TaskbarIcon x:Key="TrayIcon"
@@ -94,13 +107,15 @@
     </Window.Resources>
 
     <Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-        <Border CornerRadius="{Binding BackgroundCornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}" Padding="1,0,1,0">
+        <Border CornerRadius="{Binding BackgroundCornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                Padding="1,0,1,0">
             <Border.Style>
                 <Style TargetType="Border">
                     <Setter Property="Background" Value="Transparent" />
 
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="True">
+                        <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                     Value="True">
                             <DataTrigger.Setters>
                                 <Setter Property="Background">
                                     <Setter.Value>
@@ -119,7 +134,8 @@
                             <MultiDataTrigger.Setters>
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}" Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                        <SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                                         Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                                     </Setter.Value>
                                 </Setter>
                             </MultiDataTrigger.Setters>
@@ -142,7 +158,8 @@
                         <Setter Property="Margin" Value="0" />
 
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="False">
+                            <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                         Value="False">
                                 <DataTrigger.Setters>
                                     <Setter Property="Stroke">
                                         <Setter.Value>
