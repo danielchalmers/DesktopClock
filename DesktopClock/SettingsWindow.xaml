@@ -322,13 +322,19 @@
                     <TextBlock>
                         <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
                                    RequestNavigate="Hyperlink_RequestNavigate">
-                            JournalApp - Save notes and keep track of your well-being (Android)
+                            JournalApp - Stay on top of your well-being (Android)
                         </Hyperlink>
                     </TextBlock>
                     <TextBlock>
                         <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
                                    RequestNavigate="Hyperlink_RequestNavigate">
-                            Network Monitor - View live latency and bandwidth usage (Windows)
+                            Network Monitor - See latency and bandwidth usage (Windows)
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers/TeslaCam"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            TeslaCam - Watch dashcam clips on your computer (Windows)
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>
