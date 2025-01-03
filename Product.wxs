@@ -48,7 +48,7 @@
   <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
       <Component Id="MainExe" Guid="2148738D-B1F4-48BD-8615-1617541C6BB3">
-        <File Id="MainExe" Name="$(var.Name).exe" Source="$(var.MainExeSource)" />
+        <File Id="MainExe" Name="$(var.Name).exe" Source="$(var.Name).exe" />
       </Component>
     </ComponentGroup>
   </Fragment>
