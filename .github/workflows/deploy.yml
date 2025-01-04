@@ -7,6 +7,10 @@ on:
         description: 'Version number for the app'
         required: true
         default: ''
+      updateRelease:
+        description: 'Update existing release'
+        required: true
+        default: 'false'
 
 jobs:
   deploy:
@@ -22,6 +26,9 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         tag: "v${{ github.event.inputs.version }}"
-        artifacts: "publish/*/*.zip,publish/*/*.msi"
+        artifacts: "publish/*.zip,publish/*.msi"
         generateReleaseNotes: true
         prerelease: ${{ contains(github.event.inputs.version, 'preview') }}
+        allowUpdates: ${{ github.event.inputs.updateRelease }}
+        removeArtifacts: true
+        omitBodyDuringUpdate: true

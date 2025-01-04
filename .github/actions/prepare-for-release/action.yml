@@ -29,17 +29,16 @@ runs:
         dotnet tool install --global wix --version 4.0.6
         for arch in ${{ inputs.archs }}; do
           dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/$arch" -c Release --os win --arch $arch -p:Version=${{ inputs.version }}
-          wix build Product.wxs -d MainExeSource="publish/$arch/DesktopClock.exe" -o "publish/$arch/DesktopClock-installer-${{ inputs.version }}-${arch}.msi"
+          wix build Product.wxs -d MainExeSource="publish/$arch/DesktopClock.exe" -o "publish/DesktopClock-${{ inputs.version }}-${arch}.msi"
         done
 
     - name: Create Portable ZIPs
       shell: pwsh
       run: |
         foreach ($arch in "${{ inputs.archs }}".Split(' ')) {
-          Compress-Archive -Path "publish/$arch/DesktopClock.exe" -DestinationPath "publish/$arch/DesktopClock-portable-${{ inputs.version }}-$arch.zip"
+          Compress-Archive -Path "publish/$arch/DesktopClock.exe" -DestinationPath "publish/DesktopClock-${{ inputs.version }}-$arch.zip"
         }
 
     - uses: actions/upload-artifact@v4
       with:
-        path: |
-          publish
+        path: "publish/*.zip,publish/*.msi"
