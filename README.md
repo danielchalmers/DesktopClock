@@ -3,9 +3,9 @@
 [![Release](https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases)](https://github.com/danielchalmers/DesktopClock/releases)
 [![License](https://img.shields.io/github/license/danielchalmers/DesktopClock)](LICENSE)
 
-A free digital clock for your desktop that stays visible on screen, showing the current date and time, or a countdown.
+A digital clock for your desktop that stays visible on screen, showing the current date and time, or a countdown.
 
-You can fully customize its appearance and behavior, including font, time zone, format, color, and even custom sounds.
+It's fully customizable with options including font, time zone, format, background, color, and even custom sounds.
 
 **Basic Clock:**  
 <img src="https://github.com/danielchalmers/DesktopClock/assets/7112040/6038fa47-3a29-4b74-8f4f-fffeb8af8d0a" width="400" />
