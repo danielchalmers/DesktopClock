@@ -1,4 +1,4 @@
-name: Deploy
+name: Release and deploy
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - uses: ./.github/actions/prepare-for-release
+    - uses: ./.github/actions/full-build
       with:
         version: ${{ github.event.inputs.version }}
 

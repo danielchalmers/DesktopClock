@@ -1,6 +1,6 @@
-name: Prepare for release
+name: Full Build
 
-description: Builds, tests, and creates an installer that's ready for release.
+description: Builds, tests, and creates binaries that are ready for release.
 
 inputs:
   version:
@@ -41,6 +41,7 @@ runs:
 
     - uses: actions/upload-artifact@v4
       with:
+        if-no-files-found: error
         path: |
-          "publish/*.zip"
-          "publish/*.msi"
+          publish/*.zip
+          publish/*.msi
