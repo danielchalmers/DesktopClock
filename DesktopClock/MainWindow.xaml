@@ -165,7 +165,8 @@
                                 <DataTrigger.Setters>
                                     <Setter Property="Stroke">
                                         <Setter.Value>
-                                            <SolidColorBrush Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                            <SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                                                             Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                                         </Setter.Value>
                                     </Setter>
 
