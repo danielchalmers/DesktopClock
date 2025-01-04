@@ -41,4 +41,6 @@ runs:
 
     - uses: actions/upload-artifact@v4
       with:
-        path: "publish/*.zip,publish/*.msi"
+        path: |
+          "publish/*.zip"
+          "publish/*.msi"
