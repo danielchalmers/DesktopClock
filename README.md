@@ -16,6 +16,14 @@ You can fully customize its appearance and behavior, including font, time zone, 
 **Settings - Format:**  
 <img src="https://github.com/user-attachments/assets/a7e07b9f-a927-44e7-b406-1ab18226adfd" width="400" />
 
+## Download
+
+To get started, go to the [Releases page](https://github.com/danielchalmers/DesktopClock/releases) and find Assets. For example:
+
+<img src="https://github.com/user-attachments/assets/d117e992-8d83-4df9-ad69-756d816b700c" width="700" />
+
+Grab an `.msi` for the installer or a `.zip` for the portable version. Most people use x64 but ARM is also available.
+
 ## Discover More
 
 Explore my other projects:
