@@ -82,7 +82,7 @@ public partial class MainWindow : Window
     {
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.HideForNow))
         {
-            MessageBox.Show(this, "Clock will be minimized and can be opened again from the taskbar (or system tray if enabled).",
+            MessageBox.Show(this, "Minimzing clock. Open later from the taskbar, or tray if enabled.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
@@ -116,7 +116,7 @@ public partial class MainWindow : Window
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
         {
             MessageBox.Show(this,
-                "Settings are stored in JSON format and will be opened in Notepad. Simply save the file to see your changes appear on the clock. To start fresh, delete your '.settings' file.",
+                "Settings are stored in JSON format and will be opened in Notepad. Save the file for your changes to take effect. To start fresh, delete your '.settings' file.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
@@ -144,9 +144,9 @@ public partial class MainWindow : Window
         {
             // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
             MessageBox.Show(this,
-                "Couldn't open settings file.\n\n" +
-                "This app may have be reuploaded without permission. If you paid for it, ask for a refund and download it for free from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If it still doesn't work, create a new Issue at that link with details on what happened and include this error: \"{ex.Message}\"",
+                "Couldn't open settings file in Notepad.\n\n" +
+                "This app may have be stolen. If you paid for it, ask for a refund and download it for free from https://github.com/danielchalmers/DesktopClock.\n\n" +
+                $"If it still doesn't work, create a new issue at that link with details on what happened and include this error: \"{ex.Message}\"",
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -387,7 +387,7 @@ public partial class MainWindow : Window
                 "Settings can't be saved because of an access error.\n\n" +
                 $"Make sure {Title} is in a folder that doesn't require admin privileges, " +
                 "and that you got it from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                "If the problem still persists, feel free to create a new Issue at the above link with as many details as possible.",
+                "If the problem still persists, create a new issue at the link with as many details as possible.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }

@@ -9,13 +9,13 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="DesktopClock"
-        Width="500"
+        Width="600"
         ResizeMode="CanMinimize"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="Padding" Value="8,0" />
         </Style>
 
         <Style TargetType="TextBox">
@@ -44,12 +44,11 @@
                               SelectionChanged="SelectFormat" />
                 </Grid>
                 <TextBlock FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12">
-                    <Run Text=".NET format string for the time shown on the clock. Format specific parts inside { and }." />
+                           Margin="0,0,0,16">
+                    <Run Text="Format string for the time. Anything in inside '{' and '}' will be formatted -" />
                     <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
                                RequestNavigate="Hyperlink_RequestNavigate">
-                        Learn more
+                        Learn more.
                     </Hyperlink>
                 </TextBlock>
 
@@ -58,13 +57,13 @@
                          AcceptsReturn="True"
                          MaxLines="3" />
                 <TextBlock FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12">
-                    <Run Text=".NET format string for the countdown mode. If left blank, it will be dynamic." />
+                           Margin="0,0,0,16">
+                    <Run Text="Format string for the countdown mode -" />
                     <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
                                RequestNavigate="Hyperlink_RequestNavigate">
-                        Learn more
+                        Learn more.
                     </Hyperlink>
+                    <Run Text="Dynamic if left blank." />
                 </TextBlock>
 
                 <TextBlock Text="Countdown To:" />
@@ -78,13 +77,11 @@
                              Grid.Column="0" />
                     <Button Content="Reset"
                             Command="{Binding ResetCountdownCommand}"
-                            Padding="4,0,4,0"
                             Grid.Column="1" />
                 </Grid>
-                <TextBlock Text="Date and time to countdown to. If left blank, countdown mode is not enabled."
+                <TextBlock Text="Date and time to countdown to. Not enabled if left blank."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
 
                 <TextBlock Text="Time Zone:" />
@@ -93,8 +90,7 @@
                           DisplayMemberPath="DisplayName" />
                 <TextBlock Text="A different time zone to be used."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
             </StackPanel>
         </TabItem>
 
@@ -105,23 +101,20 @@
                           SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
                 <TextBlock Text="Font to use for the clock's text."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <TextBlock Text="Font Style:" />
                 <ComboBox ItemsSource="{Binding FontStyles}"
                           SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
                 <TextBlock Text="Style of font to use for the clock's text."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <TextBlock Text="Text Color:" />
                 <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Text="Text color for the clock's text."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <TextBlock Text="Text Opacity:" />
                 <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -131,22 +124,19 @@
                         IsSnapToTickEnabled="True" />
                 <TextBlock Text="Opacity of the clock's text."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <TextBlock Text="Outer Color:" />
                 <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Text="The outer color, for either the background or the outline."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <CheckBox Content="Enable Background"
                           IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
                 <TextBlock Text="Shows a solid background instead of an outline."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <TextBlock Text="Background Opacity:" />
                 <Slider Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -156,16 +146,14 @@
                         IsSnapToTickEnabled="True" />
                 <TextBlock Text="Opacity of the background."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <!--  Binding doesn't format correctly and needs better documentation.  -->
                 <!--<TextBlock Text="Background Corner Radius:" />
                 <TextBox Text="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay}" />
                 <TextBlock Text="Corner radius of the background."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />-->
+                           Margin="0,0,0,16" />-->
 
                 <TextBlock Text="Background Image Path:" />
                 <Grid>
@@ -178,21 +166,18 @@
                              Grid.Column="0" />
                     <Button Content="Browse..."
                             Click="BrowseBackgroundImagePath"
-                            Padding="4,0,4,0"
                             Grid.Column="1" />
                 </Grid>
-                <TextBlock Text="Path to the background image. If left blank, a solid color will be used."
+                <TextBlock Text="Path to the background image. A solid color will be used if left blank."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <!--  Binding doesn't format correctly and needs better documentation.  -->
                 <!--<TextBlock Text="Outline Thickness:" />
                 <TextBox Text="{Binding Settings.OutlineThickness, Mode=TwoWay}" />
                 <TextBlock Text="Thickness of the outline around the clock."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />-->
+                           Margin="0,0,0,16" />-->
             </StackPanel>
         </TabItem>
 
@@ -202,43 +187,37 @@
                           IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
                 <TextBlock Text="Shows the app icon in the taskbar instead of the tray."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <CheckBox Content="Run on Startup"
                           IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
                 <TextBlock Text="Opens the app when you log in."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <CheckBox Content="Start Hidden"
                           IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
                 <TextBlock Text="Starts the app hidden until the taskbar or tray icon is clicked."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <CheckBox Content="Drag to Move"
                           IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
                 <TextBlock Text="Allows moving the clock by dragging it with the cursor."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <CheckBox Content="Right Aligned"
                           IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
                 <TextBlock Text="Experimental: Keeps the clock window aligned to the right when the size changes."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <CheckBox Content="Burn-in Mitigation"
                           IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
                 <TextBlock Text="Experimental: Shifts the clock periodically in order to reduce screen burn-in."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <TextBlock Text="WAV File Path:" />
                 <Grid>
@@ -251,27 +230,23 @@
                              Grid.Column="0" />
                     <Button Content="Browse..."
                             Click="BrowseWavFilePath"
-                            Padding="4,0,4,0"
                             Grid.Column="1" />
                 </Grid>
                 <TextBlock Text="Path to a WAV file to be played on a specified interval."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <TextBlock Text="WAV File Interval:" />
                 <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
                 <TextBlock Text="Interval for playing the WAV file if one is specified and exists (HH:mm:ss)."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
 
                 <CheckBox Content="Play WAV File on Countdown"
                           IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
                 <TextBlock Text="Play the WAV file when the countdown time elapses."
                            FontStyle="Italic"
-                           FontSize="10"
-                           Margin="0,0,0,12" />
+                           Margin="0,0,0,16" />
             </StackPanel>
         </TabItem>
 
@@ -281,7 +256,7 @@
                            FontSize="16">
                     Shortcuts
                 </TextBlock>
-                <StackPanel Margin="0,0,0,12">
+                <StackPanel Margin="0,0,0,16">
                     <TextBlock>
                         <Run FontWeight="Bold">Right-click:</Run>
                         Open the context menu</TextBlock>
@@ -306,7 +281,7 @@
                            FontSize="16">
                     Links
                 </TextBlock>
-                <StackPanel Margin="0,0,0,12">
+                <StackPanel Margin="0,0,0,16">
                     <TextBlock>
                         <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/releases"
                                    RequestNavigate="Hyperlink_RequestNavigate">
@@ -343,7 +318,7 @@
                            FontSize="16">
                     Credits
                 </TextBlock>
-                <StackPanel Margin="0,0,0,12">
+                <StackPanel Margin="0,0,0,16">
                     <TextBlock>
                         <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
                                    RequestNavigate="Hyperlink_RequestNavigate">

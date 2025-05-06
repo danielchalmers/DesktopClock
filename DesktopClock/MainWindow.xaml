@@ -71,19 +71,19 @@
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="0"
-                      Header="_Format" />
+                      Header="_Format…" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="1"
-                      Header="_Appearance" />
+                      Header="_Appearance…" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="2"
-                      Header="_Behavior" />
+                      Header="_Behavior…" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="3"
-                      Header="H_elp" />
+                      Header="H_elp…" />
 
             <Separator />
 
