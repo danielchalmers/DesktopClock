@@ -110,6 +110,13 @@
                            FontStyle="Italic"
                            Margin="0,0,0,16" />
 
+                <TextBlock Text="Font Weight:" />
+                <ComboBox ItemsSource="{Binding FontWeights}"
+                          SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
+                <TextBlock Text="Weight of the font for the clock's text."
+                           FontStyle="Italic"
+                           Margin="0,0,0,16" />
+
                 <TextBlock Text="Text Transform:" />
                 <ComboBox ItemsSource="{Binding TextTransforms}"
                           SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />

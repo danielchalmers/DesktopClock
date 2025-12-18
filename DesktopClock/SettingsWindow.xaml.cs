@@ -82,6 +82,7 @@ public partial class SettingsWindowViewModel : ObservableObject
         Settings = settings;
         FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
+        FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
         TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToArray();
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
     }
@@ -95,6 +96,11 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// All available font styles.
     /// </summary>
     public IList<string> FontStyles { get; }
+
+    /// <summary>
+    /// All available font weights.
+    /// </summary>
+    public IList<string> FontWeights { get; }
 
     /// <summary>
     /// All available text transformations.

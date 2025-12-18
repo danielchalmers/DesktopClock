@@ -113,6 +113,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string FontStyle { get; set; } = "Normal";
 
     /// <summary>
+    /// Weight of the font for the clock's text.
+    /// </summary>
+    public string FontWeight { get; set; } = "Normal";
+
+    /// <summary>
     /// Text transformation to apply to the clock's text.
     /// </summary>
     public TextTransform TextTransform { get; set; } = TextTransform.None;
