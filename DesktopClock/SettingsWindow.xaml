@@ -15,398 +15,524 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Padding" Value="8,0" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="MinHeight" Value="28" />
+            <Setter Property="Background" Value="#F5F5F5" />
+            <Setter Property="BorderBrush" Value="#D0D0D0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E8E8E8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#D8D8D8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="MinHeight" Value="23" />
+            <Setter Property="MinHeight" Value="26" />
+            <Setter Property="Padding" Value="2" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderBrush" Value="#D0D0D0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#A0A0A0" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#0078D4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="MinHeight" Value="26" />
+            <Setter Property="Padding" Value="6,4" />
+            <Setter Property="BorderBrush" Value="#D0D0D0" />
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="0,2,0,2" />
+        </Style>
+
+        <Style TargetType="Slider">
+            <Setter Property="Margin" Value="0,2,0,4" />
+        </Style>
+
+        <Style x:Key="LabelTextBlock"
+               TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,8,0,4" />
+            <Setter Property="Foreground" Value="#333333" />
+        </Style>
+
+        <Style x:Key="DescriptionTextBlock"
+               TargetType="TextBlock">
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="#666666" />
+            <Setter Property="Margin" Value="0,2,0,8" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style TargetType="Hyperlink">
+            <Setter Property="TextDecorations" Value="None" />
+            <Setter Property="Foreground" Value="#0078D4" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextDecorations" Value="Underline" />
+                    <Setter Property="Foreground" Value="#106EBE" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SectionHeader"
+               TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Foreground" Value="#2D2D2D" />
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
     </Window.Resources>
 
-    <TabControl Padding="12,12,12,0"
+    <TabControl Padding="16,12,16,12"
                 SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay}">
         <TabItem Header="_Format">
-            <StackPanel>
-                <TextBlock Text="Date and Time Format:" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="20" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0"
-                             Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Padding="2">
+                <StackPanel>
+                    <TextBlock Text="Time Format String:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
+                                 AcceptsReturn="True"
+                                 MaxLines="3" />
+                        <ComboBox Grid.Column="1"
+                                  DisplayMemberPath="Example"
+                                  ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
+                                  SelectionChanged="SelectFormat" />
+                    </Grid>
+                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                        <Run Text="Custom format string. Text inside '{' and '}' is displayed as-is." />
+                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            Learn more
+                        </Hyperlink>
+                    </TextBlock>
+
+                    <TextBlock Text="Countdown Display Format:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              AcceptsReturn="True"
                              MaxLines="3" />
-                    <ComboBox Grid.Column="1"
-                              DisplayMemberPath="Example"
-                              ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
-                              SelectionChanged="SelectFormat" />
-                </Grid>
-                <TextBlock FontStyle="Italic"
-                           Margin="0,0,0,16">
-                    <Run Text="Format string for the time. Anything in inside '{' and '}' will be formatted -" />
-                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
-                               RequestNavigate="Hyperlink_RequestNavigate">
-                        Learn more.
-                    </Hyperlink>
-                </TextBlock>
+                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                        <Run Text="Custom format for countdown timer." />
+                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            Learn more
+                        </Hyperlink>
+                        <Run Text=" • Leave blank for automatic formatting." />
+                    </TextBlock>
 
-                <TextBlock Text="Countdown Format:" />
-                <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         AcceptsReturn="True"
-                         MaxLines="3" />
-                <TextBlock FontStyle="Italic"
-                           Margin="0,0,0,16">
-                    <Run Text="Format string for the countdown mode -" />
-                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
-                               RequestNavigate="Hyperlink_RequestNavigate">
-                        Learn more.
-                    </Hyperlink>
-                    <Run Text="Dynamic if left blank." />
-                </TextBlock>
+                    <TextBlock Text="Target Date &amp; Time:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Countdown To:" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding Settings.CountdownTo, Mode=TwoWay}"
+                                 Grid.Column="0" />
+                        <Button Content="Reset"
+                                Command="{Binding ResetCountdownCommand}"
+                                Grid.Column="2" />
+                    </Grid>
+                    <TextBlock Text="Set a target date/time to start a countdown. Clear to disable."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBox Text="{Binding Settings.CountdownTo, Mode=TwoWay}"
-                             Grid.Column="0" />
-                    <Button Content="Reset"
-                            Command="{Binding ResetCountdownCommand}"
-                            Grid.Column="1" />
-                </Grid>
-                <TextBlock Text="Date and time to countdown to. Not enabled if left blank."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
-
-
-                <TextBlock Text="Time Zone:" />
-                <ComboBox ItemsSource="{Binding TimeZones}"
-                          SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
-                          DisplayMemberPath="DisplayName" />
-                <TextBlock Text="A different time zone to be used."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
-            </StackPanel>
+                    <TextBlock Text="Time Zone Override:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <ComboBox ItemsSource="{Binding TimeZones}"
+                              SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
+                              DisplayMemberPath="DisplayName" />
+                    <TextBlock Text="A different time zone to be used."
+                               Style="{StaticResource DescriptionTextBlock}" />
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
 
         <TabItem Header="_Appearance">
-            <StackPanel>
-                <TextBlock Text="Font Family:" />
-                <ComboBox ItemsSource="{Binding FontFamilies}"
-                          SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
-                <TextBlock Text="Font to use for the clock's text."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Padding="2">
+                <StackPanel>
+                    <TextBlock Text="Font:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <ComboBox ItemsSource="{Binding FontFamilies}"
+                              SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
+                    <TextBlock Text="Select the typeface for the clock."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="Font Style:" />
-                <ComboBox ItemsSource="{Binding FontStyles}"
-                          SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
-                <TextBlock Text="Style of font to use for the clock's text."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <TextBlock Text="Style:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <ComboBox ItemsSource="{Binding FontStyles}"
+                              SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
+                    <TextBlock Text="Select font style (e.g., Italic)."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="Font Weight:" />
-                <ComboBox ItemsSource="{Binding FontWeights}"
-                          SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
-                <TextBlock Text="Weight of the font for the clock's text."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <TextBlock Text="Weight:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <ComboBox ItemsSource="{Binding FontWeights}"
+                              SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
+                    <TextBlock Text="Select font thickness (e.g., Bold)."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="Text Transform:" />
-                <ComboBox ItemsSource="{Binding TextTransforms}"
-                          SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
-                <TextBlock Text="Text transformation to apply to the clock's text."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <TextBlock Text="Text Case:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <ComboBox ItemsSource="{Binding TextTransforms}"
+                              SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
+                    <TextBlock Text="Change text casing (e.g., Uppercase)."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="Text Color:" />
-                <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Text color for the clock's text."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <TextBlock Text="Text Color:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Hex code or name for text color."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="Text Opacity:" />
-                <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Minimum="0"
-                        Maximum="1"
-                        TickFrequency="0.01"
-                        IsSnapToTickEnabled="True" />
-                <TextBlock Text="Opacity of the clock's text."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <TextBlock Text="Text Opacity:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Minimum="0"
+                            Maximum="1"
+                            TickFrequency="0.01"
+                            IsSnapToTickEnabled="True" />
+                    <TextBlock Text="Adjust text visibility (0.0 - 1.0)."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="Outer Color:" />
-                <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="The outer color, for either the background or the outline."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <TextBlock Text="Outline/Background Color:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Color for the outline or background."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <CheckBox Content="Enable Background"
-                          IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
-                <TextBlock Text="Shows a solid background instead of an outline."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <CheckBox Content="Use Solid Background"
+                              IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
+                    <TextBlock Text="Switch between outline mode and solid background mode."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="Background Opacity:" />
-                <Slider Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Minimum="0"
-                        Maximum="1"
-                        TickFrequency="0.01"
-                        IsSnapToTickEnabled="True" />
-                <TextBlock Text="Opacity of the background."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <TextBlock Text="Background Opacity:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Slider Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Minimum="0"
+                            Maximum="1"
+                            TickFrequency="0.01"
+                            IsSnapToTickEnabled="True" />
+                    <TextBlock Text="Adjust background visibility."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <!--  Binding doesn't format correctly and needs better documentation.  -->
-                <!--<TextBlock Text="Background Corner Radius:" />
+                    <!--  Binding doesn't format correctly and needs better documentation.  -->
+                    <!--<TextBlock Text="Background Corner Radius:" />
                 <TextBox Text="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay}" />
                 <TextBlock Text="Corner radius of the background."
                            FontStyle="Italic"
                            Margin="0,0,0,16" />-->
 
-                <TextBlock Text="Background Image Path:" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Background Image:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBox Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Column="0" />
-                    <Button Content="Browse..."
-                            Click="BrowseBackgroundImagePath"
-                            Grid.Column="1" />
-                </Grid>
-                <TextBlock Text="Path to the background image. A solid color will be used if left blank."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                        <TextBox Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Column="0" />
+                        <Button Content="Browse..."
+                                Click="BrowseBackgroundImagePath"
+                                Grid.Column="2" />
+                    </Grid>
+                    <TextBlock Text="Select an image file for the background."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <!--  Binding doesn't format correctly and needs better documentation.  -->
-                <!--<TextBlock Text="Outline Thickness:" />
+                    <!--  Binding doesn't format correctly and needs better documentation.  -->
+                    <!--<TextBlock Text="Outline Thickness:" />
                 <TextBox Text="{Binding Settings.OutlineThickness, Mode=TwoWay}" />
                 <TextBlock Text="Thickness of the outline around the clock."
                            FontStyle="Italic"
                            Margin="0,0,0,16" />-->
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
 
         <TabItem Header="_Behavior">
-            <StackPanel>
-                <CheckBox Content="Show in Taskbar"
-                          IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
-                <TextBlock Text="Shows the app icon in the taskbar instead of the tray."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Padding="2">
+                <StackPanel>
+                    <CheckBox Content="Show Taskbar Icon"
+                              IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
+                    <TextBlock Text="Display icon in the taskbar instead of the system tray."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <CheckBox Content="Run on Startup"
-                          IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
-                <TextBlock Text="Opens the app when you log in."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <CheckBox Content="Launch on Startup"
+                              IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
+                    <TextBlock Text="Automatically start DesktopClock when you log in."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <CheckBox Content="Start Hidden"
-                          IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
-                <TextBlock Text="Starts the app hidden until the taskbar or tray icon is clicked."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <CheckBox Content="Start Minimized"
+                              IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
+                    <TextBlock Text="Launch in background; click tray icon to show."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <CheckBox Content="Drag to Move"
-                          IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
-                <TextBlock Text="Allows moving the clock by dragging it with the cursor."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <CheckBox Content="Draggable Window"
+                              IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
+                    <TextBlock Text="Enable moving the clock by clicking and dragging."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <CheckBox Content="Click Through"
-                          IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
-                <TextBlock Text="Makes the clock ignore mouse clicks so you can interact with windows underneath."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <CheckBox Content="Ignore Mouse Input"
+                              IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
+                    <TextBlock Text="Allow clicks to pass through to windows below."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <CheckBox Content="Right Aligned"
-                          IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
-                <TextBlock Text="Experimental: Keeps the clock window aligned to the right when the size changes."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <CheckBox Content="Anchor to Right"
+                              IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
+                    <TextBlock Text="Keep right edge fixed when text length changes."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <CheckBox Content="Burn-in Mitigation"
-                          IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                <TextBlock Text="Experimental: Shifts the clock periodically in order to reduce screen burn-in."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <CheckBox Content="Screen Burn Protection"
+                              IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
+                    <TextBlock Text="Slightly move clock periodically to prevent screen burn-in."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="WAV File Path:" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Chime Sound File:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBox Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Column="0" />
-                    <Button Content="Browse..."
-                            Click="BrowseWavFilePath"
-                            Grid.Column="1" />
-                </Grid>
-                <TextBlock Text="Path to a WAV file to be played on a specified interval."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                        <TextBox Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Column="0" />
+                        <Button Content="Browse..."
+                                Click="BrowseWavFilePath"
+                                Grid.Column="2" />
+                    </Grid>
+                    <TextBlock Text="Select a .wav file to play periodically."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <TextBlock Text="WAV File Interval:" />
-                <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
-                <TextBlock Text="Interval for playing the WAV file if one is specified and exists (HH:mm:ss)."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
+                    <TextBlock Text="Chime Interval:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
+                    <TextBlock Text="How often to play the sound (Format: HH:mm:ss)."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                <CheckBox Content="Play WAV File on Countdown"
-                          IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
-                <TextBlock Text="Play the WAV file when the countdown time elapses."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />
-            </StackPanel>
+                    <CheckBox Content="Play Sound on Countdown End"
+                              IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
+                    <TextBlock Text="Play the selected sound when countdown finishes."
+                               Style="{StaticResource DescriptionTextBlock}" />
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
 
         <TabItem Header="H_elp">
-            <StackPanel>
-                <TextBlock FontWeight="Bold"
-                           FontSize="16">
-                    Shortcuts
-                </TextBlock>
-                <StackPanel Margin="0,0,0,16">
-                    <TextBlock>
-                        <Run FontWeight="Bold">Right-click:</Run>
-                        Open the context menu</TextBlock>
-                    <TextBlock>
-                        <Run FontWeight="Bold">Double-click:</Run>
-                        Copy clock text to clipboard</TextBlock>
-                    <TextBlock>
-                        <Run FontWeight="Bold">Click and drag:</Run>
-                        Move the window</TextBlock>
-                    <TextBlock>
-                        <Run FontWeight="Bold">Ctrl and Mouse Wheel:</Run>
-                        Zoom</TextBlock>
-                    <TextBlock>
-                        <Run FontWeight="Bold">Ctrl and +:</Run>
-                        Zoom in</TextBlock>
-                    <TextBlock>
-                        <Run FontWeight="Bold">Ctrl and -:</Run>
-                        Zoom out</TextBlock>
-                </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Padding="2">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionHeader}">
+                        Shortcuts
+                    </TextBlock>
+                    <StackPanel Margin="0,0,0,12">
+                        <TextBlock>
+                            <Run FontWeight="SemiBold"
+                                 Foreground="#333333">
+                                Right-click:
+                            </Run>
+                            <Run Foreground="#666666">Open the context menu</Run>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run FontWeight="SemiBold"
+                                 Foreground="#333333">
+                                Double-click:
+                            </Run>
+                            <Run Foreground="#666666">Copy clock text to clipboard</Run>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run FontWeight="SemiBold"
+                                 Foreground="#333333">
+                                Click and drag:
+                            </Run>
+                            <Run Foreground="#666666">Move the window</Run>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run FontWeight="SemiBold"
+                                 Foreground="#333333">
+                                Ctrl + Mouse Wheel:
+                            </Run>
+                            <Run Foreground="#666666">Zoom</Run>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run FontWeight="SemiBold"
+                                 Foreground="#333333">
+                                Ctrl + Plus:
+                            </Run>
+                            <Run Foreground="#666666">Zoom in</Run>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run FontWeight="SemiBold"
+                                 Foreground="#333333">
+                                Ctrl + Minus:
+                            </Run>
+                            <Run Foreground="#666666">Zoom out</Run>
+                        </TextBlock>
+                    </StackPanel>
 
-                <TextBlock FontWeight="Bold"
-                           FontSize="16">
-                    Links
-                </TextBlock>
-                <StackPanel Margin="0,0,0,16">
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/releases"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            GitHub Releases (Check for updates)
-                        </Hyperlink>
+                    <TextBlock Style="{StaticResource SectionHeader}">
+                        Links
                     </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/issues"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            GitHub Issues (Found a bug or have an idea?)
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Good Diary - Stay on top of your well-being (Android)
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Network Monitor - See latency and bandwidth usage (Windows)
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Sentry Replay - Watch your Tesla dashcam clips (Windows)
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Radial Actions - Summon a customizable radial menu (Windows)
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/Teichos"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Teichos - Focus better by blocking distracting websites (Browser)
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            All my projects
-                        </Hyperlink>
-                    </TextBlock>
-                </StackPanel>
+                    <StackPanel Margin="0,0,0,12">
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/releases"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                GitHub Releases (Check for updates)
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/issues"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                GitHub Issues (Found a bug or have an idea?)
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Good Diary - Stay on top of your well-being (Android)
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Network Monitor - See latency and bandwidth usage (Windows)
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Sentry Replay - Watch your Tesla dashcam clips (Windows)
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Radial Actions - Summon a customizable radial menu (Windows)
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/Teichos"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Teichos - Focus better by blocking distracting websites (Browser)
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                All my projects
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
 
-                <TextBlock FontWeight="Bold"
-                           FontSize="16">
-                    Credits
-                </TextBlock>
-                <StackPanel Margin="0,0,0,16">
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            CommunityToolkit
-                        </Hyperlink>
+                    <TextBlock Style="{StaticResource SectionHeader}">
+                        Credits
                     </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/Fody/Costura"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Costura.Fody
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            H.NotifyIcon.Wpf
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Humanizer
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://www.newtonsoft.com/json"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Newtonsoft.Json
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            PropertyChanged.Fody
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            WpfWindowPlacement
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2wrCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            IconKitchen
-                        </Hyperlink>
-                    </TextBlock>
+                    <StackPanel>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                CommunityToolkit
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/Fody/Costura"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Costura.Fody
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                H.NotifyIcon.Wpf
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Humanizer
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://www.newtonsoft.com/json"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Newtonsoft.Json
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                PropertyChanged.Fody
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                WpfWindowPlacement
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                IconKitchen
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </ScrollViewer>
         </TabItem>
     </TabControl>
 </Window>
