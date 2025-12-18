@@ -221,6 +221,12 @@
                            FontStyle="Italic"
                            Margin="0,0,0,16" />
 
+                <CheckBox Content="Click Through"
+                          IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
+                <TextBlock Text="Makes the clock ignore mouse clicks so you can interact with windows underneath."
+                           FontStyle="Italic"
+                           Margin="0,0,0,16" />
+
                 <CheckBox Content="Right Aligned"
                           IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
                 <TextBlock Text="Experimental: Keeps the clock window aligned to the right when the size changes."

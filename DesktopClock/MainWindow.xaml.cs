@@ -232,6 +232,10 @@ public partial class MainWindow : Window
                 ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, false);
                 break;
 
+            case nameof(Settings.Default.ClickThrough):
+                this.SetClickThrough(Settings.Default.ClickThrough);
+                break;
+
             case nameof(Settings.Default.CountdownTo):
                 UpdateTimeString();
                 break;
@@ -371,6 +375,9 @@ public partial class MainWindow : Window
     private void Window_SourceInitialized(object sender, EventArgs e)
     {
         this.SetPlacement(Settings.Default.Placement);
+
+        // Apply click-through setting
+        this.SetClickThrough(Settings.Default.ClickThrough);
 
         UpdateTimeString();
         _systemClockTimer.Start();

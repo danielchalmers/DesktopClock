@@ -193,6 +193,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool DragToMove { get; set; } = true;
 
     /// <summary>
+    /// Makes the clock ignore mouse clicks so you can interact with windows underneath.
+    /// </summary>
+    public bool ClickThrough { get; set; } = false;
+
+    /// <summary>
     /// Experimental: Keeps the clock window aligned to the right when the size changes.
     /// </summary>
     /// <remarks>

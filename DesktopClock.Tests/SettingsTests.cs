@@ -131,7 +131,7 @@ public class SettingsSerializationTests
     public void Serialize_BoolProperty_ShouldBeSerializable()
     {
         // Arrange
-        var testData = new { Topmost = false, ShowInTaskbar = true };
+        var testData = new { Topmost = false, ShowInTaskbar = true, ClickThrough = true };
 
         // Act
         var json = JsonConvert.SerializeObject(testData, _jsonSerializerSettings);
@@ -140,6 +140,7 @@ public class SettingsSerializationTests
         // Assert
         Assert.False(deserialized?.Topmost);
         Assert.True(deserialized?.ShowInTaskbar);
+        Assert.True(deserialized?.ClickThrough);
     }
 
     [Fact]
@@ -267,6 +268,7 @@ public class SettingsSerializationTests
             TextOpacity = 0.9,
             Format = "{HH:mm:ss}",
             RunOnStartup = true,
+            ClickThrough = true,
         };
 
         // Act
@@ -281,6 +283,7 @@ public class SettingsSerializationTests
         Assert.Equal(original.TextOpacity, deserialized.TextOpacity);
         Assert.Equal(original.Format, deserialized.Format);
         Assert.Equal(original.RunOnStartup, deserialized.RunOnStartup);
+        Assert.Equal(original.ClickThrough, deserialized.ClickThrough);
     }
 
     /// <summary>
@@ -293,6 +296,7 @@ public class SettingsSerializationTests
         public bool Topmost { get; set; }
         public double TextOpacity { get; set; }
         public string Format { get; set; }
+        public bool ClickThrough { get; set; }
         public bool RunOnStartup { get; set; }
     }
 }
