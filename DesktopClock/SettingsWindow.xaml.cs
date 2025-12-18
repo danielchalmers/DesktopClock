@@ -82,6 +82,7 @@ public partial class SettingsWindowViewModel : ObservableObject
         Settings = settings;
         FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
+        TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToArray();
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
     }
 
@@ -94,6 +95,11 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// All available font styles.
     /// </summary>
     public IList<string> FontStyles { get; }
+
+    /// <summary>
+    /// All available text transformations.
+    /// </summary>
+    public IList<TextTransform> TextTransforms { get; }
 
     /// <summary>
     /// All available time zones reported by the system.

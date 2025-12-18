@@ -310,17 +310,28 @@ public partial class MainWindow : Window
         {
             var timeInSelectedZone = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
 
+            string result;
             if (Settings.Default.CountdownTo == default)
             {
-                return Tokenizer.FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format, CultureInfo.DefaultThreadCurrentCulture);
+                result = Tokenizer.FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format, CultureInfo.DefaultThreadCurrentCulture);
             }
             else
             {
                 if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
-                    return Settings.Default.CountdownTo.Humanize(utcDate: false, dateToCompareAgainst: DateTime.Now);
-
-                return Tokenizer.FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - DateTime.Now, Settings.Default.CountdownFormat, CultureInfo.DefaultThreadCurrentCulture);
+                    result = Settings.Default.CountdownTo.Humanize(utcDate: false, dateToCompareAgainst: DateTime.Now);
+                else
+                    result = Tokenizer.FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - DateTime.Now, Settings.Default.CountdownFormat, CultureInfo.DefaultThreadCurrentCulture);
             }
+
+            // Apply text transformation
+            result = Settings.Default.TextTransform switch
+            {
+                TextTransform.Uppercase => result.ToUpper(),
+                TextTransform.Lowercase => result.ToLower(),
+                _ => result
+            };
+
+            return result;
         }
 
         CurrentTimeOrCountdownString = GetTimeString();

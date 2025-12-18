@@ -110,6 +110,13 @@
                            FontStyle="Italic"
                            Margin="0,0,0,16" />
 
+                <TextBlock Text="Text Transform:" />
+                <ComboBox ItemsSource="{Binding TextTransforms}"
+                          SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
+                <TextBlock Text="Text transformation to apply to the clock's text."
+                           FontStyle="Italic"
+                           Margin="0,0,0,16" />
+
                 <TextBlock Text="Text Color:" />
                 <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Text="Text color for the clock's text."
@@ -317,7 +324,6 @@
                                    RequestNavigate="Hyperlink_RequestNavigate">
                             Radial Actions - Summon a customizable radial menu (Windows)
                         </Hyperlink>
-                    </TextBlock>
                     </TextBlock>
                     <TextBlock>
                         <Hyperlink NavigateUri="https://github.com/danielchalmers/Teichos"
