@@ -25,5 +25,8 @@ Choose the standard x64 installer (`.msi`) or the portable (`.zip`) version. ARM
 
 Check out my other projects:
 
-* 😊 **[Good Diary](https://github.com/danielchalmers/JournalApp)** - Enhance wellness through journaling on Android.
-* 🔄 **[Network Monitor](https://github.com/danielchalmers/Network-Monitor)** - Real-time desktop monitoring of your network performance.
+* 😊 **[Good Diary](https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp)** - Stay on top of your well-being (Android)
+* 🔄 **[Network Monitor](https://github.com/danielchalmers/Network-Monitor)** - See latency and bandwidth usage (Windows)
+* 🚗 **[Sentry Replay](https://github.com/danielchalmers/SentryReplay)** - Watch your Tesla dashcam clips (Windows)
+* 🪄 **[Radial Actions](https://github.com/danielchalmers/RadialActions)** - Summon a customizable radial menu (Windows)
+* 🛡️ **[Teichos](https://github.com/danielchalmers/Teichos)** - Focus better by blocking distracting websites (Browser)

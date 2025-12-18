@@ -297,7 +297,7 @@
                     <TextBlock>
                         <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
                                    RequestNavigate="Hyperlink_RequestNavigate">
-                            JournalApp - Stay on top of your well-being (Android)
+                            Good Diary - Stay on top of your well-being (Android)
                         </Hyperlink>
                     </TextBlock>
                     <TextBlock>
@@ -307,9 +307,28 @@
                         </Hyperlink>
                     </TextBlock>
                     <TextBlock>
-                        <Hyperlink NavigateUri="https://github.com/danielchalmers/TeslaCam"
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
                                    RequestNavigate="Hyperlink_RequestNavigate">
-                            TeslaCam - Watch dashcam clips on your computer (Windows)
+                            Sentry Replay - Watch your Tesla dashcam clips (Windows)
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            Radial Actions - Summon a customizable radial menu (Windows)
+                        </Hyperlink>
+                    </TextBlock>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers/Teichos"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            Teichos - Focus better by blocking distracting websites (Browser)
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://github.com/danielchalmers"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            All my projects
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>
