@@ -63,7 +63,7 @@ public partial class MainWindow : Window
         // The context menu is shared between right-clicking the window and the tray icon.
         ContextMenu = Resources["MainContextMenu"] as ContextMenu;
 
-        ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, true);
+        ConfigureTrayIcon();
 
         UpdateSoundPlayerEnabled();
     }
@@ -175,32 +175,20 @@ public partial class MainWindow : Window
         Application.Current.Shutdown();
     }
 
-    private void ConfigureTrayIcon(bool showIcon, bool isFirstLaunch)
+    private void ConfigureTrayIcon()
     {
-        if (showIcon)
+        if (_trayIcon == null)
         {
-            if (_trayIcon == null)
+            // Construct the tray from the resources defined.
+            _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
+            _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
+            _trayIcon.ContextMenu.DataContext = this;
+            _trayIcon.ForceCreate(enablesEfficiencyMode: false);
+            _trayIcon.TrayLeftMouseDoubleClick += (_, _) =>
             {
-                // Construct the tray from the resources defined.
-                _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
-                _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
-                _trayIcon.ContextMenu.DataContext = this;
-                _trayIcon.ForceCreate(enablesEfficiencyMode: false);
-                _trayIcon.TrayLeftMouseDoubleClick += (_, _) =>
-                {
-                    WindowState = WindowState.Normal;
-                    Activate();
-                };
-            }
-
-            // Show a notice if the icon was moved during runtime, but not at the start because the user will already expect it.
-            if (!isFirstLaunch)
-                _trayIcon.ShowNotification("Hidden from taskbar", "Icon was moved to the tray");
-        }
-        else
-        {
-            _trayIcon?.Dispose();
-            _trayIcon = null;
+                WindowState = WindowState.Normal;
+                Activate();
+            };
         }
     }
 
@@ -223,7 +211,6 @@ public partial class MainWindow : Window
 
             case nameof(Settings.Default.ShowInTaskbar):
                 ShowInTaskbar = Settings.Default.ShowInTaskbar;
-                ConfigureTrayIcon(!Settings.Default.ShowInTaskbar, false);
                 break;
 
             case nameof(Settings.Default.ClickThrough):
@@ -417,6 +404,8 @@ public partial class MainWindow : Window
             Settings.Default.Save();
 
         App.SetRunOnStartup(Settings.Default.RunOnStartup);
+
+        _trayIcon?.Dispose();
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

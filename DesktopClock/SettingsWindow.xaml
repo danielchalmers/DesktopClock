@@ -115,7 +115,7 @@
 
                     <CheckBox Content="Show in Taskbar"
                               IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
-                    <TextBlock Text="Show the clock in the bottom bar. If off, check the system tray."
+                    <TextBlock Text="Show the clock in the bottom bar."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <CheckBox Content="Start Hidden"
