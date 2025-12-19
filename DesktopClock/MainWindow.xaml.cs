@@ -92,12 +92,6 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Sets the app's theme to the given value.
-    /// </summary>
-    [RelayCommand]
-    public void SetTheme(Theme theme) => Settings.Default.Theme = theme;
-
-    /// <summary>
     /// Opens a new settings window or activates the existing one.
     /// </summary>
     [RelayCommand]

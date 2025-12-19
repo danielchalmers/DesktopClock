@@ -42,9 +42,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             EnableRaisingEvents = true,
         };
         _watcher.Changed += FileChanged;
-
-        // Set a random default theme which can be overwritten later when the file loads.
-        Theme = Theme.GetRandomDefaultTheme();
     }
 
 #pragma warning disable CS0067 // The event 'Settings.PropertyChanged' is never used. Handled by Fody.
@@ -244,23 +241,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// Window placement settings to preserve the location of the clock on the screen.
     /// </summary>
     public WindowPlacement Placement { get; set; }
-
-    /// <summary>
-    /// The current theme as a proxy.
-    /// </summary>
-    /// <remarks>
-    /// Ignored during serialization.
-    /// </remarks>
-    [JsonIgnore]
-    public Theme Theme
-    {
-        get => new("Custom", TextColor.ToString(), OuterColor.ToString());
-        set
-        {
-            TextColor = (Color)ColorConverter.ConvertFromString(value.PrimaryColor);
-            OuterColor = (Color)ColorConverter.ConvertFromString(value.SecondaryColor);
-        }
-    }
 
     /// <summary>
     /// Proxy for binding to the a timezone.

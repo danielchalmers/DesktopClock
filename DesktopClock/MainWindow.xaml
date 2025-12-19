@@ -55,54 +55,25 @@
                 </MenuItem.Header>
             </MenuItem>
 
-            <MenuItem Header="Quick The_me"
-                      ItemsSource="{x:Static local:Theme.DefaultThemes}">
-                <MenuItem.Resources>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="Command" Value="{Binding DataContext.SetThemeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
-
-                        <Setter Property="CommandParameter" Value="{Binding}" />
-
-                        <Setter Property="DisplayMemberPath" Value="Name" />
-                    </Style>
-                </MenuItem.Resources>
-            </MenuItem>
-
-            <Separator />
-
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="0"
-                      Header="_General…" />
-
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      CommandParameter="1"
-                      Header="_Text…" />
-
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      CommandParameter="2"
-                      Header="_Background…" />
-
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      CommandParameter="3"
-                      Header="Countdown &amp; _Sounds…" />
-
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      CommandParameter="4"
-                      Header="_Advanced…" />
+                      Header="_Settings…" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="5"
-                      Header="_Help…" />
+                      Header="H_elp…" />
 
             <Separator />
 
             <MenuItem Command="{Binding OpenSettingsFileCommand}"
-                      Header="Advanced _settings"
+                      Header="_Open settings file"
                       IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
             <MenuItem Command="{Binding NewClockCommand}"
                       Header="Create _new clock"
                       IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+
+            <Separator />
 
             <MenuItem Command="{Binding ExitCommand}"
                       Header="E_xit" />
