@@ -122,7 +122,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Text color for the clock's text.
     /// </summary>
-    public Color TextColor { get; set; }
+    public Color TextColor { get; set; } = Color.FromRgb(33, 33, 33);
 
     /// <summary>
     /// Opacity of the text.
@@ -132,7 +132,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// The outer color, for either the background or the outline.
     /// </summary>
-    public Color OuterColor { get; set; }
+    public Color OuterColor { get; set; } = Color.FromRgb(247, 247, 247);
 
     /// <summary>
     /// Shows a solid background instead of an outline.
