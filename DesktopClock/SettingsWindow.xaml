@@ -17,120 +17,66 @@
         <Style TargetType="Button">
             <Setter Property="Padding" Value="8,4" />
             <Setter Property="MinHeight" Value="28" />
-            <Setter Property="Background" Value="#F5F5F5" />
-            <Setter Property="BorderBrush" Value="#D0D0D0" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#E8E8E8" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#D8D8D8" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
         <Style TargetType="TextBox">
             <Setter Property="MinHeight" Value="26" />
             <Setter Property="Padding" Value="2" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="BorderBrush" Value="#D0D0D0" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
-                            <ScrollViewer x:Name="PART_ContentHost"
-                                          Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" Value="#A0A0A0" />
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="#0078D4" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
         <Style TargetType="ComboBox">
             <Setter Property="MinHeight" Value="26" />
             <Setter Property="Padding" Value="6,4" />
             <Setter Property="BorderBrush" Value="#D0D0D0" />
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
         <Style TargetType="CheckBox">
-            <Setter Property="Margin" Value="0,2,0,2" />
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
         <Style TargetType="Slider">
-            <Setter Property="Margin" Value="0,2,0,4" />
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
         <Style x:Key="LabelTextBlock"
                TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Margin" Value="0,8,0,4" />
-            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
         <Style x:Key="DescriptionTextBlock"
                TargetType="TextBlock">
             <Setter Property="FontStyle" Value="Italic" />
             <Setter Property="FontSize" Value="11" />
-            <Setter Property="Foreground" Value="#666666" />
-            <Setter Property="Margin" Value="0,2,0,8" />
+            <Setter Property="Margin" Value="0,0,0,16" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
         <Style TargetType="Hyperlink">
             <Setter Property="TextDecorations" Value="None" />
-            <Setter Property="Foreground" Value="#0078D4" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="TextDecorations" Value="Underline" />
-                    <Setter Property="Foreground" Value="#106EBE" />
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <Style x:Key="SectionHeader"
                TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="15" />
-            <Setter Property="Foreground" Value="#2D2D2D" />
-            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Margin" Value="0,0,0,8" />
         </Style>
     </Window.Resources>
 
-    <TabControl Padding="16,12,16,12"
+    <TabControl Padding="12,12,12,0"
                 SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay}">
         <TabItem Header="_Format">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          Padding="2">
+                          Padding="0">
                 <StackPanel>
-                    <TextBlock Text="Time Format String:"
+                    <TextBlock Text="Clock Format:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -147,33 +93,32 @@
                                   SelectionChanged="SelectFormat" />
                     </Grid>
                     <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Custom format string. Text inside '{' and '}' is displayed as-is." />
+                        <Run Text="Customize how the time is displayed. Use curly braces {} for time codes." />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
                             Learn more
                         </Hyperlink>
                     </TextBlock>
 
-                    <TextBlock Text="Countdown Display Format:"
+                    <TextBlock Text="Countdown Format:"
                                Style="{StaticResource LabelTextBlock}" />
                     <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              AcceptsReturn="True"
                              MaxLines="3" />
                     <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Custom format for countdown timer." />
+                        <Run Text="Customize how the countdown is displayed. Leave empty for default." />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
                             Learn more
                         </Hyperlink>
-                        <Run Text=" • Leave blank for automatic formatting." />
                     </TextBlock>
 
-                    <TextBlock Text="Target Date &amp; Time:"
+                    <TextBlock Text="Countdown Target:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
@@ -183,15 +128,15 @@
                                 Command="{Binding ResetCountdownCommand}"
                                 Grid.Column="2" />
                     </Grid>
-                    <TextBlock Text="Set a target date/time to start a countdown. Clear to disable."
+                    <TextBlock Text="Set a date and time to count down to. Clear to stop."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Time Zone Override:"
+                    <TextBlock Text="Time Zone:"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding TimeZones}"
                               SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
                               DisplayMemberPath="DisplayName" />
-                    <TextBlock Text="A different time zone to be used."
+                    <TextBlock Text="Show time from a different time zone."
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </ScrollViewer>
@@ -199,71 +144,71 @@
 
         <TabItem Header="_Appearance">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          Padding="2">
+                          Padding="0">
                 <StackPanel>
-                    <TextBlock Text="Font:"
+                    <TextBlock Text="Font Family:"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontFamilies}"
                               SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
-                    <TextBlock Text="Select the typeface for the clock."
+                    <TextBlock Text="Choose the font style."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Style:"
+                    <TextBlock Text="Font Style:"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontStyles}"
                               SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
-                    <TextBlock Text="Select font style (e.g., Italic)."
+                    <TextBlock Text="Make text lean to the side."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Weight:"
+                    <TextBlock Text="Font Weight:"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontWeights}"
                               SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
-                    <TextBlock Text="Select font thickness (e.g., Bold)."
+                    <TextBlock Text="Make text thicker or thinner."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Text Case:"
+                    <TextBlock Text="Capitalization:"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding TextTransforms}"
                               SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
-                    <TextBlock Text="Change text casing (e.g., Uppercase)."
+                    <TextBlock Text="Change text to uppercase or lowercase."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Text Color:"
                                Style="{StaticResource LabelTextBlock}" />
                     <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Text="Hex code or name for text color."
+                    <TextBlock Text="Change the color of the text (hex code or name)."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Text Opacity:"
+                    <TextBlock Text="Text Visibility:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Minimum="0"
                             Maximum="1"
                             TickFrequency="0.01"
                             IsSnapToTickEnabled="True" />
-                    <TextBlock Text="Adjust text visibility (0.0 - 1.0)."
+                    <TextBlock Text="Adjust how transparent the text is."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Outline/Background Color:"
+                    <TextBlock Text="Background/Outline Color:"
                                Style="{StaticResource LabelTextBlock}" />
                     <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Text="Color for the outline or background."
+                    <TextBlock Text="Change the color of the background or outline."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Use Solid Background"
+                    <CheckBox Content="Solid Background"
                               IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
-                    <TextBlock Text="Switch between outline mode and solid background mode."
+                    <TextBlock Text="Show a solid background box instead of an outline."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Background Opacity:"
+                    <TextBlock Text="Background Visibility:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Slider Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Minimum="0"
                             Maximum="1"
                             TickFrequency="0.01"
                             IsSnapToTickEnabled="True" />
-                    <TextBlock Text="Adjust background visibility."
+                    <TextBlock Text="Adjust how transparent the background is."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <!--  Binding doesn't format correctly and needs better documentation.  -->
@@ -278,7 +223,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
@@ -288,7 +233,7 @@
                                 Click="BrowseBackgroundImagePath"
                                 Grid.Column="2" />
                     </Grid>
-                    <TextBlock Text="Select an image file for the background."
+                    <TextBlock Text="Show an image behind the clock."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <!--  Binding doesn't format correctly and needs better documentation.  -->
@@ -303,49 +248,49 @@
 
         <TabItem Header="_Behavior">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          Padding="2">
+                          Padding="0">
                 <StackPanel>
-                    <CheckBox Content="Show Taskbar Icon"
+                    <CheckBox Content="Show in Taskbar"
                               IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
-                    <TextBlock Text="Display icon in the taskbar instead of the system tray."
+                    <TextBlock Text="Show the clock in the taskbar or the system tray."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Launch on Startup"
+                    <CheckBox Content="Start with Windows"
                               IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
-                    <TextBlock Text="Automatically start DesktopClock when you log in."
+                    <TextBlock Text="Run the clock automatically when you sign in."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Start Minimized"
+                    <CheckBox Content="Start Hidden"
                               IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
-                    <TextBlock Text="Launch in background; click tray icon to show."
+                    <TextBlock Text="Start without showing the clock. Click the tray icon to show it."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Draggable Window"
+                    <CheckBox Content="Allow Dragging"
                               IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
-                    <TextBlock Text="Enable moving the clock by clicking and dragging."
+                    <TextBlock Text="Move the clock by dragging it with the mouse."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Ignore Mouse Input"
+                    <CheckBox Content="Click Through"
                               IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
-                    <TextBlock Text="Allow clicks to pass through to windows below."
+                    <TextBlock Text="Let clicks pass through the clock to windows behind it."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Anchor to Right"
+                    <CheckBox Content="Align Right"
                               IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
-                    <TextBlock Text="Keep right edge fixed when text length changes."
+                    <TextBlock Text="Keep the right side fixed when the text length changes."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Screen Burn Protection"
+                    <CheckBox Content="Burn-in Protection"
                               IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                    <TextBlock Text="Slightly move clock periodically to prevent screen burn-in."
+                    <TextBlock Text="Move the clock around slightly to protect your OLED screen."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Chime Sound File:"
+                    <TextBlock Text="Chime Sound:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
@@ -355,18 +300,18 @@
                                 Click="BrowseWavFilePath"
                                 Grid.Column="2" />
                     </Grid>
-                    <TextBlock Text="Select a .wav file to play periodically."
+                    <TextBlock Text="Select a sound file (.wav) to play."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Chime Interval:"
+                    <TextBlock Text="Chime Frequency:"
                                Style="{StaticResource LabelTextBlock}" />
                     <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
-                    <TextBlock Text="How often to play the sound (Format: HH:mm:ss)."
+                    <TextBlock Text="How often to play the sound (Hours:Minutes:Seconds)."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Play Sound on Countdown End"
+                    <CheckBox Content="Countdown Alarm"
                               IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
-                    <TextBlock Text="Play the selected sound when countdown finishes."
+                    <TextBlock Text="Play the sound when the countdown finishes."
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </ScrollViewer>
@@ -374,60 +319,64 @@
 
         <TabItem Header="H_elp">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          Padding="2">
+                          Padding="0">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionHeader}">
-                        Shortcuts
+                        Keyboard Shortcuts
                     </TextBlock>
-                    <StackPanel Margin="0,0,0,12">
+                    <StackPanel Margin="0,0,0,16">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="0,0,0,4" />
+                            </Style>
+                        </StackPanel.Resources>
                         <TextBlock>
-                            <Run FontWeight="SemiBold"
-                                 Foreground="#333333">
+                            <Run FontWeight="SemiBold">
                                 Right-click:
                             </Run>
-                            <Run Foreground="#666666">Open the context menu</Run>
+                            <Run>Open menu</Run>
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold"
-                                 Foreground="#333333">
+                            <Run FontWeight="SemiBold">
                                 Double-click:
                             </Run>
-                            <Run Foreground="#666666">Copy clock text to clipboard</Run>
+                            <Run>Copy text</Run>
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold"
-                                 Foreground="#333333">
-                                Click and drag:
+                            <Run FontWeight="SemiBold">
+                                Drag:
                             </Run>
-                            <Run Foreground="#666666">Move the window</Run>
+                            <Run>Move clock</Run>
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold"
-                                 Foreground="#333333">
-                                Ctrl + Mouse Wheel:
+                            <Run FontWeight="SemiBold">
+                                Ctrl + Scroll:
                             </Run>
-                            <Run Foreground="#666666">Zoom</Run>
+                            <Run>Change size</Run>
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold"
-                                 Foreground="#333333">
-                                Ctrl + Plus:
+                            <Run FontWeight="SemiBold">
+                                Ctrl + +:
                             </Run>
-                            <Run Foreground="#666666">Zoom in</Run>
+                            <Run>Make bigger</Run>
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold"
-                                 Foreground="#333333">
-                                Ctrl + Minus:
+                            <Run FontWeight="SemiBold">
+                                Ctrl + -:
                             </Run>
-                            <Run Foreground="#666666">Zoom out</Run>
+                            <Run>Make smaller</Run>
                         </TextBlock>
                     </StackPanel>
 
                     <TextBlock Style="{StaticResource SectionHeader}">
                         Links
                     </TextBlock>
-                    <StackPanel Margin="0,0,0,12">
+                    <StackPanel Margin="0,0,0,16">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="0,0,0,4" />
+                            </Style>
+                        </StackPanel.Resources>
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/releases"
                                        RequestNavigate="Hyperlink_RequestNavigate">
@@ -473,7 +422,7 @@
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers"
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                All my projects
+                                All my projects on GitHub
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
@@ -481,7 +430,12 @@
                     <TextBlock Style="{StaticResource SectionHeader}">
                         Credits
                     </TextBlock>
-                    <StackPanel>
+                    <StackPanel Margin="0,0,0,16">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="0,0,0,4" />
+                            </Style>
+                        </StackPanel.Resources>
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
                                        RequestNavigate="Hyperlink_RequestNavigate">
