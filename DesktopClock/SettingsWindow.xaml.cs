@@ -66,6 +66,37 @@ public partial class SettingsWindow : Window
         ViewModel.Settings.WavFilePath = openFileDialog.FileName;
     }
 
+    private void PickTextColor(object sender, RoutedEventArgs e)
+    {
+        PickColor(color => ViewModel.Settings.TextColor = color, ViewModel.Settings.TextColor);
+    }
+
+    private void PickOuterColor(object sender, RoutedEventArgs e)
+    {
+        PickColor(color => ViewModel.Settings.OuterColor = color, ViewModel.Settings.OuterColor);
+    }
+
+    private void PickColor(Action<Color> applyColor, Color currentColor)
+    {
+        using var colorDialog = new System.Windows.Forms.ColorDialog
+        {
+            AllowFullOpen = true,
+            FullOpen = true,
+            Color = System.Drawing.Color.FromArgb(currentColor.A, currentColor.R, currentColor.G, currentColor.B)
+        };
+
+        if (colorDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+        {
+            return;
+        }
+
+        applyColor(Color.FromArgb(
+            colorDialog.Color.A,
+            colorDialog.Color.R,
+            colorDialog.Color.G,
+            colorDialog.Color.B));
+    }
+
     private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
     {
         Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });

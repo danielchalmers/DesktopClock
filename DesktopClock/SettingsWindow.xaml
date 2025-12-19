@@ -165,7 +165,19 @@
 
                     <TextBlock Text="Text Color:"
                                Style="{StaticResource LabelTextBlock}" />
-                    <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Column="0" />
+                        <Button Content="Pick..."
+                                Click="PickTextColor"
+                                Grid.Column="2" />
+                    </Grid>
                     <TextBlock Text="Change the color of the text (hex code or name)."
                                Style="{StaticResource DescriptionTextBlock}" />
 
@@ -188,7 +200,19 @@
                 <StackPanel>
                     <TextBlock Text="Background/Outline Color:"
                                Style="{StaticResource LabelTextBlock}" />
-                    <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Column="0" />
+                        <Button Content="Pick..."
+                                Click="PickOuterColor"
+                                Grid.Column="2" />
+                    </Grid>
                     <TextBlock Text="Change the color of the background or outline."
                                Style="{StaticResource DescriptionTextBlock}" />
 
