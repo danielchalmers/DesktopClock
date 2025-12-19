@@ -72,7 +72,7 @@
 
     <TabControl Padding="12,12,12,0"
                 SelectedIndex="{Binding Settings.SettingsTabIndex, Mode=TwoWay}">
-        <TabItem Header="_Format">
+        <TabItem Header="_General">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Padding="0">
                 <StackPanel>
@@ -100,37 +100,6 @@
                         </Hyperlink>
                     </TextBlock>
 
-                    <TextBlock Text="Countdown Format:"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             AcceptsReturn="True"
-                             MaxLines="3" />
-                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Customize how the countdown is displayed. Leave empty for default." />
-                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Learn more
-                        </Hyperlink>
-                    </TextBlock>
-
-                    <TextBlock Text="Countdown Target:"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBox Text="{Binding Settings.CountdownTo, Mode=TwoWay}"
-                                 Grid.Column="0" />
-                        <Button Content="Reset"
-                                Command="{Binding ResetCountdownCommand}"
-                                Grid.Column="2" />
-                    </Grid>
-                    <TextBlock Text="Set a date and time to count down to. Clear to stop."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
                     <TextBlock Text="Time Zone:"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding TimeZones}"
@@ -138,11 +107,31 @@
                               DisplayMemberPath="DisplayName" />
                     <TextBlock Text="Show time from a different time zone."
                                Style="{StaticResource DescriptionTextBlock}" />
+
+                    <CheckBox Content="Start with Windows"
+                              IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
+                    <TextBlock Text="Run the clock automatically when you sign in."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <CheckBox Content="Show in Taskbar"
+                              IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
+                    <TextBlock Text="Show the clock in the bottom bar. If off, check the system tray."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <CheckBox Content="Start Hidden"
+                              IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
+                    <TextBlock Text="Start without showing the clock. Click the tray icon to show it."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <CheckBox Content="Burn-in Protection"
+                              IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
+                    <TextBlock Text="Move the clock slightly every so often to protect your screen."
+                               Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
 
-        <TabItem Header="_Appearance">
+        <TabItem Header="_Text">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Padding="0">
                 <StackPanel>
@@ -189,7 +178,14 @@
                             IsSnapToTickEnabled="True" />
                     <TextBlock Text="Adjust how transparent the text is."
                                Style="{StaticResource DescriptionTextBlock}" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
 
+        <TabItem Header="_Background">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Padding="0">
+                <StackPanel>
                     <TextBlock Text="Background/Outline Color:"
                                Style="{StaticResource LabelTextBlock}" />
                     <TextBox Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -211,13 +207,6 @@
                     <TextBlock Text="Adjust how transparent the background is."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <!--  Binding doesn't format correctly and needs better documentation.  -->
-                    <!--<TextBlock Text="Background Corner Radius:" />
-                <TextBox Text="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay}" />
-                <TextBlock Text="Corner radius of the background."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />-->
-
                     <TextBlock Text="Background Image:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
@@ -235,55 +224,44 @@
                     </Grid>
                     <TextBlock Text="Show an image behind the clock."
                                Style="{StaticResource DescriptionTextBlock}" />
-
-                    <!--  Binding doesn't format correctly and needs better documentation.  -->
-                    <!--<TextBlock Text="Outline Thickness:" />
-                <TextBox Text="{Binding Settings.OutlineThickness, Mode=TwoWay}" />
-                <TextBlock Text="Thickness of the outline around the clock."
-                           FontStyle="Italic"
-                           Margin="0,0,0,16" />-->
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
 
-        <TabItem Header="_Behavior">
+        <TabItem Header="Countdown &amp; Sounds">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Padding="0">
                 <StackPanel>
-                    <CheckBox Content="Show in Taskbar"
-                              IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
-                    <TextBlock Text="Show the clock in the taskbar or the system tray."
+                    <TextBlock Text="Countdown Target:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Text="{Binding Settings.CountdownTo, Mode=TwoWay}"
+                                 Grid.Column="0" />
+                        <Button Content="Reset"
+                                Command="{Binding ResetCountdownCommand}"
+                                Grid.Column="2" />
+                    </Grid>
+                    <TextBlock Text="Set a date and time to count down to. Clear to stop."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Start with Windows"
-                              IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
-                    <TextBlock Text="Run the clock automatically when you sign in."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Start Hidden"
-                              IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
-                    <TextBlock Text="Start without showing the clock. Click the tray icon to show it."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Allow Dragging"
-                              IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
-                    <TextBlock Text="Move the clock by dragging it with the mouse."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Click Through"
-                              IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
-                    <TextBlock Text="Let clicks pass through the clock to windows behind it."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Align Right"
-                              IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
-                    <TextBlock Text="Keep the right side fixed when the text length changes."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Burn-in Protection"
-                              IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                    <TextBlock Text="Move the clock around slightly to protect your OLED screen."
-                               Style="{StaticResource DescriptionTextBlock}" />
+                    <TextBlock Text="Countdown Format:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True"
+                             MaxLines="3" />
+                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                        <Run Text="Customize how the countdown is displayed. Leave empty for default." />
+                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            Learn more
+                        </Hyperlink>
+                    </TextBlock>
 
                     <TextBlock Text="Chime Sound:"
                                Style="{StaticResource LabelTextBlock}" />
@@ -317,7 +295,29 @@
             </ScrollViewer>
         </TabItem>
 
-        <TabItem Header="H_elp">
+        <TabItem Header="_Advanced">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Padding="0">
+                <StackPanel>
+                    <CheckBox Content="Allow Dragging"
+                              IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
+                    <TextBlock Text="Move the clock by dragging it with the mouse."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <CheckBox Content="Click Through"
+                              IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
+                    <TextBlock Text="Let clicks pass through the clock to windows behind it."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <CheckBox Content="Align Right"
+                              IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
+                    <TextBlock Text="Keep the right side fixed when the text length changes."
+                               Style="{StaticResource DescriptionTextBlock}" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+        <TabItem Header="_Help">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Padding="0">
                 <StackPanel>

@@ -72,19 +72,27 @@
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="0"
-                      Header="_Format…" />
+                      Header="_General…" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="1"
-                      Header="_Appearance…" />
+                      Header="_Text…" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="2"
-                      Header="_Behavior…" />
+                      Header="_Background…" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="3"
-                      Header="H_elp…" />
+                      Header="Countdown &amp; _Sounds…" />
+
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
+                      CommandParameter="4"
+                      Header="_Advanced…" />
+
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
+                      CommandParameter="5"
+                      Header="_Help…" />
 
             <Separator />
 
