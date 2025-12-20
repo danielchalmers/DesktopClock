@@ -213,7 +213,7 @@ public partial class MainWindow : Window
 
     private void TryShiftPixels()
     {
-        if (!Settings.Default.BurnInMitigation || DateTimeOffset.Now.Second != 0)
+        if (!IsVisible || WindowState == WindowState.Minimized || !Settings.Default.BurnInMitigation || DateTimeOffset.Now.Second != 0)
             return;
 
         _pixelShifter ??= new();
