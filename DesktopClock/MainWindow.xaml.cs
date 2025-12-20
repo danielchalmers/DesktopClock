@@ -141,6 +141,7 @@ public partial class MainWindow : Window
 
             case nameof(Settings.Default.Format):
             case nameof(Settings.Default.CountdownFormat):
+            case nameof(Settings.Default.TextTransform):
                 UpdateTimeString();
                 break;
 
