@@ -311,6 +311,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <TextBox Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -318,6 +320,9 @@
                         <Button Content="Browse..."
                                 Click="BrowseBackgroundImagePath"
                                 Grid.Column="2" />
+                        <Button Content="Reset"
+                                Command="{Binding ResetBackgroundImagePathCommand}"
+                                Grid.Column="4" />
                     </Grid>
                     <TextBlock Text="Show an image behind the clock."
                                Style="{StaticResource DescriptionTextBlock}" />
@@ -349,9 +354,21 @@
 
                     <TextBlock Text="Countdown Format:"
                                Style="{StaticResource LabelTextBlock}" />
-                    <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             AcceptsReturn="True"
-                             MaxLines="3" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 AcceptsReturn="True"
+                                 MaxLines="3"
+                                 Grid.Column="0" />
+                        <Button Content="Reset"
+                                Command="{Binding ResetCountdownFormatCommand}"
+                                Grid.Column="2" />
+                    </Grid>
                     <TextBlock Style="{StaticResource DescriptionTextBlock}">
                         <Run Text="Customize how the countdown is displayed. Leave empty for default." />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
@@ -367,6 +384,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <TextBox Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -374,13 +393,28 @@
                         <Button Content="Browse..."
                                 Click="BrowseWavFilePath"
                                 Grid.Column="2" />
+                        <Button Content="Reset"
+                                Command="{Binding ResetWavFilePathCommand}"
+                                Grid.Column="4" />
                     </Grid>
                     <TextBlock Text="Select a sound file (.wav) to play."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Chime Frequency:"
                                Style="{StaticResource LabelTextBlock}" />
-                    <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Text="{Binding Settings.WavFileInterval, Mode=TwoWay}"
+                                 Grid.Column="0" />
+                        <Button Content="Reset"
+                                Command="{Binding ResetWavFileIntervalCommand}"
+                                Grid.Column="2" />
+                    </Grid>
                     <TextBlock Text="How often to play the sound (Hours:Minutes:Seconds)."
                                Style="{StaticResource DescriptionTextBlock}" />
 

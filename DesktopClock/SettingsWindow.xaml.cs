@@ -247,6 +247,42 @@ public partial class SettingsWindowViewModel : ObservableObject
         Settings.CountdownTo = default;
     }
 
+    /// <summary>
+    /// Resets the countdown format to the default (dynamic) format.
+    /// </summary>
+    [RelayCommand]
+    public void ResetCountdownFormat()
+    {
+        Settings.CountdownFormat = string.Empty;
+    }
+
+    /// <summary>
+    /// Clears the chime sound file path.
+    /// </summary>
+    [RelayCommand]
+    public void ResetWavFilePath()
+    {
+        Settings.WavFilePath = string.Empty;
+    }
+
+    /// <summary>
+    /// Resets the chime interval to the default value.
+    /// </summary>
+    [RelayCommand]
+    public void ResetWavFileInterval()
+    {
+        Settings.WavFileInterval = default;
+    }
+
+    /// <summary>
+    /// Clears the background image path.
+    /// </summary>
+    [RelayCommand]
+    public void ResetBackgroundImagePath()
+    {
+        Settings.BackgroundImagePath = string.Empty;
+    }
+
     private IEnumerable<string> GetAllSystemFonts()
     {
         // Get fonts from WPF.
