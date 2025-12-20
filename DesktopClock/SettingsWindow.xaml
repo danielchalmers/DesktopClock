@@ -188,11 +188,23 @@
 
                     <TextBlock Text="Text Visibility:"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Minimum="0"
-                            Maximum="1"
-                            TickFrequency="0.01"
-                            IsSnapToTickEnabled="True" />
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Minimum="0"
+                                Maximum="1"
+                                TickFrequency="0.01"
+                                IsSnapToTickEnabled="True"
+                                Grid.Column="0"
+                                Margin="0" />
+                        <TextBlock Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   Grid.Column="1" />
+                    </Grid>
                     <TextBlock Text="Adjust how transparent the text is."
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
@@ -228,31 +240,67 @@
 
                     <TextBlock Text="Background Visibility:"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Slider Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Minimum="0"
-                            Maximum="1"
-                            TickFrequency="0.01"
-                            IsSnapToTickEnabled="True" />
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Slider Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Minimum="0"
+                                Maximum="1"
+                                TickFrequency="0.01"
+                                IsSnapToTickEnabled="True"
+                                Grid.Column="0"
+                                Margin="0" />
+                        <TextBlock Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   Grid.Column="1" />
+                    </Grid>
                     <TextBlock Text="Adjust how transparent the background is."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Rounded Corners:"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Slider Value="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Minimum="0"
-                            Maximum="24"
-                            TickFrequency="0.1"
-                            IsSnapToTickEnabled="True" />
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Slider Value="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Minimum="0"
+                                Maximum="24"
+                                TickFrequency="0.1"
+                                IsSnapToTickEnabled="True"
+                                Grid.Column="0"
+                                Margin="0" />
+                        <TextBlock Text="{Binding Settings.BackgroundCornerRadius, StringFormat=00.0}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   Grid.Column="1" />
+                    </Grid>
                     <TextBlock Text="Soften the background edges."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Outline Thickness:"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Slider Value="{Binding Settings.OutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Minimum="0"
-                            Maximum="5"
-                            TickFrequency="0.1"
-                            IsSnapToTickEnabled="True" />
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Slider Value="{Binding Settings.OutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Minimum="0"
+                                Maximum="5"
+                                TickFrequency="0.1"
+                                IsSnapToTickEnabled="True"
+                                Grid.Column="0"
+                                Margin="0" />
+                        <TextBlock Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   Grid.Column="1" />
+                    </Grid>
                     <TextBlock Text="Adjust the outline weight when the background is off."
                                Style="{StaticResource DescriptionTextBlock}" />
 
