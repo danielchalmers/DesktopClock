@@ -201,6 +201,7 @@ public partial class SettingsWindowViewModel : ObservableObject
         FontStyles = ["Normal", "Italic", "Oblique"];
         FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
         TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToArray();
+        ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
     }
 
@@ -223,6 +224,11 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// All available text transformations.
     /// </summary>
     public IList<TextTransform> TextTransforms { get; }
+
+    /// <summary>
+    /// All available stretch options for background images.
+    /// </summary>
+    public IList<Stretch> ImageStretches { get; }
 
     /// <summary>
     /// All available time zones reported by the system.

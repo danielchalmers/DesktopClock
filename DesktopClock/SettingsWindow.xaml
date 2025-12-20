@@ -326,6 +326,11 @@
                     </Grid>
                     <TextBlock Text="Show an image behind the clock."
                                Style="{StaticResource DescriptionTextBlock}" />
+
+                    <ComboBox ItemsSource="{Binding ImageStretches}"
+                              SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
+                    <TextBlock Text="Choose how the image fits within the clock."
+                               Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </ScrollViewer>
         </TabItem>

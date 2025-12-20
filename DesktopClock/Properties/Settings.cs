@@ -155,6 +155,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string BackgroundImagePath { get; set; } = string.Empty;
 
     /// <summary>
+    /// Stretch mode for the background image.
+    /// </summary>
+    public Stretch BackgroundImageStretch { get; set; } = Stretch.Fill;
+
+    /// <summary>
     /// Thickness of the outline around the clock.
     /// </summary>
     public double OutlineThickness { get; set; } = 0.2;
