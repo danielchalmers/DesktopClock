@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -101,6 +102,91 @@ public partial class SettingsWindow : Window
     {
         Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
         e.Handled = true;
+    }
+
+    private void OpenSettingsFile(object sender, RoutedEventArgs e)
+    {
+        // Teach user how it works.
+        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
+        {
+            MessageBox.Show(this,
+                "Settings are stored in JSON format and will be opened in Notepad. Save the file for your changes to take effect. To start fresh, delete your '.settings' file.",
+                Title, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
+        }
+
+        // Save first if we can so it's up-to-date.
+        if (Settings.CanBeSaved)
+            Settings.Default.Save();
+
+        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
+        if (!Settings.Exists)
+        {
+            MessageBox.Show(this,
+                "Settings file doesn't exist and couldn't be created.",
+                Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
+        // Open settings file in notepad.
+        try
+        {
+            Process.Start("notepad", Settings.FilePath);
+        }
+        catch (Exception ex)
+        {
+            // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
+            MessageBox.Show(this,
+                "Couldn't open settings file in Notepad.\n\n" +
+                "This app may have be stolen. If you paid for it, ask for a refund and download it for free from https://github.com/danielchalmers/DesktopClock.\n\n" +
+                $"If it still doesn't work, create a new issue at that link with details on what happened and include this error: \"{ex.Message}\"",
+                Title, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void OpenSettingsFolder(object sender, RoutedEventArgs e)
+    {
+        OpenSettingsPath(Settings.FilePath);
+    }
+
+    private void CreateNewClock(object sender, RoutedEventArgs e)
+    {
+        var result = MessageBox.Show(this,
+            "This will copy the executable and start it with new settings.\n\n" +
+            "Continue?",
+            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
+
+        if (result != MessageBoxResult.OK)
+            return;
+
+        var newExePath = Path.Combine(App.MainFileInfo.DirectoryName, App.MainFileInfo.GetFileAtNextIndex().Name);
+
+        // Copy and start the new clock.
+        File.Copy(App.MainFileInfo.FullName, newExePath);
+        Process.Start(newExePath);
+    }
+
+    private void CheckForUpdates(object sender, RoutedEventArgs e)
+    {
+        OpenUrl("https://github.com/danielchalmers/DesktopClock/releases");
+    }
+
+    private static void OpenUrl(string url)
+    {
+        Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+    }
+
+    private static void OpenSettingsPath(string filePath)
+    {
+        var folderPath = Path.GetDirectoryName(filePath);
+
+        if (string.IsNullOrWhiteSpace(folderPath))
+        {
+            return;
+        }
+
+        Process.Start(new ProcessStartInfo("explorer.exe", folderPath) { UseShellExecute = true });
     }
 }
 

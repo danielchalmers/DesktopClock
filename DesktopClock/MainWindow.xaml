@@ -60,18 +60,12 @@
                       Header="_Settings…" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
+                      CommandParameter="4"
+                      Header="_Advanced…" />
+
+            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       CommandParameter="5"
                       Header="H_elp…" />
-
-            <Separator />
-
-            <MenuItem Command="{Binding OpenSettingsFileCommand}"
-                      Header="_Open settings file"
-                      IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-
-            <MenuItem Command="{Binding NewClockCommand}"
-                      Header="Create _new clock"
-                      IsEnabled="{x:Static p:Settings.CanBeSaved}" />
 
             <Separator />
 

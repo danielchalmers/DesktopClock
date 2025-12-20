@@ -410,6 +410,29 @@
                               IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
                     <TextBlock Text="Keep the right side fixed when the text length changes."
                                Style="{StaticResource DescriptionTextBlock}" />
+
+                    <Button Content="Open Folder"
+                            Click="OpenSettingsFolder"
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                    <TextBlock Text="Open the folder where the settings file is stored."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <Button Content="Open Settings File"
+                            Click="OpenSettingsFile"
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                    <TextBlock Text="Open the JSON settings file in Notepad."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <Button Content="Create New Clock"
+                            Click="CreateNewClock"
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                    <TextBlock Text="Copy this clock with fresh settings in a new instance."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <Button Content="Check for Updates"
+                            Click="CheckForUpdates" />
+                    <TextBlock Text="Open the latest releases page in your browser."
+                               Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
