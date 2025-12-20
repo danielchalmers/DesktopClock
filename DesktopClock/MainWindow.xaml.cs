@@ -28,6 +28,7 @@ public partial class MainWindow : Window
     private TimeZoneInfo _timeZone;
     private SoundPlayer _soundPlayer;
     private PixelShifter _pixelShifter;
+    private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     /// <summary>
     /// The current date and time in the selected time zone, or countdown as a formatted string.
@@ -48,7 +49,8 @@ public partial class MainWindow : Window
 
         _timeZone = Settings.Default.TimeZoneInfo;
 
-        Settings.Default.PropertyChanged += (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
+        _settingsPropertyChanged = (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
+        Settings.Default.PropertyChanged += _settingsPropertyChanged;
 
         // Not done through binding due to what's explained in the comment in WindowUtil.HideFromScreen().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
@@ -107,6 +109,19 @@ public partial class MainWindow : Window
     public void Exit()
     {
         Application.Current.Shutdown();
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        Settings.Default.PropertyChanged -= _settingsPropertyChanged;
+
+        _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
+        _systemClockTimer.Dispose();
+
+        _trayIcon?.Dispose();
+        _soundPlayer?.Dispose();
+
+        base.OnClosed(e);
     }
 
     private void ConfigureTrayIcon()
@@ -181,6 +196,8 @@ public partial class MainWindow : Window
     /// </summary>
     private void UpdateSoundPlayerEnabled()
     {
+        _soundPlayer?.Dispose();
+
         var soundPlayerEnabled =
             !string.IsNullOrWhiteSpace(Settings.Default.WavFilePath) &&
             (Settings.Default.WavFileInterval != default || Settings.Default.PlaySoundOnCountdown) &&

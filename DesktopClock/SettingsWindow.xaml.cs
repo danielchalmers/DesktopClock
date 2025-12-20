@@ -256,7 +256,7 @@ public partial class SettingsWindowViewModel : ObservableObject
         }
 
         // Get fonts from System.Drawing.
-        var installedFontCollection = new InstalledFontCollection();
+        using var installedFontCollection = new InstalledFontCollection();
         foreach (var fontFamily in installedFontCollection.Families)
         {
             yield return fontFamily.Name;
