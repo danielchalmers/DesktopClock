@@ -13,7 +13,6 @@ using DesktopClock.Properties;
 using DesktopClock.Utilities;
 using H.NotifyIcon;
 using H.NotifyIcon.EfficiencyMode;
-using Humanizer;
 using WpfWindowPlacement;
 
 namespace DesktopClock;
@@ -227,35 +226,18 @@ public partial class MainWindow : Window
 
     private void UpdateTimeString()
     {
-        string GetTimeString()
-        {
-            var timeInSelectedZone = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, _timeZone);
+        var now = DateTimeOffset.Now;
+        var nowDateTime = now.DateTime;
 
-            string result;
-            if (Settings.Default.CountdownTo == default)
-            {
-                result = Tokenizer.FormatWithTokenizerOrFallBack(timeInSelectedZone, Settings.Default.Format, CultureInfo.DefaultThreadCurrentCulture);
-            }
-            else
-            {
-                if (string.IsNullOrWhiteSpace(Settings.Default.CountdownFormat))
-                    result = Settings.Default.CountdownTo.Humanize(utcDate: false, dateToCompareAgainst: DateTime.Now);
-                else
-                    result = Tokenizer.FormatWithTokenizerOrFallBack(Settings.Default.CountdownTo - DateTime.Now, Settings.Default.CountdownFormat, CultureInfo.DefaultThreadCurrentCulture);
-            }
-
-            // Apply text transformation
-            result = Settings.Default.TextTransform switch
-            {
-                TextTransform.Uppercase => result.ToUpper(),
-                TextTransform.Lowercase => result.ToLower(),
-                _ => result
-            };
-
-            return result;
-        }
-
-        CurrentTimeOrCountdownString = GetTimeString();
+        CurrentTimeOrCountdownString = TimeStringFormatter.Format(
+            now,
+            nowDateTime,
+            _timeZone,
+            Settings.Default.CountdownTo,
+            Settings.Default.Format,
+            Settings.Default.CountdownFormat,
+            Settings.Default.TextTransform,
+            CultureInfo.DefaultThreadCurrentCulture);
     }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
