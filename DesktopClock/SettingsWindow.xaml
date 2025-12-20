@@ -118,6 +118,11 @@
                     <TextBlock Text="Show the clock in the bottom bar."
                                Style="{StaticResource DescriptionTextBlock}" />
 
+                    <CheckBox Content="Always on Top"
+                              IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
+                    <TextBlock Text="Keep the clock above other windows."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
                     <CheckBox Content="Start Hidden"
                               IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
                     <TextBlock Text="Start without showing the clock. Click the tray icon to show it."
@@ -229,6 +234,26 @@
                             TickFrequency="0.01"
                             IsSnapToTickEnabled="True" />
                     <TextBlock Text="Adjust how transparent the background is."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <TextBlock Text="Rounded Corners:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Slider Value="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Minimum="0"
+                            Maximum="24"
+                            TickFrequency="0.1"
+                            IsSnapToTickEnabled="True" />
+                    <TextBlock Text="Soften the background edges."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <TextBlock Text="Outline Thickness:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Slider Value="{Binding Settings.OutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Minimum="0"
+                            Maximum="5"
+                            TickFrequency="0.1"
+                            IsSnapToTickEnabled="True" />
+                    <TextBlock Text="Adjust the outline weight when the background is off."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Background Image:"
