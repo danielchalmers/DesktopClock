@@ -105,7 +105,7 @@
                     <ComboBox ItemsSource="{Binding TimeZones}"
                               SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
                               DisplayMemberPath="DisplayName" />
-                    <TextBlock Text="Show time from a different time zone."
+                    <TextBlock Text="Display time from another time zone."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <CheckBox Content="Start with Windows"
@@ -125,7 +125,7 @@
 
                     <CheckBox Content="Start Hidden"
                               IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
-                    <TextBlock Text="Start without showing the clock. Click the tray icon to show it."
+                    <TextBlock Text="Start without showing the clock. Use the tray icon to show it."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <CheckBox Content="Pixel Shifting"
@@ -144,14 +144,14 @@
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontFamilies}"
                               SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
-                    <TextBlock Text="Choose the font style."
+                    <TextBlock Text="Choose the font family."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Font Style:"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontStyles}"
                               SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
-                    <TextBlock Text="Make text lean to the side."
+                    <TextBlock Text="Choose normal or italic text."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Font Weight:"
@@ -186,7 +186,7 @@
                     <TextBlock Text="Change the color of the text (hex code or name)."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Text Visibility:"
+                    <TextBlock Text="Text Opacity:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid Margin="0,0,0,4">
                         <Grid.ColumnDefinitions>
@@ -238,7 +238,7 @@
                     <TextBlock Text="Show a solid background box instead of an outline."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Background Visibility:"
+                    <TextBlock Text="Background Opacity:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid Margin="0,0,0,4">
                         <Grid.ColumnDefinitions>
@@ -301,7 +301,7 @@
                                    HorizontalAlignment="Right"
                                    Grid.Column="1" />
                     </Grid>
-                    <TextBlock Text="Adjust the outline weight when the background is off."
+                    <TextBlock Text="Adjust the outline weight when the background is disabled."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Background Image:"
@@ -354,7 +354,7 @@
                                 Command="{Binding ResetCountdownCommand}"
                                 Grid.Column="2" />
                     </Grid>
-                    <TextBlock Text="Set a date and time to count down to. Clear to stop."
+                    <TextBlock Text="Set a date and time to count down to. Clear to disable."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <TextBlock Text="Countdown Format:"
@@ -375,7 +375,7 @@
                                 Grid.Column="2" />
                     </Grid>
                     <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Customize how the countdown is displayed. Leave empty for default." />
+                        <Run Text="Customize how the countdown is displayed. Leave blank for the default." />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
                             Learn more
@@ -405,7 +405,7 @@
                     <TextBlock Text="Select a sound file (.wav) to play."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Alarm Frequency:"
+                    <TextBlock Text="Sound Interval:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -465,7 +465,7 @@
                     <Button Content="Create New Clock"
                             Click="CreateNewClock"
                             IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <TextBlock Text="Copy this clock with fresh settings in a new instance."
+                    <TextBlock Text="Copy this clock and start it with fresh settings."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <Button Content="Check for Updates"
@@ -493,37 +493,37 @@
                             <Run FontWeight="SemiBold">
                                 Right-click:
                             </Run>
-                            <Run>Open menu</Run>
+                            <Run>Open the menu</Run>
                         </TextBlock>
                         <TextBlock>
                             <Run FontWeight="SemiBold">
                                 Double-click:
                             </Run>
-                            <Run>Copy text</Run>
+                            <Run>Copy the displayed text</Run>
                         </TextBlock>
                         <TextBlock>
                             <Run FontWeight="SemiBold">
                                 Drag:
                             </Run>
-                            <Run>Move clock</Run>
+                            <Run>Move the clock</Run>
                         </TextBlock>
                         <TextBlock>
                             <Run FontWeight="SemiBold">
                                 Ctrl + Scroll:
                             </Run>
-                            <Run>Change size</Run>
+                            <Run>Change the size</Run>
                         </TextBlock>
                         <TextBlock>
                             <Run FontWeight="SemiBold">
                                 Ctrl + +:
                             </Run>
-                            <Run>Make bigger</Run>
+                            <Run>Increase size</Run>
                         </TextBlock>
                         <TextBlock>
                             <Run FontWeight="SemiBold">
                                 Ctrl + -:
                             </Run>
-                            <Run>Make smaller</Run>
+                            <Run>Decrease size</Run>
                         </TextBlock>
                     </StackPanel>
 

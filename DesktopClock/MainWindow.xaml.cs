@@ -31,7 +31,7 @@ public partial class MainWindow : Window
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     /// <summary>
-    /// The current date and time in the selected time zone, or countdown as a formatted string.
+    /// The current date and time in the selected time zone, or the formatted countdown text.
     /// </summary>
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
@@ -55,7 +55,7 @@ public partial class MainWindow : Window
         // Not done through binding due to what's explained in the comment in WindowUtil.HideFromScreen().
         ShowInTaskbar = Settings.Default.ShowInTaskbar;
 
-        // Restore the structure of the last state using the display text.
+        // Restore the last displayed text so the window starts near its previous size.
         CurrentTimeOrCountdownString = Settings.Default.LastDisplay;
 
         _systemClockTimer = new();
@@ -83,7 +83,7 @@ public partial class MainWindow : Window
     {
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.HideForNow))
         {
-            MessageBox.Show(this, "Minimizing clock. Open later from the taskbar or tray icon.",
+            MessageBox.Show(this, "Clock minimized. Open it later from the taskbar or tray icon.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.HideForNow;
@@ -128,7 +128,7 @@ public partial class MainWindow : Window
     {
         if (_trayIcon == null)
         {
-            // Construct the tray from the resources defined.
+            // Construct the tray icon from the XAML resources.
             _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
             _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
             _trayIcon.ContextMenu.DataContext = this;
@@ -180,7 +180,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Handles the event when the system clock timer signals a second change.
+    /// Runs when the system clock timer ticks each second.
     /// </summary>
     private void SystemClockTimer_SecondChanged(object sender, EventArgs e)
     {
@@ -192,7 +192,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Initializes the sound player for the specified file if enabled; otherwise, sets it to <c>null</c>.
+    /// Creates the sound player for the specified file when enabled; otherwise clears it.
     /// </summary>
     private void UpdateSoundPlayerEnabled()
     {
@@ -207,7 +207,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Tries to play a sound based on the settings if it hits the specified interval and the file exists.
+    /// Plays a sound when the interval or countdown match and the file exists.
     /// </summary>
     private void TryPlaySound()
     {
@@ -294,18 +294,18 @@ public partial class MainWindow : Window
     {
         this.SetPlacement(Settings.Default.Placement);
 
-        // Apply click-through setting
+        // Apply click-through setting.
         this.SetClickThrough(Settings.Default.ClickThrough);
 
         UpdateTimeString();
         _systemClockTimer.Start();
 
-        // Now that everything's been initially rendered and laid out, we can start listening for changes to the size to keep the window right-aligned.
+        // Start listening for size changes to keep the window right-aligned.
         SizeChanged += Window_SizeChanged;
 
         if (Settings.Default.StartHidden)
         {
-            _trayIcon?.ShowNotification("Started hidden", "Icon is in the tray");
+            _trayIcon?.ShowNotification("Started hidden", "Use the tray icon to show it");
             this.HideFromScreen();
         }
 
@@ -320,10 +320,10 @@ public partial class MainWindow : Window
         if (!Settings.CanBeSaved)
         {
             MessageBox.Show(this,
-                "Settings can't be saved because of an access error.\n\n" +
+                "Settings can't be saved due to an access error.\n\n" +
                 $"Make sure {Title} is in a folder that doesn't require admin privileges, " +
                 "and that you got it from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                "If the problem still persists, create a new issue at the link with as many details as possible.",
+                "If the problem persists, create a new issue at the link with as many details as possible.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
@@ -365,7 +365,7 @@ public partial class MainWindow : Window
         }
         else
         {
-            // Run like normal without withholding resources.
+            // Resume normal updates.
             UpdateTimeString();
             _systemClockTimer.Start();
             EfficiencyModeUtilities.SetEfficiencyMode(false);

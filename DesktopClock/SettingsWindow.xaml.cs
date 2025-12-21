@@ -110,7 +110,7 @@ public partial class SettingsWindow : Window
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
         {
             MessageBox.Show(this,
-                "Settings are stored in JSON format and will be opened in Notepad. Save the file for your changes to take effect. To start fresh, delete your '.settings' file.",
+                "Settings are stored in JSON and will open in Notepad. Save the file for changes to take effect. To start fresh, delete your '.settings' file.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
@@ -139,7 +139,7 @@ public partial class SettingsWindow : Window
             // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
             MessageBox.Show(this,
                 "Couldn't open settings file in Notepad.\n\n" +
-                "This app may have be stolen. If you paid for it, ask for a refund and download it for free from https://github.com/danielchalmers/DesktopClock.\n\n" +
+                "This app may have been stolen. If you paid for it, ask for a refund and download it for free from https://github.com/danielchalmers/DesktopClock.\n\n" +
                 $"If it still doesn't work, create a new issue at that link with details on what happened and include this error: \"{ex.Message}\"",
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
