@@ -34,7 +34,7 @@
                       Header="_Copy" />
 
             <MenuItem Command="{Binding HideForNowCommand}"
-                      Header="_Hide for now" />
+                      Header="_Hide" />
 
             <Separator />
 

@@ -115,7 +115,7 @@
 
                     <CheckBox Content="Show in Taskbar"
                               IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
-                    <TextBlock Text="Show the clock in the bottom bar."
+                    <TextBlock Text="Show the clock in the Windows taskbar."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <CheckBox Content="Always on Top"
@@ -128,9 +128,9 @@
                     <TextBlock Text="Start without showing the clock. Click the tray icon to show it."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Burn-in Protection"
+                    <CheckBox Content="Pixel Shifting"
                               IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                    <TextBlock Text="Move the clock slightly every so often to protect your screen."
+                    <TextBlock Text="Move the clock slightly to help avoid screen burn-in."
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </ScrollViewer>
@@ -382,7 +382,7 @@
                         </Hyperlink>
                     </TextBlock>
 
-                    <TextBlock Text="Chime Sound:"
+                    <TextBlock Text="Alarm Sound:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -405,7 +405,7 @@
                     <TextBlock Text="Select a sound file (.wav) to play."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Chime Frequency:"
+                    <TextBlock Text="Alarm Frequency:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>

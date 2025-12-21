@@ -29,4 +29,3 @@ Check out my other projects:
 * 🔄 **[Network Monitor](https://github.com/danielchalmers/Network-Monitor)** - See latency and bandwidth usage (Windows)
 * 🚗 **[Sentry Replay](https://github.com/danielchalmers/SentryReplay)** - Watch your Tesla dashcam clips (Windows)
 * 🪄 **[Radial Actions](https://github.com/danielchalmers/RadialActions)** - Summon a customizable radial menu (Windows)
-* 🛡️ **[Teichos](https://github.com/danielchalmers/Teichos)** - Focus better by blocking distracting websites (Browser)
