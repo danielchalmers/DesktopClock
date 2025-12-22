@@ -161,6 +161,11 @@ public partial class MainWindow : Window
 
             case nameof(Settings.Default.ShowInTaskbar):
                 ShowInTaskbar = Settings.Default.ShowInTaskbar;
+                this.SetHiddenFromAltTab(Settings.Default.HideFromAltTab);
+                break;
+
+            case nameof(Settings.Default.HideFromAltTab):
+                this.SetHiddenFromAltTab(Settings.Default.HideFromAltTab);
                 break;
 
             case nameof(Settings.Default.ClickThrough):
@@ -296,6 +301,7 @@ public partial class MainWindow : Window
 
         // Apply click-through setting.
         this.SetClickThrough(Settings.Default.ClickThrough);
+        this.SetHiddenFromAltTab(Settings.Default.HideFromAltTab);
 
         UpdateTimeString();
         _systemClockTimer.Start();

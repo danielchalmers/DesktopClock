@@ -118,6 +118,11 @@
                     <TextBlock Text="Show the clock in the Windows taskbar."
                                Style="{StaticResource DescriptionTextBlock}" />
 
+                    <CheckBox Content="Hide from Alt+Tab"
+                              IsChecked="{Binding Settings.HideFromAltTab, Mode=TwoWay}" />
+                    <TextBlock Text="Hide the clock window from the Alt+Tab switcher."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
                     <CheckBox Content="Always on Top"
                               IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
                     <TextBlock Text="Keep the clock above other windows."

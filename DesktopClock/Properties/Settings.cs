@@ -175,6 +175,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool ShowInTaskbar { get; set; } = false;
 
     /// <summary>
+    /// Hides the clock window from Alt+Tab.
+    /// </summary>
+    public bool HideFromAltTab { get; set; } = false;
+
+    /// <summary>
     /// Height of the clock window.
     /// </summary>
     public int Height { get; set; } = 48;
