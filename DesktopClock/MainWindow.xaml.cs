@@ -243,8 +243,9 @@ public partial class MainWindow : Window
                 return;
 
             _pixelShifter ??= new();
-            Left += _pixelShifter.ShiftX();
-            Top += _pixelShifter.ShiftY();
+            var (left, top) = _pixelShifter.ApplyShift(ActualWidth, ActualHeight, Left, Top);
+            Left = left;
+            Top = top;
         });
     }
 
@@ -270,9 +271,14 @@ public partial class MainWindow : Window
         if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove)
         {
             // Pause time updates to maintain placement.
+            _pixelShifter ??= new();
+            var (left, top) = _pixelShifter.ClearShift(Left, Top);
+            Left = left;
+            Top = top;
             _systemClockTimer.Stop();
 
             DragMove();
+            _pixelShifter.UpdateBasePosition(Left, Top);
             UpdateTimeString();
 
             _systemClockTimer.Start();
@@ -298,6 +304,8 @@ public partial class MainWindow : Window
     private void Window_SourceInitialized(object sender, EventArgs e)
     {
         this.SetPlacement(Settings.Default.Placement);
+        _pixelShifter ??= new();
+        _pixelShifter.UpdateBasePosition(Left, Top);
 
         // Apply click-through setting.
         this.SetClickThrough(Settings.Default.ClickThrough);
@@ -337,6 +345,12 @@ public partial class MainWindow : Window
     private void Window_Closing(object sender, CancelEventArgs e)
     {
         // Save the last text and the placement to preserve dimensions and position of the clock.
+        if (_pixelShifter != null)
+        {
+            var (left, top) = _pixelShifter.RestoreBasePosition(Left, Top);
+            Left = left;
+            Top = top;
+        }
         Settings.Default.LastDisplay = CurrentTimeOrCountdownString;
         Settings.Default.Placement = this.GetPlacement();
 
@@ -358,6 +372,7 @@ public partial class MainWindow : Window
         {
             var widthChange = e.NewSize.Width - e.PreviousSize.Width;
             Left -= widthChange;
+            _pixelShifter?.AdjustForRightAlignedWidthChange(widthChange);
         }
     }
 
