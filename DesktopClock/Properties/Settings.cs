@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Windows;
 using System.Windows.Media;
-using Microsoft.Win32;
 using Newtonsoft.Json;
+using DesktopClock.Utilities;
 using WpfWindowPlacement;
 
 namespace DesktopClock.Properties;
@@ -12,11 +11,6 @@ namespace DesktopClock.Properties;
 public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
     private readonly FileSystemWatcher _watcher;
-    private bool _followSystemTheme;
-    private bool _systemThemeIsLight = true;
-    private Color _systemAccentColor = DefaultAccentColor;
-    private Color _textColor = Color.FromRgb(33, 33, 33);
-    private Color _outerColor = Color.FromRgb(247, 247, 247);
 
     private static readonly Lazy<Settings> _default = new(LoadAndAttemptSave);
 
@@ -32,12 +26,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public static readonly double MaxSizeLog = 6.5;
 
     public static readonly double MinSizeLog = 2.7;
-    private static readonly Color DefaultAccentColor = Color.FromRgb(0, 120, 215);
-    private static readonly Color LightThemeOuterColor = Color.FromRgb(247, 247, 247);
-    private static readonly Color DarkThemeOuterColor = Color.FromRgb(32, 32, 32);
-    private const string PersonalizeKeyPath = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
-    private const string AppsUseLightThemeValueName = "AppsUseLightTheme";
-
     static Settings()
     {
         // Settings file path from the same directory as the executable.
@@ -54,10 +42,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             EnableRaisingEvents = true,
         };
         _watcher.Changed += FileChanged;
-
-        RefreshSystemThemeColors(notifyIfFollowing: false);
-        SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
-        SystemParameters.StaticPropertyChanged += SystemParameters_StaticPropertyChanged;
     }
 
 #pragma warning disable CS0067 // The event 'Settings.PropertyChanged' is never used. Handled by Fody.
@@ -138,19 +122,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Text color for the clock's text.
     /// </summary>
-    public Color TextColor
-    {
-        get => _textColor;
-        set
-        {
-            if (_textColor.Equals(value))
-                return;
-
-            _textColor = value;
-            NotifyPropertyChanged(nameof(TextColor));
-            NotifyEffectiveThemeChanged();
-        }
-    }
+    public Color TextColor { get; set; } = Color.FromRgb(33, 33, 33);
 
     /// <summary>
     /// Opacity of the text.
@@ -160,51 +132,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// The outer color, for either the background or the outline.
     /// </summary>
-    public Color OuterColor
-    {
-        get => _outerColor;
-        set
-        {
-            if (_outerColor.Equals(value))
-                return;
-
-            _outerColor = value;
-            NotifyPropertyChanged(nameof(OuterColor));
-            NotifyEffectiveThemeChanged();
-        }
-    }
-
-    /// <summary>
-    /// Follow the system theme and accent color.
-    /// </summary>
-    public bool FollowSystemTheme
-    {
-        get => _followSystemTheme;
-        set
-        {
-            if (_followSystemTheme == value)
-                return;
-
-            _followSystemTheme = value;
-            NotifyPropertyChanged(nameof(FollowSystemTheme));
-            RefreshSystemThemeColors(notifyIfFollowing: false);
-            NotifyEffectiveThemeChanged();
-        }
-    }
-
-    /// <summary>
-    /// Effective text color based on theme-following preference.
-    /// </summary>
-    [JsonIgnore]
-    public Color EffectiveTextColor => FollowSystemTheme ? _systemAccentColor : TextColor;
-
-    /// <summary>
-    /// Effective outer color based on theme-following preference.
-    /// </summary>
-    [JsonIgnore]
-    public Color EffectiveOuterColor => FollowSystemTheme
-        ? (_systemThemeIsLight ? LightThemeOuterColor : DarkThemeOuterColor)
-        : OuterColor;
+    public Color OuterColor { get; set; } = Color.FromRgb(247, 247, 247);
 
     /// <summary>
     /// Shows a solid background instead of an outline.
@@ -421,6 +349,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     {
         var settings = LoadFromFile();
 
+        if (!File.Exists(FilePath))
+        {
+            settings.ApplySystemThemeDefaultsIfAvailable();
+        }
+
         CanBeSaved = settings.Save();
 
         return settings;
@@ -454,82 +387,13 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         Height = (int)exp;
     }
 
-    private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+    private void ApplySystemThemeDefaultsIfAvailable()
     {
-        if (!FollowSystemTheme)
+        if (!SystemThemeService.TryGetThemeDefaults(out var textColor, out var outerColor))
             return;
 
-        if (e.Category == UserPreferenceCategory.General ||
-            e.Category == UserPreferenceCategory.Color ||
-            e.Category == UserPreferenceCategory.VisualStyle)
-        {
-            RefreshSystemThemeColors(notifyIfFollowing: true);
-        }
-    }
-
-    private void SystemParameters_StaticPropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-        if (!FollowSystemTheme)
-            return;
-
-        if (e.PropertyName == nameof(SystemParameters.WindowGlassColor))
-        {
-            RefreshSystemThemeColors(notifyIfFollowing: true);
-        }
-    }
-
-    private void RefreshSystemThemeColors(bool notifyIfFollowing)
-    {
-        var dispatcher = Application.Current?.Dispatcher;
-        if (dispatcher != null && !dispatcher.CheckAccess())
-        {
-            dispatcher.BeginInvoke(new Action(() => RefreshSystemThemeColors(notifyIfFollowing)));
-            return;
-        }
-
-        var isLightTheme = GetSystemThemeIsLight();
-        var accentColor = GetSystemAccentColor();
-        var themeChanged = isLightTheme != _systemThemeIsLight;
-        var accentChanged = !_systemAccentColor.Equals(accentColor);
-
-        _systemThemeIsLight = isLightTheme;
-        _systemAccentColor = accentColor;
-
-        if (notifyIfFollowing && (themeChanged || accentChanged) && FollowSystemTheme)
-        {
-            NotifyEffectiveThemeChanged();
-        }
-    }
-
-    private static bool GetSystemThemeIsLight()
-    {
-        var value = Registry.GetValue(PersonalizeKeyPath, AppsUseLightThemeValueName, 1);
-        return value switch
-        {
-            int intValue => intValue > 0,
-            byte byteValue => byteValue > 0,
-            _ => true,
-        };
-    }
-
-    private static Color GetSystemAccentColor()
-    {
-        var accent = SystemParameters.WindowGlassColor;
-        if (accent.A == 0)
-            return DefaultAccentColor;
-
-        return Color.FromArgb(255, accent.R, accent.G, accent.B);
-    }
-
-    private void NotifyEffectiveThemeChanged()
-    {
-        NotifyPropertyChanged(nameof(EffectiveTextColor));
-        NotifyPropertyChanged(nameof(EffectiveOuterColor));
-    }
-
-    private void NotifyPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        TextColor = textColor;
+        OuterColor = outerColor;
     }
 
     public void Dispose()

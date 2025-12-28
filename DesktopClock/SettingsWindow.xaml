@@ -44,16 +44,6 @@
             <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
-        <Style x:Key="DisableWhenFollowingSystemTheme"
-               TargetType="StackPanel">
-            <Setter Property="IsEnabled" Value="True" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Settings.FollowSystemTheme}" Value="True">
-                    <Setter Property="IsEnabled" Value="False" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
         <Style x:Key="LabelTextBlock"
                TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
@@ -160,11 +150,6 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Padding="0">
                 <StackPanel>
-                    <CheckBox Content="Follow system theme and accent color"
-                              IsChecked="{Binding Settings.FollowSystemTheme, Mode=TwoWay}" />
-                    <TextBlock Text="Use Windows light/dark mode and your accent color for the clock."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
                     <TextBlock Text="Font Family:"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontFamilies}"
@@ -193,47 +178,45 @@
                     <TextBlock Text="Change text to uppercase or lowercase."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <StackPanel Style="{StaticResource DisableWhenFollowingSystemTheme}">
-                        <TextBlock Text="Text Color:"
-                                   Style="{StaticResource LabelTextBlock}" />
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="4" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                    <TextBlock Text="Text Color:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                            <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Grid.Column="0" />
-                            <Button Content="Pick..."
-                                    Click="PickTextColor"
-                                    Grid.Column="2" />
-                        </Grid>
-                        <TextBlock Text="Change the color of the text (hex code or name)."
-                                   Style="{StaticResource DescriptionTextBlock}" />
+                        <TextBox Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Column="0" />
+                        <Button Content="Pick..."
+                                Click="PickTextColor"
+                                Grid.Column="2" />
+                    </Grid>
+                    <TextBlock Text="Change the color of the text (hex code or name)."
+                               Style="{StaticResource DescriptionTextBlock}" />
 
-                        <TextBlock Text="Text Opacity:"
-                                   Style="{StaticResource LabelTextBlock}" />
-                        <Grid Margin="0,0,0,4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="30" />
-                            </Grid.ColumnDefinitions>
-                            <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Minimum="0"
-                                    Maximum="1"
-                                    TickFrequency="0.01"
-                                    IsSnapToTickEnabled="True"
-                                    Grid.Column="0"
-                                    Margin="0" />
-                            <TextBlock Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"
-                                       Grid.Column="1" />
-                        </Grid>
-                        <TextBlock Text="Adjust how transparent the text is."
-                                   Style="{StaticResource DescriptionTextBlock}" />
-                    </StackPanel>
+                    <TextBlock Text="Text Opacity:"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Slider Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Minimum="0"
+                                Maximum="1"
+                                TickFrequency="0.01"
+                                IsSnapToTickEnabled="True"
+                                Grid.Column="0"
+                                Margin="0" />
+                        <TextBlock Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   Grid.Column="1" />
+                    </Grid>
+                    <TextBlock Text="Adjust how transparent the text is."
+                               Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
@@ -241,7 +224,7 @@
         <TabItem Header="_Background">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Padding="0">
-                <StackPanel Style="{StaticResource DisableWhenFollowingSystemTheme}">
+                <StackPanel>
                     <TextBlock Text="Background/Outline Color:"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
