@@ -77,7 +77,7 @@ public partial class MainWindow : Window
     {
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.HideForNow))
         {
-            MessageBox.Show(this, "Clock minimized. Open it later from the taskbar or tray icon.",
+            MessageBox.Show(this, "Minimizing clock. Open it later from the taskbar or tray icon.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.HideForNow;

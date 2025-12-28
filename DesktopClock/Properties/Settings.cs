@@ -177,7 +177,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Shows the app icon in the taskbar instead of the tray.
     /// </summary>
-    public bool ShowInTaskbar { get; set; } = false;
+    public bool ShowInTaskbar { get; set; } = true;
 
     /// <summary>
     /// Hides the clock window from Alt+Tab.
