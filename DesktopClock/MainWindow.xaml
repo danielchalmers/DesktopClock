@@ -111,7 +111,7 @@
                                 <Setter Property="Background">
                                     <Setter.Value>
                                         <SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                                         Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                                         Color="{Binding EffectiveOuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                                     </Setter.Value>
                                 </Setter>
                             </MultiDataTrigger.Setters>
@@ -126,7 +126,7 @@
 
                 <local:OutlinedTextBlock.Fill>
                     <SolidColorBrush Opacity="{Binding TextOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                     Color="{Binding TextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                     Color="{Binding EffectiveTextColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                 </local:OutlinedTextBlock.Fill>
 
                 <local:OutlinedTextBlock.Style>
@@ -141,7 +141,7 @@
                                     <Setter Property="Stroke">
                                         <Setter.Value>
                                             <SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                                             Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
+                                                             Color="{Binding EffectiveOuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
                                         </Setter.Value>
                                     </Setter>
 
