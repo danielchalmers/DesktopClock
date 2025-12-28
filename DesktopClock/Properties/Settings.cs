@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Media;
-using Newtonsoft.Json;
 using DesktopClock.Utilities;
+using Newtonsoft.Json;
 using WpfWindowPlacement;
 
 namespace DesktopClock.Properties;
