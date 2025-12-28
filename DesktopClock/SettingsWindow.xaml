@@ -128,6 +128,11 @@
                     <TextBlock Text="Keep the clock above other windows."
                                Style="{StaticResource DescriptionTextBlock}" />
 
+                    <CheckBox Content="Hide on Fullscreen"
+                              IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
+                    <TextBlock Text="Hide the clock when a fullscreen app is active on the same monitor."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
                     <CheckBox Content="Start Hidden"
                               IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
                     <TextBlock Text="Start without showing the clock. Use the tray icon to show it."

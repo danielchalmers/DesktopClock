@@ -27,6 +27,7 @@ public partial class MainWindow : Window
     private TimeZoneInfo _timeZone;
     private SoundPlayer _soundPlayer;
     private PixelShifter _pixelShifter;
+    private FullscreenHideManager _fullscreenHideManager;
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     /// <summary>
@@ -189,6 +190,12 @@ public partial class MainWindow : Window
         TryShiftPixels();
 
         TryPlaySound();
+
+        if (Settings.Default.HideWhenFullscreen)
+        {
+            _fullscreenHideManager ??= new FullscreenHideManager(this);
+            _fullscreenHideManager.TryUpdate();
+        }
     }
 
     /// <summary>

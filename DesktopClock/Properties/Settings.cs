@@ -170,6 +170,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool Topmost { get; set; } = true;
 
     /// <summary>
+    /// Hides the clock when a fullscreen app covers the same monitor.
+    /// </summary>
+    public bool HideWhenFullscreen { get; set; } = false;
+
+    /// <summary>
     /// Shows the app icon in the taskbar instead of the tray.
     /// </summary>
     public bool ShowInTaskbar { get; set; } = false;
