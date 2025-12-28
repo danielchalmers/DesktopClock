@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Media;
@@ -36,19 +35,7 @@ public partial class MainWindow : Window
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
 
-    /// <summary>
-    /// The amount of margin applied in order to shift the clock's pixels and help prevent burn-in.
-    /// </summary>
-    [ObservableProperty]
-    private Thickness _pixelShift;
-
-    private PixelShifter GetPixelShifter()
-    {
-        if (!Settings.Default.BurnInMitigation)
-            return null;
-
-        return _pixelShifter ??= new();
-    }
+    private PixelShifter PixelShifter => Settings.Default.BurnInMitigation ? (_pixelShifter ??= new()) : null;
 
     public MainWindow()
     {
@@ -242,7 +229,7 @@ public partial class MainWindow : Window
 
     private void TryShiftPixels()
     {
-        if (!Settings.Default.BurnInMitigation || DateTimeOffset.Now.Second != 0)
+        if (!Settings.Default.BurnInMitigation)
             return;
 
         Dispatcher.Invoke(() =>
@@ -250,7 +237,7 @@ public partial class MainWindow : Window
             if (!IsVisible || WindowState == WindowState.Minimized)
                 return;
 
-            GetPixelShifter()?.ApplyShift(this);
+            PixelShifter?.ApplyShift(this);
         });
     }
 
@@ -276,11 +263,11 @@ public partial class MainWindow : Window
         if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove)
         {
             // Pause time updates to maintain placement.
-            GetPixelShifter()?.ClearShift(this);
+            PixelShifter?.ClearShift(this);
             _systemClockTimer.Stop();
 
             DragMove();
-            GetPixelShifter()?.UpdateBasePosition(this);
+            PixelShifter?.UpdateBasePosition(this);
             UpdateTimeString();
 
             _systemClockTimer.Start();
@@ -306,7 +293,7 @@ public partial class MainWindow : Window
     private void Window_SourceInitialized(object sender, EventArgs e)
     {
         this.SetPlacement(Settings.Default.Placement);
-        GetPixelShifter()?.UpdateBasePosition(this);
+        PixelShifter?.UpdateBasePosition(this);
 
         // Apply click-through setting.
         this.SetClickThrough(Settings.Default.ClickThrough);
@@ -346,7 +333,7 @@ public partial class MainWindow : Window
     private void Window_Closing(object sender, CancelEventArgs e)
     {
         // Save the last text and the placement to preserve dimensions and position of the clock.
-        GetPixelShifter()?.RestoreBasePosition(this);
+        PixelShifter?.RestoreBasePosition(this);
         Settings.Default.LastDisplay = CurrentTimeOrCountdownString;
         Settings.Default.Placement = this.GetPlacement();
 
@@ -368,7 +355,7 @@ public partial class MainWindow : Window
         {
             var widthChange = e.NewSize.Width - e.PreviousSize.Width;
             Left -= widthChange;
-            GetPixelShifter()?.AdjustForRightAlignedWidthChange(widthChange);
+            PixelShifter?.AdjustForRightAlignedWidthChange(widthChange);
         }
     }
 
