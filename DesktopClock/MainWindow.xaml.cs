@@ -35,8 +35,6 @@ public partial class MainWindow : Window
     [ObservableProperty]
     private string _currentTimeOrCountdownString;
 
-    private PixelShifter PixelShifter => Settings.Default.BurnInMitigation ? (_pixelShifter ??= new()) : null;
-
     public MainWindow()
     {
         InitializeComponent();
@@ -105,6 +103,8 @@ public partial class MainWindow : Window
     {
         Application.Current.Shutdown();
     }
+
+    public PixelShifter PixelShifter => Settings.Default.BurnInMitigation ? (_pixelShifter ??= new()) : null;
 
     protected override void OnClosed(EventArgs e)
     {
