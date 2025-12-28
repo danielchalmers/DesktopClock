@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace DesktopClock.Utilities;
 
@@ -58,42 +59,47 @@ public class PixelShifter
     /// <summary>
     /// Applies the current shift to the window's position.
     /// </summary>
-    public (double Left, double Top) ApplyShift(double windowWidth, double windowHeight, double currentLeft, double currentTop)
+    public void ApplyShift(Window window)
     {
-        EnsureBasePosition(currentLeft, currentTop);
-        ShiftX(windowWidth);
-        ShiftY(windowHeight);
-        return (_baseLeft + _totalShiftX, _baseTop + _totalShiftY);
+        EnsureBasePosition(window.Left, window.Top);
+        ShiftX(window.ActualWidth);
+        ShiftY(window.ActualHeight);
+        window.Left = _baseLeft + _totalShiftX;
+        window.Top = _baseTop + _totalShiftY;
     }
 
     /// <summary>
-    /// Clears any shift and returns the base position.
+    /// Clears any shift and restores the base position.
     /// </summary>
-    public (double Left, double Top) ClearShift(double currentLeft, double currentTop)
+    public void ClearShift(Window window)
     {
-        EnsureBasePosition(currentLeft, currentTop);
+        EnsureBasePosition(window.Left, window.Top);
         Reset();
-        return (_baseLeft, _baseTop);
+        window.Left = _baseLeft;
+        window.Top = _baseTop;
     }
 
     /// <summary>
-    /// Returns the base position to persist the unshifted placement.
+    /// Restores the base position to persist the unshifted placement.
     /// </summary>
-    public (double Left, double Top) RestoreBasePosition(double currentLeft, double currentTop)
+    public void RestoreBasePosition(Window window)
     {
         if (!_hasBasePosition)
         {
-            UpdateBasePosition(currentLeft, currentTop);
-            return (currentLeft, currentTop);
+            UpdateBasePosition(window.Left, window.Top);
+            return;
         }
 
-        return (_baseLeft, _baseTop);
+        window.Left = _baseLeft;
+        window.Top = _baseTop;
     }
 
     /// <summary>
     /// Updates the base position after a user move.
     /// </summary>
-    public void UpdateBasePosition(double currentLeft, double currentTop)
+    public void UpdateBasePosition(Window window) => UpdateBasePosition(window.Left, window.Top);
+
+    private void UpdateBasePosition(double currentLeft, double currentTop)
     {
         _baseLeft = currentLeft;
         _baseTop = currentTop;
@@ -181,12 +187,12 @@ public class PixelShifter
 
         if (proposed > max)
         {
-            step = max - total;
+            step = (int)(max - total);
             direction = -1;
         }
         else if (proposed < -max)
         {
-            step = -max - total;
+            step = (int)(-max - total);
             direction = 1;
         }
 
