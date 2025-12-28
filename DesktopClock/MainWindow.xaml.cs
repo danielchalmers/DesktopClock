@@ -229,7 +229,7 @@ public partial class MainWindow : Window
 
     private void TryShiftPixels()
     {
-        if (!Settings.Default.BurnInMitigation)
+        if (!Settings.Default.BurnInMitigation || DateTimeOffset.Now.Second != 0)
             return;
 
         Dispatcher.Invoke(() =>
