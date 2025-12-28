@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Media;
+using DesktopClock.Utilities;
 using Newtonsoft.Json;
 using WpfWindowPlacement;
 
@@ -25,7 +26,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public static readonly double MaxSizeLog = 6.5;
 
     public static readonly double MinSizeLog = 2.7;
-
     static Settings()
     {
         // Settings file path from the same directory as the executable.
@@ -349,6 +349,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     {
         var settings = LoadFromFile();
 
+        if (!File.Exists(FilePath))
+        {
+            settings.ApplySystemThemeDefaultsIfAvailable();
+        }
+
         CanBeSaved = settings.Save();
 
         return settings;
@@ -380,6 +385,15 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
         // Save the new height as an integer to make it easier for the user.
         Height = (int)exp;
+    }
+
+    private void ApplySystemThemeDefaultsIfAvailable()
+    {
+        if (!SystemThemeService.TryGetThemeDefaults(out var textColor, out var outerColor))
+            return;
+
+        TextColor = textColor;
+        OuterColor = outerColor;
     }
 
     public void Dispose()
