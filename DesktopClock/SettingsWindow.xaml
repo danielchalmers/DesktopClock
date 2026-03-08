@@ -1,4 +1,4 @@
-<Window x:Class="DesktopClock.SettingsWindow"
+﻿<Window x:Class="DesktopClock.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -80,13 +80,6 @@
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
 
-        <Style x:Key="SectionHeader"
-               TargetType="TextBlock">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Margin" Value="0,0,0,8" />
-        </Style>
-
         <Style TargetType="Hyperlink">
             <Setter Property="TextDecorations" Value="None" />
         </Style>
@@ -136,6 +129,52 @@
                 </StackPanel>
             </GroupBox>
 
+            <GroupBox Header="Countdown"
+                      Style="{StaticResource CardGroupBox}">
+                <StackPanel Style="{StaticResource CardBodyPanel}">
+                    <TextBlock Text="Countdown target"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid Style="{StaticResource ControlRow}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Text="{Binding Settings.CountdownTo, Mode=TwoWay}" />
+                        <Button Grid.Column="2"
+                                Content="Reset"
+                                Command="{Binding ResetCountdownCommand}" />
+                    </Grid>
+                    <TextBlock Text="Set a date and time to count down to. Clear the value to disable countdown mode."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <TextBlock Text="Countdown format"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <Grid Style="{StaticResource ControlRow}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 AcceptsReturn="True"
+                                 MaxLines="3" />
+                        <Button Grid.Column="2"
+                                Content="Reset"
+                                Command="{Binding ResetCountdownFormatCommand}" />
+                    </Grid>
+                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                        <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display. " />
+                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            Learn more
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </GroupBox>
+
             <GroupBox Header="Window"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
@@ -159,6 +198,11 @@
                     <TextBlock Text="Keep the clock above other windows."
                                Style="{StaticResource DescriptionTextBlock}" />
 
+                    <CheckBox Content="Click through"
+                              IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
+                    <TextBlock Text="Let clicks pass through the clock to windows behind it."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
                     <CheckBox Content="Hide when fullscreen"
                               IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
                     <TextBlock Text="Hide the clock when a fullscreen app is active on the same monitor."
@@ -167,6 +211,16 @@
                     <CheckBox Content="Start hidden"
                               IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
                     <TextBlock Text="Start without showing the clock. Use the tray icon to show it again."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <CheckBox Content="Allow dragging"
+                              IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
+                    <TextBlock Text="Move the clock by dragging it with the mouse."
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <CheckBox Content="Align right"
+                              IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
+                    <TextBlock Text="Keep the right edge fixed when the text length changes."
                                Style="{StaticResource DescriptionTextBlock}" />
 
                     <CheckBox Content="Pixel shifting"
@@ -366,52 +420,6 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Countdown"
-                      Style="{StaticResource CardGroupBox}">
-                <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Countdown target"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.CountdownTo, Mode=TwoWay}" />
-                        <Button Grid.Column="2"
-                                Content="Reset"
-                                Command="{Binding ResetCountdownCommand}" />
-                    </Grid>
-                    <TextBlock Text="Set a date and time to count down to. Clear the value to disable countdown mode."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Text="Countdown format"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 AcceptsReturn="True"
-                                 MaxLines="3" />
-                        <Button Grid.Column="2"
-                                Content="Reset"
-                                Command="{Binding ResetCountdownFormatCommand}" />
-                    </Grid>
-                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display. " />
-                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Learn more
-                        </Hyperlink>
-                    </TextBlock>
-                </StackPanel>
-            </GroupBox>
-
             <GroupBox Header="Alerts"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
@@ -461,24 +469,9 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Advanced"
+            <GroupBox Header="Tools"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <CheckBox Content="Allow dragging"
-                              IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
-                    <TextBlock Text="Move the clock by dragging it with the mouse."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Click through"
-                              IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
-                    <TextBlock Text="Let clicks pass through the clock to windows behind it."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Align right"
-                              IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
-                    <TextBlock Text="Keep the right edge fixed when the text length changes."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
                     <Button Content="Open settings folder"
                             Click="OpenSettingsFolder"
                             IsEnabled="{x:Static p:Settings.CanBeSaved}" />
@@ -504,12 +497,10 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Help"
+            <GroupBox Header="Shortcuts"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Keyboard shortcuts"
-                               Style="{StaticResource SectionHeader}" />
-                    <StackPanel Margin="0,0,0,16">
+                    <StackPanel>
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Margin" Value="0,0,0,4" />
@@ -540,10 +531,13 @@
                             <Run> Decrease the size</Run>
                         </TextBlock>
                     </StackPanel>
+                </StackPanel>
+            </GroupBox>
 
-                    <TextBlock Text="Links"
-                               Style="{StaticResource SectionHeader}" />
-                    <StackPanel Margin="0,0,0,16">
+            <GroupBox Header="Links"
+                      Style="{StaticResource CardGroupBox}">
+                <StackPanel Style="{StaticResource CardBodyPanel}">
+                    <StackPanel>
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Margin" Value="0,0,0,4" />
@@ -552,62 +546,64 @@
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/releases"
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                GitHub Releases
+                                DesktopClock Releases Page
                             </Hyperlink>
-                            <Run> (check for updates)</Run>
                         </TextBlock>
+                        <TextBlock Text="Check for updates and download the latest version."
+                                   Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/issues"
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                GitHub Issues
+                                DesktopClock Issue Tracker
                             </Hyperlink>
-                            <Run> (found a bug or have an idea?)</Run>
                         </TextBlock>
+                        <TextBlock Text="Report a bug, request a feature, or follow current work."
+                                   Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
                                        RequestNavigate="Hyperlink_RequestNavigate">
                                 Good Diary
                             </Hyperlink>
-                            <Run> (Android)</Run>
                         </TextBlock>
+                        <TextBlock Text="Stay on top of your well-being (Android)"
+                                   Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
                                        RequestNavigate="Hyperlink_RequestNavigate">
                                 Network Monitor
                             </Hyperlink>
-                            <Run> (Windows)</Run>
                         </TextBlock>
+                        <TextBlock Text="See latency and bandwidth usage (Windows)"
+                                   Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
                                        RequestNavigate="Hyperlink_RequestNavigate">
                                 Sentry Replay
                             </Hyperlink>
-                            <Run> (Windows)</Run>
                         </TextBlock>
+                        <TextBlock Text="Watch your Tesla dashcam clips (Windows)"
+                                   Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
                                        RequestNavigate="Hyperlink_RequestNavigate">
                                 Radial Actions
                             </Hyperlink>
-                            <Run> (Windows)</Run>
                         </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers/Teichos"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Teichos
-                            </Hyperlink>
-                            <Run> (browser)</Run>
-                        </TextBlock>
+                        <TextBlock Text="Summon a customizable radial menu (Windows)"
+                                   Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers"
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                All projects on GitHub
+                                All my projects on GitHub
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
+                </StackPanel>
+            </GroupBox>
 
-                    <TextBlock Text="Credits"
-                               Style="{StaticResource SectionHeader}" />
+            <GroupBox Header="Credits"
+                      Style="{StaticResource CardGroupBox}">
+                <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
