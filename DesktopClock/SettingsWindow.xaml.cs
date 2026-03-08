@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing.Text;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
@@ -17,16 +19,24 @@ namespace DesktopClock;
 
 public partial class SettingsWindow : Window
 {
+    private bool _restoringScrollPosition = true;
+
     public SettingsWindow()
     {
         InitializeComponent();
         DataContext = new SettingsWindowViewModel(Settings.Default);
+        Closing += SettingsWindow_Closing;
     }
 
     private SettingsWindowViewModel ViewModel => (SettingsWindowViewModel)DataContext;
 
     private void SelectFormat(object sender, SelectionChangedEventArgs e)
     {
+        if (e.AddedItems.Count == 0)
+        {
+            return;
+        }
+
         var value = e.AddedItems[0] as DateFormatExample;
 
         if (value == null)
@@ -170,6 +180,36 @@ public partial class SettingsWindow : Window
     private void CheckForUpdates(object sender, RoutedEventArgs e)
     {
         OpenUrl("https://github.com/danielchalmers/DesktopClock/releases");
+    }
+
+    private void SettingsScrollViewer_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!_restoringScrollPosition)
+        {
+            return;
+        }
+
+        Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
+        {
+            SettingsScrollViewer.ScrollToVerticalOffset(ViewModel.Settings.SettingsScrollPosition);
+            ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
+            _restoringScrollPosition = false;
+        }));
+    }
+
+    private void SettingsScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+        if (_restoringScrollPosition)
+        {
+            return;
+        }
+
+        ViewModel.Settings.SettingsScrollPosition = e.VerticalOffset;
+    }
+
+    private void SettingsWindow_Closing(object sender, CancelEventArgs e)
+    {
+        ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
     }
 
     private static void OpenUrl(string url)

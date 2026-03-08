@@ -1,4 +1,4 @@
-﻿<Window x:Class="DesktopClock.MainWindow"
+<Window x:Class="DesktopClock.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -56,16 +56,7 @@
             </MenuItem>
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      CommandParameter="0"
                       Header="_Settings…" />
-
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      CommandParameter="4"
-                      Header="_Advanced…" />
-
-            <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      CommandParameter="5"
-                      Header="H_elp…" />
 
             <Separator />
 
