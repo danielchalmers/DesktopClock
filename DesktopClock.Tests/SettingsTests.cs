@@ -19,6 +19,9 @@ public class SettingsPersistenceTests
         original.Format = "{HH:mm:ss}";
         original.RunOnStartup = true;
         original.ClickThrough = true;
+        original.SettingsWindowWidth = 840;
+        original.SettingsWindowHeight = 640;
+        original.SettingsScrollPosition = 128;
 
         var saved = original.Save();
 
@@ -34,6 +37,9 @@ public class SettingsPersistenceTests
         Assert.Equal(original.Format, loaded.Format);
         Assert.Equal(original.RunOnStartup, loaded.RunOnStartup);
         Assert.Equal(original.ClickThrough, loaded.ClickThrough);
+        Assert.Equal(original.SettingsWindowWidth, loaded.SettingsWindowWidth);
+        Assert.Equal(original.SettingsWindowHeight, loaded.SettingsWindowHeight);
+        Assert.Equal(original.SettingsScrollPosition, loaded.SettingsScrollPosition);
     }
 
     [Fact]

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Media;
@@ -238,9 +238,19 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool PlaySoundOnCountdown { get; set; } = true;
 
     /// <summary>
-    /// The index of the selected tab in the settings window.
+    /// The width of the settings window.
     /// </summary>
-    public int SettingsTabIndex { get; set; }
+    public double SettingsWindowWidth { get; set; } = 720;
+
+    /// <summary>
+    /// The height of the settings window.
+    /// </summary>
+    public double SettingsWindowHeight { get; set; } = 600;
+
+    /// <summary>
+    /// The vertical scroll position of the settings window.
+    /// </summary>
+    public double SettingsScrollPosition { get; set; } = 0;
 
     /// <summary>
     /// Teaching tips that have already been shown to the user.

@@ -90,9 +90,8 @@ public partial class MainWindow : Window
     /// Opens a new settings window or activates the existing one.
     /// </summary>
     [RelayCommand]
-    public void OpenSettingsWindow(string tabIndex)
+    public void OpenSettingsWindow()
     {
-        Settings.Default.SettingsTabIndex = int.Parse(tabIndex);
         App.ShowSingletonWindow<SettingsWindow>(this);
     }
 

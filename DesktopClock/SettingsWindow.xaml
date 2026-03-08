@@ -9,9 +9,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="DesktopClock"
-        Width="600"
-        ResizeMode="CanMinimize"
-        SizeToContent="Height"
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowWidth, Mode=TwoWay}"
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowHeight, Mode=TwoWay}"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
