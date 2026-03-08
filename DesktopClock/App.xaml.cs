@@ -13,6 +13,7 @@ namespace DesktopClock;
 public partial class App : Application
 {
     public static FileInfo MainFileInfo = new(Process.GetCurrentProcess().MainModule.FileName);
+    public static string MainFileDisplayName => Path.GetFileNameWithoutExtension(MainFileInfo.Name);
 
     /// <summary>
     /// Sets or deletes a value in the registry which enables the current executable to run on system startup.
