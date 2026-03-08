@@ -297,6 +297,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     public bool Save()
     {
+        var shouldResumeWatcher = _watcher.EnableRaisingEvents;
+
+        if (shouldResumeWatcher)
+            _watcher.EnableRaisingEvents = false;
+
         try
         {
             var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
@@ -318,6 +323,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         }
         catch (JsonSerializationException)
         {
+        }
+        finally
+        {
+            if (shouldResumeWatcher)
+                _watcher.EnableRaisingEvents = true;
         }
 
         return false;
