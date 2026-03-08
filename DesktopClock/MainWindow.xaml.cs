@@ -169,6 +169,11 @@ public partial class MainWindow : Window
                 this.SetClickThrough(Settings.Default.ClickThrough);
                 break;
 
+            case nameof(Settings.Default.HideWhenFullscreen):
+                _fullscreenHideManager ??= new FullscreenHideManager(this);
+                _fullscreenHideManager.TryUpdate();
+                break;
+
             case nameof(Settings.Default.CountdownTo):
                 UpdateTimeString();
                 break;
