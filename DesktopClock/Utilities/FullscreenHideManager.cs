@@ -40,9 +40,6 @@ public sealed class FullscreenHideManager
 
     public void TryUpdate()
     {
-        if (!Settings.Default.HideWhenFullscreen)
-            return;
-
         if (_window.Dispatcher.CheckAccess())
             Update();
         else
