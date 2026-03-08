@@ -46,8 +46,7 @@ public partial class MainWindow : Window
         _settingsPropertyChanged = (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
         Settings.Default.PropertyChanged += _settingsPropertyChanged;
 
-        // Not done through binding due to what's explained in the comment in WindowUtil.HideFromScreen().
-        ShowInTaskbar = Settings.Default.ShowInTaskbar;
+        ApplyWindowVisibilitySettings();
 
         // Restore the last displayed text so the window starts near its previous size.
         CurrentTimeOrCountdownString = Settings.Default.LastDisplay;
@@ -84,6 +83,7 @@ public partial class MainWindow : Window
         }
 
         this.HideFromScreen();
+        ApplyWindowVisibilitySettings();
     }
 
     /// <summary>
@@ -117,6 +117,12 @@ public partial class MainWindow : Window
         _soundPlayer?.Dispose();
 
         base.OnClosed(e);
+    }
+
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+        ApplyWindowVisibilitySettings();
     }
 
     private void ConfigureTrayIcon()
@@ -155,12 +161,8 @@ public partial class MainWindow : Window
                 break;
 
             case nameof(Settings.Default.ShowInTaskbar):
-                ShowInTaskbar = Settings.Default.ShowInTaskbar;
-                this.SetHiddenFromAltTab(Settings.Default.HideFromAltTab);
-                break;
-
             case nameof(Settings.Default.HideFromAltTab):
-                this.SetHiddenFromAltTab(Settings.Default.HideFromAltTab);
+                ApplyWindowVisibilitySettings();
                 break;
 
             case nameof(Settings.Default.ClickThrough):
@@ -303,7 +305,7 @@ public partial class MainWindow : Window
 
         // Apply click-through setting.
         this.SetClickThrough(Settings.Default.ClickThrough);
-        this.SetHiddenFromAltTab(Settings.Default.HideFromAltTab);
+        ApplyWindowVisibilitySettings();
 
         UpdateTimeString();
         _systemClockTimer.Start();
@@ -315,6 +317,7 @@ public partial class MainWindow : Window
         {
             _trayIcon?.ShowNotification("Started hidden", "Use the tray icon to show it");
             this.HideFromScreen();
+            ApplyWindowVisibilitySettings();
         }
 
         // Show the window now that it's finished loading.
@@ -380,6 +383,13 @@ public partial class MainWindow : Window
             _systemClockTimer.Start();
             EfficiencyModeUtilities.SetEfficiencyMode(false);
         }
+
+        ApplyWindowVisibilitySettings();
+    }
+
+    private void ApplyWindowVisibilitySettings()
+    {
+        this.ApplyWindowVisibility(Settings.Default.ShowInTaskbar, Settings.Default.HideFromAltTab);
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)

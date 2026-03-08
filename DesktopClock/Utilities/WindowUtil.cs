@@ -66,27 +66,35 @@ public static class WindowUtil
     }
 
     /// <summary>
-    /// Hides or shows the window in Alt+Tab.
+    /// Applies the window's taskbar and Alt+Tab visibility.
     /// </summary>
-    public static void SetHiddenFromAltTab(this Window window, bool hideFromAltTab)
+    public static void ApplyWindowVisibility(this Window window, bool showInTaskbar, bool hideFromAltTab)
     {
+        window.ShowInTaskbar = showInTaskbar;
+
         var hwnd = new WindowInteropHelper(window).Handle;
         if (hwnd == IntPtr.Zero)
             return;
 
         var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-        if (hideFromAltTab)
-        {
-            extendedStyle |= WS_EX_TOOLWINDOW;
-            extendedStyle &= ~WS_EX_APPWINDOW;
-        }
-        else
-        {
-            extendedStyle |= WS_EX_APPWINDOW;
-            extendedStyle &= ~WS_EX_TOOLWINDOW;
-        }
+        extendedStyle = GetWindowVisibilityExtendedStyle(extendedStyle, showInTaskbar, hideFromAltTab);
 
         SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle);
         SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+    }
+
+    /// <summary>
+    /// Returns the extended style that matches the requested taskbar and Alt+Tab behavior.
+    /// </summary>
+    public static int GetWindowVisibilityExtendedStyle(int extendedStyle, bool showInTaskbar, bool hideFromAltTab)
+    {
+        extendedStyle &= ~(WS_EX_TOOLWINDOW | WS_EX_APPWINDOW);
+
+        if (hideFromAltTab)
+            return extendedStyle | WS_EX_TOOLWINDOW;
+
+        return showInTaskbar
+            ? extendedStyle | WS_EX_APPWINDOW
+            : extendedStyle;
     }
 }
