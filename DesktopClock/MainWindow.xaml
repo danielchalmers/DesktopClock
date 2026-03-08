@@ -30,7 +30,7 @@
     <Window.Resources>
         <ContextMenu x:Key="MainContextMenu"
                      x:Shared="False">
-            <MenuItem Header="{x:Static local:App.MainFileDisplayName}"
+            <MenuItem Header="{x:Static local:App.MainFileDisplayText}"
                       IsEnabled="False" />
 
             <Separator />
@@ -76,7 +76,7 @@
         <tb:TaskbarIcon x:Key="TrayIcon"
                         x:Shared="False"
                         IconSource="DesktopClock.ico"
-                        ToolTipText="{x:Static local:App.MainFileDisplayName}"
+                        ToolTipText="{x:Static local:App.MainFileDisplayText}"
                         MenuActivation="LeftOrRightClick" />
     </Window.Resources>
 
