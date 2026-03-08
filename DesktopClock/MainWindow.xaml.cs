@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Media;
@@ -93,6 +94,18 @@ public partial class MainWindow : Window
     public void OpenSettingsWindow()
     {
         App.ShowSingletonWindow<SettingsWindow>(this);
+    }
+
+    [RelayCommand]
+    public void OpenReleasesPage()
+    {
+        OpenUrl("https://github.com/danielchalmers/DesktopClock/releases");
+    }
+
+    [RelayCommand]
+    public void OpenIssueTracker()
+    {
+        OpenUrl("https://github.com/danielchalmers/DesktopClock/issues");
     }
 
     /// <summary>
@@ -411,5 +424,10 @@ public partial class MainWindow : Window
                     break;
             }
         }
+    }
+
+    private static void OpenUrl(string url)
+    {
+        Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
     }
 }

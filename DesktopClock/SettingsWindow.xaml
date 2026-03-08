@@ -489,11 +489,6 @@
                             IsEnabled="{x:Static p:Settings.CanBeSaved}" />
                     <TextBlock Text="Copy this clock and start it with fresh settings."
                                Style="{StaticResource DescriptionTextBlock}" />
-
-                    <Button Content="Check for updates"
-                            Click="CheckForUpdates" />
-                    <TextBlock Text="Open the latest releases page in your browser."
-                               Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </GroupBox>
 
@@ -543,22 +538,6 @@
                                 <Setter Property="Margin" Value="0,0,0,4" />
                             </Style>
                         </StackPanel.Resources>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/releases"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                DesktopClock Releases Page
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock Text="Check for updates and download the latest version."
-                                   Style="{StaticResource DescriptionTextBlock}" />
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers/DesktopClock/issues"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                DesktopClock Issue Tracker
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock Text="Report a bug, request a feature, or follow current work."
-                                   Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
                                        RequestNavigate="Hyperlink_RequestNavigate">

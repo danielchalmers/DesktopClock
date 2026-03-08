@@ -63,6 +63,12 @@
 
             <Separator />
 
+            <MenuItem Command="{Binding OpenReleasesPageCommand}"
+                      Header="Check for _updates" />
+
+            <MenuItem Command="{Binding OpenIssueTrackerCommand}"
+                      Header="Report an _issue" />
+
             <MenuItem Command="{Binding ExitCommand}"
                       Header="E_xit" />
         </ContextMenu>
