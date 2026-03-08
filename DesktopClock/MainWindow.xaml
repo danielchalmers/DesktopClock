@@ -30,13 +30,16 @@
     <Window.Resources>
         <ContextMenu x:Key="MainContextMenu"
                      x:Shared="False">
+            <MenuItem Header="{x:Static local:App.MainFileDisplayName}"
+                      IsEnabled="False" />
+
+            <Separator />
+
             <MenuItem Command="{Binding CopyToClipboardCommand}"
                       Header="_Copy" />
 
             <MenuItem Command="{Binding HideForNowCommand}"
                       Header="_Hide" />
-
-            <Separator />
 
             <MenuItem Header="Stay on _top"
                       IsCheckable="True"
@@ -67,7 +70,7 @@
         <tb:TaskbarIcon x:Key="TrayIcon"
                         x:Shared="False"
                         IconSource="DesktopClock.ico"
-                        ToolTipText="DesktopClock"
+                        ToolTipText="{x:Static local:App.MainFileDisplayName}"
                         MenuActivation="LeftOrRightClick" />
     </Window.Resources>
 
