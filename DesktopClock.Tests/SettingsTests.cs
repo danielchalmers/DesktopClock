@@ -66,6 +66,35 @@ public class SettingsPersistenceTests
         Assert.Equal(minHeight, settings.Height);
     }
 
+    [Fact]
+    public void FileChanged_WhenSuppressed_ShouldNotPopulateFromDisk()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var settings = CreateSettingsInstance();
+        settings.FontFamily = "InMemory";
+        File.WriteAllText(Settings.FilePath, "{\"FontFamily\":\"OnDisk\"}");
+
+        SetSuppressFileChangedEvents(settings, 1);
+        InvokeFileChanged(settings);
+
+        Assert.Equal("InMemory", settings.FontFamily);
+    }
+
+    [Fact]
+    public void FileChanged_WhenNotSuppressed_ShouldPopulateFromDisk()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var settings = CreateSettingsInstance();
+        settings.FontFamily = "InMemory";
+        File.WriteAllText(Settings.FilePath, "{\"FontFamily\":\"OnDisk\"}");
+
+        InvokeFileChanged(settings);
+
+        Assert.Equal("OnDisk", settings.FontFamily);
+    }
+
     private static Settings CreateSettingsInstance() =>
         (Settings)Activator.CreateInstance(typeof(Settings), nonPublic: true)!;
 
@@ -77,6 +106,33 @@ public class SettingsPersistenceTests
 
         Assert.NotNull(populateMethod);
         populateMethod.Invoke(null, new object[] { settings });
+    }
+
+    private static void InvokeFileChanged(Settings settings)
+    {
+        var fileChangedMethod = typeof(Settings).GetMethod(
+            "FileChanged",
+            BindingFlags.NonPublic | BindingFlags.Instance);
+
+        Assert.NotNull(fileChangedMethod);
+        fileChangedMethod.Invoke(settings, new object[]
+        {
+            settings,
+            new FileSystemEventArgs(
+                WatcherChangeTypes.Changed,
+                Path.GetDirectoryName(Settings.FilePath)!,
+                Path.GetFileName(Settings.FilePath)),
+        });
+    }
+
+    private static void SetSuppressFileChangedEvents(Settings settings, int value)
+    {
+        var suppressField = typeof(Settings).GetField(
+            "_suppressFileChangedEvents",
+            BindingFlags.NonPublic | BindingFlags.Instance);
+
+        Assert.NotNull(suppressField);
+        suppressField.SetValue(settings, value);
     }
 
     private sealed class TempSettingsFileScope : IDisposable

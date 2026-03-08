@@ -11,6 +11,7 @@ namespace DesktopClock.Properties;
 public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
     private readonly FileSystemWatcher _watcher;
+    private int _suppressFileChangedEvents;
 
     private static readonly Lazy<Settings> _default = new(LoadAndAttemptSave);
 
@@ -297,30 +298,39 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     public bool Save()
     {
+        System.Threading.Interlocked.Increment(ref _suppressFileChangedEvents);
+
         try
         {
-            var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
-
-            // Attempt to save multiple times.
-            for (var i = 0; i < 4; i++)
+            try
             {
-                try
+                var json = JsonConvert.SerializeObject(this, _jsonSerializerSettings);
+
+                // Attempt to save multiple times.
+                for (var i = 0; i < 4; i++)
                 {
-                    File.WriteAllText(FilePath, json);
-                    return true;
-                }
-                catch
-                {
-                    // Wait before next attempt to read.
-                    System.Threading.Thread.Sleep(250);
+                    try
+                    {
+                        File.WriteAllText(FilePath, json);
+                        return true;
+                    }
+                    catch
+                    {
+                        // Wait before next attempt to read.
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
             }
-        }
-        catch (JsonSerializationException)
-        {
-        }
+            catch (JsonSerializationException)
+            {
+            }
 
-        return false;
+            return false;
+        }
+        finally
+        {
+            System.Threading.Interlocked.Decrement(ref _suppressFileChangedEvents);
+        }
     }
 
     /// <summary>
@@ -374,6 +384,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     private void FileChanged(object sender, FileSystemEventArgs e)
     {
+        if (System.Threading.Volatile.Read(ref _suppressFileChangedEvents) > 0)
+            return;
+
         try
         {
             Populate(this);
