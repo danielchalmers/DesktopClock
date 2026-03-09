@@ -116,6 +116,13 @@
             <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
+        <Style x:Key="DescriptionTextBlock"
+               TargetType="TextBlock">
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
         <Style x:Key="SliderValueTextBlock"
                TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -503,25 +510,31 @@
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <Button Content="Open the settings folder"
+                                <Button Content="Open settings folder"
                                         Click="OpenSettingsFolder"
                                         IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                                <TextBlock Text="Open the folder where the settings file is stored."
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <Button Content="Open the settings JSON file"
+                                <Button Content="Open settings file"
                                         Click="OpenSettingsFile"
                                         IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                                <TextBlock Text="Open the JSON settings file in Notepad."
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <Button Content="Create another clock"
+                                <Button Content="Create new clock"
                                         Click="CreateNewClock"
                                         IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                                <TextBlock Text="Copy this clock and start it with fresh settings."
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -535,43 +548,55 @@
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Right-click to open the menu"
+                                <TextBlock Text="Right-click"
                                            Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Open the menu"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Double-click to copy the displayed text"
+                                <TextBlock Text="Double-click"
                                            Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Copy the displayed text"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Drag to move the clock"
+                                <TextBlock Text="Drag"
                                            Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Move the clock"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Ctrl + Scroll to change the size"
+                                <TextBlock Text="Ctrl + Scroll"
                                            Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Change the size"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Ctrl + + to increase the size"
+                                <TextBlock Text="Ctrl + +"
                                            Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Increase the size"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Ctrl + - to decrease the size"
+                                <TextBlock Text="Ctrl + -"
                                            Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Decrease the size"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -588,9 +613,11 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        Good Diary for Android
+                                        Good Diary
                                     </Hyperlink>
                                 </TextBlock>
+                                <TextBlock Text="Stay on top of your well-being (Android)"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
@@ -599,9 +626,11 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        Network Monitor for Windows
+                                        Network Monitor
                                     </Hyperlink>
                                 </TextBlock>
+                                <TextBlock Text="See latency and bandwidth usage (Windows)"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
@@ -610,9 +639,11 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        Sentry Replay for Tesla dashcam clips
+                                        Sentry Replay
                                     </Hyperlink>
                                 </TextBlock>
+                                <TextBlock Text="Watch your Tesla dashcam clips (Windows)"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
@@ -621,9 +652,11 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        Radial Actions for Windows
+                                        Radial Actions
                                     </Hyperlink>
                                 </TextBlock>
+                                <TextBlock Text="Summon a customizable radial menu (Windows)"
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
@@ -632,9 +665,11 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        All my apps and tools on GitHub
+                                        All my projects on GitHub
                                     </Hyperlink>
                                 </TextBlock>
+                                <TextBlock Text="Browse the rest of my apps and tools."
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
