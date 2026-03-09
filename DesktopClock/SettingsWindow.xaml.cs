@@ -46,22 +46,6 @@ public partial class SettingsWindow : Window
         ViewModel.Settings.Format = value.Format;
     }
 
-    private void NavButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is not FrameworkElement element || element.Tag is not string sectionName)
-        {
-            return;
-        }
-
-        if (FindName(sectionName) is not FrameworkElement section)
-        {
-            return;
-        }
-
-        var point = section.TransformToAncestor(SettingsContent).Transform(new Point(0, 0));
-        SettingsScrollViewer.ScrollToVerticalOffset(Math.Max(0, point.Y - 8));
-    }
-
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
     {
         var openFileDialog = new OpenFileDialog
@@ -244,9 +228,6 @@ public partial class SettingsWindow : Window
 
 public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 {
-    private readonly DispatcherTimer _previewTimer;
-    private bool _isCountdownPreview;
-
     public Settings Settings { get; }
 
     public SettingsWindowViewModel(Settings settings)
@@ -260,13 +241,6 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
 
         Settings.PropertyChanged += Settings_PropertyChanged;
-
-        _previewTimer = new DispatcherTimer
-        {
-            Interval = TimeSpan.FromSeconds(1)
-        };
-        _previewTimer.Tick += PreviewTimer_Tick;
-        _previewTimer.Start();
     }
 
     public IList<string> FontFamilies { get; }
@@ -281,74 +255,9 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 
     public IList<TimeZoneInfo> TimeZones { get; }
 
-    public bool IsCountdownPreview
-    {
-        get => _isCountdownPreview;
-        set
-        {
-            if (!SetProperty(ref _isCountdownPreview, value))
-            {
-                return;
-            }
-
-            RaisePreviewChanged();
-        }
-    }
-
-    public string PreviewModeLabel => IsCountdownPreview ? "COUNTDOWN MODE" : "CLOCK MODE";
-
-    public string PreviewHeadline => IsCountdownPreview
-        ? "See how the event view reads before the countdown actually starts running on your desktop."
-        : "Experiment with the visible clock surface and type treatment in real time.";
-
-    public string PreviewSummary => IsCountdownPreview
-        ? "Target, format, and sound settings are grouped below so you can shape the whole event experience together."
-        : "Typography, color, background, and size work together here so appearance choices feel connected.";
-
-    public string PreviewCaption => IsCountdownPreview
-        ? "Using your active countdown settings or a short demo target when none is set."
-        : "Reflecting your current time format, time zone, and appearance settings.";
-
-    public string PreviewClockText => IsCountdownPreview ? PreviewCountdownText : PreviewTimeText;
-
     public string PreviewTimeText => FormatPreviewText(default);
 
     public string PreviewCountdownText => FormatPreviewText(GetPreviewCountdownTarget());
-
-    public string PreviewSurfaceSummary
-    {
-        get
-        {
-            if (!string.IsNullOrWhiteSpace(Settings.BackgroundImagePath))
-            {
-                return "Image background";
-            }
-
-            return Settings.BackgroundEnabled ? "Filled background" : "Outlined text";
-        }
-    }
-
-    public string PreviewWindowSummary
-    {
-        get
-        {
-            var visibility = Settings.Topmost ? "Always on top" : "Standard layer";
-            var interaction = Settings.ClickThrough ? "click-through" : "interactive";
-            return $"{visibility}, {interaction}";
-        }
-    }
-
-    [RelayCommand]
-    public void ShowTimePreview()
-    {
-        IsCountdownPreview = false;
-    }
-
-    [RelayCommand]
-    public void ShowCountdownPreview()
-    {
-        IsCountdownPreview = true;
-    }
 
     [RelayCommand]
     public void SetFormat(DateFormatExample value)
@@ -392,8 +301,6 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
     public void Dispose()
     {
         Settings.PropertyChanged -= Settings_PropertyChanged;
-        _previewTimer.Stop();
-        _previewTimer.Tick -= PreviewTimer_Tick;
     }
 
     private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -401,22 +308,10 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         RaisePreviewChanged();
     }
 
-    private void PreviewTimer_Tick(object sender, EventArgs e)
-    {
-        RaisePreviewChanged();
-    }
-
     private void RaisePreviewChanged()
     {
-        OnPropertyChanged(nameof(PreviewModeLabel));
-        OnPropertyChanged(nameof(PreviewHeadline));
-        OnPropertyChanged(nameof(PreviewSummary));
-        OnPropertyChanged(nameof(PreviewCaption));
-        OnPropertyChanged(nameof(PreviewClockText));
         OnPropertyChanged(nameof(PreviewTimeText));
         OnPropertyChanged(nameof(PreviewCountdownText));
-        OnPropertyChanged(nameof(PreviewSurfaceSummary));
-        OnPropertyChanged(nameof(PreviewWindowSummary));
     }
 
     private string FormatPreviewText(DateTime countdownTo)

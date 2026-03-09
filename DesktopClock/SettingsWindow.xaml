@@ -16,19 +16,6 @@
         Background="#EEF3F8"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <LinearGradientBrush x:Key="HeroBrush"
-                             StartPoint="0,0"
-                             EndPoint="1,1">
-            <GradientStop Offset="0"
-                          Color="#17324F" />
-            <GradientStop Offset="0.55"
-                          Color="#1F567C" />
-            <GradientStop Offset="1"
-                          Color="#6C9DB7" />
-        </LinearGradientBrush>
-
-        <SolidColorBrush x:Key="PanelBrush"
-                         Color="#F8FBFE" />
         <SolidColorBrush x:Key="CardBrush"
                          Color="#FFFFFFFF" />
         <SolidColorBrush x:Key="SoftBrush"
@@ -39,9 +26,6 @@
                          Color="#5F7285" />
         <SolidColorBrush x:Key="AccentBrush"
                          Color="#0B678F" />
-        <SolidColorBrush x:Key="AccentSoftBrush"
-                         Color="#D9EEF7" />
-
         <Style TargetType="TextBox">
             <Setter Property="MinHeight" Value="34" />
             <Setter Property="Padding" Value="10,8" />
@@ -122,14 +106,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
-
-        <Style x:Key="NavButtonStyle"
-               TargetType="Button"
-               BasedOn="{StaticResource GhostButton}">
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Padding" Value="14,12" />
-            <Setter Property="Margin" Value="0,0,0,8" />
         </Style>
 
         <Style x:Key="SectionCardStyle"
@@ -264,10 +240,17 @@
                         <TextBlock Style="{StaticResource SectionDescriptionStyle}"
                                    Text="Switch the clock into event mode, choose how the countdown reads, and decide when sound should reinforce it." />
 
-                        <WrapPanel>
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="420"
-                                    Background="#F6FAFD">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="18" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Background="#F6FAFD"
+                                    Margin="0">
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                Text="Countdown target date and time" />
@@ -289,9 +272,10 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="420"
-                                    Background="#F6FAFD">
+                            <Border Grid.Column="2"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Background="#F6FAFD"
+                                    Margin="0">
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                Text="Countdown display format" />
@@ -314,7 +298,7 @@
                                                Text="Leave it blank for a natural-language countdown like “2 hours from now”." />
                                 </StackPanel>
                             </Border>
-                        </WrapPanel>
+                        </Grid>
 
                         <Grid Margin="0,10,0,0">
                             <Grid.ColumnDefinitions>
@@ -395,10 +379,6 @@
                                                Foreground="{StaticResource AccentBrush}"
                                                Text="{Binding PreviewCountdownText}" 
                                                TextWrapping="Wrap" />
-                                    <Button Margin="0,16,0,0"
-                                            Command="{Binding ShowCountdownPreviewCommand}"
-                                            Content="Show in main preview"
-                                            Style="{StaticResource SecondaryButton}" />
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -656,10 +636,19 @@
                         <TextBlock Style="{StaticResource SectionDescriptionStyle}"
                                    Text="Decide how persistent, interactive, and visible the clock should be across your desktop setup." />
 
-                        <WrapPanel>
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="300"
-                                    Background="#F6FAFD">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="18" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="18" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Background="#F6FAFD"
+                                    Margin="0">
                                 <StackPanel>
                                     <TextBlock FontSize="18"
                                                FontWeight="SemiBold"
@@ -678,9 +667,10 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="300"
-                                    Background="#FFF9F7">
+                            <Border Grid.Column="2"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Background="#FFF9F7"
+                                    Margin="0">
                                 <StackPanel>
                                     <TextBlock FontSize="18"
                                                FontWeight="SemiBold"
@@ -697,9 +687,10 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="300"
-                                    Background="#F8FBF7">
+                            <Border Grid.Column="4"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Background="#F8FBF7"
+                                    Margin="0">
                                 <StackPanel>
                                     <TextBlock FontSize="18"
                                                FontWeight="SemiBold"
@@ -715,7 +706,7 @@
                                               IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
                                 </StackPanel>
                             </Border>
-                        </WrapPanel>
+                        </Grid>
                     </StackPanel>
                 </Border>
 
@@ -727,9 +718,20 @@
                         <TextBlock Style="{StaticResource SectionDescriptionStyle}"
                                    Text="Keep advanced actions and references nearby without letting them dominate the primary customization flow." />
 
-                        <WrapPanel>
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="240">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Margin="0">
                                 <StackPanel>
                                     <Button Content="Open settings folder"
                                             Click="OpenSettingsFolder"
@@ -741,8 +743,9 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="240">
+                            <Border Grid.Column="2"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Margin="0">
                                 <StackPanel>
                                     <Button Content="Open settings file"
                                             Click="OpenSettingsFile"
@@ -754,8 +757,9 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="240">
+                            <Border Grid.Column="4"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Margin="0">
                                 <StackPanel>
                                     <Button Content="Create new clock"
                                             Click="CreateNewClock"
@@ -767,8 +771,9 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource MiniCardStyle}"
-                                    Width="240">
+                            <Border Grid.Column="6"
+                                    Style="{StaticResource MiniCardStyle}"
+                                    Margin="0">
                                 <StackPanel>
                                     <Button Content="Check for updates"
                                             Click="CheckForUpdates"
@@ -778,7 +783,7 @@
                                                Text="Open the latest releases page on GitHub." />
                                 </StackPanel>
                             </Border>
-                        </WrapPanel>
+                        </Grid>
 
                         <Grid Margin="0,10,0,0">
                             <Grid.ColumnDefinitions>
