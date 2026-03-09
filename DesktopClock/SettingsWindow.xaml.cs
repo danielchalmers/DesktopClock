@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing.Text;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -37,14 +38,28 @@ public partial class SettingsWindow : Window
             return;
         }
 
-        var value = e.AddedItems[0] as DateFormatExample;
-
-        if (value == null)
+        if (e.AddedItems[0] is not DateFormatExample value)
         {
             return;
         }
 
         ViewModel.Settings.Format = value.Format;
+    }
+
+    private void NavButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not FrameworkElement element || element.Tag is not string sectionName)
+        {
+            return;
+        }
+
+        if (FindName(sectionName) is not FrameworkElement section)
+        {
+            return;
+        }
+
+        var point = section.TransformToAncestor(SettingsContent).Transform(new Point(0, 0));
+        SettingsScrollViewer.ScrollToVerticalOffset(Math.Max(0, point.Y - 8));
     }
 
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
@@ -116,7 +131,6 @@ public partial class SettingsWindow : Window
 
     private void OpenSettingsFile(object sender, RoutedEventArgs e)
     {
-        // Teach user how it works.
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
         {
             MessageBox.Show(this,
@@ -126,11 +140,11 @@ public partial class SettingsWindow : Window
             Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
         }
 
-        // Save first if we can so it's up-to-date.
         if (Settings.CanBeSaved)
+        {
             Settings.Default.Save();
+        }
 
-        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
         if (!Settings.Exists)
         {
             MessageBox.Show(this,
@@ -139,14 +153,12 @@ public partial class SettingsWindow : Window
             return;
         }
 
-        // Open settings file in notepad.
         try
         {
             Process.Start("notepad", Settings.FilePath);
         }
         catch (Exception ex)
         {
-            // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
             MessageBox.Show(this,
                 "Couldn't open settings file in Notepad.\n\n" +
                 "This app may have been stolen. If you paid for it, ask for a refund and download it for free from https://github.com/danielchalmers/DesktopClock.\n\n" +
@@ -168,11 +180,11 @@ public partial class SettingsWindow : Window
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
         if (result != MessageBoxResult.OK)
+        {
             return;
+        }
 
         var newExePath = Path.Combine(App.MainFileInfo.DirectoryName, App.MainFileInfo.GetFileAtNextIndex().Name);
-
-        // Copy and start the new clock.
         File.Copy(App.MainFileInfo.FullName, newExePath);
         Process.Start(newExePath);
     }
@@ -210,6 +222,7 @@ public partial class SettingsWindow : Window
     private void SettingsWindow_Closing(object sender, CancelEventArgs e)
     {
         ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
+        ViewModel.Dispose();
     }
 
     private static void OpenUrl(string url)
@@ -220,7 +233,6 @@ public partial class SettingsWindow : Window
     private static void OpenSettingsPath(string filePath)
     {
         var folderPath = Path.GetDirectoryName(filePath);
-
         if (string.IsNullOrWhiteSpace(folderPath))
         {
             return;
@@ -230,8 +242,11 @@ public partial class SettingsWindow : Window
     }
 }
 
-public partial class SettingsWindowViewModel : ObservableObject
+public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 {
+    private readonly DispatcherTimer _previewTimer;
+    private bool _isCountdownPreview;
+
     public Settings Settings { get; }
 
     public SettingsWindowViewModel(Settings settings)
@@ -243,101 +258,204 @@ public partial class SettingsWindowViewModel : ObservableObject
         TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToArray();
         ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
+
+        Settings.PropertyChanged += Settings_PropertyChanged;
+
+        _previewTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(1)
+        };
+        _previewTimer.Tick += PreviewTimer_Tick;
+        _previewTimer.Start();
     }
 
-    /// <summary>
-    /// All available font families reported by the system.
-    /// </summary>
     public IList<string> FontFamilies { get; }
 
-    /// <summary>
-    /// All available font styles.
-    /// </summary>
     public IList<string> FontStyles { get; }
 
-    /// <summary>
-    /// All available font weights.
-    /// </summary>
     public IList<string> FontWeights { get; }
 
-    /// <summary>
-    /// All available text transformations.
-    /// </summary>
     public IList<TextTransform> TextTransforms { get; }
 
-    /// <summary>
-    /// All available stretch options for background images.
-    /// </summary>
     public IList<Stretch> ImageStretches { get; }
 
-    /// <summary>
-    /// All available time zones reported by the system.
-    /// </summary>
     public IList<TimeZoneInfo> TimeZones { get; }
 
-    /// <summary>
-    /// Sets the format string in settings.
-    /// </summary>
+    public bool IsCountdownPreview
+    {
+        get => _isCountdownPreview;
+        set
+        {
+            if (!SetProperty(ref _isCountdownPreview, value))
+            {
+                return;
+            }
+
+            RaisePreviewChanged();
+        }
+    }
+
+    public string PreviewModeLabel => IsCountdownPreview ? "COUNTDOWN MODE" : "CLOCK MODE";
+
+    public string PreviewHeadline => IsCountdownPreview
+        ? "See how the event view reads before the countdown actually starts running on your desktop."
+        : "Experiment with the visible clock surface and type treatment in real time.";
+
+    public string PreviewSummary => IsCountdownPreview
+        ? "Target, format, and sound settings are grouped below so you can shape the whole event experience together."
+        : "Typography, color, background, and size work together here so appearance choices feel connected.";
+
+    public string PreviewCaption => IsCountdownPreview
+        ? "Using your active countdown settings or a short demo target when none is set."
+        : "Reflecting your current time format, time zone, and appearance settings.";
+
+    public string PreviewClockText => IsCountdownPreview ? PreviewCountdownText : PreviewTimeText;
+
+    public string PreviewTimeText => FormatPreviewText(default);
+
+    public string PreviewCountdownText => FormatPreviewText(GetPreviewCountdownTarget());
+
+    public string PreviewSurfaceSummary
+    {
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(Settings.BackgroundImagePath))
+            {
+                return "Image background";
+            }
+
+            return Settings.BackgroundEnabled ? "Filled background" : "Outlined text";
+        }
+    }
+
+    public string PreviewWindowSummary
+    {
+        get
+        {
+            var visibility = Settings.Topmost ? "Always on top" : "Standard layer";
+            var interaction = Settings.ClickThrough ? "click-through" : "interactive";
+            return $"{visibility}, {interaction}";
+        }
+    }
+
+    [RelayCommand]
+    public void ShowTimePreview()
+    {
+        IsCountdownPreview = false;
+    }
+
+    [RelayCommand]
+    public void ShowCountdownPreview()
+    {
+        IsCountdownPreview = true;
+    }
+
     [RelayCommand]
     public void SetFormat(DateFormatExample value)
     {
         Settings.Default.Format = value.Format;
     }
 
-    /// <summary>
-    /// Disables countdown mode by resetting the date to default.
-    /// </summary>
     [RelayCommand]
     public void ResetCountdown()
     {
         Settings.CountdownTo = default;
+        RaisePreviewChanged();
     }
 
-    /// <summary>
-    /// Resets the countdown format to the default (dynamic) format.
-    /// </summary>
     [RelayCommand]
     public void ResetCountdownFormat()
     {
         Settings.CountdownFormat = string.Empty;
+        RaisePreviewChanged();
     }
 
-    /// <summary>
-    /// Clears the chime sound file path.
-    /// </summary>
     [RelayCommand]
     public void ResetWavFilePath()
     {
         Settings.WavFilePath = string.Empty;
     }
 
-    /// <summary>
-    /// Resets the chime interval to the default value.
-    /// </summary>
     [RelayCommand]
     public void ResetWavFileInterval()
     {
         Settings.WavFileInterval = default;
     }
 
-    /// <summary>
-    /// Clears the background image path.
-    /// </summary>
     [RelayCommand]
     public void ResetBackgroundImagePath()
     {
         Settings.BackgroundImagePath = string.Empty;
+        RaisePreviewChanged();
+    }
+
+    public void Dispose()
+    {
+        Settings.PropertyChanged -= Settings_PropertyChanged;
+        _previewTimer.Stop();
+        _previewTimer.Tick -= PreviewTimer_Tick;
+    }
+
+    private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        RaisePreviewChanged();
+    }
+
+    private void PreviewTimer_Tick(object sender, EventArgs e)
+    {
+        RaisePreviewChanged();
+    }
+
+    private void RaisePreviewChanged()
+    {
+        OnPropertyChanged(nameof(PreviewModeLabel));
+        OnPropertyChanged(nameof(PreviewHeadline));
+        OnPropertyChanged(nameof(PreviewSummary));
+        OnPropertyChanged(nameof(PreviewCaption));
+        OnPropertyChanged(nameof(PreviewClockText));
+        OnPropertyChanged(nameof(PreviewTimeText));
+        OnPropertyChanged(nameof(PreviewCountdownText));
+        OnPropertyChanged(nameof(PreviewSurfaceSummary));
+        OnPropertyChanged(nameof(PreviewWindowSummary));
+    }
+
+    private string FormatPreviewText(DateTime countdownTo)
+    {
+        try
+        {
+            return TimeStringFormatter.Format(
+                DateTimeOffset.Now,
+                DateTime.Now,
+                Settings.TimeZoneInfo,
+                countdownTo,
+                Settings.Format,
+                Settings.CountdownFormat,
+                Settings.TextTransform,
+                CultureInfo.CurrentCulture);
+        }
+        catch
+        {
+            return countdownTo == default ? "Preview unavailable" : "Countdown preview unavailable";
+        }
+    }
+
+    private DateTime GetPreviewCountdownTarget()
+    {
+        if (Settings.CountdownTo != default)
+        {
+            return Settings.CountdownTo;
+        }
+
+        return DateTime.Now.AddHours(2).AddMinutes(17);
     }
 
     private IEnumerable<string> GetAllSystemFonts()
     {
-        // Get fonts from WPF.
         foreach (var fontFamily in Fonts.SystemFontFamilies)
         {
             yield return fontFamily.Source;
         }
 
-        // Get fonts from System.Drawing.
         using var installedFontCollection = new InstalledFontCollection();
         foreach (var fontFamily in installedFontCollection.Families)
         {
