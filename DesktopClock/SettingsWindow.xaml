@@ -55,6 +55,22 @@
             <Setter Property="Margin" Value="8" />
         </Style>
 
+        <Style x:Key="WrapSectionPanel"
+               TargetType="WrapPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Margin" Value="0,0,-12,-12" />
+        </Style>
+
+        <Style x:Key="WrapCardBorder"
+               TargetType="Border">
+            <Setter Property="Margin" Value="0,0,12,12" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="BorderBrush" Value="#DCDCDC" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="#FAFAFA" />
+        </Style>
+
         <Style x:Key="ControlRow"
                TargetType="Grid">
             <Setter Property="Margin" Value="0,0,0,4" />
@@ -177,101 +193,138 @@
             <GroupBox Header="Window"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <CheckBox Content="Start with Windows"
-                              IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
-                    <TextBlock Text="Run the clock automatically when you sign in."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Show in taskbar"
-                              IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
-                    <TextBlock Text="Show the clock in the Windows taskbar."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Hide from Alt+Tab"
-                              IsChecked="{Binding Settings.HideFromAltTab, Mode=TwoWay}" />
-                    <TextBlock Text="Hide the clock window from the Alt+Tab switcher."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Always on top"
-                              IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
-                    <TextBlock Text="Keep the clock above other windows."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Click through"
-                              IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
-                    <TextBlock Text="Let clicks pass through the clock to windows behind it."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Hide when fullscreen"
-                              IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
-                    <TextBlock Text="Hide the clock when a fullscreen app is active on the same monitor."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Start hidden"
-                              IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
-                    <TextBlock Text="Start without showing the clock. Use the tray icon to show it again."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Allow dragging"
-                              IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
-                    <TextBlock Text="Move the clock by dragging it with the mouse."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Align right"
-                              IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
-                    <TextBlock Text="Keep the right edge fixed when the text length changes."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="Pixel shifting"
-                              IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                    <TextBlock Text="Move the clock slightly to help reduce the risk of screen burn-in."
-                               Style="{StaticResource DescriptionTextBlock}" />
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Start with Windows"
+                                          IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
+                                <TextBlock Text="Run the clock automatically when you sign in."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Show in taskbar"
+                                          IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
+                                <TextBlock Text="Show the clock in the Windows taskbar."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Hide from Alt+Tab"
+                                          IsChecked="{Binding Settings.HideFromAltTab, Mode=TwoWay}" />
+                                <TextBlock Text="Hide the clock window from the Alt+Tab switcher."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Always on top"
+                                          IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
+                                <TextBlock Text="Keep the clock above other windows."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Click through"
+                                          IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
+                                <TextBlock Text="Let clicks pass through the clock to windows behind it."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Hide when fullscreen"
+                                          IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
+                                <TextBlock Text="Hide the clock when a fullscreen app is active on the same monitor."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Start hidden"
+                                          IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
+                                <TextBlock Text="Start without showing the clock. Use the tray icon to show it again."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Allow dragging"
+                                          IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
+                                <TextBlock Text="Move the clock by dragging it with the mouse."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Align right"
+                                          IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
+                                <TextBlock Text="Keep the right edge fixed when the text length changes."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Pixel shifting"
+                                          IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
+                                <TextBlock Text="Move the clock slightly to help reduce the risk of screen burn-in."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Typography"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Font family"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox ItemsSource="{Binding FontFamilies}"
-                              SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
-                    <TextBlock Text="Choose the font family."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Text="Font style"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox ItemsSource="{Binding FontStyles}"
-                              SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
-                    <TextBlock Text="Choose normal, italic, or oblique text."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Text="Font weight"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox ItemsSource="{Binding FontWeights}"
-                              SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
-                    <TextBlock Text="Make the text thinner or thicker."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Text="Capitalization"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox ItemsSource="{Binding TextTransforms}"
-                              SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
-                    <TextBlock Text="Change the displayed text to uppercase or lowercase."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Font family"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <ComboBox ItemsSource="{Binding FontFamilies}"
+                                          SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
+                                <TextBlock Text="Choose the font family."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Font style"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <ComboBox ItemsSource="{Binding FontStyles}"
+                                          SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
+                                <TextBlock Text="Choose normal, italic, or oblique text."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Font weight"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <ComboBox ItemsSource="{Binding FontWeights}"
+                                          SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
+                                <TextBlock Text="Make the text thinner or thicker."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Capitalization"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <ComboBox ItemsSource="{Binding TextTransforms}"
+                                          SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
+                                <TextBlock Text="Change the displayed text to uppercase or lowercase."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
 
                     <TextBlock Text="Text color"
                                Style="{StaticResource LabelTextBlock}" />
@@ -493,163 +546,233 @@
             <GroupBox Header="Tools"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <Button Content="Open settings folder"
-                            Click="OpenSettingsFolder"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <TextBlock Text="Open the folder where the settings file is stored."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <Button Content="Open settings file"
-                            Click="OpenSettingsFile"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <TextBlock Text="Open the JSON settings file in Notepad."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <Button Content="Create new clock"
-                            Click="CreateNewClock"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <TextBlock Text="Copy this clock and start it with fresh settings."
-                               Style="{StaticResource DescriptionTextBlock}" />
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <Button Content="Open settings folder"
+                                        Click="OpenSettingsFolder"
+                                        IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                                <TextBlock Text="Open the folder where the settings file is stored."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <Button Content="Open settings file"
+                                        Click="OpenSettingsFile"
+                                        IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                                <TextBlock Text="Open the JSON settings file in Notepad."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <Button Content="Create new clock"
+                                        Click="CreateNewClock"
+                                        IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                                <TextBlock Text="Copy this clock and start it with fresh settings."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Shortcuts"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <StackPanel>
-                        <TextBlock>
-                            <Run FontWeight="SemiBold">Right-click:</Run>
-                            <Run> Open the menu</Run>
-                        </TextBlock>
-                        <TextBlock>
-                            <Run FontWeight="SemiBold">Double-click:</Run>
-                            <Run> Copy the displayed text</Run>
-                        </TextBlock>
-                        <TextBlock>
-                            <Run FontWeight="SemiBold">Drag:</Run>
-                            <Run> Move the clock</Run>
-                        </TextBlock>
-                        <TextBlock>
-                            <Run FontWeight="SemiBold">Ctrl + Scroll:</Run>
-                            <Run> Change the size</Run>
-                        </TextBlock>
-                        <TextBlock>
-                            <Run FontWeight="SemiBold">Ctrl + +:</Run>
-                            <Run> Increase the size</Run>
-                        </TextBlock>
-                        <TextBlock>
-                            <Run FontWeight="SemiBold">Ctrl + -:</Run>
-                            <Run> Decrease the size</Run>
-                        </TextBlock>
-                    </StackPanel>
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Right-click"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Open the menu"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Double-click"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Copy the displayed text"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Drag"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Move the clock"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Ctrl + Scroll"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Change the size"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Ctrl + +"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Increase the size"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Ctrl + -"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <TextBlock Text="Decrease the size"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Links"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <StackPanel>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Good Diary
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock Text="Stay on top of your well-being (Android)"
-                                   Margin="0,0,0,16"
-                                   Style="{StaticResource DescriptionTextBlock}" />
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Network Monitor
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock Text="See latency and bandwidth usage (Windows)"
-                                   Margin="0,0,0,16"
-                                   Style="{StaticResource DescriptionTextBlock}" />
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Sentry Replay
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock Text="Watch your Tesla dashcam clips (Windows)"
-                                   Margin="0,0,0,16"
-                                   Style="{StaticResource DescriptionTextBlock}" />
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Radial Actions
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock Text="Summon a customizable radial menu (Windows)"
-                                   Margin="0,0,0,16"
-                                   Style="{StaticResource DescriptionTextBlock}" />
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                All my projects on GitHub
-                            </Hyperlink>
-                        </TextBlock>
-                    </StackPanel>
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock>
+                                    <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
+                                               RequestNavigate="Hyperlink_RequestNavigate">
+                                        Good Diary
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock Text="Stay on top of your well-being (Android)"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock>
+                                    <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
+                                               RequestNavigate="Hyperlink_RequestNavigate">
+                                        Network Monitor
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock Text="See latency and bandwidth usage (Windows)"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock>
+                                    <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
+                                               RequestNavigate="Hyperlink_RequestNavigate">
+                                        Sentry Replay
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock Text="Watch your Tesla dashcam clips (Windows)"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock>
+                                    <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
+                                               RequestNavigate="Hyperlink_RequestNavigate">
+                                        Radial Actions
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock Text="Summon a customizable radial menu (Windows)"
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock>
+                                    <Hyperlink NavigateUri="https://github.com/danielchalmers"
+                                               RequestNavigate="Hyperlink_RequestNavigate">
+                                        All my projects on GitHub
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Credits"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <StackPanel>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                CommunityToolkit
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/Fody/Costura"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Costura.Fody
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                H.NotifyIcon.Wpf
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Humanizer
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://www.newtonsoft.com/json"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Newtonsoft.Json
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                PropertyChanged.Fody
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                WpfWindowPlacement
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                IconKitchen
-                            </Hyperlink>
-                        </TextBlock>
-                    </StackPanel>
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="180">
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
+                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                    CommunityToolkit
+                                </Hyperlink>
+                            </TextBlock>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="https://github.com/Fody/Costura"
+                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                    Costura.Fody
+                                </Hyperlink>
+                            </TextBlock>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon"
+                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                    H.NotifyIcon.Wpf
+                                </Hyperlink>
+                            </TextBlock>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
+                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                    Humanizer
+                                </Hyperlink>
+                            </TextBlock>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="https://www.newtonsoft.com/json"
+                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                    Newtonsoft.Json
+                                </Hyperlink>
+                            </TextBlock>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged"
+                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                    PropertyChanged.Fody
+                                </Hyperlink>
+                            </TextBlock>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement"
+                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                    WpfWindowPlacement
+                                </Hyperlink>
+                            </TextBlock>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <TextBlock>
+                                <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
+                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                    IconKitchen
+                                </Hyperlink>
+                            </TextBlock>
+                        </Border>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
