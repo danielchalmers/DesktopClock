@@ -85,11 +85,24 @@
         <Style x:Key="WrapCardBorder"
                TargetType="Border">
             <Setter Property="Margin" Value="0,0,12,12" />
+            <Setter Property="Width" Value="220" />
             <Setter Property="Padding" Value="10" />
             <Setter Property="BorderBrush" Value="#DCDCDC" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="CornerRadius" Value="6" />
             <Setter Property="Background" Value="#FAFAFA" />
+        </Style>
+
+        <Style x:Key="WideWrapCardBorder"
+               TargetType="Border"
+               BasedOn="{StaticResource WrapCardBorder}">
+            <Setter Property="Width" Value="344" />
+        </Style>
+
+        <Style x:Key="CompactWrapCardBorder"
+               TargetType="Border"
+               BasedOn="{StaticResource WrapCardBorder}">
+            <Setter Property="Width" Value="180" />
         </Style>
 
         <Style x:Key="ControlRow"
@@ -129,124 +142,109 @@
         <StackPanel Margin="12">
             <GroupBox Header="Display"
                       Style="{StaticResource CardGroupBox}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0"
-                               Text="Clock format"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="1"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="20" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
-                                 AcceptsReturn="True"
-                                 MaxLines="3" />
-                        <ComboBox Grid.Column="1"
-                                  DisplayMemberPath="Example"
-                                  ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
-                                  SelectionChanged="SelectFormat" />
-                    </Grid>
-                    <TextBlock Grid.Row="2"
-                               Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Choose how the clock text is formatted. Use curly braces {} around time codes. " />
-                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Learn more
-                        </Hyperlink>
-                    </TextBlock>
-
-                    <TextBlock Grid.Row="4"
-                               Text="Time zone"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox Grid.Row="5"
-                              ItemsSource="{Binding TimeZones}"
-                              SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
-                              DisplayMemberPath="DisplayName" />
-                    <TextBlock Grid.Row="6"
-                               Text="Display the clock using a different time zone."
-                               Style="{StaticResource DescriptionTextBlock}" />
-                </Grid>
+                <StackPanel Style="{StaticResource CardBodyPanel}">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Clock format"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
+                                             AcceptsReturn="True"
+                                             MaxLines="3" />
+                                    <ComboBox Grid.Column="1"
+                                              DisplayMemberPath="Example"
+                                              ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
+                                              SelectionChanged="SelectFormat" />
+                                </Grid>
+                                <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                                    <Run Text="Choose how the clock text is formatted. Use curly braces {} around time codes. " />
+                                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
+                                               RequestNavigate="Hyperlink_RequestNavigate">
+                                        Learn more
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Time zone"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <ComboBox ItemsSource="{Binding TimeZones}"
+                                          SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
+                                          DisplayMemberPath="DisplayName" />
+                                <TextBlock Text="Display the clock using a different time zone."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Countdown"
                       Style="{StaticResource CardGroupBox}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0"
-                               Text="Countdown target"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="1"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.CountdownTo, Mode=TwoWay}" />
-                        <Button Grid.Column="2"
-                                Content="Reset"
-                                Command="{Binding ResetCountdownCommand}" />
-                    </Grid>
-                    <TextBlock Grid.Row="2"
-                               Text="Set a date and time to count down to. Clear the value to disable countdown mode."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Grid.Row="4"
-                               Text="Countdown format"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="5"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 AcceptsReturn="True"
-                                 MaxLines="3" />
-                        <Button Grid.Column="2"
-                                Content="Reset"
-                                Command="{Binding ResetCountdownFormatCommand}" />
-                    </Grid>
-                    <TextBlock Grid.Row="6"
-                               Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display. " />
-                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            Learn more
-                        </Hyperlink>
-                    </TextBlock>
-                </Grid>
+                <StackPanel Style="{StaticResource CardBodyPanel}">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Countdown target"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.CountdownTo, Mode=TwoWay}" />
+                                    <Button Grid.Column="2"
+                                            Content="Reset"
+                                            Command="{Binding ResetCountdownCommand}" />
+                                </Grid>
+                                <TextBlock Text="Set a date and time to count down to. Clear the value to disable countdown mode."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Countdown format"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             AcceptsReturn="True"
+                                             MaxLines="3" />
+                                    <Button Grid.Column="2"
+                                            Content="Reset"
+                                            Command="{Binding ResetCountdownFormatCommand}" />
+                                </Grid>
+                                <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                                    <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display. " />
+                                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
+                                               RequestNavigate="Hyperlink_RequestNavigate">
+                                        Learn more
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Window"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
@@ -343,22 +341,8 @@
 
             <GroupBox Header="Typography"
                       Style="{StaticResource CardGroupBox}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="12" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="12" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <WrapPanel Grid.Row="0"
-                               Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
+                <StackPanel Style="{StaticResource CardBodyPanel}">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
@@ -403,297 +387,262 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Text color"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Button Grid.Column="2"
+                                            Content="Pick..."
+                                            Click="PickTextColor" />
+                                </Grid>
+                                <TextBlock Text="Change the text color using a hex value, a color name, or the picker."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Text opacity"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="36" />
+                                    </Grid.ColumnDefinitions>
+                                    <Slider Grid.Column="0"
+                                            Margin="0"
+                                            Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Minimum="0"
+                                            Maximum="1"
+                                            TickFrequency="0.01"
+                                            IsSnapToTickEnabled="True" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
+                                               Style="{StaticResource SliderValueTextBlock}" />
+                                </Grid>
+                                <TextBlock Text="Adjust how transparent the text appears."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
                     </WrapPanel>
-
-                    <TextBlock Grid.Row="2"
-                               Text="Text color"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="3"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <Button Grid.Column="2"
-                                Content="Pick..."
-                                Click="PickTextColor" />
-                    </Grid>
-                    <TextBlock Grid.Row="4"
-                               Text="Change the text color using a hex value, a color name, or the picker."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Grid.Row="6"
-                               Text="Text opacity"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="7"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="36" />
-                        </Grid.ColumnDefinitions>
-                        <Slider Grid.Column="0"
-                                Margin="0"
-                                Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="0"
-                                Maximum="1"
-                                TickFrequency="0.01"
-                                IsSnapToTickEnabled="True" />
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
-                                   Style="{StaticResource SliderValueTextBlock}" />
-                    </Grid>
-                    <TextBlock Grid.Row="8"
-                               Text="Adjust how transparent the text appears."
-                               Style="{StaticResource DescriptionTextBlock}" />
-                </Grid>
+                </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Appearance"
                       Style="{StaticResource CardGroupBox}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0"
-                               Text="Background or outline color"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="1"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <Button Grid.Column="2"
-                                Content="Pick..."
-                                Click="PickOuterColor" />
-                    </Grid>
-                    <TextBlock Grid.Row="2"
-                               Text="Change the background or outline color."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Grid.Row="4"
-                              Content="Solid background"
-                              IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="5"
-                               Text="Show a solid background instead of an outline."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Grid.Row="7"
-                               Text="Background opacity"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="8"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="36" />
-                        </Grid.ColumnDefinitions>
-                        <Slider Grid.Column="0"
-                                Margin="0"
-                                Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="0"
-                                Maximum="1"
-                                TickFrequency="0.01"
-                                IsSnapToTickEnabled="True" />
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
-                                   Style="{StaticResource SliderValueTextBlock}" />
-                    </Grid>
-                    <TextBlock Grid.Row="9"
-                               Text="Adjust how transparent the background appears."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Grid.Row="11"
-                               Text="Rounded corners"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="12"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="36" />
-                        </Grid.ColumnDefinitions>
-                        <Slider Grid.Column="0"
-                                Margin="0"
-                                Value="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="0"
-                                Maximum="24"
-                                TickFrequency="0.1"
-                                IsSnapToTickEnabled="True" />
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.BackgroundCornerRadius, StringFormat=00.0}"
-                                   Style="{StaticResource SliderValueTextBlock}" />
-                    </Grid>
-                    <TextBlock Grid.Row="13"
-                               Text="Soften the background edges."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Grid.Row="15"
-                               Text="Outline thickness"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="16"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="36" />
-                        </Grid.ColumnDefinitions>
-                        <Slider Grid.Column="0"
-                                Margin="0"
-                                Value="{Binding Settings.OutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="0"
-                                Maximum="5"
-                                TickFrequency="0.1"
-                                IsSnapToTickEnabled="True" />
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
-                                   Style="{StaticResource SliderValueTextBlock}" />
-                    </Grid>
-                    <TextBlock Grid.Row="17"
-                               Text="Adjust the outline thickness when the background is disabled."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Grid.Row="19"
-                               Text="Background image"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="20"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <Button Grid.Column="2"
-                                Content="Browse..."
-                                Click="BrowseBackgroundImagePath" />
-                        <Button Grid.Column="4"
-                                Content="Reset"
-                                Command="{Binding ResetBackgroundImagePathCommand}" />
-                    </Grid>
-                    <TextBlock Grid.Row="21"
-                               Text="Show an image behind the clock."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Grid.Row="23"
-                               Text="Image fit"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox Grid.Row="24"
-                              ItemsSource="{Binding ImageStretches}"
-                              SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="25"
-                               Text="Choose how the image fits within the clock."
-                               Style="{StaticResource DescriptionTextBlock}" />
-                </Grid>
+                <StackPanel Style="{StaticResource CardBodyPanel}">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Background or outline color"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Button Grid.Column="2"
+                                            Content="Pick..."
+                                            Click="PickOuterColor" />
+                                </Grid>
+                                <TextBlock Text="Change the background or outline color."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Solid background"
+                                          IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
+                                <TextBlock Text="Show a solid background instead of an outline."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Background opacity"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="36" />
+                                    </Grid.ColumnDefinitions>
+                                    <Slider Grid.Column="0"
+                                            Margin="0"
+                                            Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Minimum="0"
+                                            Maximum="1"
+                                            TickFrequency="0.01"
+                                            IsSnapToTickEnabled="True" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
+                                               Style="{StaticResource SliderValueTextBlock}" />
+                                </Grid>
+                                <TextBlock Text="Adjust how transparent the background appears."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Rounded corners"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="36" />
+                                    </Grid.ColumnDefinitions>
+                                    <Slider Grid.Column="0"
+                                            Margin="0"
+                                            Value="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Minimum="0"
+                                            Maximum="24"
+                                            TickFrequency="0.1"
+                                            IsSnapToTickEnabled="True" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Settings.BackgroundCornerRadius, StringFormat=00.0}"
+                                               Style="{StaticResource SliderValueTextBlock}" />
+                                </Grid>
+                                <TextBlock Text="Soften the background edges."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Outline thickness"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="36" />
+                                    </Grid.ColumnDefinitions>
+                                    <Slider Grid.Column="0"
+                                            Margin="0"
+                                            Value="{Binding Settings.OutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Minimum="0"
+                                            Maximum="5"
+                                            TickFrequency="0.1"
+                                            IsSnapToTickEnabled="True" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
+                                               Style="{StaticResource SliderValueTextBlock}" />
+                                </Grid>
+                                <TextBlock Text="Adjust the outline thickness when the background is disabled."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Background image"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Button Grid.Column="2"
+                                            Content="Browse..."
+                                            Click="BrowseBackgroundImagePath" />
+                                    <Button Grid.Column="4"
+                                            Content="Reset"
+                                            Command="{Binding ResetBackgroundImagePathCommand}" />
+                                </Grid>
+                                <TextBlock Text="Show an image behind the clock."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Image fit"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <ComboBox ItemsSource="{Binding ImageStretches}"
+                                          SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
+                                <TextBlock Text="Choose how the image fits within the clock."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Alerts"
                       Style="{StaticResource CardGroupBox}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0"
-                               Text="Alarm sound"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="1"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <Button Grid.Column="2"
-                                Content="Browse..."
-                                Click="BrowseWavFilePath" />
-                        <Button Grid.Column="4"
-                                Content="Reset"
-                                Command="{Binding ResetWavFilePathCommand}" />
-                    </Grid>
-                    <TextBlock Grid.Row="2"
-                               Text="Choose a WAV file to play."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <TextBlock Grid.Row="4"
-                               Text="Sound interval"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <Grid Grid.Row="5"
-                          Style="{StaticResource ControlRow}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
-                        <Button Grid.Column="2"
-                                Content="Reset"
-                                Command="{Binding ResetWavFileIntervalCommand}" />
-                    </Grid>
-                    <TextBlock Grid.Row="6"
-                               Text="Choose how often the sound should play using hours, minutes, and seconds."
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Grid.Row="8"
-                              Content="Play sound when countdown ends"
-                              IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="9"
-                               Text="Play the selected sound when the countdown finishes."
-                               Style="{StaticResource DescriptionTextBlock}" />
-                </Grid>
+                <StackPanel Style="{StaticResource CardBodyPanel}">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Alarm sound"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Button Grid.Column="2"
+                                            Content="Browse..."
+                                            Click="BrowseWavFilePath" />
+                                    <Button Grid.Column="4"
+                                            Content="Reset"
+                                            Command="{Binding ResetWavFilePathCommand}" />
+                                </Grid>
+                                <TextBlock Text="Choose a WAV file to play."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Sound interval"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <Grid Style="{StaticResource ControlRow}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
+                                    <Button Grid.Column="2"
+                                            Content="Reset"
+                                            Command="{Binding ResetWavFileIntervalCommand}" />
+                                </Grid>
+                                <TextBlock Text="Choose how often the sound should play using hours, minutes, and seconds."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <CheckBox Content="Play sound when countdown ends"
+                                          IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
+                                <TextBlock Text="Play the selected sound when the countdown finishes."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Tools"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
@@ -731,8 +680,7 @@
             <GroupBox Header="Shortcuts"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
@@ -794,8 +742,7 @@
             <GroupBox Header="Links"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
@@ -868,10 +815,9 @@
             <GroupBox Header="Credits"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="180">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border
-                                Style="{StaticResource WrapCardBorder}">
+                                Style="{StaticResource CompactWrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -880,7 +826,7 @@
                             </TextBlock>
                         </Border>
                         <Border
-                                Style="{StaticResource WrapCardBorder}">
+                                Style="{StaticResource CompactWrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Fody/Costura"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -889,7 +835,7 @@
                             </TextBlock>
                         </Border>
                         <Border
-                                Style="{StaticResource WrapCardBorder}">
+                                Style="{StaticResource CompactWrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -898,7 +844,7 @@
                             </TextBlock>
                         </Border>
                         <Border
-                                Style="{StaticResource WrapCardBorder}">
+                                Style="{StaticResource CompactWrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -907,7 +853,7 @@
                             </TextBlock>
                         </Border>
                         <Border
-                                Style="{StaticResource WrapCardBorder}">
+                                Style="{StaticResource CompactWrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://www.newtonsoft.com/json"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -916,7 +862,7 @@
                             </TextBlock>
                         </Border>
                         <Border
-                                Style="{StaticResource WrapCardBorder}">
+                                Style="{StaticResource CompactWrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -925,7 +871,7 @@
                             </TextBlock>
                         </Border>
                         <Border
-                                Style="{StaticResource WrapCardBorder}">
+                                Style="{StaticResource CompactWrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -934,7 +880,7 @@
                             </TextBlock>
                         </Border>
                         <Border
-                                Style="{StaticResource WrapCardBorder}">
+                                Style="{StaticResource CompactWrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
                                            RequestNavigate="Hyperlink_RequestNavigate">
