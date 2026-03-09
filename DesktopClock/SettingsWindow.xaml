@@ -47,15 +47,15 @@
 
         <Style x:Key="CardGroupBox"
                TargetType="GroupBox">
-            <Setter Property="Margin" Value="0,0,0,16" />
+            <Setter Property="Margin" Value="0,0,0,24" />
             <Setter Property="Padding" Value="0" />
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <TextBlock Text="{Binding}"
-                                   FontSize="13"
+                                   FontSize="16"
                                    FontWeight="SemiBold"
-                                   Margin="0,0,0,8" />
+                                   Margin="0,0,0,12" />
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
