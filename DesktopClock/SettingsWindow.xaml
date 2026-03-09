@@ -206,12 +206,6 @@
                                     <TextBlock FontSize="18"
                                                FontWeight="SemiBold"
                                                Text="Clock format editor" />
-                                    <TextBlock Margin="0,6,0,0"
-                                               FontSize="26"
-                                               FontWeight="SemiBold"
-                                               Foreground="{StaticResource AccentBrush}"
-                                               Text="{Binding PreviewTimeText}" 
-                                               TextWrapping="Wrap" />
                                     <TextBlock Margin="0,16,0,0"
                                                Style="{StaticResource FieldTitleStyle}"
                                                Text="Format string" />
@@ -286,20 +280,6 @@
                                               DisplayMemberPath="DisplayName" />
                                     <TextBlock Style="{StaticResource HintStyle}"
                                                Text="Standard formats like T, t, D, and g also work if you prefer a shorter format string." />
-                                    <Border Margin="0,16,0,0"
-                                            Padding="12"
-                                            Background="White"
-                                            BorderBrush="{StaticResource BorderBrush}"
-                                            BorderThickness="1"
-                                            CornerRadius="6">
-                                        <StackPanel>
-                                            <TextBlock FontWeight="SemiBold"
-                                                       Text="Current format" />
-                                            <TextBlock Margin="0,6,0,0"
-                                                       Text="{Binding Settings.Format}"
-                                                       TextWrapping="Wrap" />
-                                        </StackPanel>
-                                    </Border>
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -326,13 +306,6 @@
                                     <TextBlock FontSize="18"
                                                FontWeight="SemiBold"
                                                Text="Countdown target editor" />
-                                    <TextBlock Margin="0,6,0,0"
-                                               FontSize="26"
-                                               FontWeight="SemiBold"
-                                               Foreground="{StaticResource AccentBrush}"
-                                               Text="{Binding PreviewCountdownText}"
-                                               TextWrapping="Wrap" />
-
                                     <TextBlock Margin="0,16,0,0"
                                                Style="{StaticResource FieldTitleStyle}"
                                                Text="Target value" />
@@ -351,33 +324,6 @@
                                     </Grid>
                                     <TextBlock Style="{StaticResource HintStyle}"
                                                Text="Pick a date and time below, or use a quick preset to turn countdown mode on." />
-
-                                    <Grid Margin="0,16,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*" />
-                                            <ColumnDefinition Width="12" />
-                                            <ColumnDefinition Width="0.5*" />
-                                            <ColumnDefinition Width="12" />
-                                            <ColumnDefinition Width="0.5*" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Date" />
-                                            <DatePicker SelectedDate="{Binding CountdownEditorDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="2">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Hour" />
-                                            <ComboBox ItemsSource="{Binding CountdownHours}"
-                                                      SelectedItem="{Binding CountdownEditorHour, Mode=TwoWay}" />
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="4">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Minute" />
-                                            <ComboBox ItemsSource="{Binding CountdownMinutes}"
-                                                      SelectedItem="{Binding CountdownEditorMinute, Mode=TwoWay}" />
-                                        </StackPanel>
-                                    </Grid>
 
                                     <TextBlock Margin="0,16,0,8"
                                                Style="{StaticResource FieldTitleStyle}"
