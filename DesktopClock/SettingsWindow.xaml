@@ -55,15 +55,8 @@
             <Setter Property="Margin" Value="8" />
         </Style>
 
-        <Style x:Key="WrapSectionPanel"
-               TargetType="WrapPanel">
-            <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="Margin" Value="0,0,-12,-12" />
-        </Style>
-
         <Style x:Key="WrapCardBorder"
                TargetType="Border">
-            <Setter Property="Margin" Value="0,0,12,12" />
             <Setter Property="Padding" Value="10" />
             <Setter Property="BorderBrush" Value="#DCDCDC" />
             <Setter Property="BorderThickness" Value="1" />
@@ -193,9 +186,27 @@
             <GroupBox Header="Window"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
-                        <Border Style="{StaticResource WrapCardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Start with Windows"
                                           IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
@@ -203,7 +214,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Show in taskbar"
                                           IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
@@ -211,7 +224,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Hide from Alt+Tab"
                                           IsChecked="{Binding Settings.HideFromAltTab, Mode=TwoWay}" />
@@ -219,7 +234,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Always on top"
                                           IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
@@ -227,7 +244,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Click through"
                                           IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
@@ -235,7 +254,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Hide when fullscreen"
                                           IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
@@ -243,7 +264,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="4"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Start hidden"
                                           IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
@@ -251,7 +274,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="4"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Allow dragging"
                                           IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
@@ -259,7 +284,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="4"
+                                Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Align right"
                                           IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
@@ -267,7 +294,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="6"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Pixel shifting"
                                           IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
@@ -275,16 +304,40 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </WrapPanel>
+                    </Grid>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Typography"
                       Style="{StaticResource CardGroupBox}">
-                <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
-                        <Border Style="{StaticResource WrapCardBorder}">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="12" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="12" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Font family"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -294,7 +347,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Font style"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -304,7 +359,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Font weight"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -314,7 +371,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Capitalization"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -324,11 +383,13 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </WrapPanel>
+                    </Grid>
 
-                    <TextBlock Text="Text color"
+                    <TextBlock Grid.Row="2"
+                               Text="Text color"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="3"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -340,13 +401,15 @@
                                 Content="Pick..."
                                 Click="PickTextColor" />
                     </Grid>
-                    <TextBlock Text="Change the text color using a hex value, a color name, or the picker."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="4"
+                               Text="Change the text color using a hex value, a color name, or the picker."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Text opacity"
+                    <TextBlock Grid.Row="6"
+                               Text="Text opacity"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="7"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="36" />
@@ -362,9 +425,10 @@
                                    Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Adjust how transparent the text appears."
+                    <TextBlock Grid.Row="8"
+                               Text="Adjust how transparent the text appears."
                                Style="{StaticResource DescriptionTextBlock}" />
-                </StackPanel>
+                </Grid>
             </GroupBox>
 
             <GroupBox Header="Appearance"
@@ -546,9 +610,17 @@
             <GroupBox Header="Tools"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
-                        <Border Style="{StaticResource WrapCardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <Button Content="Open settings folder"
                                         Click="OpenSettingsFolder"
@@ -557,7 +629,8 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <Button Content="Open settings file"
                                         Click="OpenSettingsFile"
@@ -566,7 +639,8 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <Button Content="Create new clock"
                                         Click="CreateNewClock"
@@ -575,16 +649,30 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </WrapPanel>
+                    </Grid>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Shortcuts"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
-                        <Border Style="{StaticResource WrapCardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Right-click"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -592,7 +680,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Double-click"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -600,7 +690,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Drag"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -608,7 +700,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Ctrl + Scroll"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -616,7 +710,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Ctrl + +"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -624,7 +720,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Ctrl + -"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -632,16 +730,30 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </WrapPanel>
+                    </Grid>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Links"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="220">
-                        <Border Style="{StaticResource WrapCardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
@@ -653,7 +765,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
@@ -665,7 +779,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
@@ -677,7 +793,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
@@ -689,7 +807,9 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers"
@@ -699,16 +819,32 @@
                                 </TextBlock>
                             </StackPanel>
                         </Border>
-                    </WrapPanel>
+                    </Grid>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Credits"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
-                               ItemWidth="180">
-                        <Border Style="{StaticResource WrapCardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -716,7 +852,9 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Fody/Costura"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -724,7 +862,9 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -732,7 +872,9 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="0"
+                                Grid.Column="6"
+                                Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -740,7 +882,9 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="0"
+                                Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://www.newtonsoft.com/json"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -748,7 +892,9 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="2"
+                                Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -756,7 +902,9 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="4"
+                                Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -764,7 +912,9 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Style="{StaticResource WrapCardBorder}">
+                        <Border Grid.Row="2"
+                                Grid.Column="6"
+                                Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
                                            RequestNavigate="Hyperlink_RequestNavigate">
@@ -772,7 +922,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                    </WrapPanel>
+                    </Grid>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
