@@ -48,11 +48,33 @@
         <Style x:Key="CardGroupBox"
                TargetType="GroupBox">
             <Setter Property="Margin" Value="0,0,0,16" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,8" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <StackPanel>
+                            <ContentPresenter ContentSource="Header"
+                                              RecognizesAccessKey="True" />
+                            <ContentPresenter />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="CardBodyPanel"
                TargetType="StackPanel">
-            <Setter Property="Margin" Value="8" />
+            <Setter Property="Margin" Value="0" />
         </Style>
 
         <Style x:Key="WrapCardBorder"
@@ -310,7 +332,7 @@
 
             <GroupBox Header="Typography"
                       Style="{StaticResource CardGroupBox}">
-                <Grid Margin="8">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="12" />
