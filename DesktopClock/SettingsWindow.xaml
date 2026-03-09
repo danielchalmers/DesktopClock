@@ -839,6 +839,8 @@
                                         All my projects on GitHub
                                     </Hyperlink>
                                 </TextBlock>
+                                <TextBlock Text="Browse the rest of my apps and tools."
+                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </Grid>
