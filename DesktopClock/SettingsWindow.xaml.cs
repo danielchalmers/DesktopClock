@@ -230,7 +230,10 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 {
     private readonly SystemClockTimer _systemClockTimer;
 
+    [ObservableProperty]
     private string _previewTimeText;
+
+    [ObservableProperty]
     private string _previewCountdownText;
 
     public Settings Settings { get; }
@@ -263,18 +266,6 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
     public IList<Stretch> ImageStretches { get; }
 
     public IList<TimeZoneInfo> TimeZones { get; }
-
-    public string PreviewTimeText
-    {
-        get => _previewTimeText;
-        private set => SetProperty(ref _previewTimeText, value);
-    }
-
-    public string PreviewCountdownText
-    {
-        get => _previewCountdownText;
-        private set => SetProperty(ref _previewCountdownText, value);
-    }
 
     [RelayCommand]
     public void SetFormat(DateFormatExample value)
