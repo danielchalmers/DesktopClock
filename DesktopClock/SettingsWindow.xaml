@@ -63,16 +63,21 @@
             <Setter Property="Background" Value="#10385B" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Padding" Value="14,9" />
-            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Padding" Value="14,8" />
+            <Setter Property="MinHeight" Value="38" />
+            <Setter Property="MinWidth" Value="104" />
             <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
-                                CornerRadius="10">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -99,9 +104,11 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="10">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -113,7 +120,7 @@
             <Setter Property="Background" Value="{StaticResource CardBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="18" />
+            <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Padding" Value="24" />
             <Setter Property="Margin" Value="0,0,0,20" />
         </Style>
@@ -121,7 +128,7 @@
         <Style x:Key="MiniCardStyle"
                TargetType="Border">
             <Setter Property="Background" Value="{StaticResource SoftBrush}" />
-            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="CornerRadius" Value="8" />
             <Setter Property="Padding" Value="16" />
             <Setter Property="Margin" Value="0,0,12,12" />
         </Style>
@@ -176,7 +183,7 @@
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Display" />
                         <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Define how the live clock reads in normal mode. This section keeps time format and time zone together so you can shape the display as one decision." />
+                                   Text="Choose the text format and time zone used when the clock is showing the current time." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -192,7 +199,7 @@
                                          AcceptsReturn="True"
                                          MaxLines="3" />
                                 <TextBlock Style="{StaticResource HintStyle}"
-                                           Text="Use .NET date/time tokens inside braces. Changes are reflected in the preview above immediately." />
+                                           Text="Use .NET date/time tokens inside braces, for example {h:mm:ss tt} or {ddd, MMM d}." />
 
                                 <TextBlock Margin="0,16,0,0"
                                            Style="{StaticResource FieldTitleStyle}"
@@ -213,7 +220,7 @@
                                                Text="Format ideas" />
                                     <TextBlock Margin="0,4,0,12"
                                                Foreground="{StaticResource MutedTextBrush}"
-                                               Text="Pick a starting point, then fine-tune it in the editor." />
+                                               Text="Choose an example to fill the format box, then edit it as needed." />
                                     <ComboBox DisplayMemberPath="Example"
                                               ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
                                               SelectionChanged="SelectFormat" />
@@ -391,7 +398,7 @@
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Appearance studio" />
                         <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Typography, color, opacity, and the background surface are grouped together so you can iterate visually instead of hunting through separate controls." />
+                                   Text="Adjust the font, text color, background, and outline used by the clock." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -410,7 +417,7 @@
                                                    Text="Type editor" />
                                         <TextBlock Margin="0,4,0,14"
                                                    Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Treat font family, style, weight, and text transform as one combined decision." />
+                                                   Text="Choose the font family, style, weight, and letter casing for the clock text." />
 
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -455,7 +462,7 @@
                                                    Text="Text styling" />
                                         <TextBlock Margin="0,4,0,14"
                                                    Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Tune readability first, then refine atmosphere." />
+                                                   Text="Set the text color and opacity." />
 
                                         <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                    Text="Text color" />
@@ -505,7 +512,7 @@
                                                    Text="Surface editor" />
                                         <TextBlock Margin="0,4,0,14"
                                                    Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Choose whether the clock sits on a filled surface or reads as outlined text." />
+                                                   Text="Use a filled background, or turn it off to show the clock as outlined text." />
 
                                         <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                    Text="Background or outline color" />
@@ -594,7 +601,7 @@
                                                    Text="Background image" />
                                         <TextBlock Margin="0,4,0,14"
                                                    Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Swap the solid surface for an image while keeping the same JSON setting fields." />
+                                                   Text="Use an image behind the clock instead of a solid background color." />
 
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -634,7 +641,7 @@
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Window behavior" />
                         <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Decide how persistent, interactive, and visible the clock should be across your desktop setup." />
+                                   Text="Control how the clock behaves on the desktop, at startup, and around other windows." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -716,7 +723,7 @@
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Tools &amp; help" />
                         <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Keep advanced actions and references nearby without letting them dominate the primary customization flow." />
+                                   Text="Open the settings file, create another clock, and find related links and shortcuts." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
