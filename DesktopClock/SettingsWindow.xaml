@@ -105,12 +105,6 @@
             <Setter Property="Width" Value="180" />
         </Style>
 
-        <Style x:Key="XLargeWrapCardBorder"
-               TargetType="Border"
-               BasedOn="{StaticResource WrapCardBorder}">
-            <Setter Property="Width" Value="468" />
-        </Style>
-
         <Style x:Key="ControlRow"
                TargetType="Grid">
             <Setter Property="Margin" Value="0,0,0,4" />
@@ -150,10 +144,8 @@
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <WrapPanel Style="{StaticResource WrapSectionPanel}">
-                        <Border Style="{StaticResource XLargeWrapCardBorder}">
+                        <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Clock text"
-                                           Style="{StaticResource LabelTextBlock}" />
                                 <TextBlock Text="Format"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
@@ -166,17 +158,12 @@
                                              AcceptsReturn="True"
                                              MaxLines="3" />
                                     <ComboBox Grid.Column="1"
-                                              DisplayMemberPath="Example"
-                                              ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
-                                              SelectionChanged="SelectFormat" />
+                                             DisplayMemberPath="Example"
+                                             ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
+                                             SelectionChanged="SelectFormat" />
                                 </Grid>
-                                <TextBlock Text="Time zone"
-                                           Style="{StaticResource LabelTextBlock}" />
-                                <ComboBox ItemsSource="{Binding TimeZones}"
-                                          SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
-                                          DisplayMemberPath="DisplayName" />
                                 <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                                    <Run Text="Control what the clock says and which time zone it uses. Use curly braces {} around time codes. " />
+                                    <Run Text="Choose what the clock says. Use curly braces {} around time codes. " />
                                     <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
                                                RequestNavigate="Hyperlink_RequestNavigate">
                                         Learn more
@@ -184,18 +171,27 @@
                                 </TextBlock>
                             </StackPanel>
                         </Border>
+                        <Border Style="{StaticResource WrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Time zone"
+                                           Style="{StaticResource LabelTextBlock}" />
+                                <ComboBox ItemsSource="{Binding TimeZones}"
+                                          SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
+                                          DisplayMemberPath="DisplayName" />
+                                <TextBlock Text="Override the local time zone when you want the clock to show another region."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
                     </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Timers &amp; Alerts"
+            <GroupBox Header="Countdown"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <WrapPanel Style="{StaticResource WrapSectionPanel}">
-                        <Border Style="{StaticResource XLargeWrapCardBorder}">
+                        <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Countdown"
-                                           Style="{StaticResource LabelTextBlock}" />
                                 <TextBlock Text="Target"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
@@ -210,6 +206,12 @@
                                             Content="Reset"
                                             Command="{Binding ResetCountdownCommand}" />
                                 </Grid>
+                                <TextBlock Text="Set the date and time to count down to. Clear the value to turn countdown mode off."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
                                 <TextBlock Text="Format"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
@@ -226,10 +228,8 @@
                                             Content="Reset"
                                             Command="{Binding ResetCountdownFormatCommand}" />
                                 </Grid>
-                                <CheckBox Content="Play sound when countdown ends"
-                                          IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
                                 <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                                    <Run Text="Control the countdown target, how it is displayed, and whether it should trigger a sound when it finishes. " />
+                                    <Run Text="Control how the countdown is displayed. Leave it blank to use the default display. " />
                                     <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
                                                RequestNavigate="Hyperlink_RequestNavigate">
                                         Learn more
@@ -237,9 +237,17 @@
                                 </TextBlock>
                             </StackPanel>
                         </Border>
+                    </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Alerts"
+                      Style="{StaticResource CardGroupBox}">
+                <StackPanel Style="{StaticResource CardBodyPanel}">
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Alert sound"
+                                <TextBlock Text="Sound"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <TextBlock Text="Audio file"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -274,7 +282,9 @@
                                             Content="Reset"
                                             Command="{Binding ResetWavFileIntervalCommand}" />
                                 </Grid>
-                                <TextBlock Text="Pick a WAV file and how often it should repeat while active."
+                                <CheckBox Content="Play sound when countdown ends"
+                                          IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
+                                <TextBlock Text="Pick a WAV file, set its repeat interval, and choose whether countdown completion should use it."
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
@@ -352,7 +362,7 @@
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <WrapPanel Style="{StaticResource WrapSectionPanel}">
-                        <Border Style="{StaticResource XLargeWrapCardBorder}">
+                        <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Font"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -424,9 +434,9 @@
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <WrapPanel Style="{StaticResource WrapSectionPanel}">
-                        <Border Style="{StaticResource XLargeWrapCardBorder}">
+                        <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Fill &amp; outline"
+                                <TextBlock Text="Fill"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <TextBlock Text="Color"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -462,6 +472,14 @@
                                                Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
                                                Style="{StaticResource SliderValueTextBlock}" />
                                 </Grid>
+                                <TextBlock Text="Control the fill color and how much of it appears behind the clock."
+                                           Style="{StaticResource DescriptionTextBlock}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource WideWrapCardBorder}">
+                            <StackPanel>
+                                <TextBlock Text="Shape &amp; outline"
+                                           Style="{StaticResource LabelTextBlock}" />
                                 <TextBlock Text="Rounded corners"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
@@ -498,7 +516,7 @@
                                                Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
                                                Style="{StaticResource SliderValueTextBlock}" />
                                 </Grid>
-                                <TextBlock Text="Shape the background fill, corner softness, and outline in one place."
+                                <TextBlock Text="Adjust the silhouette of the clock container and the strength of its outline."
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
