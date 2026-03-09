@@ -257,6 +257,26 @@
                                                 Click="InsertClockFormatToken_Click"
                                                 Style="{StaticResource EditorChipButton}" />
                                     </WrapPanel>
+                                    <TextBlock Margin="0,12,0,0"
+                                               Style="{StaticResource HintStyle}"
+                                               TextWrapping="Wrap">
+                                        <Run Text="Use plain text plus tokens in braces. " />
+                                        <Run FontFamily="Consolas"
+                                             Text="{}{ddd}, {MMM d}, {h:mm tt}" />
+                                        <Run Text=" is one example." />
+                                    </TextBlock>
+                                    <TextBlock Style="{StaticResource HintStyle}"
+                                               TextWrapping="Wrap">
+                                        <Run Text="Text outside braces stays literal. " />
+                                        <Run FontFamily="Consolas"
+                                             Text="{}Meeting at {h:mm tt}" />
+                                        <Run Text=" keeps “Meeting at” as text." />
+                                    </TextBlock>
+                                    <TextBlock Margin="0,10,0,0"
+                                               Style="{StaticResource HintStyle}">
+                                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
+                                                   RequestNavigate="Hyperlink_RequestNavigate">Date/time formatting rules</Hyperlink>
+                                    </TextBlock>
                                 </StackPanel>
                             </Border>
 
@@ -279,6 +299,10 @@
                                               DisplayMemberPath="DisplayName" />
                                     <TextBlock Style="{StaticResource HintStyle}"
                                                Text="Standard formats like T, t, D, and g also work if you prefer a shorter format string." />
+                                    <TextBlock Style="{StaticResource HintStyle}"
+                                               TextWrapping="Wrap">
+                                        <Run Text="Use short standard formats for simple cases, or combine custom tokens when you want full control over the layout." />
+                                    </TextBlock>
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -412,11 +436,11 @@
                                                Text="Insert common pieces" />
                                     <WrapPanel>
                                         <Button Content="HH:MM"
-                                                Tag="{}{hh\\:mm}"
+                                                Tag="{}{hh:mm}"
                                                 Click="InsertCountdownFormatToken_Click"
                                                 Style="{StaticResource EditorChipButton}" />
                                         <Button Content="HH:MM:SS"
-                                                Tag="{}{hh\\:mm\\:ss}"
+                                                Tag="{}{hh:mm:ss}"
                                                 Click="InsertCountdownFormatToken_Click"
                                                 Style="{StaticResource EditorChipButton}" />
                                         <Button Content="Days"
@@ -432,6 +456,30 @@
                                                 Click="InsertCountdownFormatToken_Click"
                                                 Style="{StaticResource EditorChipButton}" />
                                     </WrapPanel>
+                                    <TextBlock Margin="0,12,0,0"
+                                               Style="{StaticResource HintStyle}"
+                                               TextWrapping="Wrap">
+                                        <Run Text="Wrap each duration format in braces. " />
+                                        <Run FontFamily="Consolas"
+                                             Text="{}{hh:mm:ss}" />
+                                        <Run Text=" is a common example." />
+                                    </TextBlock>
+                                    <TextBlock Style="{StaticResource HintStyle}"
+                                               TextWrapping="Wrap">
+                                        <Run Text="No escaping needed. " />
+                                        <Run FontFamily="Consolas"
+                                             Text="{}{dd} days {hh:mm:ss}" />
+                                        <Run Text=" is valid." />
+                                    </TextBlock>
+                                    <TextBlock Style="{StaticResource HintStyle}"
+                                               TextWrapping="Wrap">
+                                        <Run Text="Text outside braces stays literal. Leave it blank for the natural countdown sentence." />
+                                    </TextBlock>
+                                    <TextBlock Margin="0,10,0,0"
+                                               Style="{StaticResource HintStyle}">
+                                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
+                                                   RequestNavigate="Hyperlink_RequestNavigate">Countdown formatting rules</Hyperlink>
+                                    </TextBlock>
                                 </StackPanel>
                             </Border>
 
