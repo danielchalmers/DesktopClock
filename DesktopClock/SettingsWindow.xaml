@@ -77,8 +77,14 @@
             <Setter Property="Margin" Value="0" />
         </Style>
 
+        <Style x:Key="WrapSectionPanel"
+               TargetType="WrapPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+
         <Style x:Key="WrapCardBorder"
                TargetType="Border">
+            <Setter Property="Margin" Value="0,0,12,12" />
             <Setter Property="Padding" Value="10" />
             <Setter Property="BorderBrush" Value="#DCDCDC" />
             <Setter Property="BorderThickness" Value="1" />
@@ -123,10 +129,22 @@
         <StackPanel Margin="12">
             <GroupBox Header="Display"
                       Style="{StaticResource CardGroupBox}">
-                <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Clock format"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Clock format"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="1"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="20" />
@@ -140,7 +158,8 @@
                                   ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
                                   SelectionChanged="SelectFormat" />
                     </Grid>
-                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                    <TextBlock Grid.Row="2"
+                               Style="{StaticResource DescriptionTextBlock}">
                         <Run Text="Choose how the clock text is formatted. Use curly braces {} around time codes. " />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
@@ -148,22 +167,37 @@
                         </Hyperlink>
                     </TextBlock>
 
-                    <TextBlock Text="Time zone"
+                    <TextBlock Grid.Row="4"
+                               Text="Time zone"
                                Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox ItemsSource="{Binding TimeZones}"
+                    <ComboBox Grid.Row="5"
+                              ItemsSource="{Binding TimeZones}"
                               SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
                               DisplayMemberPath="DisplayName" />
-                    <TextBlock Text="Display the clock using a different time zone."
+                    <TextBlock Grid.Row="6"
+                               Text="Display the clock using a different time zone."
                                Style="{StaticResource DescriptionTextBlock}" />
-                </StackPanel>
+                </Grid>
             </GroupBox>
 
             <GroupBox Header="Countdown"
                       Style="{StaticResource CardGroupBox}">
-                <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Countdown target"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Countdown target"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="1"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -175,13 +209,15 @@
                                 Content="Reset"
                                 Command="{Binding ResetCountdownCommand}" />
                     </Grid>
-                    <TextBlock Text="Set a date and time to count down to. Clear the value to disable countdown mode."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="2"
+                               Text="Set a date and time to count down to. Clear the value to disable countdown mode."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Countdown format"
+                    <TextBlock Grid.Row="4"
+                               Text="Countdown format"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="5"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -195,39 +231,23 @@
                                 Content="Reset"
                                 Command="{Binding ResetCountdownFormatCommand}" />
                     </Grid>
-                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                    <TextBlock Grid.Row="6"
+                               Style="{StaticResource DescriptionTextBlock}">
                         <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display. " />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
                             Learn more
                         </Hyperlink>
                     </TextBlock>
-                </StackPanel>
+                </Grid>
             </GroupBox>
 
             <GroupBox Header="Window"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="12" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="12" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="12" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Border Grid.Row="0"
-                                Grid.Column="0"
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Start with Windows"
@@ -236,8 +256,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Show in taskbar"
@@ -246,8 +265,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Hide from Alt+Tab"
@@ -256,8 +274,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="0"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Always on top"
@@ -266,8 +283,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Click through"
@@ -276,8 +292,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Hide when fullscreen"
@@ -286,8 +301,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="4"
-                                Grid.Column="0"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Start hidden"
@@ -296,8 +310,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="4"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Allow dragging"
@@ -306,8 +319,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="4"
-                                Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Align right"
@@ -316,8 +328,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="6"
-                                Grid.Column="0"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <CheckBox Content="Pixel shifting"
@@ -326,7 +337,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </Grid>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
@@ -345,20 +356,10 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="12" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Border Grid.Row="0"
-                                Grid.Column="0"
+                    <WrapPanel Grid.Row="0"
+                               Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Font family"
@@ -369,8 +370,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Font style"
@@ -381,8 +381,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="0"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Font weight"
@@ -393,8 +392,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Capitalization"
@@ -405,7 +403,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </Grid>
+                    </WrapPanel>
 
                     <TextBlock Grid.Row="2"
                                Text="Text color"
@@ -455,10 +453,41 @@
 
             <GroupBox Header="Appearance"
                       Style="{StaticResource CardGroupBox}">
-                <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Background or outline color"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Background or outline color"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="1"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -470,19 +499,22 @@
                                 Content="Pick..."
                                 Click="PickOuterColor" />
                     </Grid>
-                    <TextBlock Text="Change the background or outline color."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="2"
+                               Text="Change the background or outline color."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Solid background"
+                    <CheckBox Grid.Row="4"
+                              Content="Solid background"
                               IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
-                    <TextBlock Text="Show a solid background instead of an outline."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="5"
+                               Text="Show a solid background instead of an outline."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Background opacity"
+                    <TextBlock Grid.Row="7"
+                               Text="Background opacity"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="8"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="36" />
@@ -498,13 +530,15 @@
                                    Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Adjust how transparent the background appears."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="9"
+                               Text="Adjust how transparent the background appears."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Rounded corners"
+                    <TextBlock Grid.Row="11"
+                               Text="Rounded corners"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="12"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="36" />
@@ -520,13 +554,15 @@
                                    Text="{Binding Settings.BackgroundCornerRadius, StringFormat=00.0}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Soften the background edges."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="13"
+                               Text="Soften the background edges."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Outline thickness"
+                    <TextBlock Grid.Row="15"
+                               Text="Outline thickness"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="16"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="36" />
@@ -542,13 +578,15 @@
                                    Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Adjust the outline thickness when the background is disabled."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="17"
+                               Text="Adjust the outline thickness when the background is disabled."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Background image"
+                    <TextBlock Grid.Row="19"
+                               Text="Background image"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="20"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -565,25 +603,43 @@
                                 Content="Reset"
                                 Command="{Binding ResetBackgroundImagePathCommand}" />
                     </Grid>
-                    <TextBlock Text="Show an image behind the clock."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="21"
+                               Text="Show an image behind the clock."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Image fit"
+                    <TextBlock Grid.Row="23"
+                               Text="Image fit"
                                Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox ItemsSource="{Binding ImageStretches}"
+                    <ComboBox Grid.Row="24"
+                              ItemsSource="{Binding ImageStretches}"
                               SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
-                    <TextBlock Text="Choose how the image fits within the clock."
+                    <TextBlock Grid.Row="25"
+                               Text="Choose how the image fits within the clock."
                                Style="{StaticResource DescriptionTextBlock}" />
-                </StackPanel>
+                </Grid>
             </GroupBox>
 
             <GroupBox Header="Alerts"
                       Style="{StaticResource CardGroupBox}">
-                <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Alarm sound"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Alarm sound"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="1"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -600,13 +656,15 @@
                                 Content="Reset"
                                 Command="{Binding ResetWavFilePathCommand}" />
                     </Grid>
-                    <TextBlock Text="Choose a WAV file to play."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="2"
+                               Text="Choose a WAV file to play."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Sound interval"
+                    <TextBlock Grid.Row="4"
+                               Text="Sound interval"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid Grid.Row="5"
+                          Style="{StaticResource ControlRow}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -618,30 +676,25 @@
                                 Content="Reset"
                                 Command="{Binding ResetWavFileIntervalCommand}" />
                     </Grid>
-                    <TextBlock Text="Choose how often the sound should play using hours, minutes, and seconds."
-                               Margin="0,0,0,16"
+                    <TextBlock Grid.Row="6"
+                               Text="Choose how often the sound should play using hours, minutes, and seconds."
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Play sound when countdown ends"
+                    <CheckBox Grid.Row="8"
+                              Content="Play sound when countdown ends"
                               IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
-                    <TextBlock Text="Play the selected sound when the countdown finishes."
+                    <TextBlock Grid.Row="9"
+                               Text="Play the selected sound when the countdown finishes."
                                Style="{StaticResource DescriptionTextBlock}" />
-                </StackPanel>
+                </Grid>
             </GroupBox>
 
             <GroupBox Header="Tools"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Border Grid.Column="0"
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <Button Content="Open settings folder"
@@ -651,7 +704,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <Button Content="Open settings file"
@@ -661,7 +714,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <Button Content="Create new clock"
@@ -671,29 +724,16 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </Grid>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Shortcuts"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="12" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Border Grid.Row="0"
-                                Grid.Column="0"
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Right-click"
@@ -702,8 +742,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Double-click"
@@ -712,8 +751,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Drag"
@@ -722,8 +760,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="0"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Ctrl + Scroll"
@@ -732,8 +769,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Ctrl + +"
@@ -742,8 +778,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Ctrl + -"
@@ -752,29 +787,16 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </Grid>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Links"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="12" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Border Grid.Row="0"
-                                Grid.Column="0"
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="220">
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
@@ -787,8 +809,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
@@ -801,8 +822,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
@@ -815,8 +835,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="0"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
@@ -829,8 +848,7 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
                                 <TextBlock>
@@ -843,31 +861,16 @@
                                            Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
-                    </Grid>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Credits"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="12" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Border Grid.Row="0"
-                                Grid.Column="0"
+                    <WrapPanel Style="{StaticResource WrapSectionPanel}"
+                               ItemWidth="180">
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
@@ -876,8 +879,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Fody/Costura"
@@ -886,8 +888,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon"
@@ -896,8 +897,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Grid.Row="0"
-                                Grid.Column="6"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
@@ -906,8 +906,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="0"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://www.newtonsoft.com/json"
@@ -916,8 +915,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="2"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged"
@@ -926,8 +924,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="4"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement"
@@ -936,8 +933,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                        <Border Grid.Row="2"
-                                Grid.Column="6"
+                        <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <TextBlock>
                                 <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
@@ -946,7 +942,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </Border>
-                    </Grid>
+                    </WrapPanel>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
