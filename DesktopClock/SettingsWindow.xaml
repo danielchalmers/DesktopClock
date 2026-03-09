@@ -47,6 +47,7 @@
 
         <Style TargetType="CheckBox">
             <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
         <Style TargetType="Slider">
@@ -65,7 +66,7 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Padding" Value="14,8" />
             <Setter Property="MinHeight" Value="38" />
-            <Setter Property="MinWidth" Value="104" />
+            <Setter Property="MinWidth" Value="80" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -140,13 +141,6 @@
             <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
-        <Style x:Key="SectionDescriptionStyle"
-               TargetType="TextBlock">
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}" />
-            <Setter Property="Margin" Value="0,0,0,20" />
-        </Style>
-
         <Style x:Key="FieldTitleStyle"
                TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
@@ -182,8 +176,6 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Display" />
-                        <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Choose the text format and time zone used when the clock is showing the current time." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -244,8 +236,6 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Countdown &amp; alerts" />
-                        <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Switch the clock into event mode, choose how the countdown reads, and decide when sound should reinforce it." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -396,9 +386,7 @@
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
-                                   Text="Appearance studio" />
-                        <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Adjust the font, text color, background, and outline used by the clock." />
+                                   Text="Appearance" />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -468,13 +456,26 @@
                                                    Text="Text color" />
                                         <Grid Margin="0,4,0,0">
                                             <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="8" />
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="8" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <TextBox Grid.Column="0"
+                                            <Border Grid.Column="0"
+                                                    Width="26"
+                                                    Height="26"
+                                                    VerticalAlignment="Center"
+                                                    BorderBrush="{StaticResource BorderBrush}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="4">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="{Binding Settings.TextColor, Mode=OneWay}" />
+                                                </Border.Background>
+                                            </Border>
+                                            <TextBox Grid.Column="2"
                                                      Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                            <Button Grid.Column="2"
+                                            <Button Grid.Column="4"
                                                     Content="Pick..."
                                                     Click="PickTextColor"
                                                     Style="{StaticResource GhostButton}" />
@@ -518,13 +519,26 @@
                                                    Text="Background or outline color" />
                                         <Grid Margin="0,4,0,0">
                                             <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="8" />
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="8" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <TextBox Grid.Column="0"
+                                            <Border Grid.Column="0"
+                                                    Width="26"
+                                                    Height="26"
+                                                    VerticalAlignment="Center"
+                                                    BorderBrush="{StaticResource BorderBrush}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="4">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="{Binding Settings.OuterColor, Mode=OneWay}" />
+                                                </Border.Background>
+                                            </Border>
+                                            <TextBox Grid.Column="2"
                                                      Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                            <Button Grid.Column="2"
+                                            <Button Grid.Column="4"
                                                     Content="Pick..."
                                                     Click="PickOuterColor"
                                                     Style="{StaticResource GhostButton}" />
@@ -534,7 +548,8 @@
                                                   Content="Use a solid background fill"
                                                   IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
 
-                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                        <TextBlock Margin="0,8,0,0"
+                                                   Style="{StaticResource FieldTitleStyle}"
                                                    Text="Surface opacity" />
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -640,8 +655,6 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Window behavior" />
-                        <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Control how the clock behaves on the desktop, at startup, and around other windows." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -687,9 +700,9 @@
                                                Text="Tune how the clock behaves when it shares space with other apps." />
                                     <CheckBox Content="Keep the clock above other windows"
                                               IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
-                                    <CheckBox Content="Let clicks pass through to windows behind"
+                                    <CheckBox Content="Pass clicks through to windows behind"
                                               IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
-                                    <CheckBox Content="Allow dragging the clock with the mouse"
+                                    <CheckBox Content="Allow dragging the clock"
                                               IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
                                 </StackPanel>
                             </Border>
@@ -705,11 +718,11 @@
                                     <TextBlock Margin="0,4,0,14"
                                                Foreground="{StaticResource MutedTextBrush}"
                                                Text="Useful for overlays, OLED displays, or dynamic text widths." />
-                                    <CheckBox Content="Keep the right edge fixed as text length changes"
+                                    <CheckBox Content="Keep the right edge fixed as text changes"
                                               IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
-                                    <CheckBox Content="Gently move the clock to reduce burn-in risk"
+                                    <CheckBox Content="Shift the clock slightly to reduce burn-in"
                                               IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                                    <CheckBox Content="Hide the clock while fullscreen apps are active"
+                                    <CheckBox Content="Hide the clock while fullscreen apps are open"
                                               IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
                                 </StackPanel>
                             </Border>
@@ -722,13 +735,9 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Tools &amp; help" />
-                        <TextBlock Style="{StaticResource SectionDescriptionStyle}"
-                                   Text="Open the settings file, create another clock, and find related links and shortcuts." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="12" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="12" />
                                 <ColumnDefinition Width="*" />
@@ -760,7 +769,7 @@
                                             Style="{StaticResource GhostButton}" />
                                     <TextBlock Margin="0,10,0,0"
                                                Style="{StaticResource HintStyle}"
-                                               Text="Open the JSON settings file in Notepad for advanced edits." />
+                                               Text="Open the JSON settings file for advanced edits." />
                                 </StackPanel>
                             </Border>
 
@@ -774,22 +783,10 @@
                                             Style="{StaticResource GhostButton}" />
                                     <TextBlock Margin="0,10,0,0"
                                                Style="{StaticResource HintStyle}"
-                                               Text="Copy this clock and launch it with a fresh settings file." />
+                                               Text="Copy this clock and launch it with a new settings file." />
                                 </StackPanel>
                             </Border>
 
-                            <Border Grid.Column="6"
-                                    Style="{StaticResource MiniCardStyle}"
-                                    Margin="0">
-                                <StackPanel>
-                                    <Button Content="Check for updates"
-                                            Click="CheckForUpdates"
-                                            Style="{StaticResource GhostButton}" />
-                                    <TextBlock Margin="0,10,0,0"
-                                               Style="{StaticResource HintStyle}"
-                                               Text="Open the latest releases page on GitHub." />
-                                </StackPanel>
-                            </Border>
                         </Grid>
 
                         <Grid Margin="0,10,0,0">
@@ -806,9 +803,6 @@
                                     <TextBlock FontSize="18"
                                                FontWeight="SemiBold"
                                                Text="Shortcuts" />
-                                    <TextBlock Margin="0,4,0,14"
-                                               Foreground="{StaticResource MutedTextBrush}"
-                                               Text="Small reminders for the built-in clock interactions." />
                                     <TextBlock><Run FontWeight="SemiBold">Right-click:</Run><Run Text=" open the menu" /></TextBlock>
                                     <TextBlock Margin="0,6,0,0"><Run FontWeight="SemiBold">Double-click:</Run><Run Text=" copy the displayed text" /></TextBlock>
                                     <TextBlock Margin="0,6,0,0"><Run FontWeight="SemiBold">Drag:</Run><Run Text=" move the clock" /></TextBlock>
