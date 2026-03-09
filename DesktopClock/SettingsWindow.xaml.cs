@@ -46,6 +46,36 @@ public partial class SettingsWindow : Window
         ViewModel.Settings.Format = value.Format;
     }
 
+    private void InsertClockFormatToken_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not FrameworkElement element || element.Tag is not string token)
+        {
+            return;
+        }
+
+        InsertTextAtCaret(ClockFormatTextBox, token);
+    }
+
+    private void InsertCountdownFormatToken_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not FrameworkElement element || element.Tag is not string token)
+        {
+            return;
+        }
+
+        InsertTextAtCaret(CountdownFormatTextBox, token);
+    }
+
+    private void ApplyCountdownPreset_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not FrameworkElement element || element.Tag is not string presetKey)
+        {
+            return;
+        }
+
+        ViewModel.ApplyCountdownPreset(presetKey);
+    }
+
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
     {
         var openFileDialog = new OpenFileDialog
@@ -224,17 +254,40 @@ public partial class SettingsWindow : Window
 
         Process.Start(new ProcessStartInfo("explorer.exe", folderPath) { UseShellExecute = true });
     }
+
+    private static void InsertTextAtCaret(TextBox textBox, string text)
+    {
+        textBox.Focus();
+
+        var selectionStart = textBox.SelectionStart;
+        var selectionLength = textBox.SelectionLength;
+        var originalText = textBox.Text ?? string.Empty;
+
+        textBox.Text = originalText.Remove(selectionStart, selectionLength).Insert(selectionStart, text);
+        textBox.SelectionStart = selectionStart + text.Length;
+        textBox.SelectionLength = 0;
+    }
 }
 
 public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 {
     private readonly SystemClockTimer _systemClockTimer;
+    private bool _syncingCountdownEditor;
 
     [ObservableProperty]
     private string _previewTimeText;
 
     [ObservableProperty]
     private string _previewCountdownText;
+
+    [ObservableProperty]
+    private DateTime? _countdownEditorDate;
+
+    [ObservableProperty]
+    private int _countdownEditorHour;
+
+    [ObservableProperty]
+    private int _countdownEditorMinute;
 
     public Settings Settings { get; }
 
@@ -247,11 +300,15 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToArray();
         ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
+        CountdownHours = Enumerable.Range(0, 24).ToArray();
+        CountdownMinutes = Enumerable.Range(0, 60).ToArray();
 
+        PropertyChanged += ViewModel_PropertyChanged;
         Settings.PropertyChanged += Settings_PropertyChanged;
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
         _systemClockTimer.Start();
+        SyncCountdownEditorFromSettings();
         RefreshPreviewText();
     }
 
@@ -267,6 +324,14 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 
     public IList<TimeZoneInfo> TimeZones { get; }
 
+    public IList<int> CountdownHours { get; }
+
+    public IList<int> CountdownMinutes { get; }
+
+    public string CountdownTargetSummary => Settings.CountdownTo == default
+        ? "Countdown is off."
+        : Settings.CountdownTo.ToString("f", CultureInfo.CurrentCulture);
+
     [RelayCommand]
     public void SetFormat(DateFormatExample value)
     {
@@ -277,6 +342,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
     public void ResetCountdown()
     {
         Settings.CountdownTo = default;
+        SyncCountdownEditorFromSettings();
     }
 
     [RelayCommand]
@@ -303,11 +369,41 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         Settings.BackgroundImagePath = string.Empty;
     }
 
+    public void ApplyCountdownPreset(string presetKey)
+    {
+        var now = DateTime.Now;
+        var target = presetKey switch
+        {
+            "plus_hour" => RoundUpToNextMinute(now.AddHours(1)),
+            "tonight" => GetFutureTodayOrTomorrow(18, 0),
+            "tomorrow_morning" => now.Date.AddDays(1).AddHours(9),
+            "next_week" => now.Date.AddDays(7).AddHours(9),
+            _ => now.AddHours(1),
+        };
+
+        Settings.CountdownTo = new DateTime(target.Year, target.Month, target.Day, target.Hour, target.Minute, 0);
+        SyncCountdownEditorFromSettings();
+        RefreshPreviewText();
+    }
+
     public void Dispose()
     {
+        PropertyChanged -= ViewModel_PropertyChanged;
         Settings.PropertyChanged -= Settings_PropertyChanged;
         _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
         _systemClockTimer.Dispose();
+    }
+
+    private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(CountdownEditorDate):
+            case nameof(CountdownEditorHour):
+            case nameof(CountdownEditorMinute):
+                ApplyCountdownEditorSelection();
+                break;
+        }
     }
 
     private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -319,6 +415,12 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
             case nameof(Settings.TextTransform):
             case nameof(Settings.CountdownTo):
             case nameof(Settings.CountdownFormat):
+                if (e.PropertyName == nameof(Settings.CountdownTo))
+                {
+                    SyncCountdownEditorFromSettings();
+                    OnPropertyChanged(nameof(CountdownTargetSummary));
+                }
+
                 RefreshPreviewText();
                 break;
         }
@@ -355,6 +457,37 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         PreviewCountdownText = FormatPreviewText(GetPreviewCountdownTarget());
     }
 
+    private void SyncCountdownEditorFromSettings()
+    {
+        _syncingCountdownEditor = true;
+
+        if (Settings.CountdownTo == default)
+        {
+            CountdownEditorDate = null;
+            CountdownEditorHour = 9;
+            CountdownEditorMinute = 0;
+        }
+        else
+        {
+            CountdownEditorDate = Settings.CountdownTo.Date;
+            CountdownEditorHour = Settings.CountdownTo.Hour;
+            CountdownEditorMinute = Settings.CountdownTo.Minute;
+        }
+
+        _syncingCountdownEditor = false;
+    }
+
+    private void ApplyCountdownEditorSelection()
+    {
+        if (_syncingCountdownEditor || CountdownEditorDate == null)
+        {
+            return;
+        }
+
+        var date = CountdownEditorDate.Value.Date;
+        Settings.CountdownTo = new DateTime(date.Year, date.Month, date.Day, CountdownEditorHour, CountdownEditorMinute, 0);
+    }
+
     private DateTime GetPreviewCountdownTarget()
     {
         if (Settings.CountdownTo != default)
@@ -363,6 +496,19 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         }
 
         return DateTime.Now.AddHours(2).AddMinutes(17);
+    }
+
+    private static DateTime GetFutureTodayOrTomorrow(int hour, int minute)
+    {
+        var now = DateTime.Now;
+        var today = now.Date.AddHours(hour).AddMinutes(minute);
+        return today > now ? today : today.AddDays(1);
+    }
+
+    private static DateTime RoundUpToNextMinute(DateTime dateTime)
+    {
+        var rounded = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, 0);
+        return dateTime.Second == 0 && dateTime.Millisecond == 0 ? rounded : rounded.AddMinutes(1);
     }
 
     private IEnumerable<string> GetAllSystemFonts()
