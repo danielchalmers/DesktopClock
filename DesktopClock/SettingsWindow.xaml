@@ -116,13 +116,6 @@
             <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
-        <Style x:Key="DescriptionTextBlock"
-               TargetType="TextBlock">
-            <Setter Property="FontStyle" Value="Italic" />
-            <Setter Property="FontSize" Value="11" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-
         <Style x:Key="SliderValueTextBlock"
                TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -146,7 +139,7 @@
                     <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Format"
+                                <TextBlock Text="Clock text format"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
                                     <Grid.ColumnDefinitions>
@@ -162,24 +155,15 @@
                                              ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
                                              SelectionChanged="SelectFormat" />
                                 </Grid>
-                                <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                                    <Run Text="Choose what the clock says. Use curly braces {} around time codes. " />
-                                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
-                                               RequestNavigate="Hyperlink_RequestNavigate">
-                                        Learn more
-                                    </Hyperlink>
-                                </TextBlock>
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Time zone"
+                                <TextBlock Text="Displayed time zone"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <ComboBox ItemsSource="{Binding TimeZones}"
                                           SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
                                           DisplayMemberPath="DisplayName" />
-                                <TextBlock Text="Override the local time zone when you want the clock to show another region."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -192,7 +176,7 @@
                     <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Target"
+                                <TextBlock Text="Countdown target date and time"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
                                     <Grid.ColumnDefinitions>
@@ -206,13 +190,11 @@
                                             Content="Reset"
                                             Command="{Binding ResetCountdownCommand}" />
                                 </Grid>
-                                <TextBlock Text="Set the date and time to count down to. Clear the value to turn countdown mode off."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Format"
+                                <TextBlock Text="Countdown display format"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
                                     <Grid.ColumnDefinitions>
@@ -228,13 +210,6 @@
                                             Content="Reset"
                                             Command="{Binding ResetCountdownFormatCommand}" />
                                 </Grid>
-                                <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                                    <Run Text="Control how the countdown is displayed. Leave it blank to use the default display. " />
-                                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
-                                               RequestNavigate="Hyperlink_RequestNavigate">
-                                        Learn more
-                                    </Hyperlink>
-                                </TextBlock>
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -247,9 +222,9 @@
                     <WrapPanel Style="{StaticResource WrapSectionPanel}">
                         <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Sound"
+                                <TextBlock Text="Countdown sound"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Audio file"
+                                <TextBlock Text="Alert sound file"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
                                     <Grid.ColumnDefinitions>
@@ -268,7 +243,7 @@
                                             Content="Reset"
                                             Command="{Binding ResetWavFilePathCommand}" />
                                 </Grid>
-                                <TextBlock Text="Repeat interval"
+                                <TextBlock Text="Alert repeat interval"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
                                     <Grid.ColumnDefinitions>
@@ -282,10 +257,8 @@
                                             Content="Reset"
                                             Command="{Binding ResetWavFileIntervalCommand}" />
                                 </Grid>
-                                <CheckBox Content="Play sound when countdown ends"
+                                <CheckBox Content="Play this sound when the countdown ends"
                                           IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
-                                <TextBlock Text="Pick a WAV file, set its repeat interval, and choose whether countdown completion should use it."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -300,58 +273,38 @@
                             <StackPanel>
                                 <TextBlock Text="Startup &amp; visibility"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <CheckBox Content="Start with Windows"
+                                <CheckBox Content="Launch automatically when I sign in"
                                           IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
-                                <TextBlock Text="Run the clock automatically when you sign in."
-                                           Style="{StaticResource DescriptionTextBlock}" />
-                                <CheckBox Content="Start hidden"
+                                <CheckBox Content="Start with the clock hidden"
                                           IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
-                                <TextBlock Text="Start without showing the clock. Use the tray icon to show it again."
-                                           Style="{StaticResource DescriptionTextBlock}" />
-                                <CheckBox Content="Show in taskbar"
+                                <CheckBox Content="Show the clock in the taskbar"
                                           IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
-                                <TextBlock Text="Show the clock in the Windows taskbar."
-                                           Style="{StaticResource DescriptionTextBlock}" />
-                                <CheckBox Content="Hide from Alt+Tab"
+                                <CheckBox Content="Hide the clock from Alt+Tab"
                                           IsChecked="{Binding Settings.HideFromAltTab, Mode=TwoWay}" />
-                                <TextBlock Text="Hide the clock window from the Alt+Tab switcher."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Interaction"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <CheckBox Content="Always on top"
+                                <CheckBox Content="Keep the clock above other windows"
                                           IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
-                                <TextBlock Text="Keep the clock above other windows."
-                                           Style="{StaticResource DescriptionTextBlock}" />
-                                <CheckBox Content="Click through"
+                                <CheckBox Content="Let clicks pass through to windows behind"
                                           IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
-                                <TextBlock Text="Let clicks pass through the clock to windows behind it."
-                                           Style="{StaticResource DescriptionTextBlock}" />
-                                <CheckBox Content="Allow dragging"
+                                <CheckBox Content="Allow dragging the clock with the mouse"
                                           IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
-                                <TextBlock Text="Move the clock by dragging it with the mouse."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
                                 <TextBlock Text="Layout &amp; protection"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <CheckBox Content="Align right"
+                                <CheckBox Content="Keep the right edge fixed as text length changes"
                                           IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
-                                <TextBlock Text="Keep the right edge fixed when the text length changes."
-                                           Style="{StaticResource DescriptionTextBlock}" />
-                                <CheckBox Content="Pixel shifting"
+                                <CheckBox Content="Gently move the clock to reduce burn-in risk"
                                           IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                                <TextBlock Text="Move the clock slightly to help reduce the risk of screen burn-in."
-                                           Style="{StaticResource DescriptionTextBlock}" />
-                                <CheckBox Content="Hide when fullscreen"
+                                <CheckBox Content="Hide the clock while fullscreen apps are active"
                                           IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
-                                <TextBlock Text="Hide the clock when a fullscreen app is active on the same monitor."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -366,7 +319,7 @@
                             <StackPanel>
                                 <TextBlock Text="Font"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Family"
+                                <TextBlock Text="Font family"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <ComboBox ItemsSource="{Binding FontFamilies}"
                                           SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
@@ -378,12 +331,10 @@
                                            Style="{StaticResource LabelTextBlock}" />
                                 <ComboBox ItemsSource="{Binding FontWeights}"
                                           SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
-                                <TextBlock Text="Capitalization"
+                                <TextBlock Text="Text capitalization"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <ComboBox ItemsSource="{Binding TextTransforms}"
                                           SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
-                                <TextBlock Text="Choose the font family, style, weight, and capitalization used for the clock text."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource WideWrapCardBorder}">
@@ -422,8 +373,6 @@
                                                Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
                                                Style="{StaticResource SliderValueTextBlock}" />
                                 </Grid>
-                                <TextBlock Text="Control the text color and how transparent it appears."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -438,7 +387,7 @@
                             <StackPanel>
                                 <TextBlock Text="Fill"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Color"
+                                <TextBlock Text="Background or outline color"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
                                     <Grid.ColumnDefinitions>
@@ -452,7 +401,7 @@
                                             Content="Pick..."
                                             Click="PickOuterColor" />
                                 </Grid>
-                                <CheckBox Content="Solid background"
+                                <CheckBox Content="Use a solid background fill"
                                           IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
                                 <TextBlock Text="Background opacity"
                                            Style="{StaticResource LabelTextBlock}" />
@@ -472,15 +421,13 @@
                                                Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
                                                Style="{StaticResource SliderValueTextBlock}" />
                                 </Grid>
-                                <TextBlock Text="Control the fill color and how much of it appears behind the clock."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource WideWrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Shape &amp; outline"
+                                <TextBlock Text="Shape and outline"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Rounded corners"
+                                <TextBlock Text="Background corner roundness"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <Grid Style="{StaticResource ControlRow}">
                                     <Grid.ColumnDefinitions>
@@ -516,8 +463,6 @@
                                                Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
                                                Style="{StaticResource SliderValueTextBlock}" />
                                 </Grid>
-                                <TextBlock Text="Adjust the silhouette of the clock container and the strength of its outline."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource WideWrapCardBorder}">
@@ -541,12 +486,10 @@
                                             Content="Reset"
                                             Command="{Binding ResetBackgroundImagePathCommand}" />
                                 </Grid>
-                                <TextBlock Text="Image fit"
+                                <TextBlock Text="Background image fit"
                                            Style="{StaticResource LabelTextBlock}" />
                                 <ComboBox ItemsSource="{Binding ImageStretches}"
                                           SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
-                                <TextBlock Text="Add an optional image behind the clock and decide how it fits inside the container."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -560,31 +503,25 @@
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <Button Content="Open settings folder"
+                                <Button Content="Open the settings folder"
                                         Click="OpenSettingsFolder"
                                         IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                                <TextBlock Text="Open the folder where the settings file is stored."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <Button Content="Open settings file"
+                                <Button Content="Open the settings JSON file"
                                         Click="OpenSettingsFile"
                                         IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                                <TextBlock Text="Open the JSON settings file in Notepad."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <Button Content="Create new clock"
+                                <Button Content="Create another clock"
                                         Click="CreateNewClock"
                                         IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                                <TextBlock Text="Copy this clock and start it with fresh settings."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -598,55 +535,43 @@
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Right-click"
+                                <TextBlock Text="Right-click to open the menu"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Open the menu"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Double-click"
+                                <TextBlock Text="Double-click to copy the displayed text"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Copy the displayed text"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Drag"
+                                <TextBlock Text="Drag to move the clock"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Move the clock"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Ctrl + Scroll"
+                                <TextBlock Text="Ctrl + Scroll to change the size"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Change the size"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Ctrl + +"
+                                <TextBlock Text="Ctrl + + to increase the size"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Increase the size"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
                                 Style="{StaticResource WrapCardBorder}">
                             <StackPanel>
-                                <TextBlock Text="Ctrl + -"
+                                <TextBlock Text="Ctrl + - to decrease the size"
                                            Style="{StaticResource LabelTextBlock}" />
-                                <TextBlock Text="Decrease the size"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -663,11 +588,9 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        Good Diary
+                                        Good Diary for Android
                                     </Hyperlink>
                                 </TextBlock>
-                                <TextBlock Text="Stay on top of your well-being (Android)"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
@@ -676,11 +599,9 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        Network Monitor
+                                        Network Monitor for Windows
                                     </Hyperlink>
                                 </TextBlock>
-                                <TextBlock Text="See latency and bandwidth usage (Windows)"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
@@ -689,11 +610,9 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        Sentry Replay
+                                        Sentry Replay for Tesla dashcam clips
                                     </Hyperlink>
                                 </TextBlock>
-                                <TextBlock Text="Watch your Tesla dashcam clips (Windows)"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
@@ -702,11 +621,9 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        Radial Actions
+                                        Radial Actions for Windows
                                     </Hyperlink>
                                 </TextBlock>
-                                <TextBlock Text="Summon a customizable radial menu (Windows)"
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                         <Border
@@ -715,11 +632,9 @@
                                 <TextBlock>
                                     <Hyperlink NavigateUri="https://github.com/danielchalmers"
                                                RequestNavigate="Hyperlink_RequestNavigate">
-                                        All my projects on GitHub
+                                        All my apps and tools on GitHub
                                     </Hyperlink>
                                 </TextBlock>
-                                <TextBlock Text="Browse the rest of my apps and tools."
-                                           Style="{StaticResource DescriptionTextBlock}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
