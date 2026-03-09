@@ -228,6 +228,11 @@ public partial class SettingsWindow : Window
 
 public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 {
+    private readonly SystemClockTimer _systemClockTimer;
+
+    private string _previewTimeText;
+    private string _previewCountdownText;
+
     public Settings Settings { get; }
 
     public SettingsWindowViewModel(Settings settings)
@@ -241,6 +246,10 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
 
         Settings.PropertyChanged += Settings_PropertyChanged;
+        _systemClockTimer = new();
+        _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
+        _systemClockTimer.Start();
+        RefreshPreviewText();
     }
 
     public IList<string> FontFamilies { get; }
@@ -255,9 +264,17 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 
     public IList<TimeZoneInfo> TimeZones { get; }
 
-    public string PreviewTimeText => FormatPreviewText(default);
+    public string PreviewTimeText
+    {
+        get => _previewTimeText;
+        private set => SetProperty(ref _previewTimeText, value);
+    }
 
-    public string PreviewCountdownText => FormatPreviewText(GetPreviewCountdownTarget());
+    public string PreviewCountdownText
+    {
+        get => _previewCountdownText;
+        private set => SetProperty(ref _previewCountdownText, value);
+    }
 
     [RelayCommand]
     public void SetFormat(DateFormatExample value)
@@ -269,14 +286,12 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
     public void ResetCountdown()
     {
         Settings.CountdownTo = default;
-        RaisePreviewChanged();
     }
 
     [RelayCommand]
     public void ResetCountdownFormat()
     {
         Settings.CountdownFormat = string.Empty;
-        RaisePreviewChanged();
     }
 
     [RelayCommand]
@@ -295,23 +310,32 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
     public void ResetBackgroundImagePath()
     {
         Settings.BackgroundImagePath = string.Empty;
-        RaisePreviewChanged();
     }
 
     public void Dispose()
     {
         Settings.PropertyChanged -= Settings_PropertyChanged;
+        _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
+        _systemClockTimer.Dispose();
     }
 
     private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        RaisePreviewChanged();
+        switch (e.PropertyName)
+        {
+            case nameof(Settings.Format):
+            case nameof(Settings.TimeZone):
+            case nameof(Settings.TextTransform):
+            case nameof(Settings.CountdownTo):
+            case nameof(Settings.CountdownFormat):
+                RefreshPreviewText();
+                break;
+        }
     }
 
-    private void RaisePreviewChanged()
+    private void SystemClockTimer_SecondChanged(object sender, EventArgs e)
     {
-        OnPropertyChanged(nameof(PreviewTimeText));
-        OnPropertyChanged(nameof(PreviewCountdownText));
+        Application.Current?.Dispatcher.Invoke(RefreshPreviewText);
     }
 
     private string FormatPreviewText(DateTime countdownTo)
@@ -332,6 +356,12 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         {
             return countdownTo == default ? "Preview unavailable" : "Countdown preview unavailable";
         }
+    }
+
+    private void RefreshPreviewText()
+    {
+        PreviewTimeText = FormatPreviewText(default);
+        PreviewCountdownText = FormatPreviewText(GetPreviewCountdownTarget());
     }
 
     private DateTime GetPreviewCountdownTarget()
