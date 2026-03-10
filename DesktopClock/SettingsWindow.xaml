@@ -581,271 +581,286 @@
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Appearance" />
                         <TextBlock Style="{StaticResource SectionLeadStyle}"
-                                   Text="Set the clock text first, then the surface behind it. Background images and outline tuning stay available, but they no longer crowd the main text controls." />
+                                   Text="Customize the look of the clock text and its background surface." />
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.1*" />
-                                <ColumnDefinition Width="18" />
-                                <ColumnDefinition Width="0.9*" />
-                            </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource MiniCardStyle}"
+                                Background="#F7FBFD"
+                                Margin="0">
+                            <StackPanel>
+                                <Border Padding="16"
+                                        Background="White"
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        Margin="0,0,0,16">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Live preview" />
+                                        <TextBlock Margin="0,8,0,0"
+                                                   FontSize="30"
+                                                   Text="{Binding PreviewTimeText}"
+                                                   TextWrapping="Wrap"
+                                                   FontFamily="{Binding Settings.FontFamily}"
+                                                   FontStyle="{Binding Settings.FontStyle}"
+                                                   FontWeight="{Binding Settings.FontWeight}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{Binding Settings.TextColor, Mode=OneWay}"
+                                                                 Opacity="{Binding Settings.TextOpacity}" />
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
 
-                            <Border Grid.Column="0"
-                                    Style="{StaticResource MiniCardStyle}"
-                                    Background="#F7FBFD"
-                                    Margin="0">
-                                <StackPanel>
-                                    <TextBlock FontSize="18"
-                                               FontWeight="SemiBold"
-                                               Text="Clock text" />
-                                    <TextBlock Margin="0,4,0,14"
-                                               Foreground="{StaticResource MutedTextBrush}"
-                                               Text="Choose the typeface and text color first. Those are the settings most people adjust most often." />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.1*" />
+                                        <ColumnDefinition Width="32" />
+                                        <ColumnDefinition Width="0.9*" />
+                                    </Grid.ColumnDefinitions>
 
-                                    <Border Padding="16"
-                                            Background="White"
-                                            BorderBrush="{StaticResource BorderBrush}"
-                                            BorderThickness="1"
-                                            CornerRadius="6">
-                                        <StackPanel>
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Sample text" />
-                                            <TextBlock Margin="0,8,0,0"
-                                                       FontSize="30"
-                                                       Text="{Binding PreviewTimeText}"
-                                                       TextWrapping="Wrap"
-                                                       FontFamily="{Binding Settings.FontFamily}"
-                                                       FontStyle="{Binding Settings.FontStyle}"
-                                                       FontWeight="{Binding Settings.FontWeight}">
-                                                <TextBlock.Foreground>
-                                                    <SolidColorBrush Color="{Binding Settings.TextColor, Mode=OneWay}"
-                                                                     Opacity="{Binding Settings.TextOpacity}" />
-                                                </TextBlock.Foreground>
-                                            </TextBlock>
-                                            <TextBlock Style="{StaticResource HintStyle}"
-                                                       Text="This preview reflects the current font, casing, and text color settings." />
-                                        </StackPanel>
-                                    </Border>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock FontSize="18"
+                                                   FontWeight="SemiBold"
+                                                   Text="Clock text" />
+                                        <TextBlock Margin="0,4,0,14"
+                                                   Foreground="{StaticResource MutedTextBrush}"
+                                                   Text="Choose the font and color of the text." />
 
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Font family" />
-                                    <ComboBox ItemsSource="{Binding FontFamilies}"
-                                              SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
+                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Font" />
+                                        
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="12" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <ComboBox ItemsSource="{Binding FontFamilies}"
+                                                          SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
+                                                <ComboBox Margin="0,8,0,0"
+                                                          ItemsSource="{Binding FontStyles}"
+                                                          SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <ComboBox ItemsSource="{Binding TextTransforms}"
+                                                          SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
+                                                <ComboBox Margin="0,8,0,0"
+                                                          ItemsSource="{Binding FontWeights}"
+                                                          SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
+                                            </StackPanel>
+                                        </Grid>
 
-                                    <Grid Margin="0,16,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="12" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Font style" />
-                                            <ComboBox ItemsSource="{Binding FontStyles}"
-                                                      SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="2">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Font weight" />
-                                            <ComboBox ItemsSource="{Binding FontWeights}"
-                                                      SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
-                                        </StackPanel>
-                                    </Grid>
+                                        <Grid Margin="0,16,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="12" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                           Text="Text color" />
+                                                <Grid Margin="0,4,0,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="8" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="8" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Grid.Column="0"
+                                                            Width="26"
+                                                            Height="26"
+                                                            VerticalAlignment="Center"
+                                                            BorderBrush="{StaticResource BorderBrush}"
+                                                            BorderThickness="1"
+                                                            CornerRadius="4">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="{Binding Settings.TextColor, Mode=OneWay}" />
+                                                        </Border.Background>
+                                                    </Border>
+                                                    <TextBox Grid.Column="2"
+                                                             Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                    <Button Grid.Column="4"
+                                                            Content="Pick..."
+                                                            Click="PickTextColor"
+                                                            Style="{StaticResource GhostButton}" />
+                                                </Grid>
+                                            </StackPanel>
 
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Text transform" />
-                                    <ComboBox ItemsSource="{Binding TextTransforms}"
-                                              SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                           Text="Opacity" />
+                                                <Grid Margin="0,4,0,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="40" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Slider Grid.Column="0"
+                                                            Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Minimum="0"
+                                                            Maximum="1"
+                                                            TickFrequency="0.01"
+                                                            IsSnapToTickEnabled="True" />
+                                                    <TextBlock Grid.Column="1"
+                                                            Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
+                                                            Style="{StaticResource ValueTextStyle}" />
+                                                </Grid>
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
 
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Text color" />
-                                    <Grid Margin="0,4,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="8" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="8" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0"
-                                                Width="26"
-                                                Height="26"
-                                                VerticalAlignment="Center"
-                                                BorderBrush="{StaticResource BorderBrush}"
-                                                BorderThickness="1"
-                                                CornerRadius="4">
-                                            <Border.Background>
-                                                <SolidColorBrush Color="{Binding Settings.TextColor, Mode=OneWay}" />
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBox Grid.Column="2"
-                                                 Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                        <Button Grid.Column="4"
-                                                Content="Pick..."
-                                                Click="PickTextColor"
-                                                Style="{StaticResource GhostButton}" />
-                                    </Grid>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock FontSize="18"
+                                                   FontWeight="SemiBold"
+                                                   Text="Clock surface" />
+                                        <TextBlock Margin="0,4,0,14"
+                                                   Foreground="{StaticResource MutedTextBrush}"
+                                                   Text="Customize the background or outline." />
 
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Text opacity" />
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="52" />
-                                        </Grid.ColumnDefinitions>
-                                        <Slider Grid.Column="0"
-                                                Value="{Binding Settings.TextOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Minimum="0"
-                                                Maximum="1"
-                                                TickFrequency="0.01"
-                                                IsSnapToTickEnabled="True" />
-                                        <TextBlock Grid.Column="1"
-                                                   Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
-                                                   Style="{StaticResource ValueTextStyle}" />
-                                    </Grid>
-                                </StackPanel>
-                            </Border>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="12" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                           Text="Color" />
+                                                <Grid Margin="0,4,0,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="8" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="8" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Grid.Column="0"
+                                                            Width="26"
+                                                            Height="26"
+                                                            VerticalAlignment="Center"
+                                                            BorderBrush="{StaticResource BorderBrush}"
+                                                            BorderThickness="1"
+                                                            CornerRadius="4">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="{Binding Settings.OuterColor, Mode=OneWay}" />
+                                                        </Border.Background>
+                                                    </Border>
+                                                    <TextBox Grid.Column="2"
+                                                             Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                    <Button Grid.Column="4"
+                                                            Content="Pick..."
+                                                            Click="PickOuterColor"
+                                                            Style="{StaticResource GhostButton}" />
+                                                </Grid>
+                                                <CheckBox Margin="0,8,0,0"
+                                                          Content="Solid background fill"
+                                                          IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
+                                            </StackPanel>
 
-                            <Border Grid.Column="2"
-                                    Style="{StaticResource MiniCardStyle}"
-                                    Background="#FFF9F7"
-                                    Margin="0">
-                                <StackPanel>
-                                    <TextBlock FontSize="18"
-                                               FontWeight="SemiBold"
-                                               Text="Clock surface" />
-                                    <TextBlock Margin="0,4,0,14"
-                                               Foreground="{StaticResource MutedTextBrush}"
-                                               Text="Choose whether the clock sits on a filled surface or appears as outlined text, then adjust the finishing details." />
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                           Text="Opacity" />
+                                                <Grid Margin="0,4,0,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="40" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Slider Grid.Column="0"
+                                                            Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Minimum="0"
+                                                            Maximum="1"
+                                                            TickFrequency="0.01"
+                                                            IsSnapToTickEnabled="True" />
+                                                    <TextBlock Grid.Column="1"
+                                                            Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
+                                                            Style="{StaticResource ValueTextStyle}" />
+                                                </Grid>
+                                            </StackPanel>
+                                        </Grid>
 
-                                    <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                               Text="Background or outline color" />
-                                    <Grid Margin="0,4,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="8" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="8" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0"
-                                                Width="26"
-                                                Height="26"
-                                                VerticalAlignment="Center"
-                                                BorderBrush="{StaticResource BorderBrush}"
-                                                BorderThickness="1"
-                                                CornerRadius="4">
-                                            <Border.Background>
-                                                <SolidColorBrush Color="{Binding Settings.OuterColor, Mode=OneWay}" />
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBox Grid.Column="2"
-                                                 Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                        <Button Grid.Column="4"
-                                                Content="Pick..."
-                                                Click="PickOuterColor"
-                                                Style="{StaticResource GhostButton}" />
-                                    </Grid>
+                                        <Grid Margin="0,16,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="12" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
 
-                                    <CheckBox Margin="0,16,0,0"
-                                              Content="Use a solid background fill"
-                                              IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
-                                    <TextBlock Style="{StaticResource HintStyle}"
-                                               Text="Turn this off if you want the clock to appear as outlined text without a filled panel behind it." />
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                           Text="Corner roundness" />
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="40" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Slider Grid.Column="0"
+                                                            Value="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Minimum="0"
+                                                            Maximum="24"
+                                                            TickFrequency="0.1"
+                                                            IsSnapToTickEnabled="True" />
+                                                    <TextBlock Grid.Column="1"
+                                                            Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0}"
+                                                            Style="{StaticResource ValueTextStyle}" />
+                                                </Grid>
+                                            </StackPanel>
 
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Surface opacity" />
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="52" />
-                                        </Grid.ColumnDefinitions>
-                                        <Slider Grid.Column="0"
-                                                Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Minimum="0"
-                                                Maximum="1"
-                                                TickFrequency="0.01"
-                                                IsSnapToTickEnabled="True" />
-                                        <TextBlock Grid.Column="1"
-                                                   Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
-                                                   Style="{StaticResource ValueTextStyle}" />
-                                    </Grid>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                           Text="Outline thickness" />
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="40" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Slider Grid.Column="0"
+                                                            Value="{Binding Settings.OutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Minimum="0"
+                                                            Maximum="5"
+                                                            TickFrequency="0.1"
+                                                            IsSnapToTickEnabled="True" />
+                                                    <TextBlock Grid.Column="1"
+                                                            Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
+                                                            Style="{StaticResource ValueTextStyle}" />
+                                                </Grid>
+                                            </StackPanel>
+                                        </Grid>
 
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Corner roundness" />
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="52" />
-                                        </Grid.ColumnDefinitions>
-                                        <Slider Grid.Column="0"
-                                                Value="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Minimum="0"
-                                                Maximum="24"
-                                                TickFrequency="0.1"
-                                                IsSnapToTickEnabled="True" />
-                                        <TextBlock Grid.Column="1"
-                                                   Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0}"
-                                                   Style="{StaticResource ValueTextStyle}" />
-                                    </Grid>
+                                        <TextBlock Margin="0,16,0,0"
+                                                   Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Background image" />
+                                        <Grid Margin="0,4,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="8" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="8" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Grid.Column="0"
+                                                     Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Button Grid.Column="2"
+                                                    Content="Browse..."
+                                                    Click="BrowseBackgroundImagePath"
+                                                    Style="{StaticResource GhostButton}" />
+                                            <Button Grid.Column="4"
+                                                    Command="{Binding ResetBackgroundImagePathCommand}"
+                                                    Content="Clear"
+                                                    Style="{StaticResource GhostButton}" />
+                                        </Grid>
 
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Outline thickness" />
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="52" />
-                                        </Grid.ColumnDefinitions>
-                                        <Slider Grid.Column="0"
-                                                Value="{Binding Settings.OutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Minimum="0"
-                                                Maximum="5"
-                                                TickFrequency="0.1"
-                                                IsSnapToTickEnabled="True" />
-                                    <TextBlock Grid.Column="1"
-                                                   Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
-                                                   Style="{StaticResource ValueTextStyle}" />
-                                    </Grid>
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Background image" />
-                                    <TextBlock Style="{StaticResource HintStyle}"
-                                               Text="Optional. Leave this empty if you want to use only a solid fill or outline color." />
-                                    <Grid Margin="0,4,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="8" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="8" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBox Grid.Column="0"
-                                                 Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                        <Button Grid.Column="2"
-                                                Content="Browse..."
-                                                Click="BrowseBackgroundImagePath"
-                                                Style="{StaticResource GhostButton}" />
-                                        <Button Grid.Column="4"
-                                                Command="{Binding ResetBackgroundImagePathCommand}"
-                                                Content="Clear"
-                                                Style="{StaticResource GhostButton}" />
-                                    </Grid>
-
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Image fit" />
-                                    <ComboBox ItemsSource="{Binding ImageStretches}"
-                                              SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
-                                </StackPanel>
-                            </Border>
-                        </Grid>
+                                        <TextBlock Margin="0,16,0,0"
+                                                   Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Image fit" />
+                                        <ComboBox ItemsSource="{Binding ImageStretches}"
+                                                  SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                 </Border>
 
@@ -854,6 +869,8 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Window behavior" />
+                        <TextBlock Style="{StaticResource SectionLeadStyle}"
+                                   Text="Control how the clock interacts with Windows and other applications." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -934,6 +951,8 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Tools &amp; help" />
+                        <TextBlock Style="{StaticResource SectionLeadStyle}"
+                                   Text="Access advanced configuration, copy your settings, and view helpful resources." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
