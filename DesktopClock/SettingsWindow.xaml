@@ -190,14 +190,16 @@
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
-        
 
-        
+
+
     </Window.Resources>
     <Grid Margin="24">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <StackPanel x:Name="SettingsContent" Margin="0,0,12,0">
-<Border x:Name="DisplaySection"
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="SettingsContent"
+                        Margin="0,0,12,0">
+                <Border x:Name="DisplaySection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -230,7 +232,7 @@
                                         <ColumnDefinition Width="16" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    
+
                                     <StackPanel Grid.Column="0">
                                         <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                    Text="Format text" />
@@ -240,11 +242,13 @@
                                                  MaxLines="3" />
                                         <TextBlock Margin="0,6,0,0">
                                             <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
-                                                       RequestNavigate="Hyperlink_RequestNavigate">Formatting rules</Hyperlink>
+                                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                                Formatting rules
+                                            </Hyperlink>
                                         </TextBlock>
                                     </StackPanel>
 
-                                    <StackPanel Grid.Column="2" 
+                                    <StackPanel Grid.Column="2"
                                                 Width="160">
                                         <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                    Text="Presets" />
@@ -295,7 +299,7 @@
                         </Border>
                     </StackPanel>
                 </Border>
-<Border x:Name="TimeZoneSection"
+                <Border x:Name="TimeZoneSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -316,7 +320,7 @@
                         </Border>
                     </StackPanel>
                 </Border>
-<Border x:Name="CountdownSection"
+                <Border x:Name="CountdownSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -337,7 +341,7 @@
                                     Margin="0">
                                 <StackPanel>
 
-                                    <!-- Target Settings -->
+                                    <!--  Target Settings  -->
                                     <Border Padding="16"
                                             Background="White"
                                             BorderBrush="{StaticResource BorderBrush}"
@@ -364,7 +368,7 @@
                                             <TextBox Text="{Binding CountdownTargetText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                             <TextBlock Style="{StaticResource HintStyle}"
                                                        Text="Type the countdown target directly, for example 3/14/2026 9:30 AM. Leave it blank to turn countdown off." />
-                                            
+
                                             <TextBlock Margin="0,16,0,4"
                                                        Style="{StaticResource FieldTitleStyle}"
                                                        Text="Quick add presets" />
@@ -389,13 +393,14 @@
                                         </StackPanel>
                                     </Border>
 
-                                    <!-- Formatting Settings -->
+                                    <!--  Formatting Settings  -->
                                     <Grid Margin="0,0,0,6">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <StackPanel Grid.Column="0"
+                                                    VerticalAlignment="Center">
                                             <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                        VerticalAlignment="Center"
                                                        Text="Custom format" />
@@ -407,14 +412,16 @@
                                                 Padding="8,4"
                                                 MinHeight="28" />
                                     </Grid>
-                                    
+
                                     <TextBox x:Name="CountdownFormatTextBox"
                                              Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              AcceptsReturn="True"
                                              MaxLines="3" />
                                     <TextBlock Margin="0,6,0,0">
                                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
-                                                   RequestNavigate="Hyperlink_RequestNavigate">Formatting rules</Hyperlink>
+                                                   RequestNavigate="Hyperlink_RequestNavigate">
+                                            Formatting rules
+                                        </Hyperlink>
                                     </TextBlock>
 
                                     <TextBlock Margin="0,16,0,0"
@@ -452,7 +459,7 @@
                                         <TextBlock Margin="0,4,0,14"
                                                    Foreground="{StaticResource MutedTextBrush}"
                                                    Text="Check the target text and view a live sample of the countdown display." />
-                                        
+
                                         <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                    Text="Target status" />
                                         <TextBlock Margin="0,4,0,12"
@@ -479,7 +486,7 @@
                         </Grid>
                     </StackPanel>
                 </Border>
-<Border x:Name="AppearanceSection"
+                <Border x:Name="AppearanceSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -544,7 +551,7 @@
                                                 <ColumnDefinition Width="12" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-                                            
+
                                             <StackPanel Grid.Column="0">
                                                 <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                            Text="Text color" />
@@ -591,8 +598,8 @@
                                                             TickFrequency="0.01"
                                                             IsSnapToTickEnabled="True" />
                                                     <TextBlock Grid.Column="1"
-                                                            Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
-                                                            Style="{StaticResource ValueTextStyle}" />
+                                                               Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
+                                                               Style="{StaticResource ValueTextStyle}" />
                                                 </Grid>
                                             </StackPanel>
                                         </Grid>
@@ -612,7 +619,7 @@
                                                 <ColumnDefinition Width="12" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-                                            
+
                                             <StackPanel Grid.Column="0">
                                                 <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                            Text="Color" />
@@ -662,8 +669,8 @@
                                                             TickFrequency="0.01"
                                                             IsSnapToTickEnabled="True" />
                                                     <TextBlock Grid.Column="1"
-                                                            Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
-                                                            Style="{StaticResource ValueTextStyle}" />
+                                                               Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
+                                                               Style="{StaticResource ValueTextStyle}" />
                                                 </Grid>
                                             </StackPanel>
                                         </Grid>
@@ -690,8 +697,8 @@
                                                             TickFrequency="0.1"
                                                             IsSnapToTickEnabled="True" />
                                                     <TextBlock Grid.Column="1"
-                                                            Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0}"
-                                                            Style="{StaticResource ValueTextStyle}" />
+                                                               Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0}"
+                                                               Style="{StaticResource ValueTextStyle}" />
                                                 </Grid>
                                             </StackPanel>
 
@@ -710,8 +717,8 @@
                                                             TickFrequency="0.1"
                                                             IsSnapToTickEnabled="True" />
                                                     <TextBlock Grid.Column="1"
-                                                            Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
-                                                            Style="{StaticResource ValueTextStyle}" />
+                                                               Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
+                                                               Style="{StaticResource ValueTextStyle}" />
                                                 </Grid>
                                             </StackPanel>
                                         </Grid>
@@ -750,7 +757,7 @@
                         </Border>
                     </StackPanel>
                 </Border>
-<Border x:Name="WindowSection"
+                <Border x:Name="WindowSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -815,7 +822,7 @@
                         </Grid>
                     </StackPanel>
                 </Border>
-<Border x:Name="SoundAlertsSection"
+                <Border x:Name="SoundAlertsSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -872,7 +879,7 @@
                         </Border>
                     </StackPanel>
                 </Border>
-<Border x:Name="ToolsSection"
+                <Border x:Name="ToolsSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -969,7 +976,9 @@
                                                 <StackPanel>
                                                     <TextBlock>
                                                         <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
-                                                                   RequestNavigate="Hyperlink_RequestNavigate">Good Diary</Hyperlink>
+                                                                   RequestNavigate="Hyperlink_RequestNavigate">
+                                                            Good Diary
+                                                        </Hyperlink>
                                                     </TextBlock>
                                                     <TextBlock Margin="0,8,0,0"
                                                                Style="{StaticResource HintStyle}"
@@ -982,7 +991,9 @@
                                                 <StackPanel>
                                                     <TextBlock>
                                                         <Hyperlink NavigateUri="https://github.com/danielchalmers/Network-Monitor"
-                                                                   RequestNavigate="Hyperlink_RequestNavigate">Network Monitor</Hyperlink>
+                                                                   RequestNavigate="Hyperlink_RequestNavigate">
+                                                            Network Monitor
+                                                        </Hyperlink>
                                                     </TextBlock>
                                                     <TextBlock Margin="0,8,0,0"
                                                                Style="{StaticResource HintStyle}"
@@ -995,7 +1006,9 @@
                                                 <StackPanel>
                                                     <TextBlock>
                                                         <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
-                                                                   RequestNavigate="Hyperlink_RequestNavigate">Sentry Replay</Hyperlink>
+                                                                   RequestNavigate="Hyperlink_RequestNavigate">
+                                                            Sentry Replay
+                                                        </Hyperlink>
                                                     </TextBlock>
                                                     <TextBlock Margin="0,8,0,0"
                                                                Style="{StaticResource HintStyle}"
@@ -1008,7 +1021,9 @@
                                                 <StackPanel>
                                                     <TextBlock>
                                                         <Hyperlink NavigateUri="https://github.com/danielchalmers/RadialActions"
-                                                                   RequestNavigate="Hyperlink_RequestNavigate">Radial Actions</Hyperlink>
+                                                                   RequestNavigate="Hyperlink_RequestNavigate">
+                                                            Radial Actions
+                                                        </Hyperlink>
                                                     </TextBlock>
                                                     <TextBlock Margin="0,8,0,0"
                                                                Style="{StaticResource HintStyle}"
@@ -1021,7 +1036,9 @@
                                                 <StackPanel>
                                                     <TextBlock>
                                                         <Hyperlink NavigateUri="https://github.com/danielchalmers"
-                                                                   RequestNavigate="Hyperlink_RequestNavigate">All my projects on GitHub</Hyperlink>
+                                                                   RequestNavigate="Hyperlink_RequestNavigate">
+                                                            All my projects on GitHub
+                                                        </Hyperlink>
                                                     </TextBlock>
                                                     <TextBlock Margin="0,8,0,0"
                                                                Style="{StaticResource HintStyle}"
@@ -1039,14 +1056,38 @@
                                                    FontWeight="SemiBold"
                                                    Text="Credits" />
                                         <WrapPanel Margin="0,12,0,0">
-                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet" RequestNavigate="Hyperlink_RequestNavigate">CommunityToolkit</Hyperlink></TextBlock>
-                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/Fody/Costura" RequestNavigate="Hyperlink_RequestNavigate">Costura.Fody</Hyperlink></TextBlock>
-                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon" RequestNavigate="Hyperlink_RequestNavigate">H.NotifyIcon.Wpf</Hyperlink></TextBlock>
-                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer" RequestNavigate="Hyperlink_RequestNavigate">Humanizer</Hyperlink></TextBlock>
-                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://www.newtonsoft.com/json" RequestNavigate="Hyperlink_RequestNavigate">Newtonsoft.Json</Hyperlink></TextBlock>
-                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged" RequestNavigate="Hyperlink_RequestNavigate">PropertyChanged.Fody</Hyperlink></TextBlock>
-                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement" RequestNavigate="Hyperlink_RequestNavigate">WpfWindowPlacement</Hyperlink></TextBlock>
-                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D" RequestNavigate="Hyperlink_RequestNavigate">IconKitchen</Hyperlink></TextBlock>
+                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                                    CommunityToolkit
+                                                </Hyperlink></TextBlock>
+                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/Fody/Costura"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                                    Costura.Fody
+                                                </Hyperlink></TextBlock>
+                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/HavenDV/H.NotifyIcon"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                                    H.NotifyIcon.Wpf
+                                                </Hyperlink></TextBlock>
+                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                                    Humanizer
+                                                </Hyperlink></TextBlock>
+                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://www.newtonsoft.com/json"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                                    Newtonsoft.Json
+                                                </Hyperlink></TextBlock>
+                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/Fody/PropertyChanged"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                                    PropertyChanged.Fody
+                                                </Hyperlink></TextBlock>
+                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://github.com/danielchalmers/WpfWindowPlacement"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                                    WpfWindowPlacement
+                                                </Hyperlink></TextBlock>
+                                            <TextBlock Margin="0,0,16,8"><Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">
+                                                    IconKitchen
+                                                </Hyperlink></TextBlock>
                                         </WrapPanel>
                                     </StackPanel>
                                 </Border>
