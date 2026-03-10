@@ -245,6 +245,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 {
     private readonly SystemClockTimer _systemClockTimer;
     private bool _syncingCountdownEditor;
+    private bool _countdownTargetHasParseError;
 
     [ObservableProperty]
     private string _previewTimeText;
@@ -252,14 +253,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
     [ObservableProperty]
     private string _previewCountdownText;
 
-    [ObservableProperty]
-    private DateTime? _countdownEditorDate;
-
-    [ObservableProperty]
-    private int _countdownEditorHour;
-
-    [ObservableProperty]
-    private int _countdownEditorMinute;
+    private string _countdownTargetText;
 
     public Settings Settings { get; }
 
@@ -272,10 +266,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToArray();
         ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
-        CountdownHours = Enumerable.Range(0, 24).ToArray();
-        CountdownMinutes = Enumerable.Range(0, 60).ToArray();
 
-        PropertyChanged += ViewModel_PropertyChanged;
         Settings.PropertyChanged += Settings_PropertyChanged;
         _systemClockTimer = new();
         _systemClockTimer.SecondChanged += SystemClockTimer_SecondChanged;
@@ -296,11 +287,23 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 
     public IList<TimeZoneInfo> TimeZones { get; }
 
-    public IList<int> CountdownHours { get; }
+    public string CountdownTargetText
+    {
+        get => _countdownTargetText;
+        set
+        {
+            if (!SetProperty(ref _countdownTargetText, value))
+            {
+                return;
+            }
 
-    public IList<int> CountdownMinutes { get; }
+            ApplyCountdownTargetText(value);
+        }
+    }
 
-    public string CountdownTargetSummary => Settings.CountdownTo == default
+    public string CountdownTargetSummary => _countdownTargetHasParseError
+        ? "Couldn't read that date and time. Example: 3/14/2026 9:30 AM"
+        : Settings.CountdownTo == default
         ? "Countdown is off."
         : Settings.CountdownTo.ToString("f", CultureInfo.CurrentCulture);
 
@@ -360,22 +363,9 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 
     public void Dispose()
     {
-        PropertyChanged -= ViewModel_PropertyChanged;
         Settings.PropertyChanged -= Settings_PropertyChanged;
         _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
         _systemClockTimer.Dispose();
-    }
-
-    private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-        switch (e.PropertyName)
-        {
-            case nameof(CountdownEditorDate):
-            case nameof(CountdownEditorHour):
-            case nameof(CountdownEditorMinute):
-                ApplyCountdownEditorSelection();
-                break;
-        }
     }
 
     private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -432,32 +422,49 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
     private void SyncCountdownEditorFromSettings()
     {
         _syncingCountdownEditor = true;
+        _countdownTargetHasParseError = false;
 
-        if (Settings.CountdownTo == default)
-        {
-            CountdownEditorDate = null;
-            CountdownEditorHour = 9;
-            CountdownEditorMinute = 0;
-        }
-        else
-        {
-            CountdownEditorDate = Settings.CountdownTo.Date;
-            CountdownEditorHour = Settings.CountdownTo.Hour;
-            CountdownEditorMinute = Settings.CountdownTo.Minute;
-        }
+        CountdownTargetText = Settings.CountdownTo == default
+            ? string.Empty
+            : Settings.CountdownTo.ToString("g", CultureInfo.CurrentCulture);
 
         _syncingCountdownEditor = false;
+        OnPropertyChanged(nameof(CountdownTargetSummary));
     }
 
-    private void ApplyCountdownEditorSelection()
+    private void ApplyCountdownTargetText(string value)
     {
-        if (_syncingCountdownEditor || CountdownEditorDate == null)
+        if (_syncingCountdownEditor)
         {
             return;
         }
 
-        var date = CountdownEditorDate.Value.Date;
-        Settings.CountdownTo = new DateTime(date.Year, date.Month, date.Day, CountdownEditorHour, CountdownEditorMinute, 0);
+        var trimmedValue = value?.Trim() ?? string.Empty;
+
+        if (string.IsNullOrEmpty(trimmedValue))
+        {
+            _countdownTargetHasParseError = false;
+            Settings.CountdownTo = default;
+            OnPropertyChanged(nameof(CountdownTargetSummary));
+            return;
+        }
+
+        if (!DateTime.TryParse(trimmedValue, CultureInfo.CurrentCulture, DateTimeStyles.AllowWhiteSpaces, out var countdownTo))
+        {
+            _countdownTargetHasParseError = true;
+            OnPropertyChanged(nameof(CountdownTargetSummary));
+            return;
+        }
+
+        _countdownTargetHasParseError = false;
+        Settings.CountdownTo = new DateTime(
+            countdownTo.Year,
+            countdownTo.Month,
+            countdownTo.Day,
+            countdownTo.Hour,
+            countdownTo.Minute,
+            0);
+        OnPropertyChanged(nameof(CountdownTargetSummary));
     }
 
     private DateTime GetPreviewCountdownTarget()
