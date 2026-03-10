@@ -295,27 +295,6 @@
                     </Border>
                 </StackPanel>
             </Border>
-            <Border x:Name="TimeZoneSection"
-                    Style="{StaticResource SectionCardStyle}">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}"
-                               Text="Time zone" />
-                    <TextBlock Style="{StaticResource SectionLeadStyle}"
-                               Text="Choose the time zone used for the clock text and its preview." />
-
-                    <Border Style="{StaticResource MiniCardStyle}"
-                            Background="#F6FAFD"
-                            Margin="0">
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                       Text="Displayed time zone" />
-                            <ComboBox ItemsSource="{Binding TimeZones}"
-                                      SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
-                                      DisplayMemberPath="DisplayName" />
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-            </Border>
             <Border x:Name="CountdownSection"
                     Style="{StaticResource SectionCardStyle}">
                 <StackPanel>
@@ -822,6 +801,27 @@
                             </StackPanel>
                         </Border>
                     </Grid>
+                </StackPanel>
+            </Border>
+            <Border x:Name="TimeZoneSection"
+                    Style="{StaticResource SectionCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}"
+                               Text="Time zone" />
+                    <TextBlock Style="{StaticResource SectionLeadStyle}"
+                               Text="Choose the time zone used for the clock text and its preview." />
+
+                    <Border Style="{StaticResource MiniCardStyle}"
+                            Background="#F6FAFD"
+                            Margin="0">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                       Text="Displayed time zone" />
+                            <ComboBox ItemsSource="{Binding TimeZones}"
+                                      SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
+                                      DisplayMemberPath="DisplayName" />
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </Border>
             <Border x:Name="SoundAlertsSection"
