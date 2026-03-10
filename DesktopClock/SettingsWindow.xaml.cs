@@ -146,7 +146,7 @@ public partial class SettingsWindow : Window
         if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
         {
             MessageBox.Show(this,
-                "Settings are stored in JSON and will open in Notepad. Save the file for changes to take effect. To start fresh, delete your '.settings' file.",
+                "Your settings are stored in a JSON file and will open in Notepad. Save the file after editing for changes to take effect. To reset everything, delete the '.settings' file.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
             Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
@@ -160,7 +160,7 @@ public partial class SettingsWindow : Window
         if (!Settings.Exists)
         {
             MessageBox.Show(this,
-                "Settings file doesn't exist and couldn't be created.",
+                "The settings file doesn't exist and couldn't be created.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
@@ -172,9 +172,9 @@ public partial class SettingsWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(this,
-                "Couldn't open settings file in Notepad.\n\n" +
-                "This app may have been stolen. If you paid for it, ask for a refund and download it for free from https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If it still doesn't work, create a new issue at that link with details on what happened and include this error: \"{ex.Message}\"",
+                "Couldn't open the settings file in Notepad.\n\n" +
+                "DesktopClock is free and open source. If you paid for a copy, request a refund and download it from https://github.com/danielchalmers/DesktopClock.\n\n" +
+                $"If this keeps happening, create an issue at that link and include this error: \"{ex.Message}\"",
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -187,7 +187,7 @@ public partial class SettingsWindow : Window
     private void CreateNewClock(object sender, RoutedEventArgs e)
     {
         var result = MessageBox.Show(this,
-            "This will copy the executable and start it with new settings.\n\n" +
+            "This will copy the app and launch the copy with its own settings file.\n\n" +
             "Continue?",
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
@@ -263,8 +263,19 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
         FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
-        TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToArray();
-        ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
+        TextTransforms =
+        [
+            new NamedOption<TextTransform>(TextTransform.None, "No change"),
+            new NamedOption<TextTransform>(TextTransform.Uppercase, "UPPERCASE"),
+            new NamedOption<TextTransform>(TextTransform.Lowercase, "lowercase"),
+        ];
+        ImageStretches =
+        [
+            new NamedOption<Stretch>(Stretch.None, "Original size"),
+            new NamedOption<Stretch>(Stretch.Fill, "Stretch to fill"),
+            new NamedOption<Stretch>(Stretch.Uniform, "Fit inside"),
+            new NamedOption<Stretch>(Stretch.UniformToFill, "Fill and crop"),
+        ];
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
 
         Settings.PropertyChanged += Settings_PropertyChanged;
@@ -281,9 +292,9 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 
     public IList<string> FontWeights { get; }
 
-    public IList<TextTransform> TextTransforms { get; }
+    public IList<NamedOption<TextTransform>> TextTransforms { get; }
 
-    public IList<Stretch> ImageStretches { get; }
+    public IList<NamedOption<Stretch>> ImageStretches { get; }
 
     public IList<TimeZoneInfo> TimeZones { get; }
 
@@ -302,9 +313,9 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
     }
 
     public string CountdownTargetSummary => _countdownTargetHasParseError
-        ? "Couldn't read that date and time. Example: 3/14/2026 9:30 AM"
+        ? "Couldn't read that date and time. Try something like 3/14/2026 9:30 AM."
         : Settings.CountdownTo == default
-        ? "Countdown is off."
+        ? "Countdown is turned off."
         : Settings.CountdownTo.ToString("f", CultureInfo.CurrentCulture);
 
     [RelayCommand]
@@ -503,4 +514,17 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
             yield return fontFamily.Name;
         }
     }
+}
+
+public sealed class NamedOption<T>
+{
+    public NamedOption(T value, string label)
+    {
+        Value = value;
+        Label = label;
+    }
+
+    public T Value { get; }
+
+    public string Label { get; }
 }
