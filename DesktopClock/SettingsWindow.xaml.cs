@@ -400,7 +400,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
             return TimeStringFormatter.Format(
                 DateTimeOffset.Now,
                 DateTime.Now,
-                Settings.TimeZoneInfo,
+                TimeZoneInfo.Local,
                 countdownTo,
                 Settings.Format,
                 Settings.CountdownFormat,
