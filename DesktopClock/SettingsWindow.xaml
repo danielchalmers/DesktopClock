@@ -207,122 +207,116 @@
                         <TextBlock Style="{StaticResource SectionLeadStyle}"
                                    Text="Set what the clock says. Use a preset for a quick start, or build your own custom text and date tokens." />
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.4*" />
-                                <ColumnDefinition Width="18" />
-                                <ColumnDefinition Width="0.6*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Border Grid.Column="0"
-                                    Style="{StaticResource MiniCardStyle}"
-                                    Background="#F6FAFD"
-                                    Margin="0">
-                                <StackPanel>
-                                    <Border Padding="16"
-                                            Background="White"
-                                            BorderBrush="{StaticResource BorderBrush}"
-                                            BorderThickness="1"
-                                            CornerRadius="6"
-                                            Margin="0,0,0,16">
-                                        <StackPanel>
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Live preview" />
-                                            <TextBlock Margin="0,8,0,0"
-                                                       Style="{StaticResource PreviewValueStyle}"
-                                                       Text="{Binding PreviewTimeText}" />
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="16" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <StackPanel Grid.Column="0">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Format text" />
-                                            <TextBox x:Name="ClockFormatTextBox"
-                                                     Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
-                                                     AcceptsReturn="True"
-                                                     MaxLines="3" />
-                                            <TextBlock Margin="0,6,0,0">
-                                                <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
-                                                           RequestNavigate="Hyperlink_RequestNavigate">Formatting rules</Hyperlink>
-                                            </TextBlock>
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="2" 
-                                                    Width="160">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Presets" />
-                                            <ComboBox DisplayMemberPath="Example"
-                                                      ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
-                                                      SelectionChanged="SelectFormat" />
-                                        </StackPanel>
-                                    </Grid>
-
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Insert pieces" />
-                                    <WrapPanel Margin="0,8,0,0">
-                                        <Button Content="Time"
-                                                Tag="{}{h:mm tt}"
-                                                Click="InsertClockFormatToken_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Seconds"
-                                                Tag="{}{h:mm:ss tt}"
-                                                Click="InsertClockFormatToken_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="24h"
-                                                Tag="{}{HH:mm}"
-                                                Click="InsertClockFormatToken_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Day"
-                                                Tag="{}{ddd}"
-                                                Click="InsertClockFormatToken_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Date"
-                                                Tag="{}{MMM d}"
-                                                Click="InsertClockFormatToken_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Month"
-                                                Tag="{}{MMMM}"
-                                                Click="InsertClockFormatToken_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Year"
-                                                Tag="{}{yyyy}"
-                                                Click="InsertClockFormatToken_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Zone"
-                                                Tag="{}{K}"
-                                                Click="InsertClockFormatToken_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                    </WrapPanel>
-                                </StackPanel>
-                            </Border>
-
-                            <StackPanel Grid.Column="2">
-                                <Border Style="{StaticResource MiniCardStyle}"
-                                        Background="#F6FAFD"
+                        <Border Style="{StaticResource MiniCardStyle}"
+                                Background="#F6FAFD"
+                                Margin="0">
+                            <StackPanel>
+                                <Border Padding="16"
+                                        Background="White"
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
                                         Margin="0,0,0,16">
                                     <StackPanel>
-                                        <TextBlock FontSize="18"
-                                                   FontWeight="SemiBold"
-                                                   Text="Time zone" />
-                                        <TextBlock Margin="0,4,0,12"
-                                                   Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Choose the time zone used for the clock." 
-                                                   TextWrapping="Wrap" />
-                                        <ComboBox ItemsSource="{Binding TimeZones}"
-                                                  SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
-                                                  DisplayMemberPath="DisplayName" />
+                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Live preview" />
+                                        <TextBlock Margin="0,8,0,0"
+                                                   Style="{StaticResource PreviewValueStyle}"
+                                                   Text="{Binding PreviewTimeText}" />
                                     </StackPanel>
                                 </Border>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="16" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Format text" />
+                                        <TextBox x:Name="ClockFormatTextBox"
+                                                 Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
+                                                 AcceptsReturn="True"
+                                                 MaxLines="3" />
+                                        <TextBlock Margin="0,6,0,0">
+                                            <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
+                                                       RequestNavigate="Hyperlink_RequestNavigate">Formatting rules</Hyperlink>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2" 
+                                                Width="160">
+                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Presets" />
+                                        <ComboBox DisplayMemberPath="Example"
+                                                  ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
+                                                  SelectionChanged="SelectFormat" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <TextBlock Margin="0,16,0,0"
+                                           Style="{StaticResource FieldTitleStyle}"
+                                           Text="Insert pieces" />
+                                <WrapPanel Margin="0,8,0,0">
+                                    <Button Content="Time"
+                                            Tag="{}{h:mm tt}"
+                                            Click="InsertClockFormatToken_Click"
+                                            Style="{StaticResource EditorChipButton}" />
+                                    <Button Content="Seconds"
+                                            Tag="{}{h:mm:ss tt}"
+                                            Click="InsertClockFormatToken_Click"
+                                            Style="{StaticResource EditorChipButton}" />
+                                    <Button Content="24h"
+                                            Tag="{}{HH:mm}"
+                                            Click="InsertClockFormatToken_Click"
+                                            Style="{StaticResource EditorChipButton}" />
+                                    <Button Content="Day"
+                                            Tag="{}{ddd}"
+                                            Click="InsertClockFormatToken_Click"
+                                            Style="{StaticResource EditorChipButton}" />
+                                    <Button Content="Date"
+                                            Tag="{}{MMM d}"
+                                            Click="InsertClockFormatToken_Click"
+                                            Style="{StaticResource EditorChipButton}" />
+                                    <Button Content="Month"
+                                            Tag="{}{MMMM}"
+                                            Click="InsertClockFormatToken_Click"
+                                            Style="{StaticResource EditorChipButton}" />
+                                    <Button Content="Year"
+                                            Tag="{}{yyyy}"
+                                            Click="InsertClockFormatToken_Click"
+                                            Style="{StaticResource EditorChipButton}" />
+                                    <Button Content="Zone"
+                                            Tag="{}{K}"
+                                            Click="InsertClockFormatToken_Click"
+                                            Style="{StaticResource EditorChipButton}" />
+                                </WrapPanel>
                             </StackPanel>
-                        </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <Border x:Name="TimeZoneSection"
+                        Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource SectionTitleStyle}"
+                                   Text="Time zone" />
+                        <TextBlock Style="{StaticResource SectionLeadStyle}"
+                                   Text="Choose the time zone used for the clock text and its preview." />
+
+                        <Border Style="{StaticResource MiniCardStyle}"
+                                Background="#F6FAFD"
+                                Margin="0">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                           Text="Displayed time zone" />
+                                <ComboBox ItemsSource="{Binding TimeZones}"
+                                          SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
+                                          DisplayMemberPath="DisplayName" />
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                 </Border>
 
@@ -330,9 +324,9 @@
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
-                                   Text="Countdown &amp; alerts" />
+                                   Text="Countdown" />
                         <TextBlock Style="{StaticResource SectionLeadStyle}"
-                                   Text="Set when to count down to and customize how it displays or sounds. Leave the custom format blank to use a natural sentence." />
+                                   Text="Set when to count down to and customize how it displays. Leave the custom format blank to use a natural sentence." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -487,7 +481,7 @@
                             <StackPanel Grid.Column="2">
                                 <Border Style="{StaticResource MiniCardStyle}"
                                         Background="#FFF9F7"
-                                        Margin="0,0,0,16">
+                                        Margin="0">
                                     <StackPanel>
                                         <TextBlock FontSize="18"
                                                    FontWeight="SemiBold"
@@ -518,63 +512,66 @@
                                         </Border>
                                     </StackPanel>
                                 </Border>
-
-                                <Border Style="{StaticResource MiniCardStyle}"
-                                        Background="#FFF9F2"
-                                        Margin="0">
-                                    <StackPanel>
-                                        <TextBlock FontSize="18"
-                                                   FontWeight="SemiBold"
-                                                   Text="Sound alerts" />
-                                        <TextBlock Margin="0,4,0,14"
-                                                   Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Optional. Play a WAV file when the countdown ends." />
-
-                                        <CheckBox Content="Play a sound when the countdown ends"
-                                                  IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
-
-                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                   Text="Alert sound file" />
-                                        <Grid Margin="0,4,0,0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="8" />
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="8" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBox Grid.Column="0"
-                                                     Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                            <Button Grid.Column="2"
-                                                    Content="Browse..."
-                                                    Click="BrowseWavFilePath"
-                                                    Style="{StaticResource GhostButton}" />
-                                            <Button Grid.Column="4"
-                                                    Command="{Binding ResetWavFilePathCommand}"
-                                                    Content="Clear"
-                                                    Style="{StaticResource GhostButton}" />
-                                        </Grid>
-
-                                        <TextBlock Margin="0,16,0,0"
-                                                   Style="{StaticResource FieldTitleStyle}"
-                                                   Text="Repeat interval" />
-                                        <Grid Margin="0,4,0,0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="8" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBox Grid.Column="0"
-                                                     Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
-                                            <Button Grid.Column="2"
-                                                    Command="{Binding ResetWavFileIntervalCommand}"
-                                                    Content="Reset"
-                                                    Style="{StaticResource GhostButton}" />
-                                        </Grid>
-                                    </StackPanel>
-                                </Border>
                             </StackPanel>
                         </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border x:Name="SoundAlertsSection"
+                        Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource SectionTitleStyle}"
+                                   Text="Sound alerts" />
+                        <TextBlock Style="{StaticResource SectionLeadStyle}"
+                                   Text="Optional. Play a WAV file when the countdown ends." />
+
+                        <Border Style="{StaticResource MiniCardStyle}"
+                                Background="#FFF9F2"
+                                Margin="0">
+                            <StackPanel>
+                                <CheckBox Content="Play a sound when the countdown ends"
+                                          IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
+
+                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                           Text="Alert sound file" />
+                                <Grid Margin="0,4,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="8" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="8" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Button Grid.Column="2"
+                                            Content="Browse..."
+                                            Click="BrowseWavFilePath"
+                                            Style="{StaticResource GhostButton}" />
+                                    <Button Grid.Column="4"
+                                            Command="{Binding ResetWavFilePathCommand}"
+                                            Content="Clear"
+                                            Style="{StaticResource GhostButton}" />
+                                </Grid>
+
+                                <TextBlock Margin="0,16,0,0"
+                                           Style="{StaticResource FieldTitleStyle}"
+                                           Text="Repeat interval" />
+                                <Grid Margin="0,4,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="8" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
+                                    <Button Grid.Column="2"
+                                            Command="{Binding ResetWavFileIntervalCommand}"
+                                            Content="Reset"
+                                            Style="{StaticResource GhostButton}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                 </Border>
 
