@@ -205,13 +205,13 @@
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Clock display" />
                         <TextBlock Style="{StaticResource SectionLeadStyle}"
-                                   Text="Set what the clock says first. The common path starts with a live sample and a ready-made format, while token-level control stays available when you need it." />
+                                   Text="Set what the clock says. Use a preset for a quick start, or build your own custom text and date tokens." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.25*" />
+                                <ColumnDefinition Width="1.4*" />
                                 <ColumnDefinition Width="18" />
-                                <ColumnDefinition Width="0.75*" />
+                                <ColumnDefinition Width="0.6*" />
                             </Grid.ColumnDefinitions>
 
                             <Border Grid.Column="0"
@@ -219,50 +219,54 @@
                                     Background="#F6FAFD"
                                     Margin="0">
                                 <StackPanel>
-                                    <TextBlock FontSize="18"
-                                               FontWeight="SemiBold"
-                                               Text="Clock editor" />
-                                    <TextBlock Margin="0,4,0,14"
-                                               Foreground="{StaticResource MutedTextBrush}"
-                                               Text="Pick a starting format, check the preview, then tweak the exact text only if needed." />
-
                                     <Border Padding="16"
                                             Background="White"
                                             BorderBrush="{StaticResource BorderBrush}"
                                             BorderThickness="1"
-                                            CornerRadius="6">
+                                            CornerRadius="6"
+                                            Margin="0,0,0,16">
                                         <StackPanel>
                                             <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                        Text="Live preview" />
                                             <TextBlock Margin="0,8,0,0"
                                                        Style="{StaticResource PreviewValueStyle}"
                                                        Text="{Binding PreviewTimeText}" />
-                                            <TextBlock Style="{StaticResource HintStyle}"
-                                                       Text="This sample updates with your format, time zone, and text transform settings." />
                                         </StackPanel>
                                     </Border>
 
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Choose a starting point" />
-                                    <ComboBox DisplayMemberPath="Example"
-                                              ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
-                                              SelectionChanged="SelectFormat" />
-                                    <TextBlock Style="{StaticResource HintStyle}"
-                                               Text="Most setups are quickest if you start from an example and make one or two small edits." />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="16" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                       Text="Format text" />
+                                            <TextBox x:Name="ClockFormatTextBox"
+                                                     Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
+                                                     AcceptsReturn="True"
+                                                     MaxLines="3" />
+                                            <TextBlock Margin="0,6,0,0">
+                                                <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
+                                                           RequestNavigate="Hyperlink_RequestNavigate">Formatting rules</Hyperlink>
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2" 
+                                                    Width="160">
+                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                       Text="Presets" />
+                                            <ComboBox DisplayMemberPath="Example"
+                                                      ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
+                                                      SelectionChanged="SelectFormat" />
+                                        </StackPanel>
+                                    </Grid>
 
                                     <TextBlock Margin="0,16,0,0"
                                                Style="{StaticResource FieldTitleStyle}"
-                                               Text="Format string" />
-                                    <TextBox x:Name="ClockFormatTextBox"
-                                             Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
-                                             AcceptsReturn="True"
-                                             MaxLines="3" />
-                                    <TextBlock Style="{StaticResource HintStyle}"
-                                               Text="Mix normal text with date/time tokens in braces. Example: {ddd}, {MMM d}, {h:mm tt}." />
-                                    <TextBlock Margin="0,16,0,0"
-                                               Style="{StaticResource FieldTitleStyle}"
-                                               Text="Common pieces" />
+                                               Text="Insert pieces" />
                                     <WrapPanel Margin="0,8,0,0">
                                         <Button Content="Time"
                                                 Tag="{}{h:mm tt}"
@@ -297,26 +301,6 @@
                                                 Click="InsertClockFormatToken_Click"
                                                 Style="{StaticResource EditorChipButton}" />
                                     </WrapPanel>
-                                    <TextBlock Margin="0,12,0,0"
-                                               Style="{StaticResource HintStyle}"
-                                               TextWrapping="Wrap">
-                                        <Run Text="Use plain text plus tokens in braces. " />
-                                        <Run FontFamily="Consolas"
-                                             Text="{}{ddd}, {MMM d}, {h:mm tt}" />
-                                        <Run Text=" is one example." />
-                                    </TextBlock>
-                                    <TextBlock Style="{StaticResource HintStyle}"
-                                               TextWrapping="Wrap">
-                                        <Run Text="Text outside braces stays literal. " />
-                                        <Run FontFamily="Consolas"
-                                             Text="{}Meeting at {h:mm tt}" />
-                                        <Run Text=" keeps “Meeting at” as text." />
-                                    </TextBlock>
-                                    <TextBlock Margin="0,10,0,0"
-                                               Style="{StaticResource HintStyle}">
-                                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
-                                                   RequestNavigate="Hyperlink_RequestNavigate">Date/time formatting rules</Hyperlink>
-                                    </TextBlock>
                                 </StackPanel>
                             </Border>
 
@@ -327,55 +311,14 @@
                                     <StackPanel>
                                         <TextBlock FontSize="18"
                                                    FontWeight="SemiBold"
-                                                   Text="Display context" />
-                                        <TextBlock Margin="0,4,0,14"
+                                                   Text="Time zone" />
+                                        <TextBlock Margin="0,4,0,12"
                                                    Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Choose the time zone used for the live clock and its preview." 
+                                                   Text="Choose the time zone used for the clock." 
                                                    TextWrapping="Wrap" />
-                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                   Text="Displayed time zone" />
                                         <ComboBox ItemsSource="{Binding TimeZones}"
                                                   SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
                                                   DisplayMemberPath="DisplayName" />
-                                        <TextBlock Style="{StaticResource HintStyle}"
-                                                   Text="Leave this alone if you just want your local time. Change it for a second-office, travel, or UTC display." />
-                                    </StackPanel>
-                                </Border>
-
-                                <Border Style="{StaticResource MiniCardStyle}"
-                                        Background="#FFF9F7"
-                                        Margin="0">
-                                    <StackPanel>
-                                        <TextBlock FontSize="18"
-                                                   FontWeight="SemiBold"
-                                                   Text="Quick format ideas" />
-                                        <TextBlock Margin="0,4,0,12"
-                                                   Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="These are simple strings you can paste or build from." />
-                                        <TextBlock TextWrapping="Wrap">
-                                            <Run FontWeight="SemiBold"
-                                                 Text="Short time: " />
-                                            <Run FontFamily="Consolas"
-                                                 Text="{}{t}" />
-                                        </TextBlock>
-                                        <TextBlock Margin="0,8,0,0"
-                                                   TextWrapping="Wrap">
-                                            <Run FontWeight="SemiBold"
-                                                 Text="Date + time: " />
-                                            <Run FontFamily="Consolas"
-                                                 Text="{}{ddd}, {MMM d}, {h:mm tt}" />
-                                        </TextBlock>
-                                        <TextBlock Margin="0,8,0,0"
-                                                   TextWrapping="Wrap">
-                                            <Run FontWeight="SemiBold"
-                                                 Text="Full precision: " />
-                                            <Run FontFamily="Consolas"
-                                                 Text="{}{yyyy-MM-dd HH:mm:ss}" />
-                                        </TextBlock>
-                                        <TextBlock Margin="0,10,0,0"
-                                                   Style="{StaticResource HintStyle}">
-                                            Standard date/time formats like <Run FontFamily="Consolas" Text="T" /> and <Run FontFamily="Consolas" Text="g" /> also work if you want something even shorter.
-                                        </TextBlock>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
@@ -389,13 +332,13 @@
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
                                    Text="Countdown &amp; alerts" />
                         <TextBlock Style="{StaticResource SectionLeadStyle}"
-                                   Text="Make the target easy to set first, then decide whether you want a custom countdown format or an alert sound. Leaving the format blank keeps the natural wording." />
+                                   Text="Set when to count down to and customize how it displays or sounds. Leave the custom format blank to use a natural sentence." />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.05*" />
+                                <ColumnDefinition Width="1.15*" />
                                 <ColumnDefinition Width="18" />
-                                <ColumnDefinition Width="0.95*" />
+                                <ColumnDefinition Width="0.85*" />
                             </Grid.ColumnDefinitions>
 
                             <Border Grid.Column="0"
@@ -403,106 +346,141 @@
                                     Background="#F6FAFD"
                                     Margin="0">
                                 <StackPanel>
-                                    <TextBlock FontSize="18"
-                                               FontWeight="SemiBold"
-                                               Text="Countdown editor" />
-                                    <TextBlock Margin="0,4,0,14"
-                                               Foreground="{StaticResource MutedTextBrush}"
-                                               Text="Use a preset or choose a date and time. If no date is set, countdown mode stays off." />
 
-                                    <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                               Text="Quick presets" />
-                                    <WrapPanel Margin="0,8,0,0">
-                                        <Button Content="+1 hour"
-                                                Tag="plus_hour"
-                                                Click="ApplyCountdownPreset_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Tonight 6 PM"
-                                                Tag="tonight"
-                                                Click="ApplyCountdownPreset_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Tomorrow 9 AM"
-                                                Tag="tomorrow_morning"
-                                                Click="ApplyCountdownPreset_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                        <Button Content="Next week"
-                                                Tag="next_week"
-                                                Click="ApplyCountdownPreset_Click"
-                                                Style="{StaticResource EditorChipButton}" />
-                                    </WrapPanel>
+                                    <!-- Target Settings -->
+                                    <Border Padding="16"
+                                            Background="White"
+                                            BorderBrush="{StaticResource BorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="6"
+                                            Margin="0,0,0,16">
+                                        <StackPanel>
+                                            <Grid Margin="0,0,0,12">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                           VerticalAlignment="Center"
+                                                           Text="Target date and time" />
+                                                <Button Grid.Column="1"
+                                                        Command="{Binding ResetCountdownCommand}"
+                                                        Content="Turn off"
+                                                        Style="{StaticResource GhostButton}"
+                                                        Padding="8,4"
+                                                        MinHeight="28" />
+                                            </Grid>
 
-                                    <Grid Margin="0,16,0,0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="12" />
+                                                    <ColumnDefinition Width="120" />
+                                                    <ColumnDefinition Width="12" />
+                                                    <ColumnDefinition Width="120" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0">
+                                                    <DatePicker SelectedDate="{Binding CountdownEditorDate, Mode=TwoWay}" />
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="2">
+                                                    <ComboBox ItemsSource="{Binding CountdownHours}"
+                                                              SelectedItem="{Binding CountdownEditorHour, Mode=TwoWay}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding StringFormat={}{0:00}}" />
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="4">
+                                                    <ComboBox ItemsSource="{Binding CountdownMinutes}"
+                                                              SelectedItem="{Binding CountdownEditorMinute, Mode=TwoWay}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding StringFormat={}{0:00}}" />
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </Grid>
+                                            
+                                            <TextBlock Margin="0,16,0,4"
+                                                       Style="{StaticResource FieldTitleStyle}"
+                                                       Text="Quick add presets" />
+                                            <WrapPanel>
+                                                <Button Content="+1 hour"
+                                                        Tag="plus_hour"
+                                                        Click="ApplyCountdownPreset_Click"
+                                                        Style="{StaticResource EditorChipButton}" />
+                                                <Button Content="Tonight 6 PM"
+                                                        Tag="tonight"
+                                                        Click="ApplyCountdownPreset_Click"
+                                                        Style="{StaticResource EditorChipButton}" />
+                                                <Button Content="Tomorrow 9 AM"
+                                                        Tag="tomorrow_morning"
+                                                        Click="ApplyCountdownPreset_Click"
+                                                        Style="{StaticResource EditorChipButton}" />
+                                                <Button Content="Next week"
+                                                        Tag="next_week"
+                                                        Click="ApplyCountdownPreset_Click"
+                                                        Style="{StaticResource EditorChipButton}" />
+                                            </WrapPanel>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Formatting Settings -->
+                                    <Grid Margin="0,0,0,6">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="12" />
-                                            <ColumnDefinition Width="120" />
-                                            <ColumnDefinition Width="12" />
-                                            <ColumnDefinition Width="120" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Date" />
-                                            <DatePicker SelectedDate="{Binding CountdownEditorDate, Mode=TwoWay}" />
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="2">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Hour" />
-                                            <ComboBox ItemsSource="{Binding CountdownHours}"
-                                                      SelectedItem="{Binding CountdownEditorHour, Mode=TwoWay}">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding StringFormat={}{0:00}}" />
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="4">
-                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                       Text="Minute" />
-                                            <ComboBox ItemsSource="{Binding CountdownMinutes}"
-                                                      SelectedItem="{Binding CountdownEditorMinute, Mode=TwoWay}">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding StringFormat={}{0:00}}" />
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Margin="0,16,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="8" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0"
-                                                   VerticalAlignment="Center"
-                                                   Style="{StaticResource HintStyle}"
-                                                   Margin="0"
-                                                   Text="Leave the date empty to turn countdown mode off." />
-                                        <Button Grid.Column="2"
-                                                Command="{Binding ResetCountdownCommand}"
-                                                Content="Turn off"
-                                                Style="{StaticResource GhostButton}" />
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                       VerticalAlignment="Center"
+                                                       Text="Custom format" />
+                                        </StackPanel>
+                                        <Button Grid.Column="1"
+                                                Command="{Binding ResetCountdownFormatCommand}"
+                                                Content="Use natural wording"
+                                                Style="{StaticResource GhostButton}"
+                                                Padding="8,4"
+                                                MinHeight="28" />
                                     </Grid>
+                                    
+                                    <TextBox x:Name="CountdownFormatTextBox"
+                                             Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             AcceptsReturn="True"
+                                             MaxLines="3" />
+                                    <TextBlock Margin="0,6,0,0">
+                                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
+                                                   RequestNavigate="Hyperlink_RequestNavigate">Formatting rules</Hyperlink>
+                                    </TextBlock>
+
                                     <TextBlock Margin="0,16,0,0"
                                                Style="{StaticResource FieldTitleStyle}"
-                                               Text="Exact target value" />
-                                    <Grid Margin="0,4,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="8" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBox Grid.Column="0"
-                                                 Text="{Binding Settings.CountdownTo, Mode=TwoWay}" />
-                                        <Button Grid.Column="2"
-                                                Command="{Binding ResetCountdownCommand}"
-                                                Content="Clear"
-                                                Style="{StaticResource GhostButton}" />
-                                    </Grid>
-                                    <TextBlock Style="{StaticResource HintStyle}"
-                                               Text="You can type the full value here if you prefer. For most cases, the date and time pickers above are easier." />
+                                               Text="Insert pieces" />
+                                    <WrapPanel Margin="0,8,0,0">
+                                        <Button Content="HH:MM"
+                                                Tag="{}{hh:mm}"
+                                                Click="InsertCountdownFormatToken_Click"
+                                                Style="{StaticResource EditorChipButton}" />
+                                        <Button Content="HH:MM:SS"
+                                                Tag="{}{hh:mm:ss}"
+                                                Click="InsertCountdownFormatToken_Click"
+                                                Style="{StaticResource EditorChipButton}" />
+                                        <Button Content="Days"
+                                                Tag="{}{dd} days"
+                                                Click="InsertCountdownFormatToken_Click"
+                                                Style="{StaticResource EditorChipButton}" />
+                                        <Button Content="d h m"
+                                                Tag="{}{dd}d {hh}h {mm}m"
+                                                Click="InsertCountdownFormatToken_Click"
+                                                Style="{StaticResource EditorChipButton}" />
+                                        <Button Content="Compact"
+                                                Tag="c"
+                                                Click="InsertCountdownFormatToken_Click"
+                                                Style="{StaticResource EditorChipButton}" />
+                                    </WrapPanel>
                                 </StackPanel>
                             </Border>
 
@@ -516,7 +494,14 @@
                                                    Text="Status &amp; preview" />
                                         <TextBlock Margin="0,4,0,14"
                                                    Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Confirm the target at a glance, then check how the countdown will read on screen." />
+                                                   Text="Check the target text and view a live sample of the countdown display." />
+                                        
+                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Target status" />
+                                        <TextBlock Margin="0,4,0,12"
+                                                   Text="{Binding CountdownTargetSummary}"
+                                                   TextWrapping="Wrap" />
+
                                         <Border Padding="16"
                                                 Background="White"
                                                 BorderBrush="{StaticResource BorderBrush}"
@@ -524,19 +509,11 @@
                                                 CornerRadius="6">
                                             <StackPanel>
                                                 <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                                           Text="Countdown status" />
-                                                <TextBlock Margin="0,6,0,0"
-                                                           Text="{Binding CountdownTargetSummary}"
-                                                           TextWrapping="Wrap" />
-                                                <TextBlock Margin="0,16,0,0"
-                                                           Style="{StaticResource FieldTitleStyle}"
-                                                           Text="Sample countdown text" />
+                                                           Text="Live preview" />
                                                 <TextBlock Margin="0,8,0,0"
                                                            Style="{StaticResource PreviewValueStyle}"
                                                            FontSize="24"
                                                            Text="{Binding PreviewCountdownText}" />
-                                                <TextBlock Style="{StaticResource HintStyle}"
-                                                           Text="When the countdown is off, the sample still shows how your chosen format would look." />
                                             </StackPanel>
                                         </Border>
                                     </StackPanel>
@@ -551,7 +528,7 @@
                                                    Text="Sound alerts" />
                                         <TextBlock Margin="0,4,0,14"
                                                    Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Optional. Use a WAV file if you want the countdown to make a sound when it finishes." />
+                                                   Text="Optional. Play a WAV file when the countdown ends." />
 
                                         <CheckBox Content="Play a sound when the countdown ends"
                                                   IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
@@ -580,7 +557,7 @@
 
                                         <TextBlock Margin="0,16,0,0"
                                                    Style="{StaticResource FieldTitleStyle}"
-                                                   Text="Alert repeat interval" />
+                                                   Text="Repeat interval" />
                                         <Grid Margin="0,4,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
@@ -598,89 +575,6 @@
                                 </Border>
                             </StackPanel>
                         </Grid>
-
-                        <Border Style="{StaticResource MiniCardStyle}"
-                                Background="#F7FBFD"
-                                Margin="0,16,0,0">
-                            <StackPanel>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="8" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0">
-                                        <TextBlock FontSize="18"
-                                                   FontWeight="SemiBold"
-                                                   Text="Countdown text" />
-                                        <TextBlock Margin="0,4,0,0"
-                                                   Foreground="{StaticResource MutedTextBrush}"
-                                                   Text="Optional. Leave this blank to keep the friendly natural countdown sentence." />
-                                    </StackPanel>
-                                    <Button Grid.Column="2"
-                                            VerticalAlignment="Top"
-                                            Command="{Binding ResetCountdownFormatCommand}"
-                                            Content="Use natural wording"
-                                            Style="{StaticResource GhostButton}" />
-                                </Grid>
-                                <TextBlock Margin="0,16,0,0"
-                                           Style="{StaticResource FieldTitleStyle}"
-                                           Text="Format string" />
-                                <TextBox x:Name="CountdownFormatTextBox"
-                                         Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         AcceptsReturn="True"
-                                         MaxLines="3" />
-                                <TextBlock Margin="0,16,0,8"
-                                           Style="{StaticResource FieldTitleStyle}"
-                                           Text="Common pieces" />
-                                <WrapPanel>
-                                    <Button Content="HH:MM"
-                                            Tag="{}{hh:mm}"
-                                            Click="InsertCountdownFormatToken_Click"
-                                            Style="{StaticResource EditorChipButton}" />
-                                    <Button Content="HH:MM:SS"
-                                            Tag="{}{hh:mm:ss}"
-                                            Click="InsertCountdownFormatToken_Click"
-                                            Style="{StaticResource EditorChipButton}" />
-                                    <Button Content="Days"
-                                            Tag="{}{dd} days"
-                                            Click="InsertCountdownFormatToken_Click"
-                                            Style="{StaticResource EditorChipButton}" />
-                                    <Button Content="d h m"
-                                            Tag="{}{dd}d {hh}h {mm}m"
-                                            Click="InsertCountdownFormatToken_Click"
-                                            Style="{StaticResource EditorChipButton}" />
-                                    <Button Content="Compact"
-                                            Tag="c"
-                                            Click="InsertCountdownFormatToken_Click"
-                                            Style="{StaticResource EditorChipButton}" />
-                                </WrapPanel>
-                                <TextBlock Margin="0,12,0,0"
-                                           Style="{StaticResource HintStyle}"
-                                           TextWrapping="Wrap">
-                                    <Run Text="Wrap each duration format in braces. " />
-                                    <Run FontFamily="Consolas"
-                                         Text="{}{hh:mm:ss}" />
-                                    <Run Text=" is a common example." />
-                                </TextBlock>
-                                <TextBlock Style="{StaticResource HintStyle}"
-                                           TextWrapping="Wrap">
-                                    <Run Text="No escaping needed. " />
-                                    <Run FontFamily="Consolas"
-                                         Text="{}{dd} days {hh:mm:ss}" />
-                                    <Run Text=" is valid." />
-                                </TextBlock>
-                                <TextBlock Style="{StaticResource HintStyle}"
-                                           TextWrapping="Wrap">
-                                    <Run Text="Text outside braces stays literal. Leave it blank for the natural countdown sentence." />
-                                </TextBlock>
-                                <TextBlock Margin="0,10,0,0"
-                                           Style="{StaticResource HintStyle}">
-                                    <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
-                                               RequestNavigate="Hyperlink_RequestNavigate">Countdown formatting rules</Hyperlink>
-                                </TextBlock>
-                            </StackPanel>
-                        </Border>
                     </StackPanel>
                 </Border>
 
