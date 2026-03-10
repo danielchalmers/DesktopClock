@@ -432,20 +432,48 @@
                                                FontWeight="SemiBold"
                                                Text="Status &amp; preview" />
                                     <TextBlock Margin="0,4,0,14"
-                                               Foreground="{StaticResource MutedTextBrush}"
+                                               Style="{StaticResource SectionLeadStyle}"
                                                Text="Check that the target was understood and see a live sample of the countdown." />
 
-                                    <TextBlock Style="{StaticResource FieldTitleStyle}"
-                                               Text="Target status" />
-                                    <TextBlock Margin="0,4,0,12"
-                                               Text="{Binding CountdownTargetSummary}"
-                                               TextWrapping="Wrap" />
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility"
+                                                        Value="Visible" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsCountdownEnabled}"
+                                                                 Value="True">
+                                                        <Setter Property="Visibility"
+                                                                Value="Collapsed" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+                                        <TextBlock Style="{StaticResource FieldTitleStyle}"
+                                                   Text="Target status" />
+                                        <TextBlock Margin="0,4,0,12"
+                                                   Text="{Binding CountdownTargetSummary}"
+                                                   TextWrapping="Wrap" />
+                                    </StackPanel>
 
                                     <Border Padding="16"
                                             Background="White"
                                             BorderBrush="{StaticResource BorderBrush}"
                                             BorderThickness="1"
                                             CornerRadius="6">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Visibility"
+                                                        Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsCountdownEnabled}"
+                                                                 Value="True">
+                                                        <Setter Property="Visibility"
+                                                                Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
                                         <StackPanel>
                                             <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                        Text="Live preview" />
@@ -485,7 +513,7 @@
                                                FontWeight="SemiBold"
                                                Text="Clock text" />
                                     <TextBlock Margin="0,4,0,14"
-                                               Foreground="{StaticResource MutedTextBrush}"
+                                               Style="{StaticResource SectionLeadStyle}"
                                                Text="Choose the font, letter case, color, and opacity." />
 
                                     <Grid>
@@ -587,7 +615,7 @@
                                                FontWeight="SemiBold"
                                                Text="Background &amp; outline" />
                                     <TextBlock Margin="0,4,0,14"
-                                               Foreground="{StaticResource MutedTextBrush}"
+                                               Style="{StaticResource SectionLeadStyle}"
                                                Text="Customize the background fill, outline, or image." />
 
                                     <Grid>
@@ -762,7 +790,7 @@
                                            FontWeight="SemiBold"
                                            Text="Startup &amp; visibility" />
                                 <TextBlock Margin="0,4,0,14"
-                                           Foreground="{StaticResource MutedTextBrush}"
+                                           Style="{StaticResource SectionLeadStyle}"
                                            Text="Choose how the clock appears when Windows starts and when the app opens." />
                                 <CheckBox Content="Launch automatically when I sign in"
                                           IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
@@ -784,7 +812,7 @@
                                            FontWeight="SemiBold"
                                            Text="Interaction &amp; protection" />
                                 <TextBlock Margin="0,4,0,14"
-                                           Foreground="{StaticResource MutedTextBrush}"
+                                           Style="{StaticResource SectionLeadStyle}"
                                            Text="Choose how the clock behaves around other apps and during fullscreen use." />
                                 <CheckBox Content="Keep the clock above other windows"
                                           IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />

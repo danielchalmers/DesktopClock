@@ -318,6 +318,8 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         ? "Countdown is turned off."
         : Settings.CountdownTo.ToString("f", CultureInfo.CurrentCulture);
 
+    public bool IsCountdownEnabled => Settings.CountdownTo != default;
+
     [RelayCommand]
     public void SetFormat(DateFormatExample value)
     {
@@ -392,6 +394,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
                 {
                     SyncCountdownEditorFromSettings();
                     OnPropertyChanged(nameof(CountdownTargetSummary));
+                    OnPropertyChanged(nameof(IsCountdownEnabled));
                 }
 
                 RefreshPreviewText();
@@ -441,6 +444,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 
         _syncingCountdownEditor = false;
         OnPropertyChanged(nameof(CountdownTargetSummary));
+        OnPropertyChanged(nameof(IsCountdownEnabled));
     }
 
     private void ApplyCountdownTargetText(string value)
@@ -457,6 +461,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
             _countdownTargetHasParseError = false;
             Settings.CountdownTo = default;
             OnPropertyChanged(nameof(CountdownTargetSummary));
+            OnPropertyChanged(nameof(IsCountdownEnabled));
             return;
         }
 
@@ -476,6 +481,7 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
             countdownTo.Minute,
             0);
         OnPropertyChanged(nameof(CountdownTargetSummary));
+        OnPropertyChanged(nameof(IsCountdownEnabled));
     }
 
     private DateTime GetPreviewCountdownTarget()
