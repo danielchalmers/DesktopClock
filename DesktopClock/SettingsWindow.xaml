@@ -189,17 +189,15 @@
             <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
-    </Window.Resources>
 
-    <Grid Margin="18">
-        <ScrollViewer x:Name="SettingsScrollViewer"
-                      VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled"
-                      ScrollChanged="SettingsScrollViewer_ScrollChanged"
-                      Loaded="SettingsScrollViewer_Loaded">
-            <StackPanel x:Name="SettingsContent"
-                        Margin="0,0,6,24">
-                <Border x:Name="DisplaySection"
+        
+
+        
+    </Window.Resources>
+    <Grid Margin="24">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="SettingsContent" Margin="0,0,12,0">
+<Border x:Name="DisplaySection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -297,8 +295,8 @@
                         </Border>
                     </StackPanel>
                 </Border>
-
-                <Border x:Name="TimeZoneSection"
+                <Border Margin="0,32,0,32" Height="1" Background="{StaticResource BorderBrush}" />
+<Border x:Name="TimeZoneSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -319,8 +317,8 @@
                         </Border>
                     </StackPanel>
                 </Border>
-
-                <Border x:Name="CountdownSection"
+                <Border Margin="0,32,0,32" Height="1" Background="{StaticResource BorderBrush}" />
+<Border x:Name="CountdownSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -516,8 +514,8 @@
                         </Grid>
                     </StackPanel>
                 </Border>
-
-                <Border x:Name="SoundAlertsSection"
+                <Border Margin="0,32,0,32" Height="1" Background="{StaticResource BorderBrush}" />
+<Border x:Name="SoundAlertsSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -574,8 +572,8 @@
                         </Border>
                     </StackPanel>
                 </Border>
-
-                <Border x:Name="AppearanceSection"
+                <Border Margin="0,32,0,32" Height="1" Background="{StaticResource BorderBrush}" />
+<Border x:Name="AppearanceSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -863,8 +861,8 @@
                         </Border>
                     </StackPanel>
                 </Border>
-
-                <Border x:Name="WindowSection"
+                <Border Margin="0,32,0,32" Height="1" Background="{StaticResource BorderBrush}" />
+<Border x:Name="WindowSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"
@@ -945,8 +943,8 @@
                         </Grid>
                     </StackPanel>
                 </Border>
-
-                <Border x:Name="ToolsSection"
+                <Border Margin="0,32,0,32" Height="1" Background="{StaticResource BorderBrush}" />
+<Border x:Name="ToolsSection"
                         Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionTitleStyle}"

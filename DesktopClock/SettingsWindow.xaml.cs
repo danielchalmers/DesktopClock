@@ -20,8 +20,6 @@ namespace DesktopClock;
 
 public partial class SettingsWindow : Window
 {
-    private bool _restoringScrollPosition = true;
-
     public SettingsWindow()
     {
         InitializeComponent();
@@ -208,34 +206,8 @@ public partial class SettingsWindow : Window
         OpenUrl("https://github.com/danielchalmers/DesktopClock/releases");
     }
 
-    private void SettingsScrollViewer_Loaded(object sender, RoutedEventArgs e)
-    {
-        if (!_restoringScrollPosition)
-        {
-            return;
-        }
-
-        Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
-        {
-            SettingsScrollViewer.ScrollToVerticalOffset(ViewModel.Settings.SettingsScrollPosition);
-            ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
-            _restoringScrollPosition = false;
-        }));
-    }
-
-    private void SettingsScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
-    {
-        if (_restoringScrollPosition)
-        {
-            return;
-        }
-
-        ViewModel.Settings.SettingsScrollPosition = e.VerticalOffset;
-    }
-
     private void SettingsWindow_Closing(object sender, CancelEventArgs e)
     {
-        ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
         ViewModel.Dispose();
     }
 
