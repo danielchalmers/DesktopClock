@@ -22,6 +22,13 @@
             <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
 
+        <Style x:Key="ColorSwatchButton"
+               TargetType="Button"
+               BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
         <Style TargetType="TextBox">
             <Setter Property="MinHeight" Value="26" />
             <Setter Property="Padding" Value="2" />
@@ -276,8 +283,19 @@
                         <TextBox Grid.Column="0"
                                  Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Grid.Column="2"
-                                Content="Pick..."
-                                Click="PickTextColor" />
+                                Style="{StaticResource ColorSwatchButton}"
+                                ToolTip="Pick text color"
+                                Click="PickTextColor">
+                            <Border Width="18"
+                                    Height="18"
+                                    CornerRadius="3"
+                                    BorderBrush="#66000000"
+                                    BorderThickness="1">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{Binding Settings.TextColor}" />
+                                </Border.Background>
+                            </Border>
+                        </Button>
                     </Grid>
                     <TextBlock Text="Change the text color using a hex value, a color name, or the picker."
                                Margin="0,0,0,16"
@@ -320,8 +338,19 @@
                         <TextBox Grid.Column="0"
                                  Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Grid.Column="2"
-                                Content="Pick..."
-                                Click="PickOuterColor" />
+                                Style="{StaticResource ColorSwatchButton}"
+                                ToolTip="Pick background or outline color"
+                                Click="PickOuterColor">
+                            <Border Width="18"
+                                    Height="18"
+                                    CornerRadius="3"
+                                    BorderBrush="#66000000"
+                                    BorderThickness="1">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{Binding Settings.OuterColor}" />
+                                </Border.Background>
+                            </Border>
+                        </Button>
                     </Grid>
                     <TextBlock Text="Change the background or outline color."
                                Margin="0,0,0,16"
