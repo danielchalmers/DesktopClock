@@ -240,7 +240,6 @@ public partial class SettingsWindowViewModel : ObservableObject
         FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
         FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
-        TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToArray();
         ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
     }
@@ -259,11 +258,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// All available font weights.
     /// </summary>
     public IList<string> FontWeights { get; }
-
-    /// <summary>
-    /// All available text transformations.
-    /// </summary>
-    public IList<TextTransform> TextTransforms { get; }
 
     /// <summary>
     /// All available stretch options for background images.

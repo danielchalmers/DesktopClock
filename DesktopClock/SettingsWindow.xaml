@@ -265,14 +265,6 @@
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Capitalization"
-                               Style="{StaticResource LabelTextBlock}" />
-                    <ComboBox ItemsSource="{Binding TextTransforms}"
-                              SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}" />
-                    <TextBlock Text="Change the displayed text to uppercase or lowercase."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
                     <TextBlock Text="Text color"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid Style="{StaticResource ControlRow}">

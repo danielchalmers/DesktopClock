@@ -169,7 +169,6 @@ public partial class MainWindow : Window
 
             case nameof(Settings.Default.Format):
             case nameof(Settings.Default.CountdownFormat):
-            case nameof(Settings.Default.TextTransform):
                 UpdateTimeString();
                 break;
 
@@ -279,7 +278,6 @@ public partial class MainWindow : Window
             Settings.Default.CountdownTo,
             Settings.Default.Format,
             Settings.Default.CountdownFormat,
-            Settings.Default.TextTransform,
             CultureInfo.DefaultThreadCurrentCulture);
     }
 
