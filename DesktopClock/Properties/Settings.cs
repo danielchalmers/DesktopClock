@@ -74,197 +74,343 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     #region "Properties"
 
     /// <summary>
-    /// .NET format string for the time shown on the clock. Format specific parts inside { and }.
+    /// Format string used while the window is showing the current date and time instead of a countdown.
     /// </summary>
     /// <remarks>
+    /// This is re-evaluated each second in <see cref="MainWindow"/> and whenever <see cref="TimeZone"/> changes.
+    /// Text inside braces is processed by the custom tokenizer before falling back to standard .NET formatting.
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings">Custom date and time format strings</see>.
     /// </remarks>
     public string Format { get; set; } = "{ddd}, {MMM dd}, {h:mm:ss tt}";
 
     /// <summary>
-    /// .NET format string for the countdown mode. If left blank, it will be dynamic.
+    /// Format string used while <see cref="CountdownTo"/> is enabled.
     /// </summary>
     /// <remarks>
+    /// This is ignored unless countdown mode is active. When left blank, the clock shows Humanizer text such as
+    /// "2 hours" instead of formatting a <see cref="TimeSpan"/>.
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings">Custom TimeSpan format strings</see>.
     /// </remarks>
     public string CountdownFormat { get; set; } = "";
 
     /// <summary>
-    /// Date and time to countdown to. If left blank, countdown mode is not enabled.
+    /// Target date and time for countdown mode.
     /// </summary>
+    /// <remarks>
+    /// Any non-default value switches the main display from clock mode to countdown mode.
+    /// The same value is also used by the sound trigger logic to decide when countdown-related audio should play.
+    /// </remarks>
     public DateTime CountdownTo { get; set; } = default;
 
     /// <summary>
-    /// A different time zone to be used.
+    /// Time zone identifier used for the normal clock display.
     /// </summary>
+    /// <remarks>
+    /// The stored value is resolved through <see cref="TimeZoneInfo.FindSystemTimeZoneById(string)"/>.
+    /// If the ID does not exist on the current machine, the app falls back to the local time zone instead of failing.
+    /// </remarks>
     public string TimeZone { get; set; } = string.Empty;
 
     /// <summary>
-    /// Font to use for the clock's text.
+    /// Font family used by the main clock window.
     /// </summary>
+    /// <remarks>
+    /// This is bound to the window's <c>FontFamily</c>, so it affects the rendered clock text directly and can change
+    /// the auto-sized width of the window.
+    /// </remarks>
     public string FontFamily { get; set; } = "Consolas";
 
     /// <summary>
-    /// Style of font to use for the clock's text.
+    /// Font style used by the main clock window.
     /// </summary>
+    /// <remarks>
+    /// This is bound to the window's <c>FontStyle</c>, which means italic or oblique text changes the live clock
+    /// rendering immediately.
+    /// </remarks>
     public string FontStyle { get; set; } = "Normal";
 
     /// <summary>
-    /// Weight of the font for the clock's text.
+    /// Font weight used by the main clock window.
     /// </summary>
+    /// <remarks>
+    /// This is bound to the window's <c>FontWeight</c>.
+    /// Heavier or lighter weights often change the measured width, so the window can resize as this changes.
+    /// </remarks>
     public string FontWeight { get; set; } = "Normal";
 
     /// <summary>
-    /// Text color for the clock's text.
+    /// Fill color of the clock text.
     /// </summary>
+    /// <remarks>
+    /// This drives the <see cref="OutlinedTextBlock.Fill"/> brush in the main window.
+    /// On first run, it may be replaced with a value inferred from the current Windows theme.
+    /// </remarks>
     public Color TextColor { get; set; } = Color.FromRgb(33, 33, 33);
 
     /// <summary>
-    /// Opacity of the text.
+    /// Opacity applied to the text fill.
     /// </summary>
+    /// <remarks>
+    /// This affects only the text itself.
+    /// The background and outline use <see cref="BackgroundOpacity"/> instead.
+    /// </remarks>
     public double TextOpacity { get; set; } = 1;
 
     /// <summary>
-    /// The outer color, for either the background or the outline.
+    /// Color used for the background fill or the text outline, depending on the current appearance mode.
     /// </summary>
+    /// <remarks>
+    /// When <see cref="BackgroundEnabled"/> is <see langword="true"/>, this becomes the solid background color if no
+    /// image is selected. When <see cref="BackgroundEnabled"/> is <see langword="false"/>, it becomes the outline
+    /// stroke color around the text.
+    /// </remarks>
     public Color OuterColor { get; set; } = Color.FromRgb(247, 247, 247);
 
     /// <summary>
-    /// Shows a solid background instead of an outline.
+    /// Chooses between a filled background and outlined text.
     /// </summary>
+    /// <remarks>
+    /// When enabled, the outer border receives either a solid color or background image and the text stroke is turned
+    /// off. When disabled, the border becomes transparent and the outer styling is applied as a text outline instead.
+    /// </remarks>
     public bool BackgroundEnabled { get; set; } = true;
 
     /// <summary>
-    /// Opacity of the background.
+    /// Opacity used for the outer visual treatment.
     /// </summary>
+    /// <remarks>
+    /// This is shared by the solid background, the background image brush, and the outline stroke.
+    /// It does not affect the text fill.
+    /// </remarks>
     public double BackgroundOpacity { get; set; } = 0.90;
 
     /// <summary>
-    /// Corner radius of the background.
+    /// Corner radius of the background border.
     /// </summary>
+    /// <remarks>
+    /// This is applied to the main <see cref="System.Windows.Controls.Border"/> around the clock.
+    /// It is most noticeable when <see cref="BackgroundEnabled"/> is enabled.
+    /// </remarks>
     public double BackgroundCornerRadius { get; set; } = 1;
 
     /// <summary>
-    /// Path to the background image. If left blank, a solid color will be used.
+    /// File path for an optional image drawn behind the text.
     /// </summary>
+    /// <remarks>
+    /// This is only used when <see cref="BackgroundEnabled"/> is enabled.
+    /// An empty value falls back to a solid <see cref="OuterColor"/> background; a non-empty value uses an
+    /// <see cref="ImageBrush"/> instead.
+    /// </remarks>
     public string BackgroundImagePath { get; set; } = string.Empty;
 
     /// <summary>
-    /// Stretch mode for the background image.
+    /// Stretch mode for the optional background image.
     /// </summary>
+    /// <remarks>
+    /// This is passed directly to the background <see cref="ImageBrush"/> when <see cref="BackgroundImagePath"/> is
+    /// non-empty.
+    /// </remarks>
     public Stretch BackgroundImageStretch { get; set; } = Stretch.Fill;
 
     /// <summary>
-    /// Thickness of the outline around the clock.
+    /// Thickness of the text outline.
     /// </summary>
+    /// <remarks>
+    /// This is only visible when <see cref="BackgroundEnabled"/> is disabled.
+    /// The value is also reused as margin so the outline has room to render without clipping.
+    /// </remarks>
     public double OutlineThickness { get; set; } = 0.2;
 
     /// <summary>
-    /// Keeps the clock on top of other windows.
+    /// Whether the clock window should stay above normal windows.
     /// </summary>
+    /// <remarks>
+    /// This is bound directly to <see cref="Window.Topmost"/> on the main window.
+    /// The same setting is exposed in the tray and window context menus.
+    /// </remarks>
     public bool Topmost { get; set; } = true;
 
     /// <summary>
-    /// Hides the clock when a fullscreen app covers the same monitor.
+    /// Hides the clock when another fullscreen window occupies the same monitor.
     /// </summary>
+    /// <remarks>
+    /// <see cref="FullscreenHideManager"/> checks this on setting changes and once per second.
+    /// It only hides the clock for visible fullscreen windows on the same monitor, not just any foreground app.
+    /// </remarks>
     public bool HideWhenFullscreen { get; set; } = false;
 
     /// <summary>
-    /// Shows the app icon in the taskbar instead of the tray.
+    /// Whether the clock should appear in the Windows taskbar.
     /// </summary>
+    /// <remarks>
+    /// This is applied through <see cref="WindowUtil.ApplyWindowVisibility(Window, bool, bool)"/>.
+    /// It affects how the minimized clock can be brought back when the app is hidden temporarily or started hidden.
+    /// </remarks>
     public bool ShowInTaskbar { get; set; } = true;
 
     /// <summary>
-    /// Hides the clock window from Alt+Tab.
+    /// Whether the clock should be removed from the Alt+Tab switcher.
     /// </summary>
+    /// <remarks>
+    /// This is implemented with window extended styles rather than by closing or recreating the window.
+    /// It can be combined with <see cref="ShowInTaskbar"/> to tune how discoverable the clock is.
+    /// </remarks>
     public bool HideFromAltTab { get; set; } = false;
 
     /// <summary>
-    /// Height of the clock window.
+    /// Height of the clock display area in device-independent units.
     /// </summary>
+    /// <remarks>
+    /// This is bound to the outer <see cref="System.Windows.Controls.Viewbox"/>, while width remains content-driven.
+    /// Ctrl+mouse wheel and Ctrl+plus/minus change it through <see cref="ScaleHeight(double)"/>.
+    /// </remarks>
     public int Height { get; set; } = 48;
 
     /// <summary>
-    /// Opens the app when you log in.
+    /// Whether Windows should launch this executable when the current user signs in.
     /// </summary>
+    /// <remarks>
+    /// The registry entry is written or removed in <see cref="App.SetRunOnStartup(bool)"/> when the main window closes.
+    /// The value is stored per-user under the standard <c>Run</c> key.
+    /// </remarks>
     public bool RunOnStartup { get; set; } = false;
 
     /// <summary>
-    /// Starts the app hidden until the taskbar or tray icon is clicked.
+    /// Starts the clock minimized and hidden from the desktop.
     /// </summary>
+    /// <remarks>
+    /// This is checked once during window initialization.
+    /// The app still loads normally, then immediately hides itself and shows a tray notification explaining how to
+    /// restore it.
+    /// </remarks>
     public bool StartHidden { get; set; } = false;
 
     /// <summary>
-    /// Allows moving the clock by dragging it with the cursor.
+    /// Allows the main window to be repositioned by dragging with the left mouse button.
     /// </summary>
+    /// <remarks>
+    /// When enabled, <see cref="MainWindow"/> pauses timer updates and clears any pixel shift before calling
+    /// <c>DragMove</c>, then saves the new base position afterward.
+    /// </remarks>
     public bool DragToMove { get; set; } = true;
 
     /// <summary>
-    /// Makes the clock ignore mouse clicks so you can interact with windows underneath.
+    /// Makes the clock ignore mouse input so clicks reach windows underneath it.
     /// </summary>
+    /// <remarks>
+    /// This toggles the native <c>WS_EX_TRANSPARENT</c> extended style at startup and whenever the setting changes.
+    /// While enabled, normal interactions with the clock itself stop working.
+    /// </remarks>
     public bool ClickThrough { get; set; } = false;
 
     /// <summary>
-    /// Experimental: Keeps the clock window aligned to the right when the size changes.
+    /// Experimental option that keeps the right edge fixed while the window width changes.
     /// </summary>
     /// <remarks>
-    /// Small glitches can happen because programs are naturally meant to be left-anchored.
+    /// When the content width changes, <see cref="MainWindow"/> moves the window left by the same amount so the right
+    /// edge stays in place. Small glitches can still happen because the rest of the windowing behavior is naturally
+    /// left-anchored.
     /// </remarks>
     public bool RightAligned { get; set; } = false;
 
     /// <summary>
-    /// Experimental: Shifts the clock periodically in order to reduce screen burn-in.
+    /// Experimental option that periodically nudges the clock to reduce burn-in risk.
     /// </summary>
+    /// <remarks>
+    /// When enabled, the app lazily creates a <see cref="PixelShifter"/> and applies a small movement once per minute
+    /// while the window is visible. The unshifted base position is restored before saving placement so the drift is not
+    /// persisted between launches.
+    /// </remarks>
     public bool BurnInMitigation { get; set; } = false;
 
     /// <summary>
-    /// Path to a WAV file to be played on a specified interval.
+    /// Path to the WAV file used for clock and countdown alerts.
     /// </summary>
+    /// <remarks>
+    /// Sound playback is only armed when this points to an existing file and either
+    /// <see cref="WavFileInterval"/> is non-zero or <see cref="PlaySoundOnCountdown"/> is enabled.
+    /// </remarks>
     public string WavFilePath { get; set; } = string.Empty;
 
     /// <summary>
-    /// Interval for playing the WAV file if one is specified and exists (HH:mm:ss).
+    /// Interval used to decide when the alert sound should play.
     /// </summary>
+    /// <remarks>
+    /// With no countdown active, the interval is checked against the current time of day.
+    /// With countdown mode active, it is checked against the remaining countdown duration instead.
+    /// </remarks>
     public TimeSpan WavFileInterval { get; set; }
 
     /// <summary>
-    /// Play the WAV file when the countdown time elapses.
+    /// Enables a sound at the exact moment the countdown target is reached.
     /// </summary>
+    /// <remarks>
+    /// This also keeps the sound subsystem active even if <see cref="WavFileInterval"/> is zero.
+    /// If both settings are used, the exact countdown completion still counts as a match and plays the same WAV file.
+    /// </remarks>
     public bool PlaySoundOnCountdown { get; set; } = true;
 
     /// <summary>
-    /// The width of the settings window.
+    /// Persisted width of the settings window.
     /// </summary>
+    /// <remarks>
+    /// The settings window binds its <c>Width</c> directly to this property so user resizing is saved automatically.
+    /// </remarks>
     public double SettingsWindowWidth { get; set; } = 720;
 
     /// <summary>
-    /// The height of the settings window.
+    /// Persisted height of the settings window.
     /// </summary>
+    /// <remarks>
+    /// The settings window binds its <c>Height</c> directly to this property so the next session reopens at the same
+    /// size.
+    /// </remarks>
     public double SettingsWindowHeight { get; set; } = 600;
 
     /// <summary>
-    /// The vertical scroll position of the settings window.
+    /// Persisted vertical scroll offset of the settings window.
     /// </summary>
+    /// <remarks>
+    /// <see cref="SettingsWindow"/> restores this after loading so the user returns to the same section they were last
+    /// editing.
+    /// </remarks>
     public double SettingsScrollPosition { get; set; } = 0;
 
     /// <summary>
-    /// Teaching tips that have already been shown to the user.
+    /// Bit flags describing which one-time teaching tips have already been shown.
     /// </summary>
+    /// <remarks>
+    /// This currently suppresses repeated helper dialogs such as the advanced settings explanation and the "Hide for
+    /// now" tip.
+    /// </remarks>
     public TeachingTips TipsShown { get; set; }
 
     /// <summary>
-    /// The last text shown on the clock, saved to maintain the dimensions on the next launch.
+    /// Last rendered clock text, saved so the next launch starts near the previous width.
     /// </summary>
+    /// <remarks>
+    /// The main window restores this before the first timer tick because the clock auto-sizes to its content.
+    /// That avoids an obvious width jump during startup.
+    /// </remarks>
     public string LastDisplay { get; set; }
 
     /// <summary>
-    /// Window placement settings to preserve the location of the clock on the screen.
+    /// Persisted native window placement for the main clock window.
     /// </summary>
+    /// <remarks>
+    /// This is restored during source initialization and rewritten on close through the WpfWindowPlacement helpers.
+    /// If burn-in mitigation is active, the base position is restored first so the saved placement is the intentional
+    /// location rather than a temporary shifted offset.
+    /// </remarks>
     public WindowPlacement Placement { get; set; }
 
     /// <summary>
-    /// Proxy for binding to the a timezone.
+    /// UI-facing wrapper around <see cref="TimeZone"/> for the settings window.
     /// </summary>
+    /// <remarks>
+    /// The settings UI binds to <see cref="TimeZoneInfo"/> objects, while the JSON file persists only the time zone ID
+    /// string. Unknown IDs resolve to the local zone here instead of throwing.
+    /// </remarks>
     [JsonIgnore]
     public TimeZoneInfo TimeZoneInfo
     {
