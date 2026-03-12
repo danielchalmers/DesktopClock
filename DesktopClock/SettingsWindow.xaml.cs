@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
+using DesktopClock.Utilities;
 using Microsoft.Win32;
 
 namespace DesktopClock;
@@ -263,19 +264,8 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
         FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
         FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
-        TextTransforms =
-        [
-            new NamedOption<TextTransform>(TextTransform.None, "No change"),
-            new NamedOption<TextTransform>(TextTransform.Uppercase, "UPPERCASE"),
-            new NamedOption<TextTransform>(TextTransform.Lowercase, "lowercase"),
-        ];
-        ImageStretches =
-        [
-            new NamedOption<Stretch>(Stretch.None, "Original size"),
-            new NamedOption<Stretch>(Stretch.Fill, "Stretch to fill"),
-            new NamedOption<Stretch>(Stretch.Uniform, "Fit inside"),
-            new NamedOption<Stretch>(Stretch.UniformToFill, "Fill and crop"),
-        ];
+        TextTransforms = Enum.GetValues(typeof(TextTransform)).Cast<TextTransform>().ToList();
+        ImageFits = Enum.GetValues(typeof(BackgroundImageFit)).Cast<BackgroundImageFit>().ToList();
         TimeZones = TimeZoneInfo.GetSystemTimeZones();
 
         Settings.PropertyChanged += Settings_PropertyChanged;
@@ -292,11 +282,26 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
 
     public IList<string> FontWeights { get; }
 
-    public IList<NamedOption<TextTransform>> TextTransforms { get; }
+    public IList<TextTransform> TextTransforms { get; }
 
-    public IList<NamedOption<Stretch>> ImageStretches { get; }
+    public IList<BackgroundImageFit> ImageFits { get; }
 
     public IList<TimeZoneInfo> TimeZones { get; }
+
+    public BackgroundImageFit SelectedImageFit
+    {
+        get => Settings.BackgroundImageStretch.ToBackgroundImageFit();
+        set
+        {
+            if (Settings.BackgroundImageStretch == value.ToStretch())
+            {
+                return;
+            }
+
+            Settings.BackgroundImageStretch = value.ToStretch();
+            OnPropertyChanged();
+        }
+    }
 
     public string CountdownTargetText
     {
@@ -390,11 +395,17 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
             case nameof(Settings.TextTransform):
             case nameof(Settings.CountdownTo):
             case nameof(Settings.CountdownFormat):
+            case nameof(Settings.BackgroundImageStretch):
                 if (e.PropertyName == nameof(Settings.CountdownTo))
                 {
                     SyncCountdownEditorFromSettings();
                     OnPropertyChanged(nameof(CountdownTargetSummary));
                     OnPropertyChanged(nameof(IsCountdownEnabled));
+                }
+
+                if (e.PropertyName == nameof(Settings.BackgroundImageStretch))
+                {
+                    OnPropertyChanged(nameof(SelectedImageFit));
                 }
 
                 RefreshPreviewText();
@@ -520,17 +531,4 @@ public partial class SettingsWindowViewModel : ObservableObject, IDisposable
             yield return fontFamily.Name;
         }
     }
-}
-
-public sealed class NamedOption<T>
-{
-    public NamedOption(T value, string label)
-    {
-        Value = value;
-        Label = label;
-    }
-
-    public T Value { get; }
-
-    public string Label { get; }
 }

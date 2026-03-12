@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopClock"
         xmlns:p="clr-namespace:DesktopClock.Properties"
+        xmlns:utilities="clr-namespace:DesktopClock.Utilities"
         d:DataContext="{d:DesignInstance Type=local:SettingsWindowViewModel}"
         mc:Ignorable="d"
         Title="Settings"
@@ -538,9 +539,13 @@
                                             <TextBlock Style="{StaticResource FieldTitleStyle}"
                                                        Text="Letter case" />
                                             <ComboBox ItemsSource="{Binding TextTransforms}"
-                                                      DisplayMemberPath="Label"
-                                                      SelectedValuePath="Value"
-                                                      SelectedValue="{Binding Settings.TextTransform, Mode=TwoWay}" />
+                                                      SelectedItem="{Binding Settings.TextTransform, Mode=TwoWay}">
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Converter={utilities:EnumDescriptionConverter}}" />
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
                                             <TextBlock Margin="0,12,0,2"
                                                        Style="{StaticResource FieldTitleStyle}"
                                                        Text="Font weight" />
@@ -655,7 +660,7 @@
                                                         Style="{StaticResource GhostButton}" />
                                             </Grid>
                                             <CheckBox Margin="0,8,0,0"
-                                                      Content="Use a solid background instead of an outline"
+                                                      Content="Use a solid background"
                                                       IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
                                         </StackPanel>
 
@@ -756,10 +761,14 @@
                                     <TextBlock Margin="0,16,0,0"
                                                Style="{StaticResource FieldTitleStyle}"
                                                Text="Image fit" />
-                                    <ComboBox ItemsSource="{Binding ImageStretches}"
-                                              DisplayMemberPath="Label"
-                                              SelectedValuePath="Value"
-                                              SelectedValue="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
+                                    <ComboBox ItemsSource="{Binding ImageFits}"
+                                              SelectedItem="{Binding SelectedImageFit, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Converter={utilities:EnumDescriptionConverter}}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
