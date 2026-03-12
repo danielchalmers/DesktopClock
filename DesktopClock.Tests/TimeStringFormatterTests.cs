@@ -19,7 +19,6 @@ public class TimeStringFormatterTests
             default,
             "HH:mm",
             null,
-            TextTransform.None,
             CultureInfo.InvariantCulture);
 
         Assert.Equal("12:15", result);
@@ -38,7 +37,6 @@ public class TimeStringFormatterTests
             default,
             "d",
             null,
-            TextTransform.None,
             formatProvider);
 
         Assert.Equal(now.ToString("d", formatProvider), result);
@@ -58,7 +56,6 @@ public class TimeStringFormatterTests
             countdownTo,
             "HH:mm",
             "{hh\\:mm}",
-            TextTransform.None,
             CultureInfo.InvariantCulture);
 
         Assert.Equal("01:02", result);
@@ -79,7 +76,6 @@ public class TimeStringFormatterTests
             countdownTo,
             "HH:mm",
             "c",
-            TextTransform.None,
             formatProvider);
 
         Assert.Equal((countdownTo - nowDateTime).ToString("c", formatProvider), result);
@@ -108,7 +104,6 @@ public class TimeStringFormatterTests
                 countdownTo,
                 "HH:mm",
                 " ",
-                TextTransform.None,
                 CultureInfo.CurrentCulture);
 
             Assert.Equal(countdownTo.Humanize(utcDate: false, dateToCompareAgainst: nowDateTime), result);
@@ -133,28 +128,8 @@ public class TimeStringFormatterTests
             default,
             "HH:mm",
             null,
-            TextTransform.None,
             CultureInfo.InvariantCulture);
 
         Assert.Equal("18:30", result);
-    }
-
-    [Fact]
-    public void Format_AppliesTextTransform()
-    {
-        var now = new DateTimeOffset(2024, 1, 1, 13, 5, 0, TimeSpan.Zero);
-        var formatProvider = new CultureInfo("en-US");
-
-        var result = TimeStringFormatter.Format(
-            now,
-            now.DateTime,
-            TimeZoneInfo.Utc,
-            default,
-            "h:mm tt",
-            null,
-            TextTransform.Lowercase,
-            formatProvider);
-
-        Assert.Equal("1:05 pm", result);
     }
 }
