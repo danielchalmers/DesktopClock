@@ -345,30 +345,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool PlaySoundOnCountdown { get; set; } = true;
 
     /// <summary>
-    /// Persisted width of the settings window.
-    /// </summary>
-    /// <remarks>
-    /// This remembers how wide you last made the settings window so it feels familiar the next time you open it.
-    /// </remarks>
-    public double SettingsWindowWidth { get; set; } = 720;
-
-    /// <summary>
-    /// Persisted height of the settings window.
-    /// </summary>
-    /// <remarks>
-    /// This remembers how tall you last made the settings window so you do not have to resize it every time.
-    /// </remarks>
-    public double SettingsWindowHeight { get; set; } = 600;
-
-    /// <summary>
-    /// Persisted vertical scroll offset of the settings window.
-    /// </summary>
-    /// <remarks>
-    /// This helps reopen the settings window near the same section you were working in before.
-    /// </remarks>
-    public double SettingsScrollPosition { get; set; } = 0;
-
-    /// <summary>
     /// Bit flags describing which one-time teaching tips have already been shown.
     /// </summary>
     /// <remarks>
