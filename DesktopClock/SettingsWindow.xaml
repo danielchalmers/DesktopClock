@@ -1,0 +1,1299 @@
+<Window x:Class="DesktopClock.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DesktopClock"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:DesktopClock.Properties"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        d:DataContext="{d:DesignInstance Type=local:SettingsWindow}"
+        mc:Ignorable="d"
+        Title="DesktopClock Settings"
+        Width="1120"
+        Height="860"
+        MinWidth="860"
+        MinHeight="680"
+        Loaded="Window_Loaded"
+        SizeChanged="Window_SizeChanged"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        Background="Transparent"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True">
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="0"
+                            CornerRadius="24"
+                            GlassFrameThickness="1"
+                            ResizeBorderThickness="7"
+                            UseAeroCaptionButtons="False" />
+    </shell:WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#F3F7FB" />
+        <SolidColorBrush x:Key="WindowChromeBrush" Color="#F8FBFE" />
+        <SolidColorBrush x:Key="CardBrush" Color="#FFFFFFFF" />
+        <SolidColorBrush x:Key="CardAltBrush" Color="#F7FAFD" />
+        <SolidColorBrush x:Key="CardAccentBrush" Color="#EEF5FF" />
+        <SolidColorBrush x:Key="BorderBrush" Color="#D7E0EA" />
+        <SolidColorBrush x:Key="BorderStrongBrush" Color="#C4D0DE" />
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#152238" />
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#526279" />
+        <SolidColorBrush x:Key="TextMutedBrush" Color="#8090A5" />
+        <SolidColorBrush x:Key="AccentBrush" Color="#2563EB" />
+        <SolidColorBrush x:Key="AccentSoftBrush" Color="#E1EBFF" />
+        <SolidColorBrush x:Key="AccentTextBrush" Color="#1D4ED8" />
+        <SolidColorBrush x:Key="DangerBrush" Color="#C2410C" />
+        <SolidColorBrush x:Key="SuccessBrush" Color="#0F766E" />
+
+        <LinearGradientBrush x:Key="HeroPanelBrush"
+                             StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Offset="0" Color="#F8FBFF" />
+            <GradientStop Offset="1" Color="#EEF4FC" />
+        </LinearGradientBrush>
+
+        <Style x:Key="SectionCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="24" />
+            <Setter Property="Padding" Value="28" />
+            <Setter Property="Margin" Value="0,0,0,18" />
+        </Style>
+
+        <Style x:Key="EyebrowStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource AccentTextBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+        </Style>
+
+        <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+        </Style>
+
+        <Style x:Key="BodyStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="HelperStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStyle}">
+            <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="0,8,0,0" />
+        </Style>
+
+        <Style x:Key="ErrorStyle" TargetType="TextBlock" BasedOn="{StaticResource HelperStyle}">
+            <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
+        </Style>
+
+        <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource CardAltBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="14,10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="TextBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="16"
+                                SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="TextBorder" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="TextBorder" Property="Opacity" Value="0.55" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="Background" Value="{StaticResource CardAltBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="14,10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        </Style>
+
+        <Style x:Key="ModernDatePickerStyle" TargetType="DatePicker">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="Background" Value="{StaticResource CardAltBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+        </Style>
+
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="16,10" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="16">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.92" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.84" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="Background" Value="{StaticResource CardAltBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        </Style>
+
+        <Style x:Key="ChipButtonStyle" TargetType="Button" BasedOn="{StaticResource SecondaryButtonStyle}">
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Margin" Value="0,0,8,8" />
+        </Style>
+
+        <Style x:Key="TitleBarButtonStyle" TargetType="Button" BasedOn="{StaticResource SecondaryButtonStyle}">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <Style x:Key="ModernToggleStyle" TargetType="CheckBox">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border Background="Transparent"
+                                Padding="{TemplateBinding Padding}">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="64" />
+                                </Grid.ColumnDefinitions>
+
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  Margin="0,0,16,0" />
+
+                                <Grid Grid.Column="1"
+                                      Height="34"
+                                      Width="56"
+                                      HorizontalAlignment="Right">
+                                    <Border x:Name="SwitchTrack"
+                                            Background="#CBD6E3"
+                                            BorderBrush="{StaticResource BorderStrongBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="17" />
+                                    <Ellipse x:Name="SwitchThumb"
+                                             Width="24"
+                                             Height="24"
+                                             HorizontalAlignment="Left"
+                                             Margin="4,5,0,5"
+                                             Fill="White" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="SwitchTrack" Property="Background" Value="{StaticResource AccentBrush}" />
+                                <Setter TargetName="SwitchTrack" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                                <Setter TargetName="SwitchThumb" Property="HorizontalAlignment" Value="Right" />
+                                <Setter TargetName="SwitchThumb" Property="Margin" Value="0,5,4,5" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="SwitchTrack" Property="Opacity" Value="0.55" />
+                                <Setter TargetName="SwitchThumb" Property="Opacity" Value="0.55" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="{StaticResource WindowBackgroundBrush}"
+            BorderBrush="{StaticResource BorderBrush}"
+            BorderThickness="1"
+            CornerRadius="24">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"
+                    Background="{StaticResource WindowChromeBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    CornerRadius="24,24,0,0"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid Margin="24,18">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <Border Width="36"
+                                Height="36"
+                                CornerRadius="12"
+                                Background="{StaticResource AccentSoftBrush}"
+                                Margin="0,0,14,0">
+                            <Viewbox Margin="8">
+                                <TextBlock Text="&#xE823;"
+                                           FontFamily="Segoe MDL2 Assets"
+                                           Foreground="{StaticResource AccentTextBrush}" />
+                            </Viewbox>
+                        </Border>
+
+                        <StackPanel>
+                            <TextBlock Text="DesktopClock settings"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       FontSize="20"
+                                       FontWeight="SemiBold"
+                                       TextOptions.TextFormattingMode="Display" />
+                            <TextBlock Text="One scrollable editor for the whole clock."
+                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       FontSize="13" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal">
+                        <Button Style="{StaticResource TitleBarButtonStyle}"
+                                Content="&#xE921;"
+                                Click="MinimizeButton_Click" />
+                        <Button Style="{StaticResource TitleBarButtonStyle}"
+                                Content="&#xE922;"
+                                Margin="8,0,8,0"
+                                Click="MaximizeRestoreButton_Click" />
+                        <Button Style="{StaticResource TitleBarButtonStyle}"
+                                Content="&#xE8BB;"
+                                Click="CloseButton_Click" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <ScrollViewer x:Name="TabContentScrollViewer"
+                          Grid.Row="1"
+                          Loaded="SettingsScrollViewer_Loaded"
+                          ScrollChanged="SettingsScrollViewer_ScrollChanged"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
+                          CanContentScroll="False"
+                          PanningMode="VerticalFirst">
+                <StackPanel Margin="28,28,28,32">
+                    <Border Style="{StaticResource SectionCardStyle}"
+                            Background="{StaticResource HeroPanelBrush}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.1*" />
+                                <ColumnDefinition Width="0.9*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="0,0,22,0">
+                                <TextBlock Text="Fresh setup, deep control"
+                                           Style="{StaticResource EyebrowStyle}" />
+                                <TextBlock Text="Tune the clock without hunting through tabs."
+                                           Style="{StaticResource SectionTitleStyle}" />
+                                <TextBlock Text="Start with the preview and the core toggles below it. The deeper sections keep typography, appearance, behavior, and alerts together so the basics stay approachable."
+                                           Style="{StaticResource BodyStyle}" />
+
+                                <Grid Margin="0,22,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0"
+                                            Background="#FFFFFF"
+                                            BorderBrush="{StaticResource BorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="20"
+                                            Padding="18"
+                                            Margin="0,0,10,0">
+                                        <StackPanel>
+                                            <TextBlock Text="Clock size"
+                                                       Style="{StaticResource LabelStyle}" />
+                                            <Slider Minimum="{x:Static p:Settings.MinSizeLog}"
+                                                    Maximum="{x:Static p:Settings.MaxSizeLog}"
+                                                    Value="{Binding Settings.Height, Converter={local:LogScaleConverter}, Mode=TwoWay}" />
+                                            <TextBlock Text="{Binding Settings.Height, StringFormat={}{0} px tall}"
+                                                       Style="{StaticResource HelperStyle}" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Grid.Column="1"
+                                            Background="#FFFFFF"
+                                            BorderBrush="{StaticResource BorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="20"
+                                            Padding="18"
+                                            Margin="10,0,0,0">
+                                        <StackPanel>
+                                            <TextBlock Text="Quick mode"
+                                                       Style="{StaticResource LabelStyle}" />
+                                            <WrapPanel>
+                                                <Button Content="Studio"
+                                                        Tag="Studio"
+                                                        Style="{StaticResource ChipButtonStyle}"
+                                                        Click="ThemePreset_Click" />
+                                                <Button Content="Contrast"
+                                                        Tag="Contrast"
+                                                        Style="{StaticResource ChipButtonStyle}"
+                                                        Click="ThemePreset_Click" />
+                                                <Button Content="Night"
+                                                        Tag="Night"
+                                                        Style="{StaticResource ChipButtonStyle}"
+                                                        Click="ThemePreset_Click" />
+                                                <Button Content="Warm"
+                                                        Tag="Warm"
+                                                        Style="{StaticResource ChipButtonStyle}"
+                                                        Click="ThemePreset_Click" />
+                                            </WrapPanel>
+                                            <TextBlock Text="These presets only change appearance settings."
+                                                       Style="{StaticResource HelperStyle}" />
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <Border Background="#FFFFFF"
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="20"
+                                        Padding="18"
+                                        Margin="0,22,0,0">
+                                    <StackPanel>
+                                        <CheckBox IsChecked="{Binding CountdownEnabled, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Countdown mode"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Switch between a live clock and a target date countdown."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+
+                                        <CheckBox IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Background panel"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Use a solid or image-backed panel instead of outline-only text."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+
+                                        <CheckBox IsChecked="{Binding Settings.Topmost, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}"
+                                                  Margin="0">
+                                            <StackPanel>
+                                                <TextBlock Text="Always on top"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Keep the clock above standard windows while you work."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+
+                            <Border Grid.Column="1"
+                                    Background="#FFFFFF"
+                                    BorderBrush="{StaticResource BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="28"
+                                    Padding="22">
+                                <StackPanel>
+                                    <TextBlock Text="Live preview"
+                                               Style="{StaticResource EyebrowStyle}" />
+                                    <TextBlock Text="{Binding PreviewCaption}"
+                                               Style="{StaticResource BodyStyle}"
+                                               Margin="0,0,0,16" />
+
+                                    <Border Background="#E8EEF6"
+                                            CornerRadius="24"
+                                            Padding="18">
+                                        <Viewbox Height="108"
+                                                 StretchDirection="DownOnly"
+                                                 HorizontalAlignment="Stretch">
+                                            <Border CornerRadius="{Binding Settings.BackgroundCornerRadius}"
+                                                    Padding="4,0,4,0">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Background" Value="Transparent" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Settings.BackgroundEnabled}" Value="True">
+                                                                <DataTrigger.Setters>
+                                                                    <Setter Property="Background">
+                                                                        <Setter.Value>
+                                                                            <ImageBrush Opacity="{Binding Settings.BackgroundOpacity}"
+                                                                                        ImageSource="{Binding Settings.BackgroundImagePath}"
+                                                                                        Stretch="{Binding Settings.BackgroundImageStretch}" />
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </DataTrigger.Setters>
+                                                            </DataTrigger>
+                                                            <MultiDataTrigger>
+                                                                <MultiDataTrigger.Conditions>
+                                                                    <Condition Binding="{Binding Settings.BackgroundEnabled}" Value="True" />
+                                                                    <Condition Binding="{Binding UsesBackgroundImage}" Value="False" />
+                                                                </MultiDataTrigger.Conditions>
+                                                                <MultiDataTrigger.Setters>
+                                                                    <Setter Property="Background">
+                                                                        <Setter.Value>
+                                                                            <SolidColorBrush Opacity="{Binding Settings.BackgroundOpacity}"
+                                                                                             Color="{Binding Settings.OuterColor}" />
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </MultiDataTrigger.Setters>
+                                                            </MultiDataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+
+                                                <local:OutlinedTextBlock Text="{Binding PreviewText}"
+                                                                         FontFamily="{Binding Settings.FontFamily}"
+                                                                         FontStyle="{Binding Settings.FontStyle}"
+                                                                         FontWeight="{Binding Settings.FontWeight}"
+                                                                         StrokeThickness="{Binding Settings.OutlineThickness}"
+                                                                         TextWrapping="Wrap">
+                                                    <local:OutlinedTextBlock.Fill>
+                                                        <SolidColorBrush Color="{Binding Settings.TextColor}"
+                                                                         Opacity="{Binding Settings.TextOpacity}" />
+                                                    </local:OutlinedTextBlock.Fill>
+                                                    <local:OutlinedTextBlock.Style>
+                                                        <Style TargetType="local:OutlinedTextBlock">
+                                                            <Setter Property="Stroke" Value="Transparent" />
+                                                            <Setter Property="Margin" Value="0" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Settings.BackgroundEnabled}" Value="False">
+                                                                    <DataTrigger.Setters>
+                                                                        <Setter Property="Stroke">
+                                                                            <Setter.Value>
+                                                                                <SolidColorBrush Color="{Binding Settings.OuterColor}"
+                                                                                                 Opacity="{Binding Settings.BackgroundOpacity}" />
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                        <Setter Property="Margin"
+                                                                                Value="{Binding Settings.OutlineThickness}" />
+                                                                    </DataTrigger.Setters>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </local:OutlinedTextBlock.Style>
+                                                </local:OutlinedTextBlock>
+                                            </Border>
+                                        </Viewbox>
+                                    </Border>
+
+                                    <TextBlock Text="{Binding PreviewSupportText}"
+                                               Style="{StaticResource HelperStyle}"
+                                               Margin="0,14,0,0" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionCardStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.1*" />
+                                <ColumnDefinition Width="0.9*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="0,0,22,0">
+                                <TextBlock Text="Display"
+                                           Style="{StaticResource EyebrowStyle}" />
+                                <TextBlock Text="What the clock shows"
+                                           Style="{StaticResource SectionTitleStyle}" />
+                                <TextBlock Text="Normal clock mode uses a date/time format. Countdown mode uses the target and optional duration format below."
+                                           Style="{StaticResource BodyStyle}" />
+
+                                <TextBlock Text="Time zone"
+                                           Style="{StaticResource LabelStyle}"
+                                           Margin="0,20,0,0" />
+                                <ComboBox ItemsSource="{Binding TimeZones}"
+                                          DisplayMemberPath="DisplayName"
+                                          SelectedValuePath="Id"
+                                          SelectedValue="{Binding SelectedTimeZoneId, Mode=TwoWay}"
+                                          IsEditable="True"
+                                          IsTextSearchEnabled="True"
+                                          Style="{StaticResource ModernComboBoxStyle}" />
+
+                                <TextBlock Text="Clock format"
+                                           Style="{StaticResource LabelStyle}"
+                                           Margin="0,10,0,0" />
+                                <TextBox Text="{Binding Settings.Format, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource ModernTextBoxStyle}" />
+                                <WrapPanel>
+                                    <Button Content="Balanced"
+                                            Tag="{}{ddd}, {MMM dd}, {h:mm:ss tt}"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="ClockFormatPreset_Click" />
+                                    <Button Content="Minimal"
+                                            Tag="{}{h:mm tt}"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="ClockFormatPreset_Click" />
+                                    <Button Content="24-hour"
+                                            Tag="{}{ddd} {HH:mm:ss}"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="ClockFormatPreset_Click" />
+                                    <Button Content="Date forward"
+                                            Tag="{}{MMMM dd, yyyy}  {h:mm tt}"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="ClockFormatPreset_Click" />
+                                </WrapPanel>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+                                <Border Background="{StaticResource CardAltBrush}"
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="20"
+                                        Padding="18">
+                                    <StackPanel>
+                                        <CheckBox IsChecked="{Binding CountdownEnabled, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Enable countdown"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Switch to a target date and time."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+
+                                        <StackPanel Visibility="{Binding CountdownEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <TextBlock Text="Target date"
+                                                       Style="{StaticResource LabelStyle}" />
+                                            <DatePicker SelectedDate="{Binding CountdownDate, Mode=TwoWay}"
+                                                        Style="{StaticResource ModernDatePickerStyle}" />
+
+                                            <TextBlock Text="Target time"
+                                                       Style="{StaticResource LabelStyle}"
+                                                       Margin="0,8,0,0" />
+                                            <TextBox Text="{Binding CountdownTimeText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                     Style="{StaticResource ModernTextBoxStyle}" />
+                                            <TextBlock Text="Use 24-hour time like 09:30 or 18:45."
+                                                       Style="{StaticResource HelperStyle}"
+                                                       Margin="0,0,0,0" />
+                                            <TextBlock Text="{Binding CountdownValidationMessage}"
+                                                       Style="{StaticResource ErrorStyle}"
+                                                       Visibility="{Binding HasCountdownValidationMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+
+                                <TextBlock Text="Countdown format"
+                                           Style="{StaticResource LabelStyle}"
+                                           Margin="0,18,0,0" />
+                                <TextBox Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource ModernTextBoxStyle}" />
+                                <WrapPanel>
+                                    <Button Content="Natural language"
+                                            Tag=""
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="CountdownFormatPreset_Click" />
+                                    <Button Content="Days + hours"
+                                            Tag="{}{dd}d {hh}h {mm}m"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="CountdownFormatPreset_Click" />
+                                    <Button Content="Clock style"
+                                            Tag="{}{dd\\:hh\\:mm\\:ss}"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="CountdownFormatPreset_Click" />
+                                </WrapPanel>
+
+                                <WrapPanel Margin="0,6,0,0">
+                                    <Button Content="Date tokens"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="OpenDateFormatDocs_Click" />
+                                    <Button Content="Duration tokens"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="OpenDurationFormatDocs_Click" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionCardStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.1*" />
+                                <ColumnDefinition Width="0.9*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="0,0,22,0">
+                                <TextBlock Text="Typography"
+                                           Style="{StaticResource EyebrowStyle}" />
+                                <TextBlock Text="Shape and voice"
+                                           Style="{StaticResource SectionTitleStyle}" />
+                                <TextBlock Text="Pick a readable family first, then adjust style and weight for a stronger or softer desktop presence."
+                                           Style="{StaticResource BodyStyle}" />
+
+                                <TextBlock Text="Font family"
+                                           Style="{StaticResource LabelStyle}"
+                                           Margin="0,20,0,0" />
+                                <ComboBox ItemsSource="{Binding FontFamilies}"
+                                          SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}"
+                                          IsEditable="True"
+                                          IsTextSearchEnabled="True"
+                                          Style="{StaticResource ModernComboBoxStyle}" />
+
+                                <Grid Margin="0,8,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Margin="0,0,10,0">
+                                        <TextBlock Text="Font style"
+                                                   Style="{StaticResource LabelStyle}" />
+                                        <ComboBox ItemsSource="{Binding FontStyles}"
+                                                  SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernComboBoxStyle}" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1"
+                                                Margin="10,0,0,0">
+                                        <TextBlock Text="Font weight"
+                                                   Style="{StaticResource LabelStyle}" />
+                                        <ComboBox ItemsSource="{Binding FontWeights}"
+                                                  SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernComboBoxStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+
+                            <Border Grid.Column="1"
+                                    Background="{StaticResource CardAltBrush}"
+                                    BorderBrush="{StaticResource BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="20"
+                                    Padding="18">
+                                <StackPanel>
+                                    <TextBlock Text="Typography snapshot"
+                                               Style="{StaticResource LabelStyle}" />
+                                    <TextBlock Text="{Binding PreviewText}"
+                                               Margin="0,8,0,10"
+                                               TextWrapping="Wrap"
+                                               FontFamily="{Binding Settings.FontFamily}"
+                                               FontStyle="{Binding Settings.FontStyle}"
+                                               FontWeight="{Binding Settings.FontWeight}"
+                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                               FontSize="30"
+                                               TextOptions.TextFormattingMode="Display" />
+                                    <TextBlock Text="The live preview above shows the full rendered treatment with color, outline, and background settings applied."
+                                               Style="{StaticResource HelperStyle}"
+                                               Margin="0" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionCardStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.1*" />
+                                <ColumnDefinition Width="0.9*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="0,0,22,0">
+                                <TextBlock Text="Appearance"
+                                           Style="{StaticResource EyebrowStyle}" />
+                                <TextBlock Text="Color, panel, and texture"
+                                           Style="{StaticResource SectionTitleStyle}" />
+                                <TextBlock Text="Use opacity and corner radius to find the right balance between desktop presence and readability."
+                                           Style="{StaticResource BodyStyle}" />
+
+                                <TextBlock Text="Text color"
+                                           Style="{StaticResource LabelStyle}"
+                                           Margin="0,20,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding TextColorHex, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                             Style="{StaticResource ModernTextBoxStyle}"
+                                             Margin="0,0,12,0" />
+                                    <WrapPanel Grid.Column="1">
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#152238"
+                                                Background="#152238"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="TextColorSwatch_Click" />
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#FFFFFF"
+                                                Background="#FFFFFF"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="TextColorSwatch_Click" />
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#F97316"
+                                                Background="#F97316"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="TextColorSwatch_Click" />
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#14B8A6"
+                                                Background="#14B8A6"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="TextColorSwatch_Click" />
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#E11D48"
+                                                Background="#E11D48"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="TextColorSwatch_Click" />
+                                    </WrapPanel>
+                                </Grid>
+
+                                <TextBlock Text="Panel or outline color"
+                                           Style="{StaticResource LabelStyle}"
+                                           Margin="0,14,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding OuterColorHex, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                             Style="{StaticResource ModernTextBoxStyle}"
+                                             Margin="0,0,12,0" />
+                                    <WrapPanel Grid.Column="1">
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#FFFFFF"
+                                                Background="#FFFFFF"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="OuterColorSwatch_Click" />
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#111827"
+                                                Background="#111827"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="OuterColorSwatch_Click" />
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#E0EAFF"
+                                                Background="#E0EAFF"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="OuterColorSwatch_Click" />
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#FDE68A"
+                                                Background="#FDE68A"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="OuterColorSwatch_Click" />
+                                        <Button Width="36"
+                                                Height="36"
+                                                Tag="#C7D2FE"
+                                                Background="#C7D2FE"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                BorderThickness="1"
+                                                Margin="0,0,8,8"
+                                                Click="OuterColorSwatch_Click" />
+                                    </WrapPanel>
+                                </Grid>
+
+                                <Grid Margin="0,12,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Margin="0,0,10,0">
+                                        <TextBlock Text="Text opacity"
+                                                   Style="{StaticResource LabelStyle}" />
+                                        <Slider Minimum="0.15"
+                                                Maximum="1"
+                                                Value="{Binding Settings.TextOpacity, Mode=TwoWay}" />
+                                        <TextBlock Text="{Binding Settings.TextOpacity, StringFormat={}{0:P0}}"
+                                                   Style="{StaticResource HelperStyle}" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1"
+                                                Margin="10,0,0,0">
+                                        <TextBlock Text="Panel or outline opacity"
+                                                   Style="{StaticResource LabelStyle}" />
+                                        <Slider Minimum="0.1"
+                                                Maximum="1"
+                                                Value="{Binding Settings.BackgroundOpacity, Mode=TwoWay}" />
+                                        <TextBlock Text="{Binding Settings.BackgroundOpacity, StringFormat={}{0:P0}}"
+                                                   Style="{StaticResource HelperStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+                                <Border Background="{StaticResource CardAltBrush}"
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="20"
+                                        Padding="18">
+                                    <StackPanel>
+                                        <CheckBox IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Background panel"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Switch off to use outlined text only."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+
+                                        <Grid Margin="0,6,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Margin="0,0,10,0">
+                                                <TextBlock Text="Corner radius"
+                                                           Style="{StaticResource LabelStyle}" />
+                                                <Slider Minimum="0"
+                                                        Maximum="36"
+                                                        Value="{Binding Settings.BackgroundCornerRadius, Mode=TwoWay}" />
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="1"
+                                                        Margin="10,0,0,0">
+                                                <TextBlock Text="Outline thickness"
+                                                           Style="{StaticResource LabelStyle}" />
+                                                <Slider Minimum="0.05"
+                                                        Maximum="1"
+                                                        Value="{Binding Settings.OutlineThickness, Mode=TwoWay}" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <TextBlock Text="Background image"
+                                                   Style="{StaticResource LabelStyle}"
+                                                   Margin="0,16,0,0" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Grid.Column="0"
+                                                     Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                     Style="{StaticResource ModernTextBoxStyle}"
+                                                     Margin="0,0,10,0" />
+                                            <Button Grid.Column="1"
+                                                    Content="Browse"
+                                                    Style="{StaticResource SecondaryButtonStyle}"
+                                                    Margin="0,0,10,0"
+                                                    Click="BrowseBackgroundImage_Click" />
+                                            <Button Grid.Column="2"
+                                                    Content="Clear"
+                                                    Style="{StaticResource SecondaryButtonStyle}"
+                                                    Click="ClearBackgroundImage_Click" />
+                                        </Grid>
+
+                                        <StackPanel Visibility="{Binding UsesBackgroundImage, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <TextBlock Text="Image fit"
+                                                       Style="{StaticResource LabelStyle}" />
+                                            <ComboBox ItemsSource="{Binding StretchModes}"
+                                                      DisplayMemberPath="Label"
+                                                      SelectedValuePath="Value"
+                                                      SelectedValue="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}"
+                                                      Style="{StaticResource ModernComboBoxStyle}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionCardStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.1*" />
+                                <ColumnDefinition Width="0.9*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="0,0,22,0">
+                                <TextBlock Text="Behavior"
+                                           Style="{StaticResource EyebrowStyle}" />
+                                <TextBlock Text="How the window behaves"
+                                           Style="{StaticResource SectionTitleStyle}" />
+                                <TextBlock Text="These options control how visible and interactive the clock feels on the desktop."
+                                           Style="{StaticResource BodyStyle}" />
+
+                                <Border Background="{StaticResource CardAltBrush}"
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="20"
+                                        Padding="18"
+                                        Margin="0,20,0,0">
+                                    <StackPanel>
+                                        <CheckBox IsChecked="{Binding Settings.Topmost, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Always on top"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Keep the clock above regular windows."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+
+                                        <CheckBox IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Show in taskbar"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Make the window easy to find and restore."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+
+                                        <CheckBox IsChecked="{Binding Settings.HideFromAltTab, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Hide from Alt+Tab"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Treat the clock more like an overlay than a normal app."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+
+                                        <CheckBox IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Hide when another app is fullscreen"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Useful for games, video, and presentations."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+
+                                        <CheckBox IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}"
+                                                  Style="{StaticResource ModernToggleStyle}"
+                                                  Margin="0">
+                                            <StackPanel>
+                                                <TextBlock Text="Click through"
+                                                           Style="{StaticResource LabelStyle}"
+                                                           Margin="0" />
+                                                <TextBlock Text="Let mouse clicks pass through to windows behind the clock."
+                                                           Style="{StaticResource HelperStyle}"
+                                                           Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </CheckBox>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+
+                            <Border Grid.Column="1"
+                                    Background="{StaticResource CardAltBrush}"
+                                    BorderBrush="{StaticResource BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="20"
+                                    Padding="18">
+                                <StackPanel>
+                                    <TextBlock Text="Launch and movement"
+                                               Style="{StaticResource LabelStyle}" />
+
+                                    <CheckBox IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}"
+                                              Style="{StaticResource ModernToggleStyle}"
+                                              Margin="0,10,0,14">
+                                        <StackPanel>
+                                            <TextBlock Text="Run on startup"
+                                                       Style="{StaticResource LabelStyle}"
+                                                       Margin="0" />
+                                            <TextBlock Text="Start automatically when you sign in."
+                                                       Style="{StaticResource HelperStyle}"
+                                                       Margin="0,4,0,0" />
+                                        </StackPanel>
+                                    </CheckBox>
+
+                                    <CheckBox IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}"
+                                              Style="{StaticResource ModernToggleStyle}">
+                                        <StackPanel>
+                                            <TextBlock Text="Start hidden"
+                                                       Style="{StaticResource LabelStyle}"
+                                                       Margin="0" />
+                                            <TextBlock Text="Launch into the tray or taskbar without showing the clock immediately."
+                                                       Style="{StaticResource HelperStyle}"
+                                                       Margin="0,4,0,0" />
+                                        </StackPanel>
+                                    </CheckBox>
+
+                                    <CheckBox IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}"
+                                              Style="{StaticResource ModernToggleStyle}">
+                                        <StackPanel>
+                                            <TextBlock Text="Drag to move"
+                                                       Style="{StaticResource LabelStyle}"
+                                                       Margin="0" />
+                                            <TextBlock Text="Grab the clock directly with the mouse to reposition it."
+                                                       Style="{StaticResource HelperStyle}"
+                                                       Margin="0,4,0,0" />
+                                        </StackPanel>
+                                    </CheckBox>
+
+                                    <CheckBox IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}"
+                                              Style="{StaticResource ModernToggleStyle}">
+                                        <StackPanel>
+                                            <TextBlock Text="Right-align growth"
+                                                       Style="{StaticResource LabelStyle}"
+                                                       Margin="0" />
+                                            <TextBlock Text="Experimental: keep the right edge fixed while width changes."
+                                                       Style="{StaticResource HelperStyle}"
+                                                       Margin="0,4,0,0" />
+                                        </StackPanel>
+                                    </CheckBox>
+
+                                    <CheckBox IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}"
+                                              Style="{StaticResource ModernToggleStyle}"
+                                              Margin="0">
+                                        <StackPanel>
+                                            <TextBlock Text="Burn-in mitigation"
+                                                       Style="{StaticResource LabelStyle}"
+                                                       Margin="0" />
+                                            <TextBlock Text="Experimental: nudge the clock slightly over time on static displays."
+                                                       Style="{StaticResource HelperStyle}"
+                                                       Margin="0,4,0,0" />
+                                        </StackPanel>
+                                    </CheckBox>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionCardStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.1*" />
+                                <ColumnDefinition Width="0.9*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="0,0,22,0">
+                                <TextBlock Text="Alerts"
+                                           Style="{StaticResource EyebrowStyle}" />
+                                <TextBlock Text="Sound cues"
+                                           Style="{StaticResource SectionTitleStyle}" />
+                                <TextBlock Text="Use a WAV file if you want the clock to chime on an interval or when a countdown ends."
+                                           Style="{StaticResource BodyStyle}" />
+
+                                <TextBlock Text="Sound file"
+                                           Style="{StaticResource LabelStyle}"
+                                           Margin="0,20,0,0" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                             Style="{StaticResource ModernTextBoxStyle}"
+                                             Margin="0,0,10,0" />
+                                    <Button Grid.Column="1"
+                                            Content="Browse"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            Margin="0,0,10,0"
+                                            Click="BrowseSoundFile_Click" />
+                                    <Button Grid.Column="2"
+                                            Content="Clear"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            Click="ClearSoundFile_Click" />
+                                </Grid>
+
+                                <TextBlock Text="Repeat interval"
+                                           Style="{StaticResource LabelStyle}"
+                                           Margin="0,10,0,0" />
+                                <TextBox Text="{Binding SoundIntervalText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource ModernTextBoxStyle}" />
+                                <WrapPanel>
+                                    <Button Content="Every minute"
+                                            Tag="00:01:00"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="SoundIntervalPreset_Click" />
+                                    <Button Content="Every 15 min"
+                                            Tag="00:15:00"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="SoundIntervalPreset_Click" />
+                                    <Button Content="Every hour"
+                                            Tag="01:00:00"
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="SoundIntervalPreset_Click" />
+                                    <Button Content="Off"
+                                            Tag=""
+                                            Style="{StaticResource ChipButtonStyle}"
+                                            Click="SoundIntervalPreset_Click" />
+                                </WrapPanel>
+                                <TextBlock Text="Type values like 00:15:00 or 01:00:00."
+                                           Style="{StaticResource HelperStyle}" />
+                                <TextBlock Text="{Binding SoundIntervalValidationMessage}"
+                                           Style="{StaticResource ErrorStyle}"
+                                           Visibility="{Binding HasSoundIntervalValidationMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+
+                            <Border Grid.Column="1"
+                                    Background="{StaticResource CardAltBrush}"
+                                    BorderBrush="{StaticResource BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="20"
+                                    Padding="18">
+                                <StackPanel>
+                                    <CheckBox IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}"
+                                              Style="{StaticResource ModernToggleStyle}"
+                                              Margin="0">
+                                        <StackPanel>
+                                            <TextBlock Text="Play sound when countdown ends"
+                                                       Style="{StaticResource LabelStyle}"
+                                                       Margin="0" />
+                                            <TextBlock Text="You can use this even if the repeat interval is empty."
+                                                       Style="{StaticResource HelperStyle}"
+                                                       Margin="0,4,0,0" />
+                                        </StackPanel>
+                                    </CheckBox>
+
+                                    <TextBlock Text="If the file path is empty or the file does not exist, alerts stay silent."
+                                               Style="{StaticResource HelperStyle}" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Advanced"
+                                       Style="{StaticResource EyebrowStyle}" />
+                            <TextBlock Text="Session and storage"
+                                       Style="{StaticResource SectionTitleStyle}" />
+
+                            <Border Background="{StaticResource CardAltBrush}"
+                                    BorderBrush="{StaticResource BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="20"
+                                    Padding="18"
+                                    Margin="0,12,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Margin="0,0,18,0">
+                                        <TextBlock Text="Settings file"
+                                                   Style="{StaticResource LabelStyle}" />
+                                        <TextBlock Text="{Binding SettingsFilePath}"
+                                                   Style="{StaticResource BodyStyle}" />
+                                        <TextBlock Text="This window remembers its size and scroll position, and changes are saved when you close it."
+                                                   Style="{StaticResource HelperStyle}" />
+                                        <TextBlock Text="Saving is currently unavailable. DesktopClock can still apply changes for this session, but the settings file could not be written."
+                                                   Style="{StaticResource ErrorStyle}"
+                                                   Visibility="{Binding SaveWarningVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1"
+                                                VerticalAlignment="Center">
+                                        <Button Content="Open folder"
+                                                Style="{StaticResource SecondaryButtonStyle}"
+                                                Margin="0,0,0,10"
+                                                Click="OpenSettingsFolder_Click" />
+                                        <Button Content="Close"
+                                                Style="{StaticResource PrimaryButtonStyle}"
+                                                Click="CloseButton_Click" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>

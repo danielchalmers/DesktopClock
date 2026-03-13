@@ -369,6 +369,30 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public WindowPlacement Placement { get; set; }
 
     /// <summary>
+    /// Persisted width of the settings window.
+    /// </summary>
+    /// <remarks>
+    /// This helps the settings experience reopen at a comfortable size instead of snapping back to a fixed default.
+    /// </remarks>
+    public double SettingsWindowWidth { get; set; } = 1120;
+
+    /// <summary>
+    /// Persisted height of the settings window.
+    /// </summary>
+    /// <remarks>
+    /// This helps the settings experience reopen at a comfortable size instead of snapping back to a fixed default.
+    /// </remarks>
+    public double SettingsWindowHeight { get; set; } = 860;
+
+    /// <summary>
+    /// Persisted vertical scroll position of the settings window.
+    /// </summary>
+    /// <remarks>
+    /// This lets the scrollable settings experience reopen near the last section the user was editing.
+    /// </remarks>
+    public double SettingsScrollPosition { get; set; }
+
+    /// <summary>
     /// UI-facing wrapper around <see cref="TimeZone"/> for the settings window.
     /// </summary>
     /// <remarks>
