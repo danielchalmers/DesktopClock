@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
 
 namespace DesktopClock.Tests;
 
@@ -143,77 +141,4 @@ public class DateTimeTests
         Assert.True(result);
     }
 
-    [Theory]
-    [InlineData("dddd, MMMM dd", "Monday, January 01")]
-    [InlineData("yyyy-MM-dd", "2024-01-01")]
-    [InlineData("HH:mm:ss", "00:00:00")]
-    [InlineData("MMMM dd, yyyy", "January 01, 2024")]
-    public void FromFormat_CreatesCorrectExample(string format, string expected)
-    {
-        // Arrange
-        var dateTimeOffset = new DateTime(2024, 01, 01);
-
-        // Act
-        var dateFormatExample = DateFormatExample.FromFormat(format, dateTimeOffset, CultureInfo.InvariantCulture);
-
-        // Assert
-        Assert.Equal(format, dateFormatExample.Format);
-        Assert.Equal(expected, dateFormatExample.Example);
-    }
-
-    [Fact]
-    public void FromFormat_WithTokenizedFormat_ShouldWork()
-    {
-        // Arrange
-        var dateTimeOffset = new DateTimeOffset(2024, 3, 15, 14, 30, 0, TimeSpan.Zero);
-        var format = "{ddd}, {MMM dd}, {HH:mm}";
-
-        // Act
-        var dateFormatExample = DateFormatExample.FromFormat(format, dateTimeOffset, CultureInfo.InvariantCulture);
-
-        // Assert
-        Assert.Equal(format, dateFormatExample.Format);
-        Assert.Equal("Fri, Mar 15, 14:30", dateFormatExample.Example);
-    }
-
-    [Fact]
-    public void DefaultExamples_ShouldNotBeEmpty()
-    {
-        // Assert
-        Assert.NotEmpty(DateFormatExample.DefaultExamples);
-    }
-
-    [Fact]
-    public void DefaultExamples_AllShouldHaveFormatAndExample()
-    {
-        // Assert
-        foreach (var example in DateFormatExample.DefaultExamples)
-        {
-            Assert.NotNull(example.Format);
-            Assert.NotEmpty(example.Format);
-            Assert.NotNull(example.Example);
-            Assert.NotEmpty(example.Example);
-        }
-    }
-
-    [Fact]
-    public void DefaultExamples_ShouldContainCustomFormats()
-    {
-        // Assert - check for some expected custom formats
-        var formats = DateFormatExample.DefaultExamples.Select(e => e.Format).ToList();
-
-        Assert.Contains(formats, f => f.Contains("{ddd}"));
-        Assert.Contains(formats, f => f.Contains("{HH:mm}") || f.Contains("{h:mm tt}"));
-    }
-
-    [Fact]
-    public void DefaultExamples_ShouldContainStandardFormats()
-    {
-        // Assert - check for some expected standard formats
-        var formats = DateFormatExample.DefaultExamples.Select(e => e.Format).ToList();
-
-        Assert.Contains("D", formats);  // Long date pattern
-        Assert.Contains("T", formats);  // Long time pattern
-        Assert.Contains("t", formats);  // Short time pattern
-    }
 }

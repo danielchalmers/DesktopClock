@@ -348,25 +348,25 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// Persisted width of the settings window.
     /// </summary>
     /// <remarks>
-    /// This remembers how wide you last made the settings window so it feels familiar the next time you open it.
+    /// This helps the settings experience reopen at a comfortable size instead of snapping back to a fixed default.
     /// </remarks>
-    public double SettingsWindowWidth { get; set; } = 720;
+    public double SettingsWindowWidth { get; set; } = 1120;
 
     /// <summary>
     /// Persisted height of the settings window.
     /// </summary>
     /// <remarks>
-    /// This remembers how tall you last made the settings window so you do not have to resize it every time.
+    /// This helps the settings experience reopen at a comfortable size instead of snapping back to a fixed default.
     /// </remarks>
-    public double SettingsWindowHeight { get; set; } = 600;
+    public double SettingsWindowHeight { get; set; } = 860;
 
     /// <summary>
-    /// Persisted vertical scroll offset of the settings window.
+    /// Persisted vertical scroll position of the settings window.
     /// </summary>
     /// <remarks>
-    /// This helps reopen the settings window near the same section you were working in before.
+    /// This lets the scrollable settings experience reopen near the last section the user was editing.
     /// </remarks>
-    public double SettingsScrollPosition { get; set; } = 0;
+    public double SettingsScrollPosition { get; set; }
 
     /// <summary>
     /// Bit flags describing which one-time teaching tips have already been shown.

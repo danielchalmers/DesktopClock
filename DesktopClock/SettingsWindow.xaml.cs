@@ -1,341 +1,589 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing.Text;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Navigation;
-using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using Microsoft.Win32;
 
 namespace DesktopClock;
 
+[ObservableObject]
 public partial class SettingsWindow : Window
 {
-    private bool _restoringScrollPosition = true;
+    private static readonly string[] _fontStyles = ["Normal", "Italic", "Oblique"];
+    private static readonly string[] _fontWeights = ["Thin", "Light", "Normal", "Medium", "SemiBold", "Bold", "Black"];
+    private static readonly string[] _intervalFormats =
+    [
+        @"m\:ss",
+        @"mm\:ss",
+        @"h\:mm",
+        @"hh\:mm",
+        @"h\:mm\:ss",
+        @"hh\:mm\:ss",
+    ];
+
+    private readonly SystemClockTimer _previewTimer;
+    private readonly PropertyChangedEventHandler _settingsPropertyChanged;
+
+    [ObservableProperty]
+    private string _previewCaption = string.Empty;
+
+    [ObservableProperty]
+    private string _previewSupportText = string.Empty;
+
+    [ObservableProperty]
+    private string _previewText = string.Empty;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasCountdownValidationMessage))]
+    private string _countdownValidationMessage = string.Empty;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasSoundIntervalValidationMessage))]
+    private string _soundIntervalValidationMessage = string.Empty;
 
     public SettingsWindow()
     {
         InitializeComponent();
-        DataContext = new SettingsWindowViewModel(Settings.Default);
-        Closing += SettingsWindow_Closing;
+
+        DataContext = this;
+
+        FontFamilies = Fonts.SystemFontFamilies
+            .Select(fontFamily => fontFamily.Source)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(name => name)
+            .ToArray();
+
+        FontStyles = _fontStyles;
+        FontWeights = _fontWeights;
+
+        StretchModes =
+        [
+            new StretchOption("Fill the panel", Stretch.Fill),
+            new StretchOption("Keep aspect ratio", Stretch.Uniform),
+            new StretchOption("Fill and crop", Stretch.UniformToFill),
+            new StretchOption("Original size", Stretch.None),
+        ];
+
+        TimeZones = TimeZoneInfo.GetSystemTimeZones()
+            .Select(timeZone => new TimeZoneOption(timeZone.Id, timeZone.DisplayName))
+            .ToArray();
+
+        _settingsPropertyChanged = (_, _) => RefreshDerivedState();
+        Settings.PropertyChanged += _settingsPropertyChanged;
+
+        _previewTimer = new SystemClockTimer();
+        _previewTimer.SecondChanged += PreviewTimer_SecondChanged;
+        _previewTimer.Start();
+        RefreshDerivedState();
     }
 
-    private SettingsWindowViewModel ViewModel => (SettingsWindowViewModel)DataContext;
+    public Settings Settings => Settings.Default;
 
-    private void SelectFormat(object sender, SelectionChangedEventArgs e)
+    public IReadOnlyList<string> FontFamilies { get; }
+
+    public IReadOnlyList<string> FontStyles { get; }
+
+    public IReadOnlyList<string> FontWeights { get; }
+
+    public IReadOnlyList<StretchOption> StretchModes { get; }
+
+    public IReadOnlyList<TimeZoneOption> TimeZones { get; }
+
+    public bool CountdownEnabled
     {
-        if (e.AddedItems.Count == 0)
+        get => Settings.CountdownTo != default;
+        set
         {
-            return;
-        }
+            if (value == CountdownEnabled)
+                return;
 
-        var value = e.AddedItems[0] as DateFormatExample;
-
-        if (value == null)
-        {
-            return;
-        }
-
-        ViewModel.Settings.Format = value.Format;
-    }
-
-    private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
-    {
-        var openFileDialog = new OpenFileDialog
-        {
-            Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*"
-        };
-
-        if (openFileDialog.ShowDialog() != true)
-        {
-            return;
-        }
-
-        ViewModel.Settings.BackgroundImagePath = openFileDialog.FileName;
-    }
-
-    private void BrowseWavFilePath(object sender, RoutedEventArgs e)
-    {
-        var openFileDialog = new OpenFileDialog
-        {
-            Filter = "WAV files (*.wav)|*.wav|All files (*.*)|*.*"
-        };
-
-        if (openFileDialog.ShowDialog() != true)
-        {
-            return;
-        }
-
-        ViewModel.Settings.WavFilePath = openFileDialog.FileName;
-    }
-
-    private void PickTextColor(object sender, RoutedEventArgs e)
-    {
-        PickColor(color => ViewModel.Settings.TextColor = color, ViewModel.Settings.TextColor);
-    }
-
-    private void PickOuterColor(object sender, RoutedEventArgs e)
-    {
-        PickColor(color => ViewModel.Settings.OuterColor = color, ViewModel.Settings.OuterColor);
-    }
-
-    private void PickColor(Action<Color> applyColor, Color currentColor)
-    {
-        using var colorDialog = new System.Windows.Forms.ColorDialog
-        {
-            AllowFullOpen = true,
-            FullOpen = true,
-            Color = System.Drawing.Color.FromArgb(currentColor.A, currentColor.R, currentColor.G, currentColor.B)
-        };
-
-        if (colorDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-        {
-            return;
-        }
-
-        applyColor(Color.FromArgb(
-            colorDialog.Color.A,
-            colorDialog.Color.R,
-            colorDialog.Color.G,
-            colorDialog.Color.B));
-    }
-
-    private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-    {
-        Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-        e.Handled = true;
-    }
-
-    private void OpenSettingsFile(object sender, RoutedEventArgs e)
-    {
-        // Teach user how it works.
-        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
-        {
-            MessageBox.Show(this,
-                "Settings are stored in JSON and will open in Notepad. Save the file for changes to take effect. To start fresh, delete your '.settings' file.",
-                Title, MessageBoxButton.OK, MessageBoxImage.Information);
-
-            Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
-        }
-
-        // Save first if we can so it's up-to-date.
-        if (Settings.CanBeSaved)
-            Settings.Default.Save();
-
-        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
-        if (!Settings.Exists)
-        {
-            MessageBox.Show(this,
-                "Settings file doesn't exist and couldn't be created.",
-                Title, MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
-        }
-
-        // Open settings file in notepad.
-        try
-        {
-            Process.Start("notepad", Settings.FilePath);
-        }
-        catch (Exception ex)
-        {
-            // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
-            MessageBox.Show(this,
-                "Couldn't open settings file in Notepad.\n\n" +
-                "This app may have been stolen. If you paid for it, ask for a refund and download it for free from https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If it still doesn't work, create a new issue at that link with details on what happened and include this error: \"{ex.Message}\"",
-                Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            Settings.CountdownTo = value ? CreateDefaultCountdownTarget() : default;
+            CountdownValidationMessage = string.Empty;
+            RefreshDerivedState();
         }
     }
 
-    private void OpenSettingsFolder(object sender, RoutedEventArgs e)
+    public DateTime? CountdownDate
     {
-        OpenSettingsPath(Settings.FilePath);
+        get => CountdownEnabled ? Settings.CountdownTo.Date : null;
+        set
+        {
+            if (!value.HasValue)
+                return;
+
+            var timeOfDay = CountdownEnabled ? Settings.CountdownTo.TimeOfDay : CreateDefaultCountdownTarget().TimeOfDay;
+            Settings.CountdownTo = value.Value.Date + timeOfDay;
+            CountdownValidationMessage = string.Empty;
+            RefreshDerivedState();
+        }
     }
 
-    private void CreateNewClock(object sender, RoutedEventArgs e)
+    public string CountdownTimeText
     {
-        var result = MessageBox.Show(this,
-            "This will copy the executable and start it with new settings.\n\n" +
-            "Continue?",
-            Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
+        get => CountdownEnabled ? Settings.CountdownTo.ToString("HH:mm", CultureInfo.InvariantCulture) : string.Empty;
+        set
+        {
+            if (!CountdownEnabled)
+                return;
 
-        if (result != MessageBoxResult.OK)
-            return;
+            if (!TryParseTimeOfDay(value, out var timeOfDay))
+            {
+                CountdownValidationMessage = "Enter the countdown time as HH:mm, for example 09:30 or 18:45.";
+                OnPropertyChanged(nameof(CountdownTimeText));
+                return;
+            }
 
-        var newExePath = Path.Combine(App.MainFileInfo.DirectoryName, App.MainFileInfo.GetFileAtNextIndex().Name);
-
-        // Copy and start the new clock.
-        File.Copy(App.MainFileInfo.FullName, newExePath);
-        Process.Start(newExePath);
+            Settings.CountdownTo = Settings.CountdownTo.Date + timeOfDay;
+            CountdownValidationMessage = string.Empty;
+            RefreshDerivedState();
+        }
     }
 
-    private void CheckForUpdates(object sender, RoutedEventArgs e)
+    public bool HasCountdownValidationMessage => !string.IsNullOrWhiteSpace(CountdownValidationMessage);
+
+    public string SelectedTimeZoneId
     {
-        OpenUrl("https://github.com/danielchalmers/DesktopClock/releases");
+        get => string.IsNullOrWhiteSpace(Settings.TimeZone) ? TimeZoneInfo.Local.Id : Settings.TimeZone;
+        set
+        {
+            if (string.Equals(value, SelectedTimeZoneId, StringComparison.Ordinal))
+                return;
+
+            Settings.TimeZone = value ?? string.Empty;
+            RefreshDerivedState();
+        }
+    }
+
+    public string TextColorHex
+    {
+        get => ToHex(Settings.TextColor);
+        set
+        {
+            if (!TryParseColor(value, out var color))
+            {
+                OnPropertyChanged(nameof(TextColorHex));
+                return;
+            }
+
+            Settings.TextColor = color;
+            RefreshDerivedState();
+        }
+    }
+
+    public string OuterColorHex
+    {
+        get => ToHex(Settings.OuterColor);
+        set
+        {
+            if (!TryParseColor(value, out var color))
+            {
+                OnPropertyChanged(nameof(OuterColorHex));
+                return;
+            }
+
+            Settings.OuterColor = color;
+            RefreshDerivedState();
+        }
+    }
+
+    public string SoundIntervalText
+    {
+        get => Settings.WavFileInterval == default
+            ? string.Empty
+            : Settings.WavFileInterval.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                Settings.WavFileInterval = default;
+                SoundIntervalValidationMessage = string.Empty;
+                RefreshDerivedState();
+                return;
+            }
+
+            if (!TryParseInterval(value, out var interval))
+            {
+                SoundIntervalValidationMessage = "Enter a duration like 00:01:00, 00:15:00, or 01:00:00.";
+                OnPropertyChanged(nameof(SoundIntervalText));
+                return;
+            }
+
+            Settings.WavFileInterval = interval;
+            SoundIntervalValidationMessage = string.Empty;
+            RefreshDerivedState();
+        }
+    }
+
+    public bool HasSoundIntervalValidationMessage => !string.IsNullOrWhiteSpace(SoundIntervalValidationMessage);
+
+    public bool UsesBackgroundImage => !string.IsNullOrWhiteSpace(Settings.BackgroundImagePath);
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        RefreshDerivedState();
     }
 
     private void SettingsScrollViewer_Loaded(object sender, RoutedEventArgs e)
     {
-        if (!_restoringScrollPosition)
-        {
-            return;
-        }
-
-        Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
-        {
-            SettingsScrollViewer.ScrollToVerticalOffset(ViewModel.Settings.SettingsScrollPosition);
-            ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
-            _restoringScrollPosition = false;
-        }));
+        TabContentScrollViewer.ScrollToVerticalOffset(Settings.SettingsScrollPosition);
     }
 
     private void SettingsScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
-        if (_restoringScrollPosition)
+        if (!IsLoaded)
+            return;
+
+        Settings.SettingsScrollPosition = e.VerticalOffset;
+    }
+
+    private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton != MouseButton.Left)
+            return;
+
+        if (e.ClickCount == 2)
         {
+            ToggleMaximizeRestore();
             return;
         }
 
-        ViewModel.Settings.SettingsScrollPosition = e.VerticalOffset;
+        DragMove();
     }
 
-    private void SettingsWindow_Closing(object sender, CancelEventArgs e)
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
     {
-        ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
+        WindowState = WindowState.Minimized;
     }
 
-    private static void OpenUrl(string url)
+    private void MaximizeRestoreButton_Click(object sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        ToggleMaximizeRestore();
     }
 
-    private static void OpenSettingsPath(string filePath)
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
-        var folderPath = Path.GetDirectoryName(filePath);
+        Close();
+    }
 
-        if (string.IsNullOrWhiteSpace(folderPath))
+    protected override void OnClosed(EventArgs e)
+    {
+        _previewTimer.Stop();
+        _previewTimer.SecondChanged -= PreviewTimer_SecondChanged;
+        _previewTimer.Dispose();
+        Settings.PropertyChanged -= _settingsPropertyChanged;
+        Settings.Save();
+        base.OnClosed(e);
+    }
+
+    private void PreviewTimer_SecondChanged(object sender, EventArgs e)
+    {
+        Dispatcher.Invoke(UpdatePreview);
+    }
+
+    private void BrowseBackgroundImage_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new OpenFileDialog
         {
+            CheckFileExists = true,
+            Filter = "Image files|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.webp|All files|*.*",
+            Title = "Choose a background image",
+        };
+
+        if (dialog.ShowDialog(this) != true)
             return;
-        }
 
-        Process.Start(new ProcessStartInfo("explorer.exe", folderPath) { UseShellExecute = true });
-    }
-}
-
-public partial class SettingsWindowViewModel : ObservableObject
-{
-    public Settings Settings { get; }
-
-    public SettingsWindowViewModel(Settings settings)
-    {
-        Settings = settings;
-        FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
-        FontStyles = ["Normal", "Italic", "Oblique"];
-        FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
-        ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
-        TimeZones = TimeZoneInfo.GetSystemTimeZones();
+        Settings.BackgroundImagePath = dialog.FileName;
+        RefreshDerivedState();
     }
 
-    /// <summary>
-    /// All available font families reported by the system.
-    /// </summary>
-    public IList<string> FontFamilies { get; }
-
-    /// <summary>
-    /// All available font styles.
-    /// </summary>
-    public IList<string> FontStyles { get; }
-
-    /// <summary>
-    /// All available font weights.
-    /// </summary>
-    public IList<string> FontWeights { get; }
-
-    /// <summary>
-    /// All available stretch options for background images.
-    /// </summary>
-    public IList<Stretch> ImageStretches { get; }
-
-    /// <summary>
-    /// All available time zones reported by the system.
-    /// </summary>
-    public IList<TimeZoneInfo> TimeZones { get; }
-
-    /// <summary>
-    /// Sets the format string in settings.
-    /// </summary>
-    [RelayCommand]
-    public void SetFormat(DateFormatExample value)
-    {
-        Settings.Default.Format = value.Format;
-    }
-
-    /// <summary>
-    /// Disables countdown mode by resetting the date to default.
-    /// </summary>
-    [RelayCommand]
-    public void ResetCountdown()
-    {
-        Settings.CountdownTo = default;
-    }
-
-    /// <summary>
-    /// Resets the countdown format to the default (dynamic) format.
-    /// </summary>
-    [RelayCommand]
-    public void ResetCountdownFormat()
-    {
-        Settings.CountdownFormat = string.Empty;
-    }
-
-    /// <summary>
-    /// Clears the chime sound file path.
-    /// </summary>
-    [RelayCommand]
-    public void ResetWavFilePath()
-    {
-        Settings.WavFilePath = string.Empty;
-    }
-
-    /// <summary>
-    /// Resets the chime interval to the default value.
-    /// </summary>
-    [RelayCommand]
-    public void ResetWavFileInterval()
-    {
-        Settings.WavFileInterval = default;
-    }
-
-    /// <summary>
-    /// Clears the background image path.
-    /// </summary>
-    [RelayCommand]
-    public void ResetBackgroundImagePath()
+    private void ClearBackgroundImage_Click(object sender, RoutedEventArgs e)
     {
         Settings.BackgroundImagePath = string.Empty;
+        RefreshDerivedState();
     }
 
-    private IEnumerable<string> GetAllSystemFonts()
+    private void BrowseSoundFile_Click(object sender, RoutedEventArgs e)
     {
-        // Get fonts from WPF.
-        foreach (var fontFamily in Fonts.SystemFontFamilies)
+        var dialog = new OpenFileDialog
         {
-            yield return fontFamily.Source;
+            CheckFileExists = true,
+            Filter = "Wave files|*.wav|All files|*.*",
+            Title = "Choose a WAV file",
+        };
+
+        if (dialog.ShowDialog(this) != true)
+            return;
+
+        Settings.WavFilePath = dialog.FileName;
+        RefreshDerivedState();
+    }
+
+    private void ClearSoundFile_Click(object sender, RoutedEventArgs e)
+    {
+        Settings.WavFilePath = string.Empty;
+        RefreshDerivedState();
+    }
+
+    private void OpenSettingsFolder_Click(object sender, RoutedEventArgs e)
+    {
+        var folderPath = Path.GetDirectoryName(Settings.FilePath);
+        if (string.IsNullOrWhiteSpace(folderPath))
+            return;
+
+        if (File.Exists(Settings.FilePath))
+        {
+            OpenShellTarget("explorer.exe", $"/select,\"{Settings.FilePath}\"");
+            return;
         }
 
-        // Get fonts from System.Drawing.
-        using var installedFontCollection = new InstalledFontCollection();
-        foreach (var fontFamily in installedFontCollection.Families)
-        {
-            yield return fontFamily.Name;
-        }
+        OpenShellTarget(folderPath);
     }
+
+    private void OpenDateFormatDocs_Click(object sender, RoutedEventArgs e)
+    {
+        OpenShellTarget("https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings");
+    }
+
+    private void OpenDurationFormatDocs_Click(object sender, RoutedEventArgs e)
+    {
+        OpenShellTarget("https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings");
+    }
+
+    private void ClockFormatPreset_Click(object sender, RoutedEventArgs e)
+    {
+        Settings.Format = ((FrameworkElement)sender).Tag?.ToString() ?? Settings.Format;
+        RefreshDerivedState();
+    }
+
+    private void CountdownFormatPreset_Click(object sender, RoutedEventArgs e)
+    {
+        Settings.CountdownFormat = ((FrameworkElement)sender).Tag?.ToString() ?? string.Empty;
+        RefreshDerivedState();
+    }
+
+    private void SoundIntervalPreset_Click(object sender, RoutedEventArgs e)
+    {
+        SoundIntervalText = ((FrameworkElement)sender).Tag?.ToString() ?? string.Empty;
+    }
+
+    private void TextColorSwatch_Click(object sender, RoutedEventArgs e)
+    {
+        TextColorHex = ((FrameworkElement)sender).Tag?.ToString() ?? TextColorHex;
+    }
+
+    private void OuterColorSwatch_Click(object sender, RoutedEventArgs e)
+    {
+        OuterColorHex = ((FrameworkElement)sender).Tag?.ToString() ?? OuterColorHex;
+    }
+
+    private void ThemePreset_Click(object sender, RoutedEventArgs e)
+    {
+        switch (((FrameworkElement)sender).Tag?.ToString())
+        {
+            case "Studio":
+                Settings.BackgroundEnabled = true;
+                Settings.TextColor = ParseColor("#152238");
+                Settings.OuterColor = ParseColor("#FFFFFF");
+                Settings.TextOpacity = 1;
+                Settings.BackgroundOpacity = 0.92;
+                Settings.BackgroundCornerRadius = 20;
+                Settings.OutlineThickness = 0.18;
+                break;
+
+            case "Contrast":
+                Settings.BackgroundEnabled = false;
+                Settings.TextColor = ParseColor("#FFFFFF");
+                Settings.OuterColor = ParseColor("#111827");
+                Settings.TextOpacity = 1;
+                Settings.BackgroundOpacity = 0.9;
+                Settings.BackgroundCornerRadius = 12;
+                Settings.OutlineThickness = 0.38;
+                break;
+
+            case "Night":
+                Settings.BackgroundEnabled = true;
+                Settings.TextColor = ParseColor("#EAF2FF");
+                Settings.OuterColor = ParseColor("#162033");
+                Settings.TextOpacity = 1;
+                Settings.BackgroundOpacity = 0.88;
+                Settings.BackgroundCornerRadius = 22;
+                Settings.OutlineThickness = 0.22;
+                break;
+
+            case "Warm":
+                Settings.BackgroundEnabled = true;
+                Settings.TextColor = ParseColor("#5C2C06");
+                Settings.OuterColor = ParseColor("#FFF1E7");
+                Settings.TextOpacity = 0.98;
+                Settings.BackgroundOpacity = 0.94;
+                Settings.BackgroundCornerRadius = 24;
+                Settings.OutlineThickness = 0.18;
+                break;
+        }
+
+        RefreshDerivedState();
+    }
+
+    private void RefreshDerivedState()
+    {
+        OnPropertyChanged(nameof(CountdownEnabled));
+        OnPropertyChanged(nameof(CountdownDate));
+        OnPropertyChanged(nameof(CountdownTimeText));
+        OnPropertyChanged(nameof(CountdownValidationMessage));
+        OnPropertyChanged(nameof(HasCountdownValidationMessage));
+        OnPropertyChanged(nameof(SelectedTimeZoneId));
+        OnPropertyChanged(nameof(TextColorHex));
+        OnPropertyChanged(nameof(OuterColorHex));
+        OnPropertyChanged(nameof(SoundIntervalText));
+        OnPropertyChanged(nameof(SoundIntervalValidationMessage));
+        OnPropertyChanged(nameof(HasSoundIntervalValidationMessage));
+        OnPropertyChanged(nameof(UsesBackgroundImage));
+        UpdatePreview();
+    }
+
+    private void UpdatePreview()
+    {
+        var now = DateTimeOffset.Now;
+        var localNow = DateTime.Now;
+
+        PreviewText = TimeStringFormatter.Format(
+            now,
+            localNow,
+            Settings.TimeZoneInfo,
+            Settings.CountdownTo,
+            Settings.Format,
+            Settings.CountdownFormat,
+            CultureInfo.CurrentCulture);
+
+        if (CountdownEnabled)
+        {
+            PreviewCaption = $"Counting down to {Settings.CountdownTo:ddd, MMM d yyyy h:mm tt}";
+            PreviewSupportText = string.IsNullOrWhiteSpace(Settings.CountdownFormat)
+                ? "Countdown preview uses natural language until you add a custom duration format."
+                : "Countdown preview uses your custom duration tokens.";
+            return;
+        }
+
+        PreviewCaption = $"Showing time in {Settings.TimeZoneInfo.DisplayName}";
+        PreviewSupportText = Settings.BackgroundEnabled
+            ? "Background, image, and color changes are reflected live in the preview."
+            : "Outline mode is active, so the secondary color is applied to the text stroke.";
+    }
+
+    private void ToggleMaximizeRestore()
+    {
+        WindowState = WindowState == WindowState.Maximized
+            ? WindowState.Normal
+            : WindowState.Maximized;
+    }
+
+    private void OpenShellTarget(string target, string arguments = null)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = target,
+            Arguments = arguments ?? string.Empty,
+            UseShellExecute = true,
+        });
+    }
+
+    private static DateTime CreateDefaultCountdownTarget()
+    {
+        var now = DateTime.Now.AddHours(1);
+        return new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0);
+    }
+
+    private static bool TryParseTimeOfDay(string value, out TimeSpan timeOfDay)
+    {
+        return TimeSpan.TryParseExact(
+            value?.Trim(),
+            [@"h\:mm", @"hh\:mm"],
+            CultureInfo.InvariantCulture,
+            out timeOfDay);
+    }
+
+    private static bool TryParseInterval(string value, out TimeSpan interval)
+    {
+        return TimeSpan.TryParseExact(
+            value?.Trim(),
+            _intervalFormats,
+            CultureInfo.InvariantCulture,
+            out interval) &&
+            interval > TimeSpan.Zero;
+    }
+
+    private static bool TryParseColor(string value, out Color color)
+    {
+        try
+        {
+            var normalized = value?.Trim() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(normalized))
+            {
+                color = default;
+                return false;
+            }
+
+            if (!normalized.StartsWith("#", StringComparison.Ordinal))
+                normalized = "#" + normalized;
+
+            var converted = ColorConverter.ConvertFromString(normalized);
+            if (converted is Color parsedColor)
+            {
+                color = Color.FromRgb(parsedColor.R, parsedColor.G, parsedColor.B);
+                return true;
+            }
+        }
+        catch
+        {
+        }
+
+        color = default;
+        return false;
+    }
+
+    private static Color ParseColor(string value)
+    {
+        return TryParseColor(value, out var color) ? color : Colors.White;
+    }
+
+    private static string ToHex(Color color)
+    {
+        return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+    }
+
+}
+
+public record StretchOption
+{
+    public StretchOption(string label, Stretch value)
+    {
+        Label = label;
+        Value = value;
+    }
+
+    public string Label { get; }
+
+    public Stretch Value { get; }
+}
+
+public record TimeZoneOption
+{
+    public TimeZoneOption(string id, string displayName)
+    {
+        Id = id;
+        DisplayName = displayName;
+    }
+
+    public string Id { get; }
+
+    public string DisplayName { get; }
 }
