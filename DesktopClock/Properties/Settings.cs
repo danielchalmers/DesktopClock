@@ -345,30 +345,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool PlaySoundOnCountdown { get; set; } = true;
 
     /// <summary>
-    /// Bit flags describing which one-time teaching tips have already been shown.
-    /// </summary>
-    /// <remarks>
-    /// This keeps introductory tips from being shown over and over after the user has already seen them once.
-    /// </remarks>
-    public TeachingTips TipsShown { get; set; }
-
-    /// <summary>
-    /// Last rendered clock text, saved so the next launch starts near the previous width.
-    /// </summary>
-    /// <remarks>
-    /// This helps the clock reopen with a similar shape to the last session instead of visibly resizing right away.
-    /// </remarks>
-    public string LastDisplay { get; set; }
-
-    /// <summary>
-    /// Persisted native window placement for the main clock window.
-    /// </summary>
-    /// <remarks>
-    /// This remembers where the clock was placed so it can return to the same spot next time.
-    /// </remarks>
-    public WindowPlacement Placement { get; set; }
-
-    /// <summary>
     /// Persisted width of the settings window.
     /// </summary>
     /// <remarks>
@@ -391,6 +367,30 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// This lets the scrollable settings experience reopen near the last section the user was editing.
     /// </remarks>
     public double SettingsScrollPosition { get; set; }
+
+    /// <summary>
+    /// Bit flags describing which one-time teaching tips have already been shown.
+    /// </summary>
+    /// <remarks>
+    /// This keeps introductory tips from being shown over and over after the user has already seen them once.
+    /// </remarks>
+    public TeachingTips TipsShown { get; set; }
+
+    /// <summary>
+    /// Last rendered clock text, saved so the next launch starts near the previous width.
+    /// </summary>
+    /// <remarks>
+    /// This helps the clock reopen with a similar shape to the last session instead of visibly resizing right away.
+    /// </remarks>
+    public string LastDisplay { get; set; }
+
+    /// <summary>
+    /// Persisted native window placement for the main clock window.
+    /// </summary>
+    /// <remarks>
+    /// This remembers where the clock was placed so it can return to the same spot next time.
+    /// </remarks>
+    public WindowPlacement Placement { get; set; }
 
     /// <summary>
     /// UI-facing wrapper around <see cref="TimeZone"/> for the settings window.
