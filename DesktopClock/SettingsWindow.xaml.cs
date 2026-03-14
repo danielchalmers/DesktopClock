@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
 using DesktopClock.Properties;
 using Microsoft.Win32;
 
@@ -29,7 +28,7 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
         @"hh\:mm\:ss",
     };
 
-    private readonly DispatcherTimer _previewTimer;
+    private readonly SystemClockTimer _previewTimer;
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     private string _previewCaption = string.Empty;
@@ -71,12 +70,8 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
         _settingsPropertyChanged = (_, _) => RefreshDerivedState();
         Settings.PropertyChanged += _settingsPropertyChanged;
 
-        _previewTimer = new DispatcherTimer(
-            TimeSpan.FromSeconds(1),
-            DispatcherPriority.Background,
-            (_, _) => UpdatePreview(),
-            Dispatcher);
-
+        _previewTimer = new SystemClockTimer();
+        _previewTimer.SecondChanged += PreviewTimer_SecondChanged;
         _previewTimer.Start();
         RefreshDerivedState();
     }
@@ -309,9 +304,16 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
     protected override void OnClosed(EventArgs e)
     {
         _previewTimer.Stop();
+        _previewTimer.SecondChanged -= PreviewTimer_SecondChanged;
+        _previewTimer.Dispose();
         Settings.PropertyChanged -= _settingsPropertyChanged;
         Settings.Save();
         base.OnClosed(e);
+    }
+
+    private void PreviewTimer_SecondChanged(object sender, EventArgs e)
+    {
+        Dispatcher.Invoke(UpdatePreview);
     }
 
     private void BrowseBackgroundImage_Click(object sender, RoutedEventArgs e)
