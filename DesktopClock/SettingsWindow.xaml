@@ -9,12 +9,11 @@
         d:DataContext="{d:DesignInstance Type=local:SettingsWindow}"
         mc:Ignorable="d"
         Title="DesktopClock Settings"
-        Width="1120"
-        Height="860"
+        Width="{Binding Settings.SettingsWindowWidth, Mode=TwoWay}"
+        Height="{Binding Settings.SettingsWindowHeight, Mode=TwoWay}"
         MinWidth="860"
         MinHeight="680"
         Loaded="Window_Loaded"
-        SizeChanged="Window_SizeChanged"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         ResizeMode="CanResize"
@@ -1269,13 +1268,23 @@
                                     <StackPanel Margin="0,0,18,0">
                                         <TextBlock Text="Settings file"
                                                    Style="{StaticResource LabelStyle}" />
-                                        <TextBlock Text="{Binding SettingsFilePath}"
+                                        <TextBlock Text="{x:Static p:Settings.FilePath}"
                                                    Style="{StaticResource BodyStyle}" />
                                         <TextBlock Text="This window remembers its size and scroll position, and changes are saved when you close it."
                                                    Style="{StaticResource HelperStyle}" />
-                                        <TextBlock Text="Saving is currently unavailable. DesktopClock can still apply changes for this session, but the settings file could not be written."
-                                                   Style="{StaticResource ErrorStyle}"
-                                                   Visibility="{Binding SaveWarningVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        <TextBlock Text="Saving is currently unavailable. DesktopClock can still apply changes for this session, but the settings file could not be written.">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock" BasedOn="{StaticResource ErrorStyle}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Source={x:Static p:Settings.CanBeSaved}}"
+                                                                     Value="False">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
                                     </StackPanel>
 
                                     <StackPanel Grid.Column="1"

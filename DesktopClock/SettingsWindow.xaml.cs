@@ -18,17 +18,17 @@ namespace DesktopClock;
 [ObservableObject]
 public partial class SettingsWindow : Window
 {
-    private static readonly string[] _fontStyles = { "Normal", "Italic", "Oblique" };
-    private static readonly string[] _fontWeights = { "Thin", "Light", "Normal", "Medium", "SemiBold", "Bold", "Black" };
+    private static readonly string[] _fontStyles = ["Normal", "Italic", "Oblique"];
+    private static readonly string[] _fontWeights = ["Thin", "Light", "Normal", "Medium", "SemiBold", "Bold", "Black"];
     private static readonly string[] _intervalFormats =
-    {
+    [
         @"m\:ss",
         @"mm\:ss",
         @"h\:mm",
         @"hh\:mm",
         @"h\:mm\:ss",
         @"hh\:mm\:ss",
-    };
+    ];
 
     private readonly SystemClockTimer _previewTimer;
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
@@ -56,9 +56,6 @@ public partial class SettingsWindow : Window
 
         DataContext = this;
 
-        Width = Math.Max(MinWidth, Settings.SettingsWindowWidth);
-        Height = Math.Max(MinHeight, Settings.SettingsWindowHeight);
-
         FontFamilies = Fonts.SystemFontFamilies
             .Select(fontFamily => fontFamily.Source)
             .Distinct(StringComparer.OrdinalIgnoreCase)
@@ -68,13 +65,13 @@ public partial class SettingsWindow : Window
         FontStyles = _fontStyles;
         FontWeights = _fontWeights;
 
-        StretchModes = new[]
-        {
+        StretchModes =
+        [
             new StretchOption("Fill the panel", Stretch.Fill),
             new StretchOption("Keep aspect ratio", Stretch.Uniform),
             new StretchOption("Fill and crop", Stretch.UniformToFill),
             new StretchOption("Original size", Stretch.None),
-        };
+        ];
 
         TimeZones = TimeZoneInfo.GetSystemTimeZones()
             .Select(timeZone => new TimeZoneOption(timeZone.Id, timeZone.DisplayName))
@@ -230,22 +227,9 @@ public partial class SettingsWindow : Window
 
     public bool UsesBackgroundImage => !string.IsNullOrWhiteSpace(Settings.BackgroundImagePath);
 
-    public string SettingsFilePath => Settings.FilePath;
-
-    public bool SaveWarningVisible => !Settings.CanBeSaved;
-
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         RefreshDerivedState();
-    }
-
-    private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-    {
-        if (!IsLoaded || WindowState != WindowState.Normal)
-            return;
-
-        Settings.SettingsWindowWidth = ActualWidth;
-        Settings.SettingsWindowHeight = ActualHeight;
     }
 
     private void SettingsScrollViewer_Loaded(object sender, RoutedEventArgs e)
@@ -463,7 +447,6 @@ public partial class SettingsWindow : Window
         OnPropertyChanged(nameof(SoundIntervalValidationMessage));
         OnPropertyChanged(nameof(HasSoundIntervalValidationMessage));
         OnPropertyChanged(nameof(UsesBackgroundImage));
-        OnPropertyChanged(nameof(SaveWarningVisible));
         UpdatePreview();
     }
 
@@ -505,18 +488,12 @@ public partial class SettingsWindow : Window
 
     private void OpenShellTarget(string target, string arguments = null)
     {
-        try
+        Process.Start(new ProcessStartInfo
         {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = target,
-                Arguments = arguments ?? string.Empty,
-                UseShellExecute = true,
-            });
-        }
-        catch
-        {
-        }
+            FileName = target,
+            Arguments = arguments ?? string.Empty,
+            UseShellExecute = true,
+        });
     }
 
     private static DateTime CreateDefaultCountdownTarget()
@@ -529,7 +506,7 @@ public partial class SettingsWindow : Window
     {
         return TimeSpan.TryParseExact(
             value?.Trim(),
-            new[] { @"h\:mm", @"hh\:mm" },
+            [@"h\:mm", @"hh\:mm"],
             CultureInfo.InvariantCulture,
             out timeOfDay);
     }
@@ -585,7 +562,7 @@ public partial class SettingsWindow : Window
 
 }
 
-public sealed class StretchOption
+public record StretchOption
 {
     public StretchOption(string label, Stretch value)
     {
@@ -598,7 +575,7 @@ public sealed class StretchOption
     public Stretch Value { get; }
 }
 
-public sealed class TimeZoneOption
+public record TimeZoneOption
 {
     public TimeZoneOption(string id, string displayName)
     {
