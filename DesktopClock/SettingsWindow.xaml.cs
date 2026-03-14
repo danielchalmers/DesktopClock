@@ -9,12 +9,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 using DesktopClock.Properties;
 using Microsoft.Win32;
 
 namespace DesktopClock;
 
-public partial class SettingsWindow : Window, INotifyPropertyChanged
+[ObservableObject]
+public partial class SettingsWindow : Window
 {
     private static readonly string[] _fontStyles = { "Normal", "Italic", "Oblique" };
     private static readonly string[] _fontWeights = { "Thin", "Light", "Normal", "Medium", "SemiBold", "Bold", "Black" };
@@ -31,10 +33,21 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
     private readonly SystemClockTimer _previewTimer;
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
+    [ObservableProperty]
     private string _previewCaption = string.Empty;
+
+    [ObservableProperty]
     private string _previewSupportText = string.Empty;
+
+    [ObservableProperty]
     private string _previewText = string.Empty;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasCountdownValidationMessage))]
     private string _countdownValidationMessage = string.Empty;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasSoundIntervalValidationMessage))]
     private string _soundIntervalValidationMessage = string.Empty;
 
     public SettingsWindow()
@@ -76,8 +89,6 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
         RefreshDerivedState();
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
-
     public Settings Settings => Settings.Default;
 
     public IReadOnlyList<string> FontFamilies { get; }
@@ -90,24 +101,6 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
 
     public IReadOnlyList<TimeZoneOption> TimeZones { get; }
 
-    public string PreviewText
-    {
-        get => _previewText;
-        private set => SetField(ref _previewText, value, nameof(PreviewText));
-    }
-
-    public string PreviewCaption
-    {
-        get => _previewCaption;
-        private set => SetField(ref _previewCaption, value, nameof(PreviewCaption));
-    }
-
-    public string PreviewSupportText
-    {
-        get => _previewSupportText;
-        private set => SetField(ref _previewSupportText, value, nameof(PreviewSupportText));
-    }
-
     public bool CountdownEnabled
     {
         get => Settings.CountdownTo != default;
@@ -117,7 +110,7 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
                 return;
 
             Settings.CountdownTo = value ? CreateDefaultCountdownTarget() : default;
-            SetCountdownValidationMessage(string.Empty);
+            CountdownValidationMessage = string.Empty;
             RefreshDerivedState();
         }
     }
@@ -132,7 +125,7 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
 
             var timeOfDay = CountdownEnabled ? Settings.CountdownTo.TimeOfDay : CreateDefaultCountdownTarget().TimeOfDay;
             Settings.CountdownTo = value.Value.Date + timeOfDay;
-            SetCountdownValidationMessage(string.Empty);
+            CountdownValidationMessage = string.Empty;
             RefreshDerivedState();
         }
     }
@@ -147,18 +140,16 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
 
             if (!TryParseTimeOfDay(value, out var timeOfDay))
             {
-                SetCountdownValidationMessage("Enter the countdown time as HH:mm, for example 09:30 or 18:45.");
+                CountdownValidationMessage = "Enter the countdown time as HH:mm, for example 09:30 or 18:45.";
                 OnPropertyChanged(nameof(CountdownTimeText));
                 return;
             }
 
             Settings.CountdownTo = Settings.CountdownTo.Date + timeOfDay;
-            SetCountdownValidationMessage(string.Empty);
+            CountdownValidationMessage = string.Empty;
             RefreshDerivedState();
         }
     }
-
-    public string CountdownValidationMessage => _countdownValidationMessage;
 
     public bool HasCountdownValidationMessage => !string.IsNullOrWhiteSpace(CountdownValidationMessage);
 
@@ -217,25 +208,23 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
             if (string.IsNullOrWhiteSpace(value))
             {
                 Settings.WavFileInterval = default;
-                SetSoundIntervalValidationMessage(string.Empty);
+                SoundIntervalValidationMessage = string.Empty;
                 RefreshDerivedState();
                 return;
             }
 
             if (!TryParseInterval(value, out var interval))
             {
-                SetSoundIntervalValidationMessage("Enter a duration like 00:01:00, 00:15:00, or 01:00:00.");
+                SoundIntervalValidationMessage = "Enter a duration like 00:01:00, 00:15:00, or 01:00:00.";
                 OnPropertyChanged(nameof(SoundIntervalText));
                 return;
             }
 
             Settings.WavFileInterval = interval;
-            SetSoundIntervalValidationMessage(string.Empty);
+            SoundIntervalValidationMessage = string.Empty;
             RefreshDerivedState();
         }
     }
-
-    public string SoundIntervalValidationMessage => _soundIntervalValidationMessage;
 
     public bool HasSoundIntervalValidationMessage => !string.IsNullOrWhiteSpace(SoundIntervalValidationMessage);
 
@@ -514,26 +503,6 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
             : WindowState.Maximized;
     }
 
-    private void SetCountdownValidationMessage(string message)
-    {
-        if (_countdownValidationMessage == message)
-            return;
-
-        _countdownValidationMessage = message;
-        OnPropertyChanged(nameof(CountdownValidationMessage));
-        OnPropertyChanged(nameof(HasCountdownValidationMessage));
-    }
-
-    private void SetSoundIntervalValidationMessage(string message)
-    {
-        if (_soundIntervalValidationMessage == message)
-            return;
-
-        _soundIntervalValidationMessage = message;
-        OnPropertyChanged(nameof(SoundIntervalValidationMessage));
-        OnPropertyChanged(nameof(HasSoundIntervalValidationMessage));
-    }
-
     private void OpenShellTarget(string target, string arguments = null)
     {
         try
@@ -614,19 +583,6 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
         return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
     }
 
-    private void SetField(ref string field, string value, string propertyName)
-    {
-        if (string.Equals(field, value, StringComparison.Ordinal))
-            return;
-
-        field = value;
-        OnPropertyChanged(propertyName);
-    }
-
-    private void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 }
 
 public sealed class StretchOption
