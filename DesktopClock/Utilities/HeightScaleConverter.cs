@@ -7,7 +7,7 @@ namespace DesktopClock;
 
 public class HeightScaleConverter : MarkupExtension, IValueConverter
 {
-    private const double StepSize = 0.15;
+    private const double StepSize = 0.1;
 
     public static readonly double MaxSizeLog = 6.5;
 

@@ -50,7 +50,7 @@ public class HeightScaleConverterTests
 
         var logHeight = (double)converter.Convert(initialHeight, typeof(double), null, TestCulture);
         var scaledHeight = HeightScaleConverter.ScaleHeight(initialHeight, 1);
-        var sliderHeight = (int)converter.ConvertBack(logHeight + 0.15, typeof(int), null, TestCulture);
+        var sliderHeight = (int)converter.ConvertBack(logHeight + 0.1, typeof(int), null, TestCulture);
 
         Assert.Equal(sliderHeight, scaledHeight);
     }
@@ -61,8 +61,8 @@ public class HeightScaleConverterTests
         var minHeight = (int)Math.Round(Math.Exp(HeightScaleConverter.MinSizeLog));
         var maxHeight = (int)Math.Round(Math.Exp(HeightScaleConverter.MaxSizeLog));
 
-        Assert.Equal(65, HeightScaleConverter.ScaleHeight(48, 2));
-        Assert.Equal(47, HeightScaleConverter.ScaleHeight(64, -2));
+        Assert.Equal(59, HeightScaleConverter.ScaleHeight(48, 2));
+        Assert.Equal(52, HeightScaleConverter.ScaleHeight(64, -2));
         Assert.Equal(maxHeight, HeightScaleConverter.ScaleHeight(48, 10_000));
         Assert.Equal(minHeight, HeightScaleConverter.ScaleHeight(48, -10_000));
     }
