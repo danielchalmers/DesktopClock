@@ -62,11 +62,6 @@
             <Setter Property="Margin" Value="8" />
         </Style>
 
-        <Style x:Key="ControlRow"
-               TargetType="Grid">
-            <Setter Property="Margin" Value="0,0,0,4" />
-        </Style>
-
         <Style x:Key="LabelTextBlock"
                TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
@@ -75,7 +70,6 @@
 
         <Style x:Key="DescriptionTextBlock"
                TargetType="TextBlock">
-            <Setter Property="FontStyle" Value="Italic" />
             <Setter Property="FontSize" Value="11" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
@@ -102,7 +96,7 @@
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Clock format"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="20" />
@@ -139,7 +133,7 @@
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Countdown target"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -157,7 +151,7 @@
 
                     <TextBlock Text="Countdown format"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -274,7 +268,7 @@
 
                     <TextBlock Text="Text color"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -303,7 +297,7 @@
 
                     <TextBlock Text="Text opacity"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="36" />
@@ -329,7 +323,7 @@
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Background or outline color"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -364,7 +358,7 @@
 
                     <TextBlock Text="Background opacity"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="36" />
@@ -386,7 +380,7 @@
 
                     <TextBlock Text="Rounded corners"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="36" />
@@ -408,7 +402,7 @@
 
                     <TextBlock Text="Outline thickness"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="36" />
@@ -430,7 +424,7 @@
 
                     <TextBlock Text="Background image"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -465,7 +459,7 @@
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Alarm sound"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
@@ -488,7 +482,7 @@
 
                     <TextBlock Text="Sound interval"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid Style="{StaticResource ControlRow}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="4" />
