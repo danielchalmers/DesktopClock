@@ -302,7 +302,7 @@ public partial class MainWindow : Window
         {
             // Amount of scroll that occurred and whether it was positive or negative.
             var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
-            Settings.Default.ScaleHeight(steps);
+            Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, steps);
         }
     }
 
@@ -407,10 +407,10 @@ public partial class MainWindow : Window
             switch (e.Key)
             {
                 case Key.OemMinus:
-                    Settings.Default.ScaleHeight(-1);
+                    Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, -1);
                     break;
                 case Key.OemPlus:
-                    Settings.Default.ScaleHeight(1);
+                    Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, 1);
                     break;
             }
         }

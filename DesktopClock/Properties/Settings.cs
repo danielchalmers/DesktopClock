@@ -23,9 +23,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         Error = (_, e) => e.ErrorContext.Handled = true,
     };
 
-    public static readonly double MaxSizeLog = 6.5;
-
-    public static readonly double MinSizeLog = 2.7;
     static Settings()
     {
         // Settings file path from the same directory as the executable.
@@ -511,20 +508,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         catch
         {
         }
-    }
-
-    /// <summary>
-    /// Adjusts the height by a number of steps.
-    /// </summary>
-    public void ScaleHeight(double steps)
-    {
-        // Convert the height, adjust it, then convert back in the same way as the slider.
-        var newHeightLog = Math.Log(Height) + (steps * 0.15);
-        var newHeightLogClamped = Math.Min(Math.Max(newHeightLog, MinSizeLog), MaxSizeLog);
-        var exp = Math.Exp(newHeightLogClamped);
-
-        // Save the new height as an integer to make it easier for the user.
-        Height = (int)exp;
     }
 
     private void ApplySystemThemeDefaultsIfAvailable()

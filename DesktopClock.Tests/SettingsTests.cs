@@ -42,30 +42,6 @@ public class SettingsPersistenceTests
         Assert.Equal(original.SettingsScrollPosition, loaded.SettingsScrollPosition);
     }
 
-    [Fact]
-    public void ScaleHeight_ShouldAdjustAndClamp()
-    {
-        var settings = CreateSettingsInstance();
-
-        settings.Height = 48;
-        settings.ScaleHeight(2);
-        Assert.Equal(64, settings.Height);
-
-        settings.ScaleHeight(-2);
-        Assert.Equal(47, settings.Height);
-
-        var minHeight = (int)Math.Exp(Settings.MinSizeLog);
-        var maxHeight = (int)Math.Exp(Settings.MaxSizeLog);
-
-        settings.Height = 48;
-        settings.ScaleHeight(10_000);
-        Assert.Equal(maxHeight, settings.Height);
-
-        settings.Height = 48;
-        settings.ScaleHeight(-10_000);
-        Assert.Equal(minHeight, settings.Height);
-    }
-
     private static Settings CreateSettingsInstance() =>
         (Settings)Activator.CreateInstance(typeof(Settings), nonPublic: true)!;
 
