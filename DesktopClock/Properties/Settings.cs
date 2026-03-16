@@ -369,14 +369,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public double SettingsScrollPosition { get; set; } = 0;
 
     /// <summary>
-    /// Bit flags describing which one-time teaching tips have already been shown.
-    /// </summary>
-    /// <remarks>
-    /// This keeps introductory tips from being shown over and over after the user has already seen them once.
-    /// </remarks>
-    public TeachingTips TipsShown { get; set; }
-
-    /// <summary>
     /// Last rendered clock text, saved so the next launch starts near the previous width.
     /// </summary>
     /// <remarks>

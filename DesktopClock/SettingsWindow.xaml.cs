@@ -116,16 +116,6 @@ public partial class SettingsWindow : Window
 
     private void OpenSettingsFile(object sender, RoutedEventArgs e)
     {
-        // Teach user how it works.
-        if (!Settings.Default.TipsShown.HasFlag(TeachingTips.AdvancedSettings))
-        {
-            MessageBox.Show(this,
-                "Settings are stored in JSON and will open in Notepad. Save the file for changes to take effect. To start fresh, delete your '.settings' file.",
-                Title, MessageBoxButton.OK, MessageBoxImage.Information);
-
-            Settings.Default.TipsShown |= TeachingTips.AdvancedSettings;
-        }
-
         // Save first if we can so it's up-to-date.
         if (Settings.CanBeSaved)
             Settings.Default.Save();
