@@ -67,7 +67,7 @@
                       Header="Check for _updates" />
 
             <MenuItem Command="{Binding OpenIssueTrackerCommand}"
-                      Header="Report an _issue" />
+                      Header="Give _feedback" />
 
             <MenuItem Command="{Binding ExitCommand}"
                       Header="E_xit" />

@@ -7,7 +7,7 @@
         xmlns:p="clr-namespace:DesktopClock.Properties"
         d:DataContext="{d:DesignInstance Type=local:SettingsWindowViewModel}"
         mc:Ignorable="d"
-        Title="Settings"
+        Title="DesktopClock Settings"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowHeight, Mode=TwoWay}"
         MinWidth="720"
@@ -110,7 +110,8 @@
                                   ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
                                   SelectionChanged="SelectFormat" />
                     </Grid>
-                    <TextBlock Style="{StaticResource DescriptionTextBlock}">
+                    <TextBlock Style="{StaticResource DescriptionTextBlock}"
+                               Margin="0,0,0,16">
                         <Run Text="Choose how the clock text is formatted. Use curly braces {} around time codes. " />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
@@ -562,7 +563,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Links"
+            <GroupBox Header="Discover More"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
@@ -600,6 +601,15 @@
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock Text="Summon a customizable radial menu (Windows)"
+                                   Margin="0,0,0,16"
+                                   Style="{StaticResource DescriptionTextBlock}" />
+                        <TextBlock>
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/Teichos"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                Teichos
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock Text="Website blocker with scheduled rules (Chrome/Edge)"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
