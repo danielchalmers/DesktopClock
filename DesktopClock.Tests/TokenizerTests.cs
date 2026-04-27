@@ -140,32 +140,34 @@ public class TokenizerTests
     }
 
     [Fact]
-    public void FormatWithTokenizer_InvalidFormat_ShouldNotThrow()
+    public void FormatWithTokenizer_InvalidFormat_ShouldReturnErrorMessage()
     {
         // Arrange
         var dateTime = new DateTime(2023, 09, 24, 12, 13, 14);
-        var format = "{invalid-format-string-xyz}";
-
-        // Act - should not throw, may produce unexpected output but should handle gracefully
-        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, CultureInfo.InvariantCulture);
-
-        // Assert - just verify it returns something and doesn't throw
-        Assert.NotNull(result);
-    }
-
-    [Fact]
-    public void FormatWithTokenizer_EmptyTokens_ShouldHandleGracefully()
-    {
-        // Arrange
-        var dateTime = new DateTime(2023, 09, 24, 12, 13, 14);
-        var format = "{}";
+        var format = "{Q}";
 
         // Act
         var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, CultureInfo.InvariantCulture);
 
         // Assert
-        // Empty braces should be handled
-        Assert.NotNull(result);
+        Assert.Equal(Tokenizer.FormatErrorMessage, result);
+    }
+
+    [Theory]
+    [InlineData("{}")]
+    [InlineData("{HH:mm")]
+    [InlineData("HH:mm}")]
+    [InlineData("{{HH:mm}}")]
+    public void FormatWithTokenizer_BrokenTokenSyntax_ShouldReturnErrorMessage(string format)
+    {
+        // Arrange
+        var dateTime = new DateTime(2023, 09, 24, 12, 13, 14);
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal(Tokenizer.FormatErrorMessage, result);
     }
 
     [Theory]

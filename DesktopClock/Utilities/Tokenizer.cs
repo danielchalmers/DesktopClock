@@ -6,10 +6,11 @@ namespace DesktopClock;
 public static class Tokenizer
 {
     private static readonly Regex _tokenizerRegex = new("{([^{}]+)}", RegexOptions.Compiled);
+    public const string FormatErrorMessage = "Bad format";
 
     /// <summary>
     /// <para>Returns a string formatted using a tokenized format or the default formatting method.</para>
-    /// <para>Falls back to the default format on any exception.</para>
+    /// <para>Returns a short error message when a non-empty format is malformed.</para>
     /// </summary>
     /// <param name="formattable">The object to format.</param>
     /// <param name="format">The format to use.</param>
@@ -20,11 +21,16 @@ public static class Tokenizer
         {
             try
             {
-                if (format.Contains("}"))
+                if (UsesTokenSyntax(format))
                 {
+                    if (!HasValidTokenSyntax(format))
+                    {
+                        return FormatErrorMessage;
+                    }
+
                     return _tokenizerRegex.Replace(format, (m) =>
                     {
-                        var formatString = m.Value.Replace("{", "").Replace("}", "");
+                        var formatString = m.Groups[1].Value;
                         return formattable.ToString(formatString, formatProvider);
                     });
                 }
@@ -34,10 +40,49 @@ public static class Tokenizer
             }
             catch
             {
+                return FormatErrorMessage;
             }
         }
 
         // Fall back to the default format.
         return formattable.ToString();
+    }
+
+    private static bool UsesTokenSyntax(string format)
+    {
+        return format.Contains("{") || format.Contains("}");
+    }
+
+    private static bool HasValidTokenSyntax(string format)
+    {
+        var index = 0;
+        while (index < format.Length)
+        {
+            if (format[index] == '}')
+            {
+                return false;
+            }
+
+            if (format[index] != '{')
+            {
+                index++;
+                continue;
+            }
+
+            var closeIndex = format.IndexOf('}', index + 1);
+            if (closeIndex == -1 || closeIndex == index + 1)
+            {
+                return false;
+            }
+
+            if (format.IndexOf('{', index + 1, closeIndex - index - 1) != -1)
+            {
+                return false;
+            }
+
+            index = closeIndex + 1;
+        }
+
+        return true;
     }
 }

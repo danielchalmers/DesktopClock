@@ -132,4 +132,39 @@ public class TimeStringFormatterTests
 
         Assert.Equal("18:30", result);
     }
+
+    [Fact]
+    public void Format_InvalidClockFormatShowsBriefErrorMessage()
+    {
+        var now = new DateTimeOffset(2024, 1, 1, 10, 15, 0, TimeSpan.Zero);
+
+        var result = TimeStringFormatter.Format(
+            now,
+            now.DateTime,
+            TimeZoneInfo.Utc,
+            default,
+            "{Q}",
+            null,
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal(Tokenizer.FormatErrorMessage, result);
+    }
+
+    [Fact]
+    public void Format_InvalidCountdownFormatShowsBriefErrorMessage()
+    {
+        var now = new DateTimeOffset(2024, 1, 1, 10, 0, 0, TimeSpan.Zero);
+        var nowDateTime = now.DateTime;
+
+        var result = TimeStringFormatter.Format(
+            now,
+            nowDateTime,
+            TimeZoneInfo.Utc,
+            nowDateTime.AddMinutes(30),
+            "HH:mm",
+            "{bad}",
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal(Tokenizer.FormatErrorMessage, result);
+    }
 }
