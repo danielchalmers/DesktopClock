@@ -19,6 +19,10 @@ runs:
       shell: bash
       run: dotnet build
 
+    - name: Check Formatting
+      shell: bash
+      run: dotnet format --verify-no-changes --no-restore
+
     - name: Test
       shell: bash
       run: dotnet test
