@@ -9,6 +9,9 @@ inputs:
   archs:
     description: 'Architectures for the build'
     default: 'x64 arm64'
+  artifact_name:
+    description: 'Artifact name for uploaded build outputs'
+    default: 'desktopclock'
 
 runs:
   using: "composite"
@@ -45,6 +48,7 @@ runs:
 
     - uses: actions/upload-artifact@v4
       with:
+        name: ${{ inputs.artifact_name }}
         if-no-files-found: error
         path: |
           publish/*.zip
