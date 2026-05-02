@@ -7,6 +7,11 @@ on:
         description: 'Version number for the app'
         required: true
         default: ''
+      dryRun:
+        description: 'Build and package release artifacts without publishing a GitHub release'
+        required: true
+        type: boolean
+        default: true
       updateRelease:
         description: 'Update existing release'
         required: true
@@ -37,7 +42,7 @@ jobs:
 
     - uses: ./.github/actions/create-release-artifacts
       with:
-        version: ${{ github.event.inputs.version }}
+        version: ${{ inputs.version }}
         arch: ${{ matrix.arch }}
         artifact-name: desktopclock-${{ matrix.arch }}
 
@@ -53,12 +58,13 @@ jobs:
         merge-multiple: true
 
     - name: Create GitHub release
+      if: ${{ !inputs.dryRun }}
       uses: ncipollo/release-action@v1
       with:
-        tag: "v${{ github.event.inputs.version }}"
+        tag: "v${{ inputs.version }}"
         artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
         generateReleaseNotes: true
-        prerelease: ${{ contains(github.event.inputs.version, 'preview') }}
-        allowUpdates: ${{ github.event.inputs.updateRelease }}
+        prerelease: ${{ contains(inputs.version, 'preview') }}
+        allowUpdates: ${{ inputs.updateRelease }}
         removeArtifacts: true
         omitBodyDuringUpdate: true
