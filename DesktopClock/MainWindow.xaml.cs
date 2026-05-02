@@ -322,7 +322,7 @@ public partial class MainWindow : Window
 
         if (Settings.Default.StartHidden)
         {
-            _trayIcon?.ShowNotification("Started hidden", "Use the tray icon to show it");
+            _trayIcon?.ShowNotification("Running in the background", "Double-click the tray icon to show the clock.");
             this.HideFromScreen();
             ApplyWindowVisibilitySettings();
         }
