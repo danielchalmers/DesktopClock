@@ -12,23 +12,51 @@ on:
         required: true
         default: 'false'
 
+permissions:
+  contents: write
+
 jobs:
-  deploy:
+  build-test:
+    name: Build and Test
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
 
     - uses: ./.github/actions/build-and-test
 
+  package:
+    name: Package (${{ matrix.arch }})
+    needs: build-test
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, arm64]
+    steps:
+    - uses: actions/checkout@v4
+
     - uses: ./.github/actions/create-release-artifacts
       with:
         version: ${{ github.event.inputs.version }}
+        arch: ${{ matrix.arch }}
+        artifact-name: desktopclock-${{ matrix.arch }}
+
+  deploy:
+    name: Create GitHub release
+    needs: package
+    runs-on: windows-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: desktopclock-*
+        path: release-artifacts
+        merge-multiple: true
 
     - name: Create GitHub release
       uses: ncipollo/release-action@v1
       with:
         tag: "v${{ github.event.inputs.version }}"
-        artifacts: "publish/*.zip,publish/*.msi"
+        artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
         generateReleaseNotes: true
         prerelease: ${{ contains(github.event.inputs.version, 'preview') }}
         allowUpdates: ${{ github.event.inputs.updateRelease }}
