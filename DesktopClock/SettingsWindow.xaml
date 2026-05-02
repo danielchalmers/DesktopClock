@@ -115,35 +115,35 @@
                                Foreground="#5B6F8E"
                                Margin="0,0,0,22" />
 
-                    <Button Content="Display"
+                    <Button Content="_Display"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=DisplaySection}"
                             Click="NavigateToSection" />
-                    <Button Content="Countdown"
+                    <Button Content="_Countdown"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=CountdownSection}"
                             Click="NavigateToSection" />
-                    <Button Content="Window"
+                    <Button Content="_Window"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=WindowSection}"
                             Click="NavigateToSection" />
-                    <Button Content="Typography"
+                    <Button Content="_Typography"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=TypographySection}"
                             Click="NavigateToSection" />
-                    <Button Content="Appearance"
+                    <Button Content="A_ppearance"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=AppearanceSection}"
                             Click="NavigateToSection" />
-                    <Button Content="Alerts"
+                    <Button Content="_Alerts"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=AlertsSection}"
                             Click="NavigateToSection" />
-                    <Button Content="Tools"
+                    <Button Content="T_ools"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=ToolsSection}"
                             Click="NavigateToSection" />
-                    <Button Content="Shortcuts"
+                    <Button Content="_Shortcuts"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=ShortcutsSection}"
                             Click="NavigateToSection" />
@@ -151,10 +151,10 @@
 
                 <StackPanel DockPanel.Dock="Bottom"
                             VerticalAlignment="Bottom">
-                    <Button Content="Settings folder"
+                    <Button Content="Settings _folder"
                             Click="OpenSettingsFolder"
                             IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <Button Content="New clock"
+                    <Button Content="_New clock"
                             Background="#256BEF"
                             BorderBrush="#256BEF"
                             Foreground="White"
