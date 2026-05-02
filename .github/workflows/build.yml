@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build-test:
-    name: Validate
+    name: Build and Test
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
