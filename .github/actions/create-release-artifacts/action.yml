@@ -40,9 +40,9 @@ runs:
         $zipPath = "publish/DesktopClock-$version-$arch.zip"
         $msiPath = "publish/DesktopClock-$version-$arch.msi"
         $portableExePath = "publish/$arch/DesktopClock.exe"
-        $minPortableExeBytes = 1024
+        $minPortableExeBytes = 4096
         $minPortableZipBytes = 1024
-        $minInstallerMsiBytes = 1024
+        $minInstallerMsiBytes = 10240
         $artifacts = @(
           @{ Path = $portableExePath; MinimumBytes = $minPortableExeBytes; Label = "Portable executable" }
           @{ Path = $zipPath; MinimumBytes = $minPortableZipBytes; Label = "Portable ZIP" }
@@ -63,7 +63,7 @@ runs:
         Add-Type -AssemblyName System.IO.Compression.FileSystem
         $zip = [System.IO.Compression.ZipFile]::OpenRead((Resolve-Path $zipPath))
         try {
-          if (-not ($zip.Entries | Where-Object FullName -eq 'DesktopClock.exe')) {
+          if (($zip.Entries | Where-Object { $_.FullName -eq 'DesktopClock.exe' }).Count -eq 0) {
             throw "Portable ZIP does not contain DesktopClock.exe: $zipPath"
           }
         }
