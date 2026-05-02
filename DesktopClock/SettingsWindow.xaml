@@ -33,6 +33,24 @@
             <Setter Property="MinHeight" Value="40" />
         </Style>
 
+        <Style x:Key="SidebarToolButton"
+               TargetType="Button"
+               BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="MinWidth" Value="150" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+        </Style>
+
+        <Style x:Key="SidebarToolDescription"
+               TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Opacity" Value="0.75" />
+            <Setter Property="Margin" Value="0,2,0,0" />
+        </Style>
+
         <Style x:Key="ColorSwatchButton"
                TargetType="Button"
                BasedOn="{StaticResource {x:Type Button}}">
@@ -154,18 +172,39 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
-                    <Button Content="Settings _folder"
+                    <Button Style="{StaticResource SidebarToolButton}"
                             Click="OpenSettingsFolder"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <Button Content="Settings f_ile"
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}">
+                        <StackPanel>
+                            <AccessText FontWeight="SemiBold"
+                                        Text="Settings _folder" />
+                            <TextBlock Text="Open the settings folder."
+                                       Style="{StaticResource SidebarToolDescription}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource SidebarToolButton}"
                             Click="OpenSettingsFile"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <Button Content="_New clock"
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}">
+                        <StackPanel>
+                            <AccessText FontWeight="SemiBold"
+                                        Text="Settings f_ile" />
+                            <TextBlock Text="Open the JSON file."
+                                       Style="{StaticResource SidebarToolDescription}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource SidebarToolButton}"
                             Background="#256BEF"
                             BorderBrush="#256BEF"
                             Foreground="White"
                             Click="CreateNewClock"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}">
+                        <StackPanel>
+                            <AccessText FontWeight="SemiBold"
+                                        Text="_New clock" />
+                            <TextBlock Text="Start a fresh copy."
+                                       Style="{StaticResource SidebarToolDescription}" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Border>
