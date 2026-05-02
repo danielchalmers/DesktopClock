@@ -1,6 +1,6 @@
-name: Full Build
+name: Publish
 
-description: Builds, tests, and creates binaries that are ready for release.
+description: Creates release-ready binaries and uploads them as artifacts.
 
 inputs:
   version:
@@ -13,20 +13,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-dotnet@v4
-
-    - name: Build
-      shell: bash
-      run: dotnet build
-
-    - name: Check Formatting
-      shell: bash
-      run: dotnet format --verify-no-changes --no-restore
-
-    - name: Test
-      shell: bash
-      run: dotnet test
-
     - name: Create Binaries
       shell: bash
       run: |

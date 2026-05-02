@@ -1,0 +1,24 @@
+name: Build and Test
+
+description: Restores dependencies, verifies formatting, builds, and runs tests.
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-dotnet@v4
+
+    - name: Restore
+      shell: bash
+      run: dotnet restore
+
+    - name: Check Formatting
+      shell: bash
+      run: dotnet format --verify-no-changes --no-restore
+
+    - name: Build
+      shell: bash
+      run: dotnet build -c Release --no-restore
+
+    - name: Test
+      shell: bash
+      run: dotnet test -c Release --no-build --logger trx
