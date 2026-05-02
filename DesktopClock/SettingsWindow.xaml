@@ -124,11 +124,11 @@
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=TypographySection}"
                             Click="NavigateToSection" />
-                    <Button Content="A_ppearance"
+                    <Button Content="_Appearance"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=AppearanceSection}"
                             Click="NavigateToSection" />
-                    <Button Content="_Alerts"
+                    <Button Content="A_lerts"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=AlertsSection}"
                             Click="NavigateToSection" />
