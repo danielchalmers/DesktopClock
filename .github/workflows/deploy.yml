@@ -6,16 +6,16 @@ on:
       version:
         description: 'Version number for the app'
         required: true
-        default: ''
-      dryRun:
-        description: 'Build and package release artifacts without publishing a GitHub release'
-        required: true
-        type: boolean
-        default: true
+        default: '0.0.0'
       updateRelease:
         description: 'Update existing release'
         required: true
         default: 'false'
+      dryRun:
+        description: 'Dry run'
+        required: true
+        type: boolean
+        default: true
 
 permissions:
   contents: write
