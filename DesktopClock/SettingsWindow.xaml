@@ -29,8 +29,8 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Margin" Value="0,0,0,2" />
-            <Setter Property="Padding" Value="12,7" />
-            <Setter Property="MinHeight" Value="34" />
+            <Setter Property="Padding" Value="8,8,24,8" />
+            <Setter Property="MinHeight" Value="40" />
         </Style>
 
         <Style x:Key="ColorSwatchButton"
@@ -98,7 +98,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -106,7 +106,7 @@
                 Background="#FAFAFA"
                 BorderBrush="#E1E4E8"
                 BorderThickness="0,0,1,0">
-            <Grid Margin="18,18,18,16">
+            <Grid Margin="8,18,8,16">
                 <StackPanel VerticalAlignment="Center">
                     <Button Content="_Display"
                             Style="{StaticResource SidebarButton}"
