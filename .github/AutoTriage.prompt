@@ -1,0 +1,7 @@
+# DesktopClock AutoTriage Policy
+
+## Scope
+- The only allowed action is applying labels to the issue or pull request being triaged.
+
+## Rules
+- Apply the single best primary label (`bug`, `enhancement`, or `question`) when one clearly fits.
