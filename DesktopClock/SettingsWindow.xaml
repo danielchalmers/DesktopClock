@@ -26,10 +26,9 @@
                TargetType="Button"
                BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Background" Value="#FFFFFF" />
-            <Setter Property="BorderBrush" Value="#DADDE3" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,2" />
             <Setter Property="Padding" Value="8,8,24,8" />
             <Setter Property="MinHeight" Value="40" />
         </Style>
@@ -37,6 +36,9 @@
         <Style x:Key="SidebarToolButton"
                TargetType="Button"
                BasedOn="{StaticResource SidebarButton}">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#DADDE3" />
+            <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Padding" Value="8,7,24,7" />
             <Setter Property="MinWidth" Value="150" />
             <Setter Property="MinHeight" Value="0" />
