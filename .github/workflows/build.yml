@@ -11,7 +11,7 @@ permissions:
 jobs:
   format:
     name: Format
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v5
 
@@ -19,7 +19,7 @@ jobs:
 
   build-test:
     name: Build and Test
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v5
 
@@ -35,7 +35,7 @@ jobs:
 
   package:
     name: Package ${{ matrix.arch }}
-    runs-on: windows-latest
+    runs-on: windows-2025
     strategy:
       fail-fast: false
       matrix:
