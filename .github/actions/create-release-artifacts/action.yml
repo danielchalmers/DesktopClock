@@ -41,7 +41,7 @@ runs:
         $msiPath = "publish/DesktopClock-$version-$arch.msi"
         $portableExePath = "publish/$arch/DesktopClock.exe"
         $minPortableExeBytes = 1024
-        $minPortableZipBytes = 64
+        $minPortableZipBytes = 1024
         $minInstallerMsiBytes = 1024
         $artifacts = @(
           @{ Path = $portableExePath; MinimumBytes = $minPortableExeBytes; Label = "Portable executable" }
