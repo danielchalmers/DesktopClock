@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Media;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -73,7 +72,7 @@ public partial class MainWindow : Window
         {
             Clipboard.SetText(CurrentTimeOrCountdownString);
         }
-        catch (ExternalException)
+        catch
         {
             _trayIcon?.ShowNotification("Copy failed", "ouldn't update the clipboard. Try again.");
         }
