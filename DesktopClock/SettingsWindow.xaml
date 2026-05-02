@@ -106,8 +106,8 @@
                 Background="#FAFAFA"
                 BorderBrush="#E1E4E8"
                 BorderThickness="0,0,1,0">
-            <DockPanel Margin="18,18,18,16">
-                <StackPanel DockPanel.Dock="Top">
+            <Grid Margin="18,18,18,16">
+                <StackPanel VerticalAlignment="Center">
                     <Button Content="_Display"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=DisplaySection}"
@@ -149,20 +149,7 @@
                             Tag="{Binding ElementName=CreditsSection}"
                             Click="NavigateToSection" />
                 </StackPanel>
-
-                <StackPanel DockPanel.Dock="Bottom"
-                            VerticalAlignment="Bottom">
-                    <Button Content="Settings _folder"
-                            Click="OpenSettingsFolder"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <Button Content="_New clock"
-                            Background="#256BEF"
-                            BorderBrush="#256BEF"
-                            Foreground="White"
-                            Click="CreateNewClock"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                </StackPanel>
-            </DockPanel>
+            </Grid>
         </Border>
 
         <ScrollViewer x:Name="SettingsScrollViewer"
