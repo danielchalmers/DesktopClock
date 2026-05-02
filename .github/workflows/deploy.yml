@@ -66,7 +66,7 @@ jobs:
     steps:
       - name: Prepare release tag for update
         uses: actions/github-script@v8
-        if: ${{ !inputs.dryRun && inputs.updateRelease }}
+        if: ${{ inputs.updateRelease && !inputs.dryRun }}
         env:
           RELEASE_TAG_REF: tags/${{ env.RELEASE_TAG }}
         with:
@@ -81,11 +81,11 @@ jobs:
               });
             } catch (error) {
               if (error.status === 404) {
-                core.warning(`Tag ${ref} does not exist yet while updateRelease is enabled; ncipollo/release-action will create it at ${context.sha}.`);
+                core.warning(`Tag ${ref} does not exist yet while updateRelease is enabled; it will be created automatically during release creation at ${context.sha}.`);
                 return;
               }
 
-              throw error;
+              throw new Error(`Failed to check ${ref}: ${error.message}`);
             }
 
             await github.rest.git.updateRef({
