@@ -81,12 +81,12 @@ jobs:
                 ref,
               });
             } catch (error) {
-              if (error?.status === 404) {
+              if (error && error.status === 404) {
                 core.warning(`Tag ${tagName} does not exist yet while updateRelease is enabled; it will be created automatically during release creation at ${context.sha}.`);
                 return;
               }
 
-              throw new Error(`Failed to check ${ref}: ${error.message}`);
+              throw new Error(`Failed to check ${ref}: ${error?.message ?? String(error)}`);
             }
 
             await github.rest.git.updateRef({
