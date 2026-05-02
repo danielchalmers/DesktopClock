@@ -57,19 +57,6 @@ jobs:
         path: release-artifacts
         merge-multiple: true
 
-    - name: Summarize release artifacts
-      shell: pwsh
-      run: |
-        $dryRun = "${{ inputs.dryRun }}" -eq "true"
-        $mode = if ($dryRun) { "Dry run" } else { "Release publish" }
-        $artifacts = Get-ChildItem -Path "release-artifacts" -File | Sort-Object Name
-
-        "## Release artifacts ($mode)" >> $env:GITHUB_STEP_SUMMARY
-        "" >> $env:GITHUB_STEP_SUMMARY
-        foreach ($artifact in $artifacts) {
-          "- $($artifact.Name)" >> $env:GITHUB_STEP_SUMMARY
-        }
-
     - name: Create GitHub release
       if: ${{ !inputs.dryRun }}
       uses: ncipollo/release-action@v1
