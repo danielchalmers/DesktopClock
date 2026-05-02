@@ -95,7 +95,14 @@ public partial class SettingsWindow : Window
         }
 
         var sectionOffset = section.TransformToAncestor(SettingsContent).Transform(new Point(0, 0)).Y;
-        SettingsScrollViewer.ScrollToVerticalOffset(sectionOffset);
+        var targetOffset = sectionOffset;
+
+        if (section.ActualHeight < SettingsScrollViewer.ViewportHeight)
+        {
+            targetOffset -= (SettingsScrollViewer.ViewportHeight - section.ActualHeight) / 2;
+        }
+
+        SettingsScrollViewer.ScrollToVerticalOffset(targetOffset);
     }
 
     private void PickColor(Action<Color> applyColor, Color currentColor)
