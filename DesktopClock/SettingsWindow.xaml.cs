@@ -129,7 +129,7 @@ public partial class SettingsWindow : Window
 
     private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
     {
-        Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+        OpenUrl(e.Uri.AbsoluteUri);
         e.Handled = true;
     }
 
@@ -221,9 +221,18 @@ public partial class SettingsWindow : Window
         ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
     }
 
-    private static void OpenUrl(string url)
+    private void OpenUrl(string url)
     {
-        Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch
+        {
+            MessageBox.Show(this,
+                $"Couldn't open {url}.",
+                Title, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private static void OpenSettingsPath(string filePath)

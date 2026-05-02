@@ -66,7 +66,17 @@ public partial class MainWindow : Window
     /// Copies the current time string to the clipboard.
     /// </summary>
     [RelayCommand]
-    public void CopyToClipboard() => Clipboard.SetText(CurrentTimeOrCountdownString);
+    public void CopyToClipboard()
+    {
+        try
+        {
+            Clipboard.SetText(CurrentTimeOrCountdownString);
+        }
+        catch
+        {
+            _trayIcon?.ShowNotification("Copy failed", "ouldn't update the clipboard. Try again.");
+        }
+    }
 
     /// <summary>
     /// Minimizes the window.
@@ -239,7 +249,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            // Ignore errors because we don't want a sound issue to crash the app.
+            _trayIcon?.ShowNotification("Alert sound unavailable", "The WAV file couldn't be played.");
         }
     }
 
@@ -403,8 +413,15 @@ public partial class MainWindow : Window
         }
     }
 
-    private static void OpenUrl(string url)
+    private void OpenUrl(string url)
     {
-        Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch
+        {
+            _trayIcon?.ShowNotification("Couldn't open link", url);
+        }
     }
 }
