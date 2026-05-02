@@ -81,7 +81,7 @@ jobs:
               });
             } catch (error) {
               if (error.status === 404) {
-                core.warning(`Tag ${ref} does not exist yet while updateRelease is enabled; release-action will create it at ${context.sha}.`);
+                core.warning(`Tag ${ref} does not exist yet while updateRelease is enabled; ncipollo/release-action will create it at ${context.sha}.`);
                 return;
               }
 
@@ -109,7 +109,6 @@ jobs:
         uses: ncipollo/release-action@v1.21.0
         with:
           tag: ${{ env.RELEASE_TAG }}
-          commit: ${{ github.sha }}
           artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
           generateReleaseNotes: true
           prerelease: ${{ contains(inputs.version, 'preview') }}
