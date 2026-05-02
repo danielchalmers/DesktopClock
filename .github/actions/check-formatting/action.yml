@@ -1,0 +1,16 @@
+name: Check Formatting
+
+description: Restores dependencies and verifies formatting.
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-dotnet@v4
+
+    - name: Restore
+      shell: bash
+      run: dotnet restore
+
+    - name: Check Formatting
+      shell: bash
+      run: dotnet format --verify-no-changes --no-restore

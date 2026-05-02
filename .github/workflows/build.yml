@@ -9,6 +9,14 @@ permissions:
   contents: read
 
 jobs:
+  format:
+    name: Format
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/check-formatting
+
   build-test:
     name: Build and Test
     runs-on: windows-latest
@@ -19,7 +27,6 @@ jobs:
 
   package:
     name: Package ${{ matrix.arch }}
-    needs: build-test
     runs-on: windows-latest
     strategy:
       fail-fast: false
