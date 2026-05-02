@@ -67,12 +67,10 @@ jobs:
       - name: Prepare release tag for update
         uses: actions/github-script@v8
         if: ${{ inputs.updateRelease && !inputs.dryRun }}
-        env:
-          RELEASE_TAG_REF: tags/${{ env.RELEASE_TAG }}
         with:
           script: |
             const tagName = process.env.RELEASE_TAG;
-            const ref = process.env.RELEASE_TAG_REF;
+            const ref = `tags/${tagName}`;
 
             try {
               await github.rest.git.getRef({
