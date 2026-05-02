@@ -25,6 +25,14 @@ jobs:
 
       - uses: ./.github/actions/build-and-test
 
+      - name: Upload TRX test results
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: trx-test-results
+          if-no-files-found: warn
+          path: '**/TestResults/*.trx'
+
   package:
     name: Package ${{ matrix.arch }}
     runs-on: windows-latest
