@@ -40,10 +40,13 @@ runs:
         $zipPath = "publish/DesktopClock-$version-$arch.zip"
         $msiPath = "publish/DesktopClock-$version-$arch.msi"
         $portableExePath = "publish/$arch/DesktopClock.exe"
+        $minPortableExeBytes = 1024
+        $minPortableZipBytes = 64
+        $minInstallerMsiBytes = 1024
         $artifacts = @(
-          @{ Path = $portableExePath; MinimumBytes = 1024; Label = "Portable executable" }
-          @{ Path = $zipPath; MinimumBytes = 64; Label = "Portable ZIP" }
-          @{ Path = $msiPath; MinimumBytes = 1024; Label = "Installer MSI" }
+          @{ Path = $portableExePath; MinimumBytes = $minPortableExeBytes; Label = "Portable executable" }
+          @{ Path = $zipPath; MinimumBytes = $minPortableZipBytes; Label = "Portable ZIP" }
+          @{ Path = $msiPath; MinimumBytes = $minInstallerMsiBytes; Label = "Installer MSI" }
         )
 
         foreach ($artifact in $artifacts) {
