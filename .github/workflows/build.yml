@@ -10,16 +10,8 @@ permissions:
 
 jobs:
   build:
-    name: Build (${{ matrix.arch }})
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        arch: [x64, arm64]
     steps:
       - uses: actions/checkout@v4
-      
-      - uses: ./.github/actions/full-build
-        with:
-          archs: ${{ matrix.arch }}
-          artifact_name: desktopclock-${{ matrix.arch }}
+
+      - uses: ./.github/actions/build-and-test

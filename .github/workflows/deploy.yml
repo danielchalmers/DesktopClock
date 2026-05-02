@@ -13,14 +13,45 @@ on:
         default: 'false'
 
 jobs:
-  deploy:
+  validate:
     runs-on: windows-latest
+    permissions:
+      contents: read
     steps:
     - uses: actions/checkout@v4
-    
-    - uses: ./.github/actions/full-build
+
+    - uses: ./.github/actions/build-and-test
+
+  publish:
+    name: Publish (${{ matrix.arch }})
+    needs: validate
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, arm64]
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: ./.github/actions/create-release-artifacts
       with:
         version: ${{ github.event.inputs.version }}
+        archs: ${{ matrix.arch }}
+        artifact_name: desktopclock-${{ matrix.arch }}
+
+  deploy:
+    needs: publish
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: desktopclock-*
+        path: publish
+        merge-multiple: true
 
     - name: Create GitHub release
       uses: ncipollo/release-action@v1
