@@ -64,7 +64,7 @@ jobs:
     env:
       RELEASE_TAG: v${{ inputs.version }}
     steps:
-      - name: Move existing release tag to workflow commit
+      - name: Prepare release tag for update
         uses: actions/github-script@v8
         if: ${{ !inputs.dryRun && inputs.updateRelease }}
         env:
@@ -81,7 +81,7 @@ jobs:
               });
             } catch (error) {
               if (error.status === 404) {
-                core.warning(`Tag ${ref} does not exist yet; the release action will create it at ${context.sha}.`);
+                core.warning(`Tag ${ref} does not exist yet while updateRelease is enabled; release-action will create it at ${context.sha}.`);
                 return;
               }
 
