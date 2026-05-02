@@ -87,6 +87,17 @@ public partial class SettingsWindow : Window
         PickColor(color => ViewModel.Settings.OuterColor = color, ViewModel.Settings.OuterColor);
     }
 
+    private void NavigateToSection(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button { Tag: FrameworkElement section })
+        {
+            return;
+        }
+
+        var sectionOffset = section.TransformToAncestor(SettingsContent).Transform(new Point(0, 0)).Y;
+        SettingsScrollViewer.ScrollToVerticalOffset(sectionOffset);
+    }
+
     private void PickColor(Action<Color> applyColor, Color currentColor)
     {
         using var colorDialog = new System.Windows.Forms.ColorDialog
