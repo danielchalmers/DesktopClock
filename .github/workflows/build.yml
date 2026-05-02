@@ -10,5 +10,5 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - uses: ./.github/actions/full-build
+
+      - uses: ./.github/actions/build-and-test
