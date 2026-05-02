@@ -18,7 +18,7 @@ runs:
       run: |
         dotnet tool install --global wix --version 4.0.6
         for arch in ${{ inputs.archs }}; do
-          dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/$arch" -c Release --no-build --os win --arch $arch -p:Version=${{ inputs.version }}
+          dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/$arch" -c Release --os win --arch $arch -p:Version=${{ inputs.version }}
           wix build Product.wxs -d MainExeSource="publish/$arch/DesktopClock.exe" -o "publish/DesktopClock-${{ inputs.version }}-${arch}.msi"
         done
 
