@@ -21,50 +21,60 @@ permissions:
   contents: write
 
 jobs:
+  format:
+    name: Format
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/check-formatting
+
   build-test:
     name: Build and Test
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - uses: ./.github/actions/build-and-test
+      - uses: ./.github/actions/build-and-test
 
   package:
-    name: Package (${{ matrix.arch }})
-    needs: build-test
+    name: Package ${{ matrix.arch }}
     runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
         arch: [x64, arm64]
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - uses: ./.github/actions/create-release-artifacts
-      with:
-        version: ${{ inputs.version }}
-        arch: ${{ matrix.arch }}
-        artifact-name: desktopclock-${{ matrix.arch }}
+      - uses: ./.github/actions/create-release-artifacts
+        with:
+          version: ${{ inputs.version }}
+          arch: ${{ matrix.arch }}
+          artifact-name: desktopclock-${{ matrix.arch }}
 
   deploy:
     name: Create GitHub release
-    needs: package
+    needs:
+      - format
+      - build-test
+      - package
     runs-on: windows-latest
     steps:
-    - uses: actions/download-artifact@v4
-      with:
-        pattern: desktopclock-*
-        path: release-artifacts
-        merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: desktopclock-*
+          path: release-artifacts
+          merge-multiple: true
 
-    - name: Create GitHub release
-      if: ${{ !inputs.dryRun }}
-      uses: ncipollo/release-action@v1
-      with:
-        tag: "v${{ inputs.version }}"
-        artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
-        generateReleaseNotes: true
-        prerelease: ${{ contains(inputs.version, 'preview') }}
-        allowUpdates: ${{ inputs.updateRelease }}
-        removeArtifacts: true
-        omitBodyDuringUpdate: true
+      - name: Create GitHub release
+        if: ${{ !inputs.dryRun }}
+        uses: ncipollo/release-action@v1
+        with:
+          tag: "v${{ inputs.version }}"
+          artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
+          generateReleaseNotes: true
+          prerelease: ${{ contains(inputs.version, 'preview') }}
+          allowUpdates: ${{ inputs.updateRelease }}
+          removeArtifacts: true
+          omitBodyDuringUpdate: true

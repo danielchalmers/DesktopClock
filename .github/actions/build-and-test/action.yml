@@ -1,6 +1,6 @@
 name: Build and Test
 
-description: Restores dependencies, verifies formatting, builds, and runs tests.
+description: Restores dependencies, builds, and runs tests.
 
 runs:
   using: "composite"
@@ -10,10 +10,6 @@ runs:
     - name: Restore
       shell: bash
       run: dotnet restore
-
-    - name: Check Formatting
-      shell: bash
-      run: dotnet format --verify-no-changes --no-restore
 
     - name: Build
       shell: bash
