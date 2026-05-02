@@ -20,7 +20,7 @@ jobs:
 
     - uses: ./.github/actions/build-and-test
 
-    - uses: ./.github/actions/publish
+    - uses: ./.github/actions/create-release-artifacts
       with:
         version: ${{ github.event.inputs.version }}
 
