@@ -25,7 +25,7 @@ jobs:
     name: Format
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: ./.github/actions/check-formatting
 
@@ -33,7 +33,7 @@ jobs:
     name: Build and Test
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: ./.github/actions/build-and-test
 
@@ -45,7 +45,7 @@ jobs:
       matrix:
         arch: [x64, arm64]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: ./.github/actions/create-release-artifacts
         with:
@@ -61,7 +61,7 @@ jobs:
       - package
     runs-on: windows-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           pattern: desktopclock-*
           path: release-artifacts
@@ -69,7 +69,7 @@ jobs:
 
       - name: Create GitHub release
         if: ${{ !inputs.dryRun }}
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.21.0
         with:
           tag: "v${{ inputs.version }}"
           artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"

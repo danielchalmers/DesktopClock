@@ -16,7 +16,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-dotnet@v4
+    - uses: actions/setup-dotnet@v5
 
     - name: Create Binaries
       shell: bash
@@ -32,7 +32,7 @@ runs:
         $arch = "${{ inputs.arch }}"
         Compress-Archive -Path "publish/$arch/DesktopClock.exe" -DestinationPath "publish/DesktopClock-${{ inputs.version }}-$arch.zip"
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: ${{ inputs.artifact-name }}
         if-no-files-found: error

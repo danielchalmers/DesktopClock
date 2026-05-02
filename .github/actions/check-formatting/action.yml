@@ -5,7 +5,7 @@ description: Restores dependencies and verifies formatting.
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-dotnet@v4
+    - uses: actions/setup-dotnet@v5
 
     - name: Restore
       shell: bash
