@@ -73,9 +73,9 @@ public partial class MainWindow : Window
         {
             Clipboard.SetText(CurrentTimeOrCountdownString);
         }
-        catch (ExternalException ex) when (ex.ErrorCode == unchecked((int)0x800401D0))
+        catch (ExternalException)
         {
-            _trayIcon?.ShowNotification("Copy failed", "The clipboard is busy. Try copying again.");
+            _trayIcon?.ShowNotification("Copy failed", "Windows couldn't update the clipboard. Try again.");
         }
     }
 
