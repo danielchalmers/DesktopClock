@@ -38,7 +38,7 @@ jobs:
     - uses: ./.github/actions/create-release-artifacts
       with:
         version: ${{ github.event.inputs.version }}
-        archs: ${{ matrix.arch }}
+        arch: ${{ matrix.arch }}
         artifact_name: desktopclock-${{ matrix.arch }}
 
   deploy:
