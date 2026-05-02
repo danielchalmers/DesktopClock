@@ -71,6 +71,7 @@ jobs:
           RELEASE_TAG_REF: tags/${{ env.RELEASE_TAG }}
         with:
           script: |
+            const tagName = process.env.RELEASE_TAG;
             const ref = process.env.RELEASE_TAG_REF;
 
             try {
@@ -81,7 +82,7 @@ jobs:
               });
             } catch (error) {
               if (error.status === 404) {
-                core.warning(`Tag ${ref} does not exist yet while updateRelease is enabled; it will be created automatically during release creation at ${context.sha}.`);
+                core.warning(`Tag ${tagName} does not exist yet while updateRelease is enabled; it will be created automatically during release creation at ${context.sha}.`);
                 return;
               }
 
