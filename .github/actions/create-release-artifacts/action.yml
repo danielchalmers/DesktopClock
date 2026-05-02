@@ -6,31 +6,35 @@ inputs:
   version:
     description: 'Version number for the app'
     default: '0.0.0'
-  archs:
-    description: 'Architectures for the build'
-    default: 'x64 arm64'
+  arch:
+    description: 'Architecture for the build'
+    default: 'x64'
+  artifact-name:
+    description: 'Name for the uploaded artifact bundle'
+    default: 'desktopclock'
 
 runs:
   using: "composite"
   steps:
+    - uses: actions/setup-dotnet@v4
+
     - name: Create Binaries
       shell: bash
       run: |
+        arch="${{ inputs.arch }}"
         dotnet tool install --global wix --version 4.0.6
-        for arch in ${{ inputs.archs }}; do
-          dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/$arch" -c Release --os win --arch $arch -p:Version=${{ inputs.version }}
-          wix build Product.wxs -d MainExeSource="publish/$arch/DesktopClock.exe" -o "publish/DesktopClock-${{ inputs.version }}-${arch}.msi"
-        done
+        dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/$arch" -c Release --os win --arch "$arch" -p:Version=${{ inputs.version }}
+        wix build Product.wxs -d MainExeSource="publish/$arch/DesktopClock.exe" -o "publish/DesktopClock-${{ inputs.version }}-$arch.msi"
 
-    - name: Create Portable ZIPs
+    - name: Create Portable ZIP
       shell: pwsh
       run: |
-        foreach ($arch in "${{ inputs.archs }}".Split(' ')) {
-          Compress-Archive -Path "publish/$arch/DesktopClock.exe" -DestinationPath "publish/DesktopClock-${{ inputs.version }}-$arch.zip"
-        }
+        $arch = "${{ inputs.arch }}"
+        Compress-Archive -Path "publish/$arch/DesktopClock.exe" -DestinationPath "publish/DesktopClock-${{ inputs.version }}-$arch.zip"
 
     - uses: actions/upload-artifact@v4
       with:
+        name: ${{ inputs.artifact-name }}
         if-no-files-found: error
         path: |
           publish/*.zip

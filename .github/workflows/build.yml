@@ -5,10 +5,30 @@ on:
     branches: [ master ]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  build:
+  build-test:
+    name: Build and Test
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: ./.github/actions/build-and-test
+
+  package:
+    name: Package (${{ matrix.arch }})
+    needs: build-test
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/create-release-artifacts
+        with:
+          arch: ${{ matrix.arch }}
+          artifact-name: desktopclock-${{ matrix.arch }}
