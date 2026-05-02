@@ -61,12 +61,16 @@ jobs:
       - build-test
       - package
     runs-on: windows-2025
+    env:
+      RELEASE_TAG: v${{ inputs.version }}
     steps:
       - uses: actions/github-script@v8
         if: ${{ !inputs.dryRun && inputs.updateRelease }}
+        env:
+          RELEASE_TAG_REF: tags/${{ env.RELEASE_TAG }}
         with:
           script: |
-            const ref = `tags/v${{ inputs.version }}`;
+            const ref = process.env.RELEASE_TAG_REF;
 
             try {
               await github.rest.git.getRef({
@@ -103,7 +107,7 @@ jobs:
         if: ${{ !inputs.dryRun }}
         uses: ncipollo/release-action@v1.21.0
         with:
-          tag: "v${{ inputs.version }}"
+          tag: ${{ env.RELEASE_TAG }}
           commit: ${{ github.sha }}
           artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
           generateReleaseNotes: true
