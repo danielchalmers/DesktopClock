@@ -87,6 +87,25 @@ public partial class SettingsWindow : Window
         PickColor(color => ViewModel.Settings.OuterColor = color, ViewModel.Settings.OuterColor);
     }
 
+    private void NavigateToSection(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button { Tag: FrameworkElement section })
+        {
+            return;
+        }
+
+        var sectionOffset = section.TransformToAncestor(SettingsContent).Transform(new Point(0, 0)).Y;
+        var targetOffset = sectionOffset;
+
+        if (section.ActualHeight < SettingsScrollViewer.ViewportHeight)
+        {
+            targetOffset -= (SettingsScrollViewer.ViewportHeight - section.ActualHeight) / 2;
+        }
+
+        SettingsScrollViewer.ScrollToVerticalOffset(targetOffset);
+        section.Focus();
+    }
+
     private void PickColor(Action<Color> applyColor, Color currentColor)
     {
         using var colorDialog = new System.Windows.Forms.ColorDialog
@@ -224,9 +243,15 @@ public partial class SettingsWindowViewModel : ObservableObject
 {
     public Settings Settings { get; }
 
+    /// <summary>
+    /// The file version of the running app.
+    /// </summary>
+    public string AppVersion { get; }
+
     public SettingsWindowViewModel(Settings settings)
     {
         Settings = settings;
+        AppVersion = FileVersionInfo.GetVersionInfo(App.MainFileInfo.FullName).FileVersion;
         FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
         FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];

@@ -10,8 +10,8 @@
         Title="DesktopClock Settings"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowHeight, Mode=TwoWay}"
-        MinWidth="720"
-        MinHeight="520"
+        MinWidth="800"
+        MinHeight="600"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -20,6 +20,38 @@
             <Setter Property="MinHeight" Value="28" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+
+        <Style x:Key="SidebarButton"
+               TargetType="Button"
+               BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,2" />
+            <Setter Property="Padding" Value="8,6,24,6" />
+            <Setter Property="MinHeight" Value="32" />
+        </Style>
+
+        <Style x:Key="SidebarToolButton"
+               TargetType="Button"
+               BasedOn="{StaticResource SidebarButton}">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#DADDE3" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,4,20,4" />
+            <Setter Property="MinWidth" Value="150" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+
+        <Style x:Key="SidebarToolDescription"
+               TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Opacity" Value="0.75" />
+            <Setter Property="Margin" Value="0,2,0,0" />
         </Style>
 
         <Style x:Key="ColorSwatchButton"
@@ -55,6 +87,7 @@
         <Style x:Key="CardGroupBox"
                TargetType="GroupBox">
             <Setter Property="Margin" Value="0,0,0,16" />
+            <Setter Property="Focusable" Value="True" />
         </Style>
 
         <Style x:Key="CardBodyPanel"
@@ -85,13 +118,118 @@
         </Style>
     </Window.Resources>
 
-    <ScrollViewer x:Name="SettingsScrollViewer"
-                  VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Disabled"
-                  ScrollChanged="SettingsScrollViewer_ScrollChanged"
-                  Loaded="SettingsScrollViewer_Loaded">
-        <StackPanel Margin="12">
-            <GroupBox Header="Display"
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                Background="#FAFAFA"
+                BorderBrush="#E1E4E8"
+                BorderThickness="0,0,1,0">
+            <Grid Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            Margin="8,0,20,4">
+                    <TextBlock Text="DesktopClock"
+                               FontSize="20"
+                               FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding AppVersion, StringFormat=v{0}}"
+                               Foreground="#5B6F8E"
+                               Margin="0,0,0,6" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1"
+                            VerticalAlignment="Center">
+                    <Button Content="_Display"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=DisplaySection}"
+                            Click="NavigateToSection" />
+                    <Button Content="_Countdown"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=CountdownSection}"
+                            Click="NavigateToSection" />
+                    <Button Content="_Window"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=WindowSection}"
+                            Click="NavigateToSection" />
+                    <Button Content="_Typography"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=TypographySection}"
+                            Click="NavigateToSection" />
+                    <Button Content="_Appearance"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=AppearanceSection}"
+                            Click="NavigateToSection" />
+                    <Button Content="A_lerts"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=AlertsSection}"
+                            Click="NavigateToSection" />
+                    <Button Content="_Shortcuts"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=ShortcutsSection}"
+                            Click="NavigateToSection" />
+                    <Button Content="Discover _More"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=DiscoverMoreSection}"
+                            Click="NavigateToSection" />
+                    <Button Content="Cr_edits"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=CreditsSection}"
+                            Click="NavigateToSection" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <Button Style="{StaticResource SidebarToolButton}"
+                            Click="OpenSettingsFolder"
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}">
+                        <StackPanel>
+                            <AccessText FontWeight="SemiBold"
+                                        Text="Settings _folder" />
+                            <TextBlock Text="Open the settings folder"
+                                       Style="{StaticResource SidebarToolDescription}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource SidebarToolButton}"
+                            Click="OpenSettingsFile"
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}">
+                        <StackPanel>
+                            <AccessText FontWeight="SemiBold"
+                                        Text="Settings f_ile" />
+                            <TextBlock Text="Open the JSON file"
+                                       Style="{StaticResource SidebarToolDescription}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource SidebarToolButton}"
+                            Click="CreateNewClock"
+                            IsEnabled="{x:Static p:Settings.CanBeSaved}">
+                        <StackPanel>
+                            <AccessText FontWeight="SemiBold"
+                                        Text="_New clock" />
+                            <TextBlock Text="Start a fresh copy"
+                                       Style="{StaticResource SidebarToolDescription}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ScrollViewer x:Name="SettingsScrollViewer"
+                      Grid.Column="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      ScrollChanged="SettingsScrollViewer_ScrollChanged"
+                      Loaded="SettingsScrollViewer_Loaded">
+            <StackPanel x:Name="SettingsContent"
+                        Margin="24">
+            <GroupBox x:Name="DisplaySection"
+                      Header="Display"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Clock format"
@@ -129,7 +267,8 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Countdown"
+            <GroupBox x:Name="CountdownSection"
+                      Header="Countdown"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Countdown target"
@@ -176,7 +315,8 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Window"
+            <GroupBox x:Name="WindowSection"
+                      Header="Window"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <CheckBox Content="Start with Windows"
@@ -240,7 +380,8 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Typography"
+            <GroupBox x:Name="TypographySection"
+                      Header="Typography"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Font family"
@@ -319,7 +460,8 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Appearance"
+            <GroupBox x:Name="AppearanceSection"
+                      Header="Appearance"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Background or outline color"
@@ -455,7 +597,8 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Alerts"
+            <GroupBox x:Name="AlertsSection"
+                      Header="Alerts"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Alarm sound"
@@ -506,32 +649,8 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Tools"
-                      Style="{StaticResource CardGroupBox}">
-                <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <Button Content="Open settings folder"
-                            Click="OpenSettingsFolder"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <TextBlock Text="Open the folder where the settings file is stored."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <Button Content="Open settings file"
-                            Click="OpenSettingsFile"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <TextBlock Text="Open the JSON settings file in Notepad."
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <Button Content="Create new clock"
-                            Click="CreateNewClock"
-                            IsEnabled="{x:Static p:Settings.CanBeSaved}" />
-                    <TextBlock Text="Copy this clock and start it with fresh settings."
-                               Style="{StaticResource DescriptionTextBlock}" />
-                </StackPanel>
-            </GroupBox>
-
-            <GroupBox Header="Shortcuts"
+            <GroupBox x:Name="ShortcutsSection"
+                      Header="Shortcuts"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
@@ -563,7 +682,8 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Discover More"
+            <GroupBox x:Name="DiscoverMoreSection"
+                      Header="Discover More"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
@@ -622,7 +742,8 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Credits"
+            <GroupBox x:Name="CreditsSection"
+                      Header="Credits"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
@@ -677,6 +798,7 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-        </StackPanel>
-    </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>
