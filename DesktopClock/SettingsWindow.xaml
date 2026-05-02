@@ -29,8 +29,8 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Margin" Value="0,0,0,2" />
-            <Setter Property="Padding" Value="8,8,24,8" />
-            <Setter Property="MinHeight" Value="40" />
+            <Setter Property="Padding" Value="8,6,24,6" />
+            <Setter Property="MinHeight" Value="34" />
         </Style>
 
         <Style x:Key="SidebarToolButton"
@@ -39,10 +39,10 @@
             <Setter Property="Background" Value="#FFFFFF" />
             <Setter Property="BorderBrush" Value="#DADDE3" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="8,7,24,7" />
+            <Setter Property="Padding" Value="8,5,24,5" />
             <Setter Property="MinWidth" Value="150" />
             <Setter Property="MinHeight" Value="0" />
-            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Margin" Value="0,0,0,3" />
         </Style>
 
         <Style x:Key="SidebarToolDescription"
@@ -51,7 +51,7 @@
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Opacity" Value="0.75" />
-            <Setter Property="Margin" Value="0,2,0,0" />
+            <Setter Property="Margin" Value="0,1,0,0" />
         </Style>
 
         <Style x:Key="ColorSwatchButton"
@@ -128,7 +128,7 @@
                 Background="#FAFAFA"
                 BorderBrush="#E1E4E8"
                 BorderThickness="0,0,1,0">
-            <Grid Margin="8,18,8,16">
+            <Grid Margin="8,10,8,8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -136,13 +136,13 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0"
-                            Margin="8,0,24,0">
+                            Margin="8,0,24,6">
                     <TextBlock Text="DesktopClock"
                                FontSize="20"
                                FontWeight="SemiBold" />
                     <TextBlock Text="{Binding AppVersion, StringFormat=v{0}}"
                                Foreground="#5B6F8E"
-                               Margin="0,0,0,22" />
+                               Margin="0,0,0,8" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="1"
