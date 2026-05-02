@@ -32,6 +32,38 @@ runs:
         $arch = "${{ inputs.arch }}"
         Compress-Archive -Path "publish/$arch/DesktopClock.exe" -DestinationPath "publish/DesktopClock-${{ inputs.version }}-$arch.zip"
 
+    - name: Smoke Check Artifacts
+      shell: pwsh
+      run: |
+        $version = "${{ inputs.version }}"
+        $arch = "${{ inputs.arch }}"
+        $zipPath = "publish/DesktopClock-$version-$arch.zip"
+        $msiPath = "publish/DesktopClock-$version-$arch.msi"
+        $portableExePath = "publish/$arch/DesktopClock.exe"
+
+        foreach ($path in @($portableExePath, $zipPath, $msiPath)) {
+          if (-not (Test-Path $path)) {
+            throw "Expected artifact was not created: $path"
+          }
+        }
+
+        foreach ($path in @($portableExePath, $zipPath, $msiPath)) {
+          if ((Get-Item $path).Length -le 0) {
+            throw "Expected artifact is empty: $path"
+          }
+        }
+
+        Add-Type -AssemblyName System.IO.Compression.FileSystem
+        $zip = [System.IO.Compression.ZipFile]::OpenRead((Resolve-Path $zipPath))
+        try {
+          if (-not ($zip.Entries | Where-Object FullName -eq 'DesktopClock.exe' | Select-Object -First 1)) {
+            throw "Portable ZIP does not contain DesktopClock.exe: $zipPath"
+          }
+        }
+        finally {
+          $zip.Dispose()
+        }
+
     - uses: actions/upload-artifact@v7
       with:
         name: ${{ inputs.artifact-name }}
