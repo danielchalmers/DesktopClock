@@ -135,7 +135,8 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0">
+                <StackPanel Grid.Row="0"
+                            HorizontalAlignment="Center">
                     <TextBlock Text="DesktopClock"
                                FontSize="20"
                                FontWeight="SemiBold" />
