@@ -227,7 +227,7 @@
                       ScrollChanged="SettingsScrollViewer_ScrollChanged"
                       Loaded="SettingsScrollViewer_Loaded">
             <StackPanel x:Name="SettingsContent"
-                        Margin="24">
+                        Margin="16,16,16,0">
             <GroupBox x:Name="DisplaySection"
                       Header="Display"
                       Style="{StaticResource CardGroupBox}">
