@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   triage_issue:
-    if: ${{ github.event.sender.type != 'Bot' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
