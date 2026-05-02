@@ -147,6 +147,14 @@
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=ShortcutsSection}"
                             Click="NavigateToSection" />
+                    <Button Content="Discover _More"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=DiscoverMoreSection}"
+                            Click="NavigateToSection" />
+                    <Button Content="Cr_edits"
+                            Style="{StaticResource SidebarButton}"
+                            Tag="{Binding ElementName=CreditsSection}"
+                            Click="NavigateToSection" />
                 </StackPanel>
 
                 <StackPanel DockPanel.Dock="Bottom"
