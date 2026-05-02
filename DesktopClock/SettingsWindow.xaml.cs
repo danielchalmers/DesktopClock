@@ -103,6 +103,7 @@ public partial class SettingsWindow : Window
         }
 
         SettingsScrollViewer.ScrollToVerticalOffset(targetOffset);
+        section.Focus();
     }
 
     private void PickColor(Action<Color> applyColor, Color currentColor)

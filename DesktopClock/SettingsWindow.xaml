@@ -66,6 +66,7 @@
         <Style x:Key="CardGroupBox"
                TargetType="GroupBox">
             <Setter Property="Margin" Value="0,0,0,16" />
+            <Setter Property="Focusable" Value="True" />
         </Style>
 
         <Style x:Key="CardBodyPanel"
