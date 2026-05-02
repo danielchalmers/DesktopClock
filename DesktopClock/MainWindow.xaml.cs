@@ -75,7 +75,7 @@ public partial class MainWindow : Window
         }
         catch (ExternalException)
         {
-            _trayIcon?.ShowNotification("Copy failed", "Windows couldn't update the clipboard. Try again.");
+            _trayIcon?.ShowNotification("Copy failed", "Couldn't update the clipboard. Try again.");
         }
     }
 
