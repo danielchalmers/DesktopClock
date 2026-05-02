@@ -31,7 +31,7 @@ jobs:
         with:
           name: trx-test-results
           if-no-files-found: warn
-          path: '**/TestResults/*.trx'
+          path: TestResults/**
 
   package:
     name: Package ${{ matrix.arch }}

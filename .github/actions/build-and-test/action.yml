@@ -17,4 +17,4 @@ runs:
 
     - name: Test
       shell: bash
-      run: dotnet test -c Release --no-build --logger trx
+      run: dotnet test -c Release --no-build --logger trx --results-directory TestResults
