@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -66,7 +67,17 @@ public partial class MainWindow : Window
     /// Copies the current time string to the clipboard.
     /// </summary>
     [RelayCommand]
-    public void CopyToClipboard() => Clipboard.SetText(CurrentTimeOrCountdownString);
+    public void CopyToClipboard()
+    {
+        try
+        {
+            Clipboard.SetText(CurrentTimeOrCountdownString);
+        }
+        catch (ExternalException ex) when (ex.ErrorCode == unchecked((int)0x800401D0))
+        {
+            _trayIcon?.ShowNotification("Copy failed", "The clipboard is busy. Try copying again.");
+        }
+    }
 
     /// <summary>
     /// Minimizes the window.
@@ -239,7 +250,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            // Ignore errors because we don't want a sound issue to crash the app.
+            _trayIcon?.ShowNotification("Alert sound unavailable", "The WAV file couldn't be played.");
         }
     }
 
@@ -403,8 +414,15 @@ public partial class MainWindow : Window
         }
     }
 
-    private static void OpenUrl(string url)
+    private void OpenUrl(string url)
     {
-        Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch
+        {
+            _trayIcon?.ShowNotification("Couldn't open link", $"Couldn't open {url}.");
+        }
     }
 }
