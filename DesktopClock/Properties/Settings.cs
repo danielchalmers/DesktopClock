@@ -347,7 +347,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <remarks>
     /// This remembers how wide you last made the settings window so it feels familiar the next time you open it.
     /// </remarks>
-    public double SettingsWindowWidth { get; set; } = 1200;
+    public double SettingsWindowWidth { get; set; } = double.NaN;
 
     /// <summary>
     /// Persisted height of the settings window.
@@ -355,7 +355,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <remarks>
     /// This remembers how tall you last made the settings window so you do not have to resize it every time.
     /// </remarks>
-    public double SettingsWindowHeight { get; set; } = 900;
+    public double SettingsWindowHeight { get; set; } = double.NaN;
 
     /// <summary>
     /// Persisted vertical scroll offset of the settings window.
