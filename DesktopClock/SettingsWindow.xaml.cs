@@ -243,9 +243,15 @@ public partial class SettingsWindowViewModel : ObservableObject
 {
     public Settings Settings { get; }
 
+    /// <summary>
+    /// The file version of the running app.
+    /// </summary>
+    public string AppVersion { get; }
+
     public SettingsWindowViewModel(Settings settings)
     {
         Settings = settings;
+        AppVersion = FileVersionInfo.GetVersionInfo(App.MainFileInfo.FullName).FileVersion;
         FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
         FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];

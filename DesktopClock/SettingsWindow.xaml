@@ -136,6 +136,16 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
+                    <TextBlock Text="DesktopClock"
+                               FontSize="20"
+                               FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding AppVersion, StringFormat=v{0}}"
+                               Foreground="#5B6F8E"
+                               Margin="0,0,0,22" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1"
+                            VerticalAlignment="Center">
                     <Button Content="_Display"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=DisplaySection}"
