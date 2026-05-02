@@ -40,23 +40,27 @@ runs:
         $zipPath = "publish/DesktopClock-$version-$arch.zip"
         $msiPath = "publish/DesktopClock-$version-$arch.msi"
         $portableExePath = "publish/$arch/DesktopClock.exe"
+        $artifacts = @(
+          @{ Path = $portableExePath; MinimumBytes = 1024; Label = "Portable executable" }
+          @{ Path = $zipPath; MinimumBytes = 64; Label = "Portable ZIP" }
+          @{ Path = $msiPath; MinimumBytes = 1024; Label = "Installer MSI" }
+        )
 
-        foreach ($path in @($portableExePath, $zipPath, $msiPath)) {
-          if (-not (Test-Path $path)) {
-            throw "Expected artifact was not created: $path"
+        foreach ($artifact in $artifacts) {
+          if (-not (Test-Path $artifact.Path)) {
+            throw "Expected artifact was not created: $($artifact.Path)"
           }
-        }
 
-        foreach ($path in @($portableExePath, $zipPath, $msiPath)) {
-          if ((Get-Item $path).Length -le 0) {
-            throw "Expected artifact is empty: $path"
+          $file = Get-Item $artifact.Path
+          if ($file.Length -lt $artifact.MinimumBytes) {
+            throw "$($artifact.Label) is unexpectedly small ($($file.Length) bytes): $($artifact.Path)"
           }
         }
 
         Add-Type -AssemblyName System.IO.Compression.FileSystem
         $zip = [System.IO.Compression.ZipFile]::OpenRead((Resolve-Path $zipPath))
         try {
-          if (-not ($zip.Entries | Where-Object FullName -eq 'DesktopClock.exe' | Select-Object -First 1)) {
+          if (-not ($zip.Entries | Where-Object FullName -eq 'DesktopClock.exe')) {
             throw "Portable ZIP does not contain DesktopClock.exe: $zipPath"
           }
         }
