@@ -9,10 +9,6 @@ permissions:
   issues: write
   pull-requests: write
 
-concurrency:
-  group: autotriage-shared-db
-  cancel-in-progress: false
-
 jobs:
   triage_issue:
     if: ${{ github.event.sender.type != 'Bot' }}
@@ -20,18 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: actions/cache@v5
-        with:
-          path: triage-db.json
-          key: triage-db-${{ github.run_id }}
-          restore-keys: triage-db-
-
       - name: AutoTriage - triage issue
         uses: danielchalmers/AutoTriage@v3
         with:
           issues: ${{ github.event.issue.number }}
           prompt-path: .github/AutoTriage.prompt
-          db-path: triage-db.json
           model-fast: ""
           model-pro: gemini-3.1-flash-lite-preview
         env:
