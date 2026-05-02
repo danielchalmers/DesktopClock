@@ -1,4 +1,4 @@
-name: Build
+name: CI
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
       - uses: ./.github/actions/build-and-test
 
   package:
-    name: Package (${{ matrix.arch }})
+    name: Package ${{ matrix.arch }}
     needs: build-test
     runs-on: windows-latest
     strategy:
