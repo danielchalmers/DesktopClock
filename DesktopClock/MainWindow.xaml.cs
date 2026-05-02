@@ -12,7 +12,6 @@ using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using DesktopClock.Utilities;
 using H.NotifyIcon;
-using H.NotifyIcon.EfficiencyMode;
 using WpfWindowPlacement;
 
 namespace DesktopClock;
@@ -378,19 +377,7 @@ public partial class MainWindow : Window
 
     private void Window_StateChanged(object sender, EventArgs e)
     {
-        if (WindowState == WindowState.Minimized)
-        {
-            // Save resources while minimized.
-            _systemClockTimer.Stop();
-            EfficiencyModeUtilities.SetEfficiencyMode(true);
-        }
-        else
-        {
-            // Resume normal updates.
-            UpdateTimeString();
-            _systemClockTimer.Start();
-            EfficiencyModeUtilities.SetEfficiencyMode(false);
-        }
+        UpdateTimeString();
 
         ApplyWindowVisibilitySettings();
     }
