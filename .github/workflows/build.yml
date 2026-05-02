@@ -1,4 +1,4 @@
-name: Build
+name: CI
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build-test:
-    name: Build and Test
+    name: Validate
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +18,7 @@ jobs:
       - uses: ./.github/actions/build-and-test
 
   package:
-    name: Package (${{ matrix.arch }})
+    name: Package ${{ matrix.arch }}
     needs: build-test
     runs-on: windows-latest
     strategy:
