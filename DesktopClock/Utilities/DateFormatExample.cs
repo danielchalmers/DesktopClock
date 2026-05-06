@@ -58,6 +58,8 @@ public record DateFormatExample
         "{dddd}, {MMM dd}, {h:mm tt}",        // Custom format: "Monday, Apr 10, 2:30 PM"
         "{dddd}, {MMM dd}, {HH:mm:ss}",       // Custom format: "Monday, Apr 10, 14:30:45"
         "{dddd}, {MMM dd}, {h:mm:ss tt}",     // Custom format: "Monday, Apr 10, 2:30:45 PM"
+        "Week {week}",                        // Custom token: "Week 15"
+        "Week {week}, {weekYear}",            // Custom token: "Week 15, 2023"
     
         // Standard formats
         "D",                                  // Long date pattern: Monday, June 15, 2009 (en-US)

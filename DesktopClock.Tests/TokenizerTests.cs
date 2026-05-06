@@ -111,6 +111,41 @@ public class TokenizerTests
         Assert.Equal("Sunday, Sep 24", result);
     }
 
+    [Theory]
+    [InlineData("2024-01-01", "Week 1")]
+    [InlineData("2024-12-29", "Week 52")]
+    [InlineData("2024-12-30", "Week 1")]
+    [InlineData("2021-01-01", "Week 53")]
+    public void FormatWithTokenizer_WeekToken_ShouldUseIsoWeek(string date, string expected)
+    {
+        // Arrange
+        var dateTime = DateTime.Parse(date, CultureInfo.InvariantCulture);
+        var format = "Week {week}";
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    [Theory]
+    [InlineData("2024-12-30", "2025-W1")]
+    [InlineData("2021-01-01", "2020-W53")]
+    [InlineData("2026-05-06", "2026-W19")]
+    public void FormatWithTokenizer_WeekYearToken_ShouldUseIsoWeekYear(string date, string expected)
+    {
+        // Arrange
+        var dateTime = DateTime.Parse(date, CultureInfo.InvariantCulture);
+        var format = "{weekYear}-W{week}";
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
     [Fact]
     public void FormatWithTokenizer_StandardFormat_WithoutBraces_ShouldWork()
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace DesktopClock;
@@ -31,7 +32,7 @@ public static class Tokenizer
                     return _tokenizerRegex.Replace(format, (m) =>
                     {
                         var formatString = m.Groups[1].Value;
-                        return formattable.ToString(formatString, formatProvider);
+                        return FormatToken(formattable, formatString, formatProvider);
                     });
                 }
 
@@ -46,6 +47,75 @@ public static class Tokenizer
 
         // Fall back to the default format.
         return formattable.ToString();
+    }
+
+    private static string FormatToken(IFormattable formattable, string format, IFormatProvider formatProvider)
+    {
+        if (TryFormatWeekToken(formattable, format, out var result))
+        {
+            return result;
+        }
+
+        return formattable.ToString(format, formatProvider);
+    }
+
+    private static bool TryFormatWeekToken(IFormattable formattable, string format, out string result)
+    {
+        result = null;
+
+        if (!TryGetDateTime(formattable, out var dateTime))
+        {
+            return false;
+        }
+
+        switch (format)
+        {
+            case "week":
+                result = GetIsoWeek(dateTime).ToString(CultureInfo.InvariantCulture);
+                return true;
+
+            case "weekYear":
+                result = GetIsoWeekYear(dateTime).ToString(CultureInfo.InvariantCulture);
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    private static bool TryGetDateTime(IFormattable formattable, out DateTime dateTime)
+    {
+        switch (formattable)
+        {
+            case DateTime value:
+                dateTime = value;
+                return true;
+
+            case DateTimeOffset value:
+                dateTime = value.DateTime;
+                return true;
+
+            default:
+                dateTime = default;
+                return false;
+        }
+    }
+
+    private static int GetIsoWeek(DateTime dateTime)
+    {
+        if (dateTime.DayOfWeek is >= DayOfWeek.Monday and <= DayOfWeek.Wednesday)
+        {
+            dateTime = dateTime.AddDays(3);
+        }
+
+        var calendar = CultureInfo.InvariantCulture.Calendar;
+        return calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+    }
+
+    private static int GetIsoWeekYear(DateTime dateTime)
+    {
+        var day = dateTime.DayOfWeek == DayOfWeek.Sunday ? 7 : (int)dateTime.DayOfWeek;
+        return dateTime.AddDays(4 - day).Year;
     }
 
     private static bool UsesTokenSyntax(string format)
