@@ -8,6 +8,8 @@
         d:DataContext="{d:DesignInstance Type=local:SettingsWindowViewModel}"
         mc:Ignorable="d"
         Title="DesktopClock Settings"
+        FontFamily="Segoe UI"
+        UseLayoutRounding="True"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowHeight, Mode=TwoWay}"
         MinWidth="800"
@@ -15,95 +17,270 @@
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
+
+        <!-- ===== Content-area Button ===== -->
         <Style TargetType="Button">
-            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="Background" Value="#F8FAFC" />
+            <Setter Property="Foreground" Value="#374151" />
+            <Setter Property="BorderBrush" Value="#CBD5E1" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10,5" />
             <Setter Property="MinHeight" Value="28" />
-            <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#EBF0F8" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#93C5FD" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#DDEAF8" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Bd" Property="Background" Value="#F3F4F6" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#E5E7EB" />
+                                <Setter Property="Foreground" Value="#9CA3AF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
+        <!-- ===== Sidebar Navigation Button ===== -->
         <Style x:Key="SidebarButton"
-               TargetType="Button"
-               BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
+               TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#8FA3BF" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Margin" Value="0,0,0,2" />
-            <Setter Property="Padding" Value="8,6,24,6" />
-            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Margin" Value="0,1" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="13.5" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#1E2D45" />
+                                <Setter Property="Foreground" Value="#CBD5E1" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#182438" />
+                                <Setter Property="Foreground" Value="#E2E8F0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#3D4D60" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
+        <!-- ===== Sidebar Tool Button (bottom) ===== -->
         <Style x:Key="SidebarToolButton"
-               TargetType="Button"
-               BasedOn="{StaticResource SidebarButton}">
-            <Setter Property="Background" Value="#FFFFFF" />
-            <Setter Property="BorderBrush" Value="#DADDE3" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="8,4,20,4" />
-            <Setter Property="MinWidth" Value="150" />
-            <Setter Property="MinHeight" Value="0" />
-            <Setter Property="Margin" Value="0,0,0,4" />
+               TargetType="Button">
+            <Setter Property="Background" Value="#192540" />
+            <Setter Property="Foreground" Value="#7B90AB" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="12,9" />
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#1E2E4F" />
+                                <Setter Property="Foreground" Value="#B8C9DC" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#141E34" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#3D4D60" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
+        <!-- ===== Sidebar Tool Description Text ===== -->
         <Style x:Key="SidebarToolDescription"
                TargetType="TextBlock">
             <Setter Property="FontSize" Value="11" />
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Opacity" Value="0.75" />
+            <Setter Property="Foreground" Value="#566A82" />
             <Setter Property="Margin" Value="0,2,0,0" />
         </Style>
 
+        <!-- ===== Color Swatch Button ===== -->
         <Style x:Key="ColorSwatchButton"
-               TargetType="Button"
-               BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Width" Value="32" />
+               TargetType="Button">
+            <Setter Property="Width" Value="34" />
             <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
         </Style>
 
+        <!-- ===== TextBox ===== -->
         <Style TargetType="TextBox">
-            <Setter Property="MinHeight" Value="26" />
-            <Setter Property="Padding" Value="2" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="Foreground" Value="#1E293B" />
+            <Setter Property="BorderBrush" Value="#CBD5E1" />
             <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="MinHeight" Value="32" />
             <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Focusable="False" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#93C5FD" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#3B82F6" />
+                                <Setter TargetName="Bd" Property="Background" Value="#F0F7FF" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Bd" Property="Background" Value="#F8FAFC" />
+                                <Setter Property="Foreground" Value="#94A3B8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
+        <!-- ===== ComboBox ===== -->
         <Style TargetType="ComboBox">
-            <Setter Property="MinHeight" Value="26" />
-            <Setter Property="Padding" Value="6,4" />
-            <Setter Property="BorderBrush" Value="#D0D0D0" />
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="Foreground" Value="#1E293B" />
+            <Setter Property="BorderBrush" Value="#CBD5E1" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="MinHeight" Value="32" />
             <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="FontSize" Value="13" />
         </Style>
 
+        <!-- ===== CheckBox ===== -->
         <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#1E293B" />
             <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="FontSize" Value="13" />
         </Style>
 
+        <!-- ===== Slider ===== -->
         <Style TargetType="Slider">
-            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Margin" Value="0,4,0,4" />
         </Style>
 
+        <!-- ===== Card GroupBox ===== -->
         <Style x:Key="CardGroupBox"
                TargetType="GroupBox">
-            <Setter Property="Margin" Value="0,0,0,16" />
-            <Setter Property="Focusable" Value="True" />
+            <Setter Property="Margin" Value="0,0,0,20" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BorderBrush" Value="#E2E8F0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Border Background="#FFFFFF"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <!-- Section header bar -->
+                                <Border Grid.Row="0"
+                                        Background="#F7F9FC"
+                                        BorderBrush="#E2E8F0"
+                                        BorderThickness="0,0,0,1"
+                                        CornerRadius="10,10,0,0"
+                                        Padding="16,11">
+                                    <ContentPresenter ContentSource="Header"
+                                                      TextElement.FontWeight="SemiBold"
+                                                      TextElement.FontSize="13"
+                                                      TextElement.Foreground="#0F172A" />
+                                </Border>
+                                <!-- Section body -->
+                                <ContentPresenter Grid.Row="1"
+                                                  Margin="{TemplateBinding Padding}" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="CardBodyPanel"
                TargetType="StackPanel">
-            <Setter Property="Margin" Value="8" />
+            <Setter Property="Margin" Value="16,14,16,16" />
         </Style>
 
         <Style x:Key="LabelTextBlock"
                TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="#1E293B" />
+            <Setter Property="Margin" Value="0,0,0,5" />
         </Style>
 
         <Style x:Key="DescriptionTextBlock"
                TargetType="TextBlock">
-            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="Foreground" Value="#64748B" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
@@ -111,11 +288,15 @@
                TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Foreground" Value="#64748B" />
+            <Setter Property="FontSize" Value="12" />
         </Style>
 
         <Style TargetType="Hyperlink">
             <Setter Property="TextDecorations" Value="None" />
+            <Setter Property="Foreground" Value="#2563EB" />
         </Style>
+
     </Window.Resources>
 
     <Grid>
@@ -125,10 +306,11 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0"
-                Background="#FAFAFA"
-                BorderBrush="#E1E4E8"
-                BorderThickness="0,0,1,0">
-            <Grid Margin="8">
+                Background="#111B2E"
+                BorderBrush="#0A111E"
+                BorderThickness="0,0,1,0"
+                MinWidth="210">
+            <Grid Margin="10,14,10,14">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -136,13 +318,15 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0"
-                            Margin="8,0,20,4">
+                            Margin="10,0,10,14">
                     <TextBlock Text="DesktopClock"
-                               FontSize="20"
-                               FontWeight="SemiBold" />
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#E2E8F0" />
                     <TextBlock Text="{Binding AppVersion, StringFormat=v{0}}"
-                               Foreground="#5B6F8E"
-                               Margin="0,0,0,6" />
+                               Foreground="#4B6080"
+                               FontSize="12"
+                               Margin="0,2,0,0" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="1"
@@ -222,12 +406,13 @@
 
         <ScrollViewer x:Name="SettingsScrollViewer"
                       Grid.Column="1"
+                      Background="#F2F5F9"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       ScrollChanged="SettingsScrollViewer_ScrollChanged"
                       Loaded="SettingsScrollViewer_Loaded">
             <StackPanel x:Name="SettingsContent"
-                        Margin="16,16,16,0">
+                        Margin="20,20,20,20">
             <GroupBox x:Name="DisplaySection"
                       Header="Display"
                       Style="{StaticResource CardGroupBox}">
