@@ -9,7 +9,6 @@
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         mc:Ignorable="d"
         Title="DesktopClock"
-        UseLayoutRounding="True"
         AllowsTransparency="True"
         Background="Transparent"
         WindowStyle="None"
