@@ -18,25 +18,16 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
-        <!--
-            Windows 11 Fluent Design tokens used throughout this window:
-              Accent           #0067C0
-              Text/Primary     #1B1B1B   Text/Secondary  #616161   Text/Disabled  #A3A3A3
-              Fill/Default     #FBFBFB   Fill/Hover       #F5F5F5  Fill/Pressed   #EBEBEB
-              Stroke/Default   #CCCCCC   Stroke/Card      #E5E5E5
-        -->
-
-        <!-- ===== Standard Button (WinUI "Standard" variant) ===== -->
+        <!-- ===== Content-area Button ===== -->
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#FBFBFB" />
-            <Setter Property="Foreground" Value="#1B1B1B" />
-            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="Background" Value="#F8FAFC" />
+            <Setter Property="Foreground" Value="#374151" />
+            <Setter Property="BorderBrush" Value="#CBD5E1" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="11,5" />
-            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="MinHeight" Value="28" />
             <Setter Property="Margin" Value="0,0,0,4" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -45,26 +36,24 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4"
-                                Padding="{TemplateBinding Padding}"
-                                SnapsToDevicePixels="True">
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               RecognizesAccessKey="True" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#F5F5F5" />
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#BBBBBB" />
+                                <Setter TargetName="Bd" Property="Background" Value="#EBF0F8" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#93C5FD" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#EBEBEB" />
-                                <Setter Property="Foreground" Value="#5C5C5C" />
+                                <Setter TargetName="Bd" Property="Background" Value="#DDEAF8" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Bd" Property="Background" Value="#F9F9F9" />
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#E5E5E5" />
-                                <Setter Property="Foreground" Value="#A3A3A3" />
+                                <Setter TargetName="Bd" Property="Background" Value="#F3F4F6" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#E5E7EB" />
+                                <Setter Property="Foreground" Value="#9CA3AF" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -72,41 +61,40 @@
             </Setter>
         </Style>
 
-        <!-- ===== Sidebar Navigation Button (NavigationViewItem style) ===== -->
+        <!-- ===== Sidebar Navigation Button ===== -->
         <Style x:Key="SidebarButton"
                TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="#1B1B1B" />
+            <Setter Property="Foreground" Value="#8FA3BF" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Margin" Value="4,1" />
-            <Setter Property="Padding" Value="12,9" />
+            <Setter Property="Margin" Value="0,1" />
+            <Setter Property="Padding" Value="12,8" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontSize" Value="13.5" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="Bd"
                                 Background="{TemplateBinding Background}"
-                                CornerRadius="5"
-                                Padding="{TemplateBinding Padding}"
-                                SnapsToDevicePixels="True">
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               RecognizesAccessKey="True" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#E9E9E9" />
+                                <Setter TargetName="Bd" Property="Background" Value="#1E2D45" />
+                                <Setter Property="Foreground" Value="#CBD5E1" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#DEDEDE" />
-                                <Setter Property="Foreground" Value="#5C5C5C" />
+                                <Setter TargetName="Bd" Property="Background" Value="#182438" />
+                                <Setter Property="Foreground" Value="#E2E8F0" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" Value="#A3A3A3" />
+                                <Setter Property="Foreground" Value="#3D4D60" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -114,45 +102,37 @@
             </Setter>
         </Style>
 
-        <!-- ===== Sidebar Tool Button (footer actions) ===== -->
+        <!-- ===== Sidebar Tool Button (bottom) ===== -->
         <Style x:Key="SidebarToolButton"
                TargetType="Button">
-            <Setter Property="Background" Value="#EBEBEB" />
-            <Setter Property="Foreground" Value="#5C5C5C" />
-            <Setter Property="BorderBrush" Value="#E0E0E0" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="10,8" />
-            <Setter Property="Margin" Value="4,0,4,6" />
+            <Setter Property="Background" Value="#192540" />
+            <Setter Property="Foreground" Value="#7B90AB" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="12,9" />
+            <Setter Property="Margin" Value="0,0,0,5" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="Bd"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5"
-                                Padding="{TemplateBinding Padding}"
-                                SnapsToDevicePixels="True">
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#E0E0E0" />
+                                <Setter TargetName="Bd" Property="Background" Value="#1E2E4F" />
+                                <Setter Property="Foreground" Value="#B8C9DC" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#D4D4D4" />
-                                <Setter Property="Foreground" Value="#3C3C3C" />
+                                <Setter TargetName="Bd" Property="Background" Value="#141E34" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Bd" Property="Background" Value="#F3F3F3" />
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#EBEBEB" />
-                                <Setter Property="Foreground" Value="#A3A3A3" />
+                                <Setter Property="Foreground" Value="#3D4D60" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -160,12 +140,13 @@
             </Setter>
         </Style>
 
-        <!-- ===== Sidebar Tool Description ===== -->
+        <!-- ===== Sidebar Tool Description Text ===== -->
         <Style x:Key="SidebarToolDescription"
                TargetType="TextBlock">
             <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Foreground" Value="#898989" />
+            <Setter Property="Foreground" Value="#566A82" />
             <Setter Property="Margin" Value="0,2,0,0" />
         </Style>
 
@@ -177,20 +158,17 @@
             <Setter Property="Margin" Value="0" />
         </Style>
 
-        <!-- ===== TextBox (WinUI style with accent focus border) ===== -->
+        <!-- ===== TextBox ===== -->
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#FFFFFF" />
-            <Setter Property="Foreground" Value="#1B1B1B" />
-            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="Foreground" Value="#1E293B" />
+            <Setter Property="BorderBrush" Value="#CBD5E1" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Padding" Value="8,6" />
             <Setter Property="MinHeight" Value="32" />
             <Setter Property="Margin" Value="0,0,0,4" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
-            <Setter Property="CaretBrush" Value="#1B1B1B" />
-            <Setter Property="SelectionBrush" Value="#0067C0" />
+            <Setter Property="FontSize" Value="13" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -198,23 +176,22 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4"
-                                SnapsToDevicePixels="True">
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
                             <ScrollViewer x:Name="PART_ContentHost"
-                                          Focusable="False"
-                                          Margin="{TemplateBinding Padding}" />
+                                          Focusable="False" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#999999" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#93C5FD" />
                             </Trigger>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#0067C0" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#3B82F6" />
+                                <Setter TargetName="Bd" Property="Background" Value="#F0F7FF" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Bd" Property="Background" Value="#F9F9F9" />
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#E5E5E5" />
-                                <Setter Property="Foreground" Value="#A3A3A3" />
+                                <Setter TargetName="Bd" Property="Background" Value="#F8FAFC" />
+                                <Setter Property="Foreground" Value="#94A3B8" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -225,22 +202,20 @@
         <!-- ===== ComboBox ===== -->
         <Style TargetType="ComboBox">
             <Setter Property="Background" Value="#FFFFFF" />
-            <Setter Property="Foreground" Value="#1B1B1B" />
-            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="Foreground" Value="#1E293B" />
+            <Setter Property="BorderBrush" Value="#CBD5E1" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Padding" Value="8,6" />
             <Setter Property="MinHeight" Value="32" />
             <Setter Property="Margin" Value="0,0,0,4" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
         </Style>
 
         <!-- ===== CheckBox ===== -->
         <Style TargetType="CheckBox">
-            <Setter Property="Foreground" Value="#1B1B1B" />
+            <Setter Property="Foreground" Value="#1E293B" />
             <Setter Property="Margin" Value="0,0,0,4" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
         </Style>
 
         <!-- ===== Slider ===== -->
@@ -248,40 +223,38 @@
             <Setter Property="Margin" Value="0,4,0,4" />
         </Style>
 
-        <!-- ===== Card GroupBox (WinUI Card pattern) ===== -->
+        <!-- ===== Card GroupBox ===== -->
         <Style x:Key="CardGroupBox"
                TargetType="GroupBox">
-            <Setter Property="Margin" Value="0,0,0,12" />
+            <Setter Property="Margin" Value="0,0,0,20" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="BorderBrush" Value="#E5E5E5" />
+            <Setter Property="BorderBrush" Value="#E2E8F0" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="GroupBox">
-                        <Border Background="#FBFBFB"
+                        <Border Background="#FFFFFF"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8"
-                                SnapsToDevicePixels="True">
+                                CornerRadius="10">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-
-                                <!-- Card header — title only, separated by a hairline -->
+                                <!-- Section header bar -->
                                 <Border Grid.Row="0"
-                                        BorderBrush="#E5E5E5"
+                                        Background="#F7F9FC"
+                                        BorderBrush="#E2E8F0"
                                         BorderThickness="0,0,0,1"
-                                        Padding="16,12">
+                                        CornerRadius="10,10,0,0"
+                                        Padding="16,11">
                                     <ContentPresenter ContentSource="Header"
                                                       TextElement.FontWeight="SemiBold"
-                                                      TextElement.FontSize="14"
-                                                      TextElement.Foreground="#1B1B1B"
-                                                      TextElement.FontFamily="Segoe UI Variable Display, Segoe UI" />
+                                                      TextElement.FontSize="13"
+                                                      TextElement.Foreground="#0F172A" />
                                 </Border>
-
-                                <!-- Card body -->
+                                <!-- Section body -->
                                 <ContentPresenter Grid.Row="1"
                                                   Margin="{TemplateBinding Padding}" />
                             </Grid>
@@ -293,38 +266,35 @@
 
         <Style x:Key="CardBodyPanel"
                TargetType="StackPanel">
-            <Setter Property="Margin" Value="16,13,16,16" />
+            <Setter Property="Margin" Value="16,14,16,16" />
         </Style>
 
-        <!-- ===== Typography ===== -->
         <Style x:Key="LabelTextBlock"
                TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="FontSize" Value="13" />
-            <Setter Property="Foreground" Value="#1B1B1B" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="Foreground" Value="#1E293B" />
             <Setter Property="Margin" Value="0,0,0,5" />
         </Style>
 
         <Style x:Key="DescriptionTextBlock"
                TargetType="TextBlock">
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="Foreground" Value="#616161" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="Foreground" Value="#64748B" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
         </Style>
 
         <Style x:Key="SliderValueTextBlock"
                TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Foreground" Value="#898989" />
+            <Setter Property="Foreground" Value="#64748B" />
             <Setter Property="FontSize" Value="12" />
         </Style>
 
         <Style TargetType="Hyperlink">
             <Setter Property="TextDecorations" Value="None" />
-            <Setter Property="Foreground" Value="#0067C0" />
+            <Setter Property="Foreground" Value="#2563EB" />
         </Style>
 
     </Window.Resources>
@@ -336,11 +306,11 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0"
-                Background="#F3F3F3"
-                BorderBrush="#E0E0E0"
+                Background="#111B2E"
+                BorderBrush="#0A111E"
                 BorderThickness="0,0,1,0"
                 MinWidth="210">
-            <Grid Margin="10,16,10,14">
+            <Grid Margin="10,14,10,14">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -348,16 +318,14 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0"
-                            Margin="10,0,10,16">
+                            Margin="10,0,10,14">
                     <TextBlock Text="DesktopClock"
-                               FontSize="20"
-                               FontWeight="SemiBold"
-                               FontFamily="Segoe UI Variable Display, Segoe UI"
-                               Foreground="#1B1B1B" />
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#E2E8F0" />
                     <TextBlock Text="{Binding AppVersion, StringFormat=v{0}}"
-                               Foreground="#898989"
+                               Foreground="#4B6080"
                                FontSize="12"
-                               FontFamily="Segoe UI Variable Text, Segoe UI"
                                Margin="0,2,0,0" />
                 </StackPanel>
 
@@ -438,7 +406,7 @@
 
         <ScrollViewer x:Name="SettingsScrollViewer"
                       Grid.Column="1"
-                      Background="#EBEBEB"
+                      Background="#F2F5F9"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       ScrollChanged="SettingsScrollViewer_ScrollChanged"
