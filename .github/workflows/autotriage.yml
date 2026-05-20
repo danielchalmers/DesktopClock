@@ -1,8 +1,10 @@
-name: AutoTriage (PRs)
+name: AutoTriage
 
 on:
   pull_request_target:
-    types: [opened, ready_for_review]
+    types: [opened]
+  issues:
+    types: [opened]
 
 permissions:
   contents: read
@@ -10,18 +12,16 @@ permissions:
   pull-requests: write
 
 jobs:
-  triage_pr:
+  triage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
-      - name: AutoTriage - triage PR
-        uses: danielchalmers/AutoTriage@v3
+      - name: Triage
+        uses: danielchalmers/AutoTriage@v4
         with:
-          issues: ${{ github.event.pull_request.number }}
+          issues: ${{ github.event.pull_request.number || github.event.issue.number }}
           prompt-path: .github/AutoTriage.prompt
-          model-fast: ""
-          model-pro: gemini-3.1-flash-lite-preview
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
