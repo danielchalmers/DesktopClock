@@ -1,6 +1,8 @@
-name: AutoTriage (Issues)
+name: AutoTriage
 
 on:
+  pull_request_target:
+    types: [opened]
   issues:
     types: [opened]
 
@@ -10,18 +12,14 @@ permissions:
   pull-requests: write
 
 jobs:
-  triage_issue:
+  triage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
-      - name: AutoTriage - triage issue
-        uses: danielchalmers/AutoTriage@v3
+      - uses: danielchalmers/AutoTriage@v4
         with:
-          issues: ${{ github.event.issue.number }}
-          prompt-path: .github/AutoTriage.prompt
-          model-fast: ""
-          model-pro: gemini-3.1-flash-lite-preview
+          issues: ${{ github.event.pull_request.number || github.event.issue.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
