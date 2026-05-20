@@ -17,8 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Triage
-        uses: danielchalmers/AutoTriage@v4
+      - uses: danielchalmers/AutoTriage@v4
         with:
           issues: ${{ github.event.pull_request.number || github.event.issue.number }}
           prompt-path: .github/AutoTriage.prompt
