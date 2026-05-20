@@ -20,7 +20,6 @@ jobs:
       - uses: danielchalmers/AutoTriage@v4
         with:
           issues: ${{ github.event.pull_request.number || github.event.issue.number }}
-          prompt-path: .github/AutoTriage.prompt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
