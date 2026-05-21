@@ -3,7 +3,8 @@
 [![Latest Release](https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases)](https://github.com/danielchalmers/DesktopClock/releases)
 [![License](https://img.shields.io/github/license/danielchalmers/DesktopClock)](LICENSE)
 
-A highly customizable, lightweight clock that's always visible on your desktop.
+A customizable and lightweight Windows digital clock for keeping the time, a countdown, or another time zone visible without opening a full calendar or timer app.
+Built around a small overlay window that you can place wherever it fits your desktop, DesktopClock is designed to feel more like part of your workspace than a regular app window.
 
 ## 📸 Preview
 
@@ -20,12 +21,3 @@ Download the latest version from the [Releases page](https://github.com/danielch
 ![Download Options](https://github.com/user-attachments/assets/d117e992-8d83-4df9-ad69-756d816b700c)
 
 Choose the standard x64 installer (`.msi`) or the portable (`.zip`) version. ARM builds are also available.
-
-## 🌟 Discover More
-
-Check out my other projects:
-
-* 😊 **[Good Diary](https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp)** - Stay on top of your well-being (Android)
-* 🔄 **[Network Monitor](https://github.com/danielchalmers/Network-Monitor)** - See latency and bandwidth usage (Windows)
-* 🚗 **[Sentry Replay](https://github.com/danielchalmers/SentryReplay)** - Watch your Tesla dashcam clips (Windows)
-* 🪄 **[Radial Actions](https://github.com/danielchalmers/RadialActions)** - Summon a customizable radial menu (Windows)
