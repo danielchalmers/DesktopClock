@@ -15,10 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: ./.github/actions/check-formatting
+      - uses: actions/setup-dotnet@v5
+
+      - name: Restore
+        shell: bash
+        run: dotnet restore
+
+      - name: Check Formatting
+        shell: bash
+        run: dotnet format --verify-no-changes --no-restore
 
   build-test:
-    name: Build and Test
+    name: Build and test
     runs-on: windows-2025
     steps:
       - uses: actions/checkout@v5
@@ -46,4 +54,3 @@ jobs:
       - uses: ./.github/actions/create-release-artifacts
         with:
           arch: ${{ matrix.arch }}
-          artifact-name: desktopclock-${{ matrix.arch }}

@@ -4,13 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version number for the app'
+        description: 'Version number'
         required: true
         default: '0.0.0'
       updateRelease:
         description: 'Update existing release'
         required: true
-        default: 'false'
+        type: boolean
+        default: false
       dryRun:
         description: 'Dry run'
         required: true
@@ -21,16 +22,8 @@ permissions:
   contents: write
 
 jobs:
-  format:
-    name: Format
-    runs-on: windows-2025
-    steps:
-      - uses: actions/checkout@v5
-
-      - uses: ./.github/actions/check-formatting
-
   build-test:
-    name: Build and Test
+    name: Build and test
     runs-on: windows-2025
     steps:
       - uses: actions/checkout@v5
@@ -51,12 +44,10 @@ jobs:
         with:
           version: ${{ inputs.version }}
           arch: ${{ matrix.arch }}
-          artifact-name: desktopclock-${{ matrix.arch }}
 
   deploy:
     name: Create GitHub release
     needs:
-      - format
       - build-test
       - package
     runs-on: windows-2025
