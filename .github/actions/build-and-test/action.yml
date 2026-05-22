@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build and test
 
 description: Restores dependencies, builds, and runs tests.
 
