@@ -32,7 +32,6 @@ jobs:
 
   package:
     name: Package ${{ matrix.arch }}
-    needs: build-test
     runs-on: windows-2025
     strategy:
       fail-fast: false
@@ -48,7 +47,9 @@ jobs:
 
   deploy:
     name: Create GitHub release
-    needs: package
+    needs:
+      - build-test
+      - package
     runs-on: ubuntu-24.04
     permissions:
       contents: write
