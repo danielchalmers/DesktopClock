@@ -19,14 +19,14 @@ on:
         default: true
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-test:
     name: Build and test
     runs-on: windows-2025
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: ./.github/actions/build-and-test
 
@@ -38,7 +38,7 @@ jobs:
       matrix:
         arch: [x64, arm64]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: ./.github/actions/create-release-artifacts
         with:
@@ -50,7 +50,9 @@ jobs:
     needs:
       - build-test
       - package
-    runs-on: windows-2025
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     steps:
       - uses: actions/download-artifact@v8
         with:
@@ -65,7 +67,7 @@ jobs:
           tag: "v${{ inputs.version }}"
           artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
           generateReleaseNotes: true
-          prerelease: ${{ contains(inputs.version, 'preview') }}
+          prerelease: ${{ contains(inputs.version, '-') }}
           allowUpdates: ${{ inputs.updateRelease }}
           removeArtifacts: true
           omitBodyDuringUpdate: true
