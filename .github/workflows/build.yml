@@ -54,3 +54,11 @@ jobs:
       - uses: ./.github/actions/create-release-artifacts
         with:
           arch: ${{ matrix.arch }}
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: desktopclock-${{ matrix.arch }}
+          if-no-files-found: error
+          path: |
+            publish/*.zip
+            publish/*.msi

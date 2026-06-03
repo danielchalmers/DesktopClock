@@ -19,53 +19,35 @@ on:
         default: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  build-test:
-    name: Build and test
+  release:
+    name: Release
     runs-on: windows-2025
     steps:
       - uses: actions/checkout@v6
 
       - uses: ./.github/actions/build-and-test
 
-  package:
-    name: Package ${{ matrix.arch }}
-    runs-on: windows-2025
-    strategy:
-      fail-fast: false
-      matrix:
-        arch: [x64, arm64]
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: ./.github/actions/create-release-artifacts
+      - name: Package x64
+        uses: ./.github/actions/create-release-artifacts
         with:
           version: ${{ inputs.version }}
-          arch: ${{ matrix.arch }}
+          arch: x64
 
-  deploy:
-    name: Create GitHub release
-    needs:
-      - build-test
-      - package
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/download-artifact@v8
+      - name: Package arm64
+        uses: ./.github/actions/create-release-artifacts
         with:
-          pattern: desktopclock-*
-          path: release-artifacts
-          merge-multiple: true
+          version: ${{ inputs.version }}
+          arch: arm64
 
       - name: Create GitHub release
         if: ${{ !inputs.dryRun }}
         uses: ncipollo/release-action@v1.21.0
         with:
           tag: "v${{ inputs.version }}"
-          artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
+          artifacts: "publish/*.zip,publish/*.msi"
           generateReleaseNotes: true
           prerelease: ${{ contains(inputs.version, '-') }}
           allowUpdates: ${{ inputs.updateRelease }}

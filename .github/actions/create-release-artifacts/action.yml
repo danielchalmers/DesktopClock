@@ -1,6 +1,6 @@
 name: Create release artifacts
 
-description: Creates release-ready binaries and uploads them as artifacts.
+description: Creates release-ready binaries.
 
 inputs:
   version:
@@ -18,18 +18,10 @@ runs:
     - name: Create binaries
       shell: bash
       run: |
-        dotnet tool install --global wix --version 4.0.6
+        dotnet tool update --global wix --version 4.0.6
         dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/${{ inputs.arch }}" -c Release --os win --arch "${{ inputs.arch }}" -p:Version="${{ inputs.version }}"
         wix build Product.wxs -d "MainExeSource=publish/${{ inputs.arch }}/DesktopClock.exe" -o "publish/DesktopClock-${{ inputs.version }}-${{ inputs.arch }}.msi"
 
     - name: Create portable ZIP
       shell: pwsh
       run: Compress-Archive -Path "publish/${{ inputs.arch }}/DesktopClock.exe" -DestinationPath "publish/DesktopClock-${{ inputs.version }}-${{ inputs.arch }}.zip" -Force
-
-    - uses: actions/upload-artifact@v7
-      with:
-        name: desktopclock-${{ inputs.arch }}
-        if-no-files-found: error
-        path: |
-          publish/*.zip
-          publish/*.msi
