@@ -11,8 +11,7 @@ public static class DateTimeUtil
     /// </summary>
     public static int GetIsoWeekOfYear(this DateTime date)
     {
-        // ISO weeks start on Monday and belong to the year containing their Thursday,
-        // so shift Monday through Wednesday forward to get counted in the correct week.
+        // ISO weeks start on Monday and belong to the year containing their Thursday, so shift Monday through Wednesday forward to get counted in the correct week.
         if (date.DayOfWeek >= DayOfWeek.Monday && date.DayOfWeek <= DayOfWeek.Wednesday)
             date = date.AddDays(3);
 
@@ -20,8 +19,7 @@ public static class DateTimeUtil
     }
 
     /// <summary>
-    /// Gets the ISO 8601 week-numbering year for the given date,
-    /// which differs from the calendar year for days near New Year.
+    /// Gets the ISO 8601 week-numbering year for the given date, which differs from the calendar year for days near New Year.
     /// </summary>
     public static int GetIsoWeekYear(this DateTime date)
     {
