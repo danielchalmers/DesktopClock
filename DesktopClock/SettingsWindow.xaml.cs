@@ -36,23 +36,6 @@ public partial class SettingsWindow : Window
         Utilities.ThemeManager.ApplyTitleBarTheme(this);
     }
 
-    private void SelectFormat(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.AddedItems.Count == 0)
-        {
-            return;
-        }
-
-        var value = e.AddedItems[0] as DateFormatExample;
-
-        if (value == null)
-        {
-            return;
-        }
-
-        ViewModel.Settings.Format = value.Format;
-    }
-
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
     {
         var openFileDialog = new OpenFileDialog
@@ -81,22 +64,6 @@ public partial class SettingsWindow : Window
         }
 
         ViewModel.Settings.WavFilePath = openFileDialog.FileName;
-    }
-
-    private void OpenClockFormatEditor(object sender, RoutedEventArgs e)
-    {
-        OpenFormatEditor(FormatEditorMode.Clock);
-    }
-
-    private void OpenCountdownFormatEditor(object sender, RoutedEventArgs e)
-    {
-        OpenFormatEditor(FormatEditorMode.Countdown);
-    }
-
-    private void OpenFormatEditor(FormatEditorMode mode)
-    {
-        var editor = new FormatEditorWindow(mode) { Owner = this };
-        editor.ShowDialog();
     }
 
     private void PickTextColor(object sender, RoutedEventArgs e)

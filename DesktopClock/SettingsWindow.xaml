@@ -135,23 +135,7 @@
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Clock format"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="20" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.Format, UpdateSourceTrigger=PropertyChanged}"
-                                 AcceptsReturn="True"
-                                 MaxLines="3" />
-                        <ComboBox Grid.Column="1"
-                                  DisplayMemberPath="Example"
-                                  ItemsSource="{x:Static local:DateFormatExample.DefaultExamples}"
-                                  SelectionChanged="SelectFormat" />
-                    </Grid>
-                    <Button Content="Open format editor (preview)…"
-                            HorizontalAlignment="Left"
-                            Click="OpenClockFormatEditor" />
+                    <local:FormatEditor Mode="Clock" />
                     <TextBlock Style="{StaticResource DescriptionTextBlock}"
                                Margin="0,0,0,16">
                         <Run Text="Choose how the clock text is formatted. Use curly braces {} around time codes. " />
@@ -195,23 +179,7 @@
 
                     <TextBlock Text="Countdown format"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.CountdownFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 AcceptsReturn="True"
-                                 MaxLines="3" />
-                        <Button Grid.Column="2"
-                                Content="Reset"
-                                Command="{Binding ResetCountdownFormatCommand}" />
-                    </Grid>
-                    <Button Content="Open format editor (preview)…"
-                            HorizontalAlignment="Left"
-                            Click="OpenCountdownFormatEditor" />
+                    <local:FormatEditor Mode="Countdown" />
                     <TextBlock Style="{StaticResource DescriptionTextBlock}">
                         <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display. " />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"

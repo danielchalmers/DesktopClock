@@ -2,10 +2,10 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Threading;
 using DesktopClock.Properties;
-using DesktopClock.Utilities;
 
 namespace DesktopClock;
 
@@ -16,12 +16,13 @@ public enum FormatEditorMode
 }
 
 /// <summary>
-/// Prototype editor for the clock and countdown format strings, built around
+/// Inline editor for the clock and countdown format strings, built around
 /// one-click presets for common scenarios and insertable building blocks.
+/// Changes bind straight to settings, so the clock updates as you edit.
 /// </summary>
-public partial class FormatEditorWindow : Window
+public partial class FormatEditor : UserControl
 {
-    // Presets cover the scenarios users most commonly ask for; the raw box below stays the escape hatch.
+    // Presets cover the scenarios users most commonly ask for; the raw box stays the escape hatch.
     private static readonly (string Name, string Format)[] ClockPresets =
     {
         ("Time", "{h:mm tt}"),
@@ -70,40 +71,54 @@ public partial class FormatEditorWindow : Window
 
     private static readonly SolidColorBrush _errorBrush = new(Color.FromRgb(0xE8, 0x54, 0x54));
 
-    private readonly FormatEditorMode _mode;
-    private readonly DispatcherTimer _timer;
+    public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(
+        nameof(Mode), typeof(FormatEditorMode), typeof(FormatEditor), new PropertyMetadata(FormatEditorMode.Clock));
 
-    public FormatEditorWindow(FormatEditorMode mode)
+    private readonly DispatcherTimer _timer;
+    private bool _built;
+
+    public FormatEditor()
     {
         InitializeComponent();
 
-        _mode = mode;
-        Title = mode == FormatEditorMode.Clock ? "Clock format editor (preview)" : "Countdown format editor (preview)";
-        FormatHintText.Text = mode == FormatEditorMode.Clock ?
-            "Use curly braces {} around time codes." :
-            "Use curly braces {} around time codes. Leave blank for a friendly automatic countdown.";
-
-        BuildPresetButtons();
-        BuildTokenButtons();
-
-        FormatTextBox.Text = mode == FormatEditorMode.Clock ? Settings.Default.Format : Settings.Default.CountdownFormat;
-
         _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         _timer.Tick += (_, _) => UpdatePreview();
-        _timer.Start();
-        Closed += (_, _) => _timer.Stop();
 
-        UpdatePreview();
+        Loaded += FormatEditor_Loaded;
+        Unloaded += (_, _) => _timer.Stop();
     }
 
-    private void Window_SourceInitialized(object sender, EventArgs e)
+    public FormatEditorMode Mode
     {
-        ThemeManager.ApplyTitleBarTheme(this);
+        get => (FormatEditorMode)GetValue(ModeProperty);
+        set => SetValue(ModeProperty, value);
+    }
+
+    private void FormatEditor_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!_built)
+        {
+            _built = true;
+
+            var settingsPath = Mode == FormatEditorMode.Clock ? nameof(Settings.Format) : nameof(Settings.CountdownFormat);
+            FormatTextBox.SetBinding(TextBox.TextProperty, new Binding(settingsPath)
+            {
+                Source = Settings.Default,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            });
+
+            BuildPresetButtons();
+            BuildTokenButtons();
+        }
+
+        UpdatePreview();
+        _timer.Start();
     }
 
     private void BuildPresetButtons()
     {
-        var presets = _mode == FormatEditorMode.Clock ? ClockPresets : CountdownPresets;
+        var presets = Mode == FormatEditorMode.Clock ? ClockPresets : CountdownPresets;
 
         foreach (var (name, format) in presets)
         {
@@ -128,9 +143,9 @@ public partial class FormatEditorWindow : Window
             var button = new Button
             {
                 Content = content,
-                MaxWidth = 260,
+                MaxWidth = 280,
                 HorizontalContentAlignment = HorizontalAlignment.Left,
-                Margin = new Thickness(0, 0, 8, 8),
+                Margin = new Thickness(0, 0, 8, 4),
                 ToolTip = string.IsNullOrEmpty(format) ? "(automatic)" : format,
             };
             button.Click += (_, _) => SetFormat(format);
@@ -141,15 +156,18 @@ public partial class FormatEditorWindow : Window
 
     private void BuildTokenButtons()
     {
-        var tokens = _mode == FormatEditorMode.Clock ? ClockTokens : CountdownTokens;
+        var tokens = Mode == FormatEditorMode.Clock ? ClockTokens : CountdownTokens;
 
         foreach (var (name, token) in tokens)
         {
             var button = new Button
             {
                 Content = name,
-                Margin = new Thickness(0, 0, 8, 8),
-                ToolTip = token,
+                FontSize = 12,
+                Padding = new Thickness(7, 3, 7, 3),
+                MinHeight = 24,
+                Margin = new Thickness(0, 0, 6, 4),
+                ToolTip = $"Insert {token} at the cursor",
             };
             button.Click += (_, _) => InsertToken(token);
 
@@ -200,7 +218,7 @@ public partial class FormatEditorWindow : Window
         var timeZone = Settings.Default.TimeZoneInfo;
         var culture = CultureInfo.CurrentCulture;
 
-        if (_mode == FormatEditorMode.Clock)
+        if (Mode == FormatEditorMode.Clock)
         {
             return TimeStringFormatter.Format(DateTimeOffset.Now, DateTime.Now, timeZone, default, format, string.Empty, culture);
         }
@@ -211,24 +229,5 @@ public partial class FormatEditorWindow : Window
             DateTime.Now.AddDays(3).AddHours(4).AddMinutes(30).AddSeconds(10);
 
         return TimeStringFormatter.Format(DateTimeOffset.Now, DateTime.Now, timeZone, countdownTo, string.Empty, format, culture);
-    }
-
-    private void Apply_Click(object sender, RoutedEventArgs e)
-    {
-        if (_mode == FormatEditorMode.Clock)
-        {
-            Settings.Default.Format = FormatTextBox.Text;
-        }
-        else
-        {
-            Settings.Default.CountdownFormat = FormatTextBox.Text;
-        }
-
-        Close();
-    }
-
-    private void Cancel_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
     }
 }

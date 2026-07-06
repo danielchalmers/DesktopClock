@@ -1,0 +1,22 @@
+<UserControl x:Class="DesktopClock.FormatEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <!-- One-click presets for common scenarios, each showing its live rendered output -->
+        <WrapPanel x:Name="PresetsPanel" />
+
+        <TextBox x:Name="FormatTextBox"
+                 AcceptsReturn="True"
+                 MaxLines="3"
+                 Margin="0,4,0,4"
+                 TextChanged="FormatTextBox_TextChanged" />
+
+        <!-- Building blocks that insert tokens at the cursor -->
+        <WrapPanel x:Name="TokensPanel" />
+
+        <TextBlock x:Name="PreviewText"
+                   FontWeight="SemiBold"
+                   TextWrapping="Wrap"
+                   Margin="0,2,0,0" />
+    </StackPanel>
+</UserControl>
