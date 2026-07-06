@@ -70,7 +70,9 @@ public static class ThemeManager
             or UserPreferenceCategory.Color
             or UserPreferenceCategory.VisualStyle
             or UserPreferenceCategory.Accessibility))
+        {
             return;
+        }
 
         Application.Current?.Dispatcher.BeginInvoke(new Action(Apply));
     }
@@ -126,9 +128,9 @@ public static class ThemeManager
     private static Color Lighten(Color color, double amount)
     {
         return Color.FromRgb(
-            (byte)(color.R + (255 - color.R) * amount),
-            (byte)(color.G + (255 - color.G) * amount),
-            (byte)(color.B + (255 - color.B) * amount));
+            (byte)(color.R + ((255 - color.R) * amount)),
+            (byte)(color.G + ((255 - color.G) * amount)),
+            (byte)(color.B + ((255 - color.B) * amount)));
     }
 
     [DllImport("dwmapi.dll", PreserveSig = true)]

@@ -267,7 +267,7 @@ public partial class SettingsWindow : Window
         else
         {
             // Otherwise the active section is the one containing the middle of the viewport.
-            var probe = SettingsScrollViewer.VerticalOffset + SettingsScrollViewer.ViewportHeight / 2;
+            var probe = SettingsScrollViewer.VerticalOffset + (SettingsScrollViewer.ViewportHeight / 2);
             activeButton = buttons[0];
 
             foreach (var button in buttons)
