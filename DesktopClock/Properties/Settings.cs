@@ -12,6 +12,10 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
     private readonly FileSystemWatcher _watcher;
 
+    // Cached result of resolving <see cref="TimeZone"/> so repeated reads don't hit the registry.
+    private string _resolvedTimeZoneId;
+    private TimeZoneInfo _resolvedTimeZone;
+
     private static readonly Lazy<Settings> _default = new(LoadAndAttemptSave);
 
     private static readonly JsonSerializerSettings _jsonSerializerSettings = new()
@@ -392,14 +396,28 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     {
         get
         {
-            try
-            {
-                return TimeZoneInfo.FindSystemTimeZoneById(TimeZone);
-            }
-            catch (TimeZoneNotFoundException)
-            {
+            // An empty ID means "use the system time zone" and is the default,
+            // so don't pay for a failed registry lookup on every call.
+            if (string.IsNullOrWhiteSpace(TimeZone))
                 return TimeZoneInfo.Local;
+
+            // Cache the lookup; this getter can run every second and an unknown
+            // or corrupt ID would otherwise throw on each tick.
+            if (_resolvedTimeZoneId != TimeZone)
+            {
+                try
+                {
+                    _resolvedTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZone);
+                }
+                catch (Exception ex) when (ex is TimeZoneNotFoundException or InvalidTimeZoneException)
+                {
+                    _resolvedTimeZone = TimeZoneInfo.Local;
+                }
+
+                _resolvedTimeZoneId = TimeZone;
             }
+
+            return _resolvedTimeZone;
         }
         set
         {
