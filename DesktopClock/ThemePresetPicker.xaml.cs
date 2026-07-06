@@ -88,8 +88,7 @@ public partial class ThemePresetPicker : UserControl
             text.StrokeThickness = theme.OutlineThickness;
         }
 
-        // A wallpaper-like gradient stands in for the desktop so every look pops the
-        // way it would in place; a flat grey swatch made all the themes look alike.
+        // Neutral backdrop standing in for the desktop behind the clock.
         var backdrop = new Border
         {
             Child = clock,
@@ -97,12 +96,8 @@ public partial class ThemePresetPicker : UserControl
             Height = 58,
             CornerRadius = new CornerRadius(5),
             SnapsToDevicePixels = true,
-            Background = new LinearGradientBrush(
-                Color.FromRgb(0x35, 0x3E, 0x5C),
-                Color.FromRgb(0x18, 0x1C, 0x2A),
-                new Point(0, 0),
-                new Point(1, 1)),
         };
+        backdrop.SetResourceReference(Border.BackgroundProperty, "SubtleBrush");
 
         return backdrop;
     }
