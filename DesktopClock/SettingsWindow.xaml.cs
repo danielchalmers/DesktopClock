@@ -213,12 +213,49 @@ public partial class SettingsWindow : Window
 
     private void SettingsScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
+        UpdateActiveNavButton();
+
         if (_restoringScrollPosition)
         {
             return;
         }
 
         ViewModel.Settings.SettingsScrollPosition = e.VerticalOffset;
+    }
+
+    /// <summary>
+    /// Marks the sidebar button whose section is currently in view.
+    /// </summary>
+    private void UpdateActiveNavButton()
+    {
+        if (!SettingsContent.IsLoaded)
+        {
+            return;
+        }
+
+        // The active section is the last one whose top has scrolled past the upper part of the viewport.
+        var threshold = SettingsScrollViewer.VerticalOffset + SettingsScrollViewer.ViewportHeight / 3;
+        Button activeButton = null;
+
+        foreach (var button in NavPanel.Children.OfType<Button>())
+        {
+            if (button.Tag is not FrameworkElement section)
+            {
+                continue;
+            }
+
+            var sectionOffset = section.TransformToAncestor(SettingsContent).Transform(new Point(0, 0)).Y;
+
+            if (sectionOffset <= threshold || activeButton == null)
+            {
+                activeButton = button;
+            }
+        }
+
+        foreach (var button in NavPanel.Children.OfType<Button>())
+        {
+            NavButton.SetIsActive(button, button == activeButton);
+        }
     }
 
     private void SettingsWindow_Closing(object sender, CancelEventArgs e)
@@ -251,6 +288,19 @@ public partial class SettingsWindow : Window
 
         Process.Start(new ProcessStartInfo("explorer.exe", folderPath) { UseShellExecute = true });
     }
+}
+
+/// <summary>
+/// Attached property that marks the sidebar navigation button for the section currently in view.
+/// </summary>
+public static class NavButton
+{
+    public static readonly DependencyProperty IsActiveProperty = DependencyProperty.RegisterAttached(
+        "IsActive", typeof(bool), typeof(NavButton), new PropertyMetadata(false));
+
+    public static bool GetIsActive(DependencyObject obj) => (bool)obj.GetValue(IsActiveProperty);
+
+    public static void SetIsActive(DependencyObject obj, bool value) => obj.SetValue(IsActiveProperty, value);
 }
 
 public partial class SettingsWindowViewModel : ObservableObject

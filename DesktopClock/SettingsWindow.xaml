@@ -28,10 +28,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0"
-                Background="{DynamicResource SubtleBrush}"
-                BorderBrush="{DynamicResource SeparatorBrush}"
-                BorderThickness="0,0,1,0">
+        <Border Grid.Column="0">
             <Grid Margin="8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -49,8 +46,8 @@
                                Margin="0,0,0,6" />
                 </StackPanel>
 
-                <StackPanel Grid.Row="1"
-                            VerticalAlignment="Center">
+                <StackPanel x:Name="NavPanel"
+                            Grid.Row="1">
                     <Button Content="_Display"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=DisplaySection}"
