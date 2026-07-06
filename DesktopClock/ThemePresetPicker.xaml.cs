@@ -58,8 +58,8 @@ public partial class ThemePresetPicker : UserControl
     {
         var text = new OutlinedTextBlock
         {
-            Text = "12:34",
-            FontSize = 15,
+            Text = "10:08",
+            FontSize = 17,
             FontFamily = new FontFamily(theme.FontFamily),
             FontWeight = (FontWeight)_fontWeightConverter.ConvertFromString(theme.FontWeight),
             FontStyle = (FontStyle)_fontStyleConverter.ConvertFromString(theme.FontStyle),
@@ -71,7 +71,7 @@ public partial class ThemePresetPicker : UserControl
         var clock = new Border
         {
             Child = text,
-            Padding = new Thickness(9, 3, 9, 3),
+            Padding = new Thickness(10, 4, 10, 4),
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
         };
@@ -82,21 +82,27 @@ public partial class ThemePresetPicker : UserControl
             clock.Background = new SolidColorBrush(theme.OuterColor) { Opacity = theme.BackgroundOpacity };
             clock.CornerRadius = new CornerRadius(theme.BackgroundCornerRadius * 0.75);
         }
-        else
+        else if (theme.OutlineThickness > 0)
         {
             text.Stroke = new SolidColorBrush(theme.OuterColor) { Opacity = theme.BackgroundOpacity };
             text.StrokeThickness = theme.OutlineThickness;
         }
 
-        // Neutral backdrop standing in for the desktop behind the clock.
+        // A wallpaper-like gradient stands in for the desktop so every look pops the
+        // way it would in place; a flat grey swatch made all the themes look alike.
         var backdrop = new Border
         {
             Child = clock,
-            Width = 108,
-            Height = 48,
-            CornerRadius = new CornerRadius(4),
+            Width = 128,
+            Height = 58,
+            CornerRadius = new CornerRadius(5),
+            SnapsToDevicePixels = true,
+            Background = new LinearGradientBrush(
+                Color.FromRgb(0x35, 0x3E, 0x5C),
+                Color.FromRgb(0x18, 0x1C, 0x2A),
+                new Point(0, 0),
+                new Point(1, 1)),
         };
-        backdrop.SetResourceReference(Border.BackgroundProperty, "SubtleBrush");
 
         return backdrop;
     }
