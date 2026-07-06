@@ -57,6 +57,7 @@ public partial class FormatEditor : UserControl
         ("Time", "{h:mm tt}"),
         ("Time (24-hour)", "{HH:mm}"),
         ("Seconds", "{ss}"),
+        ("Week number", "{week}"),
         ("UTC offset", "{zzz}"),
     };
 

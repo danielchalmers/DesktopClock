@@ -31,6 +31,12 @@ public static class Tokenizer
                     return _tokenizerRegex.Replace(format, (m) =>
                     {
                         var formatString = m.Groups[1].Value;
+
+                        if (TryFormatCustomToken(formattable, formatString, formatProvider, out var customResult))
+                        {
+                            return customResult;
+                        }
+
                         return formattable.ToString(formatString, formatProvider);
                     });
                 }
@@ -46,6 +52,29 @@ public static class Tokenizer
 
         // Fall back to the default format.
         return formattable.ToString();
+    }
+
+    /// <summary>
+    /// Handles tokens that have no standard format string equivalent, such as ISO week numbers.
+    /// </summary>
+    private static bool TryFormatCustomToken(IFormattable formattable, string token, IFormatProvider formatProvider, out string result)
+    {
+        result = null;
+
+        if (token != "week" && token != "weekYear")
+            return false;
+
+        DateTime dateTime;
+        if (formattable is DateTime dt)
+            dateTime = dt;
+        else if (formattable is DateTimeOffset dto)
+            dateTime = dto.DateTime;
+        else
+            return false;
+
+        var value = token == "week" ? dateTime.GetIsoWeekOfYear() : dateTime.GetIsoWeekYear();
+        result = value.ToString(formatProvider);
+        return true;
     }
 
     private static bool UsesTokenSyntax(string format)

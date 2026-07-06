@@ -134,6 +134,25 @@ public class TimeStringFormatterTests
     }
 
     [Fact]
+    public void Format_WeekTokenUsesSelectedTimeZone()
+    {
+        // 23:30 UTC on Sunday is already Monday of ISO week 1 in a UTC+2 zone.
+        var now = new DateTimeOffset(2024, 12, 29, 23, 30, 0, TimeSpan.Zero);
+        var timeZone = TimeZoneInfo.CreateCustomTimeZone("UtcPlus2", TimeSpan.FromHours(2), "UtcPlus2", "UtcPlus2");
+
+        var result = TimeStringFormatter.Format(
+            now,
+            now.DateTime,
+            timeZone,
+            default,
+            "{weekYear}-W{week}",
+            null,
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal("2025-W1", result);
+    }
+
+    [Fact]
     public void Format_InvalidClockFormatShowsBriefErrorMessage()
     {
         var now = new DateTimeOffset(2024, 1, 1, 10, 15, 0, TimeSpan.Zero);
