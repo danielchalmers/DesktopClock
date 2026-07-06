@@ -144,6 +144,22 @@ public class DateTimeTests
     }
 
     [Theory]
+    [InlineData("2024-01-01", 1, 2024)] // Monday starting the first ISO week of 2024.
+    [InlineData("2024-12-29", 52, 2024)] // Sunday ending the last ISO week of 2024.
+    [InlineData("2024-12-30", 1, 2025)] // Monday belonging to the first ISO week of 2025.
+    [InlineData("2021-01-01", 53, 2020)] // Friday belonging to the last ISO week of 2020.
+    [InlineData("2026-07-06", 28, 2026)] // Mid-year date where week year matches calendar year.
+    public void GetIsoWeek_MatchesIso8601(string dateString, int expectedWeek, int expectedWeekYear)
+    {
+        // Arrange
+        var date = DateTime.Parse(dateString, CultureInfo.InvariantCulture);
+
+        // Act & Assert
+        Assert.Equal(expectedWeek, date.GetIsoWeekOfYear());
+        Assert.Equal(expectedWeekYear, date.GetIsoWeekYear());
+    }
+
+    [Theory]
     [InlineData("dddd, MMMM dd", "Monday, January 01")]
     [InlineData("yyyy-MM-dd", "2024-01-01")]
     [InlineData("HH:mm:ss", "00:00:00")]

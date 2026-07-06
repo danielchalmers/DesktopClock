@@ -111,6 +111,69 @@ public class TokenizerTests
         Assert.Equal("Sunday, Sep 24", result);
     }
 
+    [Theory]
+    [InlineData("2024-01-01", "Week 1")]
+    [InlineData("2024-12-29", "Week 52")]
+    [InlineData("2024-12-30", "Week 1")]
+    [InlineData("2021-01-01", "Week 53")]
+    public void FormatWithTokenizer_WeekToken_ShouldUseIsoWeek(string dateString, string expected)
+    {
+        // Arrange
+        var dateTime = DateTime.Parse(dateString, CultureInfo.InvariantCulture);
+        var format = "Week {week}";
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    [Theory]
+    [InlineData("2024-12-30", "2025-W1")]
+    [InlineData("2021-01-01", "2020-W53")]
+    [InlineData("2026-05-06", "2026-W19")]
+    public void FormatWithTokenizer_WeekYearToken_ShouldUseIsoWeekYear(string dateString, string expected)
+    {
+        // Arrange
+        var dateTime = DateTime.Parse(dateString, CultureInfo.InvariantCulture);
+        var format = "{weekYear}-W{week}";
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void FormatWithTokenizer_WeekToken_MixesWithStandardTokens()
+    {
+        // Arrange
+        var dateTimeOffset = new DateTimeOffset(2024, 12, 30, 14, 30, 0, TimeSpan.Zero);
+        var format = "{ddd}, {MMM dd} (W{week})";
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTimeOffset, format, CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal("Mon, Dec 30 (W1)", result);
+    }
+
+    [Fact]
+    public void FormatWithTokenizer_WeekToken_OnTimeSpan_ShowsErrorMessage()
+    {
+        // Arrange - week tokens only apply to dates, so a countdown format using one is invalid.
+        var timeSpan = new TimeSpan(1, 2, 3, 4);
+        var format = "Week {week}";
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(timeSpan, format, CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal(Tokenizer.FormatErrorMessage, result);
+    }
+
     [Fact]
     public void FormatWithTokenizer_StandardFormat_WithoutBraces_ShouldWork()
     {

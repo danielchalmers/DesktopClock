@@ -33,6 +33,7 @@ public partial class FormatEditor : UserControl
         ("Full date and time", "{dddd}, {MMMM dd}, {h:mm tt}"),
         ("Date only", "{dddd}, {MMMM dd}"),
         ("Sortable", "{yyyy-MM-dd} {HH:mm}"),
+        ("ISO week", "{weekYear}-W{week}"),
     };
 
     private static readonly (string Name, string Format)[] CountdownPresets =
@@ -57,6 +58,7 @@ public partial class FormatEditor : UserControl
         ("Time", "{h:mm tt}"),
         ("Time (24-hour)", "{HH:mm}"),
         ("Seconds", "{ss}"),
+        ("Week number", "{week}"),
         ("UTC offset", "{zzz}"),
     };
 
