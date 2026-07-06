@@ -48,17 +48,19 @@ public class OutlinedTextBlock : FrameworkElement
       typeof(OutlinedTextBlock),
       new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
 
+    // No outline unless the consumer asks for one; a visible default stroke is a trap
+    // for anyone instantiating the control without styling it.
     public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(
       "Stroke",
       typeof(Brush),
       typeof(OutlinedTextBlock),
-      new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
+      new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
       "StrokeThickness",
       typeof(double),
       typeof(OutlinedTextBlock),
-      new FrameworkPropertyMetadata(1d, FrameworkPropertyMetadataOptions.AffectsRender));
+      new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty FontFamilyProperty = TextElement.FontFamilyProperty.AddOwner(
       typeof(OutlinedTextBlock),

@@ -57,8 +57,7 @@ public partial class ThemePresetPicker : UserControl
     private static FrameworkElement CreateMiniClock(ClockTheme theme)
     {
         // Rendered as geometry, so keep the sample large enough that thin weights
-        // don't dissolve into anti-aliasing at small stroke widths. The control
-        // defaults to a 1px black stroke, so clear it unless the theme wants one.
+        // don't dissolve into anti-aliasing at small stroke widths.
         var text = new OutlinedTextBlock
         {
             Text = "10:08",
@@ -67,8 +66,6 @@ public partial class ThemePresetPicker : UserControl
             FontWeight = (FontWeight)_fontWeightConverter.ConvertFromString(theme.FontWeight),
             FontStyle = (FontStyle)_fontStyleConverter.ConvertFromString(theme.FontStyle),
             Fill = new SolidColorBrush(theme.TextColor),
-            Stroke = System.Windows.Media.Brushes.Transparent,
-            StrokeThickness = 0,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
         };
