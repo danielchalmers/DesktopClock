@@ -1,4 +1,4 @@
-# <img src="DesktopClock/DesktopClock.svg" alt="DesktopClock icon" width="32" /> DesktopClock
+# 🕒 DesktopClock
 
 [![Latest Release](https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases)](https://github.com/danielchalmers/DesktopClock/releases)
 [![License](https://img.shields.io/github/license/danielchalmers/DesktopClock)](LICENSE)
