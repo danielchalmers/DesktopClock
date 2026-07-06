@@ -83,6 +83,22 @@ public partial class SettingsWindow : Window
         ViewModel.Settings.WavFilePath = openFileDialog.FileName;
     }
 
+    private void OpenClockFormatEditor(object sender, RoutedEventArgs e)
+    {
+        OpenFormatEditor(FormatEditorMode.Clock);
+    }
+
+    private void OpenCountdownFormatEditor(object sender, RoutedEventArgs e)
+    {
+        OpenFormatEditor(FormatEditorMode.Countdown);
+    }
+
+    private void OpenFormatEditor(FormatEditorMode mode)
+    {
+        var editor = new FormatEditorWindow(mode) { Owner = this };
+        editor.ShowDialog();
+    }
+
     private void PickTextColor(object sender, RoutedEventArgs e)
     {
         PickColor(color => ViewModel.Settings.TextColor = color, ViewModel.Settings.TextColor);

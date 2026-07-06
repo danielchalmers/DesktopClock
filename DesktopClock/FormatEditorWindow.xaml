@@ -1,0 +1,89 @@
+<Window x:Class="DesktopClock.FormatEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Format editor (preview)"
+        Width="620"
+        Height="680"
+        MinWidth="520"
+        MinHeight="480"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        FontFamily="Segoe UI Variable Text, Segoe UI"
+        FontSize="13"
+        UseLayoutRounding="True"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Foreground="{DynamicResource TextPrimaryBrush}"
+        SourceInitialized="Window_SourceInitialized">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Live preview -->
+        <Border Grid.Row="0"
+                Background="{DynamicResource CardBackgroundBrush}"
+                BorderBrush="{DynamicResource CardBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="{DynamicResource CardCornerRadius}"
+                Padding="16,12"
+                Margin="0,0,0,12">
+            <StackPanel>
+                <TextBlock Text="Live preview"
+                           Style="{StaticResource DescriptionTextBlock}" />
+                <TextBlock x:Name="PreviewText"
+                           FontSize="22"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap"
+                           Margin="0,4,0,0" />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="0,0,8,0">
+                <TextBlock Text="Common scenarios"
+                           Style="{StaticResource LabelTextBlock}" />
+                <TextBlock Text="Start from a preset, then fine-tune it below."
+                           Style="{StaticResource DescriptionTextBlock}"
+                           Margin="0,0,0,8" />
+                <WrapPanel x:Name="PresetsPanel"
+                           Margin="0,0,0,12" />
+
+                <TextBlock Text="Building blocks"
+                           Style="{StaticResource LabelTextBlock}" />
+                <TextBlock Text="Insert pieces at the cursor position. Anything outside curly braces is shown exactly as typed."
+                           Style="{StaticResource DescriptionTextBlock}"
+                           Margin="0,0,0,8" />
+                <WrapPanel x:Name="TokensPanel"
+                           Margin="0,0,0,12" />
+
+                <TextBlock Text="Format"
+                           Style="{StaticResource LabelTextBlock}" />
+                <TextBox x:Name="FormatTextBox"
+                         AcceptsReturn="True"
+                         MaxLines="3"
+                         TextChanged="FormatTextBox_TextChanged" />
+                <TextBlock x:Name="FormatHintText"
+                           Style="{StaticResource DescriptionTextBlock}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,12,0,0">
+            <Button Content="Apply"
+                    MinWidth="90"
+                    Margin="0,0,8,0"
+                    Click="Apply_Click" />
+            <Button Content="Cancel"
+                    MinWidth="90"
+                    Margin="0"
+                    Click="Cancel_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
