@@ -20,6 +20,7 @@ namespace DesktopClock;
 public partial class SettingsWindow : Window
 {
     private bool _restoringScrollPosition = true;
+    private DateTime _navClickTime = DateTime.MinValue;
 
     public SettingsWindow()
     {
@@ -94,7 +95,7 @@ public partial class SettingsWindow : Window
 
     private void NavigateToSection(object sender, RoutedEventArgs e)
     {
-        if (sender is not Button { Tag: FrameworkElement section })
+        if (sender is not Button { Tag: FrameworkElement section } button)
         {
             return;
         }
@@ -106,6 +107,11 @@ public partial class SettingsWindow : Window
         {
             targetOffset -= (SettingsScrollViewer.ViewportHeight - section.ActualHeight) / 2;
         }
+
+        // Highlight the clicked button directly; scroll positions near the ends can map to
+        // several sections, so geometry alone can't always tell which one was chosen.
+        _navClickTime = DateTime.UtcNow;
+        SetActiveNavButton(button);
 
         SettingsScrollViewer.ScrollToVerticalOffset(targetOffset);
         section.Focus();
@@ -233,25 +239,54 @@ public partial class SettingsWindow : Window
             return;
         }
 
-        // The active section is the last one whose top has scrolled past the upper part of the viewport.
-        var threshold = SettingsScrollViewer.VerticalOffset + SettingsScrollViewer.ViewportHeight / 3;
-        Button activeButton = null;
-
-        foreach (var button in NavPanel.Children.OfType<Button>())
+        // A click already set the highlight; the scroll it caused shouldn't recompute it.
+        if ((DateTime.UtcNow - _navClickTime).TotalMilliseconds < 500)
         {
-            if (button.Tag is not FrameworkElement section)
-            {
-                continue;
-            }
+            return;
+        }
 
-            var sectionOffset = section.TransformToAncestor(SettingsContent).Transform(new Point(0, 0)).Y;
+        var buttons = NavPanel.Children.OfType<Button>().Where(b => b.Tag is FrameworkElement).ToList();
 
-            if (sectionOffset <= threshold || activeButton == null)
+        if (buttons.Count == 0)
+        {
+            return;
+        }
+
+        Button activeButton;
+
+        if (SettingsScrollViewer.VerticalOffset <= 1)
+        {
+            // Pinned to the top: always the first section.
+            activeButton = buttons[0];
+        }
+        else if (SettingsScrollViewer.VerticalOffset >= SettingsScrollViewer.ScrollableHeight - 1)
+        {
+            // Pinned to the bottom: always the last section, which can never scroll past the probe.
+            activeButton = buttons[buttons.Count - 1];
+        }
+        else
+        {
+            // Otherwise the active section is the one containing the middle of the viewport.
+            var probe = SettingsScrollViewer.VerticalOffset + SettingsScrollViewer.ViewportHeight / 2;
+            activeButton = buttons[0];
+
+            foreach (var button in buttons)
             {
-                activeButton = button;
+                var section = (FrameworkElement)button.Tag;
+                var sectionOffset = section.TransformToAncestor(SettingsContent).Transform(new Point(0, 0)).Y;
+
+                if (sectionOffset <= probe)
+                {
+                    activeButton = button;
+                }
             }
         }
 
+        SetActiveNavButton(activeButton);
+    }
+
+    private void SetActiveNavButton(Button activeButton)
+    {
         foreach (var button in NavPanel.Children.OfType<Button>())
         {
             NavButton.SetIsActive(button, button == activeButton);
