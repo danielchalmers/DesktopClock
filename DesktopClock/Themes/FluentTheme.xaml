@@ -713,10 +713,6 @@
     </Style>
 
     <!-- ═══════════════════════════════════════════════════════════ -->
-    <!-- Separator (within menus)                                    -->
-    <!-- ═══════════════════════════════════════════════════════════ -->
-
-    <!-- ═══════════════════════════════════════════════════════════ -->
     <!-- ScrollBar — thin Win11-style rail                           -->
     <!-- ═══════════════════════════════════════════════════════════ -->
 
@@ -811,7 +807,13 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type Separator}">
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- Separator (within menus)                                    -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+    <!-- Menus assign separators the MenuItem.SeparatorStyleKey style; an implicit style is never picked up. -->
+    <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}"
+           TargetType="{x:Type Separator}">
         <Setter Property="Height" Value="1" />
         <Setter Property="Margin" Value="6,4" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
