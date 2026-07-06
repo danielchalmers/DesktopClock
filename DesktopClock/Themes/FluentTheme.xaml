@@ -616,6 +616,15 @@
     <!-- MenuItem                                                    -->
     <!-- ═══════════════════════════════════════════════════════════ -->
 
+    <!-- Segoe Fluent Icons glyph for MenuItem.Icon; falls back to MDL2 on Windows 10. -->
+    <Style x:Key="MenuIconGlyph"
+           TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <Style TargetType="{x:Type MenuItem}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
@@ -643,7 +652,7 @@
                             <Path x:Name="CheckMark"
                                   Grid.Column="0"
                                   Data="M 2,5 L 5,8.5 L 11,1"
-                                  Stroke="{TemplateBinding Foreground}"
+                                  Stroke="{DynamicResource AccentBrush}"
                                   StrokeThickness="1.5"
                                   StrokeStartLineCap="Round"
                                   StrokeEndLineCap="Round"
@@ -659,8 +668,7 @@
                                               VerticalAlignment="Center"
                                               Width="16"
                                               Height="16"
-                                              Margin="0,0,6,0"
-                                              Visibility="Collapsed" />
+                                              Margin="0,0,6,0" />
 
                             <!-- Header -->
                             <ContentPresenter Grid.Column="1"
