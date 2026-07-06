@@ -19,6 +19,7 @@ public static class ThemeManager
 
     private static readonly Uri LightPaletteUri = new(PaletteFolder + "LightPalette.xaml", UriKind.Relative);
     private static readonly Uri DarkPaletteUri = new(PaletteFolder + "DarkPalette.xaml", UriKind.Relative);
+    private static readonly Uri HighContrastPaletteUri = new(PaletteFolder + "HighContrastPalette.xaml", UriKind.Relative);
 
     /// <summary>
     /// Whether the dark palette is currently applied.
@@ -64,7 +65,11 @@ public static class ThemeManager
 
     private static void OnUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
     {
-        if (e.Category != UserPreferenceCategory.General)
+        // Theme changes arrive as General; accent and high-contrast changes as Color/VisualStyle/Accessibility.
+        if (e.Category is not (UserPreferenceCategory.General
+            or UserPreferenceCategory.Color
+            or UserPreferenceCategory.VisualStyle
+            or UserPreferenceCategory.Accessibility))
             return;
 
         Application.Current?.Dispatcher.BeginInvoke(new Action(Apply));
@@ -76,9 +81,11 @@ public static class ThemeManager
         if (app == null)
             return;
 
-        IsDarkTheme = !SystemThemeService.IsLightTheme();
+        var highContrast = SystemParameters.HighContrast;
+        IsDarkTheme = !highContrast && !SystemThemeService.IsLightTheme();
 
-        var paletteUri = IsDarkTheme ? DarkPaletteUri : LightPaletteUri;
+        var paletteUri = highContrast ? HighContrastPaletteUri :
+            IsDarkTheme ? DarkPaletteUri : LightPaletteUri;
         var palette = new ResourceDictionary { Source = paletteUri };
 
         var dictionaries = app.Resources.MergedDictionaries;
@@ -89,7 +96,11 @@ public static class ThemeManager
         else
             dictionaries.Add(palette);
 
-        app.Resources["AccentBrush"] = CreateAccentBrush();
+        // In high contrast the palette's system highlight color wins; otherwise use the accent color.
+        if (highContrast)
+            app.Resources.Remove("AccentBrush");
+        else
+            app.Resources["AccentBrush"] = CreateAccentBrush();
 
         foreach (Window window in app.Windows)
             ApplyTitleBarTheme(window);
