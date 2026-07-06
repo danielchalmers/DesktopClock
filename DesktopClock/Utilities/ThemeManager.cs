@@ -63,6 +63,48 @@ public static class ThemeManager
         }
     }
 
+    /// <summary>
+    /// Fills the window with the palette's background color whenever Windows asks it to
+    /// erase, so it never flashes white before WPF paints the first frame (or when areas
+    /// are exposed during a resize).
+    /// </summary>
+    /// <remarks>
+    /// A window's surface starts out white and is on screen before WPF presents anything,
+    /// which reads as a bright flash in dark mode. Call once per window after its handle
+    /// exists, e.g. from <see cref="Window.SourceInitialized"/>.
+    /// </remarks>
+    public static void ApplyThemedBackgroundErase(Window window)
+    {
+        var hwnd = new WindowInteropHelper(window).Handle;
+        if (hwnd == IntPtr.Zero || HwndSource.FromHwnd(hwnd) is not { } source)
+            return;
+
+        source.AddHook(EraseBackgroundWithThemeColor);
+    }
+
+    private static IntPtr EraseBackgroundWithThemeColor(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        const int WM_ERASEBKGND = 0x0014;
+
+        if (msg != WM_ERASEBKGND)
+            return IntPtr.Zero;
+
+        // Read the color at message time so theme changes while the window is open apply.
+        if (Application.Current?.TryFindResource("WindowBackgroundBrush") is not SolidColorBrush brush ||
+            !GetClientRect(hwnd, out var clientRect))
+        {
+            return IntPtr.Zero;
+        }
+
+        var colorRef = (uint)(brush.Color.R | (brush.Color.G << 8) | (brush.Color.B << 16));
+        var gdiBrush = CreateSolidBrush(colorRef);
+        FillRect(wParam, ref clientRect, gdiBrush);
+        DeleteObject(gdiBrush);
+
+        handled = true;
+        return new IntPtr(1);
+    }
+
     private static void OnUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
     {
         // Theme changes arrive as General; accent and high-contrast changes as Color/VisualStyle/Accessibility.
@@ -135,4 +177,22 @@ public static class ThemeManager
 
     [DllImport("dwmapi.dll", PreserveSig = true)]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attribute, ref int value, int size);
+
+    [DllImport("user32.dll")]
+    private static extern bool GetClientRect(IntPtr hwnd, out RECT rect);
+
+    [DllImport("user32.dll")]
+    private static extern int FillRect(IntPtr hdc, ref RECT rect, IntPtr brush);
+
+    [DllImport("gdi32.dll")]
+    private static extern IntPtr CreateSolidBrush(uint colorRef);
+
+    [DllImport("gdi32.dll")]
+    private static extern bool DeleteObject(IntPtr obj);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct RECT
+    {
+        public int Left, Top, Right, Bottom;
+    }
 }
