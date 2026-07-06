@@ -18,6 +18,11 @@
     <SolidColorBrush x:Key="ControlBorderBrush" Color="#454545" />
     <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#2C2C2C" />
     <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="#6B6B6B" />
+    <SolidColorBrush x:Key="SliderTrackBrush" Color="#757575" />
+    <SolidColorBrush x:Key="SliderThumbBackgroundBrush" Color="#454545" />
+
+    <!-- Foreground for glyphs sitting on an accent fill; dark mode lightens the accent so dark glyphs read better. -->
+    <SolidColorBrush x:Key="OnAccentBrush" Color="#1B1B1B" />
 
     <!-- Fallback when the system accent can't be read; ThemeManager overrides at runtime. -->
     <SolidColorBrush x:Key="AccentBrush" Color="#4CC2FF" />
