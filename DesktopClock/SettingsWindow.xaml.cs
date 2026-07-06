@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -323,6 +324,14 @@ public static class NavButton
 
 public partial class SettingsWindowViewModel : ObservableObject
 {
+    // Enumerating fonts and time zones costs ~100 ms and the results don't change within
+    // a session, so they're fetched once on a background thread. The app kicks this off
+    // while idle after startup so opening settings doesn't have to pay for it.
+    private static readonly Lazy<Task<(IList<string> Fonts, IList<TimeZoneInfo> TimeZones)>> _systemLists =
+        new(() => Task.Run(() => (
+            (IList<string>)GetAllSystemFonts().Distinct().OrderBy(f => f).ToList(),
+            (IList<TimeZoneInfo>)TimeZoneInfo.GetSystemTimeZones())));
+
     public Settings Settings { get; }
 
     /// <summary>
@@ -334,17 +343,21 @@ public partial class SettingsWindowViewModel : ObservableObject
     {
         Settings = settings;
         AppVersion = FileVersionInfo.GetVersionInfo(App.MainFileInfo.FullName).FileVersion;
-        FontFamilies = GetAllSystemFonts().Distinct().OrderBy(f => f).ToList();
         FontStyles = ["Normal", "Italic", "Oblique"];
         FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
         ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
-        TimeZones = TimeZoneInfo.GetSystemTimeZones();
     }
+
+    /// <summary>
+    /// Starts fetching the system lists in the background so they're ready by the time
+    /// the settings window binds to them.
+    /// </summary>
+    public static void PrefetchSystemLists() => _ = _systemLists.Value;
 
     /// <summary>
     /// All available font families reported by the system.
     /// </summary>
-    public IList<string> FontFamilies { get; }
+    public IList<string> FontFamilies => _systemLists.Value.Result.Fonts;
 
     /// <summary>
     /// All available font styles.
@@ -364,7 +377,7 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// All available time zones reported by the system.
     /// </summary>
-    public IList<TimeZoneInfo> TimeZones { get; }
+    public IList<TimeZoneInfo> TimeZones => _systemLists.Value.Result.TimeZones;
 
     /// <summary>
     /// Sets the format string in settings.
@@ -420,7 +433,7 @@ public partial class SettingsWindowViewModel : ObservableObject
         Settings.BackgroundImagePath = string.Empty;
     }
 
-    private IEnumerable<string> GetAllSystemFonts()
+    private static IEnumerable<string> GetAllSystemFonts()
     {
         // Get fonts from WPF.
         foreach (var fontFamily in Fonts.SystemFontFamilies)
