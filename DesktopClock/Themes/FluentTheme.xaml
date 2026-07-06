@@ -2,27 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- ═══════════════════════════════════════════════════════════ -->
-    <!-- Tokens — Colors & Geometry                                  -->
+    <!-- Tokens — Geometry (colors live in LightPalette/DarkPalette) -->
     <!-- ═══════════════════════════════════════════════════════════ -->
 
     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
     <CornerRadius x:Key="CardCornerRadius">8</CornerRadius>
     <CornerRadius x:Key="MenuCornerRadius">8</CornerRadius>
-
-    <SolidColorBrush x:Key="SubtleBrush" Color="#F5F5F5" />
-    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="CardBorderBrush" Color="#E5E5E5" />
-    <SolidColorBrush x:Key="SeparatorBrush" Color="#E5E5E5" />
-    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#636363" />
-    <SolidColorBrush x:Key="HoverBrush" Color="#E9E9E9" />
-    <SolidColorBrush x:Key="PressedBrush" Color="#DFDFDF" />
-    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#FBFBFB" />
-    <SolidColorBrush x:Key="ButtonBorderBrush" Color="#E0E0E0" />
-
-    <!-- System-aware brushes for accessibility / high-contrast -->
-    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}" />
-    <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
-    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}" />
 
     <!-- ═══════════════════════════════════════════════════════════ -->
     <!-- Button                                                      -->
@@ -132,7 +117,10 @@
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ControlFillBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource TextPrimaryBrush}" />
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="SelectionBrush" Value="{DynamicResource AccentBrush}" />
     </Style>
@@ -144,7 +132,7 @@
     <Style TargetType="{x:Type ComboBox}">
         <Setter Property="MinHeight" Value="28" />
         <Setter Property="Padding" Value="6,4" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
         <Setter Property="Margin" Value="0,0,0,4" />
     </Style>
 
@@ -154,6 +142,7 @@
 
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="Margin" Value="0,2,0,6" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
     </Style>
 
     <!-- ═══════════════════════════════════════════════════════════ -->

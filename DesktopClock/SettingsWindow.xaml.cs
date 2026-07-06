@@ -30,6 +30,11 @@ public partial class SettingsWindow : Window
 
     private SettingsWindowViewModel ViewModel => (SettingsWindowViewModel)DataContext;
 
+    private void Window_SourceInitialized(object sender, EventArgs e)
+    {
+        Utilities.ThemeManager.ApplyTitleBarTheme(this);
+    }
+
     private void SelectFormat(object sender, SelectionChangedEventArgs e)
     {
         if (e.AddedItems.Count == 0)

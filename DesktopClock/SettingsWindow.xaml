@@ -16,7 +16,10 @@
         WindowStartupLocation="CenterScreen"
         FontFamily="Segoe UI Variable Text, Segoe UI"
         FontSize="13"
-        UseLayoutRounding="True">
+        UseLayoutRounding="True"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Foreground="{DynamicResource TextPrimaryBrush}"
+        SourceInitialized="Window_SourceInitialized">
 
 
     <Grid>

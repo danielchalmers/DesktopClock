@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Light palette — mirrors Windows 11 light mode surfaces. -->
+
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#F3F3F3" />
+    <SolidColorBrush x:Key="SubtleBrush" Color="#F5F5F5" />
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="CardBorderBrush" Color="#E5E5E5" />
+    <SolidColorBrush x:Key="SeparatorBrush" Color="#E5E5E5" />
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#1A1A1A" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#5D5D5D" />
+    <SolidColorBrush x:Key="HoverBrush" Color="#EAEAEA" />
+    <SolidColorBrush x:Key="PressedBrush" Color="#E0E0E0" />
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#FBFBFB" />
+    <SolidColorBrush x:Key="ButtonBorderBrush" Color="#E0E0E0" />
+    <SolidColorBrush x:Key="ControlFillBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ControlBorderBrush" Color="#DADADA" />
+    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#F9F9F9" />
+    <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="#9A9A9A" />
+
+    <!-- Fallback when the system accent can't be read; ThemeManager overrides at runtime. -->
+    <SolidColorBrush x:Key="AccentBrush" Color="#0067C0" />
+
+</ResourceDictionary>
