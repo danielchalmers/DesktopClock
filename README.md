@@ -1,12 +1,7 @@
-<h1 align="center">
-  <img src="DesktopClock/DesktopClock.svg" alt="DesktopClock icon" width="96" /><br />
-  DesktopClock
-</h1>
+# <img src="DesktopClock/DesktopClock.svg" alt="DesktopClock icon" width="32" align="middle" /> DesktopClock
 
-<p align="center">
-  <a href="https://github.com/danielchalmers/DesktopClock/releases"><img src="https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases" alt="Latest Release" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/danielchalmers/DesktopClock" alt="License" /></a>
-</p>
+[![Latest Release](https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases)](https://github.com/danielchalmers/DesktopClock/releases)
+[![License](https://img.shields.io/github/license/danielchalmers/DesktopClock)](LICENSE)
 
 A customizable and lightweight Windows digital clock for keeping the time, a countdown, or another time zone visible without opening a full calendar or timer app.
 Built around a small overlay window that you can place wherever it fits your desktop, DesktopClock is designed to feel more like part of your workspace than a regular app window.
