@@ -27,7 +27,6 @@ public partial class SettingsWindow : Window
         InitializeComponent();
         DataContext = new SettingsWindowViewModel(Settings.Default);
         Closing += SettingsWindow_Closing;
-        Utilities.ThemeManager.HideUntilContentRendered(this);
     }
 
     private SettingsWindowViewModel ViewModel => (SettingsWindowViewModel)DataContext;

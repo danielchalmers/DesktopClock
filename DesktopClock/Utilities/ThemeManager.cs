@@ -1,11 +1,9 @@
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Threading;
 using Microsoft.Win32;
 
 namespace DesktopClock.Utilities;
@@ -18,7 +16,6 @@ public static class ThemeManager
     private const string PaletteFolder = "Themes/";
     private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
     private const int DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1 = 19;
-    private const int DWMWA_CLOAK = 13;
 
     private static readonly Uri LightPaletteUri = new(PaletteFolder + "LightPalette.xaml", UriKind.Relative);
     private static readonly Uri DarkPaletteUri = new(PaletteFolder + "DarkPalette.xaml", UriKind.Relative);
@@ -63,76 +60,6 @@ public static class ThemeManager
         catch
         {
             // DWM isn't available; keep the default title bar.
-        }
-    }
-
-    /// <summary>
-    /// Keeps the window invisible until its first frame has rendered, so it can't flash
-    /// as an unpainted white rectangle before WPF draws the themed content.
-    /// </summary>
-    /// <remarks>
-    /// The window's surface starts out white and DWM shows it as soon as the window opens,
-    /// which reads as a bright flash in dark mode. Cloaking hides the window at the DWM level
-    /// (unlike <see cref="Window.Visibility"/>, it doesn't affect layout, activation, or focus)
-    /// until the content is actually on the surface.
-    /// </remarks>
-    public static void HideUntilContentRendered(Window window)
-    {
-        window.SourceInitialized += (_, _) => SetCloaked(window, true);
-
-        // ContentRendered fires when the frame is handed to the render thread, slightly
-        // before it reaches the screen surface, so wait out the render and composition
-        // passes that carry the frame before revealing the window.
-        window.ContentRendered += (_, _) => window.Dispatcher.BeginInvoke(DispatcherPriority.ContextIdle, new Action(() =>
-        {
-            WaitForRenderThread(window.Dispatcher);
-
-            try
-            {
-                DwmFlush();
-            }
-            catch
-            {
-            }
-
-            SetCloaked(window, false);
-        }));
-    }
-
-    /// <summary>
-    /// Blocks until the render thread has finished presenting the current frame.
-    /// </summary>
-    private static void WaitForRenderThread(Dispatcher dispatcher)
-    {
-        // MediaContext.CompleteRender is what WPF itself uses to sync with the render
-        // thread but it isn't public; if the internals ever change, the cloaked window
-        // just reveals a frame early.
-        try
-        {
-            var mediaContextType = typeof(CompositionTarget).Assembly.GetType("System.Windows.Media.MediaContext");
-            var mediaContext = mediaContextType?.GetMethod("From", BindingFlags.Static | BindingFlags.NonPublic)?.Invoke(null, [dispatcher]);
-            mediaContextType?.GetMethod("CompleteRender", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)?.Invoke(mediaContext, null);
-        }
-        catch
-        {
-        }
-    }
-
-    private static void SetCloaked(Window window, bool cloaked)
-    {
-        var hwnd = new WindowInteropHelper(window).Handle;
-        if (hwnd == IntPtr.Zero)
-            return;
-
-        var value = cloaked ? 1 : 0;
-
-        try
-        {
-            DwmSetWindowAttribute(hwnd, DWMWA_CLOAK, ref value, sizeof(int));
-        }
-        catch
-        {
-            // DWM isn't available; the window just shows normally.
         }
     }
 
@@ -208,7 +135,4 @@ public static class ThemeManager
 
     [DllImport("dwmapi.dll", PreserveSig = true)]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attribute, ref int value, int size);
-
-    [DllImport("dwmapi.dll", PreserveSig = true)]
-    private static extern int DwmFlush();
 }
