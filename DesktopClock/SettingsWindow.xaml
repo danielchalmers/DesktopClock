@@ -161,18 +161,7 @@
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <TextBlock Text="Countdown target"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.CountdownTo, Mode=TwoWay}" />
-                        <Button Grid.Column="2"
-                                Content="Reset"
-                                Command="{Binding ResetCountdownCommand}" />
-                    </Grid>
+                    <local:CountdownTargetEditor />
                     <TextBlock Text="Set a date and time to count down to. Clear the value to disable countdown mode."
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
