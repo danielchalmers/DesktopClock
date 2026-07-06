@@ -56,10 +56,12 @@ public partial class ThemePresetPicker : UserControl
     /// </summary>
     private static FrameworkElement CreateMiniClock(ClockTheme theme)
     {
+        // Rendered as geometry, so keep the sample large enough that thin weights
+        // don't dissolve into anti-aliasing at small stroke widths.
         var text = new OutlinedTextBlock
         {
             Text = "10:08",
-            FontSize = 17,
+            FontSize = 21,
             FontFamily = new FontFamily(theme.FontFamily),
             FontWeight = (FontWeight)_fontWeightConverter.ConvertFromString(theme.FontWeight),
             FontStyle = (FontStyle)_fontStyleConverter.ConvertFromString(theme.FontStyle),
@@ -92,8 +94,8 @@ public partial class ThemePresetPicker : UserControl
         var backdrop = new Border
         {
             Child = clock,
-            Width = 128,
-            Height = 58,
+            Width = 140,
+            Height = 64,
             CornerRadius = new CornerRadius(5),
             SnapsToDevicePixels = true,
         };
