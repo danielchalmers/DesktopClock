@@ -1,4 +1,4 @@
-<!-- Master source for DesktopClock.ico and icon.png. Small ICO sizes are re-rendered with proportionally thicker strokes for legibility. -->
+<!-- Master source for DesktopClock.ico. Small ICO sizes are re-rendered with proportionally thicker strokes for legibility. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
     <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
