@@ -36,10 +36,20 @@
             <Separator />
 
             <MenuItem Command="{Binding CopyToClipboardCommand}"
-                      Header="_Copy" />
+                      Header="_Copy">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xE8C8;"
+                               Style="{StaticResource MenuIconGlyph}" />
+                </MenuItem.Icon>
+            </MenuItem>
 
             <MenuItem Command="{Binding HideForNowCommand}"
-                      Header="_Hide" />
+                      Header="_Hide">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xE890;"
+                               Style="{StaticResource MenuIconGlyph}" />
+                </MenuItem.Icon>
+            </MenuItem>
 
             <MenuItem>
                 <MenuItem.Header>
@@ -59,18 +69,38 @@
                       IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      Header="_Settings…" />
+                      Header="_Settings…">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xE713;"
+                               Style="{StaticResource MenuIconGlyph}" />
+                </MenuItem.Icon>
+            </MenuItem>
 
             <Separator />
 
             <MenuItem Command="{Binding OpenReleasesPageCommand}"
-                      Header="Check for _updates" />
+                      Header="Check for _updates">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xE895;"
+                               Style="{StaticResource MenuIconGlyph}" />
+                </MenuItem.Icon>
+            </MenuItem>
 
             <MenuItem Command="{Binding OpenIssueTrackerCommand}"
-                      Header="Give _feedback" />
+                      Header="Give _feedback">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xED15;"
+                               Style="{StaticResource MenuIconGlyph}" />
+                </MenuItem.Icon>
+            </MenuItem>
 
             <MenuItem Command="{Binding ExitCommand}"
-                      Header="E_xit" />
+                      Header="E_xit">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xE7E8;"
+                               Style="{StaticResource MenuIconGlyph}" />
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <tb:TaskbarIcon x:Key="TrayIcon"

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using DesktopClock.Utilities;
 using Microsoft.Win32;
 
 namespace DesktopClock;
@@ -14,6 +15,12 @@ public partial class App : Application
 {
     public static FileInfo MainFileInfo = new(Process.GetCurrentProcess().MainModule.FileName);
     public static string MainFileDisplayText = $"{Path.GetFileNameWithoutExtension(MainFileInfo.Name)} {FileVersionInfo.GetVersionInfo(MainFileInfo.FullName).FileVersion}";
+
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+        ThemeManager.Initialize();
+    }
 
     /// <summary>
     /// Sets or deletes a value in the registry which enables the current executable to run on system startup.

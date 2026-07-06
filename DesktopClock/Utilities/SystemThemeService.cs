@@ -42,6 +42,14 @@ public static class SystemThemeService
     }
 
     /// <summary>
+    /// Whether Windows is using the light app theme; defaults to light when it can't be read.
+    /// </summary>
+    public static bool IsLightTheme()
+    {
+        return !TryGetSystemThemeIsLight(out var isLight) || isLight;
+    }
+
+    /// <summary>
     /// Reads the light/dark preference from the Windows personalize key.
     /// </summary>
     private static bool TryGetSystemThemeIsLight(out bool isLightTheme)
@@ -68,7 +76,7 @@ public static class SystemThemeService
     /// <summary>
     /// Resolves the current accent color using DWM, registry, then system parameters.
     /// </summary>
-    private static Color GetSystemAccentColor()
+    public static Color GetSystemAccentColor()
     {
         // Prefer DWM because it tracks the active colorization value.
         if (TryGetAccentColorFromDwm(out var accent) || TryGetAccentColorFromRegistry(out accent))

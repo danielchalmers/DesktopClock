@@ -6,6 +6,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/FluentTheme.xaml" />
+                <!-- Design-time default; ThemeManager swaps this for the system theme at runtime. -->
+                <ResourceDictionary Source="Themes/LightPalette.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
