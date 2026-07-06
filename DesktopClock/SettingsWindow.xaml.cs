@@ -36,23 +36,6 @@ public partial class SettingsWindow : Window
         Utilities.ThemeManager.ApplyTitleBarTheme(this);
     }
 
-    private void SelectFormat(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.AddedItems.Count == 0)
-        {
-            return;
-        }
-
-        var value = e.AddedItems[0] as DateFormatExample;
-
-        if (value == null)
-        {
-            return;
-        }
-
-        ViewModel.Settings.Format = value.Format;
-    }
-
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
     {
         var openFileDialog = new OpenFileDialog

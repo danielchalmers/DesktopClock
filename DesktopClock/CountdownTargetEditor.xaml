@@ -1,0 +1,44 @@
+<UserControl x:Class="DesktopClock.CountdownTargetEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:p="clr-namespace:DesktopClock.Properties">
+    <StackPanel>
+        <!-- One-click targets for common scenarios, computed when clicked -->
+        <TextBlock Text="Common targets"
+                   Style="{StaticResource EditorCaption}" />
+        <WrapPanel x:Name="PresetsPanel"
+                   Margin="0,0,0,10" />
+
+        <TextBlock Text="Custom target"
+                   Style="{StaticResource EditorCaption}" />
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Text="{Binding CountdownTo, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+            <Button Grid.Column="2"
+                    Content="Reset"
+                    Click="ResetTarget" />
+        </Grid>
+
+        <!-- What the target means in plain words -->
+        <Border Background="{DynamicResource SubtleBrush}"
+                BorderBrush="{DynamicResource CardBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="{DynamicResource ControlCornerRadius}"
+                Padding="10,7">
+            <StackPanel>
+                <TextBlock Text="Preview"
+                           FontSize="11"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           Margin="0,0,0,2" />
+                <TextBlock x:Name="PreviewText"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,45 @@
+<UserControl x:Class="DesktopClock.FormatEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <!-- One-click presets for common scenarios, each showing its live rendered output -->
+        <TextBlock Text="Common formats"
+                   Style="{StaticResource EditorCaption}" />
+        <WrapPanel x:Name="PresetsPanel"
+                   Margin="0,0,0,10" />
+
+        <!-- Free-form format with building blocks that insert tokens at the cursor -->
+        <TextBlock Text="Custom format"
+                   Style="{StaticResource EditorCaption}" />
+        <TextBox x:Name="FormatTextBox"
+                 AcceptsReturn="True"
+                 MaxLines="3"
+                 Margin="0,0,0,4"
+                 TextChanged="FormatTextBox_TextChanged" />
+        <WrapPanel x:Name="TokensPanel"
+                   Margin="0,0,0,10">
+            <TextBlock Text="Insert:"
+                       FontSize="12"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,4" />
+        </WrapPanel>
+
+        <!-- Live result, rendered the same way the clock draws it -->
+        <Border Background="{DynamicResource SubtleBrush}"
+                BorderBrush="{DynamicResource CardBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="{DynamicResource ControlCornerRadius}"
+                Padding="10,7">
+            <StackPanel>
+                <TextBlock Text="Preview"
+                           FontSize="11"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           Margin="0,0,0,2" />
+                <TextBlock x:Name="PreviewText"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

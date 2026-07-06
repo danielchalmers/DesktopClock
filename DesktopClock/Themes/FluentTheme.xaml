@@ -624,6 +624,14 @@
         <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
     </Style>
 
+    <!-- Small section caption inside inline editors -->
+    <Style x:Key="EditorCaption"
+           TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+        <Setter Property="Margin" Value="0,0,0,4" />
+    </Style>
+
     <Style x:Key="SliderValueTextBlock"
            TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center" />
