@@ -64,14 +64,10 @@ public static class ThemeManager
     }
 
     /// <summary>
-    /// Fills the window with the palette's background color whenever Windows asks it to
-    /// erase, so it never flashes white before WPF paints the first frame (or when areas
-    /// are exposed during a resize).
+    /// Fills the window with the palette's background color whenever Windows asks it to erase, so it never flashes white before WPF paints the first frame or when areas are exposed during a resize.
     /// </summary>
     /// <remarks>
-    /// A window's surface starts out white and is on screen before WPF presents anything,
-    /// which reads as a bright flash in dark mode. Call once per window after its handle
-    /// exists, e.g. from <see cref="Window.SourceInitialized"/>.
+    /// A window's surface starts out white and is on screen before WPF presents anything, which reads as a bright flash in dark mode. Call once per window after its handle exists, e.g. from <see cref="Window.SourceInitialized"/>.
     /// </remarks>
     public static void ApplyThemedBackgroundErase(Window window)
     {

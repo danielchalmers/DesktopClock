@@ -325,9 +325,7 @@ public static class NavButton
 
 public partial class SettingsWindowViewModel : ObservableObject
 {
-    // Enumerating fonts and time zones costs ~100 ms and the results don't change within
-    // a session, so they're fetched once on a background thread. The app kicks this off
-    // while idle after startup so opening settings doesn't have to pay for it.
+    // Enumerating fonts and time zones costs ~100 ms and the results don't change within a session, so they're fetched once on a background thread that the app kicks off while idle after startup.
     private static readonly Lazy<Task<(IList<string> Fonts, IList<TimeZoneInfo> TimeZones)>> _systemLists =
         new(() => Task.Run(() => (
             (IList<string>)GetAllSystemFonts().Distinct().OrderBy(f => f).ToList(),
@@ -350,8 +348,7 @@ public partial class SettingsWindowViewModel : ObservableObject
     }
 
     /// <summary>
-    /// Starts fetching the system lists in the background so they're ready by the time
-    /// the settings window binds to them.
+    /// Starts fetching the system lists in the background so they're ready by the time the settings window binds to them.
     /// </summary>
     public static void PrefetchSystemLists() => _ = _systemLists.Value;
 
