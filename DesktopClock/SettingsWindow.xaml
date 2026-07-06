@@ -690,12 +690,6 @@
                                 WpfWindowPlacement
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="https://icon.kitchen/i/H4sIAAAAAAAAA0WP2grCMAyG3yXe7sIDCO5WH0DQOxHJ2rQrdstsOw%2BI725aB%2FaiCV8O%2F5833NGPFKF%2Bg8ZwPbbUEdQGfaQKjN16N2BIuRxJAmgyOPoEFTjFvQBUimK8JCdznzLCnoMUZqY86Wz%2BbLnYrM2qsEOLg0hBvI0uKE8Cjd2j1q63WS%2FxAPViXkFwthXpnDacEne%2F3JMptIgeX2WXmuwWRM9seLctalODDagd9Slb7ViPPp9%2BAux1YKfzVRzlf1AD588XVKijiB0BAAA%3D"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                IconKitchen
-                            </Hyperlink>
-                        </TextBlock>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
