@@ -35,6 +35,7 @@ public partial class SettingsWindow : Window
     private void Window_SourceInitialized(object sender, EventArgs e)
     {
         Utilities.ThemeManager.ApplyTitleBarTheme(this);
+        Utilities.ThemeManager.ApplyThemedBackgroundErase(this);
     }
 
     private void BrowseBackgroundImagePath(object sender, RoutedEventArgs e)
