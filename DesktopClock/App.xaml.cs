@@ -20,6 +20,11 @@ public partial class App : Application
     {
         base.OnStartup(e);
         ThemeManager.Initialize();
+
+        // Warm the settings window's system lists once the clock is up and idle, so opening settings later doesn't stall on enumerating them.
+        Dispatcher.BeginInvoke(
+            System.Windows.Threading.DispatcherPriority.ApplicationIdle,
+            new Action(SettingsWindowViewModel.PrefetchSystemLists));
     }
 
     /// <summary>
