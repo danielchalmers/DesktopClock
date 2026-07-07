@@ -193,12 +193,11 @@ public partial class SettingsWindow : Window
             return;
         }
 
-        Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
-        {
-            SettingsScrollViewer.ScrollToVerticalOffset(ViewModel.Settings.SettingsScrollPosition);
-            ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
-            _restoringScrollPosition = false;
-        }));
+        // Apply the offset within the same layout pass so the first frame is already at the saved position instead of visibly jumping there after it renders.
+        SettingsScrollViewer.ScrollToVerticalOffset(ViewModel.Settings.SettingsScrollPosition);
+        SettingsScrollViewer.UpdateLayout();
+        ViewModel.Settings.SettingsScrollPosition = SettingsScrollViewer.VerticalOffset;
+        _restoringScrollPosition = false;
     }
 
     private void SettingsScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
