@@ -113,42 +113,16 @@
     <Viewbox Height="{Binding Height, Source={x:Static p:Settings.Default}, Mode=OneWay}">
         <Border CornerRadius="{Binding BackgroundCornerRadius, Source={x:Static p:Settings.Default}, Mode=OneWay}"
                 Padding="1,0,1,0">
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Setter Property="Background" Value="Transparent" />
-
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                     Value="True">
-                            <DataTrigger.Setters>
-                                <Setter Property="Background">
-                                    <Setter.Value>
-                                        <ImageBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                                    ImageSource="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                                    Stretch="{Binding BackgroundImageStretch, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger.Setters>
-                        </DataTrigger>
-
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding BackgroundEnabled, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="True" />
-                                <Condition Binding="{Binding BackgroundImagePath, Source={x:Static p:Settings.Default}, Mode=OneWay}" Value="" />
-                            </MultiDataTrigger.Conditions>
-
-                            <MultiDataTrigger.Setters>
-                                <Setter Property="Background">
-                                    <Setter.Value>
-                                        <SolidColorBrush Opacity="{Binding BackgroundOpacity, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-                                                         Color="{Binding OuterColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </MultiDataTrigger.Setters>
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
+            <Border.Background>
+                <!-- Falls back to the solid outer color when the background image is missing or unreadable, so the clock is never left with an invisible background. -->
+                <MultiBinding Converter="{local:BackgroundBrushConverter}">
+                    <Binding Path="BackgroundEnabled" Source="{x:Static p:Settings.Default}" Mode="OneWay" />
+                    <Binding Path="BackgroundImagePath" Source="{x:Static p:Settings.Default}" Mode="OneWay" />
+                    <Binding Path="OuterColor" Source="{x:Static p:Settings.Default}" Mode="OneWay" />
+                    <Binding Path="BackgroundOpacity" Source="{x:Static p:Settings.Default}" Mode="OneWay" />
+                    <Binding Path="BackgroundImageStretch" Source="{x:Static p:Settings.Default}" Mode="OneWay" />
+                </MultiBinding>
+            </Border.Background>
 
             <local:OutlinedTextBlock Text="{Binding CurrentTimeOrCountdownString}"
                                      StrokeThickness="{Binding OutlineThickness, Source={x:Static p:Settings.Default}, Mode=OneWay}"
