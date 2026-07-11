@@ -59,7 +59,24 @@ public partial class MainWindow : Window
 
         ConfigureTrayIcon();
 
+        // Rebuild the tray menu when the system theme changes; unlike the window's own menu, it lives outside any window tree so its colors never refresh on their own.
+        ThemeManager.ThemeChanged += ThemeManager_ThemeChanged;
+
         UpdateSoundPlayerEnabled();
+    }
+
+    /// <summary>
+    /// Swaps in a fresh tray context menu so it picks up the new palette after a system theme change.
+    /// </summary>
+    private void ThemeManager_ThemeChanged(object sender, EventArgs e)
+    {
+        if (_trayIcon == null)
+            return;
+
+        // A new instance (x:Shared="False") resolves its DynamicResource colors against the current palette when it next opens.
+        var menu = Resources["MainContextMenu"] as ContextMenu;
+        menu.DataContext = this;
+        _trayIcon.ContextMenu = menu;
     }
 
     /// <summary>
@@ -123,6 +140,7 @@ public partial class MainWindow : Window
     protected override void OnClosed(EventArgs e)
     {
         Settings.Default.PropertyChanged -= _settingsPropertyChanged;
+        ThemeManager.ThemeChanged -= ThemeManager_ThemeChanged;
 
         _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
         _systemClockTimer.Dispose();
