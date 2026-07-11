@@ -133,7 +133,7 @@ public partial class FormatEditor : UserControl
             var example = new TextBlock
             {
                 Text = FormatPreview(format),
-                FontSize = 11.5,
+                FontSize = 12,
                 TextTrimming = TextTrimming.CharacterEllipsis,
             };
             example.SetResourceReference(ForegroundProperty, "TextSecondaryBrush");

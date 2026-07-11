@@ -29,7 +29,7 @@ public partial class ThemePresetPicker : UserControl
         var name = new TextBlock
         {
             Text = theme.Name,
-            FontSize = 11.5,
+            FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Center,
             Margin = new Thickness(0, 4, 0, 0),
         };

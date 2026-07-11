@@ -70,7 +70,7 @@ public partial class CountdownTargetEditor : UserControl
             var example = new TextBlock
             {
                 Text = getTarget().ToString("ddd, MMM d, h:mm tt"),
-                FontSize = 11.5,
+                FontSize = 12,
                 TextTrimming = TextTrimming.CharacterEllipsis,
             };
             example.SetResourceReference(ForegroundProperty, "TextSecondaryBrush");
