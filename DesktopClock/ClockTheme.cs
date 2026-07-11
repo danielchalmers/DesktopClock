@@ -62,7 +62,7 @@ public sealed class ClockTheme
                 backgroundEnabled: true, backgroundOpacity: 0.97, backgroundCornerRadius: 8, outlineThickness: 0.2),
             new ClockTheme("Minimal", "Segoe UI", "Light",
                 Color.FromRgb(0xFF, 0xFF, 0xFF), Color.FromRgb(0x00, 0x00, 0x00),
-                backgroundEnabled: false, backgroundOpacity: 0, backgroundCornerRadius: 1, outlineThickness: 0),
+                backgroundEnabled: false, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 0),
             new ClockTheme("Chalk", "Segoe UI", "SemiBold",
                 Color.FromRgb(0xFF, 0xFF, 0xFF), Color.FromRgb(0x00, 0x00, 0x00),
                 backgroundEnabled: false, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 1.5),
