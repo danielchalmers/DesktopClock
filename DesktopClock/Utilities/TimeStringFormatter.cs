@@ -32,8 +32,7 @@ public static class TimeStringFormatter
         {
             var countdown = countdownTo - nowDateTime;
 
-            // Custom TimeSpan formats drop the sign, so format the magnitude and add the sign back
-            // to keep an elapsed target from reading like time remaining.
+            // Custom TimeSpan formats drop the sign, so format the magnitude and add it back to mark an elapsed target.
             var isElapsed = countdown < TimeSpan.Zero;
             result = Tokenizer.FormatWithTokenizerOrFallBack(isElapsed ? countdown.Negate() : countdown, countdownFormat, formatProvider);
 
