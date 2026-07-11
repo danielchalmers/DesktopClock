@@ -15,7 +15,7 @@
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         FontFamily="Segoe UI Variable Text, Segoe UI"
-        FontSize="13"
+        FontSize="14"
         UseLayoutRounding="True"
         Background="{DynamicResource WindowBackgroundBrush}"
         Foreground="{DynamicResource TextPrimaryBrush}"

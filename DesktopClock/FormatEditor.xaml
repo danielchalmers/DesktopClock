@@ -33,7 +33,7 @@
                 Padding="10,7">
             <StackPanel>
                 <TextBlock Text="Preview"
-                           FontSize="11"
+                           FontSize="12"
                            Foreground="{DynamicResource TextSecondaryBrush}"
                            Margin="0,0,0,2" />
                 <TextBlock x:Name="PreviewText"

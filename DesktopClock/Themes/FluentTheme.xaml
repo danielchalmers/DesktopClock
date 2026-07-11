@@ -82,7 +82,7 @@
         <Setter Property="Margin" Value="0,0,0,2" />
         <Setter Property="Padding" Value="11,7,23,7" />
         <Setter Property="MinHeight" Value="34" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
@@ -154,7 +154,7 @@
 
     <Style x:Key="SidebarToolDescription"
            TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
@@ -632,7 +632,8 @@
 
     <Style x:Key="DescriptionTextBlock"
            TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11.5" />
+        <!-- Win11 caption size, one step under the 14px body. -->
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
     </Style>
@@ -698,7 +699,7 @@
     <Style x:Key="MenuIconGlyph"
            TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe Fluent Icons, Segoe MDL2 Assets" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -706,7 +707,8 @@
     <Style TargetType="{x:Type MenuItem}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
-        <Setter Property="FontSize" Value="12" />
+        <!-- Win11 flyout menus use body-size text. -->
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
