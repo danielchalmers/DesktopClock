@@ -106,7 +106,48 @@ public class TimeStringFormatterTests
                 " ",
                 CultureInfo.CurrentCulture);
 
-            Assert.Equal(countdownTo.Humanize(utcDate: false, dateToCompareAgainst: nowDateTime), result);
+            var localNow = DateTime.SpecifyKind(nowDateTime, DateTimeKind.Local);
+            Assert.Equal(countdownTo.Humanize(utcDate: false, dateToCompareAgainst: localNow), result);
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = originalCulture;
+            CultureInfo.CurrentUICulture = originalUiCulture;
+        }
+    }
+
+    [Theory]
+    [InlineData(0, "now")]
+    [InlineData(3, "3 hours from now")]
+    [InlineData(-3, "3 hours ago")]
+    [InlineData(72, "3 days from now")]
+    [InlineData(-72, "3 days ago")]
+    public void Format_HumanizedCountdownIsRelativeToNow(int hoursFromNow, string expected)
+    {
+        // The wall-clock values have Kind Unspecified, which Humanizer used to shift by the
+        // machine's UTC offset, e.g. a target of "now" read as "6 hours from now" on UTC-6.
+        var originalCulture = CultureInfo.CurrentCulture;
+        var originalUiCulture = CultureInfo.CurrentUICulture;
+
+        try
+        {
+            var enUs = new CultureInfo("en-US");
+            CultureInfo.CurrentCulture = enUs;
+            CultureInfo.CurrentUICulture = enUs;
+
+            var now = new DateTimeOffset(2026, 1, 1, 12, 0, 0, TimeSpan.Zero);
+            var countdownTo = now.DateTime.AddHours(hoursFromNow);
+
+            var result = TimeStringFormatter.Format(
+                now,
+                now.DateTime,
+                TimeZoneInfo.Utc,
+                countdownTo,
+                "HH:mm",
+                "",
+                CultureInfo.CurrentCulture);
+
+            Assert.Equal(expected, result);
         }
         finally
         {

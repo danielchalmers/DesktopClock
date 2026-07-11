@@ -24,7 +24,11 @@ public static class TimeStringFormatter
         }
         else if (string.IsNullOrWhiteSpace(countdownFormat))
         {
-            result = countdownTo.Humanize(utcDate: false, dateToCompareAgainst: nowDateTime);
+            // Both values are local wall-clock times, but their Kind is usually Unspecified, which Humanizer
+            // shifts by the UTC offset when it converts the comparison date to local time. Pinning the Kind
+            // makes that conversion a no-op so the countdown reads correctly in every time zone.
+            var localNow = DateTime.SpecifyKind(nowDateTime, DateTimeKind.Local);
+            result = countdownTo.Humanize(utcDate: false, dateToCompareAgainst: localNow);
         }
         else
         {
