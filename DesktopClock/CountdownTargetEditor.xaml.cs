@@ -1,7 +1,9 @@
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using DesktopClock.Properties;
 using Humanizer;
 
@@ -26,6 +28,9 @@ public partial class CountdownTargetEditor : UserControl
     public CountdownTargetEditor()
     {
         InitializeComponent();
+
+        // WPF defaults every element's Language to en-US, so the target text box would parse and show dates only in US format. Follow the OS locale instead, matching the preset captions and preview below it.
+        Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
 
         Loaded += CountdownTargetEditor_Loaded;
         Unloaded += (_, _) => Settings.Default.PropertyChanged -= Settings_PropertyChanged;
