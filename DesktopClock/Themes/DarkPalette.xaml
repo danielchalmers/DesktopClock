@@ -10,6 +10,8 @@
     <SolidColorBrush x:Key="SeparatorBrush" Color="#3F3F3F" />
     <SolidColorBrush x:Key="TextPrimaryBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="#A6A6A6" />
+    <!-- Foreground on a hover/highlight fill; matches primary text since the fill is only a subtle tint here. -->
+    <SolidColorBrush x:Key="OnHoverTextBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="HoverBrush" Color="#383838" />
     <SolidColorBrush x:Key="PressedBrush" Color="#303030" />
     <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#2E2E2E" />
