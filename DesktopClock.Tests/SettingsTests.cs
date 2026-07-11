@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Windows.Media;
 using DesktopClock.Properties;
 
 namespace DesktopClock.Tests;
@@ -40,6 +41,33 @@ public class SettingsPersistenceTests
         Assert.Equal(original.SettingsWindowWidth, loaded.SettingsWindowWidth);
         Assert.Equal(original.SettingsWindowHeight, loaded.SettingsWindowHeight);
         Assert.Equal(original.SettingsScrollPosition, loaded.SettingsScrollPosition);
+    }
+
+    [Fact]
+    public void Save_ThenPopulate_ShouldRoundTripWpfAndTimeTypes()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var original = CreateSettingsInstance();
+        original.TextColor = Color.FromArgb(0xFF, 0x12, 0x34, 0x56);
+        original.OuterColor = Color.FromRgb(0xAB, 0xCD, 0xEF);
+        original.BackgroundImageStretch = Stretch.UniformToFill;
+        original.WavFileInterval = new TimeSpan(1, 15, 0);
+        original.CountdownTo = new DateTime(2027, 3, 14, 9, 26, 53);
+
+        Assert.True(original.Save());
+
+        var loaded = CreateSettingsInstance();
+        PopulateFromFile(loaded);
+
+        Assert.Equal(original.TextColor, loaded.TextColor);
+        Assert.Equal(original.OuterColor, loaded.OuterColor);
+        Assert.Equal(original.BackgroundImageStretch, loaded.BackgroundImageStretch);
+        Assert.Equal(original.WavFileInterval, loaded.WavFileInterval);
+        Assert.Equal(original.CountdownTo, loaded.CountdownTo);
+
+        // Countdown targets are local wall-clock times; the formatter relies on the Kind staying Unspecified.
+        Assert.Equal(DateTimeKind.Unspecified, loaded.CountdownTo.Kind);
     }
 
     private static Settings CreateSettingsInstance() =>

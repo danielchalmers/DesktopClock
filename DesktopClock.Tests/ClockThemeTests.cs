@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 using DesktopClock.Properties;
 
@@ -6,6 +8,39 @@ namespace DesktopClock.Tests;
 
 public class ClockThemeTests
 {
+    [Fact]
+    public void BuiltInThemes_HaveDistinctNamesAndSaneValues()
+    {
+        var themes = ClockTheme.GetBuiltInThemes();
+
+        Assert.NotEmpty(themes);
+        Assert.Equal(themes.Count, themes.Select(t => t.Name).Distinct().Count());
+
+        foreach (var theme in themes)
+        {
+            Assert.False(string.IsNullOrWhiteSpace(theme.Name));
+            Assert.False(string.IsNullOrWhiteSpace(theme.FontFamily));
+            Assert.InRange(theme.BackgroundOpacity, 0, 1);
+            Assert.True(theme.BackgroundCornerRadius >= 0);
+            Assert.True(theme.OutlineThickness >= 0);
+        }
+    }
+
+    [Fact]
+    public void BuiltInThemes_FontWeightsAndStylesParse()
+    {
+        // ThemePresetPicker converts these strings directly when rendering the chips,
+        // so an invalid value in a preset would crash the settings window at load.
+        var weightConverter = new FontWeightConverter();
+        var styleConverter = new FontStyleConverter();
+
+        foreach (var theme in ClockTheme.GetBuiltInThemes())
+        {
+            Assert.IsType<FontWeight>(weightConverter.ConvertFromString(theme.FontWeight));
+            Assert.IsType<FontStyle>(styleConverter.ConvertFromString(theme.FontStyle));
+        }
+    }
+
     [Fact]
     public void Apply_ClearsLeftoverBackgroundImage()
     {
