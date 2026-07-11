@@ -81,6 +81,29 @@ public class TimeStringFormatterTests
         Assert.Equal((countdownTo - nowDateTime).ToString("c", formatProvider), result);
     }
 
+    [Theory]
+    [InlineData("{hh\\:mm\\:ss}", "-01:30:00")] // Tokenized custom format
+    [InlineData("{%h}h {%m}m", "-1h 30m")] // Tokenized preset style
+    [InlineData("c", "-01:30:00")] // Standard format keeps a single sign
+    [InlineData("{bad}", "Bad format")] // Errors are not prefixed
+    public void Format_PastCountdownShowsNegativeSign(string countdownFormat, string expected)
+    {
+        var now = new DateTimeOffset(2024, 1, 1, 10, 0, 0, TimeSpan.Zero);
+        var nowDateTime = now.DateTime;
+        var countdownTo = nowDateTime.AddMinutes(-90);
+
+        var result = TimeStringFormatter.Format(
+            now,
+            nowDateTime,
+            TimeZoneInfo.Utc,
+            countdownTo,
+            "HH:mm",
+            countdownFormat,
+            CultureInfo.InvariantCulture);
+
+        Assert.Equal(expected, result);
+    }
+
     [Fact]
     public void Format_UsesHumanizerWhenCountdownFormatMissing()
     {
