@@ -24,7 +24,9 @@ public static class TimeStringFormatter
         }
         else if (string.IsNullOrWhiteSpace(countdownFormat))
         {
-            result = countdownTo.Humanize(utcDate: false, dateToCompareAgainst: nowDateTime);
+            // Humanizer shifts Unspecified times by the UTC offset when localizing, so pin the Kind to make that conversion a no-op.
+            var localNow = DateTime.SpecifyKind(nowDateTime, DateTimeKind.Local);
+            result = countdownTo.Humanize(utcDate: false, dateToCompareAgainst: localNow);
         }
         else
         {
