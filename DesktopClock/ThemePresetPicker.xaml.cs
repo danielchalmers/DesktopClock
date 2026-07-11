@@ -99,7 +99,6 @@ public partial class ThemePresetPicker : UserControl
             Child = clock,
             Width = 140,
             Height = 64,
-            CornerRadius = new CornerRadius(5),
             SnapsToDevicePixels = true,
         };
         backdrop.SetResourceReference(Border.BackgroundProperty, "SubtleBrush");
