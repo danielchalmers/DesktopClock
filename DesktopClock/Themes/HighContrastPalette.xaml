@@ -10,8 +10,10 @@
     <SolidColorBrush x:Key="SeparatorBrush" Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}" />
     <SolidColorBrush x:Key="TextPrimaryBrush" Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
-    <SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}" />
-    <SolidColorBrush x:Key="PressedBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}" />
+    <SolidColorBrush x:Key="OnHoverTextBrush" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}" />
+    <!-- Highlight, not Control: in every built-in high-contrast theme Control equals the window surface, so a Control-colored hover would be invisible. -->
+    <SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
+    <SolidColorBrush x:Key="PressedBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
     <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}" />
     <SolidColorBrush x:Key="ButtonBorderBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}" />
     <SolidColorBrush x:Key="ControlFillBrush" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />

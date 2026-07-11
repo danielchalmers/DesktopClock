@@ -48,9 +48,11 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource HoverBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource PressedBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
@@ -114,12 +116,15 @@
                         <Trigger Property="local:NavButton.IsActive" Value="True">
                             <Setter TargetName="ActivePill" Property="Visibility" Value="Visible" />
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource HoverBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource HoverBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource PressedBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
@@ -246,9 +251,11 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource HoverBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource HoverBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                             <Setter TargetName="SelectionPill" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -300,7 +307,8 @@
                                           ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" />
 
                         <!-- Chevron -->
-                        <Path Data="M 0,0 L 4.5,4.5 L 9,0"
+                        <Path x:Name="Chevron"
+                              Data="M 0,0 L 4.5,4.5 L 9,0"
                               Stroke="{DynamicResource TextSecondaryBrush}"
                               StrokeThickness="1.5"
                               StrokeStartLineCap="Round"
@@ -346,9 +354,13 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource HoverBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
+                            <Setter TargetName="Chevron" Property="Stroke" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource PressedBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
+                            <Setter TargetName="Chevron" Property="Stroke" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
@@ -767,6 +779,9 @@
                         </Trigger>
                         <Trigger Property="IsHighlighted" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource HoverBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
+                            <Setter TargetName="CheckMark" Property="Stroke" Value="{DynamicResource OnHoverTextBrush}" />
+                            <Setter TargetName="GestureText" Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
