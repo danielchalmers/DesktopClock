@@ -77,9 +77,10 @@
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
+        <!-- A transparent 1px border reserves room for the keyboard-focus ring (the IsKeyboardFocused trigger colors it); padding is trimmed 1px to keep the layout identical. -->
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Margin" Value="0,0,0,2" />
-        <Setter Property="Padding" Value="12,8,24,8" />
+        <Setter Property="Padding" Value="11,7,23,7" />
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
