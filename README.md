@@ -5,13 +5,7 @@
 
 DesktopClock is a free, open-source digital clock widget for Windows. It keeps the time, a countdown, or another time zone visible on your desktop without opening a full calendar or timer app.
 
-## 📸 Screenshots
-
-![Main Display](https://github.com/danielchalmers/DesktopClock/assets/7112040/6038fa47-3a29-4b74-8f4f-fffeb8af8d0a)
-
-![Context Menu](https://github.com/user-attachments/assets/2154f1d3-23b0-4161-9a12-02748f5941db)
-
-![Format Settings](https://github.com/user-attachments/assets/a7e07b9f-a927-44e7-b406-1ab18226adfd)
+<img width="2400" height="1470" alt="DesktopClock showing themed clocks, the right-click menu, and the Settings window's format options" src="https://github.com/user-attachments/assets/8a3b198b-1793-4b8d-b31a-b72dba0abca7" />
 
 ## ✨ Features
 
