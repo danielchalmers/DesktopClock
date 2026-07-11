@@ -54,7 +54,9 @@ public static class DateTimeUtil
     {
         var time = countdown == default ? now.TimeOfDay : countdown - now;
 
-        var isOnInterval = interval != default && (int)time.TotalSeconds % (int)interval.TotalSeconds == 0;
+        // Work in whole seconds as a long so a sub-second interval doesn't truncate to a zero divisor and a far-future countdown doesn't overflow int.
+        var intervalSeconds = (long)interval.TotalSeconds;
+        var isOnInterval = intervalSeconds > 0 && (long)time.TotalSeconds % intervalSeconds == 0;
 
         var isCountdownReached = now.EqualExcludingMillisecond(countdown);
 
