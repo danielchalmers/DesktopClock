@@ -414,7 +414,7 @@
                                 TickFrequency="0.1"
                                 IsSnapToTickEnabled="True" />
                         <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.BackgroundCornerRadius, StringFormat=00.0}"
+                                   Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
                     <TextBlock Text="Soften the background edges."
