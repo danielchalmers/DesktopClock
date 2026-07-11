@@ -11,7 +11,7 @@
         Width="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowHeight, Mode=TwoWay}"
         MinWidth="800"
-        MinHeight="600"
+        MinHeight="700"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         FontFamily="Segoe UI Variable Text, Segoe UI"
@@ -20,8 +20,6 @@
         Background="{DynamicResource WindowBackgroundBrush}"
         Foreground="{DynamicResource TextPrimaryBrush}"
         SourceInitialized="Window_SourceInitialized">
-
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
