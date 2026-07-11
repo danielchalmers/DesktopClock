@@ -72,8 +72,10 @@ public static class Tokenizer
         else
             return false;
 
-        var value = token == "week" ? dateTime.GetIsoWeekOfYear() : dateTime.GetIsoWeekYear();
-        result = value.ToString(formatProvider);
+        // ISO 8601 writes the week as two digits, like 2026-W05.
+        result = token == "week"
+            ? dateTime.GetIsoWeekOfYear().ToString("D2", formatProvider)
+            : dateTime.GetIsoWeekYear().ToString(formatProvider);
         return true;
     }
 

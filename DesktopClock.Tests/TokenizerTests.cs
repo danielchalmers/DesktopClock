@@ -112,10 +112,11 @@ public class TokenizerTests
     }
 
     [Theory]
-    [InlineData("2024-01-01", "Week 1")]
+    [InlineData("2024-01-01", "Week 01")]
     [InlineData("2024-12-29", "Week 52")]
-    [InlineData("2024-12-30", "Week 1")]
+    [InlineData("2024-12-30", "Week 01")]
     [InlineData("2021-01-01", "Week 53")]
+    [InlineData("2026-02-02", "Week 06")]
     public void FormatWithTokenizer_WeekToken_ShouldUseIsoWeek(string dateString, string expected)
     {
         // Arrange
@@ -130,7 +131,7 @@ public class TokenizerTests
     }
 
     [Theory]
-    [InlineData("2024-12-30", "2025-W1")]
+    [InlineData("2024-12-30", "2025-W01")]
     [InlineData("2021-01-01", "2020-W53")]
     [InlineData("2026-05-06", "2026-W19")]
     public void FormatWithTokenizer_WeekYearToken_ShouldUseIsoWeekYear(string dateString, string expected)
@@ -157,7 +158,7 @@ public class TokenizerTests
         var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTimeOffset, format, CultureInfo.InvariantCulture);
 
         // Assert
-        Assert.Equal("Mon, Dec 30 (W1)", result);
+        Assert.Equal("Mon, Dec 30 (W01)", result);
     }
 
     [Fact]

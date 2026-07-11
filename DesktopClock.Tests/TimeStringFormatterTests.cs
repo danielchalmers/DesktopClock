@@ -149,7 +149,7 @@ public class TimeStringFormatterTests
             null,
             CultureInfo.InvariantCulture);
 
-        Assert.Equal("2025-W1", result);
+        Assert.Equal("2025-W01", result);
     }
 
     [Fact]
