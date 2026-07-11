@@ -3,10 +3,9 @@
 [![Latest Release](https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases)](https://github.com/danielchalmers/DesktopClock/releases)
 [![License](https://img.shields.io/github/license/danielchalmers/DesktopClock)](LICENSE)
 
-A customizable and lightweight Windows digital clock for keeping the time, a countdown, or another time zone visible without opening a full calendar or timer app.
-Built around a small overlay window that you can place wherever it fits your desktop, DesktopClock is designed to feel more like part of your workspace than a regular app window.
+DesktopClock is a free, open-source digital clock widget for Windows. It keeps the time, a countdown, or another time zone visible on your desktop without opening a full calendar or timer app.
 
-## 📸 Preview
+## 📸 Screenshots
 
 ![Main Display](https://github.com/danielchalmers/DesktopClock/assets/7112040/6038fa47-3a29-4b74-8f4f-fffeb8af8d0a)
 
@@ -14,10 +13,15 @@ Built around a small overlay window that you can place wherever it fits your des
 
 ![Format Settings](https://github.com/user-attachments/assets/a7e07b9f-a927-44e7-b406-1ab18226adfd)
 
+## ✨ Features
+
+- Fully custom date and time format with a live preview, including seconds, 12/24-hour, etc.
+- Show any time zone, or count down to a date with an optional sound.
+- Theme presets, custom fonts, colors, opacity, and background images.
+- Run on startup, chime on an interval, and burn-in mitigation for OLED screens.
+
 ## 🚀 Get Started
 
-Download the latest version from the [Releases page](https://github.com/danielchalmers/DesktopClock/releases).
+Get the installer (`.msi`) or portable (`.zip`) version from the [Releases page](https://github.com/danielchalmers/DesktopClock/releases). x64 and ARM builds are available.
 
-![Download Options](https://github.com/user-attachments/assets/d117e992-8d83-4df9-ad69-756d816b700c)
-
-Choose the standard x64 installer (`.msi`) or the portable (`.zip`) version. ARM builds are also available.
+![Release download options showing the installer and portable builds](https://github.com/user-attachments/assets/d117e992-8d83-4df9-ad69-756d816b700c)
