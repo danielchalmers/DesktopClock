@@ -11,7 +11,9 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
     <ProjectReference Include="..\DesktopClock\DesktopClock.csproj" />
 
     <Using Include="Xunit" />

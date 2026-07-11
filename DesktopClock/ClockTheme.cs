@@ -84,6 +84,9 @@ public sealed class ClockTheme
         settings.BackgroundOpacity = BackgroundOpacity;
         settings.BackgroundCornerRadius = BackgroundCornerRadius;
         settings.OutlineThickness = OutlineThickness;
+
+        // A leftover background image would keep covering the theme's colors.
+        settings.BackgroundImagePath = string.Empty;
     }
 
     /// <summary>
