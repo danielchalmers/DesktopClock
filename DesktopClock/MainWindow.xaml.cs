@@ -429,6 +429,30 @@ public partial class MainWindow : Window
                     break;
             }
         }
+        else if (Keyboard.Modifiers is ModifierKeys.None or ModifierKeys.Shift)
+        {
+            NudgeWindow(e);
+        }
+    }
+
+    /// <summary>
+    /// Moves the clock with the arrow keys as a precise, mouse-free alternative to dragging.
+    /// </summary>
+    private void NudgeWindow(KeyEventArgs e)
+    {
+        // The keyboard respects the same lock as the mouse.
+        if (!Settings.Default.DragToMove)
+            return;
+
+        var nudge = WindowUtil.GetKeyboardNudge(e.Key, Keyboard.Modifiers);
+        if (nudge == default)
+            return;
+
+        Left += nudge.X;
+        Top += nudge.Y;
+
+        PixelShifter?.UpdateBasePosition(this);
+        e.Handled = true;
     }
 
     private void OpenUrl(string url)
