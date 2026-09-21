@@ -116,9 +116,9 @@ public class TimeStringFormatterTests
 
     [Theory]
     [InlineData(0, "now")]
-    [InlineData(3, "3 hours from now")]
+    [InlineData(3, "in 3 hours")]
     [InlineData(-3, "3 hours ago")]
-    [InlineData(72, "3 days from now")]
+    [InlineData(72, "in 3 days")]
     [InlineData(-72, "3 days ago")]
     public void Format_HumanizedCountdownIsRelativeToNow(int hoursFromNow, string expected)
     {

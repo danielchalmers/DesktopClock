@@ -4,7 +4,7 @@ using System.Globalization;
 namespace DesktopClock;
 
 /// <summary>
-/// Describes how far a moment is from now in plain English, such as "3 hours from now" or "yesterday".
+/// Describes how far a moment is from now in plain English, such as "in 3 hours" or "yesterday".
 /// </summary>
 public static class RelativeTimeFormatter
 {
@@ -21,7 +21,7 @@ public static class RelativeTimeFormatter
             return "now";
 
         if (span.TotalSeconds < 60)
-            return Phrase(span.Seconds, "one second", "{0} seconds", isFuture);
+            return Phrase(span.Seconds, "a second", "{0} seconds", isFuture);
 
         if (span.TotalSeconds < 120)
             return Phrase(1, "a minute", "{0} minutes", isFuture);
@@ -46,14 +46,14 @@ public static class RelativeTimeFormatter
         if (span.TotalDays < 30)
         {
             var sameDateNextMonth = now.Date.AddMonths(isFuture ? 1 : -1) == target.Date;
-            return sameDateNextMonth ? Phrase(1, "one month", "{0} months", isFuture) : Days(span.Days, isFuture);
+            return sameDateNextMonth ? Phrase(1, "a month", "{0} months", isFuture) : Days(span.Days, isFuture);
         }
 
         if (span.TotalDays < 345)
-            return Phrase((int)Math.Floor(span.TotalDays / 29.5), "one month", "{0} months", isFuture);
+            return Phrase((int)Math.Floor(span.TotalDays / 29.5), "a month", "{0} months", isFuture);
 
         var years = Math.Max(1, (int)Math.Floor(span.TotalDays / 365));
-        return Phrase(years, "one year", "{0} years", isFuture);
+        return Phrase(years, "a year", "{0} years", isFuture);
     }
 
     private static string Days(int days, bool isFuture) => days switch
@@ -69,6 +69,6 @@ public static class RelativeTimeFormatter
             return "now";
 
         var amount = count == 1 ? single : string.Format(CultureInfo.InvariantCulture, plural, count);
-        return isFuture ? amount + " from now" : amount + " ago";
+        return isFuture ? "in " + amount : amount + " ago";
     }
 }
