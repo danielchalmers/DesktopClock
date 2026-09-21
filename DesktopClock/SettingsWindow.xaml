@@ -58,7 +58,7 @@
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=WindowSection}"
                             Click="NavigateToSection" />
-                    <Button Content="T_heme Presets"
+                    <Button Content="T_heme presets"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=ThemeSection}"
                             Click="NavigateToSection" />
@@ -78,7 +78,7 @@
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=ShortcutsSection}"
                             Click="NavigateToSection" />
-                    <Button Content="Discover _More"
+                    <Button Content="Discover _more"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=DiscoverMoreSection}"
                             Click="NavigateToSection" />
@@ -115,7 +115,7 @@
                         <StackPanel>
                             <AccessText FontWeight="SemiBold"
                                         Text="_New clock" />
-                            <TextBlock Text="Start a fresh copy"
+                            <TextBlock Text="Start another clock"
                                        Style="{StaticResource SidebarToolDescription}" />
                         </StackPanel>
                     </Button>
@@ -140,7 +140,7 @@
                     <local:FormatEditor Mode="Clock" />
                     <TextBlock Style="{StaticResource DescriptionTextBlock}"
                                Margin="0,0,0,16">
-                        <Run Text="Choose how the clock text is formatted. Use curly braces {} around time codes. " />
+                        <Run Text="Choose how the clock text is formatted. Use curly braces {} around time codes." />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
                             Learn more
@@ -172,7 +172,7 @@
                                Style="{StaticResource LabelTextBlock}" />
                     <local:FormatEditor Mode="Countdown" />
                     <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display. " />
+                        <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display." />
                         <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
                             Learn more
@@ -247,7 +247,7 @@
             </GroupBox>
 
             <GroupBox x:Name="ThemeSection"
-                      Header="Theme Presets"
+                      Header="Theme presets"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <local:ThemePresetPicker />
@@ -415,7 +415,7 @@
                                    Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Soften the background edges."
+                    <TextBlock Text="Round the corners of the background."
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
@@ -559,7 +559,7 @@
             </GroupBox>
 
             <GroupBox x:Name="DiscoverMoreSection"
-                      Header="Discover More"
+                      Header="Discover more"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
@@ -569,7 +569,7 @@
                                 Good Diary
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="Stay on top of your well-being (Android)"
+                        <TextBlock Text="Track your mood and well-being (Android)"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
@@ -596,7 +596,7 @@
                                 Radial Actions
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="Summon a customizable radial menu (Windows)"
+                        <TextBlock Text="Open a customizable radial menu with a shortcut (Windows)"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
@@ -605,13 +605,13 @@
                                 Teichos
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="Website blocker with scheduled rules (Chrome/Edge)"
+                        <TextBlock Text="Block websites on a schedule (Chrome/Edge)"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers"
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                All my projects on GitHub
+                                More from the developer of DesktopClock
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>

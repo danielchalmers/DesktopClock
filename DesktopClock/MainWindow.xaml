@@ -64,7 +64,7 @@
                 </MenuItem.Header>
             </MenuItem>
 
-            <MenuItem Header="Stay on _top"
+            <MenuItem Header="Always on _top"
                       IsCheckable="True"
                       IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 

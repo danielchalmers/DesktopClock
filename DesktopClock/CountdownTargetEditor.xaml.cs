@@ -19,8 +19,8 @@ public partial class CountdownTargetEditor : UserControl
     {
         ("Midnight tonight", () => DateTime.Today.AddDays(1)),
         ("Tomorrow morning", () => DateTime.Today.AddDays(1).AddHours(9)),
-        ("Friday 5 PM", () => NextOccurrence(DayOfWeek.Friday, 17)),
-        ("New Year's", () => new DateTime(DateTime.Today.Year + 1, 1, 1)),
+        ("Friday afternoon", () => NextOccurrence(DayOfWeek.Friday, 17)),
+        ("New Year", () => new DateTime(DateTime.Today.Year + 1, 1, 1)),
     };
 
     private bool _built;
@@ -69,7 +69,7 @@ public partial class CountdownTargetEditor : UserControl
 
             var example = new TextBlock
             {
-                Text = getTarget().ToString("ddd, MMM d, h:mm tt"),
+                Text = $"{getTarget():ddd, MMM d} {getTarget():t}",
                 FontSize = 12,
                 TextTrimming = TextTrimming.CharacterEllipsis,
             };
@@ -102,8 +102,8 @@ public partial class CountdownTargetEditor : UserControl
         var target = Settings.Default.CountdownTo;
 
         PreviewText.Text = target == default
-            ? "No target — countdown mode is off and the clock shows the time."
-            : $"{target:dddd, MMMM d, yyyy h:mm tt} — {target.Humanize(utcDate: false)}";
+            ? "No target. The clock shows the current time."
+            : $"{target:f} — {target.Humanize(utcDate: false)}";
     }
 
     /// <summary>
