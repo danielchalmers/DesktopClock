@@ -367,9 +367,9 @@ public partial class MainWindow : Window
         {
             MessageBox.Show(this,
                 "Settings can't be saved due to an access error.\n\n" +
-                $"Make sure {Title} is in a folder that doesn't require admin privileges, " +
-                "and that you got it from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                "If the problem persists, create a new issue at the link with as many details as possible.",
+                "Move the app to a folder that doesn't need admin rights.\n\n" +
+                "Make sure you downloaded it from the official source: https://github.com/danielchalmers/DesktopClock. If you paid for it, ask for a refund.\n\n" +
+                "If the problem persists, report it at that link.",
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
