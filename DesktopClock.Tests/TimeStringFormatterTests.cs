@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Humanizer;
 
 namespace DesktopClock.Tests;
 
@@ -82,7 +81,7 @@ public class TimeStringFormatterTests
     }
 
     [Fact]
-    public void Format_UsesHumanizerWhenCountdownFormatMissing()
+    public void Format_UsesRelativePhraseWhenCountdownFormatMissing()
     {
         var originalCulture = CultureInfo.CurrentCulture;
         var originalUiCulture = CultureInfo.CurrentUICulture;
@@ -106,8 +105,7 @@ public class TimeStringFormatterTests
                 " ",
                 CultureInfo.CurrentCulture);
 
-            var localNow = DateTime.SpecifyKind(nowDateTime, DateTimeKind.Local);
-            Assert.Equal(countdownTo.Humanize(utcDate: false, dateToCompareAgainst: localNow), result);
+            Assert.Equal("tomorrow", result);
         }
         finally
         {
@@ -118,14 +116,14 @@ public class TimeStringFormatterTests
 
     [Theory]
     [InlineData(0, "now")]
-    [InlineData(3, "3 hours from now")]
+    [InlineData(3, "in 3 hours")]
     [InlineData(-3, "3 hours ago")]
-    [InlineData(72, "3 days from now")]
+    [InlineData(72, "in 3 days")]
     [InlineData(-72, "3 days ago")]
     public void Format_HumanizedCountdownIsRelativeToNow(int hoursFromNow, string expected)
     {
-        // The wall-clock values have Kind Unspecified, which Humanizer used to shift by the
-        // machine's UTC offset, e.g. a target of "now" read as "6 hours from now" on UTC-6.
+        // The wall-clock values have Kind Unspecified, which the old Humanizer dependency shifted by
+        // the machine's UTC offset, e.g. a target of "now" read as "6 hours from now" on UTC-6.
         var originalCulture = CultureInfo.CurrentCulture;
         var originalUiCulture = CultureInfo.CurrentUICulture;
 

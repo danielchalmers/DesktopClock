@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Humanizer;
 
 namespace DesktopClock;
 
@@ -24,9 +23,7 @@ public static class TimeStringFormatter
         }
         else if (string.IsNullOrWhiteSpace(countdownFormat))
         {
-            // Humanizer shifts Unspecified times by the UTC offset when localizing, so pin the Kind to make that conversion a no-op.
-            var localNow = DateTime.SpecifyKind(nowDateTime, DateTimeKind.Local);
-            result = countdownTo.Humanize(utcDate: false, dateToCompareAgainst: localNow);
+            result = RelativeTimeFormatter.Format(countdownTo, nowDateTime);
         }
         else
         {

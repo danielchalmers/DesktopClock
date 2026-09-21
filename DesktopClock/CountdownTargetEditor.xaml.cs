@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using DesktopClock.Properties;
-using Humanizer;
 
 namespace DesktopClock;
 
@@ -103,7 +102,7 @@ public partial class CountdownTargetEditor : UserControl
 
         PreviewText.Text = target == default
             ? "No target. The clock shows the current time."
-            : $"{target:f} — {target.Humanize(utcDate: false)}";
+            : $"{target:f} — {RelativeTimeFormatter.Format(target, DateTime.Now)}";
     }
 
     /// <summary>

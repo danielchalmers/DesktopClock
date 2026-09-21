@@ -642,12 +642,6 @@
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/Humanizr/Humanizer"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                Humanizer
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
                             <Hyperlink NavigateUri="https://www.newtonsoft.com/json"
                                        RequestNavigate="Hyperlink_RequestNavigate">
                                 Newtonsoft.Json
