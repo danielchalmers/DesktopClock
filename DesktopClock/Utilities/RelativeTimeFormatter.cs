@@ -9,8 +9,7 @@ namespace DesktopClock;
 public static class RelativeTimeFormatter
 {
     /// <summary>
-    /// Returns a phrase for the distance between <paramref name="target"/> and <paramref name="now"/>,
-    /// using the single largest unit that fits.
+    /// Returns a phrase for the distance between <paramref name="target"/> and <paramref name="now"/>, using the single largest unit that fits.
     /// </summary>
     public static string Format(DateTime target, DateTime now)
     {
