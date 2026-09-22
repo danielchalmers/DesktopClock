@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
@@ -117,7 +118,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// Change it when you want a different arrangement, such as adding the weekday, seconds, or a shorter date.
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings">Custom date and time format strings</see>.
     /// </remarks>
-    public string Format { get; set; } = "{ddd}, {MMM dd}, {h:mm:ss tt}";
+    public string Format { get; set; } = FormatPresets.DefaultClockFormat(CultureInfo.CurrentCulture.DateTimeFormat);
 
     /// <summary>
     /// Format string used while <see cref="CountdownTo"/> is enabled.

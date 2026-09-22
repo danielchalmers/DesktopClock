@@ -68,7 +68,7 @@ public partial class CountdownTargetEditor : UserControl
 
             var example = new TextBlock
             {
-                Text = $"{getTarget():ddd, MMM d} {getTarget():t}",
+                Text = getTarget().ToString($"ddd, {FormatPresets.ShortMonthDayPattern(CultureInfo.CurrentCulture.DateTimeFormat)} {CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern}"),
                 FontSize = 12,
                 TextTrimming = TextTrimming.CharacterEllipsis,
             };
