@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>_Kopiëren</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>_Verbergen</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>Grootte:</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>_Altijd op voorgrond</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>_Instellingen…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>_Controleren op updates</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>_Feedback geven</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Af_sluiten</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>Kopiëren mislukt</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>Kan het klembord niet bijwerken. Probeer het opnieuw.</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>Alarmgeluid niet beschikbaar</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>Het WAV-bestand kan niet worden afgespeeld.</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>Wordt op de achtergrond uitgevoerd</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>Dubbelklik op het pictogram in het systeemvak om de klok weer te geven.</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>Kan koppeling niet openen</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>De instellingen kunnen niet worden opgeslagen door een toegangsfout.
+
+Verplaats de app naar een map waarvoor geen beheerdersrechten nodig zijn.
+
+Controleer of je de app hebt gedownload van de officiële bron: https://github.com/danielchalmers/DesktopClock. Als je ervoor hebt betaald, vraag dan je geld terug.
+
+Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Ongeldige notatie</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>DesktopClock heeft een probleem en moet worden gesloten.</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>De details zijn opgeslagen in:
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>Meld het probleem op https://github.com/danielchalmers/DesktopClock/issues en voeg dat bestand toe.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>DesktopClock-instellingen</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>_Weergave</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>_Aftellen</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>_Venster</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>_Themasjablonen</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>T_ypografie</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>_Uiterlijk</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>_Meldingen</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>Be_diening</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>_Ontdek meer</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>_Credits</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>_Instellingenmap</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>De instellingenmap openen</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>Instellingen_bestand</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>Het JSON-bestand openen</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>_Nieuwe klok</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>Nog een klok starten</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Meer informatie</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Bladeren...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Opnieuw instellen</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Voorbeeld</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>Weergave</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>Kloknotatie</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>Kies hoe de tekst van de klok wordt opgemaakt. Zet tijdcodes tussen accolades {}.</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Tijdzone</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>De klok in een andere tijdzone weergeven.</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>Aftellen</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>Aftellen tot</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>Stel een datum en tijd in om naar af te tellen. Wis de waarde om de aftelmodus uit te schakelen.</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>Aftelnotatie</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>Kies hoe het aftellen wordt opgemaakt. Laat leeg om de standaardweergave te gebruiken.</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>Venster</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Starten met Windows</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>De klok automatisch starten wanneer je je aanmeldt.</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>Weergeven op taakbalk</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>De klok weergeven op de Windows-taakbalk.</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Verbergen in Alt+Tab</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Het klokvenster verbergen in de Alt+Tab-weergave.</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Altijd op voorgrond</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>De klok boven andere vensters houden.</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Doorklikken</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>Klikken door de klok laten gaan naar de vensters erachter.</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>Verbergen bij volledig scherm</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>De klok verbergen wanneer een app op volledig scherm actief is op hetzelfde beeldscherm.</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>Verborgen starten</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>Starten zonder de klok weer te geven. Gebruik het pictogram in het systeemvak om de klok weer te geven.</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>Slepen toestaan</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>De klok verplaatsen door deze met de muis te slepen.</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Rechts uitlijnen</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>De rechterrand vast houden wanneer de tekstlengte verandert.</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>Pixelverschuiving</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>De klok iets verplaatsen om het risico op inbranden van het scherm te verkleinen.</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>Themasjablonen</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>Kies een uitgangspunt voor het uiterlijk van de klok. Elk detail kan nog worden aangepast in de onderstaande secties.</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>Stelt het lettertype, de kleuren, de dekking en de hoeken in. Verder aanpassen in Typografie en Uiterlijk.</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Systeem</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>Accent</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>Rook</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>Middernacht</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>Papier</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>Minimaal</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>Krijt</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>Typografie</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>Lettertypefamilie</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>Kies de lettertypefamilie.</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>Tekenstijl</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>Kies normale, cursieve of schuine tekst.</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>Tekendikte</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>Maak de tekst dunner of dikker.</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Tekstkleur</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>Tekstkleur kiezen</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>Wijzig de tekstkleur met een hexadecimale waarde, een kleurnaam of de kleurkiezer.</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>Tekstdekking</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>Pas aan hoe transparant de tekst is.</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>Uiterlijk</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>Achtergrond- of contourkleur</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>Achtergrond- of contourkleur kiezen</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>Wijzig de achtergrond- of contourkleur.</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>Effen achtergrond</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>Een effen achtergrond weergeven in plaats van een contour.</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>Achtergronddekking</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>Pas aan hoe transparant de achtergrond is.</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>Afgeronde hoeken</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>De hoeken van de achtergrond afronden.</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>Contourdikte</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>Pas de contourdikte aan wanneer de achtergrond is uitgeschakeld.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Achtergrondafbeelding</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>Een afbeelding achter de klok weergeven.</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Afbeeldingsweergave</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>Kies hoe de afbeelding in de klok past.</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>Meldingen</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>Alarmgeluid</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>Kies een WAV-bestand om af te spelen.</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>Geluidsinterval</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>Kies in uren, minuten en seconden hoe vaak het geluid moet worden afgespeeld.</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>Geluid afspelen na aftellen</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>Het geselecteerde geluid afspelen wanneer het aftellen is voltooid.</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>Bediening</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>Rechtsklik:</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>Menu openen</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>Dubbelklik:</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>Weergegeven tekst kopiëren</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>Slepen:</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>Klok verplaatsen</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + scrollen:</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>Grootte wijzigen</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>Groter maken</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>Kleiner maken</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>Ontdek meer</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>Houd je stemming en welzijn bij (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>Bekijk latentie en bandbreedtegebruik (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Bekijk je Tesla-dashcamclips (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>Open een aanpasbaar radiaal menu met een sneltoets (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>Blokkeer websites volgens een schema (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>Meer van de ontwikkelaar van DesktopClock</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>Afbeeldingsbestanden</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>WAV-bestanden</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>Alle bestanden</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>Het instellingenbestand bestaat niet en kan niet worden gemaakt.</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>Kan het instellingenbestand niet openen in Kladblok.
+
+Deze app is mogelijk een gestolen kopie. Als je ervoor hebt betaald, vraag dan je geld terug. De officiële versie is gratis via https://github.com/danielchalmers/DesktopClock.
+
+Als de officiële versie ook niet werkt, meld het dan via die koppeling en vermeld deze fout: "{0}"</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>Kan geen nieuwe klok maken.
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>Hiermee wordt een kopie van de app gemaakt en gestart met de standaardinstellingen.
+
+Doorgaan?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>Kan {0} niet openen.</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>Veelgebruikte notaties</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>Aangepaste notatie</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>Invoegen:</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>{0} invoegen bij de cursor</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(automatisch)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>Tijd, 24-uurs</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>Tijd met seconden</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>Dag en tijd</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>Datum en tijd</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>Volledige datum en tijd</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>Alleen datum</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>Sorteerbaar</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>ISO-week</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>Automatisch</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>Resterende dagen</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>Dagen en uren</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>Volledig overzicht</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>Digitaal</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>Nog {%d} dagen</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d} d {%h} u</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d} d {%h} u {%m} min {%s} s</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>Weekdag</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>Weekdag (voluit)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>Dag</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>Maand</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>Maand (voluit)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>Jaar</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>Tijd (24-uurs)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>Seconden</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>Weeknummer</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>UTC-verschil</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>Dagen</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>Uren</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>Minuten</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>Digitale klok</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>Veelgebruikte momenten</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>Aangepast moment</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>Vannacht om middernacht</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>Morgenochtend</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>Vrijdagmiddag</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>Nieuwjaar</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>Geen moment ingesteld. De klok toont de huidige tijd.</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>nu</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>over {0}</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0} geleden</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>morgen</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>gisteren</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>een seconde|{0} seconden</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>een minuut|{0} minuten</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>een uur|{0} uur</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>een dag|{0} dagen</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>een maand|{0} maanden</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>een jaar|{0} jaar</value>
+  </data>
+</root>
