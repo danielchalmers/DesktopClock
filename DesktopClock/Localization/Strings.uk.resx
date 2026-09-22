@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>_Копіювати</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>_Приховати</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>Розмір:</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>Поверх _усіх вікон</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>_Налаштування…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>Перевірити _оновлення</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>Надіслати ві_дгук</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>_Вихід</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>Не вдалося скопіювати</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>Не вдалося оновити буфер обміну. Повторіть спробу.</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>Звуковий сигнал недоступний</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>Не вдалося відтворити WAV-файл.</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>Працює у фоновому режимі</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>Двічі клацніть значок в області сповіщень, щоб показати годинник.</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>Не вдалося відкрити посилання</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>Не вдається зберегти налаштування через помилку доступу.
+
+Перемістіть програму в папку, для якої не потрібні права адміністратора.
+
+Переконайтеся, що ви завантажили її з офіційного джерела: https://github.com/danielchalmers/DesktopClock. Якщо ви заплатили за неї, попросіть повернути кошти.
+
+Якщо проблема не зникне, повідомте про неї за цим посиланням.</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Неправильний формат</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>У DesktopClock виникла проблема, і програму буде закрито.</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>Подробиці збережено у файлі:
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>Повідомте про проблему на https://github.com/danielchalmers/DesktopClock/issues і додайте цей файл.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Налаштування DesktopClock</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>_Відображення</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>_Зворотний відлік</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>Вікн_о</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>_Готові теми</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>_Шрифт</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>Зовнішній в_игляд</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>_Сигнали</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>_Керування</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>_Інші програми</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>_Подяки</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>П_апка налаштувань</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>Відкрити папку налаштувань</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>_Файл налаштувань</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>Відкрити JSON-файл</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>_Новий годинник</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>Запустити ще один годинник</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Докладніше</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Огляд...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Скинути</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Перегляд</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>Відображення</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>Формат годинника</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>Виберіть формат тексту годинника. Беріть коди часу у фігурні дужки {}.</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Часовий пояс</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>Показувати годинник в іншому часовому поясі.</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>Зворотний відлік</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>Ціль відліку</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>Укажіть дату й час, до яких вести відлік. Очистіть поле, щоб вимкнути режим зворотного відліку.</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>Формат відліку</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>Виберіть формат зворотного відліку. Залиште поле порожнім, щоб використовувати стандартний вигляд.</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>Вікно</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Запускати разом із Windows</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>Автоматично запускати годинник під час входу в систему.</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>Показувати на панелі завдань</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>Показувати годинник на панелі завдань Windows.</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Приховувати в Alt+Tab</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Приховувати вікно годинника в перемикачі Alt+Tab.</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Поверх усіх вікон</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>Показувати годинник поверх інших вікон.</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Пропускати клацання</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>Пропускати клацання крізь годинник до вікон за ним.</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>Приховувати в повноекранному режимі</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>Приховувати годинник, коли на тому самому моніторі активна повноекранна програма.</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>Запускати прихованим</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>Запускати без показу годинника. Щоб знову показати його, скористайтеся значком в області сповіщень.</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>Дозволити перетягування</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>Переміщувати годинник, перетягуючи його мишею.</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Вирівнювати праворуч</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>Утримувати правий край на місці, коли змінюється довжина тексту.</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>Зсув пікселів</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>Трохи зсувати годинник, щоб зменшити ризик вигорання екрана.</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>Готові теми</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>Виберіть початковий вигляд годинника. Будь-яку деталь можна змінити в розділах нижче.</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>Задає шрифт, кольори, непрозорість і кути. Додатково налаштуйте в розділах «Шрифт» і «Зовнішній вигляд».</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Системна</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>Акцент</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>Дим</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>Термінал</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>Північ</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>Папір</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>Мінімалізм</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>Крейда</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>Шрифт</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>Сімейство шрифтів</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>Виберіть сімейство шрифтів.</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>Накреслення</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>Виберіть звичайний, курсивний або похилий текст.</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>Товщина шрифту</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>Зробіть текст тоншим або товстішим.</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Колір тексту</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>Вибрати колір тексту</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>Змініть колір тексту за допомогою шістнадцяткового значення, назви кольору або палітри.</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>Непрозорість тексту</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>Налаштуйте прозорість тексту.</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>Зовнішній вигляд</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>Колір фону або контуру</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>Вибрати колір фону або контуру</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>Змініть колір фону або контуру.</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>Суцільний фон</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>Показувати суцільний фон замість контуру.</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>Непрозорість фону</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>Налаштуйте прозорість фону.</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>Заокруглені кути</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>Заокруглити кути фону.</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>Товщина контуру</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>Налаштуйте товщину контуру, коли фон вимкнено.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Фонове зображення</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>Показувати зображення за годинником.</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Розміщення зображення</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>Виберіть, як зображення розміщується в годиннику.</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>Сигнали</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>Звук сигналу</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>Виберіть WAV-файл для відтворення.</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>Інтервал звуку</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>Укажіть у годинах, хвилинах і секундах, як часто відтворювати звук.</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>Звук після завершення відліку</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>Відтворювати вибраний звук, коли зворотний відлік завершиться.</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>Керування</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>Клацання правою кнопкою:</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>Відкрити меню</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>Подвійне клацання:</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>Скопіювати показаний текст</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>Перетягування:</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>Перемістити годинник</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + прокручування:</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>Змінити розмір</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>Збільшити розмір</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>Зменшити розмір</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>Інші програми</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>Відстежуйте настрій і самопочуття (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>Стежте за затримкою й використанням пропускної здатності (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Переглядайте записи відеореєстратора Tesla (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>Відкривайте налаштовуване радіальне меню сполученням клавіш (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>Блокуйте вебсайти за розкладом (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>Інші програми від розробника DesktopClock</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>Подяки</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>Файли зображень</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>Файли WAV</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>Усі файли</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>Файл налаштувань не існує, і його не вдалося створити.</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>Не вдалося відкрити файл налаштувань у Блокноті.
+
+Можливо, це викрадена копія програми. Якщо ви заплатили за неї, попросіть повернути кошти. Офіційна версія безкоштовна: https://github.com/danielchalmers/DesktopClock.
+
+Якщо офіційна версія теж не працює, повідомте про це за тим самим посиланням і додайте цю помилку: «{0}»</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>Не вдалося створити новий годинник.
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>Буде створено копію програми, яка запуститься зі стандартними налаштуваннями.
+
+Продовжити?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>Не вдалося відкрити {0}.</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>Стандартні формати</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>Власний формат</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>Вставити:</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>Вставити {0} у позицію курсора</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(автоматично)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>Час</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>Час, 24-годинний формат</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>Час із секундами</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>День і час</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>Дата й час</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>Повна дата й час</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>Лише дата</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>Для сортування</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>Тиждень ISO</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>Автоматично</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>Залишилося днів</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>Дні й години</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>Детально</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>Цифровий</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>Залишилося днів: {%d}</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d} д {%h} год</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d} д {%h} год {%m} хв {%s} с</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>День тижня</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>День тижня (повністю)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>День</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>Місяць</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>Місяць (повністю)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>Рік</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>Час</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>Час (24 години)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>Секунди</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>Номер тижня</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>Зсув UTC</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>Дні</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>Години</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>Хвилини</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>Цифровий годинник</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>Стандартні цілі</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>Власна ціль</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>Сьогодні опівночі</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>Завтра вранці</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>Вечір п'ятниці</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>Новий рік</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>Ціль не задано. Годинник показує поточний час.</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>зараз</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>через {0}</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0} тому</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>завтра</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>учора</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>{0} секунду|{0} секунди|{0} секунд</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>{0} хвилину|{0} хвилини|{0} хвилин</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>{0} годину|{0} години|{0} годин</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>{0} день|{0} дні|{0} днів</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>{0} місяць|{0} місяці|{0} місяців</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>{0} рік|{0} роки|{0} років</value>
+  </data>
+</root>

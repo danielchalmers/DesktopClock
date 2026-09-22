@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>コピー(_C)</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>非表示(_H)</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>サイズ:</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>常に手前に表示(_T)</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>設定(_S)…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>更新の確認(_U)</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>フィードバックの送信(_F)</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>終了(_X)</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>コピーできませんでした</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>クリップボードを更新できませんでした。もう一度お試しください。</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>通知音を利用できません</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>WAV ファイルを再生できませんでした。</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>バックグラウンドで実行中</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>時計を表示するには、通知領域のアイコンをダブルクリックします。</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>リンクを開けませんでした</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>アクセス エラーのため、設定を保存できません。
+
+管理者権限が不要なフォルダーにアプリを移動してください。
+
+公式の配布元 (https://github.com/danielchalmers/DesktopClock) からダウンロードしたか確認してください。料金を支払った場合は、返金を求めてください。
+
+問題が解決しない場合は、同じリンクから報告してください。</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>書式エラー</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>DesktopClock で問題が発生したため、終了します。</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>詳細は次の場所に保存されました:
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>https://github.com/danielchalmers/DesktopClock/issues でこの問題を報告し、そのファイルを添付してください。</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>DesktopClock の設定</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>表示(_D)</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>カウントダウン(_C)</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>ウィンドウ(_W)</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>テーマ プリセット(_H)</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>テキスト(_T)</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>外観(_A)</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>アラート(_L)</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>ショートカット(_S)</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>さらに探す(_M)</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>クレジット(_E)</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>設定フォルダー(_F)</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>設定フォルダーを開きます</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>設定ファイル(_I)</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>JSON ファイルを開きます</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>新しい時計(_N)</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>別の時計を起動します</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>詳細情報</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>参照...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>リセット</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>プレビュー</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>表示</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>時計の書式</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>時計のテキストの書式を選択します。時刻コードは波かっこ {} で囲みます。</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>タイム ゾーン</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>別のタイム ゾーンで時計を表示します。</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>カウントダウン</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>カウントダウンの目標</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>カウントダウンする日時を設定します。値をクリアするとカウントダウン モードが無効になります。</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>カウントダウンの書式</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>カウントダウンの書式を選択します。空欄にすると既定の表示になります。</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>ウィンドウ</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Windows の起動時に開始</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>サインイン時に時計を自動的に実行します。</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>タスク バーに表示</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>Windows のタスク バーに時計を表示します。</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Alt+Tab に表示しない</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Alt+Tab の切り替え画面に時計のウィンドウを表示しません。</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>常に手前に表示</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>時計をほかのウィンドウより手前に表示します。</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>クリックを透過</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>クリックを時計の後ろにあるウィンドウに通します。</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>全画面表示のときに非表示</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>同じモニターで全画面表示のアプリがアクティブなときに時計を非表示にします。</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>非表示で起動</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>時計を表示せずに起動します。再び表示するには通知領域のアイコンを使います。</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>ドラッグを許可</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>マウスでドラッグして時計を移動します。</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>右揃え</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>テキストの長さが変わっても右端の位置を固定します。</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>ピクセル シフト</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>時計を少しずつ動かして、画面の焼き付きのリスクを軽減します。</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>テーマ プリセット</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>時計の基本の見た目を選択します。細かい部分は下のセクションで調整できます。</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>フォント、色、不透明度、角を設定します。「テキスト」と「外観」でさらに調整できます。</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>システム</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>アクセント</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>スモーク</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>ターミナル</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>ミッドナイト</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>ペーパー</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>ミニマル</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>チョーク</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>テキスト</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>フォント ファミリ</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>フォント ファミリを選択します。</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>フォント スタイル</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>標準、イタリック、または斜体のテキストを選択します。</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>フォントの太さ</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>テキストを細くしたり太くしたりします。</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>テキストの色</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>テキストの色を選択</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>16 進数の値、色の名前、またはピッカーでテキストの色を変更します。</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>テキストの不透明度</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>テキストの透明度を調整します。</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>外観</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>背景または輪郭の色</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>背景または輪郭の色を選択</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>背景または輪郭の色を変更します。</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>単色の背景</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>輪郭の代わりに単色の背景を表示します。</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>背景の不透明度</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>背景の透明度を調整します。</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>角を丸くする</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>背景の角を丸くします。</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>輪郭の太さ</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>背景が無効のときの輪郭の太さを調整します。</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>背景画像</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>時計の後ろに画像を表示します。</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>画像の調整</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>時計内での画像の合わせ方を選択します。</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>アラート</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>アラーム音</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>再生する WAV ファイルを選択します。</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>音の間隔</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>音を再生する間隔を時間、分、秒で選択します。</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>カウントダウン終了時に音を鳴らす</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>カウントダウンが終了したときに、選択した音を再生します。</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>ショートカット</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>右クリック:</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>メニューを開く</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>ダブルクリック:</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>表示中のテキストをコピー</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>ドラッグ:</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>時計を移動</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + スクロール:</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>サイズを変更</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>サイズを大きくする</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>サイズを小さくする</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>さらに探す</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>気分や心身の健康を記録 (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>遅延と帯域幅の使用量を確認 (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Tesla のドライブレコーダー映像を再生 (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>ショートカットでカスタマイズ可能な円形メニューを開く (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>スケジュールに沿って Web サイトをブロック (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>DesktopClock の開発者によるその他の作品</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>クレジット</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>画像ファイル</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>WAV ファイル</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>すべてのファイル</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>設定ファイルが存在せず、作成もできませんでした。</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>設定ファイルをメモ帳で開けませんでした。
+
+このアプリは盗用されたコピーである可能性があります。料金を支払った場合は、返金を求めてください。公式版は https://github.com/danielchalmers/DesktopClock で無料で入手できます。
+
+公式版でも失敗する場合は、同じリンクから次のエラーを添えて報告してください: 「{0}」</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>新しい時計を作成できませんでした。
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>アプリのコピーを作成し、既定の設定で起動します。
+
+続行しますか?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>{0} を開けませんでした。</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>よく使う書式</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>カスタム書式</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>挿入:</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>カーソル位置に {0} を挿入</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(自動)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>時刻</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>時刻 (24 時間制)</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>時刻 (秒付き)</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>曜日と時刻</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>日付と時刻</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>完全な日付と時刻</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>日付のみ</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>並べ替え可能</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>ISO 週</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>自動</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>残り日数</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>日と時間</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>デジタル</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>残り {%d} 日</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d}日 {%h}時間</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d}日 {%h}時間 {%m}分 {%s}秒</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>曜日</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>曜日 (完全形)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>日</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>月</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>月 (完全形)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>年</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>時刻</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>時刻 (24 時間制)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>週番号</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>UTC オフセット</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>日数</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>時間</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>デジタル時計</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>よく使う目標</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>カスタム目標</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>今夜の午前 0 時</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>明日の朝</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>金曜日の午後</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>元日</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>目標はありません。時計には現在の時刻が表示されます。</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>今</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>{0}後</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0}前</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>明日</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>昨日</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>{0}秒</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>{0}分</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>{0}時間</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>{0}日</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>{0}か月</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>{0}年</value>
+  </data>
+</root>

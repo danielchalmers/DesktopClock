@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>_Sao chép</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>Ẩ_n</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>Kích thước:</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>_Luôn ở trên cùng</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>_Cài đặt…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>_Kiểm tra bản cập nhật</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>_Gửi phản hồi</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>_Thoát</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>Sao chép không thành công</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>Không thể cập nhật bảng tạm. Hãy thử lại.</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>Âm thanh cảnh báo không khả dụng</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>Không thể phát tệp WAV.</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>Đang chạy trong nền</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>Bấm đúp vào biểu tượng trên khay hệ thống để hiện đồng hồ.</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>Không thể mở liên kết</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>Không thể lưu cài đặt do lỗi truy cập.
+
+Hãy di chuyển ứng dụng đến thư mục không cần quyền quản trị.
+
+Hãy đảm bảo bạn đã tải ứng dụng từ nguồn chính thức: https://github.com/danielchalmers/DesktopClock. Nếu bạn đã trả tiền cho ứng dụng, hãy yêu cầu hoàn tiền.
+
+Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Định dạng sai</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>DesktopClock gặp sự cố và cần phải đóng.</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>Chi tiết đã được lưu vào:
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>Vui lòng báo cáo sự cố tại https://github.com/danielchalmers/DesktopClock/issues và đính kèm tệp đó.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Cài đặt DesktopClock</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>_Hiển thị</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>Đếm _ngược</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>Cửa _sổ</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>_Mẫu chủ đề</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>Kiể_u chữ</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>Giao _diện</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>Cảnh _báo</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>_Phím tắt</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>_Khám phá thêm</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>_Ghi công</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>_Thư mục cài đặt</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>Mở thư mục cài đặt</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>Tệp _cài đặt</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>Mở tệp JSON</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>Đồng hồ mớ_i</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>Khởi động thêm một đồng hồ</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Tìm hiểu thêm</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Duyệt...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Đặt lại</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Xem trước</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>Hiển thị</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>Định dạng đồng hồ</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>Chọn cách định dạng văn bản đồng hồ. Dùng dấu ngoặc nhọn {} quanh các mã thời gian.</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Múi giờ</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>Hiển thị đồng hồ theo múi giờ khác.</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>Đếm ngược</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>Mốc đếm ngược</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>Đặt ngày và giờ để đếm ngược đến. Xóa giá trị để tắt chế độ đếm ngược.</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>Định dạng đếm ngược</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>Chọn cách định dạng bộ đếm ngược. Để trống để dùng cách hiển thị mặc định.</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>Cửa sổ</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Khởi động cùng Windows</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>Tự động chạy đồng hồ khi bạn đăng nhập.</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>Hiện trên thanh tác vụ</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>Hiện đồng hồ trên thanh tác vụ Windows.</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Ẩn khỏi Alt+Tab</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Ẩn cửa sổ đồng hồ khỏi trình chuyển đổi Alt+Tab.</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Luôn ở trên cùng</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>Giữ đồng hồ ở trên các cửa sổ khác.</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Bấm xuyên qua</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>Cho phép thao tác bấm đi xuyên qua đồng hồ đến các cửa sổ phía sau.</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>Ẩn khi toàn màn hình</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>Ẩn đồng hồ khi một ứng dụng toàn màn hình đang hoạt động trên cùng màn hình.</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>Khởi động ẩn</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>Khởi động mà không hiện đồng hồ. Dùng biểu tượng trên khay để hiện lại.</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>Cho phép kéo</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>Di chuyển đồng hồ bằng cách kéo bằng chuột.</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Căn phải</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>Giữ cố định cạnh phải khi độ dài văn bản thay đổi.</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>Dịch chuyển điểm ảnh</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>Di chuyển nhẹ đồng hồ để giúp giảm nguy cơ lưu ảnh trên màn hình.</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>Mẫu chủ đề</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>Chọn giao diện khởi đầu cho đồng hồ. Mọi chi tiết vẫn có thể điều chỉnh trong các mục bên dưới.</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>Đặt phông chữ, màu, độ mờ đục và góc. Điều chỉnh thêm trong Kiểu chữ và Giao diện.</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Hệ thống</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>Màu nhấn</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>Khói</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>Nửa đêm</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>Giấy</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>Tối giản</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>Phấn</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>Kiểu chữ</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>Họ phông chữ</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>Chọn họ phông chữ.</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>Kiểu phông chữ</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>Chọn kiểu bình thường, nghiêng hoặc xiên.</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>Độ đậm phông chữ</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>Làm chữ mảnh hơn hoặc đậm hơn.</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Màu chữ</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>Chọn màu chữ</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>Thay đổi màu chữ bằng giá trị hex, tên màu hoặc bộ chọn màu.</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>Độ mờ đục của chữ</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>Điều chỉnh độ trong suốt của chữ.</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>Giao diện</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>Màu nền hoặc viền</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>Chọn màu nền hoặc viền</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>Thay đổi màu nền hoặc màu viền.</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>Nền đặc</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>Hiện nền đặc thay vì viền.</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>Độ mờ đục của nền</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>Điều chỉnh độ trong suốt của nền.</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>Bo tròn góc</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>Bo tròn các góc của nền.</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>Độ dày viền</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>Điều chỉnh độ dày viền khi nền bị tắt.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Ảnh nền</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>Hiện một hình ảnh phía sau đồng hồ.</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Kiểu vừa khít ảnh</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>Chọn cách hình ảnh vừa khít trong đồng hồ.</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>Cảnh báo</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>Âm báo thức</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>Chọn tệp WAV để phát.</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>Khoảng lặp âm thanh</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>Chọn tần suất phát âm thanh theo giờ, phút và giây.</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>Phát âm thanh khi hết đếm ngược</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>Phát âm thanh đã chọn khi đếm ngược kết thúc.</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>Phím tắt</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>Bấm chuột phải:</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>Mở menu</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>Bấm đúp:</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>Sao chép văn bản đang hiển thị</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>Kéo:</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>Di chuyển đồng hồ</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + cuộn:</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>Thay đổi kích thước</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>Tăng kích thước</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>Giảm kích thước</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>Khám phá thêm</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>Theo dõi tâm trạng và sức khỏe tinh thần của bạn (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>Xem độ trễ và mức sử dụng băng thông (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Xem video camera hành trình trên xe Tesla của bạn (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>Mở menu hình tròn tùy chỉnh bằng phím tắt (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>Chặn trang web theo lịch (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>Thêm từ nhà phát triển DesktopClock</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>Ghi công</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>Tệp hình ảnh</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>Tệp WAV</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>Tất cả tệp</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>Tệp cài đặt không tồn tại và không thể tạo.</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>Không thể mở tệp cài đặt trong Notepad.
+
+Ứng dụng này có thể là bản sao bị đánh cắp. Nếu bạn đã trả tiền cho ứng dụng, hãy yêu cầu hoàn tiền. Phiên bản chính thức được cung cấp miễn phí tại https://github.com/danielchalmers/DesktopClock.
+
+Nếu phiên bản chính thức vẫn lỗi, hãy báo cáo tại liên kết đó và kèm theo lỗi này: "{0}"</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>Không thể tạo đồng hồ mới.
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>Thao tác này sẽ tạo một bản sao của ứng dụng và khởi động bản sao đó với cài đặt mặc định.
+
+Tiếp tục?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>Không thể mở {0}.</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>Định dạng phổ biến</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>Định dạng tùy chỉnh</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>Chèn:</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>Chèn {0} tại con trỏ</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(tự động)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>Giờ</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>Giờ, 24 giờ</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>Giờ kèm giây</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>Thứ và giờ</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>Ngày và giờ</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>Ngày giờ đầy đủ</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>Chỉ ngày</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>Có thể sắp xếp</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>Tuần ISO</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>Tự động</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>Số ngày còn lại</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>Số ngày và giờ</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>Chi tiết đầy đủ</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>Kỹ thuật số</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>Còn {%d} ngày</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d} ngày {%h} giờ</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d} ngày {%h} giờ {%m} phút {%s} giây</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>Thứ</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>Thứ (đầy đủ)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>Ngày</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>Tháng</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>Tháng (đầy đủ)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>Năm</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>Giờ</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>Giờ (24 giờ)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>Giây</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>Số tuần</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>Chênh lệch UTC</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>Ngày</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>Giờ</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>Phút</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>Đồng hồ kỹ thuật số</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>Mốc phổ biến</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>Mốc tùy chỉnh</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>Nửa đêm nay</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>Sáng mai</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>Chiều thứ Sáu</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>Năm mới</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>Không có mốc. Đồng hồ hiển thị giờ hiện tại.</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>bây giờ</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>{0} nữa</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0} trước</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>ngày mai</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>hôm qua</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>{0} giây</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>{0} phút</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>{0} giờ</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>{0} ngày</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>{0} tháng</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>{0} năm</value>
+  </data>
+</root>

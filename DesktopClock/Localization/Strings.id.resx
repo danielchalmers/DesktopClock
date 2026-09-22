@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>_Salin</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>Se_mbunyikan</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>Ukuran:</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>Selalu di _atas</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>_Pengaturan…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>Periksa pem_baruan</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>Berikan _umpan balik</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>_Keluar</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>Gagal menyalin</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>Tidak dapat memperbarui papan klip. Coba lagi.</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>Suara peringatan tidak tersedia</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>File WAV tidak dapat diputar.</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>Berjalan di latar belakang</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>Klik dua kali ikon di baki sistem untuk menampilkan jam.</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>Tidak dapat membuka tautan</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>Pengaturan tidak dapat disimpan karena kesalahan akses.
+
+Pindahkan aplikasi ke folder yang tidak memerlukan hak admin.
+
+Pastikan Anda mengunduhnya dari sumber resmi: https://github.com/danielchalmers/DesktopClock. Jika Anda membayar untuk aplikasi ini, minta pengembalian dana.
+
+Jika masalah berlanjut, laporkan di tautan tersebut.</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Format salah</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>DesktopClock mengalami masalah dan harus ditutup.</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>Detail disimpan di:
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>Laporkan masalah ini di https://github.com/danielchalmers/DesktopClock/issues dan sertakan file tersebut.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Pengaturan DesktopClock</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>_Tampilan</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>_Hitung mundur</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>_Jendela</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>_Preset tema</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>Tipo_grafi</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>P_enampilan</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>Pe_ringatan</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>Pi_ntasan</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>Temukan _lainnya</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>_Kredit</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>_Folder pengaturan</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>Buka folder pengaturan</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>F_ile pengaturan</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>Buka file JSON</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>Jam _baru</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>Jalankan jam lain</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Pelajari selengkapnya</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Telusuri...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Atur ulang</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Pratinjau</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>Tampilan</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>Format jam</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>Pilih cara teks jam diformat. Gunakan kurung kurawal {} di sekitar kode waktu.</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Zona waktu</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>Tampilkan jam menggunakan zona waktu lain.</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>Hitung mundur</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>Target hitung mundur</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>Atur tanggal dan waktu tujuan hitung mundur. Kosongkan nilainya untuk menonaktifkan mode hitung mundur.</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>Format hitung mundur</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>Pilih cara hitung mundur diformat. Biarkan kosong untuk menggunakan tampilan default.</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>Jendela</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Mulai bersama Windows</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>Jalankan jam secara otomatis saat Anda masuk.</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>Tampilkan di bilah tugas</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>Tampilkan jam di bilah tugas Windows.</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Sembunyikan dari Alt+Tab</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Sembunyikan jendela jam dari pengalih Alt+Tab.</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Selalu di atas</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>Pertahankan jam di atas jendela lain.</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Klik tembus</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>Biarkan klik menembus jam ke jendela di belakangnya.</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>Sembunyikan saat layar penuh</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>Sembunyikan jam saat aplikasi layar penuh aktif di monitor yang sama.</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>Mulai tersembunyi</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>Mulai tanpa menampilkan jam. Gunakan ikon baki untuk menampilkannya lagi.</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>Izinkan menyeret</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>Pindahkan jam dengan menyeretnya menggunakan mouse.</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Rata kanan</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>Pertahankan posisi tepi kanan saat panjang teks berubah.</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>Pergeseran piksel</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>Geser jam sedikit untuk membantu mengurangi risiko burn-in layar.</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>Preset tema</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>Pilih tampilan awal untuk jam. Setiap detail masih dapat disesuaikan di bagian di bawah.</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>Mengatur font, warna, opasitas, dan sudut. Sesuaikan lebih lanjut di Tipografi dan Penampilan.</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Sistem</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>Aksen</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>Asap</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>Tengah malam</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>Kertas</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>Minimal</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>Kapur</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>Tipografi</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>Keluarga font</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>Pilih keluarga font.</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>Gaya font</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>Pilih teks normal, miring, atau condong.</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>Ketebalan font</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>Buat teks lebih tipis atau lebih tebal.</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Warna teks</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>Pilih warna teks</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>Ubah warna teks menggunakan nilai hex, nama warna, atau pemilih warna.</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>Opasitas teks</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>Sesuaikan transparansi teks.</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>Penampilan</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>Warna latar belakang atau garis tepi</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>Pilih warna latar belakang atau garis tepi</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>Ubah warna latar belakang atau garis tepi.</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>Latar belakang solid</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>Tampilkan latar belakang solid, bukan garis tepi.</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>Opasitas latar belakang</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>Sesuaikan transparansi latar belakang.</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>Sudut membulat</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>Bulatkan sudut latar belakang.</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>Ketebalan garis tepi</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>Sesuaikan ketebalan garis tepi saat latar belakang dinonaktifkan.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Gambar latar belakang</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>Tampilkan gambar di belakang jam.</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Penyesuaian gambar</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>Pilih cara gambar disesuaikan di dalam jam.</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>Peringatan</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>Suara alarm</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>Pilih file WAV untuk diputar.</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>Interval suara</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>Pilih seberapa sering suara diputar menggunakan jam, menit, dan detik.</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>Putar suara saat hitung mundur selesai</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>Putar suara yang dipilih saat hitung mundur selesai.</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>Pintasan</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>Klik kanan:</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>Buka menu</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>Klik dua kali:</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>Salin teks yang ditampilkan</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>Seret:</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>Pindahkan jam</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + gulir:</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>Ubah ukuran</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>Perbesar ukuran</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>Perkecil ukuran</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>Temukan lainnya</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>Catat suasana hati dan kesejahteraan Anda (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>Lihat latensi dan penggunaan bandwidth (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Tonton klip dashcam Tesla Anda (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>Buka menu radial yang dapat disesuaikan dengan pintasan (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>Blokir situs web sesuai jadwal (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>Lainnya dari pengembang DesktopClock</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>Kredit</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>File gambar</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>File WAV</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>Semua file</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>File pengaturan tidak ada dan tidak dapat dibuat.</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>Tidak dapat membuka file pengaturan di Notepad.
+
+Aplikasi ini mungkin salinan curian. Jika Anda membayar untuk aplikasi ini, minta pengembalian dana. Versi resmi tersedia gratis di https://github.com/danielchalmers/DesktopClock.
+
+Jika versi resmi masih gagal, laporkan di tautan tersebut dan sertakan kesalahan ini: "{0}"</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>Tidak dapat membuat jam baru.
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>Ini akan membuat salinan aplikasi dan menjalankannya dengan pengaturan default.
+
+Lanjutkan?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>Tidak dapat membuka {0}.</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>Format umum</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>Format kustom</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>Sisipkan:</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>Sisipkan {0} di posisi kursor</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(otomatis)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>Waktu</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>Waktu, 24 jam</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>Waktu dengan detik</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>Hari dan waktu</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>Tanggal dan waktu</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>Tanggal dan waktu lengkap</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>Tanggal saja</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>Dapat diurutkan</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>Minggu ISO</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>Otomatis</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>Sisa hari</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>Hari dan jam</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>Rincian lengkap</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>Digital</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>{%d} hari lagi</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d} hr {%h} j</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d} hr {%h} j {%m} mnt {%s} dtk</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>Hari</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>Hari (lengkap)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>Tanggal</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>Bulan</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>Bulan (lengkap)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>Tahun</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>Waktu</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>Waktu (24 jam)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>Detik</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>Nomor minggu</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>Selisih UTC</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>Hari</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>Jam</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>Menit</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>Jam digital</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>Target umum</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>Target kustom</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>Tengah malam nanti</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>Besok pagi</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>Jumat sore</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>Tahun Baru</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>Tidak ada target. Jam menampilkan waktu saat ini.</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>sekarang</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>{0} lagi</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0} yang lalu</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>besok</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>kemarin</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>{0} detik</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>{0} menit</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>{0} jam</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>{0} hari</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>{0} bulan</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>{0} tahun</value>
+  </data>
+</root>

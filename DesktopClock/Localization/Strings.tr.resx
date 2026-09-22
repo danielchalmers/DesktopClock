@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>_Kopyala</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>_Gizle</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>Boyut:</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>Her zaman _üstte</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>_Ayarlar…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>Güncelleştirmeleri _denetle</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>Geri _bildirim gönder</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>_Çıkış</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>Kopyalama başarısız oldu</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>Pano güncelleştirilemedi. Yeniden deneyin.</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>Uyarı sesi kullanılamıyor</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>WAV dosyası çalınamadı.</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>Arka planda çalışıyor</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>Saati göstermek için bildirim alanındaki simgeye çift tıklayın.</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>Bağlantı açılamadı</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>Bir erişim hatası nedeniyle ayarlar kaydedilemiyor.
+
+Uygulamayı yönetici hakları gerektirmeyen bir klasöre taşıyın.
+
+Uygulamayı resmi kaynaktan indirdiğinizden emin olun: https://github.com/danielchalmers/DesktopClock. Uygulama için ödeme yaptıysanız para iadesi isteyin.
+
+Sorun devam ederse bu bağlantıdan bildirin.</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Hatalı biçim</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>DesktopClock bir sorunla karşılaştı ve kapatılması gerekiyor.</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>Ayrıntılar şuraya kaydedildi:
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>Lütfen sorunu https://github.com/danielchalmers/DesktopClock/issues adresinde bildirin ve bu dosyayı ekleyin.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>DesktopClock Ayarları</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>_Görüntüleme</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>Geri _sayım</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>_Pencere</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>_Hazır temalar</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>_Yazı tipi</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>Gö_rünüm</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>_Uyarılar</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>_Kısayollar</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>_Diğer uygulamalar</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>_Teşekkürler</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>_Ayarlar klasörü</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>Ayarlar klasörünü açın</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>Ayarlar d_osyası</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>JSON dosyasını açın</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>Y_eni saat</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>Başka bir saat başlatın</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Daha fazla bilgi</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Gözat...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Sıfırla</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Önizleme</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>Görüntüleme</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>Saat biçimi</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>Saat metninin nasıl biçimlendirileceğini seçin. Zaman kodlarını süslü ayraçlar {} içine alın.</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Saat dilimi</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>Saati farklı bir saat diliminde görüntüleyin.</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>Geri sayım</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>Geri sayım hedefi</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>Geri sayılacak tarihi ve saati ayarlayın. Geri sayım modunu kapatmak için değeri temizleyin.</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>Geri sayım biçimi</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>Geri sayımın nasıl biçimlendirileceğini seçin. Varsayılan görünümü kullanmak için boş bırakın.</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>Pencere</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Windows ile başlat</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>Oturum açtığınızda saati otomatik olarak çalıştırın.</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>Görev çubuğunda göster</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>Saati Windows görev çubuğunda gösterin.</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Alt+Tab'da gizle</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Saat penceresini Alt+Tab geçiş ekranında gizleyin.</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Her zaman üstte</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>Saati diğer pencerelerin üstünde tutun.</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Tıklamaları geçir</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>Tıklamaların saatten geçip arkasındaki pencerelere ulaşmasına izin verin.</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>Tam ekranda gizle</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>Aynı monitörde tam ekran bir uygulama etkinken saati gizleyin.</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>Gizli başlat</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>Saati göstermeden başlatın. Yeniden göstermek için bildirim alanındaki simgeyi kullanın.</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>Sürüklemeye izin ver</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>Saati fareyle sürükleyerek taşıyın.</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Sağa hizala</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>Metin uzunluğu değiştiğinde sağ kenarı sabit tutun.</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>Piksel kaydırma</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>Ekran yanması riskini azaltmak için saati hafifçe kaydırın.</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>Hazır temalar</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>Saat için bir başlangıç görünümü seçin. Tüm ayrıntılar aşağıdaki bölümlerde yine de ayarlanabilir.</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>Yazı tipini, renkleri, opaklığı ve köşeleri ayarlar. Daha fazla ayar için Yazı tipi ve Görünüm bölümlerini kullanın.</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Sistem</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>Vurgu</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>Duman</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>Gece yarısı</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>Kâğıt</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>Minimal</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>Tebeşir</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>Yazı tipi</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>Yazı tipi ailesi</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>Yazı tipi ailesini seçin.</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>Yazı tipi stili</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>Normal, italik veya eğik metin seçin.</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>Yazı tipi kalınlığı</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>Metni daha ince veya daha kalın yapın.</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Metin rengi</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>Metin rengini seç</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>Metin rengini onaltılık bir değerle, renk adıyla veya seçiciyle değiştirin.</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>Metin opaklığı</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>Metnin ne kadar saydam görüneceğini ayarlayın.</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>Görünüm</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>Arka plan veya kontur rengi</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>Arka plan veya kontur rengini seç</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>Arka plan veya kontur rengini değiştirin.</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>Düz arka plan</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>Kontur yerine düz bir arka plan gösterin.</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>Arka plan opaklığı</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>Arka planın ne kadar saydam görüneceğini ayarlayın.</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>Yuvarlatılmış köşeler</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>Arka planın köşelerini yuvarlatın.</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>Kontur kalınlığı</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>Arka plan kapalıyken kontur kalınlığını ayarlayın.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Arka plan resmi</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>Saatin arkasında bir resim gösterin.</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Resim sığdırma</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>Resmin saate nasıl sığacağını seçin.</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>Uyarılar</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>Alarm sesi</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>Çalınacak bir WAV dosyası seçin.</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>Ses aralığı</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>Sesin ne sıklıkla çalınacağını saat, dakika ve saniye olarak seçin.</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>Geri sayım bitince ses çal</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>Geri sayım bittiğinde seçili sesi çalın.</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>Kısayollar</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>Sağ tıklama:</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>Menüyü aç</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>Çift tıklama:</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>Görüntülenen metni kopyala</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>Sürükleme:</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>Saati taşı</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + kaydırma:</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>Boyutu değiştir</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>Boyutu büyüt</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>Boyutu küçült</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>Diğer uygulamalar</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>Ruh halinizi ve iyi oluşunuzu takip edin (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>Gecikmeyi ve bant genişliği kullanımını görün (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Tesla araç kamerası kayıtlarınızı izleyin (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>Özelleştirilebilir dairesel bir menüyü kısayolla açın (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>Web sitelerini bir zamanlamaya göre engelleyin (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>DesktopClock geliştiricisinin diğer uygulamaları</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>Teşekkürler</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>Resim dosyaları</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>WAV dosyaları</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>Tüm dosyalar</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>Ayarlar dosyası yok ve oluşturulamadı.</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>Ayarlar dosyası Not Defteri'nde açılamadı.
+
+Bu uygulama çalıntı bir kopya olabilir. Uygulama için ödeme yaptıysanız para iadesi isteyin. Resmi sürüm ücretsizdir: https://github.com/danielchalmers/DesktopClock.
+
+Resmi sürümde de sorun devam ederse bu bağlantıdan bildirin ve şu hatayı ekleyin: "{0}"</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>Yeni saat oluşturulamadı.
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>Bu işlem, uygulamanın bir kopyasını oluşturup varsayılan ayarlarla başlatır.
+
+Devam edilsin mi?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>{0} açılamadı.</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>Yaygın biçimler</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>Özel biçim</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>Ekle:</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>{0} kodunu imlecin olduğu yere ekle</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(otomatik)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>Saat</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>Saat, 24 saatlik</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>Saniyeli saat</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>Gün ve saat</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>Tarih ve saat</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>Tam tarih ve saat</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>Yalnızca tarih</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>Sıralanabilir</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>ISO haftası</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>Otomatik</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>Kalan gün</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>Gün ve saat</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>Ayrıntılı</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>Dijital</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>{%d} gün kaldı</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d} g {%h} sa</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d} g {%h} sa {%m} dk {%s} sn</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>Haftanın günü</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>Haftanın günü (tam)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>Gün</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>Ay</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>Ay (tam)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>Yıl</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>Saat</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>Saat (24 saatlik)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>Saniye</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>Hafta numarası</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>UTC farkı</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>Günler</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>Saatler</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>Dakikalar</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>Dijital saat</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>Yaygın hedefler</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>Özel hedef</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>Bu gece yarısı</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>Yarın sabah</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>Cuma öğleden sonra</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>Yeni yıl</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>Hedef yok. Saat, geçerli saati gösterir.</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>şimdi</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>{0} sonra</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0} önce</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>yarın</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>dün</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>{0} saniye</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>{0} dakika</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>{0} saat</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>{0} gün</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>{0} ay</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>{0} yıl</value>
+  </data>
+</root>

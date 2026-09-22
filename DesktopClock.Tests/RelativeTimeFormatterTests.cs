@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace DesktopClock.Tests;
 
@@ -92,5 +93,26 @@ public class RelativeTimeFormatterTests
         var now = DateTime.SpecifyKind(Now, DateTimeKind.Unspecified);
 
         Assert.Equal("in 3 hours", RelativeTimeFormatter.Format(target, now));
+    }
+
+    [Theory]
+    [InlineData("de", "00:01:00", "in einer Minute")]
+    [InlineData("de", "3.00:00:00", "in 3 Tagen")]
+    [InlineData("fr", "01:00:00", "dans une heure")]
+    [InlineData("ja", "03:00:00", "3時間後")]
+    [InlineData("zh-CN", "2.00:00:00", "2天后")]
+    [InlineData("pl", "00:01:00", "za minutę")]
+    [InlineData("pl", "00:12:00", "za 12 minut")]
+    [InlineData("pl", "00:22:00", "za 22 minuty")]
+    [InlineData("ru", "11.00:00:00", "через 11 дней")]
+    [InlineData("ru", "21.00:00:00", "через 21 день")]
+    [InlineData("ru", "22.00:00:00", "через 22 дня")]
+    [InlineData("ru", "25.00:00:00", "через 25 дней")]
+    [InlineData("uk", "00:03:00", "через 3 хвилини")]
+    public void Format_UsesTheLanguagesPluralForms(string culture, string offset, string expected)
+    {
+        var target = Now + TimeSpan.Parse(offset);
+
+        Assert.Equal(expected, RelativeTimeFormatter.Format(target, Now, CultureInfo.GetCultureInfo(culture)));
     }
 }

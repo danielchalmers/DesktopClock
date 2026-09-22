@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>複製(_C)</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>隱藏(_H)</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>大小：</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>最上層顯示(_T)</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>設定(_S)…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>檢查更新(_U)</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>提供意見反應(_F)</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>結束(_X)</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>複製失敗</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>無法更新剪貼簿。請再試一次。</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>無法使用提示音效</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>無法播放此 WAV 檔案。</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>正在背景執行</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>按兩下系統匣圖示以顯示時鐘。</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>無法開啟連結</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>由於存取錯誤，無法儲存設定。
+
+請將應用程式移至不需要系統管理員權限的資料夾。
+
+請確認您是從官方來源 https://github.com/danielchalmers/DesktopClock 下載。如果您曾付費購買，請要求退款。
+
+如果問題持續發生，請透過該連結回報。</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>格式錯誤</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>DesktopClock 發生問題，必須關閉。</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>詳細資料已儲存至：
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>請到 https://github.com/danielchalmers/DesktopClock/issues 回報此問題，並附上該檔案。</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>DesktopClock 設定</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>顯示(_D)</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>倒數計時(_C)</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>視窗(_W)</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>主題預設(_H)</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>文字(_T)</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>外觀(_A)</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>提醒(_L)</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>快速操作(_S)</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>探索更多(_M)</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>致謝(_E)</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>設定資料夾(_F)</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>開啟設定資料夾</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>設定檔(_I)</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>開啟 JSON 檔案</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>新增時鐘(_N)</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>再啟動一個時鐘</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>深入了解</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>瀏覽...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>重設</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>預覽</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>顯示</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>時鐘格式</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>選擇時鐘文字的格式。請以大括號 {} 括住時間代碼。</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>時區</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>使用其他時區顯示時鐘。</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>倒數計時</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>倒數目標</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>設定要倒數的日期和時間。清除此值即可停用倒數計時模式。</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>倒數格式</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>選擇倒數計時的格式。保留空白即可使用預設顯示。</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>視窗</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>隨 Windows 啟動</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>登入時自動執行時鐘。</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>在工作列中顯示</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>在 Windows 工作列中顯示時鐘。</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>在 Alt+Tab 中隱藏</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>在 Alt+Tab 切換畫面中隱藏時鐘視窗。</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>最上層顯示</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>讓時鐘保持在其他視窗上方。</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>點選穿透</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>讓點選動作穿過時鐘，傳到後方的視窗。</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>全螢幕時隱藏</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>當同一台顯示器上有全螢幕應用程式在使用中時，隱藏時鐘。</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>啟動時隱藏</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>啟動時不顯示時鐘。可使用系統匣圖示再次顯示。</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>允許拖曳</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>用滑鼠拖曳來移動時鐘。</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>靠右對齊</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>文字長度變更時，保持右側邊緣固定。</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>像素位移</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>稍微移動時鐘，有助於降低螢幕烙印的風險。</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>主題預設</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>為時鐘選擇起始外觀。所有細節仍可在下方各區段中調整。</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>設定字型、色彩、不透明度和圓角。可在「文字」和「外觀」中進一步調整。</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>系統</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>輔色</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>煙霧</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>終端機</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>午夜</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>紙張</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>極簡</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>粉筆</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>文字</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>字型</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>選擇字型。</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>字型樣式</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>選擇一般、斜體或傾斜文字。</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>字型粗細</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>讓文字變細或變粗。</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>文字色彩</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>選擇文字色彩</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>使用十六進位值、色彩名稱或色彩選擇器變更文字色彩。</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>文字不透明度</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>調整文字的透明程度。</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>外觀</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>背景或外框色彩</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>選擇背景或外框色彩</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>變更背景或外框色彩。</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>純色背景</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>顯示純色背景，而非外框。</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>背景不透明度</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>調整背景的透明程度。</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>圓角</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>將背景的邊角變成圓角。</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>外框粗細</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>停用背景時調整外框粗細。</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>背景圖片</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>在時鐘後方顯示圖片。</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>圖片調整方式</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>選擇圖片在時鐘內的調整方式。</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>提醒</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>鬧鐘音效</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>選擇要播放的 WAV 檔案。</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>音效間隔</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>以小時、分鐘和秒設定音效的播放頻率。</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>倒數結束時播放音效</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>倒數計時結束時播放所選音效。</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>快速操作</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>按右鍵：</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>開啟選單</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>按兩下：</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>複製顯示的文字</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>拖曳：</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>移動時鐘</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + 滾輪：</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>變更大小</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +：</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>放大</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -：</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>縮小</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>探索更多</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>記錄心情與身心健康 (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>查看延遲與頻寬使用量 (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>觀看 Tesla 行車記錄器影片 (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>使用快速鍵開啟可自訂的環狀選單 (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>依排程封鎖網站 (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>DesktopClock 開發人員的更多作品</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>致謝</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>圖片檔</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>WAV 檔案</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>所有檔案</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>設定檔不存在，且無法建立。</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>無法在記事本中開啟設定檔。
+
+此應用程式可能是盜版複本。如果您曾付費購買，請要求退款。官方版本可在 https://github.com/danielchalmers/DesktopClock 免費取得。
+
+如果官方版本仍然失敗，請透過該連結回報，並附上此錯誤：「{0}」</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>無法建立新時鐘。
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>這會建立應用程式的複本，並以預設設定啟動。
+
+要繼續嗎？</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>無法開啟 {0}。</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>常用格式</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>自訂格式</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>插入：</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>在游標處插入 {0}</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>（自動）</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>時間</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>時間，24 小時制</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>時間（含秒）</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>星期和時間</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>日期和時間</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>完整日期和時間</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>僅日期</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>可排序</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>ISO 週</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>自動</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>剩餘天數</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>天和小時</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>完整明細</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>數位</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>還剩 {%d} 天</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d}天 {%h}時</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d}天 {%h}時 {%m}分 {%s}秒</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>星期</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>星期（全名）</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>日</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>月</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>月（全名）</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>年</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>時間</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>時間（24 小時制）</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>週數</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>UTC 時差</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>天數</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>小時</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>分鐘</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>數位時鐘</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>常用目標</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>自訂目標</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>今晚午夜</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>明天早上</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>週五下午</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>新年</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>沒有目標。時鐘會顯示目前時間。</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>現在</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>{0}後</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0}前</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>明天</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>昨天</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>{0}秒</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>{0}分鐘</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>{0}小時</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>{0}天</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>{0}個月</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>{0}年</value>
+  </data>
+</root>
