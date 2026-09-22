@@ -267,6 +267,8 @@ public partial class MainWindow : Window
         }
         catch
         {
+            // Stop trying until the sound settings change, otherwise a bad file shows this on every tick.
+            _soundPlayer = null;
             _trayIcon?.ShowNotification("Alert sound unavailable", "The WAV file couldn't be played.");
         }
     }
