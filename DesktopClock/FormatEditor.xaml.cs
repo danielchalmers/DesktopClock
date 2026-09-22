@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,18 +24,7 @@ public enum FormatEditorMode
 public partial class FormatEditor : UserControl
 {
     // Presets cover the scenarios users most commonly ask for; the raw box stays the escape hatch.
-    private static readonly (string Name, string Format)[] ClockPresets =
-    {
-        (Loc.Get("ClockPresetTime"), "{h:mm tt}"),
-        (Loc.Get("ClockPresetTime24"), "{HH:mm}"),
-        (Loc.Get("ClockPresetTimeSeconds"), "{h:mm:ss tt}"),
-        (Loc.Get("ClockPresetDayTime"), "{ddd}, {h:mm tt}"),
-        (Loc.Get("ClockPresetDateTime"), "{ddd}, {MMM dd}, {h:mm tt}"),
-        (Loc.Get("ClockPresetFullDateTime"), "{dddd}, {MMMM dd}, {h:mm tt}"),
-        (Loc.Get("ClockPresetDateOnly"), "{dddd}, {MMMM dd}"),
-        (Loc.Get("ClockPresetSortable"), "{yyyy-MM-dd} {HH:mm}"),
-        (Loc.Get("ClockPresetIsoWeek"), "{weekYear}-W{week}"),
-    };
+    private static readonly IReadOnlyList<(string Name, string Format)> ClockPresets = FormatPresets.ForClock(CultureInfo.CurrentCulture.DateTimeFormat);
 
     private static readonly (string Name, string Format)[] CountdownPresets =
     {
@@ -55,7 +45,7 @@ public partial class FormatEditor : UserControl
         (Loc.Get("TokenMonth"), "{MMM}"),
         (Loc.Get("TokenMonthFull"), "{MMMM}"),
         (Loc.Get("TokenYear"), "{yyyy}"),
-        (Loc.Get("TokenTime"), "{h:mm tt}"),
+        (Loc.Get("TokenTime"), "{" + CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern + "}"),
         (Loc.Get("TokenTime24"), "{HH:mm}"),
         (Loc.Get("TokenSeconds"), "{ss}"),
         (Loc.Get("TokenWeekNumber"), "{week}"),
