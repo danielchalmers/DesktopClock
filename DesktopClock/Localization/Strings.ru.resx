@@ -289,6 +289,45 @@
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Сделайте текст тоньше или толще.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Обычный</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>Курсив</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Наклонный</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>Тонкий</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Сверхсветлый</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Светлый</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Обычный</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Средний</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Полужирный</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Жирный</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Сверхжирный</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Черный</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Сверхчерный</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Цвет текста</value>
   </data>
@@ -351,6 +390,18 @@
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Выберите, как изображение размещается в часах.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Исходный размер</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Растянуть</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>По размеру</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Заполнение</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Сигналы</value>

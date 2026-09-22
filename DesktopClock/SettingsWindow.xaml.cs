@@ -347,9 +347,32 @@ public partial class SettingsWindowViewModel : ObservableObject
     {
         Settings = settings;
         AppVersion = FileVersionInfo.GetVersionInfo(App.MainFileInfo.FullName).FileVersion;
-        FontStyles = ["Normal", "Italic", "Oblique"];
-        FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
-        ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
+        FontStyles =
+        [
+            new("Normal", Loc.Get("FontStyleNormal")),
+            new("Italic", Loc.Get("FontStyleItalic")),
+            new("Oblique", Loc.Get("FontStyleOblique")),
+        ];
+        FontWeights =
+        [
+            new("Thin", Loc.Get("FontWeightThin")),
+            new("ExtraLight", Loc.Get("FontWeightExtraLight")),
+            new("Light", Loc.Get("FontWeightLight")),
+            new("Normal", Loc.Get("FontWeightNormal")),
+            new("Medium", Loc.Get("FontWeightMedium")),
+            new("SemiBold", Loc.Get("FontWeightSemiBold")),
+            new("Bold", Loc.Get("FontWeightBold")),
+            new("ExtraBold", Loc.Get("FontWeightExtraBold")),
+            new("Black", Loc.Get("FontWeightBlack")),
+            new("ExtraBlack", Loc.Get("FontWeightExtraBlack")),
+        ];
+        ImageStretches =
+        [
+            new(Stretch.None, Loc.Get("ImageFitNone")),
+            new(Stretch.Fill, Loc.Get("ImageFitFill")),
+            new(Stretch.Uniform, Loc.Get("ImageFitUniform")),
+            new(Stretch.UniformToFill, Loc.Get("ImageFitUniformToFill")),
+        ];
     }
 
     /// <summary>
@@ -365,17 +388,17 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// All available font styles.
     /// </summary>
-    public IList<string> FontStyles { get; }
+    public IList<SettingOption> FontStyles { get; }
 
     /// <summary>
     /// All available font weights.
     /// </summary>
-    public IList<string> FontWeights { get; }
+    public IList<SettingOption> FontWeights { get; }
 
     /// <summary>
     /// All available stretch options for background images.
     /// </summary>
-    public IList<Stretch> ImageStretches { get; }
+    public IList<SettingOption> ImageStretches { get; }
 
     /// <summary>
     /// All available time zones reported by the system.
@@ -451,4 +474,14 @@ public partial class SettingsWindowViewModel : ObservableObject
             yield return fontFamily.Name;
         }
     }
+}
+
+/// <summary>
+/// A choice in a settings dropdown: the value saved in settings, and the name shown in the UI language.
+/// </summary>
+public sealed class SettingOption(object value, string name)
+{
+    public object Value { get; } = value;
+
+    public string Name { get; } = name;
 }

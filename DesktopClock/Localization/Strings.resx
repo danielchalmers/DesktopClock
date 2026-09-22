@@ -325,6 +325,58 @@ If the problem persists, report it at that link.</value>
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Make the text thinner or thicker.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Font style option: upright text.</comment>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>Italic</value>
+    <comment>Font style option.</comment>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Oblique</value>
+    <comment>Font style option: slanted text, like italic but without cursive letter shapes.</comment>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>Thin</value>
+    <comment>Font weight option, from thinnest to thickest: Thin, Extra light, Light, Normal, Medium, Semibold, Bold, Extra bold, Black, Extra black. Use the names word processors in this language use.</comment>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Extra light</value>
+    <comment>Font weight option.</comment>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Light</value>
+    <comment>Font weight option.</comment>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Font weight option: the regular weight.</comment>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Medium</value>
+    <comment>Font weight option.</comment>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Semibold</value>
+    <comment>Font weight option.</comment>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Bold</value>
+    <comment>Font weight option.</comment>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Extra bold</value>
+    <comment>Font weight option.</comment>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Black</value>
+    <comment>Font weight option: very heavy, not the color.</comment>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Extra black</value>
+    <comment>Font weight option: the heaviest, not the color.</comment>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Text color</value>
   </data>
@@ -389,6 +441,22 @@ If the problem persists, report it at that link.</value>
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Choose how the image fits within the clock.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Original size</value>
+    <comment>Image fit option: show the image at its own size.</comment>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Stretch</value>
+    <comment>Image fit option: stretch the image to the clock's shape, distorting it.</comment>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>Fit</value>
+    <comment>Image fit option: show the whole image, keeping its shape.</comment>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Fill</value>
+    <comment>Image fit option: cover the whole clock, keeping the image's shape and cropping the edges.</comment>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Alerts</value>
