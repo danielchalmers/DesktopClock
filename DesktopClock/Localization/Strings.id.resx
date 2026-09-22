@@ -289,6 +289,45 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Buat teks lebih tipis atau lebih tebal.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>Miring</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Condong</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>Tipis</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Ekstra ringan</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Ringan</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Sedang</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Semi tebal</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Tebal</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Ekstra tebal</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Hitam</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Ekstra hitam</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Warna teks</value>
   </data>
@@ -351,6 +390,18 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Pilih cara gambar disesuaikan di dalam jam.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Ukuran asli</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Regangkan</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>Paskan</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Isi</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Peringatan</value>

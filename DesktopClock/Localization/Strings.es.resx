@@ -289,6 +289,45 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Haz el texto más fino o más grueso.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>Cursiva</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Oblicua</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>Fina</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Extraligera</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Ligera</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Seminegrita</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Negrita</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Extranegrita</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Negra</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Extranegra</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Color del texto</value>
   </data>
@@ -351,6 +390,18 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Elige cómo se ajusta la imagen dentro del reloj.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Tamaño original</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Expandir</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>Ajustar</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Rellenar</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Alertas</value>

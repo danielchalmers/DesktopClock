@@ -289,6 +289,45 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Làm chữ mảnh hơn hoặc đậm hơn.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Bình thường</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>Nghiêng</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Xiên</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>Mảnh</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Siêu nhẹ</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Nhẹ</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Bình thường</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Vừa</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Nửa đậm</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Đậm</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Siêu đậm</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Đen</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Siêu đen</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Màu chữ</value>
   </data>
@@ -351,6 +390,18 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Chọn cách hình ảnh vừa khít trong đồng hồ.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Kích thước gốc</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Kéo giãn</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>Vừa khít</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Lấp đầy</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Cảnh báo</value>

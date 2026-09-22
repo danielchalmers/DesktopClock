@@ -289,6 +289,45 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Metni daha ince veya daha kalın yapın.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>İtalik</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Eğik</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>İnce</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Ekstra hafif</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Hafif</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Orta</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Yarı kalın</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Kalın</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Ekstra kalın</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Siyah</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Ekstra siyah</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Metin rengi</value>
   </data>
@@ -351,6 +390,18 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Resmin saate nasıl sığacağını seçin.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Orijinal boyut</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Uzat</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>Sığdır</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Doldur</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Uyarılar</value>

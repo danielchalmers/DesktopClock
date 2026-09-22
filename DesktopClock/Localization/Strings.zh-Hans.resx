@@ -289,6 +289,45 @@
   <data name="FontWeightDescription" xml:space="preserve">
     <value>让文字变细或变粗。</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>斜体</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>倾斜</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>极细</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>超细</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>细体</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>中等</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>半粗</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>粗体</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>特粗</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>超粗</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>极粗</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>文字颜色</value>
   </data>
@@ -351,6 +390,18 @@
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>选择图片在时钟内的适应方式。</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>原始大小</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>拉伸</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>适应</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>填充</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>提醒</value>
