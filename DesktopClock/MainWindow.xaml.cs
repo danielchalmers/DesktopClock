@@ -302,8 +302,8 @@ public partial class MainWindow : Window
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        // Drag the window to move it.
-        if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove)
+        // Drag the window to move it. DragMove throws if the left button isn't down anymore, which can happen with touch or pen input, so check it first.
+        if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove && Mouse.LeftButton == MouseButtonState.Pressed)
         {
             // Pause time updates to maintain placement.
             PixelShifter?.ClearShift(this);
