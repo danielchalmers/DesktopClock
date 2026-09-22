@@ -113,7 +113,7 @@ public class OutlinedTextBlock : FrameworkElement
     private FormattedText _FormattedText;
     private Geometry _TextGeometry;
     private Pen _Pen;
-    private PathGeometry _clipGeometry;
+    private Geometry _clipGeometry;
 
     public Brush Fill
     {
@@ -206,8 +206,15 @@ public class OutlinedTextBlock : FrameworkElement
 
         drawingContext.DrawGeometry(Fill, null, _TextGeometry);
 
+        // With a solid background the outline is transparent, so skip it; its clip geometry is the most expensive part of redrawing the clock each second.
+        if (!HasVisibleStroke())
+        {
+            return;
+        }
+
         if (StrokePosition == StrokePosition.Outside)
         {
+            _clipGeometry ??= BuildOutsideClipGeometry();
             drawingContext.PushClip(_clipGeometry);
         }
         else if (StrokePosition == StrokePosition.Inside)
@@ -325,14 +332,18 @@ public class OutlinedTextBlock : FrameworkElement
 
         EnsureFormattedText();
         _TextGeometry = _FormattedText.BuildGeometry(new Point(0, 0));
+        _clipGeometry = null;
+    }
 
-        if (StrokePosition == StrokePosition.Outside)
-        {
-            // https://stackoverflow.com/questions/93650/apply-stroke-to-a-textblock-in-wpf/35262509#comment106994536_49636033.
-            //var boundsGeo = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
-            var boundsGeo = new RectangleGeometry(new Rect(-(2 * StrokeThickness), -(2 * StrokeThickness), ActualWidth + (4 * StrokeThickness), ActualHeight + (4 * StrokeThickness)));
-            _clipGeometry = Geometry.Combine(boundsGeo, _TextGeometry, GeometryCombineMode.Exclude, null);
-        }
+    private bool HasVisibleStroke() =>
+        StrokeThickness > 0 && Stroke is not (null or SolidColorBrush { Color.A: 0 } or SolidColorBrush { Opacity: 0 });
+
+    private Geometry BuildOutsideClipGeometry()
+    {
+        // https://stackoverflow.com/questions/93650/apply-stroke-to-a-textblock-in-wpf/35262509#comment106994536_49636033.
+        //var boundsGeo = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
+        var boundsGeo = new RectangleGeometry(new Rect(-(2 * StrokeThickness), -(2 * StrokeThickness), ActualWidth + (4 * StrokeThickness), ActualHeight + (4 * StrokeThickness)));
+        return Geometry.Combine(boundsGeo, _TextGeometry, GeometryCombineMode.Exclude, null);
     }
 }
 
