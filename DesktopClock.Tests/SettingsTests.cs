@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Windows.Media;
+using System.Windows.Threading;
 using DesktopClock.Properties;
 
 namespace DesktopClock.Tests;
@@ -68,6 +69,132 @@ public class SettingsPersistenceTests
 
         // Countdown targets are local wall-clock times; the formatter relies on the Kind staying Unspecified.
         Assert.Equal(DateTimeKind.Unspecified, loaded.CountdownTo.Kind);
+    }
+
+    [Fact]
+    public void Save_OverExistingFile_ShouldReplaceItWithoutLeavingTempFile()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var settings = CreateSettingsInstance();
+        settings.Format = "first";
+        Assert.True(settings.Save());
+
+        settings.Format = "second";
+        Assert.True(settings.Save());
+
+        var loaded = CreateSettingsInstance();
+        PopulateFromFile(loaded);
+
+        Assert.Equal("second", loaded.Format);
+        Assert.False(File.Exists(Settings.FilePath + ".tmp"));
+    }
+
+    [Fact]
+    public void ChangingASetting_ShouldSaveItShortlyAfterwards()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        using var __ = new CanBeSavedScope();
+
+        var settings = CreateSettingsInstance();
+        settings.Format = "saved without exiting";
+
+        // The save runs on a short timer, so let the dispatcher run for a bit.
+        PumpDispatcher(TimeSpan.FromSeconds(2));
+
+        // Read the file directly; populating another instance here would queue its own save and leak into other tests.
+        Assert.Contains("saved without exiting", File.ReadAllText(Settings.FilePath));
+    }
+
+    [Fact]
+    public void EditingTheFile_ShouldCancelASaveStillWaitingFromAnEarlierChange()
+    {
+        using var _ = new TempSettingsFileScope();
+        using var __ = new CanBeSavedScope();
+
+        var settings = CreateSettingsInstance();
+        settings.Height = 99;
+
+        // Edit the file by hand before that change is saved, then let the watcher report it.
+        const string handEdit = "{ \"Format\": \"edited by hand\" }";
+        File.WriteAllText(Settings.FilePath, handEdit);
+        typeof(Settings).GetMethod("FileChanged", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(settings, new object[] { null, null });
+        PumpDispatcher(TimeSpan.FromSeconds(2));
+
+        Assert.Equal("edited by hand", settings.Format);
+        Assert.Equal(handEdit, File.ReadAllText(Settings.FilePath));
+    }
+
+    [Fact]
+    public void Load_WithBrieflyLockedFile_ShouldWaitAndKeepSettings()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var original = CreateSettingsInstance();
+        original.Format = "kept through a lock";
+        Assert.True(original.Save());
+
+        // Hold the file like antivirus scanning it, then let go shortly after loading starts.
+        var lockStream = new FileStream(Settings.FilePath, FileMode.Open, FileAccess.Read, FileShare.None);
+        var releaser = new System.Threading.Thread(() =>
+        {
+            System.Threading.Thread.Sleep(150);
+            lockStream.Dispose();
+        });
+        releaser.Start();
+
+        var loaded = LoadAndAttemptSave();
+        releaser.Join();
+
+        Assert.Equal("kept through a lock", loaded.Format);
+    }
+
+    /// <summary>
+    /// Runs the app's startup load, restoring the static state it sets so other tests aren't affected.
+    /// </summary>
+    private static Settings LoadAndAttemptSave()
+    {
+        var canBeSaved = typeof(Settings).GetProperty(nameof(Settings.CanBeSaved), BindingFlags.Public | BindingFlags.Static)!.GetSetMethod(nonPublic: true)!;
+        var originalCanBeSaved = Settings.CanBeSaved;
+
+        try
+        {
+            canBeSaved.Invoke(null, new object[] { false });
+
+            var loadAndAttemptSave = typeof(Settings).GetMethod("LoadAndAttemptSave", BindingFlags.NonPublic | BindingFlags.Static)!;
+            return (Settings)loadAndAttemptSave.Invoke(null, null)!;
+        }
+        finally
+        {
+            canBeSaved.Invoke(null, new object[] { originalCanBeSaved });
+        }
+    }
+
+    private static void PumpDispatcher(TimeSpan duration)
+    {
+        var frame = new DispatcherFrame();
+        var stopTimer = new DispatcherTimer { Interval = duration };
+        stopTimer.Tick += (_, _) =>
+        {
+            stopTimer.Stop();
+            frame.Continue = false;
+        };
+        stopTimer.Start();
+        Dispatcher.PushFrame(frame);
+    }
+
+    /// <summary>
+    /// Lets settings save on their own during a test, as they do once the app has confirmed the file is writable.
+    /// </summary>
+    private sealed class CanBeSavedScope : IDisposable
+    {
+        private static readonly MethodInfo _setCanBeSaved = typeof(Settings).GetProperty(nameof(Settings.CanBeSaved), BindingFlags.Public | BindingFlags.Static)!.GetSetMethod(nonPublic: true)!;
+        private readonly bool _original = Settings.CanBeSaved;
+
+        public CanBeSavedScope() => _setCanBeSaved.Invoke(null, new object[] { true });
+
+        public void Dispose() => _setCanBeSaved.Invoke(null, new object[] { _original });
     }
 
     private static Settings CreateSettingsInstance() =>
