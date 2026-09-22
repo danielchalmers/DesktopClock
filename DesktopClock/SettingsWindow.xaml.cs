@@ -175,11 +175,20 @@ public partial class SettingsWindow : Window
         if (result != MessageBoxResult.OK)
             return;
 
-        var newExePath = Path.Combine(App.MainFileInfo.DirectoryName, App.MainFileInfo.GetFileAtNextIndex().Name);
+        var newExePath = App.MainFileInfo.GetFileAtNextIndex().FullName;
 
         // Copy and start the new clock.
-        File.Copy(App.MainFileInfo.FullName, newExePath);
-        Process.Start(newExePath);
+        try
+        {
+            File.Copy(App.MainFileInfo.FullName, newExePath);
+            Process.Start(newExePath);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this,
+                $"Couldn't create a new clock.\n\n{ex.Message}",
+                Title, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private void CheckForUpdates(object sender, RoutedEventArgs e)
