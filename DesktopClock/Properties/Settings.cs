@@ -572,18 +572,24 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     private void FileChanged(object sender, FileSystemEventArgs e)
     {
-        try
+        // Reload on the thread that saves and cancel any save still waiting from an earlier change, so it can't write a half-reloaded file or put old values back over the edit.
+        _saveTimer.Dispatcher.BeginInvoke(new Action(() =>
         {
-            _populatingFromFile = true;
-            Populate(this);
-        }
-        catch
-        {
-        }
-        finally
-        {
-            _populatingFromFile = false;
-        }
+            _saveTimer.Stop();
+
+            try
+            {
+                _populatingFromFile = true;
+                Populate(this);
+            }
+            catch
+            {
+            }
+            finally
+            {
+                _populatingFromFile = false;
+            }
+        }));
     }
 
     private void ApplySystemThemeDefaultsIfAvailable()

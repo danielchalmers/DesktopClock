@@ -95,35 +95,35 @@ public class SettingsPersistenceTests
     {
         using var _ = new TempSettingsFileScope();
 
-        var canBeSavedProperty = typeof(Settings).GetProperty(nameof(Settings.CanBeSaved), BindingFlags.Public | BindingFlags.Static)!;
-        var originalCanBeSaved = Settings.CanBeSaved;
-        canBeSavedProperty.GetSetMethod(nonPublic: true)!.Invoke(null, new object[] { true });
+        using var __ = new CanBeSavedScope();
 
-        try
-        {
-            var settings = CreateSettingsInstance();
-            settings.Format = "saved without exiting";
+        var settings = CreateSettingsInstance();
+        settings.Format = "saved without exiting";
 
-            // The save runs on a short timer, so let the dispatcher run for a bit.
-            var frame = new DispatcherFrame();
-            var stopTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-            stopTimer.Tick += (_, _) =>
-            {
-                stopTimer.Stop();
-                frame.Continue = false;
-            };
-            stopTimer.Start();
-            Dispatcher.PushFrame(frame);
+        // The save runs on a short timer, so let the dispatcher run for a bit.
+        PumpDispatcher(TimeSpan.FromSeconds(2));
 
-            var loaded = CreateSettingsInstance();
-            PopulateFromFile(loaded);
+        // Read the file directly; populating another instance here would queue its own save and leak into other tests.
+        Assert.Contains("saved without exiting", File.ReadAllText(Settings.FilePath));
+    }
 
-            Assert.Equal("saved without exiting", loaded.Format);
-        }
-        finally
-        {
-            canBeSavedProperty.GetSetMethod(nonPublic: true)!.Invoke(null, new object[] { originalCanBeSaved });
-        }
+    [Fact]
+    public void EditingTheFile_ShouldCancelASaveStillWaitingFromAnEarlierChange()
+    {
+        using var _ = new TempSettingsFileScope();
+        using var __ = new CanBeSavedScope();
+
+        var settings = CreateSettingsInstance();
+        settings.Height = 99;
+
+        // Edit the file by hand before that change is saved, then let the watcher report it.
+        const string handEdit = "{ \"Format\": \"edited by hand\" }";
+        File.WriteAllText(Settings.FilePath, handEdit);
+        typeof(Settings).GetMethod("FileChanged", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(settings, new object[] { null, null });
+        PumpDispatcher(TimeSpan.FromSeconds(2));
+
+        Assert.Equal("edited by hand", settings.Format);
+        Assert.Equal(handEdit, File.ReadAllText(Settings.FilePath));
     }
 
     [Fact]
@@ -169,6 +169,32 @@ public class SettingsPersistenceTests
         {
             canBeSaved.Invoke(null, new object[] { originalCanBeSaved });
         }
+    }
+
+    private static void PumpDispatcher(TimeSpan duration)
+    {
+        var frame = new DispatcherFrame();
+        var stopTimer = new DispatcherTimer { Interval = duration };
+        stopTimer.Tick += (_, _) =>
+        {
+            stopTimer.Stop();
+            frame.Continue = false;
+        };
+        stopTimer.Start();
+        Dispatcher.PushFrame(frame);
+    }
+
+    /// <summary>
+    /// Lets settings save on their own during a test, as they do once the app has confirmed the file is writable.
+    /// </summary>
+    private sealed class CanBeSavedScope : IDisposable
+    {
+        private static readonly MethodInfo _setCanBeSaved = typeof(Settings).GetProperty(nameof(Settings.CanBeSaved), BindingFlags.Public | BindingFlags.Static)!.GetSetMethod(nonPublic: true)!;
+        private readonly bool _original = Settings.CanBeSaved;
+
+        public CanBeSavedScope() => _setCanBeSaved.Invoke(null, new object[] { true });
+
+        public void Dispose() => _setCanBeSaved.Invoke(null, new object[] { _original });
     }
 
     private static Settings CreateSettingsInstance() =>
