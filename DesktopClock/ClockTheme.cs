@@ -45,25 +45,25 @@ public sealed class ClockTheme
         return new[]
         {
             CreateSystemTheme(),
-            new ClockTheme("Accent", "Segoe UI", "SemiBold",
+            new ClockTheme(Loc.Get("ThemeAccent"), "Segoe UI", "SemiBold",
                 Color.FromRgb(0xFF, 0xFF, 0xFF), SystemThemeService.GetSystemAccentColor(),
                 backgroundEnabled: true, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 0.2),
-            new ClockTheme("Smoke", "Segoe UI", "Normal",
+            new ClockTheme(Loc.Get("ThemeSmoke"), "Segoe UI", "Normal",
                 Color.FromRgb(0xF2, 0xF2, 0xF2), Color.FromRgb(0x0A, 0x0A, 0x10),
                 backgroundEnabled: true, backgroundOpacity: 0.55, backgroundCornerRadius: 1, outlineThickness: 0.2),
-            new ClockTheme("Terminal", "Consolas", "Bold",
+            new ClockTheme(Loc.Get("ThemeTerminal"), "Consolas", "Bold",
                 Color.FromRgb(0x00, 0xE5, 0xFF), Color.FromRgb(0x0C, 0x0C, 0x0C),
                 backgroundEnabled: true, backgroundOpacity: 0.85, backgroundCornerRadius: 1, outlineThickness: 0.2),
-            new ClockTheme("Midnight", "Segoe UI", "SemiBold",
+            new ClockTheme(Loc.Get("ThemeMidnight"), "Segoe UI", "SemiBold",
                 Color.FromRgb(0x4C, 0xC2, 0xFF), Color.FromRgb(0x1B, 0x1B, 0x1B),
                 backgroundEnabled: true, backgroundOpacity: 0.95, backgroundCornerRadius: 1, outlineThickness: 0.2),
-            new ClockTheme("Paper", "Georgia", "Normal",
+            new ClockTheme(Loc.Get("ThemePaper"), "Georgia", "Normal",
                 Color.FromRgb(0x1A, 0x1A, 0x1A), Color.FromRgb(0xFA, 0xF9, 0xF6),
                 backgroundEnabled: true, backgroundOpacity: 0.97, backgroundCornerRadius: 1, outlineThickness: 0.2),
-            new ClockTheme("Minimal", "Segoe UI", "Light",
+            new ClockTheme(Loc.Get("ThemeMinimal"), "Segoe UI", "Light",
                 Color.FromRgb(0xFF, 0xFF, 0xFF), Color.FromRgb(0x00, 0x00, 0x00),
                 backgroundEnabled: false, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 0),
-            new ClockTheme("Chalk", "Segoe UI", "SemiBold",
+            new ClockTheme(Loc.Get("ThemeChalk"), "Segoe UI", "SemiBold",
                 Color.FromRgb(0xFF, 0xFF, 0xFF), Color.FromRgb(0x00, 0x00, 0x00),
                 backgroundEnabled: false, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 1.5),
         };
@@ -101,7 +101,7 @@ public sealed class ClockTheme
             outerColor = Color.FromRgb(247, 247, 247);
         }
 
-        return new ClockTheme("System", "Consolas", "Normal", textColor, outerColor,
+        return new ClockTheme(Loc.Get("ThemeSystem"), "Consolas", "Normal", textColor, outerColor,
             backgroundEnabled: true, backgroundOpacity: 0.9, backgroundCornerRadius: 1, outlineThickness: 0.2);
     }
 }

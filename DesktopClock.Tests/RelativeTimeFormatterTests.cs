@@ -2,6 +2,7 @@ using System;
 
 namespace DesktopClock.Tests;
 
+[UseUICulture("en-US")]
 public class RelativeTimeFormatterTests
 {
     private static readonly DateTime Now = new(2026, 3, 15, 12, 34, 56, 500);

@@ -28,4 +28,9 @@
   <ItemGroup>
     <Resource Include="DesktopClock.ico" />
   </ItemGroup>
+
+  <ItemGroup>
+    <!-- Translations compile into the exe instead of satellite assemblies, which Costura doesn't embed, so the app stays a single file. See Loc. -->
+    <EmbeddedResource Update="Localization\Strings.*.resx" WithCulture="false" />
+  </ItemGroup>
 </Project>

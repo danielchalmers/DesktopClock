@@ -36,7 +36,7 @@
             <Separator />
 
             <MenuItem Command="{Binding CopyToClipboardCommand}"
-                      Header="_Copy">
+                      Header="{local:Loc MenuCopy}">
                 <MenuItem.Icon>
                     <TextBlock Text="&#xE8C8;"
                                Style="{StaticResource MenuIconGlyph}" />
@@ -44,7 +44,7 @@
             </MenuItem>
 
             <MenuItem Command="{Binding HideForNowCommand}"
-                      Header="_Hide">
+                      Header="{local:Loc MenuHide}">
                 <MenuItem.Icon>
                     <TextBlock Text="&#xE890;"
                                Style="{StaticResource MenuIconGlyph}" />
@@ -54,7 +54,8 @@
             <MenuItem>
                 <MenuItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Size: " />
+                        <TextBlock Text="{local:Loc MenuSize}"
+                                   Margin="0,0,4,0" />
 
                         <Slider Width="80"
                                 Maximum="{x:Static local:HeightScaleConverter.MaxSizeLog}"
@@ -64,12 +65,12 @@
                 </MenuItem.Header>
             </MenuItem>
 
-            <MenuItem Header="Always on _top"
+            <MenuItem Header="{local:Loc MenuAlwaysOnTop}"
                       IsCheckable="True"
                       IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
-                      Header="_Settings…">
+                      Header="{local:Loc MenuSettings}">
                 <MenuItem.Icon>
                     <TextBlock Text="&#xE713;"
                                Style="{StaticResource MenuIconGlyph}" />
@@ -79,7 +80,7 @@
             <Separator />
 
             <MenuItem Command="{Binding OpenReleasesPageCommand}"
-                      Header="Check for _updates">
+                      Header="{local:Loc MenuCheckForUpdates}">
                 <MenuItem.Icon>
                     <TextBlock Text="&#xE895;"
                                Style="{StaticResource MenuIconGlyph}" />
@@ -87,7 +88,7 @@
             </MenuItem>
 
             <MenuItem Command="{Binding OpenIssueTrackerCommand}"
-                      Header="Give _feedback">
+                      Header="{local:Loc MenuGiveFeedback}">
                 <MenuItem.Icon>
                     <TextBlock Text="&#xED15;"
                                Style="{StaticResource MenuIconGlyph}" />
@@ -95,7 +96,7 @@
             </MenuItem>
 
             <MenuItem Command="{Binding ExitCommand}"
-                      Header="E_xit">
+                      Header="{local:Loc MenuExit}">
                 <MenuItem.Icon>
                     <TextBlock Text="&#xE7E8;"
                                Style="{StaticResource MenuIconGlyph}" />
