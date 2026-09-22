@@ -3,11 +3,12 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
+using DesktopClock.Properties;
 
 namespace DesktopClock.Utilities;
 
 /// <summary>
-/// Handles crashes so the clock doesn't just vanish: it writes the error to a log file, tells the user where it is, and then exits.
+/// Handles crashes so the clock doesn't just vanish: it saves settings one last time, writes the error to a log file, tells the user where it is, and then exits.
 /// </summary>
 public static class CrashHandler
 {
@@ -32,6 +33,7 @@ public static class CrashHandler
         // Only the first crash is handled; another one while it's being handled exits right away instead of stacking up dialogs.
         if (Interlocked.Exchange(ref _handling, 1) == 0)
         {
+            Settings.TrySaveIfLoaded();
             var logPath = TryWriteLog(exception);
             ShowMessage(logPath);
         }
