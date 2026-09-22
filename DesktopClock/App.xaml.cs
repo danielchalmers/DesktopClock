@@ -18,6 +18,7 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
+        CrashHandler.Register(this);
         base.OnStartup(e);
         ThemeManager.Initialize();
 

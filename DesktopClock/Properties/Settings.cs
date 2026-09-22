@@ -86,6 +86,23 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public static bool CanBeSaved { get; private set; }
 
     /// <summary>
+    /// Saves one last time if the settings were loaded and can be saved, without throwing, for when the app is about to close after a crash.
+    /// </summary>
+    public static void TrySaveIfLoaded()
+    {
+        if (!_default.IsValueCreated || !CanBeSaved)
+            return;
+
+        try
+        {
+            Default.Save();
+        }
+        catch
+        {
+        }
+    }
+
+    /// <summary>
     /// Checks if the settings file exists on the disk.
     /// </summary>
     public static bool Exists => File.Exists(FilePath);
