@@ -44,7 +44,7 @@ public partial class ThemePresetPicker : UserControl
             Content = content,
             Padding = new Thickness(5),
             Margin = new Thickness(0, 0, 8, 8),
-            ToolTip = "Sets the font, colors, opacity, and corners. Adjust further in Typography and Appearance.",
+            ToolTip = Loc.Get("ThemePresetTooltip"),
         };
         button.Click += (_, _) => theme.Apply(Settings.Default);
 

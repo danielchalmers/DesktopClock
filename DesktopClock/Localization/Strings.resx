@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>_Copy</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>_Hide</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>Size:</value>
+    <comment>Label next to the size slider in the clock menu.</comment>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>Always on _top</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>_Settings…</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>Check for _updates</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>Give _feedback</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>E_xit</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>Copy failed</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>Couldn't update the clipboard. Try again.</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>Alert sound unavailable</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>The WAV file couldn't be played.</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>Running in the background</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>Double-click the tray icon to show the clock.</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>Couldn't open link</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>Settings can't be saved due to an access error.
+
+Move the app to a folder that doesn't need admin rights.
+
+Make sure you downloaded it from the official source: https://github.com/danielchalmers/DesktopClock. If you paid for it, ask for a refund.
+
+If the problem persists, report it at that link.</value>
+    <comment>Shown when a copy of the app can't save. Must keep all three points: move the app, it may be an unofficial copy so download from the official link, and ask for a refund if you paid.</comment>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Bad format</value>
+    <comment>Shown on the clock when the format is invalid. Keep it very short.</comment>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>DesktopClock ran into a problem and needs to close.</value>
+    <comment>Shown after a crash, before the app exits.</comment>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>Details were saved to:
+{0}</value>
+    <comment>{0} is the path of the log file.</comment>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>Please report it at https://github.com/danielchalmers/DesktopClock/issues and include that file.</value>
+    <comment>"That file" is the log file from the previous line.</comment>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>DesktopClock Settings</value>
+    <comment>Window title. Keep the name DesktopClock.</comment>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>_Display</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>_Countdown</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>_Window</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>T_heme presets</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>_Typography</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>_Appearance</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>A_lerts</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>_Shortcuts</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>Discover _more</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>Cr_edits</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>Settings _folder</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>Open the settings folder</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>Settings f_ile</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>Open the JSON file</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>_New clock</value>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>Start another clock</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>Clock format</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>Choose how the clock text is formatted. Use curly braces {} around time codes.</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Time zone</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>Display the clock using a different time zone.</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>Countdown</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>Countdown target</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>Set a date and time to count down to. Clear the value to disable countdown mode.</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>Countdown format</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>Choose how the countdown is formatted. Leave it blank to use the default display.</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>Run the clock automatically when you sign in.</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>Show in taskbar</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>Show the clock in the Windows taskbar.</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Hide from Alt+Tab</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Hide the clock window from the Alt+Tab switcher.</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Always on top</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>Keep the clock above other windows.</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Click through</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>Let clicks pass through the clock to windows behind it.</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>Hide when fullscreen</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>Hide the clock when a fullscreen app is active on the same monitor.</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>Start hidden</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>Start without showing the clock. Use the tray icon to show it again.</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>Allow dragging</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>Move the clock by dragging it with the mouse.</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Align right</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>Keep the right edge fixed when the text length changes.</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>Pixel shifting</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>Move the clock slightly to help reduce the risk of screen burn-in.</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>Theme presets</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>Pick a starting look for the clock. Every detail can still be adjusted in the sections below.</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>Sets the font, colors, opacity, and corners. Adjust further in Typography and Appearance.</value>
+    <comment>Typography and Appearance are the names of settings sections; use the same translations.</comment>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>System</value>
+    <comment>Theme preset name: follows the Windows light or dark theme.</comment>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>Accent</value>
+    <comment>Theme preset name: uses the Windows accent color.</comment>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>Smoke</value>
+    <comment>Theme preset name: translucent dark background.</comment>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>Terminal</value>
+    <comment>Theme preset name: cyan monospace text like a command prompt.</comment>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>Midnight</value>
+    <comment>Theme preset name: blue text on near-black.</comment>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>Paper</value>
+    <comment>Theme preset name: dark serif text on off-white.</comment>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>Minimal</value>
+    <comment>Theme preset name: thin white text with no background.</comment>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>Chalk</value>
+    <comment>Theme preset name: white text with a thick black outline.</comment>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>Typography</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>Font family</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>Choose the font family.</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>Font style</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>Choose normal, italic, or oblique text.</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>Font weight</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>Make the text thinner or thicker.</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Text color</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>Pick text color</value>
+    <comment>Tooltip on the color picker button.</comment>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>Change the text color using a hex value, a color name, or the picker.</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>Text opacity</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>Adjust how transparent the text appears.</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>Background or outline color</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>Pick background or outline color</value>
+    <comment>Tooltip on the color picker button.</comment>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>Change the background or outline color.</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>Solid background</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>Show a solid background instead of an outline.</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>Background opacity</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>Adjust how transparent the background appears.</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>Rounded corners</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>Round the corners of the background.</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>Outline thickness</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>Adjust the outline thickness when the background is disabled.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Background image</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>Show an image behind the clock.</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Image fit</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>Choose how the image fits within the clock.</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>Alarm sound</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>Choose a WAV file to play.</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>Sound interval</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>Choose how often the sound should play using hours, minutes, and seconds.</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>Play sound when countdown ends</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>Play the selected sound when the countdown finishes.</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>Shortcuts</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>Right-click:</value>
+    <comment>Mouse or keyboard input, shown in bold before its action.</comment>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>Open the menu</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>Double-click:</value>
+    <comment>Mouse or keyboard input, shown in bold before its action.</comment>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>Copy the displayed text</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>Drag:</value>
+    <comment>Mouse or keyboard input, shown in bold before its action.</comment>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>Move the clock</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + Scroll:</value>
+    <comment>Use the key name printed on keyboards in this language (for example Strg in German).</comment>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>Change the size</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+    <comment>Use the key name printed on keyboards in this language (for example Strg in German).</comment>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>Increase the size</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+    <comment>Use the key name printed on keyboards in this language (for example Strg in German).</comment>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>Decrease the size</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>Discover more</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>Track your mood and well-being (Android)</value>
+    <comment>Describes another app by the same developer. Keep the platform in parentheses.</comment>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>See latency and bandwidth usage (Windows)</value>
+    <comment>Describes another app by the same developer. Keep the platform in parentheses.</comment>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Watch your Tesla dashcam clips (Windows)</value>
+    <comment>Describes another app by the same developer. Keep the platform in parentheses.</comment>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>Open a customizable radial menu with a shortcut (Windows)</value>
+    <comment>Describes another app by the same developer. Keep the platform in parentheses.</comment>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>Block websites on a schedule (Chrome/Edge)</value>
+    <comment>Describes another app by the same developer. Keep the platform in parentheses.</comment>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>More from the developer of DesktopClock</value>
+    <comment>Link to the developer's GitHub profile.</comment>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>Image files</value>
+    <comment>File type name in the open file dialog.</comment>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>WAV files</value>
+    <comment>File type name in the open file dialog.</comment>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>All files</value>
+    <comment>File type name in the open file dialog.</comment>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>Settings file doesn't exist and couldn't be created.</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>Couldn't open the settings file in Notepad.
+
+This app may be a stolen copy. If you paid for it, ask for a refund. The official version is free at https://github.com/danielchalmers/DesktopClock.
+
+If the official version still fails, report it at that link and include this error: "{0}"</value>
+    <comment>{0} is the error message. Must keep all three points: this may be a stolen copy, ask for a refund if you paid, the official version is free at the link.</comment>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>Couldn't create a new clock.
+
+{0}</value>
+    <comment>{0} is the error message.</comment>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>This will make a copy of the app and start it with default settings.
+
+Continue?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>Couldn't open {0}.</value>
+    <comment>{0} is a web address.</comment>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>Common formats</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>Custom format</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>Insert:</value>
+    <comment>Label before buttons that insert a building block into the format.</comment>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>Insert {0} at the cursor</value>
+    <comment>{0} is a format code such as {ddd}.</comment>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(automatic)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>Time, 24-hour</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>Time with seconds</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>Day and time</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>Date and time</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>Full date and time</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>Date only</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>Sortable</value>
+    <comment>Format like 2026-03-15 14:30 that sorts correctly as text.</comment>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>ISO week</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>Days left</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>Days and hours</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>Full breakdown</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>Digital</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>{%d} days left</value>
+    <comment>Countdown format. Keep every {...} token exactly as is; translate only the text outside the braces.</comment>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d}d {%h}h</value>
+    <comment>Countdown format. Keep every {...} token exactly as is; translate only the text outside the braces. Use this language's short unit abbreviations for days and hours.</comment>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d}d {%h}h {%m}m {%s}s</value>
+    <comment>Countdown format. Keep every {...} token exactly as is; translate only the text outside the braces. Use this language's short unit abbreviations for days, hours, minutes, and seconds.</comment>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>Weekday</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>Weekday (full)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>Month (full)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>Time (24-hour)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>Seconds</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>Week number</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>UTC offset</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>Digital clock</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>Common targets</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>Custom target</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>Midnight tonight</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>Tomorrow morning</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>Friday afternoon</value>
+    <comment>Friday at 5 PM.</comment>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>New Year</value>
+    <comment>January 1 of next year.</comment>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>No target. The clock shows the current time.</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>now</value>
+    <comment>Countdown text when the target is the current moment.</comment>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>in {0}</value>
+    <comment>{0} is an amount of time such as "3 days".</comment>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0} ago</value>
+    <comment>{0} is an amount of time such as "3 days".</comment>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>tomorrow</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>yesterday</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>a second|{0} seconds</value>
+    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>a minute|{0} minutes</value>
+    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>an hour|{0} hours</value>
+    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>a day|{0} days</value>
+    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>a month|{0} months</value>
+    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>a year|{0} years</value>
+    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+  </data>
+</root>

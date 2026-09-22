@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>_Копировать</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>_Скрыть</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>Размер:</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>Пове_рх всех окон</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>_Параметры…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>Проверить _обновления</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>Оставить от_зыв</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>_Выход</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>Не удалось скопировать</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>Не удалось обновить буфер обмена. Повторите попытку.</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>Звуковой сигнал недоступен</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>Не удалось воспроизвести WAV-файл.</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>Работает в фоновом режиме</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>Дважды щелкните значок в области уведомлений, чтобы показать часы.</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>Не удалось открыть ссылку</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>Не удается сохранить параметры из-за ошибки доступа.
+
+Переместите приложение в папку, для которой не нужны права администратора.
+
+Убедитесь, что вы скачали его из официального источника: https://github.com/danielchalmers/DesktopClock. Если вы заплатили за него, запросите возврат средств.
+
+Если проблема не исчезнет, сообщите о ней по этой ссылке.</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Неверный формат</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>В DesktopClock возникла проблема, и приложение будет закрыто.</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>Подробности сохранены в файле:
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>Сообщите о проблеме на https://github.com/danielchalmers/DesktopClock/issues и приложите этот файл.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Параметры DesktopClock</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>_Отображение</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>Обратный о_тсчет</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>О_кно</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>_Готовые темы</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>_Шрифт</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>_Внешний вид</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>_Сигналы</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>_Управление</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>_Другие приложения</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>_Благодарности</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>_Папка параметров</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>Открыть папку параметров</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>_Файл параметров</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>Открыть JSON-файл</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>_Новые часы</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>Запустить еще одни часы</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Подробнее</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Обзор...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Сбросить</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Просмотр</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>Отображение</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>Формат часов</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>Выберите формат текста часов. Заключайте коды времени в фигурные скобки {}.</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Часовой пояс</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>Показывать часы в другом часовом поясе.</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>Обратный отсчет</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>Цель отсчета</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>Укажите дату и время, до которых нужно вести отсчет. Очистите поле, чтобы отключить режим обратного отсчета.</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>Формат отсчета</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>Выберите формат обратного отсчета. Оставьте поле пустым, чтобы использовать вид по умолчанию.</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>Окно</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Запускать вместе с Windows</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>Автоматически запускать часы при входе в систему.</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>Показывать на панели задач</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>Показывать часы на панели задач Windows.</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Скрывать в Alt+Tab</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Скрывать окно часов в переключателе Alt+Tab.</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Поверх всех окон</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>Отображать часы поверх других окон.</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Пропускать щелчки</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>Пропускать щелчки сквозь часы к окнам за ними.</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>Скрывать в полноэкранном режиме</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>Скрывать часы, когда на том же мониторе активно полноэкранное приложение.</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>Запускать в скрытом виде</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>Запускать без отображения часов. Чтобы снова показать их, используйте значок в области уведомлений.</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>Разрешить перетаскивание</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>Перемещать часы, перетаскивая их мышью.</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Выравнивать по правому краю</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>Сохранять положение правого края при изменении длины текста.</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>Сдвиг пикселей</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>Слегка смещать часы, чтобы снизить риск выгорания экрана.</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>Готовые темы</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>Выберите исходный вид часов. Любую деталь можно изменить в разделах ниже.</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>Задает шрифт, цвета, непрозрачность и углы. Дальнейшая настройка в разделах «Шрифт» и «Внешний вид».</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Системная</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>Акцент</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>Дымка</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>Терминал</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>Полночь</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>Бумага</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>Минимализм</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>Мел</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>Шрифт</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>Семейство шрифтов</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>Выберите семейство шрифтов.</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>Начертание</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>Выберите обычный, курсивный или наклонный текст.</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>Насыщенность шрифта</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>Сделайте текст тоньше или толще.</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Цвет текста</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>Выбрать цвет текста</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>Измените цвет текста с помощью шестнадцатеричного значения, названия цвета или палитры.</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>Непрозрачность текста</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>Настройте прозрачность текста.</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>Внешний вид</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>Цвет фона или контура</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>Выбрать цвет фона или контура</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>Измените цвет фона или контура.</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>Сплошной фон</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>Показывать сплошной фон вместо контура.</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>Непрозрачность фона</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>Настройте прозрачность фона.</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>Скругленные углы</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>Скруглить углы фона.</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>Толщина контура</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>Настройте толщину контура, когда фон отключен.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Фоновое изображение</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>Показывать изображение за часами.</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Размещение изображения</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>Выберите, как изображение размещается в часах.</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>Сигналы</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>Звук сигнала</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>Выберите WAV-файл для воспроизведения.</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>Интервал звука</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>Укажите в часах, минутах и секундах, как часто воспроизводить звук.</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>Звук по окончании отсчета</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>Воспроизводить выбранный звук, когда обратный отсчет завершится.</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>Управление</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>Щелчок правой кнопкой:</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>Открыть меню</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>Двойной щелчок:</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>Скопировать отображаемый текст</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>Перетаскивание:</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>Переместить часы</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + прокрутка:</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>Изменить размер</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>Увеличить размер</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>Уменьшить размер</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>Другие приложения</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>Отслеживайте настроение и самочувствие (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>Следите за задержкой и использованием полосы пропускания (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Смотрите записи видеорегистратора Tesla (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>Открывайте настраиваемое радиальное меню сочетанием клавиш (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>Блокируйте сайты по расписанию (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>Другие приложения от разработчика DesktopClock</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>Благодарности</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>Файлы изображений</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>Файлы WAV</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>Все файлы</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>Файл параметров не существует, и его не удалось создать.</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>Не удалось открыть файл параметров в Блокноте.
+
+Возможно, это украденная копия приложения. Если вы заплатили за него, запросите возврат средств. Официальная версия бесплатна: https://github.com/danielchalmers/DesktopClock.
+
+Если официальная версия тоже не работает, сообщите об этом по той же ссылке и приложите эту ошибку: «{0}»</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>Не удалось создать новые часы.
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>Будет создана копия приложения, которая запустится с параметрами по умолчанию.
+
+Продолжить?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>Не удалось открыть {0}.</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>Стандартные форматы</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>Свой формат</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>Вставить:</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>Вставить {0} в позицию курсора</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(автоматически)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>Время</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>Время, 24-часовой формат</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>Время с секундами</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>День и время</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>Дата и время</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>Полные дата и время</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>Только дата</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>Для сортировки</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>Неделя ISO</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>Автоматически</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>Осталось дней</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>Дни и часы</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>Подробно</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>Цифровой</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>Осталось дней: {%d}</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d} д {%h} ч</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d} д {%h} ч {%m} мин {%s} с</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>День недели</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>День недели (полностью)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>День</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>Месяц</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>Месяц (полностью)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>Год</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>Время</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>Время (24 часа)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>Секунды</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>Номер недели</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>Смещение UTC</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>Дни</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>Часы</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>Минуты</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>Цифровые часы</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>Стандартные цели</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>Своя цель</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>Сегодня в полночь</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>Завтра утром</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>Вечер пятницы</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>Новый год</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>Цель не задана. Часы показывают текущее время.</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>сейчас</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>через {0}</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>{0} назад</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>завтра</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>вчера</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>{0} секунду|{0} секунды|{0} секунд</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>{0} минуту|{0} минуты|{0} минут</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>{0} час|{0} часа|{0} часов</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>{0} день|{0} дня|{0} дней</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>{0} месяц|{0} месяца|{0} месяцев</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>{0} год|{0} года|{0} лет</value>
+  </data>
+</root>

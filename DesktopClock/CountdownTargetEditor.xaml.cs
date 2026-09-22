@@ -16,10 +16,10 @@ public partial class CountdownTargetEditor : UserControl
 {
     private static readonly (string Name, Func<DateTime> GetTarget)[] Presets =
     {
-        ("Midnight tonight", () => DateTime.Today.AddDays(1)),
-        ("Tomorrow morning", () => DateTime.Today.AddDays(1).AddHours(9)),
-        ("Friday afternoon", () => NextOccurrence(DayOfWeek.Friday, 17)),
-        ("New Year", () => new DateTime(DateTime.Today.Year + 1, 1, 1)),
+        (Loc.Get("TargetMidnight"), () => DateTime.Today.AddDays(1)),
+        (Loc.Get("TargetTomorrowMorning"), () => DateTime.Today.AddDays(1).AddHours(9)),
+        (Loc.Get("TargetFridayAfternoon"), () => NextOccurrence(DayOfWeek.Friday, 17)),
+        (Loc.Get("TargetNewYear"), () => new DateTime(DateTime.Today.Year + 1, 1, 1)),
     };
 
     private bool _built;
@@ -101,7 +101,7 @@ public partial class CountdownTargetEditor : UserControl
         var target = Settings.Default.CountdownTo;
 
         PreviewText.Text = target == default
-            ? "No target. The clock shows the current time."
+            ? Loc.Get("NoCountdownTarget")
             : $"{target:f} — {RelativeTimeFormatter.Format(target, DateTime.Now)}";
     }
 

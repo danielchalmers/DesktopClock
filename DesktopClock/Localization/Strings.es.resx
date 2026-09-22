@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuCopy" xml:space="preserve">
+    <value>_Copiar</value>
+  </data>
+  <data name="MenuHide" xml:space="preserve">
+    <value>_Ocultar</value>
+  </data>
+  <data name="MenuSize" xml:space="preserve">
+    <value>Tamaño:</value>
+  </data>
+  <data name="MenuAlwaysOnTop" xml:space="preserve">
+    <value>_Siempre visible</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>Con_figuración…</value>
+  </data>
+  <data name="MenuCheckForUpdates" xml:space="preserve">
+    <value>_Buscar actualizaciones</value>
+  </data>
+  <data name="MenuGiveFeedback" xml:space="preserve">
+    <value>_Enviar comentarios</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Sa_lir</value>
+  </data>
+  <data name="CopyFailedTitle" xml:space="preserve">
+    <value>Error al copiar</value>
+  </data>
+  <data name="CopyFailedMessage" xml:space="preserve">
+    <value>No se pudo actualizar el portapapeles. Vuelve a intentarlo.</value>
+  </data>
+  <data name="SoundFailedTitle" xml:space="preserve">
+    <value>Sonido de alerta no disponible</value>
+  </data>
+  <data name="SoundFailedMessage" xml:space="preserve">
+    <value>No se pudo reproducir el archivo WAV.</value>
+  </data>
+  <data name="StartHiddenTitle" xml:space="preserve">
+    <value>Ejecutándose en segundo plano</value>
+  </data>
+  <data name="StartHiddenMessage" xml:space="preserve">
+    <value>Haz doble clic en el icono de la bandeja del sistema para mostrar el reloj.</value>
+  </data>
+  <data name="OpenLinkFailedTitle" xml:space="preserve">
+    <value>No se pudo abrir el vínculo</value>
+  </data>
+  <data name="CantSaveSettingsMessage" xml:space="preserve">
+    <value>No se puede guardar la configuración debido a un error de acceso.
+
+Mueve la aplicación a una carpeta que no requiera permisos de administrador.
+
+Asegúrate de haberla descargado de la fuente oficial: https://github.com/danielchalmers/DesktopClock. Si pagaste por ella, solicita un reembolso.
+
+Si el problema continúa, notifícalo en ese vínculo.</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Formato no válido</value>
+  </data>
+  <data name="CrashMessage" xml:space="preserve">
+    <value>DesktopClock tuvo un problema y debe cerrarse.</value>
+  </data>
+  <data name="CrashLogLocation" xml:space="preserve">
+    <value>Los detalles se guardaron en:
+{0}</value>
+  </data>
+  <data name="CrashReport" xml:space="preserve">
+    <value>Informa del problema en https://github.com/danielchalmers/DesktopClock/issues y adjunta ese archivo.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Configuración de DesktopClock</value>
+  </data>
+  <data name="NavDisplay" xml:space="preserve">
+    <value>_Pantalla</value>
+  </data>
+  <data name="NavCountdown" xml:space="preserve">
+    <value>_Cuenta regresiva</value>
+  </data>
+  <data name="NavWindow" xml:space="preserve">
+    <value>_Ventana</value>
+  </data>
+  <data name="NavThemePresets" xml:space="preserve">
+    <value>_Temas predefinidos</value>
+  </data>
+  <data name="NavTypography" xml:space="preserve">
+    <value>Tipo_grafía</value>
+  </data>
+  <data name="NavAppearance" xml:space="preserve">
+    <value>Apa_riencia</value>
+  </data>
+  <data name="NavAlerts" xml:space="preserve">
+    <value>A_lertas</value>
+  </data>
+  <data name="NavShortcuts" xml:space="preserve">
+    <value>_Atajos</value>
+  </data>
+  <data name="NavDiscoverMore" xml:space="preserve">
+    <value>_Descubrir más</value>
+  </data>
+  <data name="NavCredits" xml:space="preserve">
+    <value>Crédit_os</value>
+  </data>
+  <data name="SettingsFolder" xml:space="preserve">
+    <value>Carpeta de con_figuración</value>
+  </data>
+  <data name="SettingsFolderDescription" xml:space="preserve">
+    <value>Abrir la carpeta de configuración</value>
+  </data>
+  <data name="SettingsFile" xml:space="preserve">
+    <value>Arch_ivo de configuración</value>
+  </data>
+  <data name="SettingsFileDescription" xml:space="preserve">
+    <value>Abrir el archivo JSON</value>
+  </data>
+  <data name="NewClock" xml:space="preserve">
+    <value>_Nuevo reloj</value>
+  </data>
+  <data name="NewClockDescription" xml:space="preserve">
+    <value>Iniciar otro reloj</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Más información</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Examinar...</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Restablecer</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Vista previa</value>
+  </data>
+  <data name="SectionDisplay" xml:space="preserve">
+    <value>Pantalla</value>
+  </data>
+  <data name="ClockFormat" xml:space="preserve">
+    <value>Formato del reloj</value>
+  </data>
+  <data name="ClockFormatDescription" xml:space="preserve">
+    <value>Elige el formato del texto del reloj. Usa llaves {} alrededor de los códigos de hora.</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Zona horaria</value>
+  </data>
+  <data name="TimeZoneDescription" xml:space="preserve">
+    <value>Muestra el reloj con otra zona horaria.</value>
+  </data>
+  <data name="SectionCountdown" xml:space="preserve">
+    <value>Cuenta regresiva</value>
+  </data>
+  <data name="CountdownTarget" xml:space="preserve">
+    <value>Objetivo de la cuenta regresiva</value>
+  </data>
+  <data name="CountdownTargetDescription" xml:space="preserve">
+    <value>Establece la fecha y hora hasta la que contar. Borra el valor para desactivar el modo de cuenta regresiva.</value>
+  </data>
+  <data name="CountdownFormat" xml:space="preserve">
+    <value>Formato de la cuenta regresiva</value>
+  </data>
+  <data name="CountdownFormatDescription" xml:space="preserve">
+    <value>Elige el formato de la cuenta regresiva. Déjalo en blanco para usar la presentación predeterminada.</value>
+  </data>
+  <data name="SectionWindow" xml:space="preserve">
+    <value>Ventana</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Iniciar con Windows</value>
+  </data>
+  <data name="StartWithWindowsDescription" xml:space="preserve">
+    <value>Ejecuta el reloj automáticamente al iniciar sesión.</value>
+  </data>
+  <data name="ShowInTaskbar" xml:space="preserve">
+    <value>Mostrar en la barra de tareas</value>
+  </data>
+  <data name="ShowInTaskbarDescription" xml:space="preserve">
+    <value>Muestra el reloj en la barra de tareas de Windows.</value>
+  </data>
+  <data name="HideFromAltTab" xml:space="preserve">
+    <value>Ocultar de Alt+Tab</value>
+  </data>
+  <data name="HideFromAltTabDescription" xml:space="preserve">
+    <value>Oculta la ventana del reloj en el selector de Alt+Tab.</value>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Siempre visible</value>
+  </data>
+  <data name="AlwaysOnTopDescription" xml:space="preserve">
+    <value>Mantiene el reloj encima de las demás ventanas.</value>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Dejar pasar los clics</value>
+  </data>
+  <data name="ClickThroughDescription" xml:space="preserve">
+    <value>Los clics atraviesan el reloj y llegan a las ventanas de detrás.</value>
+  </data>
+  <data name="HideWhenFullscreen" xml:space="preserve">
+    <value>Ocultar en pantalla completa</value>
+  </data>
+  <data name="HideWhenFullscreenDescription" xml:space="preserve">
+    <value>Oculta el reloj cuando una aplicación en pantalla completa está activa en el mismo monitor.</value>
+  </data>
+  <data name="StartHidden" xml:space="preserve">
+    <value>Iniciar oculto</value>
+  </data>
+  <data name="StartHiddenDescription" xml:space="preserve">
+    <value>Inicia sin mostrar el reloj. Usa el icono de la bandeja para volver a mostrarlo.</value>
+  </data>
+  <data name="AllowDragging" xml:space="preserve">
+    <value>Permitir arrastrar</value>
+  </data>
+  <data name="AllowDraggingDescription" xml:space="preserve">
+    <value>Mueve el reloj arrastrándolo con el mouse.</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Alinear a la derecha</value>
+  </data>
+  <data name="AlignRightDescription" xml:space="preserve">
+    <value>Mantiene fijo el borde derecho cuando cambia la longitud del texto.</value>
+  </data>
+  <data name="PixelShifting" xml:space="preserve">
+    <value>Desplazamiento de píxeles</value>
+  </data>
+  <data name="PixelShiftingDescription" xml:space="preserve">
+    <value>Mueve ligeramente el reloj para ayudar a reducir el riesgo de quemado de pantalla.</value>
+  </data>
+  <data name="SectionThemePresets" xml:space="preserve">
+    <value>Temas predefinidos</value>
+  </data>
+  <data name="ThemePresetsDescription" xml:space="preserve">
+    <value>Elige un aspecto inicial para el reloj. Todos los detalles se pueden ajustar en las secciones siguientes.</value>
+  </data>
+  <data name="ThemePresetTooltip" xml:space="preserve">
+    <value>Establece la fuente, los colores, la opacidad y las esquinas. Ajusta más en Tipografía y Apariencia.</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="ThemeAccent" xml:space="preserve">
+    <value>Énfasis</value>
+  </data>
+  <data name="ThemeSmoke" xml:space="preserve">
+    <value>Humo</value>
+  </data>
+  <data name="ThemeTerminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="ThemeMidnight" xml:space="preserve">
+    <value>Medianoche</value>
+  </data>
+  <data name="ThemePaper" xml:space="preserve">
+    <value>Papel</value>
+  </data>
+  <data name="ThemeMinimal" xml:space="preserve">
+    <value>Mínimo</value>
+  </data>
+  <data name="ThemeChalk" xml:space="preserve">
+    <value>Tiza</value>
+  </data>
+  <data name="SectionTypography" xml:space="preserve">
+    <value>Tipografía</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>Familia de fuentes</value>
+  </data>
+  <data name="FontFamilyDescription" xml:space="preserve">
+    <value>Elige la familia de fuentes.</value>
+  </data>
+  <data name="FontStyle" xml:space="preserve">
+    <value>Estilo de fuente</value>
+  </data>
+  <data name="FontStyleDescription" xml:space="preserve">
+    <value>Elige texto normal, cursiva u oblicuo.</value>
+  </data>
+  <data name="FontWeight" xml:space="preserve">
+    <value>Grosor de fuente</value>
+  </data>
+  <data name="FontWeightDescription" xml:space="preserve">
+    <value>Haz el texto más fino o más grueso.</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Color del texto</value>
+  </data>
+  <data name="TextColorPick" xml:space="preserve">
+    <value>Elegir color del texto</value>
+  </data>
+  <data name="TextColorDescription" xml:space="preserve">
+    <value>Cambia el color del texto con un valor hexadecimal, un nombre de color o el selector.</value>
+  </data>
+  <data name="TextOpacity" xml:space="preserve">
+    <value>Opacidad del texto</value>
+  </data>
+  <data name="TextOpacityDescription" xml:space="preserve">
+    <value>Ajusta la transparencia del texto.</value>
+  </data>
+  <data name="SectionAppearance" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="OuterColor" xml:space="preserve">
+    <value>Color de fondo o contorno</value>
+  </data>
+  <data name="OuterColorPick" xml:space="preserve">
+    <value>Elegir color de fondo o contorno</value>
+  </data>
+  <data name="OuterColorDescription" xml:space="preserve">
+    <value>Cambia el color de fondo o del contorno.</value>
+  </data>
+  <data name="SolidBackground" xml:space="preserve">
+    <value>Fondo sólido</value>
+  </data>
+  <data name="SolidBackgroundDescription" xml:space="preserve">
+    <value>Muestra un fondo sólido en lugar de un contorno.</value>
+  </data>
+  <data name="BackgroundOpacity" xml:space="preserve">
+    <value>Opacidad del fondo</value>
+  </data>
+  <data name="BackgroundOpacityDescription" xml:space="preserve">
+    <value>Ajusta la transparencia del fondo.</value>
+  </data>
+  <data name="RoundedCorners" xml:space="preserve">
+    <value>Esquinas redondeadas</value>
+  </data>
+  <data name="RoundedCornersDescription" xml:space="preserve">
+    <value>Redondea las esquinas del fondo.</value>
+  </data>
+  <data name="OutlineThickness" xml:space="preserve">
+    <value>Grosor del contorno</value>
+  </data>
+  <data name="OutlineThicknessDescription" xml:space="preserve">
+    <value>Ajusta el grosor del contorno cuando el fondo está desactivado.</value>
+  </data>
+  <data name="BackgroundImage" xml:space="preserve">
+    <value>Imagen de fondo</value>
+  </data>
+  <data name="BackgroundImageDescription" xml:space="preserve">
+    <value>Muestra una imagen detrás del reloj.</value>
+  </data>
+  <data name="ImageFit" xml:space="preserve">
+    <value>Ajuste de imagen</value>
+  </data>
+  <data name="ImageFitDescription" xml:space="preserve">
+    <value>Elige cómo se ajusta la imagen dentro del reloj.</value>
+  </data>
+  <data name="SectionAlerts" xml:space="preserve">
+    <value>Alertas</value>
+  </data>
+  <data name="AlarmSound" xml:space="preserve">
+    <value>Sonido de alarma</value>
+  </data>
+  <data name="AlarmSoundDescription" xml:space="preserve">
+    <value>Elige un archivo WAV para reproducir.</value>
+  </data>
+  <data name="SoundInterval" xml:space="preserve">
+    <value>Intervalo del sonido</value>
+  </data>
+  <data name="SoundIntervalDescription" xml:space="preserve">
+    <value>Elige cada cuánto se reproduce el sonido en horas, minutos y segundos.</value>
+  </data>
+  <data name="PlaySoundOnCountdown" xml:space="preserve">
+    <value>Sonido al terminar la cuenta regresiva</value>
+  </data>
+  <data name="PlaySoundOnCountdownDescription" xml:space="preserve">
+    <value>Reproduce el sonido seleccionado cuando termina la cuenta regresiva.</value>
+  </data>
+  <data name="SectionShortcuts" xml:space="preserve">
+    <value>Atajos</value>
+  </data>
+  <data name="ShortcutRightClick" xml:space="preserve">
+    <value>Clic derecho:</value>
+  </data>
+  <data name="ShortcutRightClickAction" xml:space="preserve">
+    <value>Abrir el menú</value>
+  </data>
+  <data name="ShortcutDoubleClick" xml:space="preserve">
+    <value>Doble clic:</value>
+  </data>
+  <data name="ShortcutDoubleClickAction" xml:space="preserve">
+    <value>Copiar el texto mostrado</value>
+  </data>
+  <data name="ShortcutDrag" xml:space="preserve">
+    <value>Arrastrar:</value>
+  </data>
+  <data name="ShortcutDragAction" xml:space="preserve">
+    <value>Mover el reloj</value>
+  </data>
+  <data name="ShortcutCtrlScroll" xml:space="preserve">
+    <value>Ctrl + rueda:</value>
+  </data>
+  <data name="ShortcutCtrlScrollAction" xml:space="preserve">
+    <value>Cambiar el tamaño</value>
+  </data>
+  <data name="ShortcutCtrlPlus" xml:space="preserve">
+    <value>Ctrl + +:</value>
+  </data>
+  <data name="ShortcutCtrlPlusAction" xml:space="preserve">
+    <value>Aumentar el tamaño</value>
+  </data>
+  <data name="ShortcutCtrlMinus" xml:space="preserve">
+    <value>Ctrl + -:</value>
+  </data>
+  <data name="ShortcutCtrlMinusAction" xml:space="preserve">
+    <value>Reducir el tamaño</value>
+  </data>
+  <data name="SectionDiscoverMore" xml:space="preserve">
+    <value>Descubrir más</value>
+  </data>
+  <data name="GoodDiaryDescription" xml:space="preserve">
+    <value>Registra tu estado de ánimo y bienestar (Android)</value>
+  </data>
+  <data name="NetworkMonitorDescription" xml:space="preserve">
+    <value>Consulta la latencia y el uso de ancho de banda (Windows)</value>
+  </data>
+  <data name="SentryReplayDescription" xml:space="preserve">
+    <value>Mira los clips de la cámara de tu Tesla (Windows)</value>
+  </data>
+  <data name="RadialActionsDescription" xml:space="preserve">
+    <value>Abre un menú radial personalizable con un atajo (Windows)</value>
+  </data>
+  <data name="TeichosDescription" xml:space="preserve">
+    <value>Bloquea sitios web según un horario (Chrome/Edge)</value>
+  </data>
+  <data name="MoreFromDeveloper" xml:space="preserve">
+    <value>Más del desarrollador de DesktopClock</value>
+  </data>
+  <data name="SectionCredits" xml:space="preserve">
+    <value>Créditos</value>
+  </data>
+  <data name="ImageFilesFilter" xml:space="preserve">
+    <value>Archivos de imagen</value>
+  </data>
+  <data name="WavFilesFilter" xml:space="preserve">
+    <value>Archivos WAV</value>
+  </data>
+  <data name="AllFilesFilter" xml:space="preserve">
+    <value>Todos los archivos</value>
+  </data>
+  <data name="SettingsFileMissing" xml:space="preserve">
+    <value>El archivo de configuración no existe y no se pudo crear.</value>
+  </data>
+  <data name="OpenSettingsFileFailed" xml:space="preserve">
+    <value>No se pudo abrir el archivo de configuración en el Bloc de notas.
+
+Es posible que esta aplicación sea una copia robada. Si pagaste por ella, solicita un reembolso. La versión oficial es gratuita en https://github.com/danielchalmers/DesktopClock.
+
+Si la versión oficial también falla, notifícalo en ese vínculo e incluye este error: "{0}"</value>
+  </data>
+  <data name="NewClockFailed" xml:space="preserve">
+    <value>No se pudo crear un reloj nuevo.
+
+{0}</value>
+  </data>
+  <data name="NewClockConfirm" xml:space="preserve">
+    <value>Se creará una copia de la aplicación y se iniciará con la configuración predeterminada.
+
+¿Continuar?</value>
+  </data>
+  <data name="OpenUrlFailed" xml:space="preserve">
+    <value>No se pudo abrir {0}.</value>
+  </data>
+  <data name="CommonFormats" xml:space="preserve">
+    <value>Formatos comunes</value>
+  </data>
+  <data name="CustomFormat" xml:space="preserve">
+    <value>Formato personalizado</value>
+  </data>
+  <data name="InsertToken" xml:space="preserve">
+    <value>Insertar:</value>
+  </data>
+  <data name="InsertTokenTooltip" xml:space="preserve">
+    <value>Insertar {0} en el cursor</value>
+  </data>
+  <data name="AutomaticTooltip" xml:space="preserve">
+    <value>(automático)</value>
+  </data>
+  <data name="ClockPresetTime" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="ClockPresetTime24" xml:space="preserve">
+    <value>Hora, 24 horas</value>
+  </data>
+  <data name="ClockPresetTimeSeconds" xml:space="preserve">
+    <value>Hora con segundos</value>
+  </data>
+  <data name="ClockPresetDayTime" xml:space="preserve">
+    <value>Día y hora</value>
+  </data>
+  <data name="ClockPresetDateTime" xml:space="preserve">
+    <value>Fecha y hora</value>
+  </data>
+  <data name="ClockPresetFullDateTime" xml:space="preserve">
+    <value>Fecha y hora completas</value>
+  </data>
+  <data name="ClockPresetDateOnly" xml:space="preserve">
+    <value>Solo fecha</value>
+  </data>
+  <data name="ClockPresetSortable" xml:space="preserve">
+    <value>Ordenable</value>
+  </data>
+  <data name="ClockPresetIsoWeek" xml:space="preserve">
+    <value>Semana ISO</value>
+  </data>
+  <data name="CountdownPresetAutomatic" xml:space="preserve">
+    <value>Automático</value>
+  </data>
+  <data name="CountdownPresetDaysLeft" xml:space="preserve">
+    <value>Días restantes</value>
+  </data>
+  <data name="CountdownPresetDaysHours" xml:space="preserve">
+    <value>Días y horas</value>
+  </data>
+  <data name="CountdownPresetFull" xml:space="preserve">
+    <value>Desglose completo</value>
+  </data>
+  <data name="CountdownPresetDigital" xml:space="preserve">
+    <value>Digital</value>
+  </data>
+  <data name="CountdownFormatDaysLeft" xml:space="preserve">
+    <value>{%d} días restantes</value>
+  </data>
+  <data name="CountdownFormatDaysHours" xml:space="preserve">
+    <value>{%d} d {%h} h</value>
+  </data>
+  <data name="CountdownFormatFull" xml:space="preserve">
+    <value>{%d} d {%h} h {%m} min {%s} s</value>
+  </data>
+  <data name="TokenWeekday" xml:space="preserve">
+    <value>Día de la semana</value>
+  </data>
+  <data name="TokenWeekdayFull" xml:space="preserve">
+    <value>Día de la semana (completo)</value>
+  </data>
+  <data name="TokenDay" xml:space="preserve">
+    <value>Día</value>
+  </data>
+  <data name="TokenMonth" xml:space="preserve">
+    <value>Mes</value>
+  </data>
+  <data name="TokenMonthFull" xml:space="preserve">
+    <value>Mes (completo)</value>
+  </data>
+  <data name="TokenYear" xml:space="preserve">
+    <value>Año</value>
+  </data>
+  <data name="TokenTime" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="TokenTime24" xml:space="preserve">
+    <value>Hora (24 horas)</value>
+  </data>
+  <data name="TokenSeconds" xml:space="preserve">
+    <value>Segundos</value>
+  </data>
+  <data name="TokenWeekNumber" xml:space="preserve">
+    <value>Número de semana</value>
+  </data>
+  <data name="TokenUtcOffset" xml:space="preserve">
+    <value>Desfase UTC</value>
+  </data>
+  <data name="TokenDays" xml:space="preserve">
+    <value>Días</value>
+  </data>
+  <data name="TokenHours" xml:space="preserve">
+    <value>Horas</value>
+  </data>
+  <data name="TokenMinutes" xml:space="preserve">
+    <value>Minutos</value>
+  </data>
+  <data name="TokenDigitalClock" xml:space="preserve">
+    <value>Reloj digital</value>
+  </data>
+  <data name="CommonTargets" xml:space="preserve">
+    <value>Objetivos comunes</value>
+  </data>
+  <data name="CustomTarget" xml:space="preserve">
+    <value>Objetivo personalizado</value>
+  </data>
+  <data name="TargetMidnight" xml:space="preserve">
+    <value>Medianoche de hoy</value>
+  </data>
+  <data name="TargetTomorrowMorning" xml:space="preserve">
+    <value>Mañana por la mañana</value>
+  </data>
+  <data name="TargetFridayAfternoon" xml:space="preserve">
+    <value>Viernes por la tarde</value>
+  </data>
+  <data name="TargetNewYear" xml:space="preserve">
+    <value>Año Nuevo</value>
+  </data>
+  <data name="NoCountdownTarget" xml:space="preserve">
+    <value>Sin objetivo. El reloj muestra la hora actual.</value>
+  </data>
+  <data name="RelativeNow" xml:space="preserve">
+    <value>ahora</value>
+  </data>
+  <data name="RelativeFuture" xml:space="preserve">
+    <value>dentro de {0}</value>
+  </data>
+  <data name="RelativePast" xml:space="preserve">
+    <value>hace {0}</value>
+  </data>
+  <data name="RelativeTomorrow" xml:space="preserve">
+    <value>mañana</value>
+  </data>
+  <data name="RelativeYesterday" xml:space="preserve">
+    <value>ayer</value>
+  </data>
+  <data name="RelativeSeconds" xml:space="preserve">
+    <value>un segundo|{0} segundos</value>
+  </data>
+  <data name="RelativeMinutes" xml:space="preserve">
+    <value>un minuto|{0} minutos</value>
+  </data>
+  <data name="RelativeHours" xml:space="preserve">
+    <value>una hora|{0} horas</value>
+  </data>
+  <data name="RelativeDays" xml:space="preserve">
+    <value>un día|{0} días</value>
+  </data>
+  <data name="RelativeMonths" xml:space="preserve">
+    <value>un mes|{0} meses</value>
+  </data>
+  <data name="RelativeYears" xml:space="preserve">
+    <value>un año|{0} años</value>
+  </data>
+</root>
