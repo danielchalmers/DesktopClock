@@ -289,6 +289,45 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Rendi il testo più sottile o più spesso.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Normale</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>Corsivo</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Obliquo</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>Sottile</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Extraleggero</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Leggero</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Normale</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Medio</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Semigrassetto</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Grassetto</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Extragrassetto</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Nero</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Extranero</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Colore testo</value>
   </data>
@@ -351,6 +390,18 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Scegli come adattare l'immagine all'orologio.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Dimensioni originali</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Estendi</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>Adatta</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Riempi</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Avvisi</value>

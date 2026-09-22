@@ -271,7 +271,9 @@
                     <TextBlock Text="{local:Loc FontStyle}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontStyles}"
-                              SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
+                              SelectedValue="{Binding Settings.FontStyle, Mode=TwoWay}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Name" />
                     <TextBlock Text="{local:Loc FontStyleDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
@@ -279,7 +281,9 @@
                     <TextBlock Text="{local:Loc FontWeight}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontWeights}"
-                              SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
+                              SelectedValue="{Binding Settings.FontWeight, Mode=TwoWay}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Name" />
                     <TextBlock Text="{local:Loc FontWeightDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
@@ -467,7 +471,9 @@
                     <TextBlock Text="{local:Loc ImageFit}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding ImageStretches}"
-                              SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
+                              SelectedValue="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Name" />
                     <TextBlock Text="{local:Loc ImageFitDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>

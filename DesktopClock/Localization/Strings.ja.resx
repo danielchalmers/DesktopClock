@@ -289,6 +289,45 @@
   <data name="FontWeightDescription" xml:space="preserve">
     <value>テキストを細くしたり太くしたりします。</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>標準</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>イタリック</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>斜体</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>シン</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>エクストラライト</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>標準</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>ミディアム</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>セミボールド</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>ボールド</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>エクストラボールド</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>ブラック</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>エクストラブラック</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>テキストの色</value>
   </data>
@@ -351,6 +390,18 @@
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>時計内での画像の合わせ方を選択します。</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>元のサイズ</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>拡大して表示</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>ページに合わせる</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>ページ幅に合わせる</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>アラート</value>
