@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Windows.Media;
+using System.Windows.Threading;
 using DesktopClock.Properties;
 
 namespace DesktopClock.Tests;
@@ -87,6 +88,42 @@ public class SettingsPersistenceTests
 
         Assert.Equal("second", loaded.Format);
         Assert.False(File.Exists(Settings.FilePath + ".tmp"));
+    }
+
+    [Fact]
+    public void ChangingASetting_ShouldSaveItShortlyAfterwards()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var canBeSavedProperty = typeof(Settings).GetProperty(nameof(Settings.CanBeSaved), BindingFlags.Public | BindingFlags.Static)!;
+        var originalCanBeSaved = Settings.CanBeSaved;
+        canBeSavedProperty.GetSetMethod(nonPublic: true)!.Invoke(null, new object[] { true });
+
+        try
+        {
+            var settings = CreateSettingsInstance();
+            settings.Format = "saved without exiting";
+
+            // The save runs on a short timer, so let the dispatcher run for a bit.
+            var frame = new DispatcherFrame();
+            var stopTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            stopTimer.Tick += (_, _) =>
+            {
+                stopTimer.Stop();
+                frame.Continue = false;
+            };
+            stopTimer.Start();
+            Dispatcher.PushFrame(frame);
+
+            var loaded = CreateSettingsInstance();
+            PopulateFromFile(loaded);
+
+            Assert.Equal("saved without exiting", loaded.Format);
+        }
+        finally
+        {
+            canBeSavedProperty.GetSetMethod(nonPublic: true)!.Invoke(null, new object[] { originalCanBeSaved });
+        }
     }
 
     private static Settings CreateSettingsInstance() =>

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
+using System.Windows.Threading;
 using DesktopClock.Utilities;
 using Newtonsoft.Json;
 using WpfWindowPlacement;
@@ -12,6 +13,8 @@ namespace DesktopClock.Properties;
 public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
     private readonly FileSystemWatcher _watcher;
+    private readonly DispatcherTimer _saveTimer;
+    private bool _populatingFromFile;
     private string _resolvedTimeZoneId;
     private TimeZoneInfo _resolvedTimeZone;
     private static readonly Lazy<Settings> _default = new(LoadAndAttemptSave);
@@ -44,6 +47,23 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
         // Editors that save by swapping in a new file report it as a rename rather than a change.
         _watcher.Renamed += FileChanged;
+
+        // Save shortly after a change instead of only on exit, so a crash, a forced close, or a shutdown that doesn't let the app exit normally only loses the last moment of changes. The short wait groups rapid changes, like dragging a slider, into one save.
+        _saveTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _saveTimer.Tick += (_, _) =>
+        {
+            _saveTimer.Stop();
+            Save();
+        };
+        PropertyChanged += (_, _) =>
+        {
+            // Values that were just read from the file are already saved.
+            if (!CanBeSaved || _populatingFromFile)
+                return;
+
+            _saveTimer.Stop();
+            _saveTimer.Start();
+        };
     }
 
 #pragma warning disable CS0067 // The event 'Settings.PropertyChanged' is never used. Handled by Fody.
@@ -555,6 +575,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         {
             try
             {
+                _populatingFromFile = true;
                 Populate(this);
                 return;
             }
@@ -565,6 +586,10 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             catch
             {
                 return;
+            }
+            finally
+            {
+                _populatingFromFile = false;
             }
         }
     }

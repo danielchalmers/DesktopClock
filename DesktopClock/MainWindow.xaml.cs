@@ -311,6 +311,7 @@ public partial class MainWindow : Window
 
             DragMove();
             PixelShifter?.UpdateBasePosition(this);
+            Settings.Default.Placement = this.GetPlacement();
             UpdateTimeString();
 
             _systemClockTimer.Start();
@@ -452,6 +453,7 @@ public partial class MainWindow : Window
         Top += nudge.Y;
 
         PixelShifter?.UpdateBasePosition(this);
+        Settings.Default.Placement = this.GetPlacement();
         e.Handled = true;
     }
 
