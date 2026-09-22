@@ -3,6 +3,7 @@ using System.Globalization;
 
 namespace DesktopClock.Tests;
 
+[UseUICulture("en-US")]
 public class TimeStringFormatterTests
 {
     [Fact]

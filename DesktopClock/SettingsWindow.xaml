@@ -7,7 +7,7 @@
         xmlns:p="clr-namespace:DesktopClock.Properties"
         d:DataContext="{d:DesignInstance Type=local:SettingsWindowViewModel}"
         mc:Ignorable="d"
-        Title="DesktopClock Settings"
+        Title="{local:Loc SettingsTitle}"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=SettingsWindowHeight, Mode=TwoWay}"
         MinWidth="800"
@@ -46,43 +46,43 @@
 
                 <StackPanel x:Name="NavPanel"
                             Grid.Row="1">
-                    <Button Content="_Display"
+                    <Button Content="{local:Loc NavDisplay}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=DisplaySection}"
                             Click="NavigateToSection" />
-                    <Button Content="_Countdown"
+                    <Button Content="{local:Loc NavCountdown}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=CountdownSection}"
                             Click="NavigateToSection" />
-                    <Button Content="_Window"
+                    <Button Content="{local:Loc NavWindow}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=WindowSection}"
                             Click="NavigateToSection" />
-                    <Button Content="T_heme presets"
+                    <Button Content="{local:Loc NavThemePresets}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=ThemeSection}"
                             Click="NavigateToSection" />
-                    <Button Content="_Typography"
+                    <Button Content="{local:Loc NavTypography}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=TypographySection}"
                             Click="NavigateToSection" />
-                    <Button Content="_Appearance"
+                    <Button Content="{local:Loc NavAppearance}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=AppearanceSection}"
                             Click="NavigateToSection" />
-                    <Button Content="A_lerts"
+                    <Button Content="{local:Loc NavAlerts}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=AlertsSection}"
                             Click="NavigateToSection" />
-                    <Button Content="_Shortcuts"
+                    <Button Content="{local:Loc NavShortcuts}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=ShortcutsSection}"
                             Click="NavigateToSection" />
-                    <Button Content="Discover _more"
+                    <Button Content="{local:Loc NavDiscoverMore}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=DiscoverMoreSection}"
                             Click="NavigateToSection" />
-                    <Button Content="Cr_edits"
+                    <Button Content="{local:Loc NavCredits}"
                             Style="{StaticResource SidebarButton}"
                             Tag="{Binding ElementName=CreditsSection}"
                             Click="NavigateToSection" />
@@ -94,8 +94,8 @@
                             IsEnabled="{x:Static p:Settings.CanBeSaved}">
                         <StackPanel>
                             <AccessText FontWeight="SemiBold"
-                                        Text="Settings _folder" />
-                            <TextBlock Text="Open the settings folder"
+                                        Text="{local:Loc SettingsFolder}" />
+                            <TextBlock Text="{local:Loc SettingsFolderDescription}"
                                        Style="{StaticResource SidebarToolDescription}" />
                         </StackPanel>
                     </Button>
@@ -104,8 +104,8 @@
                             IsEnabled="{x:Static p:Settings.CanBeSaved}">
                         <StackPanel>
                             <AccessText FontWeight="SemiBold"
-                                        Text="Settings f_ile" />
-                            <TextBlock Text="Open the JSON file"
+                                        Text="{local:Loc SettingsFile}" />
+                            <TextBlock Text="{local:Loc SettingsFileDescription}"
                                        Style="{StaticResource SidebarToolDescription}" />
                         </StackPanel>
                     </Button>
@@ -114,8 +114,8 @@
                             IsEnabled="{x:Static p:Settings.CanBeSaved}">
                         <StackPanel>
                             <AccessText FontWeight="SemiBold"
-                                        Text="_New clock" />
-                            <TextBlock Text="Start another clock"
+                                        Text="{local:Loc NewClock}" />
+                            <TextBlock Text="{local:Loc NewClockDescription}"
                                        Style="{StaticResource SidebarToolDescription}" />
                         </StackPanel>
                     </Button>
@@ -132,159 +132,159 @@
             <StackPanel x:Name="SettingsContent"
                         Margin="24,24,24,0">
             <GroupBox x:Name="DisplaySection"
-                      Header="Display"
+                      Header="{local:Loc SectionDisplay}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Clock format"
+                    <TextBlock Text="{local:Loc ClockFormat}"
                                Style="{StaticResource LabelTextBlock}" />
                     <local:FormatEditor Mode="Clock" />
                     <TextBlock Style="{StaticResource DescriptionTextBlock}"
                                Margin="0,0,0,16">
-                        <Run Text="Choose how the clock text is formatted. Use curly braces {} around time codes." />
-                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings"
+                        <Run Text="{local:Loc ClockFormatDescription}" />
+                        <Hyperlink NavigateUri="https://learn.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
-                            Learn more
+                            <Run Text="{local:Loc LearnMore}" />
                         </Hyperlink>
                     </TextBlock>
 
-                    <TextBlock Text="Time zone"
+                    <TextBlock Text="{local:Loc TimeZone}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding TimeZones}"
                               SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
                               DisplayMemberPath="DisplayName" />
-                    <TextBlock Text="Display the clock using a different time zone."
+                    <TextBlock Text="{local:Loc TimeZoneDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </GroupBox>
 
             <GroupBox x:Name="CountdownSection"
-                      Header="Countdown"
+                      Header="{local:Loc SectionCountdown}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Countdown target"
+                    <TextBlock Text="{local:Loc CountdownTarget}"
                                Style="{StaticResource LabelTextBlock}" />
                     <local:CountdownTargetEditor />
-                    <TextBlock Text="Set a date and time to count down to. Clear the value to disable countdown mode."
+                    <TextBlock Text="{local:Loc CountdownTargetDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Countdown format"
+                    <TextBlock Text="{local:Loc CountdownFormat}"
                                Style="{StaticResource LabelTextBlock}" />
                     <local:FormatEditor Mode="Countdown" />
                     <TextBlock Style="{StaticResource DescriptionTextBlock}">
-                        <Run Text="Choose how the countdown is formatted. Leave it blank to use the default display." />
-                        <Hyperlink NavigateUri="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings"
+                        <Run Text="{local:Loc CountdownFormatDescription}" />
+                        <Hyperlink NavigateUri="https://learn.microsoft.com/dotnet/standard/base-types/custom-timespan-format-strings"
                                    RequestNavigate="Hyperlink_RequestNavigate">
-                            Learn more
+                            <Run Text="{local:Loc LearnMore}" />
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox x:Name="WindowSection"
-                      Header="Window"
+                      Header="{local:Loc SectionWindow}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <CheckBox Content="Start with Windows"
+                    <CheckBox Content="{local:Loc StartWithWindows}"
                               IsChecked="{Binding Settings.RunOnStartup, Mode=TwoWay}" />
-                    <TextBlock Text="Run the clock automatically when you sign in."
+                    <TextBlock Text="{local:Loc StartWithWindowsDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Show in taskbar"
+                    <CheckBox Content="{local:Loc ShowInTaskbar}"
                               IsChecked="{Binding Settings.ShowInTaskbar, Mode=TwoWay}" />
-                    <TextBlock Text="Show the clock in the Windows taskbar."
+                    <TextBlock Text="{local:Loc ShowInTaskbarDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Hide from Alt+Tab"
+                    <CheckBox Content="{local:Loc HideFromAltTab}"
                               IsChecked="{Binding Settings.HideFromAltTab, Mode=TwoWay}" />
-                    <TextBlock Text="Hide the clock window from the Alt+Tab switcher."
+                    <TextBlock Text="{local:Loc HideFromAltTabDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Always on top"
+                    <CheckBox Content="{local:Loc AlwaysOnTop}"
                               IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
-                    <TextBlock Text="Keep the clock above other windows."
+                    <TextBlock Text="{local:Loc AlwaysOnTopDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Click through"
+                    <CheckBox Content="{local:Loc ClickThrough}"
                               IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
-                    <TextBlock Text="Let clicks pass through the clock to windows behind it."
+                    <TextBlock Text="{local:Loc ClickThroughDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Hide when fullscreen"
+                    <CheckBox Content="{local:Loc HideWhenFullscreen}"
                               IsChecked="{Binding Settings.HideWhenFullscreen, Mode=TwoWay}" />
-                    <TextBlock Text="Hide the clock when a fullscreen app is active on the same monitor."
+                    <TextBlock Text="{local:Loc HideWhenFullscreenDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Start hidden"
+                    <CheckBox Content="{local:Loc StartHidden}"
                               IsChecked="{Binding Settings.StartHidden, Mode=TwoWay}" />
-                    <TextBlock Text="Start without showing the clock. Use the tray icon to show it again."
+                    <TextBlock Text="{local:Loc StartHiddenDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Allow dragging"
+                    <CheckBox Content="{local:Loc AllowDragging}"
                               IsChecked="{Binding Settings.DragToMove, Mode=TwoWay}" />
-                    <TextBlock Text="Move the clock by dragging it with the mouse."
+                    <TextBlock Text="{local:Loc AllowDraggingDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Align right"
+                    <CheckBox Content="{local:Loc AlignRight}"
                               IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
-                    <TextBlock Text="Keep the right edge fixed when the text length changes."
+                    <TextBlock Text="{local:Loc AlignRightDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Pixel shifting"
+                    <CheckBox Content="{local:Loc PixelShifting}"
                               IsChecked="{Binding Settings.BurnInMitigation, Mode=TwoWay}" />
-                    <TextBlock Text="Move the clock slightly to help reduce the risk of screen burn-in."
+                    <TextBlock Text="{local:Loc PixelShiftingDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </GroupBox>
 
             <GroupBox x:Name="ThemeSection"
-                      Header="Theme presets"
+                      Header="{local:Loc SectionThemePresets}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <local:ThemePresetPicker />
-                    <TextBlock Text="Pick a starting look for the clock. Every detail can still be adjusted in the sections below."
+                    <TextBlock Text="{local:Loc ThemePresetsDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </GroupBox>
 
             <GroupBox x:Name="TypographySection"
-                      Header="Typography"
+                      Header="{local:Loc SectionTypography}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Font family"
+                    <TextBlock Text="{local:Loc FontFamily}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontFamilies}"
                               SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
-                    <TextBlock Text="Choose the font family."
+                    <TextBlock Text="{local:Loc FontFamilyDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Font style"
+                    <TextBlock Text="{local:Loc FontStyle}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontStyles}"
                               SelectedItem="{Binding Settings.FontStyle, Mode=TwoWay}" />
-                    <TextBlock Text="Choose normal, italic, or oblique text."
+                    <TextBlock Text="{local:Loc FontStyleDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Font weight"
+                    <TextBlock Text="{local:Loc FontWeight}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontWeights}"
                               SelectedItem="{Binding Settings.FontWeight, Mode=TwoWay}" />
-                    <TextBlock Text="Make the text thinner or thicker."
+                    <TextBlock Text="{local:Loc FontWeightDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Text color"
+                    <TextBlock Text="{local:Loc TextColor}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -296,7 +296,7 @@
                                  Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Grid.Column="2"
                                 Style="{StaticResource ColorSwatchButton}"
-                                ToolTip="Pick text color"
+                                ToolTip="{local:Loc TextColorPick}"
                                 Click="PickTextColor">
                             <Border Width="18"
                                     Height="18"
@@ -309,11 +309,11 @@
                             </Border>
                         </Button>
                     </Grid>
-                    <TextBlock Text="Change the text color using a hex value, a color name, or the picker."
+                    <TextBlock Text="{local:Loc TextColorDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Text opacity"
+                    <TextBlock Text="{local:Loc TextOpacity}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -331,16 +331,16 @@
                                    Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Adjust how transparent the text appears."
+                    <TextBlock Text="{local:Loc TextOpacityDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </GroupBox>
 
             <GroupBox x:Name="AppearanceSection"
-                      Header="Appearance"
+                      Header="{local:Loc SectionAppearance}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Background or outline color"
+                    <TextBlock Text="{local:Loc OuterColor}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -352,7 +352,7 @@
                                  Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Grid.Column="2"
                                 Style="{StaticResource ColorSwatchButton}"
-                                ToolTip="Pick background or outline color"
+                                ToolTip="{local:Loc OuterColorPick}"
                                 Click="PickOuterColor">
                             <Border Width="18"
                                     Height="18"
@@ -365,17 +365,17 @@
                             </Border>
                         </Button>
                     </Grid>
-                    <TextBlock Text="Change the background or outline color."
+                    <TextBlock Text="{local:Loc OuterColorDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Solid background"
+                    <CheckBox Content="{local:Loc SolidBackground}"
                               IsChecked="{Binding Settings.BackgroundEnabled, Mode=TwoWay}" />
-                    <TextBlock Text="Show a solid background instead of an outline."
+                    <TextBlock Text="{local:Loc SolidBackgroundDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Background opacity"
+                    <TextBlock Text="{local:Loc BackgroundOpacity}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -393,11 +393,11 @@
                                    Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Adjust how transparent the background appears."
+                    <TextBlock Text="{local:Loc BackgroundOpacityDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Rounded corners"
+                    <TextBlock Text="{local:Loc RoundedCorners}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -415,11 +415,11 @@
                                    Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Round the corners of the background."
+                    <TextBlock Text="{local:Loc RoundedCornersDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Outline thickness"
+                    <TextBlock Text="{local:Loc OutlineThickness}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -437,11 +437,11 @@
                                    Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
-                    <TextBlock Text="Adjust the outline thickness when the background is disabled."
+                    <TextBlock Text="{local:Loc OutlineThicknessDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Background image"
+                    <TextBlock Text="{local:Loc BackgroundImage}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -454,30 +454,30 @@
                         <TextBox Grid.Column="0"
                                  Text="{Binding Settings.BackgroundImagePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Grid.Column="2"
-                                Content="Browse..."
+                                Content="{local:Loc Browse}"
                                 Click="BrowseBackgroundImagePath" />
                         <Button Grid.Column="4"
-                                Content="Reset"
+                                Content="{local:Loc Reset}"
                                 Command="{Binding ResetBackgroundImagePathCommand}" />
                     </Grid>
-                    <TextBlock Text="Show an image behind the clock."
+                    <TextBlock Text="{local:Loc BackgroundImageDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Image fit"
+                    <TextBlock Text="{local:Loc ImageFit}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding ImageStretches}"
                               SelectedItem="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}" />
-                    <TextBlock Text="Choose how the image fits within the clock."
+                    <TextBlock Text="{local:Loc ImageFitDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </GroupBox>
 
             <GroupBox x:Name="AlertsSection"
-                      Header="Alerts"
+                      Header="{local:Loc SectionAlerts}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
-                    <TextBlock Text="Alarm sound"
+                    <TextBlock Text="{local:Loc AlarmSound}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -490,17 +490,17 @@
                         <TextBox Grid.Column="0"
                                  Text="{Binding Settings.WavFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Grid.Column="2"
-                                Content="Browse..."
+                                Content="{local:Loc Browse}"
                                 Click="BrowseWavFilePath" />
                         <Button Grid.Column="4"
-                                Content="Reset"
+                                Content="{local:Loc Reset}"
                                 Command="{Binding ResetWavFilePathCommand}" />
                     </Grid>
-                    <TextBlock Text="Choose a WAV file to play."
+                    <TextBlock Text="{local:Loc AlarmSoundDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <TextBlock Text="Sound interval"
+                    <TextBlock Text="{local:Loc SoundInterval}"
                                Style="{StaticResource LabelTextBlock}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -511,55 +511,61 @@
                         <TextBox Grid.Column="0"
                                  Text="{Binding Settings.WavFileInterval, Mode=TwoWay}" />
                         <Button Grid.Column="2"
-                                Content="Reset"
+                                Content="{local:Loc Reset}"
                                 Command="{Binding ResetWavFileIntervalCommand}" />
                     </Grid>
-                    <TextBlock Text="Choose how often the sound should play using hours, minutes, and seconds."
+                    <TextBlock Text="{local:Loc SoundIntervalDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="Play sound when countdown ends"
+                    <CheckBox Content="{local:Loc PlaySoundOnCountdown}"
                               IsChecked="{Binding Settings.PlaySoundOnCountdown, Mode=TwoWay}" />
-                    <TextBlock Text="Play the selected sound when the countdown finishes."
+                    <TextBlock Text="{local:Loc PlaySoundOnCountdownDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </GroupBox>
 
             <GroupBox x:Name="ShortcutsSection"
-                      Header="Shortcuts"
+                      Header="{local:Loc SectionShortcuts}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
                         <TextBlock>
-                            <Run FontWeight="SemiBold">Right-click:</Run>
-                            <Run> Open the menu</Run>
+                            <Run FontWeight="SemiBold"
+                                 Text="{local:Loc ShortcutRightClick}" />
+                            <Run Text="{local:Loc ShortcutRightClickAction}" />
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold">Double-click:</Run>
-                            <Run> Copy the displayed text</Run>
+                            <Run FontWeight="SemiBold"
+                                 Text="{local:Loc ShortcutDoubleClick}" />
+                            <Run Text="{local:Loc ShortcutDoubleClickAction}" />
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold">Drag:</Run>
-                            <Run> Move the clock</Run>
+                            <Run FontWeight="SemiBold"
+                                 Text="{local:Loc ShortcutDrag}" />
+                            <Run Text="{local:Loc ShortcutDragAction}" />
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold">Ctrl + Scroll:</Run>
-                            <Run> Change the size</Run>
+                            <Run FontWeight="SemiBold"
+                                 Text="{local:Loc ShortcutCtrlScroll}" />
+                            <Run Text="{local:Loc ShortcutCtrlScrollAction}" />
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold">Ctrl + +:</Run>
-                            <Run> Increase the size</Run>
+                            <Run FontWeight="SemiBold"
+                                 Text="{local:Loc ShortcutCtrlPlus}" />
+                            <Run Text="{local:Loc ShortcutCtrlPlusAction}" />
                         </TextBlock>
                         <TextBlock>
-                            <Run FontWeight="SemiBold">Ctrl + -:</Run>
-                            <Run> Decrease the size</Run>
+                            <Run FontWeight="SemiBold"
+                                 Text="{local:Loc ShortcutCtrlMinus}" />
+                            <Run Text="{local:Loc ShortcutCtrlMinusAction}" />
                         </TextBlock>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox x:Name="DiscoverMoreSection"
-                      Header="Discover more"
+                      Header="{local:Loc SectionDiscoverMore}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
@@ -569,7 +575,7 @@
                                 Good Diary
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="Track your mood and well-being (Android)"
+                        <TextBlock Text="{local:Loc GoodDiaryDescription}"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
@@ -578,7 +584,7 @@
                                 Network Monitor
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="See latency and bandwidth usage (Windows)"
+                        <TextBlock Text="{local:Loc NetworkMonitorDescription}"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
@@ -587,7 +593,7 @@
                                 Sentry Replay
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="Watch your Tesla dashcam clips (Windows)"
+                        <TextBlock Text="{local:Loc SentryReplayDescription}"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
@@ -596,7 +602,7 @@
                                 Radial Actions
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="Open a customizable radial menu with a shortcut (Windows)"
+                        <TextBlock Text="{local:Loc RadialActionsDescription}"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
@@ -605,13 +611,13 @@
                                 Teichos
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock Text="Block websites on a schedule (Chrome/Edge)"
+                        <TextBlock Text="{local:Loc TeichosDescription}"
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/danielchalmers"
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                More from the developer of DesktopClock
+                                <Run Text="{local:Loc MoreFromDeveloper}" />
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
@@ -619,7 +625,7 @@
             </GroupBox>
 
             <GroupBox x:Name="CreditsSection"
-                      Header="Credits"
+                      Header="{local:Loc SectionCredits}"
                       Style="{StaticResource CardGroupBox}">
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
