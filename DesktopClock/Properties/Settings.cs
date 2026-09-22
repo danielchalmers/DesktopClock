@@ -89,6 +89,16 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public static bool CanBeSaved { get; private set; }
 
     /// <summary>
+    /// Where a settings file that couldn't be read at startup is moved so defaults can be saved in its place.
+    /// </summary>
+    public static string BackupFilePath => FilePath + ".bak";
+
+    /// <summary>
+    /// Indicates the settings file couldn't be read at startup, so it was moved to <see cref="BackupFilePath"/> and defaults were loaded.
+    /// </summary>
+    public static bool MovedUnreadableFileToBackup { get; private set; }
+
+    /// <summary>
     /// Checks if the settings file exists on the disk.
     /// </summary>
     public static bool Exists => File.Exists(FilePath);
@@ -528,19 +538,42 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
+    /// Populates the given settings from the default path, retrying briefly while the file is locked, which is common right after it's edited while antivirus scans it.
+    /// </summary>
+    private static void PopulateWithRetries(Settings settings)
+    {
+        for (var attempt = 1; ; attempt++)
+        {
+            try
+            {
+                Populate(settings);
+                return;
+            }
+            catch (IOException) when (attempt < 4)
+            {
+                System.Threading.Thread.Sleep(100);
+            }
+        }
+    }
+
+    /// <summary>
     /// Loads from the default path in JSON format.
     /// </summary>
-    private static Settings LoadFromFile()
+    /// <returns><c>false</c> if the file couldn't be read, in which case <paramref name="settings"/> holds the defaults.</returns>
+    private static bool TryLoadFromFile(out Settings settings)
     {
+        settings = new Settings();
+
         try
         {
-            var settings = new Settings();
-            Populate(settings);
-            return settings;
+            PopulateWithRetries(settings);
+            return true;
         }
         catch
         {
-            return new();
+            // Start over so values read before the error don't mix with the defaults.
+            settings = new();
+            return false;
         }
     }
 
@@ -549,16 +582,38 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     private static Settings LoadAndAttemptSave()
     {
-        var settings = LoadFromFile();
+        Settings settings;
 
-        if (!File.Exists(FilePath))
+        // An empty file has nothing to keep; older versions could leave one behind when closed mid-save (#7).
+        if (!Exists || new FileInfo(FilePath).Length == 0)
         {
+            settings = new();
+            settings.ApplySystemThemeDefaultsIfAvailable();
+        }
+        else if (!TryLoadFromFile(out settings))
+        {
+            // Move a file that couldn't be read, such as after a typo while editing it by hand, out of the way instead of saving defaults over it.
+            MovedUnreadableFileToBackup = TryMoveToBackup();
             settings.ApplySystemThemeDefaultsIfAvailable();
         }
 
         CanBeSaved = settings.Save();
 
         return settings;
+    }
+
+    private static bool TryMoveToBackup()
+    {
+        try
+        {
+            File.Delete(BackupFilePath);
+            File.Move(FilePath, BackupFilePath);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -570,27 +625,17 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         if (!string.Equals(e.FullPath, FilePath, StringComparison.OrdinalIgnoreCase))
             return;
 
-        // Right after an edit the file is often still locked, such as while antivirus scans it, so give it a few tries.
-        for (var i = 0; i < 4; i++)
+        try
         {
-            try
-            {
-                _populatingFromFile = true;
-                Populate(this);
-                return;
-            }
-            catch (IOException)
-            {
-                System.Threading.Thread.Sleep(100);
-            }
-            catch
-            {
-                return;
-            }
-            finally
-            {
-                _populatingFromFile = false;
-            }
+            _populatingFromFile = true;
+            PopulateWithRetries(this);
+        }
+        catch
+        {
+        }
+        finally
+        {
+            _populatingFromFile = false;
         }
     }
 
