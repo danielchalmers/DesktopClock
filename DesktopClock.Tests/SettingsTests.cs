@@ -127,38 +127,6 @@ public class SettingsPersistenceTests
     }
 
     [Fact]
-    public void Load_WithUnreadableFile_ShouldMoveItToBackupAndUseDefaults()
-    {
-        using var _ = new TempSettingsFileScope();
-
-        // A missing comma, like a typo made while editing the file by hand.
-        const string brokenJson = "{ \"Format\": \"{HH:mm}\" \"FontFamily\": \"Georgia\" }";
-        File.WriteAllText(Settings.FilePath, brokenJson);
-
-        var loaded = LoadAndAttemptSave(out var movedToBackup);
-
-        Assert.True(movedToBackup);
-        Assert.Equal(brokenJson, File.ReadAllText(Settings.BackupFilePath));
-        Assert.Equal(CreateSettingsInstance().Format, loaded.Format);
-        Assert.True(File.Exists(Settings.FilePath));
-    }
-
-    [Fact]
-    public void Load_WithEmptyFile_ShouldUseDefaultsWithoutBackup()
-    {
-        using var _ = new TempSettingsFileScope();
-
-        File.WriteAllText(Settings.FilePath, "");
-
-        var loaded = LoadAndAttemptSave(out var movedToBackup);
-
-        Assert.False(movedToBackup);
-        Assert.False(File.Exists(Settings.BackupFilePath));
-        Assert.Equal(CreateSettingsInstance().Format, loaded.Format);
-        Assert.NotEqual(0, new FileInfo(Settings.FilePath).Length);
-    }
-
-    [Fact]
     public void Load_WithBrieflyLockedFile_ShouldWaitAndKeepSettings()
     {
         using var _ = new TempSettingsFileScope();
@@ -176,36 +144,30 @@ public class SettingsPersistenceTests
         });
         releaser.Start();
 
-        var loaded = LoadAndAttemptSave(out var movedToBackup);
+        var loaded = LoadAndAttemptSave();
         releaser.Join();
 
-        Assert.False(movedToBackup);
         Assert.Equal("kept through a lock", loaded.Format);
     }
 
     /// <summary>
     /// Runs the app's startup load, restoring the static state it sets so other tests aren't affected.
     /// </summary>
-    private static Settings LoadAndAttemptSave(out bool movedToBackup)
+    private static Settings LoadAndAttemptSave()
     {
         var canBeSaved = typeof(Settings).GetProperty(nameof(Settings.CanBeSaved), BindingFlags.Public | BindingFlags.Static)!.GetSetMethod(nonPublic: true)!;
-        var movedUnreadableFileToBackup = typeof(Settings).GetProperty(nameof(Settings.MovedUnreadableFileToBackup), BindingFlags.Public | BindingFlags.Static)!.GetSetMethod(nonPublic: true)!;
         var originalCanBeSaved = Settings.CanBeSaved;
 
         try
         {
             canBeSaved.Invoke(null, new object[] { false });
-            movedUnreadableFileToBackup.Invoke(null, new object[] { false });
 
             var loadAndAttemptSave = typeof(Settings).GetMethod("LoadAndAttemptSave", BindingFlags.NonPublic | BindingFlags.Static)!;
-            var settings = (Settings)loadAndAttemptSave.Invoke(null, null)!;
-            movedToBackup = Settings.MovedUnreadableFileToBackup;
-            return settings;
+            return (Settings)loadAndAttemptSave.Invoke(null, null)!;
         }
         finally
         {
             canBeSaved.Invoke(null, new object[] { originalCanBeSaved });
-            movedUnreadableFileToBackup.Invoke(null, new object[] { false });
         }
     }
 
@@ -246,9 +208,6 @@ public class SettingsPersistenceTests
             {
                 if (File.Exists(Settings.FilePath))
                     File.Delete(Settings.FilePath);
-
-                if (File.Exists(Settings.BackupFilePath))
-                    File.Delete(Settings.BackupFilePath);
             }
             finally
             {

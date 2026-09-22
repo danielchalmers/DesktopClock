@@ -349,11 +349,6 @@ public partial class MainWindow : Window
         // Start listening for size changes to keep the window right-aligned.
         SizeChanged += Window_SizeChanged;
 
-        if (Settings.MovedUnreadableFileToBackup)
-        {
-            _trayIcon?.ShowNotification("Settings reset", $"The settings file couldn't be read, so it was moved to {Path.GetFileName(Settings.BackupFilePath)}.");
-        }
-
         if (Settings.Default.StartHidden)
         {
             _trayIcon?.ShowNotification("Running in the background", "Double-click the tray icon to show the clock.");

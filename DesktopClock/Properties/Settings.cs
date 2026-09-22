@@ -45,9 +45,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         };
         _watcher.Changed += FileChanged;
 
-        // Editors that save by swapping in a new file report it as a rename rather than a change.
-        _watcher.Renamed += FileChanged;
-
         // Save shortly after a change instead of only on exit, so a crash, a forced close, or a shutdown that doesn't let the app exit normally only loses the last moment of changes. The short wait groups rapid changes, like dragging a slider, into one save.
         _saveTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         _saveTimer.Tick += (_, _) =>
@@ -87,16 +84,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <c>false</c> could indicate the file is in a folder that requires administrator permissions among other constraints.
     /// </remarks>
     public static bool CanBeSaved { get; private set; }
-
-    /// <summary>
-    /// Where a settings file that couldn't be read at startup is moved so defaults can be saved in its place.
-    /// </summary>
-    public static string BackupFilePath => FilePath + ".bak";
-
-    /// <summary>
-    /// Indicates the settings file couldn't be read at startup, so it was moved to <see cref="BackupFilePath"/> and defaults were loaded.
-    /// </summary>
-    public static bool MovedUnreadableFileToBackup { get; private set; }
 
     /// <summary>
     /// Checks if the settings file exists on the disk.
@@ -538,42 +525,28 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
-    /// Populates the given settings from the default path, retrying briefly while the file is locked, which is common right after it's edited while antivirus scans it.
+    /// Loads from the default path in JSON format.
     /// </summary>
-    private static void PopulateWithRetries(Settings settings)
+    private static Settings LoadFromFile()
     {
+        var settings = new Settings();
+
+        // The file can be locked for a moment, such as while antivirus scans it at sign-in, and falling back to defaults here would save them over every setting. Give it about as long as saving does before giving up.
         for (var attempt = 1; ; attempt++)
         {
             try
             {
                 Populate(settings);
-                return;
+                return settings;
             }
-            catch (IOException) when (attempt < 4)
+            catch (IOException) when (attempt < 4 && Exists)
             {
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(250);
             }
-        }
-    }
-
-    /// <summary>
-    /// Loads from the default path in JSON format.
-    /// </summary>
-    /// <returns><c>false</c> if the file couldn't be read, in which case <paramref name="settings"/> holds the defaults.</returns>
-    private static bool TryLoadFromFile(out Settings settings)
-    {
-        settings = new Settings();
-
-        try
-        {
-            PopulateWithRetries(settings);
-            return true;
-        }
-        catch
-        {
-            // Start over so values read before the error don't mix with the defaults.
-            settings = new();
-            return false;
+            catch
+            {
+                return new();
+            }
         }
     }
 
@@ -582,18 +555,10 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     private static Settings LoadAndAttemptSave()
     {
-        Settings settings;
+        var settings = LoadFromFile();
 
-        // An empty file has nothing to keep; older versions could leave one behind when closed mid-save (#7).
-        if (!Exists || new FileInfo(FilePath).Length == 0)
+        if (!Exists)
         {
-            settings = new();
-            settings.ApplySystemThemeDefaultsIfAvailable();
-        }
-        else if (!TryLoadFromFile(out settings))
-        {
-            // Move a file that couldn't be read, such as after a typo while editing it by hand, out of the way instead of saving defaults over it.
-            MovedUnreadableFileToBackup = TryMoveToBackup();
             settings.ApplySystemThemeDefaultsIfAvailable();
         }
 
@@ -602,33 +567,15 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         return settings;
     }
 
-    private static bool TryMoveToBackup()
-    {
-        try
-        {
-            File.Delete(BackupFilePath);
-            File.Move(FilePath, BackupFilePath);
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
     /// <summary>
     /// Occurs after the watcher detects a change in the settings file.
     /// </summary>
     private void FileChanged(object sender, FileSystemEventArgs e)
     {
-        // A swap-in save also renames the old file away; only the rename that puts the new file in place matters.
-        if (!string.Equals(e.FullPath, FilePath, StringComparison.OrdinalIgnoreCase))
-            return;
-
         try
         {
             _populatingFromFile = true;
-            PopulateWithRetries(this);
+            Populate(this);
         }
         catch
         {
