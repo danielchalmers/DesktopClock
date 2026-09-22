@@ -70,6 +70,25 @@ public class SettingsPersistenceTests
         Assert.Equal(DateTimeKind.Unspecified, loaded.CountdownTo.Kind);
     }
 
+    [Fact]
+    public void Save_OverExistingFile_ShouldReplaceItWithoutLeavingTempFile()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var settings = CreateSettingsInstance();
+        settings.Format = "first";
+        Assert.True(settings.Save());
+
+        settings.Format = "second";
+        Assert.True(settings.Save());
+
+        var loaded = CreateSettingsInstance();
+        PopulateFromFile(loaded);
+
+        Assert.Equal("second", loaded.Format);
+        Assert.False(File.Exists(Settings.FilePath + ".tmp"));
+    }
+
     private static Settings CreateSettingsInstance() =>
         (Settings)Activator.CreateInstance(typeof(Settings), nonPublic: true)!;
 

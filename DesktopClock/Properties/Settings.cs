@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Media;
 using DesktopClock.Utilities;
 using Newtonsoft.Json;
@@ -40,6 +41,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             EnableRaisingEvents = true,
         };
         _watcher.Changed += FileChanged;
+
+        // Editors that save by swapping in a new file report it as a rename rather than a change.
+        _watcher.Renamed += FileChanged;
     }
 
 #pragma warning disable CS0067 // The event 'Settings.PropertyChanged' is never used. Handled by Fody.
@@ -441,7 +445,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             {
                 try
                 {
-                    File.WriteAllText(FilePath, json);
+                    WriteAllTextAtomically(FilePath, json);
                     return true;
                 }
                 catch
@@ -462,6 +466,34 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
         return false;
     }
+
+    /// <summary>
+    /// Writes to a temporary file and then swaps it in, so the file is never left empty or half-written if the app is killed mid-save, such as during a Windows shutdown (#7).
+    /// </summary>
+    private static void WriteAllTextAtomically(string path, string contents)
+    {
+        var tempPath = path + ".tmp";
+
+        using (var stream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
+        using (var writer = new StreamWriter(stream))
+        {
+            writer.Write(contents);
+            writer.Flush();
+
+            // Make sure the new contents are on disk before they replace the old ones.
+            stream.Flush(flushToDisk: true);
+        }
+
+        // Swap it in with a single rename; File.Replace isn't safe here because it renames the old file away first, so being killed in between leaves no settings file at all.
+        if (!MoveFileEx(tempPath, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
+            throw new IOException($"Couldn't replace {path}.", Marshal.GetHRForLastWin32Error());
+    }
+
+    private const int MOVEFILE_REPLACE_EXISTING = 0x1;
+    private const int MOVEFILE_WRITE_THROUGH = 0x8;
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern bool MoveFileEx(string existingFileName, string newFileName, int flags);
 
     /// <summary>
     /// Populates the given settings with values from the default path.
@@ -514,12 +546,26 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     private void FileChanged(object sender, FileSystemEventArgs e)
     {
-        try
+        // A swap-in save also renames the old file away; only the rename that puts the new file in place matters.
+        if (!string.Equals(e.FullPath, FilePath, StringComparison.OrdinalIgnoreCase))
+            return;
+
+        // Right after an edit the file is often still locked, such as while antivirus scans it, so give it a few tries.
+        for (var i = 0; i < 4; i++)
         {
-            Populate(this);
-        }
-        catch
-        {
+            try
+            {
+                Populate(this);
+                return;
+            }
+            catch (IOException)
+            {
+                System.Threading.Thread.Sleep(100);
+            }
+            catch
+            {
+                return;
+            }
         }
     }
 
