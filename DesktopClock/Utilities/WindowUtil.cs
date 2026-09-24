@@ -42,7 +42,10 @@ public static class WindowUtil
     private const uint SWP_NOMOVE = 0x0002;
     private const uint SWP_NOSIZE = 0x0001;
     private const uint SWP_NOZORDER = 0x0004;
+    private const uint SWP_NOACTIVATE = 0x0010;
     private const uint SWP_FRAMECHANGED = 0x0020;
+
+    private static readonly IntPtr HWND_TOPMOST = new(-1);
 
     [DllImport("user32.dll")]
     private static extern int GetWindowLong(IntPtr hwnd, int index);
@@ -109,6 +112,23 @@ public static class WindowUtil
 
         SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle);
         SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+    }
+
+    /// <summary>
+    /// Moves the window back to the top of the topmost band so it covers the taskbar again.
+    /// </summary>
+    /// <remarks>
+    /// Topmost windows all share one band, so the shell raising itself leaves the clock buried inside it.
+    /// Assigning <see cref="Window.Topmost"/> again wouldn't help because WPF only reapplies the z-order when the value changes.
+    /// </remarks>
+    public static void ReassertTopmost(this Window window)
+    {
+        var hwnd = new WindowInteropHelper(window).Handle;
+        if (hwnd == IntPtr.Zero)
+            return;
+
+        // SWP_NOZORDER is deliberately left out because moving within the band is the whole point, and SWP_NOACTIVATE keeps focus wherever the user left it.
+        SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
     }
 
     /// <summary>

@@ -224,6 +224,8 @@ public partial class MainWindow : Window
     {
         UpdateTimeString();
 
+        TryReassertTopmost();
+
         TryShiftPixels();
 
         TryPlaySound();
@@ -271,6 +273,21 @@ public partial class MainWindow : Window
             _soundPlayer = null;
             _trayIcon?.ShowNotification("Alert sound unavailable", "The WAV file couldn't be played.");
         }
+    }
+
+    /// <summary>
+    /// Puts the clock back above the taskbar, which buries it whenever the shell raises itself.
+    /// </summary>
+    /// <remarks>
+    /// Checking every second rather than reacting to a foreground event is deliberate: the shell also raises itself without changing the foreground, as an auto-hide taskbar does, and reasserting mid-switch gets undone anyway.
+    /// </remarks>
+    private void TryReassertTopmost()
+    {
+        Dispatcher.Invoke(() =>
+        {
+            if (Settings.Default.Topmost && IsVisible && WindowState != WindowState.Minimized)
+                this.ReassertTopmost();
+        });
     }
 
     private void TryShiftPixels()
