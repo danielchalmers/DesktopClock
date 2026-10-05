@@ -392,16 +392,16 @@
     <value>時計の中で画像をどのように表示するかを選択します。</value>
   </data>
   <data name="ImageFitNone" xml:space="preserve">
-    <value>元のサイズ</value>
+    <value>元のサイズで表示</value>
   </data>
   <data name="ImageFitFill" xml:space="preserve">
-    <value>拡大して表示</value>
+    <value>引き伸ばして表示</value>
   </data>
   <data name="ImageFitUniform" xml:space="preserve">
-    <value>ページに合わせる</value>
+    <value>全体を表示</value>
   </data>
   <data name="ImageFitUniformToFill" xml:space="preserve">
-    <value>ページ幅に合わせる</value>
+    <value>トリミングして表示</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>アラート</value>
