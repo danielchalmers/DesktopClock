@@ -383,7 +383,19 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// All available font families reported by the system.
     /// </summary>
-    public IList<string> FontFamilies => _systemLists.Value.Result.Fonts;
+    public IList<string> FontFamilies
+    {
+        get
+        {
+            var fonts = _systemLists.Value.Result.Fonts;
+
+            // Older versions also listed East Asian fonts under their localized names, so a saved name like 微软雅黑 may not be in the list anymore; switch it to the same font's English name so the dropdown still shows it.
+            if (!fonts.Contains(Settings.FontFamily) && GetEnglishFontName(Settings.FontFamily) is { } englishName && fonts.Contains(englishName))
+                Settings.FontFamily = englishName;
+
+            return fonts;
+        }
+    }
 
     /// <summary>
     /// All available font styles.
@@ -430,6 +442,19 @@ public partial class SettingsWindowViewModel : ObservableObject
     public void ResetBackgroundImagePath()
     {
         Settings.BackgroundImagePath = string.Empty;
+    }
+
+    private static string GetEnglishFontName(string name)
+    {
+        try
+        {
+            using var family = new System.Drawing.FontFamily(name);
+            return family.GetName(1033);
+        }
+        catch (ArgumentException)
+        {
+            return null;
+        }
     }
 
     private static IEnumerable<string> GetAllSystemFonts()
