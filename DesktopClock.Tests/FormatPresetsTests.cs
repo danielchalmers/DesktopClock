@@ -61,10 +61,11 @@ public class FormatPresetsTests
     [InlineData("de-DE", false)]
     [InlineData("ja-JP", false)]
     [InlineData("fr-CA", false)]
-    public void ForClock_OnlyOffersA24HourPresetWhereTheRegionUses12Hours(string culture, bool expected)
+    public void TwentyFourHourOptions_OnlyShowWhereTheRegionUses12Hours(string culture, bool expected)
     {
         Assert.Equal(expected, FormatPresets.Uses12HourClock(Region(culture).DateTimeFormat));
         Assert.Equal(expected, FormatPresets.ForClock(Region(culture)).Any(p => p.Name == "Time (24-hour)"));
+        Assert.Equal(expected, FormatPresets.ClockTokens(Region(culture)).Any(t => t.Name == "Time (24-hour)"));
     }
 
     [Fact]
@@ -75,6 +76,7 @@ public class FormatPresetsTests
         foreach (var culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
         {
             var formats = FormatPresets.ForClock(culture).Select(p => p.Format)
+                .Concat(FormatPresets.ClockTokens(culture).Select(t => t.Token))
                 .Append(FormatPresets.DefaultClockFormat(culture));
 
             foreach (var format in formats)

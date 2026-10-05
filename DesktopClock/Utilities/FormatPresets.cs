@@ -43,6 +43,32 @@ public static class FormatPresets
     }
 
     /// <summary>
+    /// Building blocks for the clock format that insert a token at the cursor.
+    /// </summary>
+    public static IReadOnlyList<(string Name, string Token)> ClockTokens(CultureInfo culture)
+    {
+        var format = culture.DateTimeFormat;
+        var tokens = new List<(string Name, string Token)>
+        {
+            (Loc.Get("TokenWeekday"), "{ddd}"),
+            (Loc.Get("TokenWeekdayFull"), "{dddd}"),
+            (Loc.Get("TokenDay"), "{dd}"),
+            (Loc.Get("TokenMonth"), "{MMM}"),
+            (Loc.Get("TokenMonthFull"), "{MMMM}"),
+            (Loc.Get("TokenYear"), "{yyyy}"),
+            (Loc.Get("TokenTime"), Token(format.ShortTimePattern)),
+        };
+
+        if (Uses12HourClock(format))
+            tokens.Add((Loc.Get("TokenTime24"), "{HH:mm}"));
+
+        tokens.Add((Loc.Get("TokenSeconds"), "{ss}"));
+        tokens.Add((Loc.Get("TokenWeekNumber"), "{week}"));
+        tokens.Add((Loc.Get("TokenUtcOffset"), "{zzz}"));
+        return tokens;
+    }
+
+    /// <summary>
     /// A .NET format for a short weekday, date, and time, such as "ddd, MMM d h:mm tt" in the US or "M月d日(ddd) H:mm" in Japan.
     /// </summary>
     public static string ShortDateTimePattern(CultureInfo culture) =>

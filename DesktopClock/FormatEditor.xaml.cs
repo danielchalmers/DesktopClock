@@ -35,23 +35,10 @@ public partial class FormatEditor : UserControl
         (Loc.Get("CountdownPresetDigital"), "{dd}.{hh}:{mm}:{ss}"),
     };
 
+    private static readonly IReadOnlyList<(string Name, string Token)> ClockTokens = FormatPresets.ClockTokens(CultureInfo.CurrentCulture);
+
     // Multi-character tokens are used where possible; single characters would be
     // interpreted as standard format strings, so day/hour counts use the % prefix.
-    private static readonly (string Name, string Token)[] ClockTokens =
-    {
-        (Loc.Get("TokenWeekday"), "{ddd}"),
-        (Loc.Get("TokenWeekdayFull"), "{dddd}"),
-        (Loc.Get("TokenDay"), "{dd}"),
-        (Loc.Get("TokenMonth"), "{MMM}"),
-        (Loc.Get("TokenMonthFull"), "{MMMM}"),
-        (Loc.Get("TokenYear"), "{yyyy}"),
-        (Loc.Get("TokenTime"), "{" + CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern + "}"),
-        (Loc.Get("TokenTime24"), "{HH:mm}"),
-        (Loc.Get("TokenSeconds"), "{ss}"),
-        (Loc.Get("TokenWeekNumber"), "{week}"),
-        (Loc.Get("TokenUtcOffset"), "{zzz}"),
-    };
-
     private static readonly (string Name, string Token)[] CountdownTokens =
     {
         (Loc.Get("TokenDays"), "{%d}"),
