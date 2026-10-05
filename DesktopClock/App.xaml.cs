@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Markup;
 using DesktopClock.Utilities;
 using Microsoft.Win32;
 
@@ -15,6 +18,14 @@ public partial class App : Application
 {
     public static FileInfo MainFileInfo = new(Process.GetCurrentProcess().MainModule.FileName);
     public static string MainFileDisplayText = $"{Path.GetFileNameWithoutExtension(MainFileInfo.Name)} {FileVersionInfo.GetVersionInfo(MainFileInfo.FullName).FileVersion}";
+
+    static App()
+    {
+        // WPF treats all text as en-US unless told otherwise, which draws Chinese with a mix of Japanese and Traditional Chinese fallback fonts. Follow the display language instead; text runs (TextElement) don't inherit a FrameworkElement default, so they need the same override. This must run before any element is created.
+        var language = XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.IetfLanguageTag);
+        FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(language));
+        FrameworkContentElement.LanguageProperty.OverrideMetadata(typeof(TextElement), new FrameworkPropertyMetadata(language));
+    }
 
     protected override void OnStartup(StartupEventArgs e)
     {

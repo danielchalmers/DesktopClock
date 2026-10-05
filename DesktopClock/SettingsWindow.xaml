@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopClock"
+        xmlns:glob="clr-namespace:System.Globalization;assembly=mscorlib"
         xmlns:p="clr-namespace:DesktopClock.Properties"
         d:DataContext="{d:DesignInstance Type=local:SettingsWindowViewModel}"
         mc:Ignorable="d"
@@ -328,7 +329,7 @@
                                 TickFrequency="0.01"
                                 IsSnapToTickEnabled="True" />
                         <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.TextOpacity, StringFormat=0.00}"
+                                   Text="{Binding Settings.TextOpacity, StringFormat=0.00, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
                     <TextBlock Text="{local:Loc TextOpacityDescription}"
@@ -390,7 +391,7 @@
                                 TickFrequency="0.01"
                                 IsSnapToTickEnabled="True" />
                         <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00}"
+                                   Text="{Binding Settings.BackgroundOpacity, StringFormat=0.00, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
                     <TextBlock Text="{local:Loc BackgroundOpacityDescription}"
@@ -412,7 +413,7 @@
                                 TickFrequency="0.1"
                                 IsSnapToTickEnabled="True" />
                         <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0}"
+                                   Text="{Binding Settings.BackgroundCornerRadius, StringFormat=0.0, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
                     <TextBlock Text="{local:Loc RoundedCornersDescription}"
@@ -434,7 +435,7 @@
                                 TickFrequency="0.1"
                                 IsSnapToTickEnabled="True" />
                         <TextBlock Grid.Column="1"
-                                   Text="{Binding Settings.OutlineThickness, StringFormat=0.0}"
+                                   Text="{Binding Settings.OutlineThickness, StringFormat=0.0, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}}"
                                    Style="{StaticResource SliderValueTextBlock}" />
                     </Grid>
                     <TextBlock Text="{local:Loc OutlineThicknessDescription}"
