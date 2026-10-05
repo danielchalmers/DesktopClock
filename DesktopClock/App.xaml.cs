@@ -21,11 +21,26 @@ public partial class App : Application
 
     static App()
     {
-        // WPF treats all text as en-US unless told otherwise, which draws Chinese with a mix of Japanese and Traditional Chinese fallback fonts. Follow the display language instead; text runs (TextElement) don't inherit a FrameworkElement default, so they need the same override. This must run before any element is created.
-        var language = XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.IetfLanguageTag);
+        // WPF treats all text as en-US unless told otherwise, which draws Chinese with a mix of Japanese and Traditional Chinese fallback fonts. Text runs (TextElement) don't inherit a FrameworkElement default, so they need the same override. This must run before any element is created.
+        var language = XmlLanguage.GetLanguage(TextCulture().IetfLanguageTag);
         FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(language));
         FrameworkContentElement.LanguageProperty.OverrideMetadata(typeof(TextElement), new FrameworkPropertyMetadata(language));
     }
+
+    /// <summary>
+    /// The language on-screen text is in, which decides the fallback fonts for Chinese, Japanese, and Korean: the language of the translation being shown, unless only the regional format is East Asian, because then the East Asian text on screen is the dates and times.
+    /// </summary>
+    internal static CultureInfo TextCulture()
+    {
+        var display = CultureInfo.CurrentUICulture;
+        var translation = Loc.TranslationLanguage(display);
+        if (translation != display.TwoLetterISOLanguageName)
+            display = CultureInfo.GetCultureInfo(translation);
+
+        return !IsEastAsian(display) && IsEastAsian(CultureInfo.CurrentCulture) ? CultureInfo.CurrentCulture : display;
+    }
+
+    private static bool IsEastAsian(CultureInfo culture) => culture.TwoLetterISOLanguageName is "zh" or "ja" or "ko";
 
     protected override void OnStartup(StartupEventArgs e)
     {
