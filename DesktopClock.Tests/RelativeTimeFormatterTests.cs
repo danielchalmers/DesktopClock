@@ -109,6 +109,8 @@ public class RelativeTimeFormatterTests
     [InlineData("ru", "22.00:00:00", "через 22 дня")]
     [InlineData("ru", "25.00:00:00", "через 25 дней")]
     [InlineData("uk", "00:03:00", "через 3 хвилини")]
+    [InlineData("be-BY", "22.00:00:00", "через 22 дня")]
+    [InlineData("ca-ES", "3.00:00:00", "dentro de 3 días")]
     public void Format_UsesTheLanguagesPluralForms(string culture, string offset, string expected)
     {
         var target = Now + TimeSpan.Parse(offset);

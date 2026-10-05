@@ -105,6 +105,8 @@ public class LocalizationTests
 
         Assert.Equal(german["MenuCopy"], Loc.Get("MenuCopy", CultureInfo.GetCultureInfo("de-AT")));
         Assert.Equal("_Copy", Loc.Get("MenuCopy", CultureInfo.GetCultureInfo("sv-SE")));
+        Assert.Equal(ReadStrings("es.")["MenuCopy"], Loc.Get("MenuCopy", CultureInfo.GetCultureInfo("ca-ES")));
+        Assert.Equal(ReadStrings("ru.")["MenuCopy"], Loc.Get("MenuCopy", CultureInfo.GetCultureInfo("be-BY")));
         Assert.Equal("NoSuchKey", Loc.Get("NoSuchKey"));
     }
 

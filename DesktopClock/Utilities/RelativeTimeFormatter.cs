@@ -75,7 +75,7 @@ public static class RelativeTimeFormatter
     }
 
     /// <summary>
-    /// Picks which plural form to use following the CLDR rules for the translated languages: one|few|many for Polish, Russian, and Ukrainian, and one|other for everything else.
+    /// Picks which plural form to use following the CLDR rules for the translated languages: one|few|many for Polish, Russian, and Ukrainian, and one|other for everything else. A new language with other plural rules needs a case here and in LocalizationTests.Translation_HasPluralFormsForItsLanguage.
     /// </summary>
     private static int PluralFormIndex(int count, CultureInfo culture)
     {
@@ -83,7 +83,8 @@ public static class RelativeTimeFormatter
         var mod100 = count % 100;
         var isFew = mod10 is >= 2 and <= 4 && mod100 is < 12 or > 14;
 
-        return culture.TwoLetterISOLanguageName switch
+        // Follow the language of the strings being shown, so Belarusian (which shows Russian) uses the Russian rule.
+        return Loc.TranslationLanguage(culture) switch
         {
             "ru" or "uk" => (mod10 == 1 && mod100 != 11) ? 0 : isFew ? 1 : 2,
             "pl" => count == 1 ? 0 : isFew ? 1 : 2,

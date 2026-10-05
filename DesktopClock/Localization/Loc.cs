@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
@@ -14,6 +15,19 @@ namespace DesktopClock;
 public class Loc : MarkupExtension
 {
     private static readonly ResourceManager _resources = new EmbeddedResourceManager("DesktopClock.Localization.Strings", typeof(Loc).Assembly);
+
+    /// <summary>
+    /// Windows language add-ons show their base language for anything they don't translate, so these get that language's strings instead of English. Remove a language from here if it gets its own translation.
+    /// </summary>
+    private static readonly Dictionary<string, string> _baseLanguages = new()
+    {
+        ["ca"] = "es", // Catalan
+        ["eu"] = "es", // Basque
+        ["gl"] = "es", // Galician
+        ["be"] = "ru", // Belarusian
+        ["tt"] = "ru", // Tatar
+        ["ug"] = "zh-Hans", // Uyghur
+    };
 
     public Loc(string key)
     {
@@ -36,6 +50,12 @@ public class Loc : MarkupExtension
     public static string Format(string key, params object[] args) => string.Format(CultureInfo.CurrentCulture, Get(key), args);
 
     /// <summary>
+    /// The language whose translation the culture uses, such as "de" for de-AT, or "es" for Catalan, which Windows backs with Spanish.
+    /// </summary>
+    public static string TranslationLanguage(CultureInfo culture) =>
+        _baseLanguages.TryGetValue(culture.TwoLetterISOLanguageName, out var baseLanguage) ? baseLanguage : culture.TwoLetterISOLanguageName;
+
+    /// <summary>
     /// Finds translations compiled into the exe as Strings.{culture}.resources, since satellite assemblies would break the single-file app (see the csproj).
     /// </summary>
     private sealed class EmbeddedResourceManager(string baseName, Assembly assembly) : ResourceManager(baseName, assembly)
@@ -51,6 +71,9 @@ public class Loc : MarkupExtension
                 if (set != null)
                     return set;
             }
+
+            if (_baseLanguages.TryGetValue(culture.TwoLetterISOLanguageName, out var baseLanguage) && _cultureSets.GetOrAdd(baseLanguage, LoadCultureSet) is { } baseSet)
+                return baseSet;
 
             return base.InternalGetResourceSet(CultureInfo.InvariantCulture, createIfNotExists, tryParents);
         }
