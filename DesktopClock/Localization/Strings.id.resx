@@ -83,7 +83,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Pengaturan DesktopClock</value>
   </data>
   <data name="NavDisplay" xml:space="preserve">
-    <value>_Tampilan</value>
+    <value>_Waktu</value>
   </data>
   <data name="NavCountdown" xml:space="preserve">
     <value>_Hitung mundur</value>
@@ -143,7 +143,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Pratinjau</value>
   </data>
   <data name="SectionDisplay" xml:space="preserve">
-    <value>Tampilan</value>
+    <value>Waktu</value>
   </data>
   <data name="ClockFormat" xml:space="preserve">
     <value>Format jam</value>

@@ -347,10 +347,10 @@
     <value>時計の後ろに画像を表示します。</value>
   </data>
   <data name="ImageFit" xml:space="preserve">
-    <value>画像の調整</value>
+    <value>画像の表示方法</value>
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
-    <value>時計内での画像の合わせ方を選択します。</value>
+    <value>時計の中で画像をどのように表示するかを選択します。</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>アラート</value>
@@ -526,7 +526,7 @@
     <value>デジタル</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>残り {%d} 日</value>
+    <value>残り{%d}日</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d}日 {%h}時間</value>

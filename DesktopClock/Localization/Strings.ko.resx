@@ -484,13 +484,13 @@
     <value>(자동)</value>
   </data>
   <data name="ClockPresetTime" xml:space="preserve">
-    <value>시간</value>
+    <value>시각</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
     <value>시각(24시간제)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
-    <value>시간(초 포함)</value>
+    <value>시각(초 포함)</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
     <value>요일 및 시간</value>

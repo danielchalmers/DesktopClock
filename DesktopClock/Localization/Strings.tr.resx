@@ -362,7 +362,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Çalınacak bir WAV dosyası seçin.</value>
   </data>
   <data name="SoundInterval" xml:space="preserve">
-    <value>Ses aralığı</value>
+    <value>Ses tekrar aralığı</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
     <value>Sesin ne sıklıkla çalınacağını saat, dakika ve saniye olarak seçin.</value>
