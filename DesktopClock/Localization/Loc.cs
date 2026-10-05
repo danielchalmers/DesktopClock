@@ -11,6 +11,9 @@ namespace DesktopClock;
 /// <summary>
 /// Looks up UI text from Localization/Strings.resx in the Windows display language, falling back to English. In XAML, use <c>{local:Loc KeyName}</c>.
 /// </summary>
+/// <remarks>
+/// To add text, put it in Strings.resx with a comment for translators, then translate it in every Strings.*.resx. To add a language, name the file after the neutral culture that regional cultures fall back to (de, pt, zh-Hans, zh-Hant), and check RelativeTimeFormatter.PluralFormIndex. LocalizationTests checks keys, placeholders, links, access keys, and plural forms.
+/// </remarks>
 [MarkupExtensionReturnType(typeof(string))]
 public class Loc : MarkupExtension
 {

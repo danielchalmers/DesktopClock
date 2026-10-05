@@ -14,7 +14,7 @@ public class LocalizationTests
     private const string ResourcePrefix = "DesktopClock.Localization.Strings.";
 
     private static readonly Regex PlaceholderRegex = new(@"\{[^{}]*\}");
-    private static readonly Regex UrlRegex = new(@"https://[\w./-]*\w");
+    private static readonly Regex UrlRegex = new(@"https?://[A-Za-z0-9./_-]*[A-Za-z0-9]");
 
     // Alt access keys that share a window must not collide.
     private static readonly string[][] AccessKeyGroups =
@@ -46,6 +46,9 @@ public class LocalizationTests
         Assert.Empty(English.Keys.Except(translation.Keys));
         Assert.Empty(translation.Keys.Except(English.Keys));
         Assert.DoesNotContain(translation, t => string.IsNullOrWhiteSpace(t.Value));
+
+        // Single words like "Terminal" can legitimately match English, but a whole phrase means it was never translated.
+        Assert.Empty(translation.Where(t => t.Value == English[t.Key] && Regex.Matches(t.Value, @"[^\W\d_]{2,}").Count > 1).Select(t => t.Key));
     }
 
     [Theory]
@@ -55,10 +58,15 @@ public class LocalizationTests
         foreach (var translated in ReadStrings(culture + "."))
         {
             var english = English[translated.Key];
-            Assert.True(Placeholders(english).SetEquals(Placeholders(translated.Value)), $"{culture} {translated.Key}: placeholders changed in \"{translated.Value}\"");
+            var value = translated.Value;
+            Assert.True(Placeholders(english).SetEquals(Placeholders(value)), $"{culture} {translated.Key}: placeholders changed in \"{value}\"");
+            Assert.True(Urls(english).SetEquals(Urls(value)), $"{culture} {translated.Key}: links changed in \"{value}\"");
 
-            foreach (Match url in UrlRegex.Matches(english))
-                Assert.True(translated.Value.Contains(url.Value), $"{culture} {translated.Key}: missing {url.Value}");
+            // A stray brace makes Loc.Format throw, and these messages are shown from catch blocks and the crash handler.
+            Assert.True(PlaceholderRegex.Replace(value, "").IndexOfAny(['{', '}']) < 0, $"{culture} {translated.Key}: stray brace in \"{value}\"");
+            Assert.True(english.Count(c => c == '\n') == value.Count(c => c == '\n'), $"{culture} {translated.Key}: line breaks changed in \"{value}\"");
+            Assert.True(value == value.Trim(), $"{culture} {translated.Key}: leading or trailing whitespace in \"{value}\"");
+            Assert.True(value.IndexOfAny(['\u2013', '\u2014']) < 0, $"{culture} {translated.Key}: dash in \"{value}\"");
         }
     }
 
@@ -95,7 +103,15 @@ public class LocalizationTests
         };
 
         foreach (var plural in ReadStrings(culture + ".").Where(t => English[t.Key].Contains('|')))
-            Assert.True(plural.Value.Split('|').Length == expectedForms, $"{culture} {plural.Key}: expected {expectedForms} forms in \"{plural.Value}\"");
+        {
+            var forms = plural.Value.Split('|');
+            Assert.True(forms.Length == expectedForms, $"{culture} {plural.Key}: expected {expectedForms} forms in \"{plural.Value}\"");
+            Assert.DoesNotContain(forms, string.IsNullOrWhiteSpace);
+
+            // Only a form used for exactly 1 may leave out the number; Russian and Ukrainian use their first form for 21, 31, and so on too.
+            var formsWithNumber = forms.Length == 1 || culture is "ru" or "uk" ? forms : forms.Skip(1);
+            Assert.All(formsWithNumber, form => Assert.Contains("{0}", form));
+        }
     }
 
     [Fact]
@@ -111,10 +127,11 @@ public class LocalizationTests
     }
 
     [Fact]
-    public void Source_OnlyUsesKeysThatExist()
+    public void Source_UsesExactlyTheDefinedKeys()
     {
+        // Keys chosen at runtime must start with "Relative" (the relative time units) or be written as separate Loc.Get calls, so this scan can see them.
         var sourceFolder = FindSourceFolder();
-        var usage = new Regex(@"Loc\.(?:Get|Format)\(""(\w+)""|=""\{local:Loc (\w+)\}""|""(Relative\w+)""");
+        var usage = new Regex(@"Loc\.(?:Get|Format)\(\s*""(\w+)""|=""\{local:Loc\s+(\w+)\s*\}""|""(Relative\w+)""");
         var used = Directory.EnumerateFiles(sourceFolder, "*.*", SearchOption.AllDirectories)
             .Where(f => f.EndsWith(".cs") || f.EndsWith(".xaml"))
             .Where(f => !f.Contains($"{Path.DirectorySeparatorChar}obj{Path.DirectorySeparatorChar}"))
@@ -124,10 +141,13 @@ public class LocalizationTests
             .ToList();
 
         Assert.NotEmpty(used);
-        Assert.DoesNotContain(used, k => !English.ContainsKey(k));
+        Assert.Empty(used.Except(English.Keys));
+        Assert.Empty(English.Keys.Except(used));
     }
 
     private static HashSet<string> Placeholders(string text) => new(PlaceholderRegex.Matches(text).Cast<Match>().Select(m => m.Value));
+
+    private static HashSet<string> Urls(string text) => new(UrlRegex.Matches(text).Cast<Match>().Select(m => m.Value));
 
     private static Dictionary<string, string> ReadStrings(string culturePart)
     {

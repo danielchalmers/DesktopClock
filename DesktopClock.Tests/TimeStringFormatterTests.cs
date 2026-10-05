@@ -84,35 +84,20 @@ public class TimeStringFormatterTests
     [Fact]
     public void Format_UsesRelativePhraseWhenCountdownFormatMissing()
     {
-        var originalCulture = CultureInfo.CurrentCulture;
-        var originalUiCulture = CultureInfo.CurrentUICulture;
+        var now = new DateTimeOffset(2024, 1, 1, 10, 0, 0, TimeSpan.Zero);
+        var nowDateTime = now.DateTime;
+        var countdownTo = nowDateTime.AddDays(1);
 
-        try
-        {
-            var enUs = new CultureInfo("en-US");
-            CultureInfo.CurrentCulture = enUs;
-            CultureInfo.CurrentUICulture = enUs;
+        var result = TimeStringFormatter.Format(
+            now,
+            nowDateTime,
+            TimeZoneInfo.Utc,
+            countdownTo,
+            "HH:mm",
+            " ",
+            CultureInfo.InvariantCulture);
 
-            var now = new DateTimeOffset(2024, 1, 1, 10, 0, 0, TimeSpan.Zero);
-            var nowDateTime = now.DateTime;
-            var countdownTo = nowDateTime.AddDays(1);
-
-            var result = TimeStringFormatter.Format(
-                now,
-                nowDateTime,
-                TimeZoneInfo.Utc,
-                countdownTo,
-                "HH:mm",
-                " ",
-                CultureInfo.CurrentCulture);
-
-            Assert.Equal("tomorrow", result);
-        }
-        finally
-        {
-            CultureInfo.CurrentCulture = originalCulture;
-            CultureInfo.CurrentUICulture = originalUiCulture;
-        }
+        Assert.Equal("tomorrow", result);
     }
 
     [Theory]
@@ -125,34 +110,19 @@ public class TimeStringFormatterTests
     {
         // The wall-clock values have Kind Unspecified, which the old Humanizer dependency shifted by
         // the machine's UTC offset, e.g. a target of "now" read as "6 hours from now" on UTC-6.
-        var originalCulture = CultureInfo.CurrentCulture;
-        var originalUiCulture = CultureInfo.CurrentUICulture;
+        var now = new DateTimeOffset(2026, 1, 1, 12, 0, 0, TimeSpan.Zero);
+        var countdownTo = now.DateTime.AddHours(hoursFromNow);
 
-        try
-        {
-            var enUs = new CultureInfo("en-US");
-            CultureInfo.CurrentCulture = enUs;
-            CultureInfo.CurrentUICulture = enUs;
+        var result = TimeStringFormatter.Format(
+            now,
+            now.DateTime,
+            TimeZoneInfo.Utc,
+            countdownTo,
+            "HH:mm",
+            "",
+            CultureInfo.InvariantCulture);
 
-            var now = new DateTimeOffset(2026, 1, 1, 12, 0, 0, TimeSpan.Zero);
-            var countdownTo = now.DateTime.AddHours(hoursFromNow);
-
-            var result = TimeStringFormatter.Format(
-                now,
-                now.DateTime,
-                TimeZoneInfo.Utc,
-                countdownTo,
-                "HH:mm",
-                "",
-                CultureInfo.CurrentCulture);
-
-            Assert.Equal(expected, result);
-        }
-        finally
-        {
-            CultureInfo.CurrentCulture = originalCulture;
-            CultureInfo.CurrentUICulture = originalUiCulture;
-        }
+        Assert.Equal(expected, result);
     }
 
     [Fact]
