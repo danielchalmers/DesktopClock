@@ -289,6 +289,45 @@ Se o problema persistir, informe-o nesse link.</value>
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Deixe o texto mais fino ou mais grosso.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>Itálico</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Oblíquo</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>Fino</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Extraleve</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Leve</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Médio</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Seminegrito</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Negrito</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Extranegrito</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Pesado</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Extrapesado</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Cor do texto</value>
   </data>
@@ -351,6 +390,18 @@ Se o problema persistir, informe-o nesse link.</value>
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Escolha como a imagem se ajusta ao relógio.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Tamanho original</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Ampliar</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>Ajustar</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Preencher</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Alertas</value>

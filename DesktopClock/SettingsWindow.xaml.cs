@@ -347,9 +347,32 @@ public partial class SettingsWindowViewModel : ObservableObject
     {
         Settings = settings;
         AppVersion = FileVersionInfo.GetVersionInfo(App.MainFileInfo.FullName).FileVersion;
-        FontStyles = ["Normal", "Italic", "Oblique"];
-        FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
-        ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
+        FontStyles =
+        [
+            new("Normal", Loc.Get("FontStyleNormal")),
+            new("Italic", Loc.Get("FontStyleItalic")),
+            new("Oblique", Loc.Get("FontStyleOblique")),
+        ];
+        FontWeights =
+        [
+            new("Thin", Loc.Get("FontWeightThin")),
+            new("ExtraLight", Loc.Get("FontWeightExtraLight")),
+            new("Light", Loc.Get("FontWeightLight")),
+            new("Normal", Loc.Get("FontWeightNormal")),
+            new("Medium", Loc.Get("FontWeightMedium")),
+            new("SemiBold", Loc.Get("FontWeightSemiBold")),
+            new("Bold", Loc.Get("FontWeightBold")),
+            new("ExtraBold", Loc.Get("FontWeightExtraBold")),
+            new("Black", Loc.Get("FontWeightBlack")),
+            new("ExtraBlack", Loc.Get("FontWeightExtraBlack")),
+        ];
+        ImageStretches =
+        [
+            new(Stretch.None, Loc.Get("ImageFitNone")),
+            new(Stretch.Fill, Loc.Get("ImageFitFill")),
+            new(Stretch.Uniform, Loc.Get("ImageFitUniform")),
+            new(Stretch.UniformToFill, Loc.Get("ImageFitUniformToFill")),
+        ];
     }
 
     /// <summary>
@@ -360,22 +383,34 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// All available font families reported by the system.
     /// </summary>
-    public IList<string> FontFamilies => _systemLists.Value.Result.Fonts;
+    public IList<string> FontFamilies
+    {
+        get
+        {
+            var fonts = _systemLists.Value.Result.Fonts;
+
+            // Older versions also listed East Asian fonts under their localized names, so a saved name like 微软雅黑 may not be in the list anymore; switch it to the same font's English name so the dropdown still shows it.
+            if (!fonts.Contains(Settings.FontFamily) && GetEnglishFontName(Settings.FontFamily) is { } englishName && fonts.Contains(englishName))
+                Settings.FontFamily = englishName;
+
+            return fonts;
+        }
+    }
 
     /// <summary>
     /// All available font styles.
     /// </summary>
-    public IList<string> FontStyles { get; }
+    public IList<SettingOption> FontStyles { get; }
 
     /// <summary>
     /// All available font weights.
     /// </summary>
-    public IList<string> FontWeights { get; }
+    public IList<SettingOption> FontWeights { get; }
 
     /// <summary>
     /// All available stretch options for background images.
     /// </summary>
-    public IList<Stretch> ImageStretches { get; }
+    public IList<SettingOption> ImageStretches { get; }
 
     /// <summary>
     /// All available time zones reported by the system.
@@ -409,6 +444,19 @@ public partial class SettingsWindowViewModel : ObservableObject
         Settings.BackgroundImagePath = string.Empty;
     }
 
+    private static string GetEnglishFontName(string name)
+    {
+        try
+        {
+            using var family = new System.Drawing.FontFamily(name);
+            return family.GetName(1033);
+        }
+        catch (ArgumentException)
+        {
+            return null;
+        }
+    }
+
     private static IEnumerable<string> GetAllSystemFonts()
     {
         // Get fonts from WPF.
@@ -417,11 +465,21 @@ public partial class SettingsWindowViewModel : ObservableObject
             yield return fontFamily.Source;
         }
 
-        // Get fonts from System.Drawing.
+        // Get fonts from System.Drawing, which also finds fonts installed for the current user. Use the English name like WPF does, otherwise East Asian fonts show up twice on Chinese, Japanese, and Korean Windows (Microsoft YaHei and 微软雅黑).
         using var installedFontCollection = new InstalledFontCollection();
         foreach (var fontFamily in installedFontCollection.Families)
         {
-            yield return fontFamily.Name;
+            yield return fontFamily.GetName(1033);
         }
     }
+}
+
+/// <summary>
+/// A choice in a settings dropdown: the value saved in settings, and the name shown in the UI language.
+/// </summary>
+public sealed class SettingOption(object value, string name)
+{
+    public object Value { get; } = value;
+
+    public string Name { get; } = name;
 }

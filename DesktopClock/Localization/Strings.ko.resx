@@ -289,6 +289,45 @@
   <data name="FontWeightDescription" xml:space="preserve">
     <value>텍스트를 더 가늘게 또는 더 굵게 만듭니다.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>보통</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>기울임꼴</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>오블리크</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>씬</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>엑스트라 라이트</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>라이트</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>보통</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>미디엄</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>세미볼드</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>볼드</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>엑스트라 볼드</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>블랙</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>엑스트라 블랙</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>텍스트 색</value>
   </data>
@@ -351,6 +390,18 @@
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>시계 안에서 이미지를 맞추는 방식을 선택합니다.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>원래 크기</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>확대</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>맞춤</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>채우기</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>알림</value>

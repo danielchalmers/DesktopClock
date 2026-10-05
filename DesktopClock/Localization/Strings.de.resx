@@ -289,6 +289,45 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   <data name="FontWeightDescription" xml:space="preserve">
     <value>Den Text dünner oder fetter machen.</value>
   </data>
+  <data name="FontStyleNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontStyleItalic" xml:space="preserve">
+    <value>Kursiv</value>
+  </data>
+  <data name="FontStyleOblique" xml:space="preserve">
+    <value>Schräg</value>
+  </data>
+  <data name="FontWeightThin" xml:space="preserve">
+    <value>Dünn</value>
+  </data>
+  <data name="FontWeightExtraLight" xml:space="preserve">
+    <value>Extraleicht</value>
+  </data>
+  <data name="FontWeightLight" xml:space="preserve">
+    <value>Leicht</value>
+  </data>
+  <data name="FontWeightNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="FontWeightMedium" xml:space="preserve">
+    <value>Mittel</value>
+  </data>
+  <data name="FontWeightSemiBold" xml:space="preserve">
+    <value>Halbfett</value>
+  </data>
+  <data name="FontWeightBold" xml:space="preserve">
+    <value>Fett</value>
+  </data>
+  <data name="FontWeightExtraBold" xml:space="preserve">
+    <value>Extrafett</value>
+  </data>
+  <data name="FontWeightBlack" xml:space="preserve">
+    <value>Schwarz</value>
+  </data>
+  <data name="FontWeightExtraBlack" xml:space="preserve">
+    <value>Extraschwarz</value>
+  </data>
   <data name="TextColor" xml:space="preserve">
     <value>Textfarbe</value>
   </data>
@@ -351,6 +390,18 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   </data>
   <data name="ImageFitDescription" xml:space="preserve">
     <value>Festlegen, wie das Bild in die Uhr eingepasst wird.</value>
+  </data>
+  <data name="ImageFitNone" xml:space="preserve">
+    <value>Originalgröße</value>
+  </data>
+  <data name="ImageFitFill" xml:space="preserve">
+    <value>Strecken</value>
+  </data>
+  <data name="ImageFitUniform" xml:space="preserve">
+    <value>Anpassen</value>
+  </data>
+  <data name="ImageFitUniformToFill" xml:space="preserve">
+    <value>Ausfüllen</value>
   </data>
   <data name="SectionAlerts" xml:space="preserve">
     <value>Signale</value>
