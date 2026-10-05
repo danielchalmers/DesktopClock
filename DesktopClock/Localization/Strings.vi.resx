@@ -299,13 +299,13 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Xiên</value>
   </data>
   <data name="FontWeightThin" xml:space="preserve">
-    <value>Mảnh</value>
+    <value>Cực mảnh</value>
   </data>
   <data name="FontWeightExtraLight" xml:space="preserve">
-    <value>Siêu nhẹ</value>
+    <value>Rất mảnh</value>
   </data>
   <data name="FontWeightLight" xml:space="preserve">
-    <value>Nhẹ</value>
+    <value>Mảnh</value>
   </data>
   <data name="FontWeightNormal" xml:space="preserve">
     <value>Bình thường</value>
@@ -320,13 +320,13 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Đậm</value>
   </data>
   <data name="FontWeightExtraBold" xml:space="preserve">
-    <value>Siêu đậm</value>
+    <value>Rất đậm</value>
   </data>
   <data name="FontWeightBlack" xml:space="preserve">
-    <value>Đen</value>
+    <value>Siêu đậm</value>
   </data>
   <data name="FontWeightExtraBlack" xml:space="preserve">
-    <value>Siêu đen</value>
+    <value>Cực đậm</value>
   </data>
   <data name="TextColor" xml:space="preserve">
     <value>Màu chữ</value>

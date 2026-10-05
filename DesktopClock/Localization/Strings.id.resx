@@ -314,7 +314,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Sedang</value>
   </data>
   <data name="FontWeightSemiBold" xml:space="preserve">
-    <value>Semi tebal</value>
+    <value>Semitebal</value>
   </data>
   <data name="FontWeightBold" xml:space="preserve">
     <value>Tebal</value>
@@ -323,10 +323,10 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Ekstra tebal</value>
   </data>
   <data name="FontWeightBlack" xml:space="preserve">
-    <value>Hitam</value>
+    <value>Sangat tebal</value>
   </data>
   <data name="FontWeightExtraBlack" xml:space="preserve">
-    <value>Ekstra hitam</value>
+    <value>Paling tebal</value>
   </data>
   <data name="TextColor" xml:space="preserve">
     <value>Warna teks</value>

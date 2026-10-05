@@ -398,7 +398,7 @@
     <value>延展</value>
   </data>
   <data name="ImageFitUniform" xml:space="preserve">
-    <value>符合</value>
+    <value>最適大小</value>
   </data>
   <data name="ImageFitUniformToFill" xml:space="preserve">
     <value>填滿</value>

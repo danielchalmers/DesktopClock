@@ -320,6 +320,7 @@ If the problem persists, report it at that link.</value>
   </data>
   <data name="FontStyleDescription" xml:space="preserve">
     <value>Choose normal, italic, or oblique text.</value>
+    <comment>Use the same words as the font style options FontStyleNormal, FontStyleItalic, and FontStyleOblique.</comment>
   </data>
   <data name="FontWeight" xml:space="preserve">
     <value>Font weight</value>

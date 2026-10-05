@@ -323,10 +323,10 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Ekstra kalın</value>
   </data>
   <data name="FontWeightBlack" xml:space="preserve">
-    <value>Siyah</value>
+    <value>Ağır</value>
   </data>
   <data name="FontWeightExtraBlack" xml:space="preserve">
-    <value>Ekstra siyah</value>
+    <value>Ekstra ağır</value>
   </data>
   <data name="TextColor" xml:space="preserve">
     <value>Metin rengi</value>

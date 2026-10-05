@@ -296,7 +296,7 @@
     <value>イタリック</value>
   </data>
   <data name="FontStyleOblique" xml:space="preserve">
-    <value>斜体</value>
+    <value>オブリーク</value>
   </data>
   <data name="FontWeightThin" xml:space="preserve">
     <value>シン</value>

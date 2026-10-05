@@ -395,7 +395,7 @@
     <value>Вихідний розмір</value>
   </data>
   <data name="ImageFitFill" xml:space="preserve">
-    <value>Розтягнути</value>
+    <value>Розтягування</value>
   </data>
   <data name="ImageFitUniform" xml:space="preserve">
     <value>За розміром</value>
