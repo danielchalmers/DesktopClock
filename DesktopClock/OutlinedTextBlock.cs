@@ -294,7 +294,7 @@ public class OutlinedTextBlock : FrameworkElement
 #pragma warning disable CS0618 // Type or member is obsolete
         _FormattedText = new FormattedText(
           Text ?? "",
-          CultureInfo.CurrentUICulture,
+          Language.GetEquivalentCulture(),
           FlowDirection,
           new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
           FontSize,

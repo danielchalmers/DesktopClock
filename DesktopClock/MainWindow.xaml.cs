@@ -91,7 +91,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            _trayIcon?.ShowNotification("Copy failed", "Couldn't update the clipboard. Try again.");
+            _trayIcon?.ShowNotification(Loc.Get("CopyFailedTitle"), Loc.Get("CopyFailedMessage"));
         }
     }
 
@@ -269,7 +269,7 @@ public partial class MainWindow : Window
         {
             // Stop trying until the sound settings change, otherwise a bad file shows this on every tick.
             _soundPlayer = null;
-            _trayIcon?.ShowNotification("Alert sound unavailable", "The WAV file couldn't be played.");
+            _trayIcon?.ShowNotification(Loc.Get("SoundFailedTitle"), Loc.Get("SoundFailedMessage"));
         }
     }
 
@@ -353,7 +353,7 @@ public partial class MainWindow : Window
 
         if (Settings.Default.StartHidden)
         {
-            _trayIcon?.ShowNotification("Running in the background", "Double-click the tray icon to show the clock.");
+            _trayIcon?.ShowNotification(Loc.Get("StartHiddenTitle"), Loc.Get("StartHiddenMessage"));
             this.HideFromScreen();
             ApplyWindowVisibilitySettings();
         }
@@ -369,10 +369,7 @@ public partial class MainWindow : Window
         if (!Settings.CanBeSaved)
         {
             MessageBox.Show(this,
-                "Settings can't be saved due to an access error.\n\n" +
-                "Move the app to a folder that doesn't need admin rights.\n\n" +
-                "Make sure you downloaded it from the official source: https://github.com/danielchalmers/DesktopClock. If you paid for it, ask for a refund.\n\n" +
-                "If the problem persists, report it at that link.",
+                Loc.Get("CantSaveSettingsMessage"),
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
@@ -467,7 +464,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            _trayIcon?.ShowNotification("Couldn't open link", url);
+            _trayIcon?.ShowNotification(Loc.Get("OpenLinkFailedTitle"), url);
         }
     }
 }

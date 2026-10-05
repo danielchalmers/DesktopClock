@@ -78,12 +78,12 @@ public static class CrashHandler
     {
         try
         {
-            var details = logPath == null ? "" : $"Details were saved to:\n{logPath}\n\n";
+            var details = logPath == null ? "" : Loc.Format("CrashLogLocation", logPath) + "\n\n";
 
             MessageBox.Show(
-                "DesktopClock ran into a problem and needs to close.\n\n" +
+                Loc.Get("CrashMessage") + "\n\n" +
                 details +
-                "Please report it at https://github.com/danielchalmers/DesktopClock/issues and include that file.",
+                Loc.Get("CrashReport"),
                 "DesktopClock", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         catch

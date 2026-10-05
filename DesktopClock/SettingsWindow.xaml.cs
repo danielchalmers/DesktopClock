@@ -42,7 +42,7 @@ public partial class SettingsWindow : Window
     {
         var openFileDialog = new OpenFileDialog
         {
-            Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*"
+            Filter = $"{Loc.Get("ImageFilesFilter")} (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|{Loc.Get("AllFilesFilter")} (*.*)|*.*"
         };
 
         if (openFileDialog.ShowDialog() != true)
@@ -57,7 +57,7 @@ public partial class SettingsWindow : Window
     {
         var openFileDialog = new OpenFileDialog
         {
-            Filter = "WAV files (*.wav)|*.wav|All files (*.*)|*.*"
+            Filter = $"{Loc.Get("WavFilesFilter")} (*.wav)|*.wav|{Loc.Get("AllFilesFilter")} (*.*)|*.*"
         };
 
         if (openFileDialog.ShowDialog() != true)
@@ -139,7 +139,7 @@ public partial class SettingsWindow : Window
         if (!Settings.Exists)
         {
             MessageBox.Show(this,
-                "Settings file doesn't exist and couldn't be created.",
+                Loc.Get("SettingsFileMissing"),
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
@@ -153,9 +153,7 @@ public partial class SettingsWindow : Window
         {
             // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
             MessageBox.Show(this,
-                "Couldn't open the settings file in Notepad.\n\n" +
-                "This app may be a stolen copy. If you paid for it, ask for a refund. The official version is free at https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If the official version still fails, report it at that link and include this error: \"{ex.Message}\"",
+                Loc.Format("OpenSettingsFileFailed", ex.Message),
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -168,8 +166,7 @@ public partial class SettingsWindow : Window
     private void CreateNewClock(object sender, RoutedEventArgs e)
     {
         var result = MessageBox.Show(this,
-            "This will make a copy of the app and start it with default settings.\n\n" +
-            "Continue?",
+            Loc.Get("NewClockConfirm"),
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
         if (result != MessageBoxResult.OK)
@@ -186,7 +183,7 @@ public partial class SettingsWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(this,
-                $"Couldn't create a new clock.\n\n{ex.Message}",
+                Loc.Format("NewClockFailed", ex.Message),
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -300,7 +297,7 @@ public partial class SettingsWindow : Window
         catch
         {
             MessageBox.Show(this,
-                $"Couldn't open {url}.",
+                Loc.Format("OpenUrlFailed", url),
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }

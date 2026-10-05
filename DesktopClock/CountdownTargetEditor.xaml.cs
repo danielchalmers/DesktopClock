@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using DesktopClock.Properties;
 
 namespace DesktopClock;
@@ -16,19 +15,16 @@ public partial class CountdownTargetEditor : UserControl
 {
     private static readonly (string Name, Func<DateTime> GetTarget)[] Presets =
     {
-        ("Midnight tonight", () => DateTime.Today.AddDays(1)),
-        ("Tomorrow morning", () => DateTime.Today.AddDays(1).AddHours(9)),
-        ("Friday afternoon", () => NextOccurrence(DayOfWeek.Friday, 17)),
-        ("New Year", () => new DateTime(DateTime.Today.Year + 1, 1, 1)),
+        (Loc.Get("TargetMidnight"), () => DateTime.Today.AddDays(1)),
+        (Loc.Get("TargetTomorrowMorning"), () => DateTime.Today.AddDays(1).AddHours(9)),
+        (Loc.Get("TargetFridayAfternoon"), () => NextOccurrence(DayOfWeek.Friday, 17)),
+        (Loc.Get("TargetNewYear"), () => new DateTime(DateTime.Today.Year + 1, 1, 1)),
     };
 
     private bool _built;
 
     public CountdownTargetEditor()
     {
-        // WPF defaults every element's Language to en-US, so the target text box would parse and show dates only in US format. Follow the OS locale instead, matching the preset captions and preview below it. Set before InitializeComponent so the culture is already in place when the bindings are created.
-        Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
-
         InitializeComponent();
 
         Loaded += CountdownTargetEditor_Loaded;
@@ -101,8 +97,8 @@ public partial class CountdownTargetEditor : UserControl
         var target = Settings.Default.CountdownTo;
 
         PreviewText.Text = target == default
-            ? "No target. The clock shows the current time."
-            : $"{target:f} — {RelativeTimeFormatter.Format(target, DateTime.Now)}";
+            ? Loc.Get("NoCountdownTarget")
+            : Loc.Format("CountdownPreview", target.ToString("f"), RelativeTimeFormatter.Format(target, DateTime.Now));
     }
 
     /// <summary>
