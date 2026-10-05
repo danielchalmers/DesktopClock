@@ -299,7 +299,7 @@ public partial class MainWindow : Window
             Settings.Default.CountdownTo,
             Settings.Default.Format,
             Settings.Default.CountdownFormat,
-            CultureInfo.DefaultThreadCurrentCulture);
+            CultureInfo.CurrentCulture);
     }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
