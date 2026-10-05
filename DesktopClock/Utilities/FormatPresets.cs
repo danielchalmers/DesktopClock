@@ -50,16 +50,29 @@ public static class FormatPresets
     public static IReadOnlyList<(string Name, string Token)> ClockTokens(CultureInfo culture)
     {
         var format = culture.DateTimeFormat;
+
+        // Chinese, Japanese, and Korean write a unit after each number (2026年10月5日), and their short month names are bare numbers, so the blocks include the unit.
+        var units = culture.TwoLetterISOLanguageName switch
+        {
+            "ja" or "zh" => ("年", "月", "日"),
+            "ko" => ("년", "월", "일"),
+            _ => default((string Year, string Month, string Day)?),
+        };
+
         var tokens = new List<(string Name, string Token)>
         {
             (Loc.Get("TokenWeekday"), "{ddd}"),
             (Loc.Get("TokenWeekdayFull"), "{dddd}"),
-            (Loc.Get("TokenDay"), "{dd}"),
-            (Loc.Get("TokenMonth"), "{MMM}"),
-            (Loc.Get("TokenMonthFull"), "{MMMM}"),
-            (Loc.Get("TokenYear"), "{yyyy}"),
-            (Loc.Get("TokenTime"), Token(format.ShortTimePattern)),
+            (Loc.Get("TokenDay"), units is { } u1 ? $"{{d{u1.Day}}}" : "{dd}"),
+            (Loc.Get("TokenMonth"), units is { } u2 ? $"{{M{u2.Month}}}" : "{MMM}"),
         };
+
+        // Japanese and Korean full month names are the same as the short ones (10月), so only Chinese, with its written-out months (十月), keeps both.
+        if (culture.TwoLetterISOLanguageName is not ("ja" or "ko"))
+            tokens.Add((Loc.Get("TokenMonthFull"), "{MMMM}"));
+
+        tokens.Add((Loc.Get("TokenYear"), units is { } u3 ? $"{{yyyy{u3.Year}}}" : "{yyyy}"));
+        tokens.Add((Loc.Get("TokenTime"), Token(format.ShortTimePattern)));
 
         if (Uses12HourClock(format))
             tokens.Add((Loc.Get("TokenTime24"), "{HH:mm}"));

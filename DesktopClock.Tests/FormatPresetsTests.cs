@@ -70,6 +70,20 @@ public class FormatPresetsTests
         Assert.Equal(expected, FormatPresets.ShortMonthDayPattern(Region(culture).DateTimeFormat));
     }
 
+    [Fact]
+    public void ClockTokens_IncludeTheUnitInChineseJapaneseAndKorean()
+    {
+        var japanese = FormatPresets.ClockTokens(Region("ja-JP")).ToDictionary(t => t.Name, t => t.Token);
+        Assert.Equal("{d日}", japanese["Day"]);
+        Assert.Equal("{M月}", japanese["Month"]);
+        Assert.Equal("{yyyy年}", japanese["Year"]);
+        Assert.DoesNotContain("Month (full)", japanese.Keys);
+
+        var english = FormatPresets.ClockTokens(Region("en-US")).ToDictionary(t => t.Name, t => t.Token);
+        Assert.Equal("{dd}", english["Day"]);
+        Assert.Equal("{MMMM}", english["Month (full)"]);
+    }
+
     [Theory]
     [InlineData("en-US", true)]
     [InlineData("ko-KR", true)]

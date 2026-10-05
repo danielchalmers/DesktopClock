@@ -32,7 +32,7 @@ public partial class FormatEditor : UserControl
         (Loc.Get("CountdownPresetDaysLeft"), Loc.Get("CountdownFormatDaysLeft")),
         (Loc.Get("CountdownPresetDaysHours"), Loc.Get("CountdownFormatDaysHours")),
         (Loc.Get("CountdownPresetFull"), Loc.Get("CountdownFormatFull")),
-        (Loc.Get("CountdownPresetDigital"), "{dd}.{hh}:{mm}:{ss}"),
+        (Loc.Get("CountdownPresetDigital"), "{dd}:{hh}:{mm}:{ss}"),
     };
 
     private static readonly IReadOnlyList<(string Name, string Token)> ClockTokens = FormatPresets.ClockTokens(CultureInfo.CurrentCulture);
