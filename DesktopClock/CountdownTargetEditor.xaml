@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
-                     Text="{Binding CountdownTo, Source={x:Static p:Settings.Default}, Mode=TwoWay, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}}" />
+                     Text="{Binding CountdownTo, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={local:CountdownTargetConverter}, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}}" />
             <Button Grid.Column="2"
                     Content="{local:Loc Reset}"
                     Click="ResetTarget" />
