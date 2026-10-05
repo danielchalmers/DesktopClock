@@ -242,7 +242,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Choisissez une apparence de départ pour l'horloge. Chaque détail reste modifiable dans les sections ci-dessous.</value>
   </data>
   <data name="ThemePresetTooltip" xml:space="preserve">
-    <value>Définit la police, les couleurs, l'opacité et les coins. Ajustez davantage dans Typographie et Apparence.</value>
+    <value>Définit la police, les couleurs, l'opacité et les coins. Affinez le résultat dans les sections Typographie et Apparence.</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
     <value>Système</value>
@@ -428,7 +428,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Ouvrir un menu radial personnalisable avec un raccourci (Windows)</value>
   </data>
   <data name="TeichosDescription" xml:space="preserve">
-    <value>Bloquer des sites web selon un planning (Chrome/Edge)</value>
+    <value>Bloquer des sites web selon un calendrier (Chrome/Edge)</value>
   </data>
   <data name="MoreFromDeveloper" xml:space="preserve">
     <value>Autres projets du développeur de DesktopClock</value>

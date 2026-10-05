@@ -242,7 +242,7 @@ Se o problema persistir, informe-o nesse link.</value>
     <value>Escolha um visual inicial para o relógio. Todos os detalhes ainda podem ser ajustados nas seções abaixo.</value>
   </data>
   <data name="ThemePresetTooltip" xml:space="preserve">
-    <value>Define a fonte, as cores, a opacidade e os cantos. Ajuste mais em Tipografia e Aparência.</value>
+    <value>Define a fonte, as cores, a opacidade e os cantos. Faça outros ajustes em Tipografia e Aparência.</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
     <value>Sistema</value>

@@ -242,7 +242,7 @@
     <value>Выберите исходный вид часов. Любую деталь можно изменить в разделах ниже.</value>
   </data>
   <data name="ThemePresetTooltip" xml:space="preserve">
-    <value>Задает шрифт, цвета, непрозрачность и углы. Дальнейшая настройка в разделах «Шрифт» и «Внешний вид».</value>
+    <value>Задает шрифт, цвета, непрозрачность и скругление углов. Точнее настроить их можно в разделах «Шрифт» и «Внешний вид».</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
     <value>Системная</value>
@@ -332,7 +332,7 @@
     <value>Скругленные углы</value>
   </data>
   <data name="RoundedCornersDescription" xml:space="preserve">
-    <value>Скруглить углы фона.</value>
+    <value>Скруглять углы фона.</value>
   </data>
   <data name="OutlineThickness" xml:space="preserve">
     <value>Толщина контура</value>
@@ -362,7 +362,7 @@
     <value>Выберите WAV-файл для воспроизведения.</value>
   </data>
   <data name="SoundInterval" xml:space="preserve">
-    <value>Интервал звука</value>
+    <value>Интервал повтора звука</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
     <value>Укажите в часах, минутах и секундах, как часто воспроизводить звук.</value>
@@ -453,7 +453,7 @@
 
 Возможно, это украденная копия приложения. Если вы заплатили за него, запросите возврат средств. Официальная версия бесплатна: https://github.com/danielchalmers/DesktopClock.
 
-Если официальная версия тоже не работает, сообщите об этом по той же ссылке и приложите эту ошибку: «{0}»</value>
+Если официальная версия тоже не работает, сообщите об этом по той же ссылке и укажите текст ошибки: «{0}»</value>
   </data>
   <data name="NewClockFailed" xml:space="preserve">
     <value>Не удалось создать новые часы.

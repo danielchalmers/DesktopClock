@@ -215,7 +215,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Mulai tersembunyi</value>
   </data>
   <data name="StartHiddenDescription" xml:space="preserve">
-    <value>Mulai tanpa menampilkan jam. Gunakan ikon baki untuk menampilkannya lagi.</value>
+    <value>Mulai tanpa menampilkan jam. Gunakan ikon baki sistem untuk menampilkannya lagi.</value>
   </data>
   <data name="AllowDragging" xml:space="preserve">
     <value>Izinkan menyeret</value>
@@ -514,7 +514,7 @@ Lanjutkan?</value>
     <value>Otomatis</value>
   </data>
   <data name="CountdownPresetDaysLeft" xml:space="preserve">
-    <value>Sisa hari</value>
+    <value>Hari tersisa</value>
   </data>
   <data name="CountdownPresetDaysHours" xml:space="preserve">
     <value>Hari dan jam</value>
@@ -529,10 +529,10 @@ Lanjutkan?</value>
     <value>{%d} hari lagi</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
-    <value>{%d} hr {%h} j</value>
+    <value>{%d} hr {%h} jam</value>
   </data>
   <data name="CountdownFormatFull" xml:space="preserve">
-    <value>{%d} hr {%h} j {%m} mnt {%s} dtk</value>
+    <value>{%d} hr {%h} jam {%m} mnt {%s} dtk</value>
   </data>
   <data name="TokenWeekday" xml:space="preserve">
     <value>Hari</value>

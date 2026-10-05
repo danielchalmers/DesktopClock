@@ -43,7 +43,7 @@
     <value>クリップボードを更新できませんでした。もう一度お試しください。</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>通知音を利用できません</value>
+    <value>アラーム音を利用できません</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>WAV ファイルを再生できませんでした。</value>
@@ -281,7 +281,7 @@
     <value>フォント スタイル</value>
   </data>
   <data name="FontStyleDescription" xml:space="preserve">
-    <value>標準、イタリック、または斜体のテキストを選択します。</value>
+    <value>標準、イタリック、またはオブリークのテキストを選択します。</value>
   </data>
   <data name="FontWeight" xml:space="preserve">
     <value>フォントの太さ</value>
@@ -538,7 +538,7 @@
     <value>曜日</value>
   </data>
   <data name="TokenWeekdayFull" xml:space="preserve">
-    <value>曜日 (完全形)</value>
+    <value>曜日 (省略なし)</value>
   </data>
   <data name="TokenDay" xml:space="preserve">
     <value>日</value>
@@ -547,7 +547,7 @@
     <value>月</value>
   </data>
   <data name="TokenMonthFull" xml:space="preserve">
-    <value>月 (完全形)</value>
+    <value>月 (省略なし)</value>
   </data>
   <data name="TokenYear" xml:space="preserve">
     <value>年</value>

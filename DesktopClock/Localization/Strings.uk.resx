@@ -556,7 +556,7 @@
     <value>Час</value>
   </data>
   <data name="TokenTime24" xml:space="preserve">
-    <value>Час (24 години)</value>
+    <value>Час (24-годинний)</value>
   </data>
   <data name="TokenSeconds" xml:space="preserve">
     <value>Секунди</value>
@@ -592,7 +592,7 @@
     <value>Завтра вранці</value>
   </data>
   <data name="TargetFridayAfternoon" xml:space="preserve">
-    <value>Вечір п'ятниці</value>
+    <value>Вечір п’ятниці</value>
   </data>
   <data name="TargetNewYear" xml:space="preserve">
     <value>Новий рік</value>

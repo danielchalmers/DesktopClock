@@ -164,7 +164,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Scadenza del conto alla rovescia</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Imposta la data e l'ora a cui termina il conto alla rovescia. Cancella il valore per disattivare la modalità conto alla rovescia.</value>
+    <value>Imposta la data e l'ora in cui termina il conto alla rovescia. Cancella il valore per disattivare la modalità conto alla rovescia.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Formato conto alla rovescia</value>
@@ -200,7 +200,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Mantieni l'orologio sopra le altre finestre.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
-    <value>Clic passanti</value>
+    <value>Ignora i clic</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
     <value>Lascia passare i clic attraverso l'orologio alle finestre sottostanti.</value>
@@ -248,7 +248,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Sistema</value>
   </data>
   <data name="ThemeAccent" xml:space="preserve">
-    <value>Accento</value>
+    <value>Colore principale</value>
   </data>
   <data name="ThemeSmoke" xml:space="preserve">
     <value>Fumo</value>

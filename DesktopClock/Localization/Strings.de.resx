@@ -149,7 +149,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Uhrformat</value>
   </data>
   <data name="ClockFormatDescription" xml:space="preserve">
-    <value>Legt fest, wie der Text der Uhr formatiert wird. Zeitcodes in geschweifte Klammern {} setzen.</value>
+    <value>Festlegen, wie der Text der Uhr formatiert wird. Zeitcodes in geschweifte Klammern {} setzen.</value>
   </data>
   <data name="TimeZone" xml:space="preserve">
     <value>Zeitzone</value>
@@ -170,7 +170,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Countdown-Format</value>
   </data>
   <data name="CountdownFormatDescription" xml:space="preserve">
-    <value>Legt fest, wie der Countdown formatiert wird. Leer lassen, um die Standardanzeige zu verwenden.</value>
+    <value>Festlegen, wie der Countdown formatiert wird. Leer lassen, um die Standardanzeige zu verwenden.</value>
   </data>
   <data name="SectionWindow" xml:space="preserve">
     <value>Fenster</value>
@@ -487,7 +487,7 @@ Fortfahren?</value>
     <value>Uhrzeit</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Uhrzeit, 24 Stunden</value>
+    <value>Uhrzeit, 24-Stunden-Format</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Uhrzeit mit Sekunden</value>
@@ -556,7 +556,7 @@ Fortfahren?</value>
     <value>Uhrzeit</value>
   </data>
   <data name="TokenTime24" xml:space="preserve">
-    <value>Uhrzeit (24 Stunden)</value>
+    <value>Uhrzeit (24 h)</value>
   </data>
   <data name="TokenSeconds" xml:space="preserve">
     <value>Sekunden</value>

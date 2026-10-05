@@ -227,7 +227,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Rechts uitlijnen</value>
   </data>
   <data name="AlignRightDescription" xml:space="preserve">
-    <value>De rechterrand vast houden wanneer de tekstlengte verandert.</value>
+    <value>De rechterrand op dezelfde plaats houden wanneer de tekstlengte verandert.</value>
   </data>
   <data name="PixelShifting" xml:space="preserve">
     <value>Pixelverschuiving</value>

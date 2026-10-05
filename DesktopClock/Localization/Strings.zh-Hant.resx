@@ -595,7 +595,7 @@
     <value>週五下午</value>
   </data>
   <data name="TargetNewYear" xml:space="preserve">
-    <value>新年</value>
+    <value>元旦</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>沒有目標。時鐘會顯示目前時間。</value>
@@ -616,21 +616,21 @@
     <value>昨天</value>
   </data>
   <data name="RelativeSeconds" xml:space="preserve">
-    <value>{0}秒</value>
+    <value>{0} 秒</value>
   </data>
   <data name="RelativeMinutes" xml:space="preserve">
-    <value>{0}分鐘</value>
+    <value>{0} 分鐘</value>
   </data>
   <data name="RelativeHours" xml:space="preserve">
-    <value>{0}小時</value>
+    <value>{0} 小時</value>
   </data>
   <data name="RelativeDays" xml:space="preserve">
-    <value>{0}天</value>
+    <value>{0} 天</value>
   </data>
   <data name="RelativeMonths" xml:space="preserve">
-    <value>{0}個月</value>
+    <value>{0} 個月</value>
   </data>
   <data name="RelativeYears" xml:space="preserve">
-    <value>{0}年</value>
+    <value>{0} 年</value>
   </data>
 </root>

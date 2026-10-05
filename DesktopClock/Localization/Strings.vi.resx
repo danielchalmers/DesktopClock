@@ -209,13 +209,13 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Ẩn khi toàn màn hình</value>
   </data>
   <data name="HideWhenFullscreenDescription" xml:space="preserve">
-    <value>Ẩn đồng hồ khi một ứng dụng toàn màn hình đang hoạt động trên cùng màn hình.</value>
+    <value>Ẩn đồng hồ khi một ứng dụng toàn màn hình đang hoạt động trên cùng một màn hình.</value>
   </data>
   <data name="StartHidden" xml:space="preserve">
     <value>Khởi động ẩn</value>
   </data>
   <data name="StartHiddenDescription" xml:space="preserve">
-    <value>Khởi động mà không hiện đồng hồ. Dùng biểu tượng trên khay để hiện lại.</value>
+    <value>Khởi động mà không hiện đồng hồ. Dùng biểu tượng trên khay hệ thống để hiện lại.</value>
   </data>
   <data name="AllowDragging" xml:space="preserve">
     <value>Cho phép kéo</value>
@@ -431,7 +431,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Chặn trang web theo lịch (Chrome/Edge)</value>
   </data>
   <data name="MoreFromDeveloper" xml:space="preserve">
-    <value>Thêm từ nhà phát triển DesktopClock</value>
+    <value>Xem thêm từ nhà phát triển DesktopClock</value>
   </data>
   <data name="SectionCredits" xml:space="preserve">
     <value>Ghi công</value>
@@ -487,7 +487,7 @@ Tiếp tục?</value>
     <value>Giờ</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Giờ, 24 giờ</value>
+    <value>Giờ dạng 24 giờ</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Giờ kèm giây</value>

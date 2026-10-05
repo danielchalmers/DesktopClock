@@ -595,7 +595,7 @@ Devam edilsin mi?</value>
     <value>Cuma öğleden sonra</value>
   </data>
   <data name="TargetNewYear" xml:space="preserve">
-    <value>Yeni yıl</value>
+    <value>Yılbaşı</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Hedef yok. Saat, geçerli saati gösterir.</value>

@@ -83,7 +83,7 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
     <value>Configuración de DesktopClock</value>
   </data>
   <data name="NavDisplay" xml:space="preserve">
-    <value>_Pantalla</value>
+    <value>Vi_sualización</value>
   </data>
   <data name="NavCountdown" xml:space="preserve">
     <value>_Cuenta regresiva</value>
@@ -143,7 +143,7 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
     <value>Vista previa</value>
   </data>
   <data name="SectionDisplay" xml:space="preserve">
-    <value>Pantalla</value>
+    <value>Visualización</value>
   </data>
   <data name="ClockFormat" xml:space="preserve">
     <value>Formato del reloj</value>
@@ -242,7 +242,7 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
     <value>Elige un aspecto inicial para el reloj. Todos los detalles se pueden ajustar en las secciones siguientes.</value>
   </data>
   <data name="ThemePresetTooltip" xml:space="preserve">
-    <value>Establece la fuente, los colores, la opacidad y las esquinas. Ajusta más en Tipografía y Apariencia.</value>
+    <value>Establece la fuente, los colores, la opacidad y las esquinas. Puedes ajustar más detalles en Tipografía y Apariencia.</value>
   </data>
   <data name="ThemeSystem" xml:space="preserve">
     <value>Sistema</value>
@@ -263,7 +263,7 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
     <value>Papel</value>
   </data>
   <data name="ThemeMinimal" xml:space="preserve">
-    <value>Mínimo</value>
+    <value>Minimalista</value>
   </data>
   <data name="ThemeChalk" xml:space="preserve">
     <value>Tiza</value>
@@ -281,7 +281,7 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
     <value>Estilo de fuente</value>
   </data>
   <data name="FontStyleDescription" xml:space="preserve">
-    <value>Elige texto normal, cursiva u oblicuo.</value>
+    <value>Elige texto normal, en cursiva u oblicuo.</value>
   </data>
   <data name="FontWeight" xml:space="preserve">
     <value>Grosor de fuente</value>
@@ -478,7 +478,7 @@ Si la versión oficial también falla, notifícalo en ese vínculo e incluye est
     <value>Insertar:</value>
   </data>
   <data name="InsertTokenTooltip" xml:space="preserve">
-    <value>Insertar {0} en el cursor</value>
+    <value>Insertar {0} en la posición del cursor</value>
   </data>
   <data name="AutomaticTooltip" xml:space="preserve">
     <value>(automático)</value>

@@ -233,7 +233,7 @@
     <value>像素偏移</value>
   </data>
   <data name="PixelShiftingDescription" xml:space="preserve">
-    <value>轻微移动时钟，帮助降低屏幕烧屏的风险。</value>
+    <value>轻微移动时钟，帮助降低烧屏的风险。</value>
   </data>
   <data name="SectionThemePresets" xml:space="preserve">
     <value>主题预设</value>
@@ -520,7 +520,7 @@
     <value>天和小时</value>
   </data>
   <data name="CountdownPresetFull" xml:space="preserve">
-    <value>完整明细</value>
+    <value>完整显示</value>
   </data>
   <data name="CountdownPresetDigital" xml:space="preserve">
     <value>数字</value>
@@ -595,7 +595,7 @@
     <value>周五下午</value>
   </data>
   <data name="TargetNewYear" xml:space="preserve">
-    <value>新年</value>
+    <value>元旦</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>无目标。时钟显示当前时间。</value>
