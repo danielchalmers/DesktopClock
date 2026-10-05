@@ -24,7 +24,7 @@ public enum FormatEditorMode
 public partial class FormatEditor : UserControl
 {
     // Presets cover the scenarios users most commonly ask for; the raw box stays the escape hatch.
-    private static readonly IReadOnlyList<(string Name, string Format)> ClockPresets = FormatPresets.ForClock(CultureInfo.CurrentCulture.DateTimeFormat);
+    private static readonly IReadOnlyList<(string Name, string Format)> ClockPresets = FormatPresets.ForClock(CultureInfo.CurrentCulture);
 
     private static readonly (string Name, string Format)[] CountdownPresets =
     {
