@@ -66,6 +66,7 @@ jobs:
         with:
           tag: "v${{ inputs.version }}"
           artifacts: "release-artifacts/*.zip,release-artifacts/*.msi"
+          artifactErrorsFailBuild: true
           generateReleaseNotes: true
           prerelease: ${{ contains(inputs.version, '-') }}
           allowUpdates: ${{ inputs.updateRelease }}

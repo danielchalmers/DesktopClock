@@ -14,6 +14,9 @@
     <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
     <Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />
 
+    <!--Skips the System Restore point, which can hold a double-click install at "Please wait" for most of a minute and protects nothing in a per-user app folder-->
+    <Property Id="MSIFASTINSTALL" Value="1" />
+
     <Media Id="1" Cabinet="App.cab" EmbedCab="yes" />
 
     <Feature Id="ProductFeature" Title="$(var.Name)" Level="1">
