@@ -440,11 +440,11 @@ public partial class SettingsWindowViewModel : ObservableObject
             yield return fontFamily.Source;
         }
 
-        // Get fonts from System.Drawing.
+        // Get fonts from System.Drawing, which also finds fonts installed for the current user. Use the English name like WPF does, otherwise East Asian fonts show up twice on Chinese, Japanese, and Korean Windows (Microsoft YaHei and 微软雅黑).
         using var installedFontCollection = new InstalledFontCollection();
         foreach (var fontFamily in installedFontCollection.Families)
         {
-            yield return fontFamily.Name;
+            yield return fontFamily.GetName(1033);
         }
     }
 }
