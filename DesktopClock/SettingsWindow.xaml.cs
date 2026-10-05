@@ -383,33 +383,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     public IList<TimeZoneInfo> TimeZones => _systemLists.Value.Result.TimeZones;
 
     /// <summary>
-    /// Sets the format string in settings.
-    /// </summary>
-    [RelayCommand]
-    public void SetFormat(DateFormatExample value)
-    {
-        Settings.Default.Format = value.Format;
-    }
-
-    /// <summary>
-    /// Disables countdown mode by resetting the date to default.
-    /// </summary>
-    [RelayCommand]
-    public void ResetCountdown()
-    {
-        Settings.CountdownTo = default;
-    }
-
-    /// <summary>
-    /// Resets the countdown format to the default (dynamic) format.
-    /// </summary>
-    [RelayCommand]
-    public void ResetCountdownFormat()
-    {
-        Settings.CountdownFormat = string.Empty;
-    }
-
-    /// <summary>
     /// Clears the chime sound file path.
     /// </summary>
     [RelayCommand]
