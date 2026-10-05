@@ -43,7 +43,7 @@
     <value>Impossibile aggiornare gli Appunti. Riprova.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Suono di avviso non disponibile</value>
+    <value>Suono di allarme non disponibile</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>Impossibile riprodurre il file WAV.</value>
@@ -62,7 +62,7 @@
 
 Sposta l'app in una cartella che non richiede diritti di amministratore.
 
-Assicurati di averla scaricata dalla fonte ufficiale: https://github.com/danielchalmers/DesktopClock. Se l'hai pagata, chiedi un rimborso.
+La versione ufficiale è gratuita su https://github.com/danielchalmers/DesktopClock. Se l'hai ottenuta altrove, potrebbe essere una copia rubata. Se l'hai pagata, chiedi un rimborso.
 
 Se il problema persiste, segnalalo tramite quel collegamento.</value>
   </data>
@@ -134,7 +134,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Altre informazioni</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Sfoglia...</value>
+    <value>Sfoglia…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reimposta</value>
@@ -164,7 +164,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Scadenza del conto alla rovescia</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Imposta la data e l'ora in cui termina il conto alla rovescia. Cancella il valore per disattivare la modalità conto alla rovescia.</value>
+    <value>Imposta una data e un'ora per il conto alla rovescia. Seleziona Reimposta per mostrare invece l'ora corrente.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Formato conto alla rovescia</value>
@@ -338,7 +338,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Spessore contorno</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Regola lo spessore del contorno quando lo sfondo è disattivato.</value>
+    <value>Regola lo spessore del contorno quando Sfondo pieno è disattivato.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Immagine di sfondo</value>
@@ -487,13 +487,13 @@ Continuare?</value>
     <value>Ora</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Ora, 24 ore</value>
+    <value>Ora (24 ore)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Ora con secondi</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>Giorno e ora</value>
+    <value>Giorno della settimana e ora</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Data e ora</value>
@@ -526,7 +526,7 @@ Continuare?</value>
     <value>Digitale</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>{%d} giorni rimanenti</value>
+    <value>Giorni rimanenti: {%d}</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d} g {%h} h</value>
@@ -599,6 +599,9 @@ Continuare?</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Nessuna scadenza. L'orologio mostra l'ora attuale.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>adesso</value>

@@ -14,11 +14,11 @@
   </resheader>
   <data name="MenuCopy" xml:space="preserve">
     <value>_Copy</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="MenuHide" xml:space="preserve">
     <value>_Hide</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="MenuSize" xml:space="preserve">
     <value>Size:</value>
@@ -26,23 +26,23 @@
   </data>
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>Always on _top</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Settings…</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="MenuCheckForUpdates" xml:space="preserve">
     <value>Check for _updates</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="MenuGiveFeedback" xml:space="preserve">
     <value>Give _feedback</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="MenuExit" xml:space="preserve">
     <value>E_xit</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="CopyFailedTitle" xml:space="preserve">
     <value>Copy failed</value>
@@ -51,7 +51,7 @@
     <value>Couldn't update the clipboard. Try again.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Alert sound unavailable</value>
+    <value>Alarm sound unavailable</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>The WAV file couldn't be played.</value>
@@ -70,10 +70,10 @@
 
 Move the app to a folder that doesn't need admin rights.
 
-Make sure you downloaded it from the official source: https://github.com/danielchalmers/DesktopClock. If you paid for it, ask for a refund.
+The official version is free at https://github.com/danielchalmers/DesktopClock. If you got it anywhere else, it may be a stolen copy. If you paid for it, ask for a refund.
 
 If the problem persists, report it at that link.</value>
-    <comment>Shown when a copy of the app can't save. Must keep all three points: move the app, it may be an unofficial copy so download from the official link, and ask for a refund if you paid.</comment>
+    <comment>Shown at startup when the app can't save its settings. Keep every point: move the app to another folder; the official version is free at the link and other copies may be stolen; ask for a refund if you paid; report it at that link if it continues.</comment>
   </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Bad format</value>
@@ -98,61 +98,61 @@ If the problem persists, report it at that link.</value>
   </data>
   <data name="NavDisplay" xml:space="preserve">
     <value>_Display</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavCountdown" xml:space="preserve">
     <value>_Countdown</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavWindow" xml:space="preserve">
     <value>_Window</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavThemePresets" xml:space="preserve">
     <value>T_heme presets</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavTypography" xml:space="preserve">
     <value>_Typography</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavAppearance" xml:space="preserve">
     <value>_Appearance</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavAlerts" xml:space="preserve">
     <value>A_lerts</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavShortcuts" xml:space="preserve">
     <value>_Shortcuts</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavDiscoverMore" xml:space="preserve">
     <value>Discover _more</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NavCredits" xml:space="preserve">
     <value>Cr_edits</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="SettingsFolder" xml:space="preserve">
     <value>Settings _folder</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="SettingsFolderDescription" xml:space="preserve">
     <value>Open the settings folder</value>
   </data>
   <data name="SettingsFile" xml:space="preserve">
     <value>Settings f_ile</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="SettingsFileDescription" xml:space="preserve">
     <value>Open the JSON file</value>
   </data>
   <data name="NewClock" xml:space="preserve">
     <value>_New clock</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter. CJK languages append it as (_X) using a Latin letter.</comment>
+    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
   <data name="NewClockDescription" xml:space="preserve">
     <value>Start another clock</value>
@@ -161,7 +161,7 @@ If the problem persists, report it at that link.</value>
     <value>Learn more</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Browse...</value>
+    <value>Browse…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
@@ -191,7 +191,8 @@ If the problem persists, report it at that link.</value>
     <value>Countdown target</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Set a date and time to count down to. Clear the value to disable countdown mode.</value>
+    <value>Set a date and time to count down to. Select Reset to show the current time instead.</value>
+    <comment>Reset is the button next to the date box; use the same word as the Reset string.</comment>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Countdown format</value>
@@ -234,6 +235,7 @@ If the problem persists, report it at that link.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Hide when fullscreen</value>
+    <comment>Checkbox: hide the clock while another app is fullscreen. The clock itself is never fullscreen.</comment>
   </data>
   <data name="HideWhenFullscreenDescription" xml:space="preserve">
     <value>Hide the clock when a fullscreen app is active on the same monitor.</value>
@@ -334,6 +336,7 @@ If the problem persists, report it at that link.</value>
   </data>
   <data name="TextColorDescription" xml:space="preserve">
     <value>Change the text color using a hex value, a color name, or the picker.</value>
+    <comment>Color names must be typed in English (for example Red), so keep "color name" generic and don't give translated examples.</comment>
   </data>
   <data name="TextOpacity" xml:space="preserve">
     <value>Text opacity</value>
@@ -376,7 +379,8 @@ If the problem persists, report it at that link.</value>
     <value>Outline thickness</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Adjust the outline thickness when the background is disabled.</value>
+    <value>Adjust the outline thickness when Solid background is off.</value>
+    <comment>"Solid background" is the checkbox above; use the same words as the SolidBackground string.</comment>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Background image</value>
@@ -499,7 +503,7 @@ If the problem persists, report it at that link.</value>
     <comment>File type name in the open file dialog.</comment>
   </data>
   <data name="SettingsFileMissing" xml:space="preserve">
-    <value>Settings file doesn't exist and couldn't be created.</value>
+    <value>The settings file doesn't exist and couldn't be created.</value>
   </data>
   <data name="OpenSettingsFileFailed" xml:space="preserve">
     <value>Couldn't open the settings file in Notepad.
@@ -540,18 +544,21 @@ Continue?</value>
   </data>
   <data name="AutomaticTooltip" xml:space="preserve">
     <value>(automatic)</value>
+    <comment>Tooltip on the Automatic countdown preset button. Other presets show their format code here; Automatic has none because it leaves the format blank and shows text like "in 3 days".</comment>
   </data>
   <data name="ClockPresetTime" xml:space="preserve">
     <value>Time</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Time, 24-hour</value>
+    <value>Time (24-hour)</value>
+    <comment>Use the same words as TokenTime24.</comment>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Time with seconds</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>Day and time</value>
+    <value>Weekday and time</value>
+    <comment>Preset that shows the abbreviated weekday (not the day of the month) and the time.</comment>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Date and time</value>
@@ -568,6 +575,7 @@ Continue?</value>
   </data>
   <data name="ClockPresetIsoWeek" xml:space="preserve">
     <value>ISO week</value>
+    <comment>Format like 2026-W11: the ISO week-numbering year and week number. Keep ISO.</comment>
   </data>
   <data name="CountdownPresetAutomatic" xml:space="preserve">
     <value>Automatic</value>
@@ -585,8 +593,8 @@ Continue?</value>
     <value>Digital</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>{%d} days left</value>
-    <comment>Countdown format. Keep every {...} token exactly as is; translate only the text outside the braces.</comment>
+    <value>Days left: {%d}</value>
+    <comment>Countdown format shown on the clock. Keep every {...} token exactly as is; translate only the text outside the braces. {%d} is a number of days that can be any value, including 1, so write a label followed by the number.</comment>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d}d {%h}h</value>
@@ -604,6 +612,7 @@ Continue?</value>
   </data>
   <data name="TokenDay" xml:space="preserve">
     <value>Day</value>
+    <comment>Small button that inserts the day of the month (01 to 31). Weekday is a separate button.</comment>
   </data>
   <data name="TokenMonth" xml:space="preserve">
     <value>Month</value>
@@ -652,6 +661,7 @@ Continue?</value>
   </data>
   <data name="TargetTomorrowMorning" xml:space="preserve">
     <value>Tomorrow morning</value>
+    <comment>Tomorrow at 9 AM.</comment>
   </data>
   <data name="TargetFridayAfternoon" xml:space="preserve">
     <value>Friday afternoon</value>
@@ -663,6 +673,10 @@ Continue?</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>No target. The clock shows the current time.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
+    <comment>Countdown preview line under the target box: {0} is the full target date and time, {1} is the relative time such as "in 3 days". Use this language's usual parentheses.</comment>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>now</value>
@@ -678,32 +692,34 @@ Continue?</value>
   </data>
   <data name="RelativeTomorrow" xml:space="preserve">
     <value>tomorrow</value>
+    <comment>Countdown text used on its own (not inside "in {0}") when the target is the next calendar day. Same style as the other relative time strings.</comment>
   </data>
   <data name="RelativeYesterday" xml:space="preserve">
     <value>yesterday</value>
+    <comment>Countdown text used on its own (not inside "{0} ago") when the target was the previous calendar day. Same style as the other relative time strings.</comment>
   </data>
   <data name="RelativeSeconds" xml:space="preserve">
     <value>a second|{0} seconds</value>
-    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+    <comment>Plural forms separated by |. Each form goes into both RelativeFuture ("in {0}") and RelativePast ("{0} ago"), so it must read correctly in both. Most languages use one|other, where one is only used for exactly 1. Polish, Russian, and Ukrainian use one|few|many; in Russian and Ukrainian "one" also covers 21, 31, 101 and so on, so every form needs {0}. Chinese, Japanese, Korean, Vietnamese, Indonesian, and Turkish use a single form with {0}. Keep {0} in every form that covers more than one number.</comment>
   </data>
   <data name="RelativeMinutes" xml:space="preserve">
     <value>a minute|{0} minutes</value>
-    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+    <comment>Plural forms separated by |. Each form goes into both RelativeFuture ("in {0}") and RelativePast ("{0} ago"), so it must read correctly in both. Most languages use one|other, where one is only used for exactly 1. Polish, Russian, and Ukrainian use one|few|many; in Russian and Ukrainian "one" also covers 21, 31, 101 and so on, so every form needs {0}. Chinese, Japanese, Korean, Vietnamese, Indonesian, and Turkish use a single form with {0}. Keep {0} in every form that covers more than one number.</comment>
   </data>
   <data name="RelativeHours" xml:space="preserve">
     <value>an hour|{0} hours</value>
-    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+    <comment>Plural forms separated by |. Each form goes into both RelativeFuture ("in {0}") and RelativePast ("{0} ago"), so it must read correctly in both. Most languages use one|other, where one is only used for exactly 1. Polish, Russian, and Ukrainian use one|few|many; in Russian and Ukrainian "one" also covers 21, 31, 101 and so on, so every form needs {0}. Chinese, Japanese, Korean, Vietnamese, Indonesian, and Turkish use a single form with {0}. Keep {0} in every form that covers more than one number.</comment>
   </data>
   <data name="RelativeDays" xml:space="preserve">
     <value>a day|{0} days</value>
-    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+    <comment>Plural forms separated by |. Each form goes into both RelativeFuture ("in {0}") and RelativePast ("{0} ago"), so it must read correctly in both. Most languages use one|other, where one is only used for exactly 1. Polish, Russian, and Ukrainian use one|few|many; in Russian and Ukrainian "one" also covers 21, 31, 101 and so on, so every form needs {0}. Chinese, Japanese, Korean, Vietnamese, Indonesian, and Turkish use a single form with {0}. Keep {0} in every form that covers more than one number.</comment>
   </data>
   <data name="RelativeMonths" xml:space="preserve">
     <value>a month|{0} months</value>
-    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+    <comment>Plural forms separated by |. Each form goes into both RelativeFuture ("in {0}") and RelativePast ("{0} ago"), so it must read correctly in both. Most languages use one|other, where one is only used for exactly 1. Polish, Russian, and Ukrainian use one|few|many; in Russian and Ukrainian "one" also covers 21, 31, 101 and so on, so every form needs {0}. Chinese, Japanese, Korean, Vietnamese, Indonesian, and Turkish use a single form with {0}. Keep {0} in every form that covers more than one number.</comment>
   </data>
   <data name="RelativeYears" xml:space="preserve">
     <value>a year|{0} years</value>
-    <comment>Plural forms separated by |. English-style languages use one|other; Polish, Russian, and Ukrainian use one|few|many; languages without plural forms use a single form. Keep {0} in every form that covers more than one number.</comment>
+    <comment>Plural forms separated by |. Each form goes into both RelativeFuture ("in {0}") and RelativePast ("{0} ago"), so it must read correctly in both. Most languages use one|other, where one is only used for exactly 1. Polish, Russian, and Ukrainian use one|few|many; in Russian and Ukrainian "one" also covers 21, 31, 101 and so on, so every form needs {0}. Chinese, Japanese, Korean, Vietnamese, Indonesian, and Turkish use a single form with {0}. Keep {0} in every form that covers more than one number.</comment>
   </data>
 </root>

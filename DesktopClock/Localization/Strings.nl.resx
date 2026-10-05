@@ -62,7 +62,7 @@
 
 Verplaats de app naar een map waarvoor geen beheerdersrechten nodig zijn.
 
-Controleer of je de app hebt gedownload van de officiële bron: https://github.com/danielchalmers/DesktopClock. Als je ervoor hebt betaald, vraag dan je geld terug.
+De officiële versie is gratis via https://github.com/danielchalmers/DesktopClock. Als je de app ergens anders hebt gekregen, is het mogelijk een gestolen kopie. Als je ervoor hebt betaald, vraag dan je geld terug.
 
 Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
   </data>
@@ -134,7 +134,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Meer informatie</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Bladeren...</value>
+    <value>Bladeren…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Opnieuw instellen</value>
@@ -164,7 +164,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Aftellen tot</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Stel een datum en tijd in om naar af te tellen. Wis de waarde om de aftelmodus uit te schakelen.</value>
+    <value>Stel een datum en tijd in om naar af te tellen. Selecteer Opnieuw instellen om in plaats daarvan de huidige tijd weer te geven.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Aftelnotatie</value>
@@ -338,7 +338,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Contourdikte</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Pas de contourdikte aan wanneer de achtergrond is uitgeschakeld.</value>
+    <value>Pas de contourdikte aan wanneer Effen achtergrond is uitgeschakeld.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Achtergrondafbeelding</value>
@@ -487,13 +487,13 @@ Doorgaan?</value>
     <value>Tijd</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Tijd, 24-uurs</value>
+    <value>Tijd (24-uurs)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Tijd met seconden</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>Dag en tijd</value>
+    <value>Weekdag en tijd</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Datum en tijd</value>
@@ -526,7 +526,7 @@ Doorgaan?</value>
     <value>Digitaal</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>Nog {%d} dagen</value>
+    <value>Resterende dagen: {%d}</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d} d {%h} u</value>
@@ -599,6 +599,9 @@ Doorgaan?</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Geen moment ingesteld. De klok toont de huidige tijd.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>nu</value>

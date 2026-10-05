@@ -43,7 +43,7 @@
     <value>Impossible de mettre à jour le Presse-papiers. Réessayez.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Son d'alerte indisponible</value>
+    <value>Son d'alarme indisponible</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>Impossible de lire le fichier WAV.</value>
@@ -62,7 +62,7 @@
 
 Déplacez l'application vers un dossier qui ne nécessite pas de droits d'administrateur.
 
-Vérifiez que vous l'avez téléchargée depuis la source officielle : https://github.com/danielchalmers/DesktopClock. Si vous l'avez payée, demandez un remboursement.
+La version officielle est gratuite sur https://github.com/danielchalmers/DesktopClock. Si vous l'avez obtenue ailleurs, il s'agit peut-être d'une copie volée. Si vous l'avez payée, demandez un remboursement.
 
 Si le problème persiste, signalez-le via ce lien.</value>
   </data>
@@ -134,7 +134,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>En savoir plus</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Parcourir...</value>
+    <value>Parcourir…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Réinitialiser</value>
@@ -164,7 +164,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Cible du compte à rebours</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Définissez la date et l'heure de fin du compte à rebours. Effacez la valeur pour désactiver le mode compte à rebours.</value>
+    <value>Définissez la date et l'heure de fin du compte à rebours. Sélectionnez Réinitialiser pour afficher l'heure actuelle à la place.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Format du compte à rebours</value>
@@ -338,7 +338,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Épaisseur du contour</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Réglez l'épaisseur du contour lorsque l'arrière-plan est désactivé.</value>
+    <value>Réglez l'épaisseur du contour lorsque l'option Arrière-plan uni est désactivée.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Image d'arrière-plan</value>
@@ -487,13 +487,13 @@ Continuer ?</value>
     <value>Heure</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Heure, format 24 h</value>
+    <value>Heure (24 h)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Heure avec secondes</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>Jour et heure</value>
+    <value>Jour de la semaine et heure</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Date et heure</value>
@@ -526,7 +526,7 @@ Continuer ?</value>
     <value>Numérique</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>{%d} jours restants</value>
+    <value>Jours restants : {%d}</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d} j {%h} h</value>
@@ -599,6 +599,9 @@ Continuer ?</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Aucune cible. L'horloge affiche l'heure actuelle.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>maintenant</value>

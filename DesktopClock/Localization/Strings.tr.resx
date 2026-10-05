@@ -43,7 +43,7 @@
     <value>Pano güncelleştirilemedi. Yeniden deneyin.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Uyarı sesi kullanılamıyor</value>
+    <value>Alarm sesi kullanılamıyor</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>WAV dosyası çalınamadı.</value>
@@ -62,7 +62,7 @@
 
 Uygulamayı yönetici hakları gerektirmeyen bir klasöre taşıyın.
 
-Uygulamayı resmi kaynaktan indirdiğinizden emin olun: https://github.com/danielchalmers/DesktopClock. Uygulama için ödeme yaptıysanız para iadesi isteyin.
+Resmi sürüm ücretsizdir: https://github.com/danielchalmers/DesktopClock. Uygulamayı başka bir yerden edindiyseniz çalıntı bir kopya olabilir. Uygulama için ödeme yaptıysanız para iadesi isteyin.
 
 Sorun devam ederse bu bağlantıdan bildirin.</value>
   </data>
@@ -134,7 +134,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Daha fazla bilgi</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Gözat...</value>
+    <value>Gözat…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Sıfırla</value>
@@ -164,7 +164,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Geri sayım hedefi</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Geri sayılacak tarihi ve saati ayarlayın. Geri sayım modunu kapatmak için değeri temizleyin.</value>
+    <value>Geri sayılacak tarihi ve saati ayarlayın. Bunun yerine geçerli saati göstermek için Sıfırla'yı seçin.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Geri sayım biçimi</value>
@@ -338,7 +338,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Kontur kalınlığı</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Arka plan kapalıyken kontur kalınlığını ayarlayın.</value>
+    <value>Düz arka plan kapalıyken kontur kalınlığını ayarlayın.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Arka plan resmi</value>
@@ -487,13 +487,13 @@ Devam edilsin mi?</value>
     <value>Saat</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Saat, 24 saatlik</value>
+    <value>Saat (24 saatlik)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Saniyeli saat</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>Gün ve saat</value>
+    <value>Haftanın günü ve saat</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Tarih ve saat</value>
@@ -526,7 +526,7 @@ Devam edilsin mi?</value>
     <value>Dijital</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>{%d} gün kaldı</value>
+    <value>Kalan gün: {%d}</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d} g {%h} sa</value>
@@ -599,6 +599,9 @@ Devam edilsin mi?</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Hedef yok. Saat, geçerli saati gösterir.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>şimdi</value>

@@ -43,7 +43,7 @@
     <value>Không thể cập nhật bảng tạm. Hãy thử lại.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Âm thanh cảnh báo không khả dụng</value>
+    <value>Âm báo thức không khả dụng</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>Không thể phát tệp WAV.</value>
@@ -62,7 +62,7 @@
 
 Hãy di chuyển ứng dụng đến thư mục không cần quyền quản trị.
 
-Hãy đảm bảo bạn đã tải ứng dụng từ nguồn chính thức: https://github.com/danielchalmers/DesktopClock. Nếu bạn đã trả tiền cho ứng dụng, hãy yêu cầu hoàn tiền.
+Phiên bản chính thức được cung cấp miễn phí tại https://github.com/danielchalmers/DesktopClock. Nếu bạn tải ứng dụng từ nơi khác, đó có thể là bản sao bị đánh cắp. Nếu bạn đã trả tiền cho ứng dụng, hãy yêu cầu hoàn tiền.
 
 Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</value>
   </data>
@@ -134,7 +134,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Tìm hiểu thêm</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Duyệt...</value>
+    <value>Duyệt…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Đặt lại</value>
@@ -164,7 +164,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Mốc đếm ngược</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Đặt ngày và giờ để đếm ngược đến. Xóa giá trị để tắt chế độ đếm ngược.</value>
+    <value>Đặt ngày và giờ để đếm ngược đến. Chọn Đặt lại để hiển thị giờ hiện tại.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Định dạng đếm ngược</value>
@@ -338,7 +338,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Độ dày viền</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Điều chỉnh độ dày viền khi nền bị tắt.</value>
+    <value>Điều chỉnh độ dày viền khi tắt Nền đặc.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Ảnh nền</value>
@@ -487,7 +487,7 @@ Tiếp tục?</value>
     <value>Giờ</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Giờ dạng 24 giờ</value>
+    <value>Giờ (24 giờ)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Giờ kèm giây</value>
@@ -526,7 +526,7 @@ Tiếp tục?</value>
     <value>Kỹ thuật số</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>Còn {%d} ngày</value>
+    <value>Số ngày còn lại: {%d}</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d} ngày {%h} giờ</value>
@@ -599,6 +599,9 @@ Tiếp tục?</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Không có mốc. Đồng hồ hiển thị giờ hiện tại.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>bây giờ</value>

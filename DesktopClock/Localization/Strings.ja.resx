@@ -62,7 +62,7 @@
 
 管理者権限が不要なフォルダーにアプリを移動してください。
 
-公式の配布元 (https://github.com/danielchalmers/DesktopClock) からダウンロードしたか確認してください。料金を支払った場合は、返金を求めてください。
+公式版は https://github.com/danielchalmers/DesktopClock で無料で入手できます。それ以外の場所で入手した場合は、盗用されたコピーである可能性があります。料金を支払った場合は、返金を求めてください。
 
 問題が解決しない場合は、同じリンクから報告してください。</value>
   </data>
@@ -134,7 +134,7 @@
     <value>詳細情報</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>参照...</value>
+    <value>参照…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>リセット</value>
@@ -164,7 +164,7 @@
     <value>カウントダウンの目標</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>カウントダウンする日時を設定します。値をクリアするとカウントダウン モードが無効になります。</value>
+    <value>カウントダウンする日時を設定します。現在の時刻を表示するには、「リセット」を選択します。</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>カウントダウンの書式</value>
@@ -338,7 +338,7 @@
     <value>輪郭の太さ</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>背景が無効のときの輪郭の太さを調整します。</value>
+    <value>「単色の背景」がオフのときの輪郭の太さを調整します。</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>背景画像</value>
@@ -599,6 +599,9 @@
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>目標はありません。時計には現在の時刻が表示されます。</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0}（{1}）</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>今</value>

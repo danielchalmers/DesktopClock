@@ -43,7 +43,7 @@
     <value>Не вдалося оновити буфер обміну. Повторіть спробу.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Звуковий сигнал недоступний</value>
+    <value>Звук сигналу недоступний</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>Не вдалося відтворити WAV-файл.</value>
@@ -62,7 +62,7 @@
 
 Перемістіть програму в папку, для якої не потрібні права адміністратора.
 
-Переконайтеся, що ви завантажили її з офіційного джерела: https://github.com/danielchalmers/DesktopClock. Якщо ви заплатили за неї, попросіть повернути кошти.
+Офіційна версія безкоштовна: https://github.com/danielchalmers/DesktopClock. Якщо ви отримали її з іншого джерела, можливо, це викрадена копія. Якщо ви заплатили за неї, попросіть повернути кошти.
 
 Якщо проблема не зникне, повідомте про неї за цим посиланням.</value>
   </data>
@@ -134,7 +134,7 @@
     <value>Докладніше</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Огляд...</value>
+    <value>Огляд…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Скинути</value>
@@ -164,7 +164,7 @@
     <value>Ціль відліку</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Укажіть дату й час, до яких вести відлік. Очистіть поле, щоб вимкнути режим зворотного відліку.</value>
+    <value>Укажіть дату й час, до яких вести відлік. Натисніть «Скинути», щоб натомість показувати поточний час.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Формат відліку</value>
@@ -338,7 +338,7 @@
     <value>Товщина контуру</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Налаштуйте товщину контуру, коли фон вимкнено.</value>
+    <value>Налаштуйте товщину контуру, коли параметр «Суцільний фон» вимкнено.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Фонове зображення</value>
@@ -487,13 +487,13 @@
     <value>Час</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Час, 24-годинний формат</value>
+    <value>Час (24-годинний)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Час із секундами</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>День і час</value>
+    <value>День тижня й час</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Дата й час</value>
@@ -599,6 +599,9 @@
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Ціль не задано. Годинник показує поточний час.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>зараз</value>

@@ -43,7 +43,7 @@
     <value>Die Zwischenablage konnte nicht aktualisiert werden. Bitte erneut versuchen.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Signalton nicht verfügbar</value>
+    <value>Alarmton nicht verfügbar</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>Die WAV-Datei konnte nicht wiedergegeben werden.</value>
@@ -62,7 +62,7 @@
 
 Bitte die App in einen Ordner verschieben, für den keine Administratorrechte erforderlich sind.
 
-Bitte sicherstellen, dass die App aus der offiziellen Quelle stammt: https://github.com/danielchalmers/DesktopClock. Wer dafür bezahlt hat, sollte eine Rückerstattung verlangen.
+Die offizielle Version ist kostenlos unter https://github.com/danielchalmers/DesktopClock erhältlich. Stammt die App aus einer anderen Quelle, ist sie möglicherweise eine gestohlene Kopie. Wer dafür bezahlt hat, sollte eine Rückerstattung verlangen.
 
 Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   </data>
@@ -134,7 +134,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Weitere Informationen</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Durchsuchen...</value>
+    <value>Durchsuchen…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Zurücksetzen</value>
@@ -164,7 +164,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Countdown-Ziel</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Datum und Uhrzeit für den Countdown festlegen. Wert löschen, um den Countdown-Modus zu deaktivieren.</value>
+    <value>Datum und Uhrzeit für den Countdown festlegen. „Zurücksetzen“ auswählen, um stattdessen die aktuelle Uhrzeit anzuzeigen.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Countdown-Format</value>
@@ -338,7 +338,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Konturstärke</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Die Konturstärke bei deaktiviertem Hintergrund anpassen.</value>
+    <value>Die Konturstärke anpassen, wenn „Deckender Hintergrund“ deaktiviert ist.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Hintergrundbild</value>
@@ -487,13 +487,13 @@ Fortfahren?</value>
     <value>Uhrzeit</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Uhrzeit, 24-Stunden-Format</value>
+    <value>Uhrzeit (24 h)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Uhrzeit mit Sekunden</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>Tag und Uhrzeit</value>
+    <value>Wochentag und Uhrzeit</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Datum und Uhrzeit</value>
@@ -526,7 +526,7 @@ Fortfahren?</value>
     <value>Digital</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>Noch {%d} Tage</value>
+    <value>Verbleibende Tage: {%d}</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d} T. {%h} Std.</value>
@@ -599,6 +599,9 @@ Fortfahren?</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Kein Ziel. Die Uhr zeigt die aktuelle Uhrzeit an.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>jetzt</value>

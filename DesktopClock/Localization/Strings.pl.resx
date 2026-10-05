@@ -43,7 +43,7 @@
     <value>Nie można zaktualizować schowka. Spróbuj ponownie.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Dźwięk alertu niedostępny</value>
+    <value>Dźwięk alarmu niedostępny</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>Nie można odtworzyć pliku WAV.</value>
@@ -62,7 +62,7 @@
 
 Przenieś aplikację do folderu, który nie wymaga uprawnień administratora.
 
-Upewnij się, że aplikacja pochodzi z oficjalnego źródła: https://github.com/danielchalmers/DesktopClock. Jeśli za nią zapłacono, poproś o zwrot pieniędzy.
+Oficjalna wersja jest bezpłatna: https://github.com/danielchalmers/DesktopClock. Jeśli aplikacja pochodzi z innego źródła, może to być skradziona kopia. Jeśli za nią zapłacono, poproś o zwrot pieniędzy.
 
 Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
   </data>
@@ -134,7 +134,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Dowiedz się więcej</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Przeglądaj...</value>
+    <value>Przeglądaj…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Resetuj</value>
@@ -164,7 +164,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Cel odliczania</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Ustaw datę i godzinę, do której ma trwać odliczanie. Wyczyść wartość, aby wyłączyć tryb odliczania.</value>
+    <value>Ustaw datę i godzinę, do której ma trwać odliczanie. Wybierz przycisk Resetuj, aby zamiast tego wyświetlać bieżącą godzinę.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Format odliczania</value>
@@ -338,7 +338,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Grubość konturu</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Dostosuj grubość konturu, gdy tło jest wyłączone.</value>
+    <value>Dostosuj grubość konturu, gdy opcja Jednolite tło jest wyłączona.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Obraz tła</value>
@@ -487,13 +487,13 @@ Czy kontynuować?</value>
     <value>Godzina</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Godzina, format 24-godzinny</value>
+    <value>Godzina (24 h)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Godzina z sekundami</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>Dzień i godzina</value>
+    <value>Dzień tygodnia i godzina</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Data i godzina</value>
@@ -599,6 +599,9 @@ Czy kontynuować?</value>
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Brak celu. Zegar pokazuje bieżącą godzinę.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>teraz</value>

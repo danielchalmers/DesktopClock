@@ -43,7 +43,7 @@
     <value>No se pudo actualizar el portapapeles. Vuelve a intentarlo.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Sonido de alerta no disponible</value>
+    <value>Sonido de alarma no disponible</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>No se pudo reproducir el archivo WAV.</value>
@@ -62,7 +62,7 @@
 
 Mueve la aplicación a una carpeta que no requiera permisos de administrador.
 
-Asegúrate de haberla descargado de la fuente oficial: https://github.com/danielchalmers/DesktopClock. Si pagaste por ella, solicita un reembolso.
+La versión oficial es gratuita en https://github.com/danielchalmers/DesktopClock. Si la obtuviste en otro lugar, es posible que sea una copia robada. Si pagaste por ella, solicita un reembolso.
 
 Si el problema continúa, notifícalo en ese vínculo.</value>
   </data>
@@ -134,7 +134,7 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
     <value>Más información</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Examinar...</value>
+    <value>Examinar…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Restablecer</value>
@@ -164,7 +164,7 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
     <value>Objetivo de la cuenta regresiva</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Establece la fecha y hora hasta la que contar. Borra el valor para desactivar el modo de cuenta regresiva.</value>
+    <value>Establece la fecha y hora hasta la que contar. Selecciona Restablecer para mostrar la hora actual.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Formato de la cuenta regresiva</value>
@@ -338,7 +338,7 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
     <value>Grosor del contorno</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Ajusta el grosor del contorno cuando el fondo está desactivado.</value>
+    <value>Ajusta el grosor del contorno cuando Fondo sólido está desactivado.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Imagen de fondo</value>
@@ -487,13 +487,13 @@ Si la versión oficial también falla, notifícalo en ese vínculo e incluye est
     <value>Hora</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Hora, 24 horas</value>
+    <value>Hora (24 horas)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Hora con segundos</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>Día y hora</value>
+    <value>Día de la semana y hora</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Fecha y hora</value>
@@ -526,7 +526,7 @@ Si la versión oficial también falla, notifícalo en ese vínculo e incluye est
     <value>Digital</value>
   </data>
   <data name="CountdownFormatDaysLeft" xml:space="preserve">
-    <value>{%d} días restantes</value>
+    <value>Días restantes: {%d}</value>
   </data>
   <data name="CountdownFormatDaysHours" xml:space="preserve">
     <value>{%d} d {%h} h</value>
@@ -599,6 +599,9 @@ Si la versión oficial también falla, notifícalo en ese vínculo e incluye est
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Sin objetivo. El reloj muestra la hora actual.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>ahora</value>

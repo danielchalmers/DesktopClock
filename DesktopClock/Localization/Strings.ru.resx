@@ -43,7 +43,7 @@
     <value>Не удалось обновить буфер обмена. Повторите попытку.</value>
   </data>
   <data name="SoundFailedTitle" xml:space="preserve">
-    <value>Звуковой сигнал недоступен</value>
+    <value>Звук сигнала недоступен</value>
   </data>
   <data name="SoundFailedMessage" xml:space="preserve">
     <value>Не удалось воспроизвести WAV-файл.</value>
@@ -62,7 +62,7 @@
 
 Переместите приложение в папку, для которой не нужны права администратора.
 
-Убедитесь, что вы скачали его из официального источника: https://github.com/danielchalmers/DesktopClock. Если вы заплатили за него, запросите возврат средств.
+Официальная версия бесплатна: https://github.com/danielchalmers/DesktopClock. Если вы получили приложение из другого источника, возможно, это украденная копия. Если вы заплатили за него, запросите возврат средств.
 
 Если проблема не исчезнет, сообщите о ней по этой ссылке.</value>
   </data>
@@ -134,7 +134,7 @@
     <value>Подробнее</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Обзор...</value>
+    <value>Обзор…</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Сбросить</value>
@@ -164,7 +164,7 @@
     <value>Цель отсчета</value>
   </data>
   <data name="CountdownTargetDescription" xml:space="preserve">
-    <value>Укажите дату и время, до которых нужно вести отсчет. Очистите поле, чтобы отключить режим обратного отсчета.</value>
+    <value>Укажите дату и время, до которых нужно вести отсчет. Нажмите «Сбросить», чтобы вместо этого показывать текущее время.</value>
   </data>
   <data name="CountdownFormat" xml:space="preserve">
     <value>Формат отсчета</value>
@@ -338,7 +338,7 @@
     <value>Толщина контура</value>
   </data>
   <data name="OutlineThicknessDescription" xml:space="preserve">
-    <value>Настройте толщину контура, когда фон отключен.</value>
+    <value>Настройте толщину контура, когда параметр «Сплошной фон» отключен.</value>
   </data>
   <data name="BackgroundImage" xml:space="preserve">
     <value>Фоновое изображение</value>
@@ -487,13 +487,13 @@
     <value>Время</value>
   </data>
   <data name="ClockPresetTime24" xml:space="preserve">
-    <value>Время, 24-часовой формат</value>
+    <value>Время (24 часа)</value>
   </data>
   <data name="ClockPresetTimeSeconds" xml:space="preserve">
     <value>Время с секундами</value>
   </data>
   <data name="ClockPresetDayTime" xml:space="preserve">
-    <value>День и время</value>
+    <value>День недели и время</value>
   </data>
   <data name="ClockPresetDateTime" xml:space="preserve">
     <value>Дата и время</value>
@@ -599,6 +599,9 @@
   </data>
   <data name="NoCountdownTarget" xml:space="preserve">
     <value>Цель не задана. Часы показывают текущее время.</value>
+  </data>
+  <data name="CountdownPreview" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
   <data name="RelativeNow" xml:space="preserve">
     <value>сейчас</value>
