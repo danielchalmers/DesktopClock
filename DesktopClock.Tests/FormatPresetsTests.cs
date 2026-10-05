@@ -40,6 +40,9 @@ public class FormatPresetsTests
     [InlineData("ja-JP", "9月22日(火) 13:01:22")]
     [InlineData("zh-CN", "9月22日 周二 13:01:22")]
     [InlineData("ko-KR", "9월 22일 (화) 오후 1:01:22")]
+    [InlineData("de-DE", "Di, 22. Sep, 13:01:22")]
+    [InlineData("fr-FR", "mar. 22 sept. 13:01:22")]
+    [InlineData("tr-TR", "22 Eyl Sal 13:01:22")]
     public void DefaultClockFormat_ReadsNaturallyInTheRegion(string culture, string expected)
     {
         var format = FormatPresets.DefaultClockFormat(Region(culture));
@@ -48,11 +51,23 @@ public class FormatPresetsTests
     }
 
     [Theory]
-    [InlineData("en-US", "Tue, Sep 22 1:01 PM")]
+    [InlineData("en-US", "Tue, Sep 22, 1:01 PM")]
+    [InlineData("fr-FR", "mar. 22 sept. 13:01")]
     [InlineData("ja-JP", "9月22日(火) 13:01")]
     public void ShortDateTimePattern_ReadsNaturallyInTheRegion(string culture, string expected)
     {
         Assert.Equal(expected, Sample.ToString(FormatPresets.ShortDateTimePattern(Region(culture)), Region(culture)));
+    }
+
+    [Theory]
+    [InlineData("en-US", "MMM d")]
+    [InlineData("de-DE", "d. MMM")]
+    [InlineData("uk-UA", "d MMMM")] // Short month names aren't in the case a date needs, so the full name is used.
+    [InlineData("vi-VN", "dd/MM")] // Short month names carry the number (Thg9), so the date is written in numbers.
+    [InlineData("ja-JP", "M月d日")]
+    public void ShortMonthDayPattern_UsesNamesThatReadWell(string culture, string expected)
+    {
+        Assert.Equal(expected, FormatPresets.ShortMonthDayPattern(Region(culture).DateTimeFormat));
     }
 
     [Theory]
