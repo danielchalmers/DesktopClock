@@ -27,7 +27,14 @@ public class Loc : MarkupExtension
         ["ca"] = "es", // Catalan
         ["eu"] = "es", // Basque
         ["gl"] = "es", // Galician
+        ["quc"] = "es", // K'iche'
+        ["quz"] = "es", // Quechua
+        ["lb"] = "fr", // Luxembourgish
+        ["wo"] = "fr", // Wolof
         ["be"] = "ru", // Belarusian
+        ["ky"] = "ru", // Kyrgyz
+        ["tg"] = "ru", // Tajik
+        ["tk"] = "ru", // Turkmen
         ["tt"] = "ru", // Tatar
         ["ug"] = "zh-Hans", // Uyghur
     };
