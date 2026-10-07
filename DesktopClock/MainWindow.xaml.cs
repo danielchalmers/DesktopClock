@@ -471,6 +471,15 @@ public partial class MainWindow : Window
         if (nudge == default)
             return;
 
+        // Unlike a drag, which stops where the mouse can go, holding an arrow key could move the clock out of reach, so keep part of it on screen.
+        var screens = new Rect(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop, SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+        var onScreen = Rect.Intersect(screens, new Rect(Left + nudge.X, Top + nudge.Y, ActualWidth, ActualHeight));
+        if (onScreen.IsEmpty || onScreen.Width < 16 || onScreen.Height < 16)
+        {
+            e.Handled = true;
+            return;
+        }
+
         PixelShifter?.ClearShift(this);
         Left += nudge.X;
         Top += nudge.Y;
