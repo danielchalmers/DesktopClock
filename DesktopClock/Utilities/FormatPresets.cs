@@ -133,7 +133,13 @@ public static class FormatPresets
         }
 
         var (weekdayFirst, separator) = WeekdayStyle(culture);
-        return weekdayFirst ? $"{weekday}{separator}{date}" : $"{date}{separator}{weekday}";
+        if (weekdayFirst)
+            return $"{weekday}{separator}{date}";
+
+        // The separator is read from after the day in the long date, so it can start with what the date already ends with, like the dot in Hungarian "szeptember 22., kedd".
+        var dateEnd = date.TrimEnd('}');
+        var overlap = Enumerable.Range(1, separator.Length).LastOrDefault(length => dateEnd.EndsWith(separator.Substring(0, length), StringComparison.Ordinal));
+        return $"{date}{separator.Substring(overlap)}{weekday}";
     }
 
     /// <summary>
