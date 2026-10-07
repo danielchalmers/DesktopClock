@@ -219,7 +219,7 @@ If the problem persists, report it at that link.</value>
     <value>Hide from Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Hide the clock window from the Alt+Tab switcher.</value>
+    <value>Hide the clock from Alt+Tab and the taskbar.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Always on top</value>
@@ -231,7 +231,7 @@ If the problem persists, report it at that link.</value>
     <value>Click through</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Let clicks pass through the clock to windows behind it.</value>
+    <value>Let clicks pass through the clock to windows behind it. The tray icon still opens the menu.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Hide when fullscreen</value>
@@ -250,7 +250,7 @@ If the problem persists, report it at that link.</value>
     <value>Allow dragging</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Move the clock by dragging it with the mouse.</value>
+    <value>Move the clock by dragging it or with the arrow keys.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Align right</value>
@@ -420,7 +420,7 @@ If the problem persists, report it at that link.</value>
     <value>Background opacity</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Adjust how transparent the background appears.</value>
+    <value>Adjust how transparent the background or outline appears.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Rounded corners</value>
@@ -476,7 +476,7 @@ If the problem persists, report it at that link.</value>
     <value>Sound interval</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Choose how often the sound should play using hours, minutes, and seconds.</value>
+    <value>Choose how often the sound plays, like 00:15:00 for every 15 minutes.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Play sound when countdown ends</value>

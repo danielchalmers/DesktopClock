@@ -191,7 +191,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Sembunyikan dari Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Sembunyikan jendela jam dari pengalih Alt+Tab.</value>
+    <value>Sembunyikan jam dari pengalih Alt+Tab dan bilah tugas.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Selalu di atas</value>
@@ -203,7 +203,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Klik tembus</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Biarkan klik menembus jam ke jendela di belakangnya.</value>
+    <value>Biarkan klik menembus jam ke jendela di belakangnya. Ikon di baki sistem tetap membuka menu.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Sembunyikan saat layar penuh</value>
@@ -221,7 +221,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Izinkan menyeret</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Pindahkan jam dengan menyeretnya menggunakan mouse.</value>
+    <value>Pindahkan jam dengan menyeretnya atau dengan tombol panah.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Rata kanan</value>
@@ -365,7 +365,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Opasitas latar belakang</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Sesuaikan transparansi latar belakang.</value>
+    <value>Sesuaikan transparansi latar belakang atau garis tepi.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Sudut membulat</value>
@@ -416,7 +416,7 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
     <value>Interval suara</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Pilih seberapa sering suara diputar menggunakan jam, menit, dan detik.</value>
+    <value>Pilih seberapa sering suara diputar, misalnya 00:15:00 untuk setiap 15 menit.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Putar suara saat hitung mundur selesai</value>

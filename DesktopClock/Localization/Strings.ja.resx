@@ -191,7 +191,7 @@
     <value>Alt+Tab に表示しない</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Alt+Tab の切り替え画面に時計のウィンドウを表示しません。</value>
+    <value>Alt+Tab の切り替え画面とタスク バーに時計を表示しません。</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>常に手前に表示</value>
@@ -203,7 +203,7 @@
     <value>クリックを透過</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>クリックを時計の後ろにあるウィンドウに通します。</value>
+    <value>クリックを時計の後ろにあるウィンドウに通します。メニューは通知領域のアイコンから開けます。</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>全画面表示のときに非表示</value>
@@ -221,7 +221,7 @@
     <value>ドラッグを許可</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>マウスでドラッグして時計を移動します。</value>
+    <value>ドラッグまたは方向キーで時計を移動します。</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>右揃え</value>
@@ -365,7 +365,7 @@
     <value>背景の不透明度</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>背景の透明度を調整します。</value>
+    <value>背景または輪郭の透明度を調整します。</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>角を丸くする</value>
@@ -416,7 +416,7 @@
     <value>音の間隔</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>音を再生する間隔を時間、分、秒で選択します。</value>
+    <value>音を再生する間隔を選択します。たとえば 15 分ごとなら 00:15:00 です。</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>カウントダウン終了時に音を鳴らす</value>

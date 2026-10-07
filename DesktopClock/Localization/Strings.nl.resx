@@ -191,7 +191,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Verbergen in Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Het klokvenster verbergen in de Alt+Tab-weergave.</value>
+    <value>De klok verbergen in de Alt+Tab-weergave en op de taakbalk.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Altijd op voorgrond</value>
@@ -203,7 +203,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Doorklikken</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Klikken door de klok laten gaan naar de vensters erachter.</value>
+    <value>Klikken door de klok laten gaan naar de vensters erachter. Het pictogram in het systeemvak opent nog steeds het menu.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Verbergen bij volledig scherm</value>
@@ -221,7 +221,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Slepen toestaan</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>De klok verplaatsen door deze met de muis te slepen.</value>
+    <value>De klok verplaatsen door te slepen of met de pijltoetsen.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Rechts uitlijnen</value>
@@ -365,7 +365,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Achtergronddekking</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Pas aan hoe transparant de achtergrond is.</value>
+    <value>Pas aan hoe transparant de achtergrond of contour is.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Afgeronde hoeken</value>
@@ -416,7 +416,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Geluidsinterval</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Kies in uren, minuten en seconden hoe vaak het geluid moet worden afgespeeld.</value>
+    <value>Kies hoe vaak het geluid wordt afgespeeld, bijvoorbeeld 00:15:00 voor elke 15 minuten.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Geluid afspelen na aftellen</value>

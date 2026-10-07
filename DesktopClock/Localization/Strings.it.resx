@@ -191,7 +191,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Nascondi da Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Nascondi la finestra dell'orologio dal selettore Alt+Tab.</value>
+    <value>Nascondi l'orologio dal selettore Alt+Tab e dalla barra delle applicazioni.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Sempre in primo piano</value>
@@ -203,7 +203,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Ignora i clic</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Lascia passare i clic attraverso l'orologio alle finestre sottostanti.</value>
+    <value>Lascia passare i clic attraverso l'orologio alle finestre sottostanti. L'icona nell'area di notifica apre comunque il menu.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Nascondi a schermo intero</value>
@@ -221,7 +221,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Consenti trascinamento</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Sposta l'orologio trascinandolo con il mouse.</value>
+    <value>Sposta l'orologio trascinandolo o con i tasti freccia.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Allinea a destra</value>
@@ -365,7 +365,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Opacità sfondo</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Regola la trasparenza dello sfondo.</value>
+    <value>Regola la trasparenza dello sfondo o del contorno.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Angoli arrotondati</value>
@@ -416,7 +416,7 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
     <value>Intervallo suono</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Scegli ogni quanto riprodurre il suono in ore, minuti e secondi.</value>
+    <value>Scegli ogni quanto riprodurre il suono, ad esempio 00:15:00 per ogni 15 minuti.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Suono al termine del conto alla rovescia</value>

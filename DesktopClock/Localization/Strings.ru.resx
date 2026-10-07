@@ -191,7 +191,7 @@
     <value>Скрывать в Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Скрывать окно часов в переключателе Alt+Tab.</value>
+    <value>Скрывать часы в переключателе Alt+Tab и на панели задач.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Поверх всех окон</value>
@@ -203,7 +203,7 @@
     <value>Пропускать щелчки</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Пропускать щелчки сквозь часы к окнам за ними.</value>
+    <value>Пропускать щелчки сквозь часы к окнам за ними. Меню по-прежнему открывается значком в области уведомлений.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Скрывать в полноэкранном режиме</value>
@@ -221,7 +221,7 @@
     <value>Разрешить перетаскивание</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Перемещать часы, перетаскивая их мышью.</value>
+    <value>Перемещать часы перетаскиванием или клавишами со стрелками.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Выравнивать по правому краю</value>
@@ -365,7 +365,7 @@
     <value>Непрозрачность фона</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Настройте прозрачность фона.</value>
+    <value>Настройте прозрачность фона или контура.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Скругленные углы</value>
@@ -416,7 +416,7 @@
     <value>Интервал повтора звука</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Укажите в часах, минутах и секундах, как часто воспроизводить звук.</value>
+    <value>Укажите, как часто воспроизводить звук: например, 00:15:00 означает каждые 15 минут.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Звук по окончании отсчета</value>

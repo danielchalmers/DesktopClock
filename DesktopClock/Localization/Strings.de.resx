@@ -191,7 +191,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>In Alt+Tab ausblenden</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Das Uhrfenster in der Alt+Tab-Ansicht ausblenden.</value>
+    <value>Die Uhr in der Alt+Tab-Ansicht und in der Taskleiste ausblenden.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Immer im Vordergrund</value>
@@ -203,7 +203,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Klicks durchlassen</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Klicks durch die Uhr an dahinterliegende Fenster weitergeben.</value>
+    <value>Klicks durch die Uhr an dahinterliegende Fenster weitergeben. Das Menü bleibt über das Symbol im Infobereich erreichbar.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Bei Vollbild ausblenden</value>
@@ -221,7 +221,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Ziehen zulassen</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Die Uhr durch Ziehen mit der Maus verschieben.</value>
+    <value>Die Uhr durch Ziehen oder mit den Pfeiltasten verschieben.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Rechtsbündig</value>
@@ -365,7 +365,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Hintergrunddeckkraft</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Festlegen, wie transparent der Hintergrund erscheint.</value>
+    <value>Festlegen, wie transparent der Hintergrund oder die Kontur erscheint.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Abgerundete Ecken</value>
@@ -416,7 +416,7 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
     <value>Tonintervall</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>In Stunden, Minuten und Sekunden festlegen, wie oft der Ton wiedergegeben wird.</value>
+    <value>Festlegen, wie oft der Ton wiedergegeben wird, etwa 00:15:00 für alle 15 Minuten.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Ton am Ende des Countdowns</value>

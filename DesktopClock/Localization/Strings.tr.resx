@@ -191,7 +191,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Alt+Tab'da gizle</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Saat penceresini Alt+Tab geçiş ekranında gizleyin.</value>
+    <value>Saati Alt+Tab geçiş ekranında ve görev çubuğunda gizleyin.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Her zaman üstte</value>
@@ -203,7 +203,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Tıklamaları geçir</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Tıklamaların saatten geçip arkasındaki pencerelere ulaşmasına izin verin.</value>
+    <value>Tıklamaların saatten geçip arkasındaki pencerelere ulaşmasına izin verin. Menü, bildirim alanındaki simgeden açılmaya devam eder.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Tam ekranda gizle</value>
@@ -221,7 +221,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Sürüklemeye izin ver</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Saati fareyle sürükleyerek taşıyın.</value>
+    <value>Saati sürükleyerek veya ok tuşlarıyla taşıyın.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Sağa hizala</value>
@@ -365,7 +365,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Arka plan opaklığı</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Arka planın ne kadar saydam görüneceğini ayarlayın.</value>
+    <value>Arka planın veya konturun ne kadar saydam görüneceğini ayarlayın.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Yuvarlatılmış köşeler</value>
@@ -416,7 +416,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Ses tekrar aralığı</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Sesin ne sıklıkla çalınacağını saat, dakika ve saniye olarak seçin.</value>
+    <value>Sesin ne sıklıkla çalınacağını seçin, örneğin her 15 dakikada bir için 00:15:00.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Geri sayım bitince ses çal</value>

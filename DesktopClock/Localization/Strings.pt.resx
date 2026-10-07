@@ -191,7 +191,7 @@ Se o problema persistir, informe-o nesse link.</value>
     <value>Ocultar do Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Oculta a janela do relógio no seletor Alt+Tab.</value>
+    <value>Oculta o relógio no seletor Alt+Tab e na barra de tarefas.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Sempre visível</value>
@@ -203,7 +203,7 @@ Se o problema persistir, informe-o nesse link.</value>
     <value>Deixar passar cliques</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Os cliques passam pelo relógio para as janelas atrás dele.</value>
+    <value>Os cliques passam pelo relógio para as janelas atrás dele. O ícone da bandeja do sistema continua abrindo o menu.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Ocultar em tela cheia</value>
@@ -221,7 +221,7 @@ Se o problema persistir, informe-o nesse link.</value>
     <value>Permitir arrastar</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Mova o relógio arrastando-o com o mouse.</value>
+    <value>Mova o relógio arrastando-o ou com as teclas de seta.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Alinhar à direita</value>
@@ -365,7 +365,7 @@ Se o problema persistir, informe-o nesse link.</value>
     <value>Opacidade do fundo</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Ajuste a transparência do fundo.</value>
+    <value>Ajuste a transparência do fundo ou do contorno.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Cantos arredondados</value>
@@ -416,7 +416,7 @@ Se o problema persistir, informe-o nesse link.</value>
     <value>Intervalo do som</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Escolha com que frequência o som deve tocar usando horas, minutos e segundos.</value>
+    <value>Escolha com que frequência o som toca, como 00:15:00 para tocar a cada 15 minutos.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Tocar som no fim da contagem regressiva</value>

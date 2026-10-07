@@ -191,7 +191,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Ukryj w Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Ukryj okno zegara w przełączniku Alt+Tab.</value>
+    <value>Ukryj zegar w przełączniku Alt+Tab i na pasku zadań.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Zawsze na wierzchu</value>
@@ -203,7 +203,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Przepuszczaj kliknięcia</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Przepuszczaj kliknięcia przez zegar do okien za nim.</value>
+    <value>Przepuszczaj kliknięcia przez zegar do okien za nim. Menu nadal otworzysz ikoną w obszarze powiadomień.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Ukryj w trybie pełnoekranowym</value>
@@ -221,7 +221,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Zezwalaj na przeciąganie</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Przesuwaj zegar, przeciągając go myszą.</value>
+    <value>Przesuwaj zegar, przeciągając go lub klawiszami strzałek.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Wyrównaj do prawej</value>
@@ -365,7 +365,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Nieprzezroczystość tła</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Dostosuj przezroczystość tła.</value>
+    <value>Dostosuj przezroczystość tła lub konturu.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Zaokrąglone narożniki</value>
@@ -416,7 +416,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Interwał dźwięku</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Określ w godzinach, minutach i sekundach, jak często ma być odtwarzany dźwięk.</value>
+    <value>Określ, jak często ma być odtwarzany dźwięk, na przykład 00:15:00 co 15 minut.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Dźwięk po zakończeniu odliczania</value>

@@ -191,7 +191,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Ẩn khỏi Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Ẩn cửa sổ đồng hồ khỏi trình chuyển đổi Alt+Tab.</value>
+    <value>Ẩn đồng hồ khỏi trình chuyển đổi Alt+Tab và thanh tác vụ.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Luôn ở trên cùng</value>
@@ -203,7 +203,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Bấm xuyên qua</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Cho phép thao tác bấm đi xuyên qua đồng hồ đến các cửa sổ phía sau.</value>
+    <value>Cho phép thao tác bấm đi xuyên qua đồng hồ đến các cửa sổ phía sau. Bạn vẫn có thể mở menu từ biểu tượng trên khay hệ thống.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Ẩn khi toàn màn hình</value>
@@ -221,7 +221,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Cho phép kéo</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Di chuyển đồng hồ bằng cách kéo bằng chuột.</value>
+    <value>Di chuyển đồng hồ bằng cách kéo hoặc bằng phím mũi tên.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Căn phải</value>
@@ -365,7 +365,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Độ mờ đục của nền</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Điều chỉnh độ trong suốt của nền.</value>
+    <value>Điều chỉnh độ trong suốt của nền hoặc viền.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Bo tròn góc</value>
@@ -416,7 +416,7 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
     <value>Khoảng lặp âm thanh</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Chọn tần suất phát âm thanh theo giờ, phút và giây.</value>
+    <value>Chọn tần suất phát âm thanh, ví dụ 00:15:00 để phát mỗi 15 phút.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Phát âm thanh khi hết đếm ngược</value>

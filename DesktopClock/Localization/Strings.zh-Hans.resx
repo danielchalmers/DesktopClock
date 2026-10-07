@@ -191,7 +191,7 @@
     <value>在 Alt+Tab 中隐藏</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>在 Alt+Tab 切换界面中隐藏时钟窗口。</value>
+    <value>在 Alt+Tab 切换界面和任务栏中隐藏时钟。</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>置顶</value>
@@ -203,7 +203,7 @@
     <value>点击穿透</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>让点击穿过时钟，作用于其后方的窗口。</value>
+    <value>让点击穿过时钟，作用于其后方的窗口。托盘图标仍可打开菜单。</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>全屏时隐藏</value>
@@ -221,7 +221,7 @@
     <value>允许拖动</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>用鼠标拖动来移动时钟。</value>
+    <value>拖动或使用方向键来移动时钟。</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>右对齐</value>
@@ -365,7 +365,7 @@
     <value>背景不透明度</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>调整背景的透明程度。</value>
+    <value>调整背景或描边的透明程度。</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>圆角</value>
@@ -416,7 +416,7 @@
     <value>声音间隔</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>以小时、分钟和秒为单位选择声音的播放频率。</value>
+    <value>选择声音的播放频率，例如 00:15:00 表示每 15 分钟一次。</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>倒计时结束时播放声音</value>

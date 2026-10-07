@@ -191,7 +191,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Masquer dans Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Masquer la fenêtre de l'horloge dans le sélecteur Alt+Tab.</value>
+    <value>Masquer l'horloge dans le sélecteur Alt+Tab et dans la barre des tâches.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Toujours au premier plan</value>
@@ -203,7 +203,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Clics traversants</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Laisser les clics traverser l'horloge vers les fenêtres situées derrière.</value>
+    <value>Laisser les clics traverser l'horloge vers les fenêtres situées derrière. L'icône de la zone de notification ouvre toujours le menu.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Masquer en plein écran</value>
@@ -221,7 +221,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Autoriser le glissement</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Déplacer l'horloge en la faisant glisser avec la souris.</value>
+    <value>Déplacer l'horloge en la faisant glisser ou avec les touches fléchées.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Aligner à droite</value>
@@ -365,7 +365,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Opacité de l'arrière-plan</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Réglez la transparence de l'arrière-plan.</value>
+    <value>Réglez la transparence de l'arrière-plan ou du contour.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Coins arrondis</value>
@@ -416,7 +416,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Intervalle du son</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Choisissez la fréquence de lecture du son en heures, minutes et secondes.</value>
+    <value>Choisissez la fréquence de lecture du son, par exemple 00:15:00 pour toutes les 15 minutes.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Son à la fin du compte à rebours</value>

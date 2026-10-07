@@ -191,7 +191,7 @@
     <value>Приховувати в Alt+Tab</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Приховувати вікно годинника в перемикачі Alt+Tab.</value>
+    <value>Приховувати годинник у перемикачі Alt+Tab і на панелі завдань.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Поверх усіх вікон</value>
@@ -203,7 +203,7 @@
     <value>Пропускати клацання</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>Пропускати клацання крізь годинник до вікон за ним.</value>
+    <value>Пропускати клацання крізь годинник до вікон за ним. Меню й надалі відкривається значком в області сповіщень.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>Приховувати в повноекранному режимі</value>
@@ -221,7 +221,7 @@
     <value>Дозволити перетягування</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>Переміщувати годинник, перетягуючи його мишею.</value>
+    <value>Переміщувати годинник перетягуванням або клавішами зі стрілками.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Вирівнювати праворуч</value>
@@ -365,7 +365,7 @@
     <value>Непрозорість фону</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>Налаштуйте прозорість фону.</value>
+    <value>Налаштуйте прозорість фону або контуру.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>Заокруглені кути</value>
@@ -416,7 +416,7 @@
     <value>Інтервал звуку</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>Укажіть у годинах, хвилинах і секундах, як часто відтворювати звук.</value>
+    <value>Укажіть, як часто відтворювати звук: наприклад, 00:15:00 означає кожні 15 хвилин.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>Звук після завершення відліку</value>

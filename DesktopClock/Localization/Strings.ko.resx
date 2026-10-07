@@ -191,7 +191,7 @@
     <value>Alt+Tab에서 숨기기</value>
   </data>
   <data name="HideFromAltTabDescription" xml:space="preserve">
-    <value>Alt+Tab 전환 화면에서 시계 창을 숨깁니다.</value>
+    <value>Alt+Tab 전환 화면과 작업 표시줄에서 시계를 숨깁니다.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>항상 위에 표시</value>
@@ -203,7 +203,7 @@
     <value>클릭 통과</value>
   </data>
   <data name="ClickThroughDescription" xml:space="preserve">
-    <value>클릭이 시계를 통과해 뒤에 있는 창으로 전달되게 합니다.</value>
+    <value>클릭이 시계를 통과해 뒤에 있는 창으로 전달되게 합니다. 메뉴는 알림 영역 아이콘에서 열 수 있습니다.</value>
   </data>
   <data name="HideWhenFullscreen" xml:space="preserve">
     <value>전체 화면일 때 숨기기</value>
@@ -221,7 +221,7 @@
     <value>끌기 허용</value>
   </data>
   <data name="AllowDraggingDescription" xml:space="preserve">
-    <value>마우스로 끌어서 시계를 이동합니다.</value>
+    <value>끌거나 화살표 키로 시계를 이동합니다.</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
     <value>오른쪽 맞춤</value>
@@ -365,7 +365,7 @@
     <value>배경 불투명도</value>
   </data>
   <data name="BackgroundOpacityDescription" xml:space="preserve">
-    <value>배경의 투명도를 조정합니다.</value>
+    <value>배경 또는 윤곽선의 투명도를 조정합니다.</value>
   </data>
   <data name="RoundedCorners" xml:space="preserve">
     <value>둥근 모서리</value>
@@ -416,7 +416,7 @@
     <value>소리 간격</value>
   </data>
   <data name="SoundIntervalDescription" xml:space="preserve">
-    <value>시, 분, 초 단위로 소리를 재생할 간격을 선택합니다.</value>
+    <value>소리를 재생할 간격을 선택합니다. 예를 들어 15분마다 재생하려면 00:15:00을 입력합니다.</value>
   </data>
   <data name="PlaySoundOnCountdown" xml:space="preserve">
     <value>카운트다운 종료 시 소리 재생</value>
