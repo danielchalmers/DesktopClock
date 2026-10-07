@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Windows.Media;
 using DesktopClock.Properties;
@@ -42,11 +43,13 @@ public sealed class ClockTheme
     /// </summary>
     public static IReadOnlyList<ClockTheme> GetBuiltInThemes()
     {
+        var accent = SystemThemeService.GetSystemAccentColor();
+
         return new[]
         {
             CreateSystemTheme(),
             new ClockTheme(Loc.Get("ThemeAccent"), "Segoe UI", "SemiBold",
-                Color.FromRgb(0xFF, 0xFF, 0xFF), SystemThemeService.GetSystemAccentColor(),
+                ReadableTextOn(accent), accent,
                 backgroundEnabled: true, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 0.2),
             new ClockTheme(Loc.Get("ThemeSmoke"), "Segoe UI", "Normal",
                 Color.FromRgb(0xF2, 0xF2, 0xF2), Color.FromRgb(0x0A, 0x0A, 0x10),
@@ -67,6 +70,33 @@ public sealed class ClockTheme
                 Color.FromRgb(0xFF, 0xFF, 0xFF), Color.FromRgb(0x00, 0x00, 0x00),
                 backgroundEnabled: false, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 1.5),
         };
+    }
+
+    /// <summary>
+    /// White or near-black text, whichever stands out more on the given background, so a light accent like yellow still gets readable text.
+    /// </summary>
+    public static Color ReadableTextOn(Color background)
+    {
+        var white = Color.FromRgb(0xFF, 0xFF, 0xFF);
+        var black = Color.FromRgb(0x1A, 0x1A, 0x1A);
+        return Contrast(white, background) >= Contrast(black, background) ? white : black;
+    }
+
+    /// <summary>
+    /// The WCAG contrast ratio between two colors, from 1 for the same color to 21 for black and white.
+    /// </summary>
+    public static double Contrast(Color a, Color b)
+    {
+        static double Channel(byte value)
+        {
+            var c = value / 255.0;
+            return c <= 0.03928 ? c / 12.92 : Math.Pow((c + 0.055) / 1.055, 2.4);
+        }
+
+        static double Luminance(Color c) => (0.2126 * Channel(c.R)) + (0.7152 * Channel(c.G)) + (0.0722 * Channel(c.B));
+
+        var (lighter, darker) = (Math.Max(Luminance(a), Luminance(b)), Math.Min(Luminance(a), Luminance(b)));
+        return (lighter + 0.05) / (darker + 0.05);
     }
 
     /// <summary>

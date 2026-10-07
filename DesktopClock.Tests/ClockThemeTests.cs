@@ -89,23 +89,40 @@ public class ClockThemeTests
         // The first preset is the look a fresh install starts with; it follows light or dark mode but not the accent, which can be any shade.
         var system = ClockTheme.GetBuiltInThemes().First();
 
-        Assert.True(Contrast(system.TextColor, system.OuterColor) >= 7, $"{system.TextColor} on {system.OuterColor}");
+        Assert.True(ClockTheme.Contrast(system.TextColor, system.OuterColor) >= 7, $"{system.TextColor} on {system.OuterColor}");
     }
 
-    /// <summary>
-    /// The WCAG contrast ratio between two colors, from 1 (same) to 21 (black and white).
-    /// </summary>
-    private static double Contrast(Color a, Color b)
+    [Theory]
+    [InlineData("#3B003B", "#FFFFFF")] // Plum
+    [InlineData("#0078D4", "#FFFFFF")] // Default Windows blue keeps white text.
+    [InlineData("#D50056", "#FFFFFF")] // Dark pink
+    [InlineData("#FFB900", "#1A1A1A")] // Gold
+    [InlineData("#00CC6A", "#1A1A1A")] // Light green
+    [InlineData("#FFFFFF", "#1A1A1A")]
+    [InlineData("#000000", "#FFFFFF")]
+    public void ReadableTextOn_PicksWhiteOrDarkByContrast(string background, string expected)
     {
-        static double Channel(byte value)
+        var text = ClockTheme.ReadableTextOn((Color)ColorConverter.ConvertFromString(background));
+
+        Assert.Equal((Color)ColorConverter.ConvertFromString(expected), text);
+    }
+
+    [Fact]
+    public void AccentTheme_IsReadableWithAnyAccentColor()
+    {
+        var accent = ClockTheme.GetBuiltInThemes()[1];
+
+        // Whichever of white or near-black reads better is at least about 4.2:1 on any background.
+        Assert.True(ClockTheme.Contrast(accent.TextColor, accent.OuterColor) >= 4, $"{accent.TextColor} on {accent.OuterColor}");
+    }
+
+    [Fact]
+    public void ReadableTextOn_IsAtLeastFourToOneOnEveryGray()
+    {
+        for (var v = 0; v <= 255; v++)
         {
-            var c = value / 255.0;
-            return c <= 0.03928 ? c / 12.92 : Math.Pow((c + 0.055) / 1.055, 2.4);
+            var background = Color.FromRgb((byte)v, (byte)v, (byte)v);
+            Assert.True(ClockTheme.Contrast(ClockTheme.ReadableTextOn(background), background) >= 4, $"gray {v}");
         }
-
-        static double Luminance(Color c) => (0.2126 * Channel(c.R)) + (0.7152 * Channel(c.G)) + (0.0722 * Channel(c.B));
-
-        var (light, dark) = (Math.Max(Luminance(a), Luminance(b)), Math.Min(Luminance(a), Luminance(b)));
-        return (light + 0.05) / (dark + 0.05);
     }
 }
