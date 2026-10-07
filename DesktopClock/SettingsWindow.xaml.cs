@@ -26,7 +26,14 @@ public partial class SettingsWindow : Window
 
     public SettingsWindow()
     {
+        // The window opens centered but WPF doesn't keep it within the screen, so a size saved on a bigger display, or a minimum taller than a small screen, would put the title bar out of reach.
+        var workArea = SystemParameters.WorkArea;
+        Settings.Default.SettingsWindowWidth = Math.Min(Settings.Default.SettingsWindowWidth, workArea.Width);
+        Settings.Default.SettingsWindowHeight = Math.Min(Settings.Default.SettingsWindowHeight, workArea.Height);
+
         InitializeComponent();
+        MinWidth = Math.Min(MinWidth, workArea.Width);
+        MinHeight = Math.Min(MinHeight, workArea.Height);
         DataContext = new SettingsWindowViewModel(Settings.Default);
         Closing += SettingsWindow_Closing;
 
