@@ -54,6 +54,7 @@ public partial class FormatEditor : UserControl
         nameof(Mode), typeof(FormatEditorMode), typeof(FormatEditor), new PropertyMetadata(FormatEditorMode.Clock));
 
     private readonly DispatcherTimer _timer;
+    private readonly List<(TextBlock Example, string Format)> _presetExamples = new();
     private bool _built;
 
     public FormatEditor()
@@ -61,7 +62,11 @@ public partial class FormatEditor : UserControl
         InitializeComponent();
 
         _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-        _timer.Tick += (_, _) => UpdatePreview();
+        _timer.Tick += (_, _) =>
+        {
+            UpdatePreview();
+            UpdatePresetExamples();
+        };
 
         Loaded += FormatEditor_Loaded;
         Unloaded += (_, _) => _timer.Stop();
@@ -114,6 +119,7 @@ public partial class FormatEditor : UserControl
                 TextTrimming = TextTrimming.CharacterEllipsis,
             };
             example.SetResourceReference(ForegroundProperty, "TextSecondaryBrush");
+            _presetExamples.Add((example, format));
 
             var content = new StackPanel();
             content.Children.Add(title);
@@ -187,6 +193,15 @@ public partial class FormatEditor : UserControl
         {
             PreviewText.SetResourceReference(ForegroundProperty, "TextPrimaryBrush");
         }
+    }
+
+    /// <summary>
+    /// Keeps each preset's example in step with the clock, like the preview.
+    /// </summary>
+    private void UpdatePresetExamples()
+    {
+        foreach (var (example, format) in _presetExamples)
+            example.Text = FormatPreview(format);
     }
 
     /// <summary>
