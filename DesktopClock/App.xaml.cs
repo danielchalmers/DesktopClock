@@ -72,12 +72,20 @@ public partial class App : Application
 
         // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
         var keyName = GetSha256Hash(MainFileInfo.FullName);
-        using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
-        if (runOnStartup)
-            key?.SetValue(keyName, MainFileInfo.FullName);
-        else
-            key?.DeleteValue(keyName, false);
+        // A policy can make the key read-only, and the clock should keep running either way.
+        try
+        {
+            using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+
+            if (runOnStartup)
+                key?.SetValue(keyName, MainFileInfo.FullName);
+            else
+                key?.DeleteValue(keyName, false);
+        }
+        catch
+        {
+        }
     }
 
     /// <summary>

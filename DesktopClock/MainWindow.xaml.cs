@@ -48,6 +48,10 @@ public partial class MainWindow : Window
 
         ApplyWindowVisibilitySettings();
 
+        // Point the startup entry at this exe again, since a portable copy may have been moved since it was turned on.
+        if (Settings.Default.RunOnStartup)
+            App.SetRunOnStartup(true);
+
         // Restore the last displayed text so the window starts near its previous size.
         CurrentTimeOrCountdownString = Settings.Default.LastDisplay;
 
@@ -198,6 +202,10 @@ public partial class MainWindow : Window
 
             case nameof(Settings.Default.ClickThrough):
                 this.SetClickThrough(Settings.Default.ClickThrough);
+                break;
+
+            case nameof(Settings.Default.RunOnStartup):
+                App.SetRunOnStartup(Settings.Default.RunOnStartup);
                 break;
 
             case nameof(Settings.Default.HideWhenFullscreen):
@@ -386,8 +394,6 @@ public partial class MainWindow : Window
 
         if (Settings.CanBeSaved)
             Settings.Default.Save();
-
-        App.SetRunOnStartup(Settings.Default.RunOnStartup);
 
         _trayIcon?.Dispose();
     }
