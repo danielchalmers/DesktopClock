@@ -448,6 +448,7 @@ public partial class MainWindow : Window
         if (nudge == default)
             return;
 
+        PixelShifter?.ClearShift(this);
         Left += nudge.X;
         Top += nudge.Y;
 
