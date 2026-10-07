@@ -27,6 +27,7 @@ public partial class MainWindow : Window
     private TimeZoneInfo _timeZone;
     private SoundPlayer _soundPlayer;
     private PixelShifter _pixelShifter;
+    private bool _toldHowToShow;
     private FullscreenHideManager _fullscreenHideManager;
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
@@ -107,6 +108,13 @@ public partial class MainWindow : Window
     {
         this.HideFromScreen();
         ApplyWindowVisibilitySettings();
+
+        // Without a taskbar button the tray icon is the only way back, so say so the first time.
+        if (!_toldHowToShow && (!Settings.Default.ShowInTaskbar || Settings.Default.HideFromAltTab))
+        {
+            _toldHowToShow = true;
+            TryShowNotification(Loc.Get("StartHiddenTitle"), Loc.Get("StartHiddenMessage"));
+        }
     }
 
     /// <summary>
@@ -366,6 +374,7 @@ public partial class MainWindow : Window
 
         if (Settings.Default.StartHidden)
         {
+            _toldHowToShow = true;
             TryShowNotification(Loc.Get("StartHiddenTitle"), Loc.Get("StartHiddenMessage"));
             this.HideFromScreen();
             ApplyWindowVisibilitySettings();
