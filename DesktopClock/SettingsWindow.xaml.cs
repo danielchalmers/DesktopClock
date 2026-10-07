@@ -66,6 +66,9 @@ public partial class SettingsWindow : Window
         }
 
         ViewModel.Settings.BackgroundImagePath = openFileDialog.FileName;
+
+        // The image is drawn as the background, so it wouldn't show while the clock uses an outline instead, like after the Minimal preset.
+        ViewModel.Settings.BackgroundEnabled = true;
     }
 
     private void BrowseWavFilePath(object sender, RoutedEventArgs e)
