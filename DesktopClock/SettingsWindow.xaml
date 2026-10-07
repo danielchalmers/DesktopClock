@@ -89,7 +89,8 @@
                             Click="NavigateToSection" />
                 </StackPanel>
 
-                <StackPanel Grid.Row="2">
+                <StackPanel x:Name="ToolsPanel"
+                            Grid.Row="2">
                     <Button Style="{StaticResource SidebarToolButton}"
                             Click="OpenSettingsFolder"
                             IsEnabled="{x:Static p:Settings.CanBeSaved}">
@@ -301,6 +302,7 @@
                                  Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Grid.Column="2"
                                 Style="{StaticResource ColorSwatchButton}"
+                                AutomationProperties.Name="{local:Loc TextColorPick}"
                                 ToolTip="{local:Loc TextColorPick}"
                                 Click="PickTextColor">
                             <Border Width="18"
@@ -357,6 +359,7 @@
                                  Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Grid.Column="2"
                                 Style="{StaticResource ColorSwatchButton}"
+                                AutomationProperties.Name="{local:Loc OuterColorPick}"
                                 ToolTip="{local:Loc OuterColorPick}"
                                 Click="PickOuterColor">
                             <Border Width="18"

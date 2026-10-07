@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -133,6 +134,7 @@ public partial class FormatEditor : UserControl
                 Margin = new Thickness(0, 0, 8, 4),
                 ToolTip = string.IsNullOrEmpty(format) ? Loc.Get("AutomaticTooltip") : format,
             };
+            AutomationProperties.SetName(button, name);
             button.Click += (_, _) => SetFormat(format);
 
             PresetsPanel.Children.Add(button);

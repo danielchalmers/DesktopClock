@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -28,6 +29,13 @@ public partial class SettingsWindow : Window
         InitializeComponent();
         DataContext = new SettingsWindowViewModel(Settings.Default);
         Closing += SettingsWindow_Closing;
+
+        // A label with a description under it doesn't give a button a name, so screen readers would only say "button".
+        foreach (var button in ToolsPanel.Children.OfType<Button>())
+        {
+            if (button.Content is Panel panel && panel.Children.OfType<AccessText>().FirstOrDefault() is { } label)
+                AutomationProperties.SetName(button, label.Text.Replace("_", ""));
+        }
     }
 
     private SettingsWindowViewModel ViewModel => (SettingsWindowViewModel)DataContext;

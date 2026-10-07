@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Media;
 using DesktopClock.Properties;
@@ -46,6 +47,7 @@ public partial class ThemePresetPicker : UserControl
             Margin = new Thickness(0, 0, 8, 8),
             ToolTip = Loc.Get("ThemePresetTooltip"),
         };
+        AutomationProperties.SetName(button, theme.Name);
         button.Click += (_, _) => theme.Apply(Settings.Default);
 
         return button;
