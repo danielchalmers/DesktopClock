@@ -445,6 +445,12 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Di chuyển đồng hồ</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Phím mũi tên:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Di chuyển đồng hồ (giữ Shift để di chuyển nhiều hơn mỗi lần)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + cuộn:</value>
   </data>

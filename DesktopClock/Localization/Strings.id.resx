@@ -445,6 +445,12 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Pindahkan jam</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Tombol panah:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Pindahkan jam (tahan Shift untuk langkah lebih besar)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + gulir:</value>
   </data>

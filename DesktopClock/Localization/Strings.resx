@@ -508,6 +508,14 @@ If the problem persists, report it at that link.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Move the clock</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Arrow keys:</value>
+    <comment>Mouse or keyboard input, shown in bold before its action.</comment>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Move the clock (hold Shift for bigger steps)</value>
+    <comment>Use the usual name of the Shift key in this language (for example Maj in French).</comment>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + Scroll:</value>
     <comment>Use the key name printed on keyboards in this language (for example Strg in German).</comment>

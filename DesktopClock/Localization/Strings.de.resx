@@ -445,6 +445,12 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Uhr verschieben</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Pfeiltasten:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Uhr verschieben (Umschalt halten für größere Schritte)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Strg + Mausrad:</value>
   </data>

@@ -445,6 +445,12 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Saati taşı</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Ok tuşları:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Saati taşı (daha büyük adımlar için Shift'i basılı tut)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + kaydırma:</value>
   </data>

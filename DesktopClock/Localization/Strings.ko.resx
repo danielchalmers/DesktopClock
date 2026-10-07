@@ -445,6 +445,12 @@
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>시계 이동</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>화살표 키:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>시계 이동 (Shift 키를 누르면 크게 이동)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + 스크롤:</value>
   </data>

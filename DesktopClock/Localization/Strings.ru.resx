@@ -445,6 +445,12 @@
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Переместить часы</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Клавиши со стрелками:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Переместить часы (удерживайте Shift для более крупного шага)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + прокрутка:</value>
   </data>

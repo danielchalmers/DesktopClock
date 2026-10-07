@@ -445,6 +445,12 @@
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>時計を移動</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>方向キー:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>時計を移動 (Shift キーを押すと大きく移動)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + スクロール:</value>
   </data>

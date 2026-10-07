@@ -445,6 +445,12 @@
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Перемістити годинник</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Клавіші зі стрілками:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Перемістити годинник (утримуйте Shift для більшого кроку)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + прокручування:</value>
   </data>

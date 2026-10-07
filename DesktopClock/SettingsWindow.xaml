@@ -552,6 +552,11 @@
                                  Text="{local:Loc ShortcutDrag}" />
                             <Run Text="{local:Loc ShortcutDragAction}" />
                         </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run FontWeight="SemiBold"
+                                 Text="{local:Loc ShortcutArrowKeys}" />
+                            <Run Text="{local:Loc ShortcutArrowKeysAction}" />
+                        </TextBlock>
                         <TextBlock>
                             <Run FontWeight="SemiBold"
                                  Text="{local:Loc ShortcutCtrlScroll}" />

@@ -445,6 +445,12 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Mover el reloj</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Teclas de flecha:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Mover el reloj (mantén Mayús para pasos más grandes)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + rueda:</value>
   </data>

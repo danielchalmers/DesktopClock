@@ -445,6 +445,12 @@
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>移動時鐘</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>方向鍵：</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>移動時鐘（按住 Shift 鍵可加大移動幅度）</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + 滾輪：</value>
   </data>

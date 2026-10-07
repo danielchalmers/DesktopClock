@@ -445,6 +445,12 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Przesuń zegar</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Klawisze strzałek:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Przesuń zegar (przytrzymaj Shift, aby przesuwać większymi krokami)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + przewijanie:</value>
   </data>

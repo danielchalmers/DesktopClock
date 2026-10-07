@@ -445,6 +445,12 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Klok verplaatsen</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Pijltoetsen:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Klok verplaatsen (houd Shift ingedrukt voor grotere stappen)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + scrollen:</value>
   </data>

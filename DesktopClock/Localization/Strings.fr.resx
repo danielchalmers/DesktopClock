@@ -445,6 +445,12 @@ Si le problème persiste, signalez-le via ce lien.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Déplacer l'horloge</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Touches fléchées :</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Déplacer l'horloge (maintenez Maj pour des pas plus grands)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + molette :</value>
   </data>

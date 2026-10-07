@@ -445,6 +445,12 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Sposta l'orologio</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Tasti freccia:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Sposta l'orologio (tieni premuto Maiusc per spostamenti più ampi)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + rotellina:</value>
   </data>

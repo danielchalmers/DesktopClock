@@ -445,6 +445,12 @@ Se o problema persistir, informe-o nesse link.</value>
   <data name="ShortcutDragAction" xml:space="preserve">
     <value>Mover o relógio</value>
   </data>
+  <data name="ShortcutArrowKeys" xml:space="preserve">
+    <value>Teclas de seta:</value>
+  </data>
+  <data name="ShortcutArrowKeysAction" xml:space="preserve">
+    <value>Mover o relógio (segure Shift para passos maiores)</value>
+  </data>
   <data name="ShortcutCtrlScroll" xml:space="preserve">
     <value>Ctrl + rolagem:</value>
   </data>
