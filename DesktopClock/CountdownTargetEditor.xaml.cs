@@ -81,7 +81,8 @@ public partial class CountdownTargetEditor : UserControl
                 HorizontalContentAlignment = HorizontalAlignment.Left,
                 Margin = new Thickness(0, 0, 8, 4),
             };
-            button.Click += (_, _) => Settings.Default.CountdownTo = getTarget();
+            // Saved as a wall-clock time like a typed date, since a local one is saved with its UTC offset and would move after a time zone change.
+            button.Click += (_, _) => Settings.Default.CountdownTo = DateTime.SpecifyKind(getTarget(), DateTimeKind.Unspecified);
 
             PresetsPanel.Children.Add(button);
         }
