@@ -423,14 +423,17 @@ public partial class MainWindow : Window
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
-        if (Keyboard.Modifiers == ModifierKeys.Control)
+        // Shift is allowed because "+" needs it on many keyboards, like Ctrl+Shift+= on US layouts.
+        if (Keyboard.Modifiers is ModifierKeys.Control or (ModifierKeys.Control | ModifierKeys.Shift))
         {
             switch (e.Key)
             {
                 case Key.OemMinus:
+                case Key.Subtract:
                     Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, -1);
                     break;
                 case Key.OemPlus:
+                case Key.Add:
                     Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, 1);
                     break;
             }
