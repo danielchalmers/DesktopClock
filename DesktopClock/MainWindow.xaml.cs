@@ -224,8 +224,6 @@ public partial class MainWindow : Window
     {
         UpdateTimeString();
 
-        TryReassertTopmost();
-
         TryShiftPixels();
 
         TryPlaySound();
@@ -235,6 +233,9 @@ public partial class MainWindow : Window
             _fullscreenHideManager ??= new FullscreenHideManager(this);
             _fullscreenHideManager.TryUpdate();
         }
+
+        // After the fullscreen check, so a clock that is about to hide is never raised over the fullscreen app first.
+        TryReassertTopmost();
     }
 
     /// <summary>
@@ -281,9 +282,12 @@ public partial class MainWindow : Window
     /// </remarks>
     private void TryReassertTopmost()
     {
+        if (!Settings.Default.Topmost)
+            return;
+
         Dispatcher.Invoke(() =>
         {
-            if (Settings.Default.Topmost && IsVisible && WindowState != WindowState.Minimized)
+            if (IsVisible && WindowState != WindowState.Minimized)
                 this.ReassertTopmost();
         });
     }
