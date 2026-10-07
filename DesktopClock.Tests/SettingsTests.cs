@@ -150,6 +150,29 @@ public class SettingsPersistenceTests
         Assert.Equal("kept through a lock", loaded.Format);
     }
 
+    [Theory]
+    [InlineData("")] // Like issue #7, where the file was left empty by a shutdown.
+    [InlineData("not settings")]
+    public void Load_WithUnreadableFile_ShouldStartLikeAFirstRun(string contents)
+    {
+        using var _ = new TempSettingsFileScope();
+
+        // A first run picks colors that match the system theme.
+        var firstRun = LoadAndAttemptSave();
+        if (DesktopClock.Utilities.SystemThemeService.TryGetThemeDefaults(out var textColor, out var outerColor))
+        {
+            Assert.Equal(textColor, firstRun.TextColor);
+            Assert.Equal(outerColor, firstRun.OuterColor);
+        }
+
+        File.WriteAllText(Settings.FilePath, contents);
+
+        var loaded = LoadAndAttemptSave();
+
+        Assert.Equal(firstRun.TextColor, loaded.TextColor);
+        Assert.Equal(firstRun.OuterColor, loaded.OuterColor);
+    }
+
     /// <summary>
     /// Runs the app's startup load, restoring the static state it sets so other tests aren't affected.
     /// </summary>

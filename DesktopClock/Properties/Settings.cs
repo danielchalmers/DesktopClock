@@ -563,7 +563,10 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             }
             catch
             {
-                return new();
+                // Nothing could be read, including when there's no file yet, so start like a first run with colors that match the system theme.
+                var defaults = new Settings();
+                defaults.ApplySystemThemeDefaultsIfAvailable();
+                return defaults;
             }
         }
     }
@@ -574,12 +577,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     private static Settings LoadAndAttemptSave()
     {
         var settings = LoadFromFile();
-
-        if (!Exists)
-        {
-            settings.ApplySystemThemeDefaultsIfAvailable();
-        }
-
         CanBeSaved = settings.Save();
 
         return settings;
