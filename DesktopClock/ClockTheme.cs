@@ -90,7 +90,7 @@ public sealed class ClockTheme
     }
 
     /// <summary>
-    /// The factory look: accent-colored text seeded from the Windows theme, like a fresh install.
+    /// The factory look: neutral text matching the Windows light or dark theme, like a fresh install.
     /// </summary>
     private static ClockTheme CreateSystemTheme()
     {

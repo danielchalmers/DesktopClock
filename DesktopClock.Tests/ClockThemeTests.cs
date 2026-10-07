@@ -82,4 +82,30 @@ public class ClockThemeTests
         Assert.Equal(1.5, settings.OutlineThickness);
         Assert.Equal(1, settings.TextOpacity);
     }
+
+    [Fact]
+    public void SystemTheme_IsReadableWithAnyAccentColor()
+    {
+        // The first preset is the look a fresh install starts with; it follows light or dark mode but not the accent, which can be any shade.
+        var system = ClockTheme.GetBuiltInThemes().First();
+
+        Assert.True(Contrast(system.TextColor, system.OuterColor) >= 7, $"{system.TextColor} on {system.OuterColor}");
+    }
+
+    /// <summary>
+    /// The WCAG contrast ratio between two colors, from 1 (same) to 21 (black and white).
+    /// </summary>
+    private static double Contrast(Color a, Color b)
+    {
+        static double Channel(byte value)
+        {
+            var c = value / 255.0;
+            return c <= 0.03928 ? c / 12.92 : Math.Pow((c + 0.055) / 1.055, 2.4);
+        }
+
+        static double Luminance(Color c) => (0.2126 * Channel(c.R)) + (0.7152 * Channel(c.G)) + (0.0722 * Channel(c.B));
+
+        var (light, dark) = (Math.Max(Luminance(a), Luminance(b)), Math.Min(Luminance(a), Luminance(b)));
+        return (light + 0.05) / (dark + 0.05);
+    }
 }
