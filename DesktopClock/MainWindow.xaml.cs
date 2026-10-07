@@ -233,6 +233,9 @@ public partial class MainWindow : Window
             _fullscreenHideManager ??= new FullscreenHideManager(this);
             _fullscreenHideManager.TryUpdate();
         }
+
+        // After the fullscreen check, so a clock that is about to hide is never raised over the fullscreen app first.
+        TryReassertTopmost();
     }
 
     /// <summary>
@@ -271,6 +274,24 @@ public partial class MainWindow : Window
             _soundPlayer = null;
             _trayIcon?.ShowNotification(Loc.Get("SoundFailedTitle"), Loc.Get("SoundFailedMessage"));
         }
+    }
+
+    /// <summary>
+    /// Puts the clock back above the taskbar, which buries it whenever the shell raises itself.
+    /// </summary>
+    /// <remarks>
+    /// Checking every second rather than reacting to a foreground event is deliberate: the shell also raises itself without changing the foreground, as an auto-hide taskbar does, and reasserting mid-switch gets undone anyway.
+    /// </remarks>
+    private void TryReassertTopmost()
+    {
+        if (!Settings.Default.Topmost)
+            return;
+
+        Dispatcher.Invoke(() =>
+        {
+            if (IsVisible && WindowState != WindowState.Minimized)
+                this.ReassertTopmost();
+        });
     }
 
     private void TryShiftPixels()
