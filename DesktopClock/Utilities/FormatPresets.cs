@@ -36,8 +36,14 @@ public static class FormatPresets
 
         presets.Add((Loc.Get("ClockPresetTimeSeconds"), Token(format.LongTimePattern)));
         presets.Add((Loc.Get("ClockPresetDayTime"), WithTime(culture, "{ddd}", time)));
-        presets.Add((Loc.Get("ClockPresetDateTime"), WithTime(culture, WeekdayAndDate(culture, "{ddd}", Token(ShortMonthDayPattern(format))), time)));
-        presets.Add((Loc.Get("ClockPresetFullDateTime"), WithTime(culture, WeekdayAndDate(culture, "{dddd}", monthDay), time)));
+        var dateTime = WithTime(culture, WeekdayAndDate(culture, "{ddd}", Token(ShortMonthDayPattern(format))), time);
+        var fullDateTime = WithTime(culture, WeekdayAndDate(culture, "{dddd}", monthDay), time);
+        presets.Add((Loc.Get("ClockPresetDateTime"), dateTime));
+
+        // Where short names are the full ones, as in Arabic and Persian, the full date reads exactly like the one above.
+        if (!ReadsTheSame(culture, dateTime, fullDateTime))
+            presets.Add((Loc.Get("ClockPresetFullDateTime"), fullDateTime));
+
         presets.Add((Loc.Get("ClockPresetDateOnly"), WeekdayAndDate(culture, "{dddd}", monthDay)));
         presets.Add((Loc.Get("ClockPresetSortable"), "{yyyy-MM-dd} {HH:mm}"));
         presets.Add((Loc.Get("ClockPresetIsoWeek"), "{weekYear}-W{week}"));
@@ -59,16 +65,17 @@ public static class FormatPresets
             _ => default((string Year, string Month, string Day)?),
         };
 
-        var tokens = new List<(string Name, string Token)>
-        {
-            (Loc.Get("TokenWeekday"), "{ddd}"),
-            (Loc.Get("TokenWeekdayFull"), "{dddd}"),
-            (Loc.Get("TokenDay"), units is { } u1 ? $"{{d{u1.Day}}}" : "{dd}"),
-            (Loc.Get("TokenMonth"), units is { } u2 ? $"{{M{u2.Month}}}" : "{MMM}"),
-        };
+        var month = units is { } u2 ? $"{{M{u2.Month}}}" : "{MMM}";
+        var tokens = new List<(string Name, string Token)> { (Loc.Get("TokenWeekday"), "{ddd}") };
 
-        // Japanese and Korean full month names are the same as the short ones (10月), so only Chinese, with its written-out months (十月), keeps both.
-        if (culture.TwoLetterISOLanguageName is not ("ja" or "ko"))
+        // Full names are left out where they read exactly like the short ones: weekdays and months in Arabic and Persian, and months in Japanese and Korean (10月), while Chinese keeps its written-out months (十月).
+        if (!ReadsTheSame(culture, "{ddd}", "{dddd}"))
+            tokens.Add((Loc.Get("TokenWeekdayFull"), "{dddd}"));
+
+        tokens.Add((Loc.Get("TokenDay"), units is { } u1 ? $"{{d{u1.Day}}}" : "{dd}"));
+        tokens.Add((Loc.Get("TokenMonth"), month));
+
+        if (!ReadsTheSame(culture, month, "{MMMM}"))
             tokens.Add((Loc.Get("TokenMonthFull"), "{MMMM}"));
 
         tokens.Add((Loc.Get("TokenYear"), units is { } u3 ? $"{{yyyy{u3.Year}}}" : "{yyyy}"));
@@ -172,6 +179,17 @@ public static class FormatPresets
         }
 
         return (true, ", ");
+    }
+
+    /// <summary>
+    /// Whether two clock formats read the same on dates that cover every weekday and month name.
+    /// </summary>
+    private static bool ReadsTheSame(CultureInfo culture, string format, string other)
+    {
+        var dates = Enumerable.Range(1, 7).Select(day => new DateTime(2026, 1, day))
+            .Concat(Enumerable.Range(1, 12).Select(month => new DateTime(2026, month, 15)));
+
+        return dates.All(date => Tokenizer.FormatWithTokenizerOrFallBack(date, format, culture) == Tokenizer.FormatWithTokenizerOrFallBack(date, other, culture));
     }
 
     private static string Token(string pattern) => "{" + pattern + "}";

@@ -86,6 +86,21 @@ public class FormatPresetsTests
         var english = FormatPresets.ClockTokens(Region("en-US")).ToDictionary(t => t.Name, t => t.Token);
         Assert.Equal("{dd}", english["Day"]);
         Assert.Equal("{MMMM}", english["Month (full)"]);
+
+        // Chinese writes full months out (九月), unlike the numbered month block (9月).
+        Assert.Contains("Month (full)", FormatPresets.ClockTokens(Region("zh-TW")).Select(t => t.Name));
+    }
+
+    [Theory]
+    [InlineData("en-US", true)]
+    [InlineData("de-DE", true)]
+    [InlineData("ar-SA", false)] // Short day and month names are the full ones, so the full versions would read the same.
+    [InlineData("fa-IR", false)]
+    public void FullNameChoices_OnlyShowWhereTheyReadDifferently(string culture, bool expected)
+    {
+        Assert.Equal(expected, FormatPresets.ForClock(Region(culture)).Any(p => p.Name == "Full date and time"));
+        Assert.Equal(expected, FormatPresets.ClockTokens(Region(culture)).Any(t => t.Name == "Weekday (full)"));
+        Assert.Equal(expected, FormatPresets.ClockTokens(Region(culture)).Any(t => t.Name == "Month (full)"));
     }
 
     [Theory]
