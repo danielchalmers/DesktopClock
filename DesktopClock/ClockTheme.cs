@@ -43,14 +43,10 @@ public sealed class ClockTheme
     /// </summary>
     public static IReadOnlyList<ClockTheme> GetBuiltInThemes()
     {
-        var accent = SystemThemeService.GetSystemAccentColor();
-
         return new[]
         {
             CreateSystemTheme(),
-            new ClockTheme(Loc.Get("ThemeAccent"), "Segoe UI", "SemiBold",
-                ReadableTextOn(accent), accent,
-                backgroundEnabled: true, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 0.2),
+            CreateAccentTheme(SystemThemeService.GetSystemAccentColor()),
             new ClockTheme(Loc.Get("ThemeSmoke"), "Segoe UI", "Normal",
                 Color.FromRgb(0xF2, 0xF2, 0xF2), Color.FromRgb(0x0A, 0x0A, 0x10),
                 backgroundEnabled: true, backgroundOpacity: 0.55, backgroundCornerRadius: 1, outlineThickness: 0.2),
@@ -71,6 +67,13 @@ public sealed class ClockTheme
                 backgroundEnabled: false, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 1.5),
         };
     }
+
+    /// <summary>
+    /// The Accent look: the Windows accent as the background, with whichever text color reads best on it.
+    /// </summary>
+    public static ClockTheme CreateAccentTheme(Color accent) =>
+        new(Loc.Get("ThemeAccent"), "Segoe UI", "SemiBold", ReadableTextOn(accent), accent,
+            backgroundEnabled: true, backgroundOpacity: 1, backgroundCornerRadius: 1, outlineThickness: 0.2);
 
     /// <summary>
     /// White or near-black text, whichever stands out more on the given background, so a light accent like yellow still gets readable text.

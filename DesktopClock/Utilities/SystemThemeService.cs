@@ -38,11 +38,18 @@ public static class SystemThemeService
         if (!TryGetSystemThemeIsLight(out var isLightTheme))
             return false;
 
-        // The text doesn't use the accent color, since Windows allows any shade and a dark accent in dark mode or a light one in light mode can't be read.
-        textColor = isLightTheme ? LightThemeTextColor : DarkThemeTextColor;
-        outerColor = isLightTheme ? LightThemeOuterColor : DarkThemeOuterColor;
+        (textColor, outerColor) = GetThemeDefaults(isLightTheme);
         return true;
     }
+
+    /// <summary>
+    /// The default text and background colors for the light or dark theme.
+    /// </summary>
+    /// <remarks>
+    /// The text doesn't use the accent color, since Windows allows any shade and a dark accent in dark mode or a light one in light mode can't be read.
+    /// </remarks>
+    public static (Color Text, Color Outer) GetThemeDefaults(bool isLightTheme) =>
+        isLightTheme ? (LightThemeTextColor, LightThemeOuterColor) : (DarkThemeTextColor, DarkThemeOuterColor);
 
     /// <summary>
     /// Whether Windows is using the light app theme; defaults to light when it can't be read.

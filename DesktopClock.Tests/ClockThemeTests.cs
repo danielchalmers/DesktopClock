@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using DesktopClock.Properties;
+using DesktopClock.Utilities;
 
 namespace DesktopClock.Tests;
 
@@ -83,13 +84,15 @@ public class ClockThemeTests
         Assert.Equal(1, settings.TextOpacity);
     }
 
-    [Fact]
-    public void SystemTheme_IsReadableWithAnyAccentColor()
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void ThemeDefaults_AreReadableInLightAndDarkMode(bool isLightTheme)
     {
-        // The first preset is the look a fresh install starts with; it follows light or dark mode but not the accent, which can be any shade.
-        var system = ClockTheme.GetBuiltInThemes().First();
+        // A fresh install and the System preset follow light or dark mode but not the accent, which can be any shade.
+        var (text, outer) = SystemThemeService.GetThemeDefaults(isLightTheme);
 
-        Assert.True(ClockTheme.Contrast(system.TextColor, system.OuterColor) >= 7, $"{system.TextColor} on {system.OuterColor}");
+        Assert.True(ClockTheme.Contrast(text, outer) >= 7, $"{text} on {outer}");
     }
 
     [Theory]
@@ -107,13 +110,15 @@ public class ClockThemeTests
         Assert.Equal((Color)ColorConverter.ConvertFromString(expected), text);
     }
 
-    [Fact]
-    public void AccentTheme_IsReadableWithAnyAccentColor()
+    [Theory]
+    [InlineData("#3B003B", "#FFFFFF")] // Plum keeps white text.
+    [InlineData("#FFB900", "#1A1A1A")] // Gold gets dark text.
+    public void AccentTheme_PicksReadableTextForTheAccent(string accent, string expectedText)
     {
-        var accent = ClockTheme.GetBuiltInThemes()[1];
+        var theme = ClockTheme.CreateAccentTheme((Color)ColorConverter.ConvertFromString(accent));
 
-        // Whichever of white or near-black reads better is at least about 4.2:1 on any background.
-        Assert.True(ClockTheme.Contrast(accent.TextColor, accent.OuterColor) >= 4, $"{accent.TextColor} on {accent.OuterColor}");
+        Assert.Equal((Color)ColorConverter.ConvertFromString(accent), theme.OuterColor);
+        Assert.Equal((Color)ColorConverter.ConvertFromString(expectedText), theme.TextColor);
     }
 
     [Fact]
