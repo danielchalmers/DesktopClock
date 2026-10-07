@@ -24,19 +24,33 @@ public static class CrashHandler
     /// </summary>
     public static void Register(Application app)
     {
-        app.DispatcherUnhandledException += (_, e) => HandleAndExit(e.Exception);
+        app.DispatcherUnhandledException += (_, e) =>
+        {
+            // Only matters for a crash while the first one's message is showing, which runs on this thread too: going back to it keeps the message open.
+            e.Handled = true;
+            HandleAndExit(e.Exception);
+        };
         AppDomain.CurrentDomain.UnhandledException += (_, e) => HandleAndExit(e.ExceptionObject as Exception);
     }
 
     private static void HandleAndExit(Exception exception)
     {
-        // Only the first crash is handled; another one while it's being handled exits right away instead of stacking up dialogs.
-        if (Interlocked.Exchange(ref _handling, 1) == 0)
+        // Only the first crash is handled. Exiting on another one, like the clock's timer failing again a second later, would close the first one's message before it could be read, so the UI thread goes back to showing it and a background thread waits for it to exit.
+        if (Interlocked.Exchange(ref _handling, 1) != 0)
         {
-            Settings.TrySaveIfLoaded();
-            var logPath = TryWriteLog(exception);
-            ShowMessage(logPath);
+            if (Application.Current?.Dispatcher.CheckAccess() != true)
+                Thread.Sleep(Timeout.Infinite);
+
+            return;
         }
+
+        // Each of those waiting threads would otherwise make room for a new one while the message is open, so keep the pool from growing.
+        ThreadPool.GetMaxThreads(out _, out var completionPortThreads);
+        ThreadPool.SetMaxThreads(Environment.ProcessorCount, completionPortThreads);
+
+        Settings.TrySaveIfLoaded();
+        var logPath = TryWriteLog(exception);
+        ShowMessage(logPath);
 
         // Staying open in an unknown state could leave a clock that looks fine but has stopped, so always close.
         Environment.Exit(1);
