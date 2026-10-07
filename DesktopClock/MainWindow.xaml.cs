@@ -95,7 +95,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            _trayIcon?.ShowNotification(Loc.Get("CopyFailedTitle"), Loc.Get("CopyFailedMessage"));
+            TryShowNotification(Loc.Get("CopyFailedTitle"), Loc.Get("CopyFailedMessage"));
         }
     }
 
@@ -282,7 +282,7 @@ public partial class MainWindow : Window
         {
             // Stop trying until the sound settings change, otherwise a bad file shows this on every tick.
             _soundPlayer = null;
-            _trayIcon?.ShowNotification(Loc.Get("SoundFailedTitle"), Loc.Get("SoundFailedMessage"));
+            TryShowNotification(Loc.Get("SoundFailedTitle"), Loc.Get("SoundFailedMessage"));
         }
     }
 
@@ -366,7 +366,7 @@ public partial class MainWindow : Window
 
         if (Settings.Default.StartHidden)
         {
-            _trayIcon?.ShowNotification(Loc.Get("StartHiddenTitle"), Loc.Get("StartHiddenMessage"));
+            TryShowNotification(Loc.Get("StartHiddenTitle"), Loc.Get("StartHiddenMessage"));
             this.HideFromScreen();
             ApplyWindowVisibilitySettings();
         }
@@ -471,6 +471,20 @@ public partial class MainWindow : Window
         e.Handled = true;
     }
 
+    /// <summary>
+    /// Shows a tray notification when the tray icon can, since a missing icon, like while Explorer restarts, shouldn't take the clock down with it.
+    /// </summary>
+    private void TryShowNotification(string title, string message)
+    {
+        try
+        {
+            _trayIcon?.ShowNotification(title, message);
+        }
+        catch
+        {
+        }
+    }
+
     private void OpenUrl(string url)
     {
         try
@@ -479,7 +493,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            _trayIcon?.ShowNotification(Loc.Get("OpenLinkFailedTitle"), url);
+            TryShowNotification(Loc.Get("OpenLinkFailedTitle"), url);
         }
     }
 }
