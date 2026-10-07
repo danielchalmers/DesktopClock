@@ -110,6 +110,15 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Brings the clock back after it was hidden or minimized.
+    /// </summary>
+    public void ShowClock()
+    {
+        WindowState = WindowState.Normal;
+        Activate();
+    }
+
+    /// <summary>
     /// Opens a new settings window or activates the existing one.
     /// </summary>
     [RelayCommand]
@@ -170,11 +179,7 @@ public partial class MainWindow : Window
             _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
             _trayIcon.ContextMenu.DataContext = this;
             _trayIcon.ForceCreate(enablesEfficiencyMode: false);
-            _trayIcon.TrayLeftMouseDoubleClick += (_, _) =>
-            {
-                WindowState = WindowState.Normal;
-                Activate();
-            };
+            _trayIcon.TrayLeftMouseDoubleClick += (_, _) => ShowClock();
         }
     }
 

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Markup;
@@ -18,6 +19,8 @@ public partial class App : Application
 {
     public static FileInfo MainFileInfo = new(Process.GetCurrentProcess().MainModule.FileName);
     public static string MainFileDisplayText = $"{Path.GetFileNameWithoutExtension(MainFileInfo.Name)} {FileVersionInfo.GetVersionInfo(MainFileInfo.FullName).FileVersion}";
+
+    private static EventWaitHandle _showClockSignal;
 
     static App()
     {
@@ -45,6 +48,18 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         CrashHandler.Register(this);
+
+        // One clock per exe: starting it again shows the running clock instead of adding a second one that shares its settings and tray icon. Clocks made with "New clock" are separate exes, so they still run side by side.
+        _showClockSignal = new EventWaitHandle(false, EventResetMode.AutoReset, "DesktopClock-" + GetSha256Hash(MainFileInfo.FullName), out var isFirst);
+        if (!isFirst)
+        {
+            _showClockSignal.Set();
+            Shutdown();
+            return;
+        }
+
+        ThreadPool.RegisterWaitForSingleObject(_showClockSignal, (_, _) => Dispatcher.BeginInvoke(new Action(() => (MainWindow as MainWindow)?.ShowClock())), null, Timeout.Infinite, false);
+
         base.OnStartup(e);
         ThemeManager.Initialize();
 
@@ -59,17 +74,6 @@ public partial class App : Application
     /// </summary>
     public static void SetRunOnStartup(bool runOnStartup)
     {
-        static string GetSha256Hash(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return string.Empty;
-
-            using var sha = new System.Security.Cryptography.SHA256Managed();
-            var textData = System.Text.Encoding.UTF8.GetBytes(text);
-            var hash = sha.ComputeHash(textData);
-            return BitConverter.ToString(hash).Replace("-", string.Empty);
-        }
-
         // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
         var keyName = GetSha256Hash(MainFileInfo.FullName);
 
@@ -86,6 +90,17 @@ public partial class App : Application
         catch
         {
         }
+    }
+
+    private static string GetSha256Hash(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
+        using var sha = new System.Security.Cryptography.SHA256Managed();
+        var textData = System.Text.Encoding.UTF8.GetBytes(text);
+        var hash = sha.ComputeHash(textData);
+        return BitConverter.ToString(hash).Replace("-", string.Empty);
     }
 
     /// <summary>
