@@ -1,0 +1,146 @@
+name: Smoke test
+
+description: Installs the MSI, checks that the app starts natively on the runner's architecture and keeps running without showing an error, and uninstalls it.
+
+inputs:
+  msi:
+    description: 'Path to the MSI'
+    required: true
+  exe:
+    description: 'Where the MSI installs the exe, such as %LOCALAPPDATA%\App\App.exe'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install, start and uninstall
+      shell: pwsh
+      env:
+        MSI: ${{ inputs.msi }}
+        EXE: ${{ inputs.exe }}
+      run: |
+        $ErrorActionPreference = 'Stop'
+        $out = (New-Item -ItemType Directory -Force smoke-test).FullName
+        $msi = (Resolve-Path $env:MSI).Path
+        $exe = [Environment]::ExpandEnvironmentVariables($env:EXE)
+        $name = [IO.Path]::GetFileNameWithoutExtension($exe)
+        $start = Get-Date
+
+        Add-Type -AssemblyName System.Drawing, System.Windows.Forms
+        Add-Type -TypeDefinition @'
+        using System;
+        using System.Collections.Generic;
+        using System.Runtime.InteropServices;
+        using System.Text;
+
+        public static class SmokeTest
+        {
+            [StructLayout(LayoutKind.Sequential)]
+            private struct ProcessMachineInformation { public ushort ProcessMachine; public ushort Reserved; public uint MachineAttributes; }
+
+            private delegate bool EnumWindowsProc(IntPtr hwnd, IntPtr lParam);
+
+            [DllImport("kernel32.dll", SetLastError = true)]
+            private static extern bool GetProcessInformation(IntPtr process, int infoClass, out ProcessMachineInformation info, int size);
+
+            [DllImport("user32.dll")]
+            private static extern bool EnumWindows(EnumWindowsProc callback, IntPtr lParam);
+
+            [DllImport("user32.dll")]
+            private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);
+
+            [DllImport("user32.dll")]
+            private static extern bool IsWindowVisible(IntPtr hwnd);
+
+            [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+            private static extern int GetClassName(IntPtr hwnd, StringBuilder name, int size);
+
+            [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+            private static extern int GetWindowText(IntPtr hwnd, StringBuilder text, int size);
+
+            // Unlike IsWow64Process2, this also tells an x64 process emulated on Arm64 apart from a native one.
+            public static ushort ProcessMachine(IntPtr process)
+            {
+                ProcessMachineInformation info;
+                if (!GetProcessInformation(process, 9, out info, Marshal.SizeOf(typeof(ProcessMachineInformation))))
+                    throw new System.ComponentModel.Win32Exception();
+                return info.ProcessMachine;
+            }
+
+            public static List<string> VisibleWindows(int processId)
+            {
+                var windows = new List<string>();
+                EnumWindows((hwnd, _) =>
+                {
+                    uint owner;
+                    GetWindowThreadProcessId(hwnd, out owner);
+                    if (owner == processId && IsWindowVisible(hwnd))
+                    {
+                        var className = new StringBuilder(256);
+                        var title = new StringBuilder(256);
+                        GetClassName(hwnd, className, className.Capacity);
+                        GetWindowText(hwnd, title, title.Capacity);
+                        windows.Add(className + " \"" + title + "\"");
+                    }
+                    return true;
+                }, IntPtr.Zero);
+                return windows;
+            }
+        }
+        '@
+
+        function Msi($arguments, $log) {
+          $p = Start-Process msiexec.exe -ArgumentList "$arguments /qn /l*v `"$out\$log`"" -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "msiexec $arguments failed with exit code $($p.ExitCode)" }
+        }
+
+        function Screenshot {
+          $bounds = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+          $bmp = New-Object System.Drawing.Bitmap $bounds.Width, $bounds.Height
+          $g = [System.Drawing.Graphics]::FromImage($bmp)
+          $g.CopyFromScreen($bounds.Location, [System.Drawing.Point]::Empty, $bounds.Size)
+          $bmp.Save("$out\screenshot.png")
+          $g.Dispose()
+          $bmp.Dispose()
+        }
+
+        try {
+          Msi "/i `"$msi`"" install.log
+          if (-not (Test-Path $exe)) { throw "The MSI didn't install $exe" }
+
+          # Not every installer starts its app after a silent install.
+          Start-Sleep 5
+          if (-not (Get-Process $name -ErrorAction SilentlyContinue)) { Start-Process $exe }
+
+          # Long enough to finish starting up and to show an error if it hit one.
+          Start-Sleep 20
+          $process = @(Get-Process $name -ErrorAction SilentlyContinue)
+          if ($process.Count -ne 1) { throw "Expected one $name process but found $($process.Count)" }
+
+          $expected = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 0xAA64 } else { 0x8664 }
+          $machine = [SmokeTest]::ProcessMachine($process[0].Handle)
+          if ($machine -ne $expected) { throw ('{0} is running as machine type 0x{1:X4} instead of 0x{2:X4}' -f $name, $machine, $expected) }
+
+          $windows = [SmokeTest]::VisibleWindows($process[0].Id)
+          "$name is running natively with these windows: $($windows -join ', ')"
+          # Message boxes use the standard dialog class, and each app's crash handler shows one before exiting.
+          if ($windows -match '^#32770 ') { throw "$name is showing a message box" }
+        }
+        catch {
+          Get-WinEvent -FilterHashtable @{ LogName = 'Application'; Level = 1, 2; StartTime = $start } -ErrorAction SilentlyContinue | Format-List TimeCreated, ProviderName, Message
+          throw
+        }
+        finally {
+          Screenshot
+          Get-Process $name -ErrorAction SilentlyContinue | Stop-Process -Force
+        }
+
+        Msi "/x `"$msi`"" uninstall.log
+        if (Test-Path $exe) { throw "Uninstalling didn't remove $exe" }
+
+    - uses: actions/upload-artifact@v7
+      if: always()
+      with:
+        name: smoke-test-${{ runner.arch }}
+        path: smoke-test/**
+        if-no-files-found: ignore

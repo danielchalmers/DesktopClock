@@ -1,0 +1,50 @@
+# Temporary: removed before merge.
+name: Arm64 probe
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: windows-11-arm
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: WPF render probe
+        shell: pwsh
+        run: |
+          foreach ($mode in 'Default', 'SoftwareOnly') {
+            powershell -NoProfile -STA -File .github/arm64-probe/probe.ps1 -Mode $mode
+            pwsh -NoProfile -STA -File .github/arm64-probe/probe.ps1 -Mode $mode
+          }
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: probe-screens
+          path: ${{ runner.temp }}/probe-*.png
+
+  tests:
+    runs-on: windows-11-arm
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: [DesktopClock, Network-Monitor, RadialActions, SentryDeck]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: danielchalmers/${{ matrix.repo }}
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Test
+        shell: bash
+        run: |
+          dotnet --info | head -20
+          dotnet test -c Release --logger "console;verbosity=normal" 2>&1 | tail -40
+          exit ${PIPESTATUS[0]}
