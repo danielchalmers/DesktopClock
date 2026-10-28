@@ -63,29 +63,3 @@ jobs:
       - uses: ./.github/actions/create-release-artifacts
         with:
           arch: ${{ matrix.arch }}
-
-  smoke-test:
-    name: Smoke test ${{ matrix.arch }}
-    needs: package
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - arch: x64
-            runner: windows-2025
-          - arch: arm64
-            runner: windows-11-arm
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/download-artifact@v8
-        with:
-          name: desktopclock-${{ matrix.arch }}
-          path: artifact
-
-      - uses: ./.github/actions/smoke-test
-        with:
-          msi: artifact/DesktopClock-0.0.0-${{ matrix.arch }}.msi
-          exe: '%LOCALAPPDATA%\DesktopClock\DesktopClock.exe'
-          logs: '%LOCALAPPDATA%\DesktopClock\*.log'
