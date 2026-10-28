@@ -30,16 +30,24 @@ $data.uFlags = 2 -bor 4
 $data.hIcon = [System.Drawing.SystemIcons]::Application.Handle
 $data.szTip = 'probe'
 
-$start = Get-Date
-while ($true) {
-  $elapsed = [int]((Get-Date) - $start).TotalSeconds
-  $tray = [Probe.Tray]::FindWindow('Shell_TrayWnd', $null)
-  $explorer = @(Get-Process explorer -ErrorAction SilentlyContinue).Count
+function TryAdd($label) {
   $ok = [Probe.Tray]::Shell_NotifyIcon(0, [ref]$data)
   $err = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
-  "t=${elapsed}s Shell_TrayWnd=$tray explorer=$explorer NIM_ADD=$ok lastError=$err"
-  if ($ok) { [void][Probe.Tray]::Shell_NotifyIcon(2, [ref]$data); break }
-  if ($elapsed -ge 90) { break }
-  Start-Sleep 5
+  if ($ok) { [void][Probe.Tray]::Shell_NotifyIcon(2, [ref]$data) }
+  "${label}: Shell_TrayWnd=$([Probe.Tray]::FindWindow('Shell_TrayWnd', $null)) explorer=$(@(Get-Process explorer -ErrorAction SilentlyContinue).Count) NIM_ADD=$ok lastError=$err"
+  "  windows: $((Get-Process | Where-Object MainWindowHandle -ne 0 | ForEach-Object { "$($_.ProcessName) '$($_.MainWindowTitle)'" }) -join '; ')"
 }
-"Top-level windows: $((Get-Process | Where-Object MainWindowHandle -ne 0 | ForEach-Object { "$($_.ProcessName) '$($_.MainWindowTitle)'" }) -join '; ')"
+
+TryAdd 'as found'
+
+Get-Process WWAHost -ErrorAction SilentlyContinue | Stop-Process -Force
+Start-Sleep 10
+TryAdd 'after closing WWAHost'
+
+Get-Process explorer -ErrorAction SilentlyContinue | Stop-Process -Force
+Start-Sleep 5
+if (-not (Get-Process explorer -ErrorAction SilentlyContinue)) { Start-Process explorer.exe }
+foreach ($wait in 5, 10, 15) {
+  Start-Sleep $wait
+  TryAdd "after restarting explorer (+${wait}s)"
+}

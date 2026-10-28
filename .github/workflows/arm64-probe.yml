@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [windows-2025, windows-11-arm]
+        runner: [windows-11-arm]
     steps:
       - uses: actions/checkout@v6
 
