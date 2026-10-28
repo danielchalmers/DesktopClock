@@ -8,22 +8,15 @@ permissions:
   contents: read
 
 jobs:
-  render:
-    runs-on: windows-11-arm
+  tray:
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-2025, windows-11-arm]
     steps:
       - uses: actions/checkout@v6
 
-      - name: WPF render probe
+      - name: Tray probe
         shell: pwsh
-        run: |
-          foreach ($mode in 'Default', 'SoftwareOnly') {
-            powershell -NoProfile -STA -File .github/arm64-probe/probe.ps1 -Mode $mode
-            pwsh -NoProfile -STA -File .github/arm64-probe/probe.ps1 -Mode $mode
-          }
-
-      - uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: probe-screens
-          path: ${{ runner.temp }}/probe-*.png
-
+        run: powershell -NoProfile -STA -File .github/arm64-probe/tray.ps1
