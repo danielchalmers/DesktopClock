@@ -15,15 +15,13 @@ runs:
   steps:
     - uses: actions/setup-dotnet@v5
 
-    # The installer takes its version from the exe and its exe from publish/<arch>, so it only needs the architecture.
-    # Building it for that architecture makes Windows refuse the Arm64 installer on an x64 PC instead of installing an exe that can't start.
-    # WiX v7 won't build until its OSMF EULA is accepted, and -acceptEula accepts it for this run only.
+    # Each installer is built for its own architecture, so Windows refuses to install the Arm64 one on an x64 PC instead of installing an app that can't start.
     - name: Create binaries
       shell: bash
       run: |
         dotnet tool install --global wix --version 7.0.1
         dotnet publish ./DesktopClock/DesktopClock.csproj -o "publish/${{ inputs.arch }}" -c Release --os win --arch "${{ inputs.arch }}" -p:Version="${{ inputs.version }}"
-        wix build Package.wxs -arch "${{ inputs.arch }}" -acceptEula wix7 -o "publish/DesktopClock-${{ inputs.version }}-${{ inputs.arch }}.msi"
+        wix build Product.wxs -arch "${{ inputs.arch }}" -acceptEula wix7 -o "publish/DesktopClock-${{ inputs.version }}-${{ inputs.arch }}.msi"
 
     - name: Create portable ZIP
       shell: pwsh

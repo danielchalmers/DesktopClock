@@ -13,7 +13,7 @@
     <!--Skips the System Restore point, which can hold a double-click install at "Please wait" for most of a minute and protects nothing in a per-user app folder-->
     <Property Id="MSIFASTINSTALL" Value="1" />
 
-    <!--The default schedule removes the old version before installing the new one, which a per-user upgrade needs to roll back cleanly. Same-version upgrades let one 0.0.0 build replace another-->
+    <!--The default schedule removes the old version before installing the new one, which a per-user upgrade needs to roll back cleanly-->
     <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.WixDowngradePreventedMessage)" />
 
     <MediaTemplate EmbedCab="yes" />
@@ -25,7 +25,6 @@
 
     <File Id="DesktopClock.exe" Source="publish\$(sys.BUILDARCH)\DesktopClock.exe" />
 
-    <!--Start menu shortcut, which needs a registry key path in a per-user install. Its target is the folder path rather than [#DesktopClock.exe], which ICE69 flags because the exe is in another component. Its component also removes the install folder once it's empty-->
     <StandardDirectory Id="ProgramMenuFolder">
       <Component>
         <Shortcut Name="DesktopClock" Target="[INSTALLFOLDER]DesktopClock.exe" WorkingDirectory="INSTALLFOLDER" />
@@ -34,7 +33,7 @@
       </Component>
     </StandardDirectory>
 
-    <!--Starts the clock after installing or upgrading, including silent installs. Started through Explorer so the clock gets the user's environment instead of the Windows Installer service's-->
+    <!--Started through Explorer so the clock gets the user's environment instead of the Windows Installer service's-->
     <CustomAction Id="LaunchApp" Directory="INSTALLFOLDER" ExeCommand="&quot;[WindowsFolder]explorer.exe&quot; &quot;[#DesktopClock.exe]&quot;" Return="asyncNoWait" />
 
     <InstallExecuteSequence>
