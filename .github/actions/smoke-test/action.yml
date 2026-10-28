@@ -9,6 +9,9 @@ inputs:
   exe:
     description: 'Where the MSI installs the exe, such as %LOCALAPPDATA%\App\App.exe'
     required: true
+  logs:
+    description: 'Log files to print if the test fails, such as %LOCALAPPDATA%\App\*.log'
+    default: ''
 
 runs:
   using: "composite"
@@ -18,6 +21,7 @@ runs:
       env:
         MSI: ${{ inputs.msi }}
         EXE: ${{ inputs.exe }}
+        LOGS: ${{ inputs.logs }}
       run: |
         $ErrorActionPreference = 'Stop'
         $out = (New-Item -ItemType Directory -Force smoke-test).FullName
@@ -165,6 +169,15 @@ runs:
             $i++
           }
           if ($messageBox) { throw "$name is showing a message box" }
+        }
+        catch {
+          if ($env:LOGS) {
+            Get-ChildItem ([Environment]::ExpandEnvironmentVariables($env:LOGS)) -ErrorAction SilentlyContinue | ForEach-Object {
+              "== $($_.FullName)"
+              Get-Content $_.FullName
+            }
+          }
+          throw
         }
         finally {
           Get-Process $name -ErrorAction SilentlyContinue | Stop-Process -Force

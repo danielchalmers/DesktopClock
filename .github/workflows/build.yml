@@ -79,3 +79,4 @@ jobs:
         with:
           msi: artifact/DesktopClock-0.0.0-${{ matrix.arch }}.msi
           exe: '%LOCALAPPDATA%\DesktopClock\DesktopClock.exe'
+          logs: '%LOCALAPPDATA%\DesktopClock\*.log'
