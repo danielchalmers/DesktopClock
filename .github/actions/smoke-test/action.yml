@@ -126,7 +126,7 @@ runs:
           if ($p.ExitCode -ne 0) { throw "msiexec $arguments failed with exit code $($p.ExitCode)" }
         }
 
-        # Captures the window itself rather than the screen, since the Arm64 runner opens Windows' privacy settings over everything (actions/runner-images#14069).
+        # Captures the window itself rather than the screen, which other windows can cover.
         function Capture($hwnd, $path) {
           $rect = New-Object SmokeTest+Rect
           [void][SmokeTest]::GetWindowRect($hwnd, [ref]$rect)
@@ -140,6 +140,14 @@ runs:
           $bmp.Dispose()
         }
 
+        # The Arm64 runner signs in to Windows' privacy settings screen (actions/runner-images#14069), and the shell refuses notification area icons until it closes.
+        $privacyScreen = Get-Process WWAHost -ErrorAction SilentlyContinue
+        if ($privacyScreen) {
+          $privacyScreen | Stop-Process -Force
+          Start-Sleep 10
+        }
+
+        $start = Get-Date
         try {
           Msi "/i `"$msi`"" install.log
           if (-not (Test-Path $exe)) { throw "The MSI didn't install $exe" }
@@ -171,6 +179,7 @@ runs:
           if ($messageBox) { throw "$name is showing a message box" }
         }
         catch {
+          Get-WinEvent -FilterHashtable @{ LogName = 'Application'; Level = 1, 2; StartTime = $start } -ErrorAction SilentlyContinue | Format-List TimeCreated, ProviderName, Message
           if ($env:LOGS) {
             Get-ChildItem ([Environment]::ExpandEnvironmentVariables($env:LOGS)) -ErrorAction SilentlyContinue | ForEach-Object {
               "== $($_.FullName)"
