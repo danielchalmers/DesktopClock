@@ -1,6 +1,6 @@
 name: Smoke test
 
-description: Installs the MSI, checks that the app starts natively on the runner's architecture and keeps running without showing an error, and uninstalls it.
+description: Installs the MSI, checks that the app starts natively on the runner's architecture and keeps running without showing a message box, and uninstalls it.
 
 inputs:
   msi:
@@ -24,9 +24,8 @@ runs:
         $msi = (Resolve-Path $env:MSI).Path
         $exe = [Environment]::ExpandEnvironmentVariables($env:EXE)
         $name = [IO.Path]::GetFileNameWithoutExtension($exe)
-        $start = Get-Date
 
-        Add-Type -AssemblyName System.Drawing, System.Windows.Forms
+        Add-Type -AssemblyName System.Drawing
         Add-Type -TypeDefinition @'
         using System;
         using System.Collections.Generic;
@@ -38,6 +37,9 @@ runs:
             [StructLayout(LayoutKind.Sequential)]
             private struct ProcessMachineInformation { public ushort ProcessMachine; public ushort Reserved; public uint MachineAttributes; }
 
+            [StructLayout(LayoutKind.Sequential)]
+            public struct Rect { public int Left, Top, Right, Bottom; }
+
             private delegate bool EnumWindowsProc(IntPtr hwnd, IntPtr lParam);
 
             [DllImport("kernel32.dll", SetLastError = true)]
@@ -45,6 +47,9 @@ runs:
 
             [DllImport("user32.dll")]
             private static extern bool EnumWindows(EnumWindowsProc callback, IntPtr lParam);
+
+            [DllImport("user32.dll")]
+            private static extern bool EnumChildWindows(IntPtr parent, EnumWindowsProc callback, IntPtr lParam);
 
             [DllImport("user32.dll")]
             private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);
@@ -58,6 +63,12 @@ runs:
             [DllImport("user32.dll", CharSet = CharSet.Unicode)]
             private static extern int GetWindowText(IntPtr hwnd, StringBuilder text, int size);
 
+            [DllImport("user32.dll")]
+            public static extern bool GetWindowRect(IntPtr hwnd, out Rect rect);
+
+            [DllImport("user32.dll")]
+            public static extern bool PrintWindow(IntPtr hwnd, IntPtr hdc, uint flags);
+
             // Unlike IsWow64Process2, this also tells an x64 process emulated on Arm64 apart from a native one.
             public static ushort ProcessMachine(IntPtr process)
             {
@@ -67,24 +78,41 @@ runs:
                 return info.ProcessMachine;
             }
 
-            public static List<string> VisibleWindows(int processId)
+            public static List<IntPtr> VisibleWindows(int processId)
             {
-                var windows = new List<string>();
+                var windows = new List<IntPtr>();
                 EnumWindows((hwnd, _) =>
                 {
                     uint owner;
                     GetWindowThreadProcessId(hwnd, out owner);
                     if (owner == processId && IsWindowVisible(hwnd))
-                    {
-                        var className = new StringBuilder(256);
-                        var title = new StringBuilder(256);
-                        GetClassName(hwnd, className, className.Capacity);
-                        GetWindowText(hwnd, title, title.Capacity);
-                        windows.Add(className + " \"" + title + "\"");
-                    }
+                        windows.Add(hwnd);
                     return true;
                 }, IntPtr.Zero);
                 return windows;
+            }
+
+            public static string ClassName(IntPtr hwnd)
+            {
+                var name = new StringBuilder(256);
+                GetClassName(hwnd, name, name.Capacity);
+                return name.ToString();
+            }
+
+            // A window's title and the text of its child controls, which for a message box is its message.
+            public static string Text(IntPtr hwnd)
+            {
+                var texts = new List<string>();
+                EnumWindowsProc add = (child, _) =>
+                {
+                    var text = new StringBuilder(4096);
+                    if (GetWindowText(child, text, text.Capacity) > 0)
+                        texts.Add(text.ToString());
+                    return true;
+                };
+                add(hwnd, IntPtr.Zero);
+                EnumChildWindows(hwnd, add, IntPtr.Zero);
+                return string.Join(" | ", texts);
             }
         }
         '@
@@ -94,13 +122,17 @@ runs:
           if ($p.ExitCode -ne 0) { throw "msiexec $arguments failed with exit code $($p.ExitCode)" }
         }
 
-        function Screenshot {
-          $bounds = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
-          $bmp = New-Object System.Drawing.Bitmap $bounds.Width, $bounds.Height
+        # Captures the window itself rather than the screen, since the Arm64 runner opens Windows' privacy settings over everything (actions/runner-images#14069).
+        function Capture($hwnd, $path) {
+          $rect = New-Object SmokeTest+Rect
+          [void][SmokeTest]::GetWindowRect($hwnd, [ref]$rect)
+          $bmp = New-Object System.Drawing.Bitmap ([Math]::Max(1, $rect.Right - $rect.Left)), ([Math]::Max(1, $rect.Bottom - $rect.Top))
           $g = [System.Drawing.Graphics]::FromImage($bmp)
-          $g.CopyFromScreen($bounds.Location, [System.Drawing.Point]::Empty, $bounds.Size)
-          $bmp.Save("$out\screenshot.png")
+          $hdc = $g.GetHdc()
+          [void][SmokeTest]::PrintWindow($hwnd, $hdc, 2)
+          $g.ReleaseHdc($hdc)
           $g.Dispose()
+          $bmp.Save($path)
           $bmp.Dispose()
         }
 
@@ -120,18 +152,21 @@ runs:
           $expected = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 0xAA64 } else { 0x8664 }
           $machine = [SmokeTest]::ProcessMachine($process[0].Handle)
           if ($machine -ne $expected) { throw ('{0} is running as machine type 0x{1:X4} instead of 0x{2:X4}' -f $name, $machine, $expected) }
+          "$name is running natively"
 
-          $windows = [SmokeTest]::VisibleWindows($process[0].Id)
-          "$name is running natively with these windows: $($windows -join ', ')"
-          # Message boxes use the standard dialog class, and each app's crash handler shows one before exiting.
-          if ($windows -match '^#32770 ') { throw "$name is showing a message box" }
-        }
-        catch {
-          Get-WinEvent -FilterHashtable @{ LogName = 'Application'; Level = 1, 2; StartTime = $start } -ErrorAction SilentlyContinue | Format-List TimeCreated, ProviderName, Message
-          throw
+          $messageBox = $false
+          $i = 0
+          foreach ($hwnd in [SmokeTest]::VisibleWindows($process[0].Id)) {
+            $class = [SmokeTest]::ClassName($hwnd)
+            "Window $i ($class): $([SmokeTest]::Text($hwnd))"
+            Capture $hwnd "$out\window-$i.png"
+            # Message boxes use the standard dialog class, and each app's crash handler shows one before exiting.
+            if ($class -eq '#32770') { $messageBox = $true }
+            $i++
+          }
+          if ($messageBox) { throw "$name is showing a message box" }
         }
         finally {
-          Screenshot
           Get-Process $name -ErrorAction SilentlyContinue | Stop-Process -Force
         }
 
