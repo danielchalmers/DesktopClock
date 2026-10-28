@@ -3,13 +3,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
-using System.Windows.Interop;
 using System.Windows.Markup;
-using System.Windows.Media;
 using DesktopClock.Utilities;
 using Microsoft.Win32;
 
@@ -51,10 +48,6 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         CrashHandler.Register(this);
-
-        // WPF's hardware rendering has open Arm64 bugs that reach the clock's transparent window: red and blue trade places (dotnet/wpf#11847), and the app crashes when the GPU is suspended mid-frame (dotnet/wpf#11471). Other architectures don't have them, so only Arm64 draws in software, until they're fixed.
-        if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
-            RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
         // One clock per exe: starting it again shows the running clock instead of adding a second one that shares its settings and tray icon. Clocks made with "New clock" are separate exes, so they still run side by side.
         _showClockSignal = new EventWaitHandle(false, EventResetMode.AutoReset, "DesktopClock-" + GetSha256Hash(MainFileInfo.FullName), out var isFirst);
