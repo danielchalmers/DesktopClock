@@ -361,6 +361,7 @@ public partial class MainWindow : Window
     {
         this.SetPlacement(Settings.Default.Placement);
         PixelShifter?.UpdateBasePosition(this);
+        this.SnapWhileDragging();
 
         // Apply click-through setting.
         this.SetClickThrough(Settings.Default.ClickThrough);
