@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using DesktopClock.Properties;
 
 namespace DesktopClock;
 
@@ -42,7 +43,7 @@ public static class WindowSnapper
             switch (msg)
             {
                 // Find the other clocks once per drag, since they don't move while the mouse button is held.
-                case WM_ENTERSIZEMOVE:
+                case WM_ENTERSIZEMOVE when Settings.Default.SnapToEdges:
                     clocks = GetOtherClocks(hwnd, window.Title);
                     snap = default;
                     break;

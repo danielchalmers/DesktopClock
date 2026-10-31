@@ -223,6 +223,12 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Pindahkan jam dengan menyeretnya atau dengan tombol panah.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Tempelkan ke tepi</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Sejajarkan jam dengan tepi layar, bilah tugas, dan jam lain saat Anda menyeretnya ke dekatnya.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Rata kanan</value>
   </data>

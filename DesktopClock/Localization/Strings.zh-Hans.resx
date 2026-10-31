@@ -223,6 +223,12 @@
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>拖动或使用方向键来移动时钟。</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>贴靠边缘</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>将时钟拖近时，使其与屏幕边缘、任务栏和其他时钟对齐。</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>右对齐</value>
   </data>

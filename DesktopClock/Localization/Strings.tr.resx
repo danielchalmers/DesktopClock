@@ -223,6 +223,12 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Saati sürükleyerek veya ok tuşlarıyla taşıyın.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Kenarlara yapıştır</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Saati yakınlarına sürüklediğinizde ekranın kenarlarına, görev çubuğuna ve diğer saatlere hizalayın.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Sağa hizala</value>
   </data>
