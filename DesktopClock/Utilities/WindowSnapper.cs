@@ -17,7 +17,7 @@ public static class WindowSnapper
     /// <summary>
     /// How close an edge has to be, in device-independent units, for the window to snap to it.
     /// </summary>
-    public const double SnapDistance = 10;
+    public const double SnapDistance = 5;
 
     private const int WM_MOVING = 0x0216;
     private const int WM_ENTERSIZEMOVE = 0x0231;
