@@ -235,6 +235,12 @@
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
+                    <CheckBox Content="{local:Loc SnapToEdges}"
+                              IsChecked="{Binding Settings.SnapToEdges, Mode=TwoWay}" />
+                    <TextBlock Text="{local:Loc SnapToEdgesDescription}"
+                               Margin="0,0,0,16"
+                               Style="{StaticResource DescriptionTextBlock}" />
+
                     <CheckBox Content="{local:Loc AlignRight}"
                               IsChecked="{Binding Settings.RightAligned, Mode=TwoWay}" />
                     <TextBlock Text="{local:Loc AlignRightDescription}"

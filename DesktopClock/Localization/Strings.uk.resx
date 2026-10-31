@@ -223,6 +223,12 @@
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Переміщувати годинник перетягуванням або клавішами зі стрілками.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Прив’язка до країв</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Вирівнювати годинник за краями екрана, панеллю завдань та іншими годинниками, коли ви підтягуєте його близько.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Вирівнювати праворуч</value>
   </data>

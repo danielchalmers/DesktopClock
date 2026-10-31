@@ -223,6 +223,12 @@ Si le problème persiste, signalez-le via ce lien.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Déplacer l'horloge en la faisant glisser ou avec les touches fléchées.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Aimanter aux bords</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Aligner l'horloge sur les bords de l'écran, la barre des tâches et les autres horloges quand vous la faites glisser à proximité.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Aligner à droite</value>
   </data>
