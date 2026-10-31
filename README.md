@@ -13,6 +13,7 @@ DesktopClock is a free, open-source digital clock widget for Windows. It keeps t
 - Show any time zone, or count down to a date with an optional sound.
 - Theme presets, custom fonts, colors, opacity, and background images.
 - Run on startup, chime on an interval, and burn-in mitigation for OLED screens.
+- Follows your Windows language, with translations for 16 languages.
 
 ## 🚀 Get Started
 

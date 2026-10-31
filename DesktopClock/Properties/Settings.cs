@@ -1,7 +1,10 @@
-using System;
+﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Media;
+using System.Windows.Threading;
 using DesktopClock.Utilities;
 using Newtonsoft.Json;
 using WpfWindowPlacement;
@@ -11,6 +14,8 @@ namespace DesktopClock.Properties;
 public sealed class Settings : INotifyPropertyChanged, IDisposable
 {
     private readonly FileSystemWatcher _watcher;
+    private readonly DispatcherTimer _saveTimer;
+    private bool _populatingFromFile;
     private string _resolvedTimeZoneId;
     private TimeZoneInfo _resolvedTimeZone;
     private static readonly Lazy<Settings> _default = new(LoadAndAttemptSave);
@@ -40,6 +45,23 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             EnableRaisingEvents = true,
         };
         _watcher.Changed += FileChanged;
+
+        // Save shortly after a change instead of only on exit, so a crash, a forced close, or a shutdown that doesn't let the app exit normally only loses the last moment of changes. The short wait groups rapid changes, like dragging a slider, into one save.
+        _saveTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _saveTimer.Tick += (_, _) =>
+        {
+            _saveTimer.Stop();
+            Save();
+        };
+        PropertyChanged += (_, _) =>
+        {
+            // Values that were just read from the file are already saved.
+            if (!CanBeSaved || _populatingFromFile)
+                return;
+
+            _saveTimer.Stop();
+            _saveTimer.Start();
+        };
     }
 
 #pragma warning disable CS0067 // The event 'Settings.PropertyChanged' is never used. Handled by Fody.
@@ -65,6 +87,23 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public static bool CanBeSaved { get; private set; }
 
     /// <summary>
+    /// Saves one last time if the settings were loaded and can be saved, without throwing, for when the app is about to close after a crash.
+    /// </summary>
+    public static void TrySaveIfLoaded()
+    {
+        if (!_default.IsValueCreated || !CanBeSaved)
+            return;
+
+        try
+        {
+            Default.Save();
+        }
+        catch
+        {
+        }
+    }
+
+    /// <summary>
     /// Checks if the settings file exists on the disk.
     /// </summary>
     public static bool Exists => File.Exists(FilePath);
@@ -79,7 +118,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// Change it when you want a different arrangement, such as adding the weekday, seconds, or a shorter date.
     /// See: <see href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings">Custom date and time format strings</see>.
     /// </remarks>
-    public string Format { get; set; } = "{ddd}, {MMM dd}, {h:mm:ss tt}";
+    public string Format { get; set; } = FormatPresets.DefaultClockFormat(CultureInfo.CurrentCulture);
 
     /// <summary>
     /// Format string used while <see cref="CountdownTo"/> is enabled.
@@ -441,7 +480,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             {
                 try
                 {
-                    File.WriteAllText(FilePath, json);
+                    WriteAllTextAtomically(FilePath, json);
                     return true;
                 }
                 catch
@@ -464,6 +503,34 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
+    /// Writes to a temporary file and then swaps it in, so the file is never left empty or half-written if the app is killed mid-save, such as during a Windows shutdown (#7).
+    /// </summary>
+    private static void WriteAllTextAtomically(string path, string contents)
+    {
+        var tempPath = path + ".tmp";
+
+        using (var stream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
+        using (var writer = new StreamWriter(stream))
+        {
+            writer.Write(contents);
+            writer.Flush();
+
+            // Make sure the new contents are on disk before they replace the old ones.
+            stream.Flush(flushToDisk: true);
+        }
+
+        // Swap it in with a single rename; File.Replace isn't safe here because it renames the old file away first, so being killed in between leaves no settings file at all.
+        if (!MoveFileEx(tempPath, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
+            throw new IOException($"Couldn't replace {path}.", Marshal.GetHRForLastWin32Error());
+    }
+
+    private const int MOVEFILE_REPLACE_EXISTING = 0x1;
+    private const int MOVEFILE_WRITE_THROUGH = 0x8;
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern bool MoveFileEx(string existingFileName, string newFileName, int flags);
+
+    /// <summary>
     /// Populates the given settings with values from the default path.
     /// </summary>
     private static void Populate(Settings settings)
@@ -480,15 +547,27 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     private static Settings LoadFromFile()
     {
-        try
+        var settings = new Settings();
+
+        // The file can be locked for a moment, such as while antivirus scans it at sign-in, and falling back to defaults here would save them over every setting. Give it about as long as saving does before giving up.
+        for (var attempt = 1; ; attempt++)
         {
-            var settings = new Settings();
-            Populate(settings);
-            return settings;
-        }
-        catch
-        {
-            return new();
+            try
+            {
+                Populate(settings);
+                return settings;
+            }
+            catch (IOException) when (attempt < 4 && Exists)
+            {
+                System.Threading.Thread.Sleep(250);
+            }
+            catch
+            {
+                // Nothing could be read, including when there's no file yet, so start like a first run with colors that match the system theme.
+                var defaults = new Settings();
+                defaults.ApplySystemThemeDefaultsIfAvailable();
+                return defaults;
+            }
         }
     }
 
@@ -498,12 +577,6 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     private static Settings LoadAndAttemptSave()
     {
         var settings = LoadFromFile();
-
-        if (!File.Exists(FilePath))
-        {
-            settings.ApplySystemThemeDefaultsIfAvailable();
-        }
-
         CanBeSaved = settings.Save();
 
         return settings;
@@ -514,13 +587,24 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     private void FileChanged(object sender, FileSystemEventArgs e)
     {
-        try
+        // Reload on the thread that saves and cancel any save still waiting from an earlier change, so it can't write a half-reloaded file or put old values back over the edit.
+        _saveTimer.Dispatcher.BeginInvoke(new Action(() =>
         {
-            Populate(this);
-        }
-        catch
-        {
-        }
+            _saveTimer.Stop();
+
+            try
+            {
+                _populatingFromFile = true;
+                Populate(this);
+            }
+            catch
+            {
+            }
+            finally
+            {
+                _populatingFromFile = false;
+            }
+        }));
     }
 
     private void ApplySystemThemeDefaultsIfAvailable()

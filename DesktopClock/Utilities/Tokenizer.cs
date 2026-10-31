@@ -6,7 +6,7 @@ namespace DesktopClock;
 public static class Tokenizer
 {
     private static readonly Regex _tokenizerRegex = new("{([^{}]+)}", RegexOptions.Compiled);
-    public const string FormatErrorMessage = "Bad format";
+    public static string FormatErrorMessage => Loc.Get("BadFormat");
 
     /// <summary>
     /// <para>Returns a string formatted using a tokenized format or the default formatting method.</para>

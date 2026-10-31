@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Markup;
 using DesktopClock.Utilities;
 using Microsoft.Win32;
 
@@ -16,8 +20,46 @@ public partial class App : Application
     public static FileInfo MainFileInfo = new(Process.GetCurrentProcess().MainModule.FileName);
     public static string MainFileDisplayText = $"{Path.GetFileNameWithoutExtension(MainFileInfo.Name)} {FileVersionInfo.GetVersionInfo(MainFileInfo.FullName).FileVersion}";
 
+    private static EventWaitHandle _showClockSignal;
+
+    static App()
+    {
+        // WPF treats all text as en-US unless told otherwise, which draws Chinese with a mix of Japanese and Traditional Chinese fallback fonts. Text runs (TextElement) don't inherit a FrameworkElement default, so they need the same override. This must run before any element is created.
+        var language = XmlLanguage.GetLanguage(TextCulture().IetfLanguageTag);
+        FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(language));
+        FrameworkContentElement.LanguageProperty.OverrideMetadata(typeof(TextElement), new FrameworkPropertyMetadata(language));
+    }
+
+    /// <summary>
+    /// The language on-screen text is in, which decides the fallback fonts for Chinese, Japanese, and Korean: the language of the translation being shown, unless only the regional format is East Asian, because then the East Asian text on screen is the dates and times.
+    /// </summary>
+    internal static CultureInfo TextCulture()
+    {
+        var display = CultureInfo.CurrentUICulture;
+        var translation = Loc.TranslationLanguage(display);
+        if (translation != display.TwoLetterISOLanguageName)
+            display = CultureInfo.GetCultureInfo(translation);
+
+        return !IsEastAsian(display) && IsEastAsian(CultureInfo.CurrentCulture) ? CultureInfo.CurrentCulture : display;
+    }
+
+    private static bool IsEastAsian(CultureInfo culture) => culture.TwoLetterISOLanguageName is "zh" or "ja" or "ko";
+
     protected override void OnStartup(StartupEventArgs e)
     {
+        CrashHandler.Register(this);
+
+        // One clock per exe: starting it again shows the running clock instead of adding a second one that shares its settings and tray icon. Clocks made with "New clock" are separate exes, so they still run side by side.
+        _showClockSignal = new EventWaitHandle(false, EventResetMode.AutoReset, "DesktopClock-" + GetSha256Hash(MainFileInfo.FullName), out var isFirst);
+        if (!isFirst)
+        {
+            _showClockSignal.Set();
+            Shutdown();
+            return;
+        }
+
+        ThreadPool.RegisterWaitForSingleObject(_showClockSignal, (_, _) => Dispatcher.BeginInvoke(new Action(() => (MainWindow as MainWindow)?.ShowClock())), null, Timeout.Infinite, false);
+
         base.OnStartup(e);
         ThemeManager.Initialize();
 
@@ -32,25 +74,33 @@ public partial class App : Application
     /// </summary>
     public static void SetRunOnStartup(bool runOnStartup)
     {
-        static string GetSha256Hash(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return string.Empty;
-
-            using var sha = new System.Security.Cryptography.SHA256Managed();
-            var textData = System.Text.Encoding.UTF8.GetBytes(text);
-            var hash = sha.ComputeHash(textData);
-            return BitConverter.ToString(hash).Replace("-", string.Empty);
-        }
-
         // Use the path as the name so we can handle multiple exes, but hash it or Windows won't like it.
         var keyName = GetSha256Hash(MainFileInfo.FullName);
-        using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
-        if (runOnStartup)
-            key?.SetValue(keyName, MainFileInfo.FullName);
-        else
-            key?.DeleteValue(keyName, false);
+        // A policy can make the key read-only, and the clock should keep running either way.
+        try
+        {
+            using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+
+            if (runOnStartup)
+                key?.SetValue(keyName, MainFileInfo.FullName);
+            else
+                key?.DeleteValue(keyName, false);
+        }
+        catch
+        {
+        }
+    }
+
+    private static string GetSha256Hash(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
+        using var sha = new System.Security.Cryptography.SHA256Managed();
+        var textData = System.Text.Encoding.UTF8.GetBytes(text);
+        var hash = sha.ComputeHash(textData);
+        return BitConverter.ToString(hash).Replace("-", string.Empty);
     }
 
     /// <summary>

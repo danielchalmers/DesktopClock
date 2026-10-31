@@ -1,12 +1,40 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 
 namespace DesktopClock;
 
 public static class WindowUtil
 {
+    /// <summary>
+    /// How far one arrow key press moves the window.
+    /// </summary>
+    public const double NudgeStep = 1;
+
+    /// <summary>
+    /// How far an arrow key press moves the window while Shift is held.
+    /// </summary>
+    public const double LargeNudgeStep = 10;
+
+    /// <summary>
+    /// Returns how far an arrow key should move the window, or zero for other keys.
+    /// </summary>
+    public static Vector GetKeyboardNudge(Key key, ModifierKeys modifiers)
+    {
+        var step = modifiers == ModifierKeys.Shift ? LargeNudgeStep : NudgeStep;
+
+        return key switch
+        {
+            Key.Left => new Vector(-step, 0),
+            Key.Right => new Vector(step, 0),
+            Key.Up => new Vector(0, -step),
+            Key.Down => new Vector(0, step),
+            _ => default,
+        };
+    }
+
     private const int GWL_EXSTYLE = -20;
     private const int WS_EX_TRANSPARENT = 0x00000020;
     private const int WS_EX_TOOLWINDOW = 0x00000080;

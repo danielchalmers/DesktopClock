@@ -27,6 +27,7 @@ public partial class MainWindow : Window
     private TimeZoneInfo _timeZone;
     private SoundPlayer _soundPlayer;
     private PixelShifter _pixelShifter;
+    private bool _toldHowToShow;
     private FullscreenHideManager _fullscreenHideManager;
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
@@ -47,6 +48,10 @@ public partial class MainWindow : Window
         Settings.Default.PropertyChanged += _settingsPropertyChanged;
 
         ApplyWindowVisibilitySettings();
+
+        // Point the startup entry at this exe again, since a portable copy may have been moved since it was turned on.
+        if (Settings.Default.RunOnStartup)
+            App.SetRunOnStartup(true);
 
         // Restore the last displayed text so the window starts near its previous size.
         CurrentTimeOrCountdownString = Settings.Default.LastDisplay;
@@ -91,7 +96,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            _trayIcon?.ShowNotification("Copy failed", "Couldn't update the clipboard. Try again.");
+            TryShowNotification(Loc.Get("CopyFailedTitle"), Loc.Get("CopyFailedMessage"));
         }
     }
 
@@ -103,6 +108,22 @@ public partial class MainWindow : Window
     {
         this.HideFromScreen();
         ApplyWindowVisibilitySettings();
+
+        // Without a taskbar button the tray icon is the only way back, so say so the first time.
+        if (!_toldHowToShow && (!Settings.Default.ShowInTaskbar || Settings.Default.HideFromAltTab))
+        {
+            _toldHowToShow = true;
+            TryShowNotification(Loc.Get("StartHiddenTitle"), Loc.Get("StartHiddenMessage"));
+        }
+    }
+
+    /// <summary>
+    /// Brings the clock back after it was hidden or minimized.
+    /// </summary>
+    public void ShowClock()
+    {
+        WindowState = WindowState.Normal;
+        Activate();
     }
 
     /// <summary>
@@ -166,11 +187,7 @@ public partial class MainWindow : Window
             _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
             _trayIcon.ContextMenu.DataContext = this;
             _trayIcon.ForceCreate(enablesEfficiencyMode: false);
-            _trayIcon.TrayLeftMouseDoubleClick += (_, _) =>
-            {
-                WindowState = WindowState.Normal;
-                Activate();
-            };
+            _trayIcon.TrayLeftMouseDoubleClick += (_, _) => ShowClock();
         }
     }
 
@@ -198,6 +215,10 @@ public partial class MainWindow : Window
 
             case nameof(Settings.Default.ClickThrough):
                 this.SetClickThrough(Settings.Default.ClickThrough);
+                break;
+
+            case nameof(Settings.Default.RunOnStartup):
+                App.SetRunOnStartup(Settings.Default.RunOnStartup);
                 break;
 
             case nameof(Settings.Default.HideWhenFullscreen):
@@ -270,7 +291,9 @@ public partial class MainWindow : Window
         }
         catch
         {
-            _trayIcon?.ShowNotification("Alert sound unavailable", "The WAV file couldn't be played.");
+            // Stop trying until the sound settings change, otherwise a bad file shows this on every tick.
+            _soundPlayer = null;
+            TryShowNotification(Loc.Get("SoundFailedTitle"), Loc.Get("SoundFailedMessage"));
         }
     }
 
@@ -318,13 +341,13 @@ public partial class MainWindow : Window
             Settings.Default.CountdownTo,
             Settings.Default.Format,
             Settings.Default.CountdownFormat,
-            CultureInfo.DefaultThreadCurrentCulture);
+            CultureInfo.CurrentCulture);
     }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        // Drag the window to move it.
-        if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove)
+        // Drag the window to move it. DragMove throws if the left button isn't down anymore, which can happen with touch or pen input, so check it first.
+        if (e.ChangedButton == MouseButton.Left && Settings.Default.DragToMove && Mouse.LeftButton == MouseButtonState.Pressed)
         {
             // Pause time updates to maintain placement.
             PixelShifter?.ClearShift(this);
@@ -332,6 +355,7 @@ public partial class MainWindow : Window
 
             DragMove();
             PixelShifter?.UpdateBasePosition(this);
+            Settings.Default.Placement = this.GetPlacement();
             UpdateTimeString();
 
             _systemClockTimer.Start();
@@ -371,7 +395,8 @@ public partial class MainWindow : Window
 
         if (Settings.Default.StartHidden)
         {
-            _trayIcon?.ShowNotification("Running in the background", "Double-click the tray icon to show the clock.");
+            _toldHowToShow = true;
+            TryShowNotification(Loc.Get("StartHiddenTitle"), Loc.Get("StartHiddenMessage"));
             this.HideFromScreen();
             ApplyWindowVisibilitySettings();
         }
@@ -387,10 +412,7 @@ public partial class MainWindow : Window
         if (!Settings.CanBeSaved)
         {
             MessageBox.Show(this,
-                "Settings can't be saved due to an access error.\n\n" +
-                $"Make sure {Title} is in a folder that doesn't require admin privileges, " +
-                "and that you got it from the original source: https://github.com/danielchalmers/DesktopClock.\n\n" +
-                "If the problem persists, create a new issue at the link with as many details as possible.",
+                Loc.Get("CantSaveSettingsMessage"),
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
@@ -407,8 +429,6 @@ public partial class MainWindow : Window
 
         if (Settings.CanBeSaved)
             Settings.Default.Save();
-
-        App.SetRunOnStartup(Settings.Default.RunOnStartup);
 
         _trayIcon?.Dispose();
     }
@@ -438,17 +458,69 @@ public partial class MainWindow : Window
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
-        if (Keyboard.Modifiers == ModifierKeys.Control)
+        // Shift is allowed because "+" needs it on many keyboards, like Ctrl+Shift+= on US layouts.
+        if (Keyboard.Modifiers is ModifierKeys.Control or (ModifierKeys.Control | ModifierKeys.Shift))
         {
             switch (e.Key)
             {
                 case Key.OemMinus:
+                case Key.Subtract:
                     Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, -1);
                     break;
                 case Key.OemPlus:
+                case Key.Add:
                     Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, 1);
                     break;
             }
+        }
+        else if (Keyboard.Modifiers is ModifierKeys.None or ModifierKeys.Shift)
+        {
+            NudgeWindow(e);
+        }
+    }
+
+    /// <summary>
+    /// Moves the clock with the arrow keys as a precise, mouse-free alternative to dragging.
+    /// </summary>
+    private void NudgeWindow(KeyEventArgs e)
+    {
+        // The keyboard respects the same lock as the mouse.
+        if (!Settings.Default.DragToMove)
+            return;
+
+        var nudge = WindowUtil.GetKeyboardNudge(e.Key, Keyboard.Modifiers);
+        if (nudge == default)
+            return;
+
+        // Unlike a drag, which stops where the mouse can go, holding an arrow key could move the clock out of reach, so keep part of it on screen.
+        var screens = new Rect(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop, SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
+        var onScreen = Rect.Intersect(screens, new Rect(Left + nudge.X, Top + nudge.Y, ActualWidth, ActualHeight));
+        if (onScreen.IsEmpty || onScreen.Width < 16 || onScreen.Height < 16)
+        {
+            e.Handled = true;
+            return;
+        }
+
+        PixelShifter?.ClearShift(this);
+        Left += nudge.X;
+        Top += nudge.Y;
+
+        PixelShifter?.UpdateBasePosition(this);
+        Settings.Default.Placement = this.GetPlacement();
+        e.Handled = true;
+    }
+
+    /// <summary>
+    /// Shows a tray notification when the tray icon can, since a missing icon, like while Explorer restarts, shouldn't take the clock down with it.
+    /// </summary>
+    private void TryShowNotification(string title, string message)
+    {
+        try
+        {
+            _trayIcon?.ShowNotification(title, message);
+        }
+        catch
+        {
         }
     }
 
@@ -460,7 +532,7 @@ public partial class MainWindow : Window
         }
         catch
         {
-            _trayIcon?.ShowNotification("Couldn't open link", url);
+            TryShowNotification(Loc.Get("OpenLinkFailedTitle"), url);
         }
     }
 }

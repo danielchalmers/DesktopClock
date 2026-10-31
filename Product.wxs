@@ -1,66 +1,43 @@
-﻿<?define Name = "DesktopClock"?>
-<?define Manufacturer = "Daniel Chalmers"?>
-<?define Guid = "6BD5BA59-2419-4A0E-89F8-C6F8A4EA08F7"?>
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
 
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="DesktopClock" Manufacturer="Daniel Chalmers" Version="!(bind.FileVersion.DesktopClock.exe)" UpgradeCode="6BD5BA59-2419-4A0E-89F8-C6F8A4EA08F7" Scope="perUser">
 
-  <Package Name="$(var.Name)" Manufacturer="$(var.Manufacturer)" Version="!(bind.FileVersion.MainExe)" UpgradeCode="$(var.Guid)" Language="1033" InstallerVersion="500" Scope="perUser">
+    <Icon Id="DesktopClock.ico" SourceFile="DesktopClock\DesktopClock.ico" />
 
-    <SummaryInformation Manufacturer="$(var.Manufacturer)" />
+    <Property Id="ARPPRODUCTICON" Value="DesktopClock.ico" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/danielchalmers/DesktopClock" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/danielchalmers/DesktopClock/issues" />
+    <Property Id="ARPNOREPAIR" Value="1" />
+    <Property Id="ARPNOMODIFY" Value="1" />
 
-    <Icon Id="Logo.ico" SourceFile="$(var.Name)\$(var.Name).ico" />
+    <!--Skips the System Restore point, which can hold a double-click install at "Please wait" for most of a minute and protects nothing in a per-user app folder-->
+    <Property Id="MSIFASTINSTALL" Value="1" />
 
-    <Property Id="ARPPRODUCTICON" Value="Logo.ico" />
-    <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
-    <Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />
+    <!--The default schedule removes the old version before installing the new one, which a per-user upgrade needs to roll back cleanly-->
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.WixDowngradePreventedMessage)" />
 
-    <Media Id="1" Cabinet="App.cab" EmbedCab="yes" />
+    <MediaTemplate EmbedCab="yes" />
 
-    <Feature Id="ProductFeature" Title="$(var.Name)" Level="1">
-      <!--Main executable-->
-      <ComponentGroupRef Id="ProductComponents" />
-      <!--Program Menu shortcut-->
-      <ComponentRef Id="ApplicationShortcut" />
-    </Feature>
-
+    <!--Not WiX's default INSTALLFOLDER under Programs: the settings file lives next to the exe, so moving the app would lose it-->
     <StandardDirectory Id="LocalAppDataFolder">
-      <Directory Id="INSTALLFOLDER" Name="$(var.Name)" />
+      <Directory Id="INSTALLFOLDER" Name="DesktopClock" />
     </StandardDirectory>
+
+    <File Id="DesktopClock.exe" Source="publish\$(sys.BUILDARCH)\DesktopClock.exe" />
 
     <StandardDirectory Id="ProgramMenuFolder">
-      <Directory Id="ApplicationProgramsFolder" Name="$(var.Name)" />
+      <Component>
+        <Shortcut Name="DesktopClock" Target="[INSTALLFOLDER]DesktopClock.exe" WorkingDirectory="INSTALLFOLDER" />
+        <RegistryValue Root="HKCU" Key="Software\Daniel Chalmers\DesktopClock" Name="StartMenuShortcut" Type="integer" Value="1" KeyPath="yes" />
+        <RemoveFolder Directory="INSTALLFOLDER" On="uninstall" />
+      </Component>
     </StandardDirectory>
 
-    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
-    <Upgrade Id="$(var.Guid)">
-      <UpgradeVersion Minimum="0.0.0.0" Maximum="255.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
-    </Upgrade>
-
-    <CustomAction Id="RunMainExe" Directory="INSTALLFOLDER" ExeCommand="[INSTALLFOLDER]$(var.Name).exe" Execute="commit" Return="asyncNoWait" />
+    <!--Started through Explorer so the clock gets the user's environment instead of the Windows Installer service's-->
+    <CustomAction Id="LaunchApp" Directory="INSTALLFOLDER" ExeCommand="&quot;[WindowsFolder]explorer.exe&quot; &quot;[#DesktopClock.exe]&quot;" Return="asyncNoWait" />
 
     <InstallExecuteSequence>
-      <RemoveExistingProducts Before="InstallInitialize" />
-      <Custom Action="RunMainExe" Before="InstallFinalize" />
+      <Custom Action="LaunchApp" After="InstallFinalize" Condition="NOT Installed" />
     </InstallExecuteSequence>
   </Package>
-
-  <!--Main executable-->
-  <Fragment>
-    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-      <Component Id="MainExe" Guid="2148738D-B1F4-48BD-8615-1617541C6BB3">
-        <File Id="MainExe" Name="$(var.Name).exe" Source="$(var.MainExeSource)" />
-      </Component>
-    </ComponentGroup>
-  </Fragment>
-
-  <!--Program Menu shortcut-->
-  <Fragment>
-    <DirectoryRef Id="ApplicationProgramsFolder">
-      <Component Id="ApplicationShortcut">
-        <Shortcut Id="ApplicationStartMenuShortcut" Name="$(var.Name)" Icon="Logo.ico" Target="[#MainExe]" WorkingDirectory="INSTALLFOLDER" />
-        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-        <RegistryValue Root="HKCU" Key="Software\Microsoft\$(var.Manufacturer)\$(var.Name)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
-      </Component>
-    </DirectoryRef>
-  </Fragment>
 </Wix>

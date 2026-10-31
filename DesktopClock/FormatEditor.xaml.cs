@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -23,52 +25,28 @@ public enum FormatEditorMode
 public partial class FormatEditor : UserControl
 {
     // Presets cover the scenarios users most commonly ask for; the raw box stays the escape hatch.
-    private static readonly (string Name, string Format)[] ClockPresets =
-    {
-        ("Time", "{h:mm tt}"),
-        ("Time, 24-hour", "{HH:mm}"),
-        ("Time with seconds", "{h:mm:ss tt}"),
-        ("Day and time", "{ddd}, {h:mm tt}"),
-        ("Date and time", "{ddd}, {MMM dd}, {h:mm tt}"),
-        ("Full date and time", "{dddd}, {MMMM dd}, {h:mm tt}"),
-        ("Date only", "{dddd}, {MMMM dd}"),
-        ("Sortable", "{yyyy-MM-dd} {HH:mm}"),
-        ("ISO week", "{weekYear}-W{week}"),
-    };
+    private static readonly IReadOnlyList<(string Name, string Format)> ClockPresets = FormatPresets.ForClock(CultureInfo.CurrentCulture);
 
     private static readonly (string Name, string Format)[] CountdownPresets =
     {
-        ("Automatic", ""),
-        ("Days left", "{%d} days left"),
-        ("Days and hours", "{%d}d {%h}h"),
-        ("Full breakdown", "{%d}d {%h}h {%m}m {%s}s"),
-        ("Digital", "{dd}.{hh}:{mm}:{ss}"),
+        (Loc.Get("CountdownPresetAutomatic"), ""),
+        (Loc.Get("CountdownPresetDaysLeft"), Loc.Get("CountdownFormatDaysLeft")),
+        (Loc.Get("CountdownPresetDaysHours"), Loc.Get("CountdownFormatDaysHours")),
+        (Loc.Get("CountdownPresetFull"), Loc.Get("CountdownFormatFull")),
+        (Loc.Get("CountdownPresetDigital"), "{dd}:{hh}:{mm}:{ss}"),
     };
+
+    private static readonly IReadOnlyList<(string Name, string Token)> ClockTokens = FormatPresets.ClockTokens(CultureInfo.CurrentCulture);
 
     // Multi-character tokens are used where possible; single characters would be
     // interpreted as standard format strings, so day/hour counts use the % prefix.
-    private static readonly (string Name, string Token)[] ClockTokens =
-    {
-        ("Weekday", "{ddd}"),
-        ("Weekday (full)", "{dddd}"),
-        ("Day", "{dd}"),
-        ("Month", "{MMM}"),
-        ("Month (full)", "{MMMM}"),
-        ("Year", "{yyyy}"),
-        ("Time", "{h:mm tt}"),
-        ("Time (24-hour)", "{HH:mm}"),
-        ("Seconds", "{ss}"),
-        ("Week number", "{week}"),
-        ("UTC offset", "{zzz}"),
-    };
-
     private static readonly (string Name, string Token)[] CountdownTokens =
     {
-        ("Days", "{%d}"),
-        ("Hours", "{%h}"),
-        ("Minutes", "{%m}"),
-        ("Seconds", "{%s}"),
-        ("Digital clock", "{hh}:{mm}:{ss}"),
+        (Loc.Get("TokenDays"), "{%d}"),
+        (Loc.Get("TokenHours"), "{%h}"),
+        (Loc.Get("TokenMinutes"), "{%m}"),
+        (Loc.Get("TokenSeconds"), "{%s}"),
+        (Loc.Get("TokenDigitalClock"), "{hh}:{mm}:{ss}"),
     };
 
     private static readonly SolidColorBrush _errorBrush = new(Color.FromRgb(0xE8, 0x54, 0x54));
@@ -77,6 +55,7 @@ public partial class FormatEditor : UserControl
         nameof(Mode), typeof(FormatEditorMode), typeof(FormatEditor), new PropertyMetadata(FormatEditorMode.Clock));
 
     private readonly DispatcherTimer _timer;
+    private readonly List<(TextBlock Example, string Format)> _presetExamples = new();
     private bool _built;
 
     public FormatEditor()
@@ -84,7 +63,11 @@ public partial class FormatEditor : UserControl
         InitializeComponent();
 
         _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-        _timer.Tick += (_, _) => UpdatePreview();
+        _timer.Tick += (_, _) =>
+        {
+            UpdatePreview();
+            UpdatePresetExamples();
+        };
 
         Loaded += FormatEditor_Loaded;
         Unloaded += (_, _) => _timer.Stop();
@@ -137,6 +120,7 @@ public partial class FormatEditor : UserControl
                 TextTrimming = TextTrimming.CharacterEllipsis,
             };
             example.SetResourceReference(ForegroundProperty, "TextSecondaryBrush");
+            _presetExamples.Add((example, format));
 
             var content = new StackPanel();
             content.Children.Add(title);
@@ -148,8 +132,9 @@ public partial class FormatEditor : UserControl
                 MaxWidth = 280,
                 HorizontalContentAlignment = HorizontalAlignment.Left,
                 Margin = new Thickness(0, 0, 8, 4),
-                ToolTip = string.IsNullOrEmpty(format) ? "(automatic)" : format,
+                ToolTip = string.IsNullOrEmpty(format) ? Loc.Get("AutomaticTooltip") : format,
             };
+            AutomationProperties.SetName(button, name);
             button.Click += (_, _) => SetFormat(format);
 
             PresetsPanel.Children.Add(button);
@@ -169,7 +154,7 @@ public partial class FormatEditor : UserControl
                 Padding = new Thickness(7, 3, 7, 3),
                 MinHeight = 24,
                 Margin = new Thickness(0, 0, 6, 4),
-                ToolTip = $"Insert {token} at the cursor",
+                ToolTip = Loc.Format("InsertTokenTooltip", token),
             };
             button.Click += (_, _) => InsertToken(token);
 
@@ -210,6 +195,15 @@ public partial class FormatEditor : UserControl
         {
             PreviewText.SetResourceReference(ForegroundProperty, "TextPrimaryBrush");
         }
+    }
+
+    /// <summary>
+    /// Keeps each preset's example in step with the clock, like the preview.
+    /// </summary>
+    private void UpdatePresetExamples()
+    {
+        foreach (var (example, format) in _presetExamples)
+            example.Text = FormatPreview(format);
     }
 
     /// <summary>

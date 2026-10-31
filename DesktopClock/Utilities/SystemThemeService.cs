@@ -12,7 +12,9 @@ public static class SystemThemeService
 {
     // Fallbacks match the app's existing default colors.
     private static readonly Color DefaultAccentColor = Color.FromRgb(0, 120, 215);
+    private static readonly Color LightThemeTextColor = Color.FromRgb(33, 33, 33);
     private static readonly Color LightThemeOuterColor = Color.FromRgb(247, 247, 247);
+    private static readonly Color DarkThemeTextColor = Color.FromRgb(242, 242, 242);
     private static readonly Color DarkThemeOuterColor = Color.FromRgb(32, 32, 32);
 
     // Theme and colorization values stored under HKCU.
@@ -23,7 +25,7 @@ public static class SystemThemeService
     private const string ColorizationColorValueName = "ColorizationColor";
 
     /// <summary>
-    /// Tries to build default text/outer colors from the system theme and accent color.
+    /// Tries to build default text/outer colors that match the system's light or dark theme.
     /// </summary>
     /// <remarks>
     /// Returns <c>false</c> when the system theme cannot be read (older Windows or missing keys).
@@ -36,10 +38,18 @@ public static class SystemThemeService
         if (!TryGetSystemThemeIsLight(out var isLightTheme))
             return false;
 
-        textColor = GetSystemAccentColor();
-        outerColor = isLightTheme ? LightThemeOuterColor : DarkThemeOuterColor;
+        (textColor, outerColor) = GetThemeDefaults(isLightTheme);
         return true;
     }
+
+    /// <summary>
+    /// The default text and background colors for the light or dark theme.
+    /// </summary>
+    /// <remarks>
+    /// The text doesn't use the accent color, since Windows allows any shade and a dark accent in dark mode or a light one in light mode can't be read.
+    /// </remarks>
+    public static (Color Text, Color Outer) GetThemeDefaults(bool isLightTheme) =>
+        isLightTheme ? (LightThemeTextColor, LightThemeOuterColor) : (DarkThemeTextColor, DarkThemeOuterColor);
 
     /// <summary>
     /// Whether Windows is using the light app theme; defaults to light when it can't be read.

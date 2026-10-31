@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -25,9 +26,23 @@ public partial class SettingsWindow : Window
 
     public SettingsWindow()
     {
+        // The window opens centered but WPF doesn't keep it within the screen, so a size saved on a bigger display, or a minimum taller than a small screen, would put the title bar out of reach.
+        var workArea = SystemParameters.WorkArea;
+        Settings.Default.SettingsWindowWidth = Math.Min(Settings.Default.SettingsWindowWidth, workArea.Width);
+        Settings.Default.SettingsWindowHeight = Math.Min(Settings.Default.SettingsWindowHeight, workArea.Height);
+
         InitializeComponent();
+        MinWidth = Math.Min(MinWidth, workArea.Width);
+        MinHeight = Math.Min(MinHeight, workArea.Height);
         DataContext = new SettingsWindowViewModel(Settings.Default);
         Closing += SettingsWindow_Closing;
+
+        // A label with a description under it doesn't give a button a name, so screen readers would only say "button".
+        foreach (var button in ToolsPanel.Children.OfType<Button>())
+        {
+            if (button.Content is Panel panel && panel.Children.OfType<AccessText>().FirstOrDefault() is { } label)
+                AutomationProperties.SetName(button, label.Text.Replace("_", ""));
+        }
     }
 
     private SettingsWindowViewModel ViewModel => (SettingsWindowViewModel)DataContext;
@@ -42,7 +57,7 @@ public partial class SettingsWindow : Window
     {
         var openFileDialog = new OpenFileDialog
         {
-            Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*"
+            Filter = $"{Loc.Get("ImageFilesFilter")} (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|{Loc.Get("AllFilesFilter")} (*.*)|*.*"
         };
 
         if (openFileDialog.ShowDialog() != true)
@@ -51,13 +66,16 @@ public partial class SettingsWindow : Window
         }
 
         ViewModel.Settings.BackgroundImagePath = openFileDialog.FileName;
+
+        // The image is drawn as the background, so it wouldn't show while the clock uses an outline instead, like after the Minimal preset.
+        ViewModel.Settings.BackgroundEnabled = true;
     }
 
     private void BrowseWavFilePath(object sender, RoutedEventArgs e)
     {
         var openFileDialog = new OpenFileDialog
         {
-            Filter = "WAV files (*.wav)|*.wav|All files (*.*)|*.*"
+            Filter = $"{Loc.Get("WavFilesFilter")} (*.wav)|*.wav|{Loc.Get("AllFilesFilter")} (*.*)|*.*"
         };
 
         if (openFileDialog.ShowDialog() != true)
@@ -139,7 +157,7 @@ public partial class SettingsWindow : Window
         if (!Settings.Exists)
         {
             MessageBox.Show(this,
-                "Settings file doesn't exist and couldn't be created.",
+                Loc.Get("SettingsFileMissing"),
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
@@ -153,9 +171,7 @@ public partial class SettingsWindow : Window
         {
             // Lazy scammers on the Microsoft Store may reupload without realizing it gets sandboxed, making it unable to start the Notepad process (#1, #12).
             MessageBox.Show(this,
-                "Couldn't open settings file in Notepad.\n\n" +
-                "This app may have been stolen. If you paid for it, ask for a refund and download it for free from https://github.com/danielchalmers/DesktopClock.\n\n" +
-                $"If it still doesn't work, create a new issue at that link with details on what happened and include this error: \"{ex.Message}\"",
+                Loc.Format("OpenSettingsFileFailed", ex.Message),
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -168,18 +184,26 @@ public partial class SettingsWindow : Window
     private void CreateNewClock(object sender, RoutedEventArgs e)
     {
         var result = MessageBox.Show(this,
-            "This will copy the executable and start it with new settings.\n\n" +
-            "Continue?",
+            Loc.Get("NewClockConfirm"),
             Title, MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
 
         if (result != MessageBoxResult.OK)
             return;
 
-        var newExePath = Path.Combine(App.MainFileInfo.DirectoryName, App.MainFileInfo.GetFileAtNextIndex().Name);
+        var newExePath = App.MainFileInfo.GetFileAtNextIndex().FullName;
 
         // Copy and start the new clock.
-        File.Copy(App.MainFileInfo.FullName, newExePath);
-        Process.Start(newExePath);
+        try
+        {
+            File.Copy(App.MainFileInfo.FullName, newExePath);
+            Process.Start(newExePath);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this,
+                Loc.Format("NewClockFailed", ex.Message),
+                Title, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private void CheckForUpdates(object sender, RoutedEventArgs e)
@@ -291,7 +315,7 @@ public partial class SettingsWindow : Window
         catch
         {
             MessageBox.Show(this,
-                $"Couldn't open {url}.",
+                Loc.Format("OpenUrlFailed", url),
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -341,9 +365,32 @@ public partial class SettingsWindowViewModel : ObservableObject
     {
         Settings = settings;
         AppVersion = FileVersionInfo.GetVersionInfo(App.MainFileInfo.FullName).FileVersion;
-        FontStyles = ["Normal", "Italic", "Oblique"];
-        FontWeights = ["Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold", "ExtraBold", "Black", "ExtraBlack"];
-        ImageStretches = Enum.GetValues(typeof(Stretch)).Cast<Stretch>().ToArray();
+        FontStyles =
+        [
+            new("Normal", Loc.Get("FontStyleNormal")),
+            new("Italic", Loc.Get("FontStyleItalic")),
+            new("Oblique", Loc.Get("FontStyleOblique")),
+        ];
+        FontWeights =
+        [
+            new("Thin", Loc.Get("FontWeightThin")),
+            new("ExtraLight", Loc.Get("FontWeightExtraLight")),
+            new("Light", Loc.Get("FontWeightLight")),
+            new("Normal", Loc.Get("FontWeightNormal")),
+            new("Medium", Loc.Get("FontWeightMedium")),
+            new("SemiBold", Loc.Get("FontWeightSemiBold")),
+            new("Bold", Loc.Get("FontWeightBold")),
+            new("ExtraBold", Loc.Get("FontWeightExtraBold")),
+            new("Black", Loc.Get("FontWeightBlack")),
+            new("ExtraBlack", Loc.Get("FontWeightExtraBlack")),
+        ];
+        ImageStretches =
+        [
+            new(Stretch.None, Loc.Get("ImageFitNone")),
+            new(Stretch.Fill, Loc.Get("ImageFitFill")),
+            new(Stretch.Uniform, Loc.Get("ImageFitUniform")),
+            new(Stretch.UniformToFill, Loc.Get("ImageFitUniformToFill")),
+        ];
     }
 
     /// <summary>
@@ -354,54 +401,39 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// All available font families reported by the system.
     /// </summary>
-    public IList<string> FontFamilies => _systemLists.Value.Result.Fonts;
+    public IList<string> FontFamilies
+    {
+        get
+        {
+            var fonts = _systemLists.Value.Result.Fonts;
+
+            // Older versions also listed East Asian fonts under their localized names, so a saved name like 微软雅黑 may not be in the list anymore; switch it to the same font's English name so the dropdown still shows it.
+            if (!fonts.Contains(Settings.FontFamily) && GetEnglishFontName(Settings.FontFamily) is { } englishName && fonts.Contains(englishName))
+                Settings.FontFamily = englishName;
+
+            return fonts;
+        }
+    }
 
     /// <summary>
     /// All available font styles.
     /// </summary>
-    public IList<string> FontStyles { get; }
+    public IList<SettingOption> FontStyles { get; }
 
     /// <summary>
     /// All available font weights.
     /// </summary>
-    public IList<string> FontWeights { get; }
+    public IList<SettingOption> FontWeights { get; }
 
     /// <summary>
     /// All available stretch options for background images.
     /// </summary>
-    public IList<Stretch> ImageStretches { get; }
+    public IList<SettingOption> ImageStretches { get; }
 
     /// <summary>
     /// All available time zones reported by the system.
     /// </summary>
     public IList<TimeZoneInfo> TimeZones => _systemLists.Value.Result.TimeZones;
-
-    /// <summary>
-    /// Sets the format string in settings.
-    /// </summary>
-    [RelayCommand]
-    public void SetFormat(DateFormatExample value)
-    {
-        Settings.Default.Format = value.Format;
-    }
-
-    /// <summary>
-    /// Disables countdown mode by resetting the date to default.
-    /// </summary>
-    [RelayCommand]
-    public void ResetCountdown()
-    {
-        Settings.CountdownTo = default;
-    }
-
-    /// <summary>
-    /// Resets the countdown format to the default (dynamic) format.
-    /// </summary>
-    [RelayCommand]
-    public void ResetCountdownFormat()
-    {
-        Settings.CountdownFormat = string.Empty;
-    }
 
     /// <summary>
     /// Clears the chime sound file path.
@@ -430,6 +462,19 @@ public partial class SettingsWindowViewModel : ObservableObject
         Settings.BackgroundImagePath = string.Empty;
     }
 
+    private static string GetEnglishFontName(string name)
+    {
+        try
+        {
+            using var family = new System.Drawing.FontFamily(name);
+            return family.GetName(1033);
+        }
+        catch (ArgumentException)
+        {
+            return null;
+        }
+    }
+
     private static IEnumerable<string> GetAllSystemFonts()
     {
         // Get fonts from WPF.
@@ -438,11 +483,21 @@ public partial class SettingsWindowViewModel : ObservableObject
             yield return fontFamily.Source;
         }
 
-        // Get fonts from System.Drawing.
+        // Get fonts from System.Drawing, which also finds fonts installed for the current user. Use the English name like WPF does, otherwise East Asian fonts show up twice on Chinese, Japanese, and Korean Windows (Microsoft YaHei and 微软雅黑).
         using var installedFontCollection = new InstalledFontCollection();
         foreach (var fontFamily in installedFontCollection.Families)
         {
-            yield return fontFamily.Name;
+            yield return fontFamily.GetName(1033);
         }
     }
+}
+
+/// <summary>
+/// A choice in a settings dropdown: the value saved in settings, and the name shown in the UI language.
+/// </summary>
+public sealed class SettingOption(object value, string name)
+{
+    public object Value { get; } = value;
+
+    public string Name { get; } = name;
 }

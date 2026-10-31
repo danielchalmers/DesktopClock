@@ -2,10 +2,9 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using DesktopClock.Properties;
-using Humanizer;
 
 namespace DesktopClock;
 
@@ -17,19 +16,16 @@ public partial class CountdownTargetEditor : UserControl
 {
     private static readonly (string Name, Func<DateTime> GetTarget)[] Presets =
     {
-        ("Midnight tonight", () => DateTime.Today.AddDays(1)),
-        ("Tomorrow morning", () => DateTime.Today.AddDays(1).AddHours(9)),
-        ("Friday 5 PM", () => NextOccurrence(DayOfWeek.Friday, 17)),
-        ("New Year's", () => new DateTime(DateTime.Today.Year + 1, 1, 1)),
+        (Loc.Get("TargetMidnight"), () => DateTime.Today.AddDays(1)),
+        (Loc.Get("TargetTomorrowMorning"), () => DateTime.Today.AddDays(1).AddHours(9)),
+        (Loc.Get("TargetFridayAfternoon"), () => NextOccurrence(DayOfWeek.Friday, 17)),
+        (Loc.Get("TargetNewYear"), () => new DateTime(DateTime.Today.Year + 1, 1, 1)),
     };
 
     private bool _built;
 
     public CountdownTargetEditor()
     {
-        // WPF defaults every element's Language to en-US, so the target text box would parse and show dates only in US format. Follow the OS locale instead, matching the preset captions and preview below it. Set before InitializeComponent so the culture is already in place when the bindings are created.
-        Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
-
         InitializeComponent();
 
         Loaded += CountdownTargetEditor_Loaded;
@@ -69,7 +65,7 @@ public partial class CountdownTargetEditor : UserControl
 
             var example = new TextBlock
             {
-                Text = getTarget().ToString("ddd, MMM d, h:mm tt"),
+                Text = getTarget().ToString(FormatPresets.ShortDateTimePattern(CultureInfo.CurrentCulture)),
                 FontSize = 12,
                 TextTrimming = TextTrimming.CharacterEllipsis,
             };
@@ -86,7 +82,10 @@ public partial class CountdownTargetEditor : UserControl
                 HorizontalContentAlignment = HorizontalAlignment.Left,
                 Margin = new Thickness(0, 0, 8, 4),
             };
-            button.Click += (_, _) => Settings.Default.CountdownTo = getTarget();
+            AutomationProperties.SetName(button, name);
+
+            // Saved as a wall-clock time like a typed date, since a local one is saved with its UTC offset and would move after a time zone change.
+            button.Click += (_, _) => Settings.Default.CountdownTo = DateTime.SpecifyKind(getTarget(), DateTimeKind.Unspecified);
 
             PresetsPanel.Children.Add(button);
         }
@@ -102,8 +101,8 @@ public partial class CountdownTargetEditor : UserControl
         var target = Settings.Default.CountdownTo;
 
         PreviewText.Text = target == default
-            ? "No target — countdown mode is off and the clock shows the time."
-            : $"{target:dddd, MMMM d, yyyy h:mm tt} — {target.Humanize(utcDate: false)}";
+            ? Loc.Get("NoCountdownTarget")
+            : Loc.Format("CountdownPreview", target.ToString("f"), RelativeTimeFormatter.Format(target, DateTime.Now));
     }
 
     /// <summary>

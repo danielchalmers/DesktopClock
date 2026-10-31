@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using DesktopClock.Properties;
+using DesktopClock.Utilities;
 
 namespace DesktopClock.Tests;
 
@@ -81,5 +82,52 @@ public class ClockThemeTests
         Assert.Equal(6, settings.BackgroundCornerRadius);
         Assert.Equal(1.5, settings.OutlineThickness);
         Assert.Equal(1, settings.TextOpacity);
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void ThemeDefaults_AreReadableInLightAndDarkMode(bool isLightTheme)
+    {
+        // A fresh install and the System preset follow light or dark mode but not the accent, which can be any shade.
+        var (text, outer) = SystemThemeService.GetThemeDefaults(isLightTheme);
+
+        Assert.True(ClockTheme.Contrast(text, outer) >= 7, $"{text} on {outer}");
+    }
+
+    [Theory]
+    [InlineData("#3B003B", "#FFFFFF")] // Plum
+    [InlineData("#0078D4", "#FFFFFF")] // Default Windows blue keeps white text.
+    [InlineData("#D50056", "#FFFFFF")] // Dark pink
+    [InlineData("#FFB900", "#1A1A1A")] // Gold
+    [InlineData("#00CC6A", "#1A1A1A")] // Light green
+    [InlineData("#FFFFFF", "#1A1A1A")]
+    [InlineData("#000000", "#FFFFFF")]
+    public void ReadableTextOn_PicksWhiteOrDarkByContrast(string background, string expected)
+    {
+        var text = ClockTheme.ReadableTextOn((Color)ColorConverter.ConvertFromString(background));
+
+        Assert.Equal((Color)ColorConverter.ConvertFromString(expected), text);
+    }
+
+    [Theory]
+    [InlineData("#3B003B", "#FFFFFF")] // Plum keeps white text.
+    [InlineData("#FFB900", "#1A1A1A")] // Gold gets dark text.
+    public void AccentTheme_PicksReadableTextForTheAccent(string accent, string expectedText)
+    {
+        var theme = ClockTheme.CreateAccentTheme((Color)ColorConverter.ConvertFromString(accent));
+
+        Assert.Equal((Color)ColorConverter.ConvertFromString(accent), theme.OuterColor);
+        Assert.Equal((Color)ColorConverter.ConvertFromString(expectedText), theme.TextColor);
+    }
+
+    [Fact]
+    public void ReadableTextOn_IsAtLeastFourToOneOnEveryGray()
+    {
+        for (var v = 0; v <= 255; v++)
+        {
+            var background = Color.FromRgb((byte)v, (byte)v, (byte)v);
+            Assert.True(ClockTheme.Contrast(ClockTheme.ReadableTextOn(background), background) >= 4, $"gray {v}");
+        }
     }
 }
