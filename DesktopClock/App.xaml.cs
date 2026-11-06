@@ -56,7 +56,9 @@ public partial class App : Application
             // Pass the right to come to the front on to the running clock, so its settings open focused.
             WindowUtil.AllowAnyAppToComeToFront();
             _showClockSignal.Set();
-            Shutdown();
+
+            // Exit right away, because Shutdown waits for startup to finish, which still builds the clock window, loads the settings, and saves them over the running clock's as it closes.
+            Environment.Exit(0);
             return;
         }
 
