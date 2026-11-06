@@ -27,6 +27,12 @@ public static class DateTimeUtil
         return date.AddDays(4 - dayOfWeek).Year;
     }
 
+    /// <summary>
+    /// Drops the fraction of a second, keeping the offset.
+    /// </summary>
+    public static DateTimeOffset TruncateToSecond(this DateTimeOffset dateTimeOffset) =>
+        new(dateTimeOffset.Ticks - (dateTimeOffset.Ticks % TimeSpan.TicksPerSecond), dateTimeOffset.Offset);
+
     public static bool EqualExcludingMillisecond(this DateTime dt1, DateTime dt2)
     {
         if (dt1.Year != dt2.Year)
