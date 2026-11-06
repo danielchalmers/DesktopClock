@@ -157,6 +157,66 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Wyświetlaj zegar w innej strefie czasowej.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Język</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Wyświetlaj aplikację w innym języku. Daty na zegarze nadal są zgodne z formatem regionalnym systemu Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Jak w systemie Windows</value>
+  </data>
+  <data name="LanguageIndonesian" xml:space="preserve">
+    <value>indonezyjski</value>
+  </data>
+  <data name="LanguageGerman" xml:space="preserve">
+    <value>niemiecki</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>angielski</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>hiszpański</value>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>francuski</value>
+  </data>
+  <data name="LanguageItalian" xml:space="preserve">
+    <value>włoski</value>
+  </data>
+  <data name="LanguageDutch" xml:space="preserve">
+    <value>niderlandzki</value>
+  </data>
+  <data name="LanguagePolish" xml:space="preserve">
+    <value>polski</value>
+  </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>portugalski</value>
+  </data>
+  <data name="LanguageVietnamese" xml:space="preserve">
+    <value>wietnamski</value>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>turecki</value>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>rosyjski</value>
+  </data>
+  <data name="LanguageUkrainian" xml:space="preserve">
+    <value>ukraiński</value>
+  </data>
+  <data name="LanguageJapanese" xml:space="preserve">
+    <value>japoński</value>
+  </data>
+  <data name="LanguageKorean" xml:space="preserve">
+    <value>koreański</value>
+  </data>
+  <data name="LanguageChineseSimplified" xml:space="preserve">
+    <value>chiński uproszczony</value>
+  </data>
+  <data name="LanguageChineseTraditional" xml:space="preserve">
+    <value>chiński tradycyjny</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Odliczanie</value>
   </data>

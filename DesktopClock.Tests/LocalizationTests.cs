@@ -128,6 +128,20 @@ public class LocalizationTests
     }
 
     [Fact]
+    public void Languages_ListEveryTranslationUnderItsOwnName()
+    {
+        var cultures = Loc.Languages().Select(l => l.Culture).ToList();
+        Assert.Equal(Translations.Select(t => (string)t[0]).Append("en").OrderBy(c => c, StringComparer.Ordinal), cultures.OrderBy(c => c, StringComparer.Ordinal));
+
+        // The picker leaves out the translated name when it matches the language's own name, so each language has to call itself by that name.
+        foreach (var language in Loc.Languages())
+        {
+            var nameForItself = Loc.Languages(CultureInfo.GetCultureInfo(language.Culture)).Single(l => l.Culture == language.Culture).Name;
+            Assert.True(string.Equals(language.NativeName, nameForItself, StringComparison.OrdinalIgnoreCase), $"{language.Culture} calls itself \"{nameForItself}\" instead of \"{language.NativeName}\"");
+        }
+    }
+
+    [Fact]
     public void Source_UsesExactlyTheDefinedKeys()
     {
         // Keys chosen at runtime must start with "Relative" (the relative time units) or be written as separate Loc.Get calls, so this scan can see them.

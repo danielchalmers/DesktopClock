@@ -391,6 +391,13 @@ public partial class SettingsWindowViewModel : ObservableObject
             new(Stretch.Uniform, Loc.Get("ImageFitUniform")),
             new(Stretch.UniformToFill, Loc.Get("ImageFitUniformToFill")),
         ];
+
+        // Each language is listed under its own name so anyone can find theirs, followed by its name in the current language unless that's the same.
+        Languages =
+        [
+            new(string.Empty, Loc.Get("LanguageWindows")),
+            .. Loc.Languages().Select(l => new SettingOption(l.Culture, string.Equals(l.NativeName, l.Name, StringComparison.OrdinalIgnoreCase) ? l.NativeName : $"{l.NativeName} ({l.Name})")),
+        ];
     }
 
     /// <summary>
@@ -429,6 +436,11 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// All available stretch options for background images.
     /// </summary>
     public IList<SettingOption> ImageStretches { get; }
+
+    /// <summary>
+    /// The Windows display language followed by every language the app is translated into.
+    /// </summary>
+    public IList<SettingOption> Languages { get; }
 
     /// <summary>
     /// All available time zones reported by the system.

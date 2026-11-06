@@ -157,6 +157,66 @@
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>別のタイム ゾーンで時計を表示します。</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>アプリを別の言語で表示します。時計の日付は引き続き Windows の地域設定に従います。</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Windows と同じ</value>
+  </data>
+  <data name="LanguageIndonesian" xml:space="preserve">
+    <value>インドネシア語</value>
+  </data>
+  <data name="LanguageGerman" xml:space="preserve">
+    <value>ドイツ語</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>英語</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>スペイン語</value>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>フランス語</value>
+  </data>
+  <data name="LanguageItalian" xml:space="preserve">
+    <value>イタリア語</value>
+  </data>
+  <data name="LanguageDutch" xml:space="preserve">
+    <value>オランダ語</value>
+  </data>
+  <data name="LanguagePolish" xml:space="preserve">
+    <value>ポーランド語</value>
+  </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>ポルトガル語</value>
+  </data>
+  <data name="LanguageVietnamese" xml:space="preserve">
+    <value>ベトナム語</value>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>トルコ語</value>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>ロシア語</value>
+  </data>
+  <data name="LanguageUkrainian" xml:space="preserve">
+    <value>ウクライナ語</value>
+  </data>
+  <data name="LanguageJapanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="LanguageKorean" xml:space="preserve">
+    <value>韓国語</value>
+  </data>
+  <data name="LanguageChineseSimplified" xml:space="preserve">
+    <value>簡体字中国語</value>
+  </data>
+  <data name="LanguageChineseTraditional" xml:space="preserve">
+    <value>繁体字中国語</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>カウントダウン</value>
   </data>

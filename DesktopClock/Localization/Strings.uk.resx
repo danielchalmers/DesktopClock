@@ -157,6 +157,66 @@
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Показувати годинник в іншому часовому поясі.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Показувати програму іншою мовою. Дати на годиннику й надалі відображаються в регіональному форматі Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Як у Windows</value>
+  </data>
+  <data name="LanguageIndonesian" xml:space="preserve">
+    <value>індонезійська</value>
+  </data>
+  <data name="LanguageGerman" xml:space="preserve">
+    <value>німецька</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>англійська</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>іспанська</value>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>французька</value>
+  </data>
+  <data name="LanguageItalian" xml:space="preserve">
+    <value>італійська</value>
+  </data>
+  <data name="LanguageDutch" xml:space="preserve">
+    <value>нідерландська</value>
+  </data>
+  <data name="LanguagePolish" xml:space="preserve">
+    <value>польська</value>
+  </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>португальська</value>
+  </data>
+  <data name="LanguageVietnamese" xml:space="preserve">
+    <value>в’єтнамська</value>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>турецька</value>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>російська</value>
+  </data>
+  <data name="LanguageUkrainian" xml:space="preserve">
+    <value>українська</value>
+  </data>
+  <data name="LanguageJapanese" xml:space="preserve">
+    <value>японська</value>
+  </data>
+  <data name="LanguageKorean" xml:space="preserve">
+    <value>корейська</value>
+  </data>
+  <data name="LanguageChineseSimplified" xml:space="preserve">
+    <value>спрощена китайська</value>
+  </data>
+  <data name="LanguageChineseTraditional" xml:space="preserve">
+    <value>традиційна китайська</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Зворотний відлік</value>
   </data>

@@ -157,6 +157,66 @@
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>使用其他时区显示时钟。</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>以其他语言显示应用。时钟上的日期仍遵循 Windows 的区域格式。</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>与 Windows 相同</value>
+  </data>
+  <data name="LanguageIndonesian" xml:space="preserve">
+    <value>印度尼西亚语</value>
+  </data>
+  <data name="LanguageGerman" xml:space="preserve">
+    <value>德语</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>西班牙语</value>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>法语</value>
+  </data>
+  <data name="LanguageItalian" xml:space="preserve">
+    <value>意大利语</value>
+  </data>
+  <data name="LanguageDutch" xml:space="preserve">
+    <value>荷兰语</value>
+  </data>
+  <data name="LanguagePolish" xml:space="preserve">
+    <value>波兰语</value>
+  </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>葡萄牙语</value>
+  </data>
+  <data name="LanguageVietnamese" xml:space="preserve">
+    <value>越南语</value>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>土耳其语</value>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>俄语</value>
+  </data>
+  <data name="LanguageUkrainian" xml:space="preserve">
+    <value>乌克兰语</value>
+  </data>
+  <data name="LanguageJapanese" xml:space="preserve">
+    <value>日语</value>
+  </data>
+  <data name="LanguageKorean" xml:space="preserve">
+    <value>韩语</value>
+  </data>
+  <data name="LanguageChineseSimplified" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="LanguageChineseTraditional" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>倒计时</value>
   </data>

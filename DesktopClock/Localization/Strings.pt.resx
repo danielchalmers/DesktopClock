@@ -157,6 +157,66 @@ Se o problema persistir, informe-o nesse link.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Exibe o relógio em outro fuso horário.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Exibe o aplicativo em outro idioma. As datas no relógio continuam seguindo o formato regional do Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Igual ao Windows</value>
+  </data>
+  <data name="LanguageIndonesian" xml:space="preserve">
+    <value>indonésio</value>
+  </data>
+  <data name="LanguageGerman" xml:space="preserve">
+    <value>alemão</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>inglês</value>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>espanhol</value>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>francês</value>
+  </data>
+  <data name="LanguageItalian" xml:space="preserve">
+    <value>italiano</value>
+  </data>
+  <data name="LanguageDutch" xml:space="preserve">
+    <value>holandês</value>
+  </data>
+  <data name="LanguagePolish" xml:space="preserve">
+    <value>polonês</value>
+  </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>português</value>
+  </data>
+  <data name="LanguageVietnamese" xml:space="preserve">
+    <value>vietnamita</value>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>turco</value>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>russo</value>
+  </data>
+  <data name="LanguageUkrainian" xml:space="preserve">
+    <value>ucraniano</value>
+  </data>
+  <data name="LanguageJapanese" xml:space="preserve">
+    <value>japonês</value>
+  </data>
+  <data name="LanguageKorean" xml:space="preserve">
+    <value>coreano</value>
+  </data>
+  <data name="LanguageChineseSimplified" xml:space="preserve">
+    <value>chinês simplificado</value>
+  </data>
+  <data name="LanguageChineseTraditional" xml:space="preserve">
+    <value>chinês tradicional</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Contagem regressiva</value>
   </data>

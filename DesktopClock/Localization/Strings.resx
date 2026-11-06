@@ -184,6 +184,86 @@ If the problem persists, report it at that link.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Display the clock using a different time zone.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+    <comment>Label for the setting that picks the language of the app.</comment>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Show the app in a different language. Dates on the clock still follow the regional format in Windows.</value>
+    <comment>Name the regional format setting the way Windows does in this language.</comment>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Same as Windows</value>
+    <comment>Language option: use the Windows display language.</comment>
+  </data>
+  <data name="LanguageIndonesian" xml:space="preserve">
+    <value>Indonesian</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageGerman" xml:space="preserve">
+    <value>German</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>Spanish</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>French</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageItalian" xml:space="preserve">
+    <value>Italian</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageDutch" xml:space="preserve">
+    <value>Dutch</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguagePolish" xml:space="preserve">
+    <value>Polish</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguagePortuguese" xml:space="preserve">
+    <value>Portuguese</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageVietnamese" xml:space="preserve">
+    <value>Vietnamese</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>Turkish</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>Russian</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageUkrainian" xml:space="preserve">
+    <value>Ukrainian</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageJapanese" xml:space="preserve">
+    <value>Japanese</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageKorean" xml:space="preserve">
+    <value>Korean</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageChineseSimplified" xml:space="preserve">
+    <value>Simplified Chinese</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
+  <data name="LanguageChineseTraditional" xml:space="preserve">
+    <value>Traditional Chinese</value>
+    <comment>Language name in the language picker, shown in parentheses after the language's own name, as in Deutsch (German). Use the casing for the middle of a sentence. In its own language, use the language's own name from the picker, ignoring case.</comment>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Countdown</value>
   </data>
