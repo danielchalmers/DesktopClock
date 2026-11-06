@@ -163,6 +163,9 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
   <data name="LanguageDescription" xml:space="preserve">
     <value>Muestra la aplicación en otro idioma. Las fechas del reloj siguen usando el formato regional de Windows.</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Reiniciar</value>
+  </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Igual que Windows</value>
   </data>

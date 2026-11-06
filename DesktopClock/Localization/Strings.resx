@@ -192,6 +192,10 @@ If the problem persists, report it at that link.</value>
     <value>Show the app in a different language. Dates on the clock still follow the regional format in Windows.</value>
     <comment>Name the regional format setting the way Windows does in this language.</comment>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
+    <comment>Button that appears next to the language picker after a change. It closes the app and opens it again in the new language.</comment>
+  </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Same as Windows</value>
     <comment>Language option: use the Windows display language.</comment>

@@ -163,6 +163,9 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
   <data name="LanguageDescription" xml:space="preserve">
     <value>Hiển thị ứng dụng bằng ngôn ngữ khác. Ngày trên đồng hồ vẫn theo định dạng khu vực của Windows.</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Khởi động lại</value>
+  </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Giống Windows</value>
   </data>

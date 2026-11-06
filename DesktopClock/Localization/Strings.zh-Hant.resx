@@ -163,6 +163,9 @@
   <data name="LanguageDescription" xml:space="preserve">
     <value>以其他語言顯示應用程式。時鐘上的日期仍會依照 Windows 的地區格式。</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>重新啟動</value>
+  </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>與 Windows 相同</value>
   </data>

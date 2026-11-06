@@ -163,6 +163,9 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
   <data name="LanguageDescription" xml:space="preserve">
     <value>Tampilkan aplikasi dalam bahasa lain. Tanggal pada jam tetap mengikuti format regional Windows.</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Mulai ulang</value>
+  </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Sama dengan Windows</value>
   </data>

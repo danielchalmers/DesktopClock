@@ -443,6 +443,31 @@ public partial class SettingsWindowViewModel : ObservableObject
     public IList<SettingOption> Languages { get; }
 
     /// <summary>
+    /// The language picked in settings, which shows after a restart.
+    /// </summary>
+    public string Language
+    {
+        get => Settings.Language ?? string.Empty;
+        set
+        {
+            Settings.Language = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsRestartNeeded));
+        }
+    }
+
+    /// <summary>
+    /// Whether the picked language isn't the one on screen yet.
+    /// </summary>
+    public bool IsRestartNeeded => Language != Loc.StartupLanguage;
+
+    /// <summary>
+    /// Restarts the app so the picked language shows everywhere.
+    /// </summary>
+    [RelayCommand]
+    public void Restart() => App.Restart();
+
+    /// <summary>
     /// All available time zones reported by the system.
     /// </summary>
     public IList<TimeZoneInfo> TimeZones => _systemLists.Value.Result.TimeZones;

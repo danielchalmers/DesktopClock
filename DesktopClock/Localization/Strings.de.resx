@@ -163,6 +163,9 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   <data name="LanguageDescription" xml:space="preserve">
     <value>Die App in einer anderen Sprache anzeigen. Datumsangaben auf der Uhr richten sich weiterhin nach dem regionalen Format von Windows.</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Neu starten</value>
+  </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Wie in Windows</value>
   </data>

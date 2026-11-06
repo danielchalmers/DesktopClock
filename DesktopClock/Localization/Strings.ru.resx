@@ -163,6 +163,9 @@
   <data name="LanguageDescription" xml:space="preserve">
     <value>Показывать приложение на другом языке. Даты на часах по-прежнему отображаются в региональном формате Windows.</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Перезапустить</value>
+  </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Как в Windows</value>
   </data>
