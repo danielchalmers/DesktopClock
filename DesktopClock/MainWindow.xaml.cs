@@ -127,6 +127,15 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Brings the clock back and opens its settings, for when DesktopClock is started again while it's running.
+    /// </summary>
+    public void ShowClockAndSettings()
+    {
+        ShowClock();
+        OpenSettingsWindow();
+    }
+
+    /// <summary>
     /// Opens a new settings window or activates the existing one.
     /// </summary>
     [RelayCommand]
