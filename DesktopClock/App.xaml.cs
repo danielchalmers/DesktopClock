@@ -53,6 +53,8 @@ public partial class App : Application
         _showClockSignal = new EventWaitHandle(false, EventResetMode.AutoReset, "DesktopClock-" + GetSha256Hash(MainFileInfo.FullName), out var isFirst);
         if (!isFirst)
         {
+            // Pass the right to come to the front on to the running clock, so its settings open focused.
+            WindowUtil.AllowAnyAppToComeToFront();
             _showClockSignal.Set();
             Shutdown();
             return;
