@@ -162,6 +162,7 @@
                     <TextBlock Text="{local:Loc Language}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding Languages}"
+                              AutomationProperties.Name="{local:Loc Language}"
                               SelectedValue="{Binding Settings.Language, Mode=TwoWay}"
                               SelectedValuePath="Value"
                               DisplayMemberPath="Name" />
