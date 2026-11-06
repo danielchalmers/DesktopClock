@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -42,7 +43,10 @@ public static class WindowUtil
     private const uint SWP_NOMOVE = 0x0002;
     private const uint SWP_NOSIZE = 0x0001;
     private const uint SWP_NOZORDER = 0x0004;
+    private const uint SWP_NOACTIVATE = 0x0010;
     private const uint SWP_FRAMECHANGED = 0x0020;
+
+    private static readonly IntPtr HWND_TOPMOST = new(-1);
 
     [DllImport("user32.dll")]
     private static extern int GetWindowLong(IntPtr hwnd, int index);
@@ -119,6 +123,66 @@ public static class WindowUtil
 
         SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle);
         SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+    }
+
+    /// <summary>
+    /// Moves the window back above a taskbar that the shell raised over it.
+    /// </summary>
+    /// <remarks>
+    /// Topmost windows all share one band, so the shell raising itself leaves the clock buried inside it.
+    /// Assigning <see cref="Window.Topmost"/> again wouldn't help because WPF only reapplies the z-order when the value changes.
+    /// </remarks>
+    public static void ReassertTopmost(this Window window)
+    {
+        var hwnd = new WindowInteropHelper(window).Handle;
+        if (hwnd == IntPtr.Zero || !GetWindowRect(hwnd, out var clockRect))
+            return;
+
+        // Only the few topmost windows above the clock are walked, and only a taskbar that actually covers it counts, so menus and other always-on-top windows keep their place.
+        for (var above = GetWindow(hwnd, GW_HWNDPREV); above != IntPtr.Zero; above = GetWindow(above, GW_HWNDPREV))
+        {
+            if (!IsTaskbar(above) || !IsWindowVisible(above) || !GetWindowRect(above, out var taskbarRect) || !Overlaps(clockRect, taskbarRect))
+                continue;
+
+            // Slot in just above the taskbar rather than at the top of the band, so its jump lists and anything else above it stay in front.
+            // SWP_NOACTIVATE keeps focus wherever the user left it.
+            var insertAfter = GetWindow(above, GW_HWNDPREV);
+            SetWindowPos(hwnd, insertAfter == IntPtr.Zero ? HWND_TOPMOST : insertAfter, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+            return;
+        }
+
+        static bool IsTaskbar(IntPtr hwnd)
+        {
+            var className = new StringBuilder(32);
+            GetClassName(hwnd, className, className.Capacity);
+            return className.ToString() is "Shell_TrayWnd" or "Shell_SecondaryTrayWnd";
+        }
+
+        static bool Overlaps(NativeRect a, NativeRect b) =>
+            a.Left < b.Right && b.Left < a.Right && a.Top < b.Bottom && b.Top < a.Bottom;
+    }
+
+    private const uint GW_HWNDPREV = 3;
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetWindow(IntPtr hwnd, uint command);
+
+    [DllImport("user32.dll")]
+    private static extern bool IsWindowVisible(IntPtr hwnd);
+
+    [DllImport("user32.dll")]
+    private static extern bool GetWindowRect(IntPtr hwnd, out NativeRect rect);
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    private static extern int GetClassName(IntPtr hwnd, StringBuilder className, int maxCount);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct NativeRect
+    {
+        public int Left;
+        public int Top;
+        public int Right;
+        public int Bottom;
     }
 
     /// <summary>
