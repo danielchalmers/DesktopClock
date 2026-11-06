@@ -175,6 +175,47 @@ public class TokenizerTests
         Assert.Equal(Tokenizer.FormatErrorMessage, result);
     }
 
+    [Theory]
+    [InlineData("2026-01-01", "001")]
+    [InlineData("2026-07-24", "205")]
+    [InlineData("2026-12-31", "365")]
+    [InlineData("2028-02-29", "060")]
+    [InlineData("2028-12-31", "366")]
+    public void FormatWithTokenizer_DayOfYearToken_ShouldBeThreeDigits(string dateString, string expected)
+    {
+        // Arrange
+        var dateTime = DateTime.Parse(dateString, CultureInfo.InvariantCulture);
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, "{dayOfYear}", CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void FormatWithTokenizer_DayOfYearToken_UsesTheClocksTimeZone()
+    {
+        // Arrange - just after midnight UTC on New Year's Day is still New Year's Eve in New York.
+        var newYork = new DateTimeOffset(2026, 12, 31, 19, 30, 0, TimeSpan.FromHours(-5));
+
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(newYork, "{yyyy}-{dayOfYear}", CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal("2026-365", result);
+    }
+
+    [Fact]
+    public void FormatWithTokenizer_DayOfYearToken_OnTimeSpan_ShowsErrorMessage()
+    {
+        // Act
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(new TimeSpan(3, 0, 0, 0), "{dayOfYear}", CultureInfo.InvariantCulture);
+
+        // Assert
+        Assert.Equal(Tokenizer.FormatErrorMessage, result);
+    }
+
     [Fact]
     public void FormatWithTokenizer_StandardFormat_WithoutBraces_ShouldWork()
     {
