@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Markup;
+using DesktopClock.Properties;
 using DesktopClock.Utilities;
 using Microsoft.Win32;
 
@@ -22,8 +23,11 @@ public partial class App : Application
 
     private static EventWaitHandle _showClockSignal;
 
-    static App()
+    public App()
     {
+        // Switch to the language picked in settings before anything reads the UI language, including the text language below. This can't go in a static constructor because loading settings reads App's static fields.
+        Loc.UseLanguage(Settings.Default.Language);
+
         // WPF treats all text as en-US unless told otherwise, which draws Chinese with a mix of Japanese and Traditional Chinese fallback fonts. Text runs (TextElement) don't inherit a FrameworkElement default, so they need the same override. This must run before any element is created.
         var language = XmlLanguage.GetLanguage(TextCulture().IetfLanguageTag);
         FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(language));

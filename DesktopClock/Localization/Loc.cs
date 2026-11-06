@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using System.Threading;
 using System.Windows.Markup;
 
 namespace DesktopClock;
@@ -44,6 +45,11 @@ public class Loc : MarkupExtension
         Key = key;
     }
 
+    /// <summary>
+    /// The language from settings that the app started in, or empty for the Windows display language.
+    /// </summary>
+    public static string StartupLanguage { get; private set; } = string.Empty;
+
     [ConstructorArgument("key")]
     public string Key { get; set; }
 
@@ -64,6 +70,30 @@ public class Loc : MarkupExtension
     /// </summary>
     public static string TranslationLanguage(CultureInfo culture) =>
         _baseLanguages.TryGetValue(culture.TwoLetterISOLanguageName, out var baseLanguage) ? baseLanguage : culture.TwoLetterISOLanguageName;
+
+    /// <summary>
+    /// Shows text in the language chosen in settings instead of the Windows display language, unless it's empty or not a language. Call it before any text is loaded, because the UI only reads it once.
+    /// </summary>
+    public static void UseLanguage(string language)
+    {
+        StartupLanguage = language ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(language))
+            return;
+
+        CultureInfo culture;
+        try
+        {
+            culture = CultureInfo.GetCultureInfo(language);
+        }
+        catch (CultureNotFoundException)
+        {
+            return;
+        }
+
+        // Only the UI language changes, so dates and numbers keep the Windows regional format like they do when Windows itself switches languages.
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+        Thread.CurrentThread.CurrentUICulture = culture;
+    }
 
     /// <summary>
     /// Finds translations compiled into the exe as Strings.{culture}.resources, since satellite assemblies would break the single-file app (see the csproj).
