@@ -81,6 +81,10 @@ public sealed class FullscreenHideManager
         if (!IsWindowVisible(foregroundHwnd) || IsShellWindow(foregroundHwnd))
             return false;
 
+        // A maximized window with a title bar isn't fullscreen, even though its borders hang past the edges of a monitor with no taskbar or an auto-hiding one.
+        if (IsZoomed(foregroundHwnd) && (GetWindowLong(foregroundHwnd, GWL_STYLE) & WS_CAPTION) == WS_CAPTION)
+            return false;
+
         var clockMonitor = MonitorFromWindow(clockHwnd, MonitorDefaultToNearest);
         var foregroundMonitor = MonitorFromWindow(foregroundHwnd, MonitorDefaultToNearest);
         if (clockMonitor == IntPtr.Zero || foregroundMonitor == IntPtr.Zero || clockMonitor != foregroundMonitor)
@@ -135,8 +139,17 @@ public sealed class FullscreenHideManager
             : string.Empty;
     }
 
+    private const int GWL_STYLE = -16;
+    private const int WS_CAPTION = 0x00C00000;
+
     [DllImport("user32.dll")]
     private static extern IntPtr GetForegroundWindow();
+
+    [DllImport("user32.dll")]
+    private static extern bool IsZoomed(IntPtr hwnd);
+
+    [DllImport("user32.dll")]
+    private static extern int GetWindowLong(IntPtr hwnd, int index);
 
     [DllImport("user32.dll")]
     private static extern bool IsWindowVisible(IntPtr hwnd);
