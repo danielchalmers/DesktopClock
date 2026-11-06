@@ -213,17 +213,18 @@ public partial class FormatEditor : UserControl
     {
         var timeZone = Settings.Default.TimeZoneInfo;
         var culture = CultureInfo.CurrentCulture;
+        var now = SystemClockTimer.GetSecond(DateTimeOffset.Now);
 
         if (Mode == FormatEditorMode.Clock)
         {
-            return TimeStringFormatter.Format(DateTimeOffset.Now, DateTime.Now, timeZone, default, format, string.Empty, culture);
+            return TimeStringFormatter.Format(now, now.DateTime, timeZone, default, format, string.Empty, culture);
         }
 
         // Preview against the real countdown target, or a sample one when none is set.
         var countdownTo = Settings.Default.CountdownTo != default ?
             Settings.Default.CountdownTo :
-            DateTime.Now.AddDays(3).AddHours(4).AddMinutes(30).AddSeconds(10);
+            now.DateTime.AddDays(3).AddHours(4).AddMinutes(30).AddSeconds(10);
 
-        return TimeStringFormatter.Format(DateTimeOffset.Now, DateTime.Now, timeZone, countdownTo, string.Empty, format, culture);
+        return TimeStringFormatter.Format(now, now.DateTime, timeZone, countdownTo, string.Empty, format, culture);
     }
 }
