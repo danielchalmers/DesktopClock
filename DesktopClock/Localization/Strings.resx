@@ -184,6 +184,18 @@ If the problem persists, report it at that link.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Display the clock using a different time zone.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+    <comment>Label for the setting that picks the language of the app.</comment>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Show the app in a different language after you restart it. Dates on the clock still follow the regional format in Windows.</value>
+    <comment>Name the regional format setting the way Windows does in this language.</comment>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Same as Windows</value>
+    <comment>Language option: use the Windows display language.</comment>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Countdown</value>
   </data>

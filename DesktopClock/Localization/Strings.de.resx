@@ -157,6 +157,15 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Die Uhr in einer anderen Zeitzone anzeigen.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Die App nach einem Neustart in einer anderen Sprache anzeigen. Datumsangaben auf der Uhr richten sich weiterhin nach dem regionalen Format von Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Wie in Windows</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Countdown</value>
   </data>

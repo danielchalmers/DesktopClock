@@ -156,6 +156,17 @@
                               SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
                               DisplayMemberPath="DisplayName" />
                     <TextBlock Text="{local:Loc TimeZoneDescription}"
+                               Margin="0,0,0,16"
+                               Style="{StaticResource DescriptionTextBlock}" />
+
+                    <TextBlock Text="{local:Loc Language}"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <ComboBox ItemsSource="{Binding Languages}"
+                              AutomationProperties.Name="{local:Loc Language}"
+                              SelectedValue="{Binding Settings.Language, Mode=TwoWay}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Name" />
+                    <TextBlock Text="{local:Loc LanguageDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>
             </GroupBox>

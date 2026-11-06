@@ -157,6 +157,15 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Mostra l'orologio in un fuso orario diverso.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Mostra l'app in un'altra lingua dopo il riavvio. Le date sull'orologio seguono comunque il formato regionale di Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Come in Windows</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Conto alla rovescia</value>
   </data>

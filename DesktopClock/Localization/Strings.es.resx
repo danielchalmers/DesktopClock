@@ -157,6 +157,15 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Muestra el reloj con otra zona horaria.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Muestra la aplicación en otro idioma después de reiniciarla. Las fechas del reloj siguen usando el formato regional de Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Igual que Windows</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Cuenta regresiva</value>
   </data>

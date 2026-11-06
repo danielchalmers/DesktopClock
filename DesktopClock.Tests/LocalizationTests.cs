@@ -128,6 +128,13 @@ public class LocalizationTests
     }
 
     [Fact]
+    public void Languages_ListEveryTranslation()
+    {
+        var cultures = Loc.Languages.Select(l => l.Culture).OrderBy(c => c, StringComparer.Ordinal);
+        Assert.Equal(Translations.Select(t => (string)t[0]).Append("en").OrderBy(c => c, StringComparer.Ordinal), cultures);
+    }
+
+    [Fact]
     public void Source_UsesExactlyTheDefinedKeys()
     {
         // Keys chosen at runtime must start with "Relative" (the relative time units) or be written as separate Loc.Get calls, so this scan can see them.

@@ -157,6 +157,15 @@
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Показувати годинник в іншому часовому поясі.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Показувати програму іншою мовою після перезапуску. Дати на годиннику й надалі відображаються в регіональному форматі Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Як у Windows</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Зворотний відлік</value>
   </data>

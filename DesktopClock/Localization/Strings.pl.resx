@@ -157,6 +157,15 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Wyświetlaj zegar w innej strefie czasowej.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Język</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Wyświetlaj aplikację w innym języku po ponownym uruchomieniu. Daty na zegarze nadal są zgodne z formatem regionalnym systemu Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Jak w systemie Windows</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Odliczanie</value>
   </data>

@@ -157,6 +157,15 @@
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>別のタイム ゾーンで時計を表示します。</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>再起動後にアプリを別の言語で表示します。時計の日付は引き続き Windows の地域設定に従います。</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Windows と同じ</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>カウントダウン</value>
   </data>

@@ -157,6 +157,15 @@ Si le problème persiste, signalez-le via ce lien.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Afficher l'horloge dans un autre fuseau horaire.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Afficher l'application dans une autre langue après son redémarrage. Les dates de l'horloge suivent toujours le format régional de Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Identique à Windows</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Compte à rebours</value>
   </data>

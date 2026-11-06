@@ -157,6 +157,15 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Saati farklı bir saat diliminde görüntüleyin.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Uygulamayı yeniden başlattıktan sonra farklı bir dilde görüntüleyin. Saatteki tarihler yine Windows'un bölgesel biçimini izler.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Windows ile aynı</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Geri sayım</value>
   </data>

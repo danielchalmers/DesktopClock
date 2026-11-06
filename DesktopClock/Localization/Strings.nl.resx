@@ -157,6 +157,15 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>De klok in een andere tijdzone weergeven.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>De app in een andere taal weergeven nadat deze opnieuw is gestart. Datums op de klok blijven de regionale notatie van Windows volgen.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Zelfde als Windows</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Aftellen</value>
   </data>

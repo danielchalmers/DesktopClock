@@ -157,6 +157,15 @@
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>Показывать часы в другом часовом поясе.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>Показывать приложение на другом языке после перезапуска. Даты на часах по-прежнему отображаются в региональном формате Windows.</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>Как в Windows</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Обратный отсчет</value>
   </data>

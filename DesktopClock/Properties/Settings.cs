@@ -149,6 +149,15 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public string TimeZone { get; set; } = string.Empty;
 
     /// <summary>
+    /// Language of the app's text, such as "de" or "zh-Hans", or empty to use the Windows display language.
+    /// </summary>
+    /// <remarks>
+    /// Use this when you want DesktopClock in a different language than Windows, such as English on a PC set up in another language.
+    /// Dates on the clock still follow the Windows regional format, and a change takes effect after a restart.
+    /// </remarks>
+    public string Language { get; set; } = string.Empty;
+
+    /// <summary>
     /// Font family used by the main clock window.
     /// </summary>
     /// <remarks>

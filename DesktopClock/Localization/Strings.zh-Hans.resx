@@ -157,6 +157,15 @@
   <data name="TimeZoneDescription" xml:space="preserve">
     <value>使用其他时区显示时钟。</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="LanguageDescription" xml:space="preserve">
+    <value>重新启动后以其他语言显示应用。时钟上的日期仍遵循 Windows 的区域格式。</value>
+  </data>
+  <data name="LanguageWindows" xml:space="preserve">
+    <value>与 Windows 相同</value>
+  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>倒计时</value>
   </data>
