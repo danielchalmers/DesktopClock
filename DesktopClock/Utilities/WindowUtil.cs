@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using WpfWindowPlacement;
 
 namespace DesktopClock;
 
@@ -160,6 +161,70 @@ public static class WindowUtil
 
         static bool Overlaps(NativeRect a, NativeRect b) =>
             a.Left < b.Right && b.Left < a.Right && a.Top < b.Bottom && b.Top < a.Bottom;
+    }
+
+    /// <summary>
+    /// Restores the saved placement, then undoes the move Windows makes when it pushes a window that sits entirely inside the taskbar up into the work area (#157).
+    /// </summary>
+    public static void RestorePlacement(this Window window, WindowPlacement placement)
+    {
+        window.SetPlacement(placement);
+
+        var hwnd = new WindowInteropHelper(window).Handle;
+        if (placement.Equals(default(WindowPlacement)) || !GetWindowRect(hwnd, out var rect))
+            return;
+
+        // Both placements use the same coordinates, so their difference is how far Windows moved the window.
+        var saved = placement.NormalBounds;
+        var restored = window.GetPlacement().NormalBounds;
+        var target = Offset(rect, saved.Left - restored.Left, saved.Top - restored.Top);
+
+        // Keep Windows' move if the saved spot isn't on any monitor anymore, such as after unplugging one.
+        if (!IsOnAnyMonitor(target))
+            target = rect;
+
+        // Windows doesn't bring a window hidden from Alt+Tab back onto a monitor, so do it here.
+        if (!IsOnAnyMonitor(target))
+            target = MoveIntoNearestWorkArea(target);
+
+        if (target.Left != rect.Left || target.Top != rect.Top)
+            SetWindowPos(hwnd, IntPtr.Zero, target.Left, target.Top, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+
+        static NativeRect Offset(NativeRect rect, int dx, int dy) =>
+            new() { Left = rect.Left + dx, Top = rect.Top + dy, Right = rect.Right + dx, Bottom = rect.Bottom + dy };
+
+        static bool IsOnAnyMonitor(NativeRect rect) =>
+            MonitorFromRect(ref rect, MONITOR_DEFAULTTONULL) != IntPtr.Zero;
+
+        static NativeRect MoveIntoNearestWorkArea(NativeRect rect)
+        {
+            var monitor = new MonitorInfo { cbSize = Marshal.SizeOf<MonitorInfo>() };
+            if (!GetMonitorInfo(MonitorFromRect(ref rect, MONITOR_DEFAULTTONEAREST), ref monitor))
+                return rect;
+
+            var work = monitor.rcWork;
+            var left = Math.Max(work.Left, Math.Min(rect.Left, work.Right - (rect.Right - rect.Left)));
+            var top = Math.Max(work.Top, Math.Min(rect.Top, work.Bottom - (rect.Bottom - rect.Top)));
+            return Offset(rect, left - rect.Left, top - rect.Top);
+        }
+    }
+
+    private const uint MONITOR_DEFAULTTONULL = 0;
+    private const uint MONITOR_DEFAULTTONEAREST = 2;
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr MonitorFromRect(ref NativeRect rect, uint flags);
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    private static extern bool GetMonitorInfo(IntPtr monitor, ref MonitorInfo info);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct MonitorInfo
+    {
+        public int cbSize;
+        public NativeRect rcMonitor;
+        public NativeRect rcWork;
+        public uint dwFlags;
     }
 
     private const uint GW_HWNDPREV = 3;

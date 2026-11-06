@@ -397,7 +397,7 @@ public partial class MainWindow : Window
     {
         // Apply the window styles before restoring the placement, because Windows reads it in screen coordinates for tool windows (Hide from Alt+Tab) but relative to the work area otherwise, so restoring it first moves the clock down by the height of a top taskbar on every start.
         ApplyWindowVisibilitySettings();
-        this.SetPlacement(Settings.Default.Placement);
+        this.RestorePlacement(Settings.Default.Placement);
         PixelShifter?.UpdateBasePosition(this);
         this.SnapWhileDragging();
 
