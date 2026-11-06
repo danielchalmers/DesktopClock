@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using WpfWindowPlacement;
 
 namespace DesktopClock;
 
@@ -161,6 +162,33 @@ public static class WindowUtil
         static bool Overlaps(NativeRect a, NativeRect b) =>
             a.Left < b.Right && b.Left < a.Right && a.Top < b.Bottom && b.Top < a.Bottom;
     }
+
+    /// <summary>
+    /// Restores the saved placement, then undoes the move Windows makes when it pushes a window that sits entirely inside the taskbar up into the work area (#157).
+    /// </summary>
+    public static void RestorePlacement(this Window window, WindowPlacement placement)
+    {
+        window.SetPlacement(placement);
+
+        // Both placements use the same coordinates, so their difference is how far Windows moved the window.
+        var saved = placement.NormalBounds;
+        var restored = window.GetPlacement().NormalBounds;
+        var dx = saved.Left - restored.Left;
+        var dy = saved.Top - restored.Top;
+        var hwnd = new WindowInteropHelper(window).Handle;
+        if (placement.Equals(default(WindowPlacement)) || (dx == 0 && dy == 0) || !GetWindowRect(hwnd, out var rect))
+            return;
+
+        // Keep Windows' move if the saved spot isn't on any monitor anymore, such as after unplugging one.
+        var target = new NativeRect { Left = rect.Left + dx, Top = rect.Top + dy, Right = rect.Right + dx, Bottom = rect.Bottom + dy };
+        if (MonitorFromRect(ref target, MONITOR_DEFAULTTONULL) != IntPtr.Zero)
+            SetWindowPos(hwnd, IntPtr.Zero, target.Left, target.Top, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+    }
+
+    private const uint MONITOR_DEFAULTTONULL = 0;
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr MonitorFromRect(ref NativeRect rect, uint flags);
 
     private const uint GW_HWNDPREV = 3;
 
