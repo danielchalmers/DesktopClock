@@ -636,6 +636,9 @@
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Номер недели</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>День года</value>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Смещение UTC</value>
   </data>

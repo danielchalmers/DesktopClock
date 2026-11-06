@@ -636,6 +636,9 @@ Devam edilsin mi?</value>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Hafta numarası</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Yılın günü</value>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>UTC farkı</value>
   </data>

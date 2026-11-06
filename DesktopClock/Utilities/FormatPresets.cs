@@ -86,6 +86,7 @@ public static class FormatPresets
 
         tokens.Add((Loc.Get("TokenSeconds"), "{ss}"));
         tokens.Add((Loc.Get("TokenWeekNumber"), "{week}"));
+        tokens.Add((Loc.Get("TokenDayOfYear"), "{dayOfYear}"));
         tokens.Add((Loc.Get("TokenUtcOffset"), "{zzz}"));
         return tokens;
     }
