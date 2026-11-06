@@ -223,6 +223,12 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Mueve el reloj arrastrándolo o con las teclas de flecha.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Ajustar a los bordes</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Alinea el reloj con los bordes de la pantalla, la barra de tareas y otros relojes al arrastrarlo cerca de ellos.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Alinear a la derecha</value>
   </data>

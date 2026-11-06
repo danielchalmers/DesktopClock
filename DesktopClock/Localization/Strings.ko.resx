@@ -223,6 +223,12 @@
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>끌거나 화살표 키로 시계를 이동합니다.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>가장자리에 맞추기</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>시계를 가까이 끌면 화면 가장자리, 작업 표시줄, 다른 시계에 맞춥니다.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>오른쪽 맞춤</value>
   </data>

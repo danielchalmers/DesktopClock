@@ -223,6 +223,12 @@
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Перемещать часы перетаскиванием или клавишами со стрелками.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Привязка к краям</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Выравнивать часы по краям экрана, панели задач и другим часам, когда вы подтаскиваете их близко.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Выравнивать по правому краю</value>
   </data>

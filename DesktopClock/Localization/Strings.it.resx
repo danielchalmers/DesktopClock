@@ -223,6 +223,12 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Sposta l'orologio trascinandolo o con i tasti freccia.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Aggancia ai bordi</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Allinea l'orologio ai bordi dello schermo, alla barra delle applicazioni e agli altri orologi quando lo trascini vicino.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Allinea a destra</value>
   </data>

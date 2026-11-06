@@ -223,6 +223,12 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Di chuyển đồng hồ bằng cách kéo hoặc bằng phím mũi tên.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Bám vào cạnh</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Căn đồng hồ theo các cạnh màn hình, thanh tác vụ và các đồng hồ khác khi bạn kéo nó lại gần.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Căn phải</value>
   </data>

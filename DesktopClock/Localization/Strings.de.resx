@@ -223,6 +223,12 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Die Uhr durch Ziehen oder mit den Pfeiltasten verschieben.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>An Kanten ausrichten</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Die Uhr beim Ziehen an den Bildschirmrändern, der Taskleiste und anderen Uhren ausrichten.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Rechtsbündig</value>
   </data>

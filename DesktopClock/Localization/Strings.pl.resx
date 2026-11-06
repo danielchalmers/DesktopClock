@@ -223,6 +223,12 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Przesuwaj zegar, przeciągając go lub klawiszami strzałek.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Przyciągaj do krawędzi</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Wyrównuj zegar do krawędzi ekranu, paska zadań i innych zegarów, gdy przeciągasz go w ich pobliże.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Wyrównaj do prawej</value>
   </data>

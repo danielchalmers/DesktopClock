@@ -329,6 +329,15 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool DragToMove { get; set; } = true;
 
     /// <summary>
+    /// Snaps the clock to the edges of the screen, the taskbar, and other clocks while dragging it.
+    /// </summary>
+    /// <remarks>
+    /// Turn this on to line the clock up exactly without nudging it.
+    /// Turn it off if you want to drop it just short of an edge.
+    /// </remarks>
+    public bool SnapToEdges { get; set; } = true;
+
+    /// <summary>
     /// Makes the clock ignore mouse input so clicks reach windows underneath it.
     /// </summary>
     /// <remarks>

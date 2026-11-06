@@ -223,6 +223,12 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>De klok verplaatsen door te slepen of met de pijltoetsen.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Uitlijnen op randen</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>De klok uitlijnen op de randen van het scherm, de taakbalk en andere klokken wanneer u hem in de buurt sleept.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Rechts uitlijnen</value>
   </data>

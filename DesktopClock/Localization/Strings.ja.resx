@@ -223,6 +223,12 @@
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>ドラッグまたは方向キーで時計を移動します。</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>端にスナップ</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>ドラッグして近づけたときに、画面の端、タスク バー、ほかの時計に時計をそろえます。</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>右揃え</value>
   </data>

@@ -252,6 +252,12 @@ If the problem persists, report it at that link.</value>
   <data name="AllowDraggingDescription" xml:space="preserve">
     <value>Move the clock by dragging it or with the arrow keys.</value>
   </data>
+  <data name="SnapToEdges" xml:space="preserve">
+    <value>Snap to edges</value>
+  </data>
+  <data name="SnapToEdgesDescription" xml:space="preserve">
+    <value>Line the clock up with the edges of the screen, the taskbar, and other clocks when you drag it close.</value>
+  </data>
   <data name="AlignRight" xml:space="preserve">
     <value>Align right</value>
   </data>
