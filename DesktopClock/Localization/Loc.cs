@@ -45,11 +45,6 @@ public class Loc : MarkupExtension
         Key = key;
     }
 
-    /// <summary>
-    /// The language from settings that the app started in, or empty for the Windows display language.
-    /// </summary>
-    public static string StartupLanguage { get; private set; } = string.Empty;
-
     [ConstructorArgument("key")]
     public string Key { get; set; }
 
@@ -103,7 +98,6 @@ public class Loc : MarkupExtension
     /// </summary>
     public static void UseLanguage(string language)
     {
-        StartupLanguage = language ?? string.Empty;
         if (string.IsNullOrWhiteSpace(language))
             return;
 

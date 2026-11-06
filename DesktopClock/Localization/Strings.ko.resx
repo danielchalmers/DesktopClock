@@ -161,10 +161,7 @@
     <value>언어</value>
   </data>
   <data name="LanguageDescription" xml:space="preserve">
-    <value>앱을 다른 언어로 표시합니다. 시계의 날짜는 계속 Windows의 지역 형식을 따릅니다.</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>다시 시작</value>
+    <value>다시 시작한 후 앱을 다른 언어로 표시합니다. 시계의 날짜는 계속 Windows의 지역 형식을 따릅니다.</value>
   </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Windows와 동일</value>

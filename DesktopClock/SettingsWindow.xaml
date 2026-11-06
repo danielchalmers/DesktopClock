@@ -21,9 +21,6 @@
         Background="{DynamicResource WindowBackgroundBrush}"
         Foreground="{DynamicResource TextPrimaryBrush}"
         SourceInitialized="Window_SourceInitialized">
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -164,22 +161,10 @@
 
                     <TextBlock Text="{local:Loc Language}"
                                Style="{StaticResource LabelTextBlock}" />
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <ComboBox Grid.Column="0"
-                                  ItemsSource="{Binding Languages}"
-                                  SelectedValue="{Binding Language, Mode=TwoWay}"
-                                  SelectedValuePath="Value"
-                                  DisplayMemberPath="Name" />
-                        <Button Grid.Column="1"
-                                Margin="4,0,0,0"
-                                Content="{local:Loc Restart}"
-                                Command="{Binding RestartCommand}"
-                                Visibility="{Binding IsRestartNeeded, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    </Grid>
+                    <ComboBox ItemsSource="{Binding Languages}"
+                              SelectedValue="{Binding Settings.Language, Mode=TwoWay}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Name" />
                     <TextBlock Text="{local:Loc LanguageDescription}"
                                Style="{StaticResource DescriptionTextBlock}" />
                 </StackPanel>

@@ -161,10 +161,7 @@ Si le problème persiste, signalez-le via ce lien.</value>
     <value>Langue</value>
   </data>
   <data name="LanguageDescription" xml:space="preserve">
-    <value>Afficher l'application dans une autre langue. Les dates de l'horloge suivent toujours le format régional de Windows.</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>Redémarrer</value>
+    <value>Afficher l'application dans une autre langue après son redémarrage. Les dates de l'horloge suivent toujours le format régional de Windows.</value>
   </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Identique à Windows</value>

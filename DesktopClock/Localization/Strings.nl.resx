@@ -161,10 +161,7 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
     <value>Taal</value>
   </data>
   <data name="LanguageDescription" xml:space="preserve">
-    <value>De app in een andere taal weergeven. Datums op de klok blijven de regionale notatie van Windows volgen.</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>Opnieuw starten</value>
+    <value>De app in een andere taal weergeven nadat deze opnieuw is gestart. Datums op de klok blijven de regionale notatie van Windows volgen.</value>
   </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Zelfde als Windows</value>

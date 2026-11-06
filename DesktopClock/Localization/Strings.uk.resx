@@ -161,10 +161,7 @@
     <value>Мова</value>
   </data>
   <data name="LanguageDescription" xml:space="preserve">
-    <value>Показувати програму іншою мовою. Дати на годиннику й надалі відображаються в регіональному форматі Windows.</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>Перезапустити</value>
+    <value>Показувати програму іншою мовою після перезапуску. Дати на годиннику й надалі відображаються в регіональному форматі Windows.</value>
   </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Як у Windows</value>

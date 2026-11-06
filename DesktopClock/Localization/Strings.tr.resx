@@ -161,10 +161,7 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
     <value>Dil</value>
   </data>
   <data name="LanguageDescription" xml:space="preserve">
-    <value>Uygulamayı farklı bir dilde görüntüleyin. Saatteki tarihler yine Windows'un bölgesel biçimini izler.</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>Yeniden başlat</value>
+    <value>Uygulamayı yeniden başlattıktan sonra farklı bir dilde görüntüleyin. Saatteki tarihler yine Windows'un bölgesel biçimini izler.</value>
   </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Windows ile aynı</value>

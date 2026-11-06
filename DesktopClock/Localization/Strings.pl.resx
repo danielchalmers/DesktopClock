@@ -161,10 +161,7 @@ Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
     <value>Język</value>
   </data>
   <data name="LanguageDescription" xml:space="preserve">
-    <value>Wyświetlaj aplikację w innym języku. Daty na zegarze nadal są zgodne z formatem regionalnym systemu Windows.</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>Uruchom ponownie</value>
+    <value>Wyświetlaj aplikację w innym języku po ponownym uruchomieniu. Daty na zegarze nadal są zgodne z formatem regionalnym systemu Windows.</value>
   </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Jak w systemie Windows</value>

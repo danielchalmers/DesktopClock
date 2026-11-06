@@ -161,10 +161,7 @@
     <value>语言</value>
   </data>
   <data name="LanguageDescription" xml:space="preserve">
-    <value>以其他语言显示应用。时钟上的日期仍遵循 Windows 的区域格式。</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>重新启动</value>
+    <value>重新启动后以其他语言显示应用。时钟上的日期仍遵循 Windows 的区域格式。</value>
   </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>与 Windows 相同</value>

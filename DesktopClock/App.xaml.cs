@@ -21,14 +21,7 @@ public partial class App : Application
     public static FileInfo MainFileInfo = new(Process.GetCurrentProcess().MainModule.FileName);
     public static string MainFileDisplayText = $"{Path.GetFileNameWithoutExtension(MainFileInfo.Name)} {FileVersionInfo.GetVersionInfo(MainFileInfo.FullName).FileVersion}";
 
-    /// <summary>
-    /// Opens the settings window once the clock is up, so <see cref="Restart"/> can bring it back.
-    /// </summary>
-    private const string OpenSettingsArgument = "--settings";
-
     private static EventWaitHandle _showClockSignal;
-    private static RegisteredWaitHandle _showClockWait;
-    private static bool _restarting;
 
     public App()
     {
@@ -71,7 +64,7 @@ public partial class App : Application
             return;
         }
 
-        _showClockWait = ThreadPool.RegisterWaitForSingleObject(_showClockSignal, (_, _) => Dispatcher.BeginInvoke(new Action(() => (MainWindow as MainWindow)?.ShowClockAndSettings())), null, Timeout.Infinite, false);
+        ThreadPool.RegisterWaitForSingleObject(_showClockSignal, (_, _) => Dispatcher.BeginInvoke(new Action(() => (MainWindow as MainWindow)?.ShowClockAndSettings())), null, Timeout.Infinite, false);
 
         base.OnStartup(e);
         ThemeManager.Initialize();
@@ -80,35 +73,6 @@ public partial class App : Application
         Dispatcher.BeginInvoke(
             System.Windows.Threading.DispatcherPriority.ApplicationIdle,
             new Action(SettingsWindowViewModel.PrefetchSystemLists));
-
-        if (e.Args.Contains(OpenSettingsArgument))
-        {
-            Dispatcher.BeginInvoke(
-                System.Windows.Threading.DispatcherPriority.ApplicationIdle,
-                new Action(() => (MainWindow as MainWindow)?.OpenSettingsWindow()));
-        }
-    }
-
-    /// <summary>
-    /// Closes the app and starts it again with the settings window open, such as to show a new language everywhere.
-    /// </summary>
-    public static void Restart()
-    {
-        _restarting = true;
-        Current.Shutdown();
-    }
-
-    protected override void OnExit(ExitEventArgs e)
-    {
-        base.OnExit(e);
-
-        if (!_restarting)
-            return;
-
-        // The clock window has saved the settings and removed the tray icon by now. Let go of the one-clock-per-exe signal too, or the new process would show this clock and quit.
-        _showClockWait.Unregister(null);
-        _showClockSignal.Dispose();
-        Process.Start(MainFileInfo.FullName, OpenSettingsArgument);
     }
 
     /// <summary>

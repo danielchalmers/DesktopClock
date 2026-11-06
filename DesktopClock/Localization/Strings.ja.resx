@@ -161,10 +161,7 @@
     <value>言語</value>
   </data>
   <data name="LanguageDescription" xml:space="preserve">
-    <value>アプリを別の言語で表示します。時計の日付は引き続き Windows の地域設定に従います。</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>再起動</value>
+    <value>再起動後にアプリを別の言語で表示します。時計の日付は引き続き Windows の地域設定に従います。</value>
   </data>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Windows と同じ</value>

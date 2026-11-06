@@ -392,7 +392,7 @@ public partial class SettingsWindowViewModel : ObservableObject
             new(Stretch.UniformToFill, Loc.Get("ImageFitUniformToFill")),
         ];
 
-        // Each language is listed under its own name so anyone can find theirs, followed by its name in the current language unless that's the same.
+        // Each language is listed under its own name so anyone can find theirs.
         Languages =
         [
             new(string.Empty, Loc.Get("LanguageWindows")),
@@ -441,31 +441,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// The Windows display language followed by every language the app is translated into.
     /// </summary>
     public IList<SettingOption> Languages { get; }
-
-    /// <summary>
-    /// The language picked in settings, which shows after a restart.
-    /// </summary>
-    public string Language
-    {
-        get => Settings.Language ?? string.Empty;
-        set
-        {
-            Settings.Language = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(IsRestartNeeded));
-        }
-    }
-
-    /// <summary>
-    /// Whether the picked language isn't the one on screen yet.
-    /// </summary>
-    public bool IsRestartNeeded => Language != Loc.StartupLanguage;
-
-    /// <summary>
-    /// Restarts the app so the picked language shows everywhere.
-    /// </summary>
-    [RelayCommand]
-    public void Restart() => App.Restart();
 
     /// <summary>
     /// All available time zones reported by the system.
