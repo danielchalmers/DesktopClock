@@ -500,4 +500,7 @@ public sealed class SettingOption(object value, string name)
     public object Value { get; } = value;
 
     public string Name { get; } = name;
+
+    // Screen readers name dropdown items by their text, which would otherwise be the type name for every option.
+    public override string ToString() => Name;
 }
