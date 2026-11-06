@@ -169,57 +169,6 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Windows ile aynı</value>
   </data>
-  <data name="LanguageIndonesian" xml:space="preserve">
-    <value>Endonezce</value>
-  </data>
-  <data name="LanguageGerman" xml:space="preserve">
-    <value>Almanca</value>
-  </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>İngilizce</value>
-  </data>
-  <data name="LanguageSpanish" xml:space="preserve">
-    <value>İspanyolca</value>
-  </data>
-  <data name="LanguageFrench" xml:space="preserve">
-    <value>Fransızca</value>
-  </data>
-  <data name="LanguageItalian" xml:space="preserve">
-    <value>İtalyanca</value>
-  </data>
-  <data name="LanguageDutch" xml:space="preserve">
-    <value>Felemenkçe</value>
-  </data>
-  <data name="LanguagePolish" xml:space="preserve">
-    <value>Lehçe</value>
-  </data>
-  <data name="LanguagePortuguese" xml:space="preserve">
-    <value>Portekizce</value>
-  </data>
-  <data name="LanguageVietnamese" xml:space="preserve">
-    <value>Vietnamca</value>
-  </data>
-  <data name="LanguageTurkish" xml:space="preserve">
-    <value>Türkçe</value>
-  </data>
-  <data name="LanguageRussian" xml:space="preserve">
-    <value>Rusça</value>
-  </data>
-  <data name="LanguageUkrainian" xml:space="preserve">
-    <value>Ukraynaca</value>
-  </data>
-  <data name="LanguageJapanese" xml:space="preserve">
-    <value>Japonca</value>
-  </data>
-  <data name="LanguageKorean" xml:space="preserve">
-    <value>Korece</value>
-  </data>
-  <data name="LanguageChineseSimplified" xml:space="preserve">
-    <value>Basitleştirilmiş Çince</value>
-  </data>
-  <data name="LanguageChineseTraditional" xml:space="preserve">
-    <value>Geleneksel Çince</value>
-  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Geri sayım</value>
   </data>

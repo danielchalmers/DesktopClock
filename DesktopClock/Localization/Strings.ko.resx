@@ -169,57 +169,6 @@
   <data name="LanguageWindows" xml:space="preserve">
     <value>Windows와 동일</value>
   </data>
-  <data name="LanguageIndonesian" xml:space="preserve">
-    <value>인도네시아어</value>
-  </data>
-  <data name="LanguageGerman" xml:space="preserve">
-    <value>독일어</value>
-  </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>영어</value>
-  </data>
-  <data name="LanguageSpanish" xml:space="preserve">
-    <value>스페인어</value>
-  </data>
-  <data name="LanguageFrench" xml:space="preserve">
-    <value>프랑스어</value>
-  </data>
-  <data name="LanguageItalian" xml:space="preserve">
-    <value>이탈리아어</value>
-  </data>
-  <data name="LanguageDutch" xml:space="preserve">
-    <value>네덜란드어</value>
-  </data>
-  <data name="LanguagePolish" xml:space="preserve">
-    <value>폴란드어</value>
-  </data>
-  <data name="LanguagePortuguese" xml:space="preserve">
-    <value>포르투갈어</value>
-  </data>
-  <data name="LanguageVietnamese" xml:space="preserve">
-    <value>베트남어</value>
-  </data>
-  <data name="LanguageTurkish" xml:space="preserve">
-    <value>터키어</value>
-  </data>
-  <data name="LanguageRussian" xml:space="preserve">
-    <value>러시아어</value>
-  </data>
-  <data name="LanguageUkrainian" xml:space="preserve">
-    <value>우크라이나어</value>
-  </data>
-  <data name="LanguageJapanese" xml:space="preserve">
-    <value>일본어</value>
-  </data>
-  <data name="LanguageKorean" xml:space="preserve">
-    <value>한국어</value>
-  </data>
-  <data name="LanguageChineseSimplified" xml:space="preserve">
-    <value>중국어 간체</value>
-  </data>
-  <data name="LanguageChineseTraditional" xml:space="preserve">
-    <value>중국어 번체</value>
-  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>카운트다운</value>
   </data>

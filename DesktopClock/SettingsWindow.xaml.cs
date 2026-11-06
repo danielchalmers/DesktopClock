@@ -396,7 +396,7 @@ public partial class SettingsWindowViewModel : ObservableObject
         Languages =
         [
             new(string.Empty, Loc.Get("LanguageWindows")),
-            .. Loc.Languages().Select(l => new SettingOption(l.Culture, string.Equals(l.NativeName, l.Name, StringComparison.OrdinalIgnoreCase) ? l.NativeName : $"{l.NativeName} ({l.Name})")),
+            .. Loc.Languages.Select(l => new SettingOption(l.Culture, l.Name)),
         ];
     }
 

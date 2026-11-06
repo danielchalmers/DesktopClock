@@ -169,57 +169,6 @@ Si el problema continúa, notifícalo en ese vínculo.</value>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Igual que Windows</value>
   </data>
-  <data name="LanguageIndonesian" xml:space="preserve">
-    <value>indonesio</value>
-  </data>
-  <data name="LanguageGerman" xml:space="preserve">
-    <value>alemán</value>
-  </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>inglés</value>
-  </data>
-  <data name="LanguageSpanish" xml:space="preserve">
-    <value>español</value>
-  </data>
-  <data name="LanguageFrench" xml:space="preserve">
-    <value>francés</value>
-  </data>
-  <data name="LanguageItalian" xml:space="preserve">
-    <value>italiano</value>
-  </data>
-  <data name="LanguageDutch" xml:space="preserve">
-    <value>neerlandés</value>
-  </data>
-  <data name="LanguagePolish" xml:space="preserve">
-    <value>polaco</value>
-  </data>
-  <data name="LanguagePortuguese" xml:space="preserve">
-    <value>portugués</value>
-  </data>
-  <data name="LanguageVietnamese" xml:space="preserve">
-    <value>vietnamita</value>
-  </data>
-  <data name="LanguageTurkish" xml:space="preserve">
-    <value>turco</value>
-  </data>
-  <data name="LanguageRussian" xml:space="preserve">
-    <value>ruso</value>
-  </data>
-  <data name="LanguageUkrainian" xml:space="preserve">
-    <value>ucraniano</value>
-  </data>
-  <data name="LanguageJapanese" xml:space="preserve">
-    <value>japonés</value>
-  </data>
-  <data name="LanguageKorean" xml:space="preserve">
-    <value>coreano</value>
-  </data>
-  <data name="LanguageChineseSimplified" xml:space="preserve">
-    <value>chino simplificado</value>
-  </data>
-  <data name="LanguageChineseTraditional" xml:space="preserve">
-    <value>chino tradicional</value>
-  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Cuenta regresiva</value>
   </data>

@@ -169,57 +169,6 @@
   <data name="LanguageWindows" xml:space="preserve">
     <value>Как в Windows</value>
   </data>
-  <data name="LanguageIndonesian" xml:space="preserve">
-    <value>индонезийский</value>
-  </data>
-  <data name="LanguageGerman" xml:space="preserve">
-    <value>немецкий</value>
-  </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>английский</value>
-  </data>
-  <data name="LanguageSpanish" xml:space="preserve">
-    <value>испанский</value>
-  </data>
-  <data name="LanguageFrench" xml:space="preserve">
-    <value>французский</value>
-  </data>
-  <data name="LanguageItalian" xml:space="preserve">
-    <value>итальянский</value>
-  </data>
-  <data name="LanguageDutch" xml:space="preserve">
-    <value>нидерландский</value>
-  </data>
-  <data name="LanguagePolish" xml:space="preserve">
-    <value>польский</value>
-  </data>
-  <data name="LanguagePortuguese" xml:space="preserve">
-    <value>португальский</value>
-  </data>
-  <data name="LanguageVietnamese" xml:space="preserve">
-    <value>вьетнамский</value>
-  </data>
-  <data name="LanguageTurkish" xml:space="preserve">
-    <value>турецкий</value>
-  </data>
-  <data name="LanguageRussian" xml:space="preserve">
-    <value>русский</value>
-  </data>
-  <data name="LanguageUkrainian" xml:space="preserve">
-    <value>украинский</value>
-  </data>
-  <data name="LanguageJapanese" xml:space="preserve">
-    <value>японский</value>
-  </data>
-  <data name="LanguageKorean" xml:space="preserve">
-    <value>корейский</value>
-  </data>
-  <data name="LanguageChineseSimplified" xml:space="preserve">
-    <value>упрощенный китайский</value>
-  </data>
-  <data name="LanguageChineseTraditional" xml:space="preserve">
-    <value>традиционный китайский</value>
-  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Обратный отсчет</value>
   </data>

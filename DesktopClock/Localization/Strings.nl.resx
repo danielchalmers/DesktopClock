@@ -169,57 +169,6 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Zelfde als Windows</value>
   </data>
-  <data name="LanguageIndonesian" xml:space="preserve">
-    <value>Indonesisch</value>
-  </data>
-  <data name="LanguageGerman" xml:space="preserve">
-    <value>Duits</value>
-  </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>Engels</value>
-  </data>
-  <data name="LanguageSpanish" xml:space="preserve">
-    <value>Spaans</value>
-  </data>
-  <data name="LanguageFrench" xml:space="preserve">
-    <value>Frans</value>
-  </data>
-  <data name="LanguageItalian" xml:space="preserve">
-    <value>Italiaans</value>
-  </data>
-  <data name="LanguageDutch" xml:space="preserve">
-    <value>Nederlands</value>
-  </data>
-  <data name="LanguagePolish" xml:space="preserve">
-    <value>Pools</value>
-  </data>
-  <data name="LanguagePortuguese" xml:space="preserve">
-    <value>Portugees</value>
-  </data>
-  <data name="LanguageVietnamese" xml:space="preserve">
-    <value>Vietnamees</value>
-  </data>
-  <data name="LanguageTurkish" xml:space="preserve">
-    <value>Turks</value>
-  </data>
-  <data name="LanguageRussian" xml:space="preserve">
-    <value>Russisch</value>
-  </data>
-  <data name="LanguageUkrainian" xml:space="preserve">
-    <value>Oekraïens</value>
-  </data>
-  <data name="LanguageJapanese" xml:space="preserve">
-    <value>Japans</value>
-  </data>
-  <data name="LanguageKorean" xml:space="preserve">
-    <value>Koreaans</value>
-  </data>
-  <data name="LanguageChineseSimplified" xml:space="preserve">
-    <value>Vereenvoudigd Chinees</value>
-  </data>
-  <data name="LanguageChineseTraditional" xml:space="preserve">
-    <value>Traditioneel Chinees</value>
-  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Aftellen</value>
   </data>

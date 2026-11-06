@@ -169,57 +169,6 @@ Jika masalah berlanjut, laporkan di tautan tersebut.</value>
   <data name="LanguageWindows" xml:space="preserve">
     <value>Sama dengan Windows</value>
   </data>
-  <data name="LanguageIndonesian" xml:space="preserve">
-    <value>Bahasa Indonesia</value>
-  </data>
-  <data name="LanguageGerman" xml:space="preserve">
-    <value>Jerman</value>
-  </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>Inggris</value>
-  </data>
-  <data name="LanguageSpanish" xml:space="preserve">
-    <value>Spanyol</value>
-  </data>
-  <data name="LanguageFrench" xml:space="preserve">
-    <value>Prancis</value>
-  </data>
-  <data name="LanguageItalian" xml:space="preserve">
-    <value>Italia</value>
-  </data>
-  <data name="LanguageDutch" xml:space="preserve">
-    <value>Belanda</value>
-  </data>
-  <data name="LanguagePolish" xml:space="preserve">
-    <value>Polski</value>
-  </data>
-  <data name="LanguagePortuguese" xml:space="preserve">
-    <value>Portugis</value>
-  </data>
-  <data name="LanguageVietnamese" xml:space="preserve">
-    <value>Vietnam</value>
-  </data>
-  <data name="LanguageTurkish" xml:space="preserve">
-    <value>Turki</value>
-  </data>
-  <data name="LanguageRussian" xml:space="preserve">
-    <value>Rusia</value>
-  </data>
-  <data name="LanguageUkrainian" xml:space="preserve">
-    <value>Ukraina</value>
-  </data>
-  <data name="LanguageJapanese" xml:space="preserve">
-    <value>Jepang</value>
-  </data>
-  <data name="LanguageKorean" xml:space="preserve">
-    <value>Korea</value>
-  </data>
-  <data name="LanguageChineseSimplified" xml:space="preserve">
-    <value>Tionghoa Sederhana</value>
-  </data>
-  <data name="LanguageChineseTraditional" xml:space="preserve">
-    <value>Tionghoa Tradisional</value>
-  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>Hitung mundur</value>
   </data>

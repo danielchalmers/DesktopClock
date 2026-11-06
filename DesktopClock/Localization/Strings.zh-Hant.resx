@@ -169,57 +169,6 @@
   <data name="LanguageWindows" xml:space="preserve">
     <value>與 Windows 相同</value>
   </data>
-  <data name="LanguageIndonesian" xml:space="preserve">
-    <value>印尼文</value>
-  </data>
-  <data name="LanguageGerman" xml:space="preserve">
-    <value>德文</value>
-  </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>英文</value>
-  </data>
-  <data name="LanguageSpanish" xml:space="preserve">
-    <value>西班牙文</value>
-  </data>
-  <data name="LanguageFrench" xml:space="preserve">
-    <value>法文</value>
-  </data>
-  <data name="LanguageItalian" xml:space="preserve">
-    <value>義大利文</value>
-  </data>
-  <data name="LanguageDutch" xml:space="preserve">
-    <value>荷蘭文</value>
-  </data>
-  <data name="LanguagePolish" xml:space="preserve">
-    <value>波蘭文</value>
-  </data>
-  <data name="LanguagePortuguese" xml:space="preserve">
-    <value>葡萄牙文</value>
-  </data>
-  <data name="LanguageVietnamese" xml:space="preserve">
-    <value>越南文</value>
-  </data>
-  <data name="LanguageTurkish" xml:space="preserve">
-    <value>土耳其文</value>
-  </data>
-  <data name="LanguageRussian" xml:space="preserve">
-    <value>俄文</value>
-  </data>
-  <data name="LanguageUkrainian" xml:space="preserve">
-    <value>烏克蘭文</value>
-  </data>
-  <data name="LanguageJapanese" xml:space="preserve">
-    <value>日文</value>
-  </data>
-  <data name="LanguageKorean" xml:space="preserve">
-    <value>韓文</value>
-  </data>
-  <data name="LanguageChineseSimplified" xml:space="preserve">
-    <value>簡體中文</value>
-  </data>
-  <data name="LanguageChineseTraditional" xml:space="preserve">
-    <value>繁體中文</value>
-  </data>
   <data name="SectionCountdown" xml:space="preserve">
     <value>倒數計時</value>
   </data>

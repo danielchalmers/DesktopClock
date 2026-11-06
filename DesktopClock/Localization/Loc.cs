@@ -13,7 +13,7 @@ namespace DesktopClock;
 /// Looks up UI text from Localization/Strings.resx in the Windows display language or the one picked in settings, falling back to English. In XAML, use <c>{local:Loc KeyName}</c>.
 /// </summary>
 /// <remarks>
-/// To add text, put it in Strings.resx with a comment for translators, then translate it in every Strings.*.resx. To add a language, name the file after the neutral culture that regional cultures fall back to (de, pt, zh-Hans, zh-Hant), add it to <see cref="Languages"/> with a name key in every file, and check RelativeTimeFormatter.PluralFormIndex. LocalizationTests checks keys, placeholders, links, access keys, plural forms, and the language list.
+/// To add text, put it in Strings.resx with a comment for translators, then translate it in every Strings.*.resx. To add a language, name the file after the neutral culture that regional cultures fall back to (de, pt, zh-Hans, zh-Hant), add it to <see cref="Languages"/>, and check RelativeTimeFormatter.PluralFormIndex. LocalizationTests checks keys, placeholders, links, access keys, plural forms, and the language list.
 /// </remarks>
 [MarkupExtensionReturnType(typeof(string))]
 public class Loc : MarkupExtension
@@ -72,30 +72,30 @@ public class Loc : MarkupExtension
         _baseLanguages.TryGetValue(culture.TwoLetterISOLanguageName, out var baseLanguage) ? baseLanguage : culture.TwoLetterISOLanguageName;
 
     /// <summary>
-    /// Every language there's a translation for, in the order the language picker shows them: the culture name, the language's name for itself, and its name in the given language or the current UI language.
+    /// Every language there's a translation for, in the order the language picker shows them, with each language's name for itself.
     /// </summary>
     /// <remarks>
-    /// The names for themselves are written out because Windows has some of them in lowercase or in an unusual form, like "polski" and "Indonesia". The keys go through Loc.Get so LocalizationTests can find them.
+    /// The names are written out because Windows has some of them in lowercase or in an unusual form, like "polski" and "Indonesia".
     /// </remarks>
-    public static IReadOnlyList<(string Culture, string NativeName, string Name)> Languages(CultureInfo culture = null) =>
+    public static IReadOnlyList<(string Culture, string Name)> Languages { get; } =
     [
-        ("id", "Bahasa Indonesia", Loc.Get("LanguageIndonesian", culture)),
-        ("de", "Deutsch", Loc.Get("LanguageGerman", culture)),
-        ("en", "English", Loc.Get("LanguageEnglish", culture)),
-        ("es", "Español", Loc.Get("LanguageSpanish", culture)),
-        ("fr", "Français", Loc.Get("LanguageFrench", culture)),
-        ("it", "Italiano", Loc.Get("LanguageItalian", culture)),
-        ("nl", "Nederlands", Loc.Get("LanguageDutch", culture)),
-        ("pl", "Polski", Loc.Get("LanguagePolish", culture)),
-        ("pt", "Português", Loc.Get("LanguagePortuguese", culture)),
-        ("vi", "Tiếng Việt", Loc.Get("LanguageVietnamese", culture)),
-        ("tr", "Türkçe", Loc.Get("LanguageTurkish", culture)),
-        ("ru", "Русский", Loc.Get("LanguageRussian", culture)),
-        ("uk", "Українська", Loc.Get("LanguageUkrainian", culture)),
-        ("ja", "日本語", Loc.Get("LanguageJapanese", culture)),
-        ("ko", "한국어", Loc.Get("LanguageKorean", culture)),
-        ("zh-Hans", "简体中文", Loc.Get("LanguageChineseSimplified", culture)),
-        ("zh-Hant", "繁體中文", Loc.Get("LanguageChineseTraditional", culture)),
+        ("id", "Bahasa Indonesia"),
+        ("de", "Deutsch"),
+        ("en", "English"),
+        ("es", "Español"),
+        ("fr", "Français"),
+        ("it", "Italiano"),
+        ("nl", "Nederlands"),
+        ("pl", "Polski"),
+        ("pt", "Português"),
+        ("vi", "Tiếng Việt"),
+        ("tr", "Türkçe"),
+        ("ru", "Русский"),
+        ("uk", "Українська"),
+        ("ja", "日本語"),
+        ("ko", "한국어"),
+        ("zh-Hans", "简体中文"),
+        ("zh-Hant", "繁體中文"),
     ];
 
     /// <summary>
