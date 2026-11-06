@@ -26,11 +26,19 @@
   </data>
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>Always on _top</value>
-    <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
+    <comment>Choice in the Layer submenu of the clock menu: keep the clock above other windows. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the Layer submenu uses. Chinese, Japanese, and Korean append the English access letter as (_X).</comment>
   </data>
   <data name="MenuPinToDesktop" xml:space="preserve">
     <value>Pin to _desktop</value>
-    <comment>Checkable menu item that keeps the clock behind other windows, on the desktop. The opposite of Always on top. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu uses. Chinese, Japanese, and Korean append the English access letter as (_X).</comment>
+    <comment>Choice in the Layer submenu of the clock menu: keep the clock behind other windows, on the desktop. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the Layer submenu uses. Chinese, Japanese, and Korean append the English access letter as (_X).</comment>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>_Layer</value>
+    <comment>Clock menu item that opens a submenu to choose whether the clock stays above other windows, among them, or behind them on the desktop. Layer as in the stacking order of windows. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu uses. Chinese, Japanese, and Korean append the English access letter as (_X).</comment>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Normal</value>
+    <comment>Choice in the Layer submenu: the clock behaves like any other window, neither always on top nor pinned to the desktop. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the Layer submenu uses. Chinese, Japanese, and Korean append the English access letter as (_X).</comment>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Settings…</value>
@@ -239,17 +247,23 @@ If the problem persists, report it at that link.</value>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Always on top</value>
-  </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Keep the clock above other windows.</value>
+    <comment>Choice in the Layer dropdown: keep the clock above other windows.</comment>
   </data>
   <data name="PinToDesktop" xml:space="preserve">
     <value>Pin to desktop</value>
-    <comment>Checkbox: keep the clock behind other windows, on the desktop, like a widget. The opposite of Always on top.</comment>
+    <comment>Choice in the Layer dropdown: keep the clock behind other windows, on the desktop, like a widget.</comment>
   </data>
-  <data name="PinToDesktopDescription" xml:space="preserve">
-    <value>Keep the clock behind other windows. It stays visible when you show the desktop with Win+D.</value>
-    <comment>Win+D is the Windows shortcut that shows the desktop. Keep it as is.</comment>
+  <data name="Layer" xml:space="preserve">
+    <value>Layer</value>
+    <comment>Settings label for a dropdown that chooses whether the clock stays above other windows, among them, or behind them on the desktop. Use the same word as the Layer item in the clock menu, without the access key.</comment>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Choice in the Layer dropdown: the clock behaves like any other window. Use the same word as the Normal item in the clock menu, without the access key.</comment>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>Always on top keeps the clock above other windows. Pin to desktop keeps it behind them, but still visible when you show the desktop with Win+D.</value>
+    <comment>Always on top and Pin to desktop are choices in the Layer dropdown; use the same translations for them. Win+D is the Windows shortcut that shows the desktop. Keep it as is.</comment>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Click through</value>

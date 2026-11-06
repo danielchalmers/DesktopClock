@@ -284,6 +284,23 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool PinToDesktop { get; set; } = false;
 
     /// <summary>
+    /// UI-facing choice between <see cref="Topmost"/>, neither, and <see cref="PinToDesktop"/> for the clock menu and the settings window.
+    /// </summary>
+    /// <remarks>
+    /// The file keeps the two switches, so older versions still read it.
+    /// </remarks>
+    [JsonIgnore]
+    public ClockLayer Layer
+    {
+        get => Topmost ? ClockLayer.AlwaysOnTop : PinToDesktop ? ClockLayer.PinToDesktop : ClockLayer.Normal;
+        set
+        {
+            Topmost = value == ClockLayer.AlwaysOnTop;
+            PinToDesktop = value == ClockLayer.PinToDesktop;
+        }
+    }
+
+    /// <summary>
     /// Hides the clock when another fullscreen window occupies the same monitor.
     /// </summary>
     /// <remarks>

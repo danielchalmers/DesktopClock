@@ -19,7 +19,8 @@ public class LocalizationTests
     // Alt access keys that share a window must not collide.
     private static readonly string[][] AccessKeyGroups =
     {
-        ["MenuCopy", "MenuHide", "MenuAlwaysOnTop", "MenuPinToDesktop", "MenuSettings", "MenuCheckForUpdates", "MenuGiveFeedback", "MenuExit"],
+        ["MenuCopy", "MenuHide", "MenuLayer", "MenuSettings", "MenuCheckForUpdates", "MenuGiveFeedback", "MenuExit"],
+        ["MenuAlwaysOnTop", "MenuLayerNormal", "MenuPinToDesktop"],
         ["NavDisplay", "NavCountdown", "NavWindow", "NavThemePresets", "NavTypography", "NavAppearance", "NavAlerts", "NavShortcuts", "NavDiscoverMore", "NavCredits", "SettingsFolder", "SettingsFile", "NewClock"],
     };
 

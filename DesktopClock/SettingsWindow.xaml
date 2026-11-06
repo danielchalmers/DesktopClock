@@ -217,15 +217,14 @@
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
-                    <CheckBox Content="{local:Loc AlwaysOnTop}"
-                              IsChecked="{Binding Settings.Topmost, Mode=TwoWay}" />
-                    <TextBlock Text="{local:Loc AlwaysOnTopDescription}"
-                               Margin="0,0,0,16"
-                               Style="{StaticResource DescriptionTextBlock}" />
-
-                    <CheckBox Content="{local:Loc PinToDesktop}"
-                              IsChecked="{Binding Settings.PinToDesktop, Mode=TwoWay}" />
-                    <TextBlock Text="{local:Loc PinToDesktopDescription}"
+                    <TextBlock Text="{local:Loc Layer}"
+                               Style="{StaticResource LabelTextBlock}" />
+                    <ComboBox ItemsSource="{Binding Layers}"
+                              AutomationProperties.Name="{local:Loc Layer}"
+                              SelectedValue="{Binding Settings.Layer, Mode=TwoWay}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Name" />
+                    <TextBlock Text="{local:Loc LayerDescription}"
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 

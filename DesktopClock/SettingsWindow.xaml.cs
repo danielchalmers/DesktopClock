@@ -398,6 +398,12 @@ public partial class SettingsWindowViewModel : ObservableObject
             new(string.Empty, Loc.Get("LanguageWindows")),
             .. Loc.Languages.Select(l => new SettingOption(l.Culture, l.Name)),
         ];
+        Layers =
+        [
+            new(ClockLayer.AlwaysOnTop, Loc.Get("AlwaysOnTop")),
+            new(ClockLayer.Normal, Loc.Get("LayerNormal")),
+            new(ClockLayer.PinToDesktop, Loc.Get("PinToDesktop")),
+        ];
     }
 
     /// <summary>
@@ -441,6 +447,11 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// The Windows display language followed by every language the app is translated into.
     /// </summary>
     public IList<SettingOption> Languages { get; }
+
+    /// <summary>
+    /// Whether the clock stays above other windows, among them, or behind them on the desktop.
+    /// </summary>
+    public IList<SettingOption> Layers { get; }
 
     /// <summary>
     /// All available time zones reported by the system.
