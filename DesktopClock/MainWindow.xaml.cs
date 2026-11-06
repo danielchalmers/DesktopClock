@@ -310,7 +310,8 @@ public partial class MainWindow : Window
 
         Dispatcher.Invoke(() =>
         {
-            if (IsVisible && WindowState != WindowState.Minimized)
+            // Check again on the UI thread, because Stay on top may have been turned off while this was queued, and raising a window that isn't topmost would make it topmost again.
+            if (Topmost && IsVisible && WindowState != WindowState.Minimized)
                 this.ReassertTopmost();
         });
     }
