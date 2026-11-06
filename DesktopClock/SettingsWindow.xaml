@@ -152,6 +152,7 @@
                     <TextBlock Text="{local:Loc TimeZone}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding TimeZones}"
+                              AutomationProperties.Name="{local:Loc TimeZone}"
                               SelectedItem="{Binding Settings.TimeZoneInfo, Mode=TwoWay}"
                               DisplayMemberPath="DisplayName" />
                     <TextBlock Text="{local:Loc TimeZoneDescription}"
@@ -271,6 +272,7 @@
                     <TextBlock Text="{local:Loc FontFamily}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontFamilies}"
+                              AutomationProperties.Name="{local:Loc FontFamily}"
                               SelectedItem="{Binding Settings.FontFamily, Mode=TwoWay}" />
                     <TextBlock Text="{local:Loc FontFamilyDescription}"
                                Margin="0,0,0,16"
@@ -279,6 +281,7 @@
                     <TextBlock Text="{local:Loc FontStyle}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontStyles}"
+                              AutomationProperties.Name="{local:Loc FontStyle}"
                               SelectedValue="{Binding Settings.FontStyle, Mode=TwoWay}"
                               SelectedValuePath="Value"
                               DisplayMemberPath="Name" />
@@ -289,6 +292,7 @@
                     <TextBlock Text="{local:Loc FontWeight}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding FontWeights}"
+                              AutomationProperties.Name="{local:Loc FontWeight}"
                               SelectedValue="{Binding Settings.FontWeight, Mode=TwoWay}"
                               SelectedValuePath="Value"
                               DisplayMemberPath="Name" />
@@ -481,6 +485,7 @@
                     <TextBlock Text="{local:Loc ImageFit}"
                                Style="{StaticResource LabelTextBlock}" />
                     <ComboBox ItemsSource="{Binding ImageStretches}"
+                              AutomationProperties.Name="{local:Loc ImageFit}"
                               SelectedValue="{Binding Settings.BackgroundImageStretch, Mode=TwoWay}"
                               SelectedValuePath="Value"
                               DisplayMemberPath="Name" />
