@@ -60,6 +60,16 @@ public static class WindowUtil
         int cy,
         uint flags);
 
+    private const int ASFW_ANY = -1;
+
+    [DllImport("user32.dll")]
+    private static extern bool AllowSetForegroundWindow(int processId);
+
+    /// <summary>
+    /// Lets another app bring its window to the front, which Windows otherwise only allows the app the user just started.
+    /// </summary>
+    public static void AllowAnyAppToComeToFront() => AllowSetForegroundWindow(ASFW_ANY);
+
     /// <summary>
     /// Hides the window until the user opens it again through the taskbar, tray, alt-tab, etc.
     /// </summary>

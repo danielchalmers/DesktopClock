@@ -49,16 +49,18 @@ public partial class App : Application
     {
         CrashHandler.Register(this);
 
-        // One clock per exe: starting it again shows the running clock instead of adding a second one that shares its settings and tray icon. Clocks made with "New clock" are separate exes, so they still run side by side.
+        // One clock per exe: starting it again shows the running clock and its settings instead of adding a second one that shares its settings and tray icon. Settings is the way back when click-through is on and the tray icon is out of reach, and its "New clock" makes a separate exe that runs side by side.
         _showClockSignal = new EventWaitHandle(false, EventResetMode.AutoReset, "DesktopClock-" + GetSha256Hash(MainFileInfo.FullName), out var isFirst);
         if (!isFirst)
         {
+            // Pass the right to come to the front on to the running clock, so its settings open focused.
+            WindowUtil.AllowAnyAppToComeToFront();
             _showClockSignal.Set();
             Shutdown();
             return;
         }
 
-        ThreadPool.RegisterWaitForSingleObject(_showClockSignal, (_, _) => Dispatcher.BeginInvoke(new Action(() => (MainWindow as MainWindow)?.ShowClock())), null, Timeout.Infinite, false);
+        ThreadPool.RegisterWaitForSingleObject(_showClockSignal, (_, _) => Dispatcher.BeginInvoke(new Action(() => (MainWindow as MainWindow)?.ShowClockAndSettings())), null, Timeout.Infinite, false);
 
         base.OnStartup(e);
         ThemeManager.Initialize();
