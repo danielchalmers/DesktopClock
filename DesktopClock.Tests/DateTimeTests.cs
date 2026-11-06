@@ -75,6 +75,17 @@ public class DateTimeTests
         Assert.Equal(dt1.EqualExcludingMillisecond(dt2), dt2.EqualExcludingMillisecond(dt1));
     }
 
+    [Fact]
+    public void TruncateToSecond_DropsTheFractionAndKeepsTheOffset()
+    {
+        var time = new DateTimeOffset(2024, 7, 18, 12, 30, 45, 999, TimeSpan.FromHours(-5)).AddTicks(9999);
+
+        var result = time.TruncateToSecond();
+
+        Assert.Equal(new DateTimeOffset(2024, 7, 18, 12, 30, 45, TimeSpan.FromHours(-5)), result);
+        Assert.Equal(TimeSpan.FromHours(-5), result.Offset);
+    }
+
     [Theory]
     [InlineData("2024-07-18 12:30:00", "2024-07-18 12:30:00", 30, true)] // Countdown reached, on interval
     [InlineData("2024-07-18 12:30:01", "2024-07-18 12:30:01", 30, true)] // Countdown reached, not on interval

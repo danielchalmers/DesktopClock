@@ -250,13 +250,13 @@ public partial class MainWindow : Window
     /// <summary>
     /// Runs when the system clock timer ticks each second.
     /// </summary>
-    private void SystemClockTimer_SecondChanged(object sender, EventArgs e)
+    private void SystemClockTimer_SecondChanged(object sender, DateTimeOffset second)
     {
-        UpdateTimeString();
+        UpdateTimeString(second);
 
-        TryShiftPixels();
+        TryShiftPixels(second);
 
-        TryPlaySound();
+        TryPlaySound(second);
 
         if (Settings.Default.HideWhenFullscreen)
         {
@@ -286,12 +286,12 @@ public partial class MainWindow : Window
     /// <summary>
     /// Plays a sound when the interval or countdown match and the file exists.
     /// </summary>
-    private void TryPlaySound()
+    private void TryPlaySound(DateTimeOffset second)
     {
         if (_soundPlayer == null)
             return;
 
-        if (!DateTimeUtil.IsNowOrCountdownOnInterval(DateTime.Now, Settings.Default.CountdownTo, Settings.Default.WavFileInterval))
+        if (!DateTimeUtil.IsNowOrCountdownOnInterval(second.DateTime, Settings.Default.CountdownTo, Settings.Default.WavFileInterval))
             return;
 
         try
@@ -325,9 +325,9 @@ public partial class MainWindow : Window
         });
     }
 
-    private void TryShiftPixels()
+    private void TryShiftPixels(DateTimeOffset second)
     {
-        if (!Settings.Default.BurnInMitigation || DateTimeOffset.Now.Second != 0)
+        if (!Settings.Default.BurnInMitigation || second.Second != 0)
             return;
 
         Dispatcher.Invoke(() =>
@@ -339,14 +339,19 @@ public partial class MainWindow : Window
         });
     }
 
-    private void UpdateTimeString()
-    {
-        var now = DateTimeOffset.Now;
-        var nowDateTime = now.DateTime;
+    /// <summary>
+    /// Shows the current second right away, such as after a setting changes, instead of waiting for the next tick.
+    /// </summary>
+    private void UpdateTimeString() => UpdateTimeString(DateTimeOffset.Now.TruncateToSecond());
 
+    /// <summary>
+    /// Shows the given whole second, so a countdown reads exact seconds no matter when in the second the tick landed.
+    /// </summary>
+    private void UpdateTimeString(DateTimeOffset second)
+    {
         CurrentTimeOrCountdownString = TimeStringFormatter.Format(
-            now,
-            nowDateTime,
+            second,
+            second.DateTime,
             _timeZone,
             Settings.Default.CountdownTo,
             Settings.Default.Format,

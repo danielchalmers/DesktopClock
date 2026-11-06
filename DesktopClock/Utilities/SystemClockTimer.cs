@@ -9,6 +9,7 @@ namespace DesktopClock;
 public sealed class SystemClockTimer : IDisposable
 {
     private readonly Timer _timer;
+    private DateTimeOffset _lastSecond;
 
     public SystemClockTimer()
     {
@@ -16,9 +17,9 @@ public sealed class SystemClockTimer : IDisposable
     }
 
     /// <summary>
-    /// Occurs after the second changes on the system clock.
+    /// Occurs after the second changes on the system clock, with that second as a whole number of seconds.
     /// </summary>
-    public event EventHandler SecondChanged;
+    public event EventHandler<DateTimeOffset> SecondChanged;
 
     /// <summary>
     /// Number of milliseconds until the next second on the system clock.
@@ -42,9 +43,21 @@ public sealed class SystemClockTimer : IDisposable
 
     private void OnTick()
     {
+        // The tick usually lands a few milliseconds into the second, so drop that fraction to give countdowns and chimes whole seconds.
+        var second = DateTimeOffset.Now.TruncateToSecond();
+
         ScheduleTickForNextSecond();
 
-        SecondChanged?.Invoke(this, EventArgs.Empty);
+        // A tick that lands early, before the second changes, finds the second that was already raised, so skip it rather than chime or shift pixels twice. The next tick is then only a few milliseconds away.
+        lock (_timer)
+        {
+            if (second == _lastSecond)
+                return;
+
+            _lastSecond = second;
+        }
+
+        SecondChanged?.Invoke(this, second);
     }
 
     /// <summary>
