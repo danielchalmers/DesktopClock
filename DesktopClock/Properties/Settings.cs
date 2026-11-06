@@ -275,6 +275,15 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     public bool Topmost { get; set; } = true;
 
     /// <summary>
+    /// Keeps the clock behind other windows like part of the desktop, and visible when the desktop is shown with Win+D.
+    /// </summary>
+    /// <remarks>
+    /// Turn this on to use the clock as a desktop widget that never covers your work.
+    /// It's the opposite of <see cref="Topmost"/>, so turning one on turns the other off.
+    /// </remarks>
+    public bool PinToDesktop { get; set; } = false;
+
+    /// <summary>
     /// Hides the clock when another fullscreen window occupies the same monitor.
     /// </summary>
     /// <remarks>
