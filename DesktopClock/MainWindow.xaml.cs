@@ -342,7 +342,7 @@ public partial class MainWindow : Window
     /// <summary>
     /// Shows the current second right away, such as after a setting changes, instead of waiting for the next tick.
     /// </summary>
-    private void UpdateTimeString() => UpdateTimeString(SystemClockTimer.GetSecond(DateTimeOffset.Now));
+    private void UpdateTimeString() => UpdateTimeString(DateTimeOffset.Now.TruncateToSecond());
 
     /// <summary>
     /// Shows the given whole second, so a countdown reads exact seconds no matter when in the second the tick landed.

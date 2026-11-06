@@ -213,7 +213,7 @@ public partial class FormatEditor : UserControl
     {
         var timeZone = Settings.Default.TimeZoneInfo;
         var culture = CultureInfo.CurrentCulture;
-        var now = SystemClockTimer.GetSecond(DateTimeOffset.Now);
+        var now = DateTimeOffset.Now.TruncateToSecond();
 
         if (Mode == FormatEditorMode.Clock)
         {
