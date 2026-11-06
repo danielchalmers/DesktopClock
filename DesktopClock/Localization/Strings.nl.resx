@@ -24,6 +24,9 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Altijd op voorgrond</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Aan _bureaublad vastmaken</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Instellingen…</value>
   </data>
@@ -207,6 +210,12 @@ Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
   </data>
   <data name="AlwaysOnTopDescription" xml:space="preserve">
     <value>De klok boven andere vensters houden.</value>
+  </data>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Aan bureaublad vastmaken</value>
+  </data>
+  <data name="PinToDesktopDescription" xml:space="preserve">
+    <value>De klok achter andere vensters houden. Hij blijft zichtbaar als het bureaublad wordt weergegeven met Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Doorklikken</value>

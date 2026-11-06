@@ -24,6 +24,9 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Immer im Vordergrund</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>An _Desktop anheften</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Einstellungen…</value>
   </data>
@@ -207,6 +210,12 @@ Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   </data>
   <data name="AlwaysOnTopDescription" xml:space="preserve">
     <value>Die Uhr über anderen Fenstern halten.</value>
+  </data>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>An Desktop anheften</value>
+  </data>
+  <data name="PinToDesktopDescription" xml:space="preserve">
+    <value>Die Uhr hinter anderen Fenstern halten. Wenn Sie mit Win+D den Desktop anzeigen, bleibt sie sichtbar.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Klicks durchlassen</value>

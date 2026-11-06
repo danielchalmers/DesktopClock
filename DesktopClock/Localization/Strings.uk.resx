@@ -24,6 +24,9 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>Поверх _усіх вікон</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>_Закріпити на робочому столі</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Налаштування…</value>
   </data>
@@ -207,6 +210,12 @@
   </data>
   <data name="AlwaysOnTopDescription" xml:space="preserve">
     <value>Показувати годинник поверх інших вікон.</value>
+  </data>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Закріпити на робочому столі</value>
+  </data>
+  <data name="PinToDesktopDescription" xml:space="preserve">
+    <value>Показувати годинник позаду інших вікон. Він лишається видимим, коли ви показуєте робочий стіл клавішами Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Пропускати клацання</value>

@@ -24,6 +24,9 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>最上層顯示(_T)</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>釘選到桌面(_D)</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>設定(_S)…</value>
   </data>
@@ -207,6 +210,12 @@
   </data>
   <data name="AlwaysOnTopDescription" xml:space="preserve">
     <value>讓時鐘保持在其他視窗上方。</value>
+  </data>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>釘選到桌面</value>
+  </data>
+  <data name="PinToDesktopDescription" xml:space="preserve">
+    <value>讓時鐘保持在其他視窗後方。按 Win+D 顯示桌面時，時鐘仍會顯示。</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>點選穿透</value>

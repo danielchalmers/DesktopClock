@@ -24,6 +24,9 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Sempre in primo piano</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Aggiungi al _desktop</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Impostazioni…</value>
   </data>
@@ -207,6 +210,12 @@ Se il problema persiste, segnalalo tramite quel collegamento.</value>
   </data>
   <data name="AlwaysOnTopDescription" xml:space="preserve">
     <value>Mantieni l'orologio sopra le altre finestre.</value>
+  </data>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Aggiungi al desktop</value>
+  </data>
+  <data name="PinToDesktopDescription" xml:space="preserve">
+    <value>Mantieni l'orologio dietro le altre finestre. Resta visibile quando mostri il desktop con Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Ignora i clic</value>

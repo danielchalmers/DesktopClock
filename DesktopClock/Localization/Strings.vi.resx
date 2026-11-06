@@ -24,6 +24,9 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Luôn ở trên cùng</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Ghim vào _màn hình nền</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Cài đặt…</value>
   </data>
@@ -207,6 +210,12 @@ Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</val
   </data>
   <data name="AlwaysOnTopDescription" xml:space="preserve">
     <value>Giữ đồng hồ ở trên các cửa sổ khác.</value>
+  </data>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Ghim vào màn hình nền</value>
+  </data>
+  <data name="PinToDesktopDescription" xml:space="preserve">
+    <value>Giữ đồng hồ phía sau các cửa sổ khác. Đồng hồ vẫn hiển thị khi bạn hiện màn hình nền bằng Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Bấm xuyên qua</value>

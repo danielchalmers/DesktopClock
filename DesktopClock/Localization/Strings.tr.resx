@@ -24,6 +24,9 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>Her zaman _üstte</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>_Masaüstüne sabitle</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Ayarlar…</value>
   </data>
@@ -207,6 +210,12 @@ Sorun devam ederse bu bağlantıdan bildirin.</value>
   </data>
   <data name="AlwaysOnTopDescription" xml:space="preserve">
     <value>Saati diğer pencerelerin üstünde tutun.</value>
+  </data>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Masaüstüne sabitle</value>
+  </data>
+  <data name="PinToDesktopDescription" xml:space="preserve">
+    <value>Saati diğer pencerelerin arkasında tutun. Win+D ile masaüstünü gösterdiğinizde görünür kalır.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Tıklamaları geçir</value>

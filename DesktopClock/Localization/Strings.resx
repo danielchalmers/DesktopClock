@@ -28,6 +28,10 @@
     <value>Always on _top</value>
     <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Pin to _desktop</value>
+    <comment>Checkable menu item that keeps the clock behind other windows, on the desktop. The opposite of Always on top. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu uses. Chinese, Japanese, and Korean append the English access letter as (_X).</comment>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Settings…</value>
     <comment>Menu or button label. The underscore marks the Alt access key: keep exactly one underscore before a letter, and choose a letter no other item in the same clock menu or settings sidebar uses. Chinese, Japanese, and Korean append the English access letter as (_X), before any ellipsis.</comment>
@@ -238,6 +242,14 @@ If the problem persists, report it at that link.</value>
   </data>
   <data name="AlwaysOnTopDescription" xml:space="preserve">
     <value>Keep the clock above other windows.</value>
+  </data>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Pin to desktop</value>
+    <comment>Checkbox: keep the clock behind other windows, on the desktop, like a widget. The opposite of Always on top.</comment>
+  </data>
+  <data name="PinToDesktopDescription" xml:space="preserve">
+    <value>Keep the clock behind other windows. It stays visible when you show the desktop with Win+D.</value>
+    <comment>Win+D is the Windows shortcut that shows the desktop. Keep it as is.</comment>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Click through</value>

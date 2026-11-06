@@ -223,6 +223,12 @@
                                Margin="0,0,0,16"
                                Style="{StaticResource DescriptionTextBlock}" />
 
+                    <CheckBox Content="{local:Loc PinToDesktop}"
+                              IsChecked="{Binding Settings.PinToDesktop, Mode=TwoWay}" />
+                    <TextBlock Text="{local:Loc PinToDesktopDescription}"
+                               Margin="0,0,0,16"
+                               Style="{StaticResource DescriptionTextBlock}" />
+
                     <CheckBox Content="{local:Loc ClickThrough}"
                               IsChecked="{Binding Settings.ClickThrough, Mode=TwoWay}" />
                     <TextBlock Text="{local:Loc ClickThroughDescription}"

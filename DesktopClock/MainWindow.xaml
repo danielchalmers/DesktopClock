@@ -69,6 +69,10 @@
                       IsCheckable="True"
                       IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 
+            <MenuItem Header="{local:Loc MenuPinToDesktop}"
+                      IsCheckable="True"
+                      IsChecked="{Binding PinToDesktop, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       Header="{local:Loc MenuSettings}">
                 <MenuItem.Icon>
