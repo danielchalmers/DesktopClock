@@ -636,6 +636,9 @@ Czy kontynuować?</value>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Numer tygodnia</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Dzień roku</value>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Przesunięcie UTC</value>
   </data>

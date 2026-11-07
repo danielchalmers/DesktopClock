@@ -636,6 +636,9 @@
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>週數</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>一年中的第幾天</value>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>UTC 時差</value>
   </data>

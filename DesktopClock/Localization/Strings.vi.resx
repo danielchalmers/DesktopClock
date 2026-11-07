@@ -636,6 +636,9 @@ Tiếp tục?</value>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Số tuần</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Ngày trong năm</value>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Chênh lệch UTC</value>
   </data>

@@ -636,6 +636,9 @@ Lanjutkan?</value>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Nomor minggu</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Hari dalam tahun</value>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Selisih UTC</value>
   </data>

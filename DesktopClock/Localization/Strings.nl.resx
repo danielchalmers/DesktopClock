@@ -636,6 +636,9 @@ Doorgaan?</value>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Weeknummer</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Dag van het jaar</value>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>UTC-verschil</value>
   </data>

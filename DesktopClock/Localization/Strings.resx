@@ -730,6 +730,10 @@ Continue?</value>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Week number</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Day of year</value>
+    <comment>Format building block that inserts the day of the year, from 001 on January 1 to 365 or 366 on December 31.</comment>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>UTC offset</value>
   </data>

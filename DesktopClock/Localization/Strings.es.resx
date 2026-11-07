@@ -636,6 +636,9 @@ Si la versión oficial también falla, notifícalo en ese vínculo e incluye est
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Número de semana</value>
   </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Día del año</value>
+  </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Desfase UTC</value>
   </data>
