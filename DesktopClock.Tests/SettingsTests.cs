@@ -91,6 +91,26 @@ public class SettingsPersistenceTests
     }
 
     [Fact]
+    public void Save_OverReadOnlyFile_ShouldFailWithoutLeavingTempFile()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var settings = CreateSettingsInstance();
+        Assert.True(settings.Save());
+        var file = new FileInfo(Settings.FilePath) { IsReadOnly = true };
+
+        try
+        {
+            Assert.False(settings.Save());
+            Assert.False(File.Exists(Settings.FilePath + ".tmp"));
+        }
+        finally
+        {
+            file.IsReadOnly = false;
+        }
+    }
+
+    [Fact]
     public void ChangingASetting_ShouldSaveItShortlyAfterwards()
     {
         using var _ = new TempSettingsFileScope();

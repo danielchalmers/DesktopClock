@@ -539,7 +539,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
         // Swap it in with a single rename; File.Replace isn't safe here because it renames the old file away first, so being killed in between leaves no settings file at all.
         if (!MoveFileEx(tempPath, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
-            throw new IOException($"Couldn't replace {path}.", Marshal.GetHRForLastWin32Error());
+        {
+            var error = Marshal.GetHRForLastWin32Error();
+            File.Delete(tempPath);
+            throw new IOException($"Couldn't replace {path}.", error);
+        }
     }
 
     private const int MOVEFILE_REPLACE_EXISTING = 0x1;
