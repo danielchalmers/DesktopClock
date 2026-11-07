@@ -33,6 +33,30 @@ public class FileUtilTests
     }
 
     [Fact]
+    public void GetFileAtNextIndex_ShouldSkipANameWhoseSettingsFileIsLeftOver()
+    {
+        var folder = Path.Combine(Path.GetTempPath(), "DesktopClock.Tests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(folder);
+
+        try
+        {
+            var exe = new FileInfo(Path.Combine(folder, "DesktopClock.exe"));
+            File.WriteAllText(exe.FullName, "");
+
+            // An earlier clock's exe was deleted, but its settings are still there.
+            File.WriteAllText(Path.Combine(folder, "DesktopClock-2.settings"), "{}");
+
+            var next = exe.GetFileAtNextIndex();
+
+            Assert.Equal(Path.Combine(folder, "DesktopClock-3.exe"), next.FullName);
+        }
+        finally
+        {
+            Directory.Delete(folder, recursive: true);
+        }
+    }
+
+    [Fact]
     public void IsInTempFolder_ShouldMatchACopyOpenedFromInsideAZip()
     {
         // Windows opens an app inside a zip from a new folder like this one.
