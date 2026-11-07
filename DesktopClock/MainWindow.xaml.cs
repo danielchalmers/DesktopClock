@@ -12,6 +12,7 @@ using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using DesktopClock.Utilities;
 using H.NotifyIcon;
+using Microsoft.Win32;
 using WpfWindowPlacement;
 
 namespace DesktopClock;
@@ -67,7 +68,22 @@ public partial class MainWindow : Window
         // Rebuild the tray menu when the system theme changes; unlike the window's own menu, it lives outside any window tree so its colors never refresh on their own.
         ThemeManager.ThemeChanged += ThemeManager_ThemeChanged;
 
+        SystemEvents.TimeChanged += SystemEvents_TimeChanged;
+
         UpdateSoundPlayerEnabled();
+    }
+
+    /// <summary>
+    /// Picks up a new Windows time zone, such as after traveling, which .NET otherwise keeps until the app restarts.
+    /// </summary>
+    private void SystemEvents_TimeChanged(object sender, EventArgs e)
+    {
+        Dispatcher.BeginInvoke(new Action(() =>
+        {
+            TimeZoneInfo.ClearCachedData();
+            _timeZone = Settings.Default.TimeZoneInfo;
+            UpdateTimeString();
+        }));
     }
 
     /// <summary>
@@ -171,6 +187,7 @@ public partial class MainWindow : Window
     {
         Settings.Default.PropertyChanged -= _settingsPropertyChanged;
         ThemeManager.ThemeChanged -= ThemeManager_ThemeChanged;
+        SystemEvents.TimeChanged -= SystemEvents_TimeChanged;
 
         _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
         _systemClockTimer.Dispose();
