@@ -86,6 +86,9 @@ public partial class MainWindow : Window
 
         Dispatcher.BeginInvoke(new Action(() =>
         {
+            // The first run saves the regional default format, so move a clock still on it to the new default.
+            var wasDefaultFormat = Settings.Default.Format == FormatPresets.DefaultClockFormat(_culture);
+
             // WPF pins the culture it started with on this thread and the timer's, so ask Windows for the new one and pass it along directly.
             CultureInfo.CurrentCulture.ClearCachedData();
             var name = new StringBuilder(LOCALE_NAME_MAX_LENGTH);
@@ -100,6 +103,9 @@ public partial class MainWindow : Window
             {
                 return;
             }
+
+            if (wasDefaultFormat)
+                Settings.Default.Format = FormatPresets.DefaultClockFormat(_culture);
 
             UpdateTimeString();
         }));
