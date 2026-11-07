@@ -256,7 +256,15 @@ public partial class MainWindow : Window
             _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
             _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
             _trayIcon.ContextMenu.DataContext = this;
-            _trayIcon.ForceCreate(enablesEfficiencyMode: false);
+            try
+            {
+                _trayIcon.ForceCreate(enablesEfficiencyMode: false);
+            }
+            catch (InvalidOperationException)
+            {
+                // The taskbar isn't there yet, such as early in sign-in, and the icon is added once it starts.
+            }
+
             _trayIcon.TrayLeftMouseDoubleClick += (_, _) => ShowClock();
         }
     }

@@ -61,7 +61,7 @@ public class PixelShifter
     /// </summary>
     public void ApplyShift(Window window)
     {
-        EnsureBasePosition(window.Left, window.Top);
+        UpdateBaseIfMoved(window);
         ShiftX(window.ActualWidth);
         ShiftY(window.ActualHeight);
         window.Left = _baseLeft + _totalShiftX;
@@ -73,7 +73,7 @@ public class PixelShifter
     /// </summary>
     public void ClearShift(Window window)
     {
-        EnsureBasePosition(window.Left, window.Top);
+        UpdateBaseIfMoved(window);
         Reset();
         window.Left = _baseLeft;
         window.Top = _baseTop;
@@ -84,12 +84,7 @@ public class PixelShifter
     /// </summary>
     public void RestoreBasePosition(Window window)
     {
-        if (!_hasBasePosition)
-        {
-            UpdateBasePosition(window.Left, window.Top);
-            return;
-        }
-
+        UpdateBaseIfMoved(window);
         window.Left = _baseLeft;
         window.Top = _baseTop;
     }
@@ -144,16 +139,15 @@ public class PixelShifter
     }
 
     /// <summary>
-    /// Ensures the base position is captured once.
+    /// Captures the base position, or moves it along when something other than a shift moved the window, such as Windows when a monitor goes away.
     /// </summary>
-    private void EnsureBasePosition(double currentLeft, double currentTop)
+    private void UpdateBaseIfMoved(Window window)
     {
-        if (_hasBasePosition)
+        // Allow for rounding to whole device pixels.
+        if (_hasBasePosition && Math.Abs(window.Left - _baseLeft - _totalShiftX) <= 2 && Math.Abs(window.Top - _baseTop - _totalShiftY) <= 2)
             return;
 
-        _baseLeft = currentLeft;
-        _baseTop = currentTop;
-        _hasBasePosition = true;
+        UpdateBasePosition(window.Left - _totalShiftX, window.Top - _totalShiftY);
     }
 
     /// <summary>
