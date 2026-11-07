@@ -98,6 +98,19 @@ public class DateTimeTests
         Assert.Equal(expected, result);
     }
 
+    [Theory]
+    [InlineData("09:00:00", false)] // 14:30 on the clock
+    [InlineData("09:30:00", true)] // 15:00 on the clock
+    public void IsOnInterval_ChimesOnTheHourOfTheClocksTimeZone(string utcTime, bool expected)
+    {
+        var india = TimeZoneInfo.CreateCustomTimeZone("UtcPlus0530", new TimeSpan(5, 30, 0), "UtcPlus0530", "UtcPlus0530");
+        var now = new DateTimeOffset(new DateTime(2024, 7, 18) + TimeSpan.Parse(utcTime, CultureInfo.InvariantCulture), TimeSpan.Zero);
+
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, now.AddSeconds(-1), default, TimeSpan.FromHours(1), india);
+
+        Assert.Equal(expected, result);
+    }
+
     private static readonly TimeZoneInfo London = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
 
     [Fact]

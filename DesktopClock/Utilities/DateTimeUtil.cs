@@ -41,10 +41,11 @@ public static class DateTimeUtil
 
     /// <summary>
     /// Whether a sound is due: on the interval, or when the tick after <paramref name="previous"/> reaches the countdown.
+    /// The interval counts from midnight on the clock's time zone, or down to a countdown, which is local time like its display.
     /// </summary>
-    public static bool IsNowOrCountdownOnInterval(DateTimeOffset now, DateTimeOffset previous, DateTime countdown, TimeSpan interval, TimeZoneInfo countdownZone)
+    public static bool IsNowOrCountdownOnInterval(DateTimeOffset now, DateTimeOffset previous, DateTime countdown, TimeSpan interval, TimeZoneInfo clockZone)
     {
-        var time = countdown == default ? now.TimeOfDay : TimeUntil(countdown, now, countdownZone);
+        var time = countdown == default ? TimeZoneInfo.ConvertTime(now, clockZone).TimeOfDay : TimeUntil(countdown, now, TimeZoneInfo.Local);
 
         // Work in whole seconds as a long so a sub-second interval doesn't truncate to a zero divisor and a far-future countdown doesn't overflow int.
         var intervalSeconds = (long)interval.TotalSeconds;
@@ -52,7 +53,7 @@ public static class DateTimeUtil
 
         // Reached when this tick passes the target, since sleep, a drag or a late tick can skip its exact second.
         var isCountdownReached = countdown != default && previous != default &&
-            TimeUntil(countdown, previous, countdownZone) > TimeSpan.Zero && time <= TimeSpan.Zero;
+            TimeUntil(countdown, previous, TimeZoneInfo.Local) > TimeSpan.Zero && time <= TimeSpan.Zero;
 
         return isOnInterval || isCountdownReached;
     }
