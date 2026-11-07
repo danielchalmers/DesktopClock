@@ -66,6 +66,11 @@ Phiên bản chính thức được cung cấp miễn phí tại https://github.
 
 Nếu sự cố vẫn tiếp diễn, hãy báo cáo tại liên kết đó.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>Ứng dụng đang chạy từ một thư mục tạm, chẳng hạn như từ bên trong tệp ZIP, nên cài đặt của ứng dụng sẽ không được giữ lại.
+
+Hãy giải nén hoặc sao chép ứng dụng vào thư mục khác trước, rồi chạy từ đó.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Định dạng sai</value>
   </data>

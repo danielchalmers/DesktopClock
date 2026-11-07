@@ -66,6 +66,11 @@ La version officielle est gratuite sur https://github.com/danielchalmers/Desktop
 
 Si le problème persiste, signalez-le via ce lien.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>L'application s'exécute depuis un dossier temporaire, par exemple directement depuis un fichier ZIP, donc ses paramètres ne seront pas conservés.
+
+Extrayez-la ou copiez-la d'abord dans un autre dossier, puis lancez-la depuis ce dossier.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Format non valide</value>
   </data>

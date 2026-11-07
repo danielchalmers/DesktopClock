@@ -66,6 +66,11 @@ La versione ufficiale è gratuita su https://github.com/danielchalmers/DesktopCl
 
 Se il problema persiste, segnalalo tramite quel collegamento.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>L'app è in esecuzione da una cartella temporanea, ad esempio direttamente da un file ZIP, quindi le sue impostazioni non verranno conservate.
+
+Estraila o copiala prima in un'altra cartella, poi avviala da lì.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Formato non valido</value>
   </data>

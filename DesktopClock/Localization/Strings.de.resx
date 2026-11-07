@@ -66,6 +66,11 @@ Die offizielle Version ist kostenlos unter https://github.com/danielchalmers/Des
 
 Wenn das Problem weiterhin besteht, bitte über diesen Link melden.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>Die App wird aus einem temporären Ordner ausgeführt, etwa direkt aus einer ZIP-Datei, daher bleiben ihre Einstellungen nicht erhalten.
+
+Bitte die App zuerst in einen anderen Ordner entpacken oder kopieren und dort starten.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Ungültiges Format</value>
   </data>
