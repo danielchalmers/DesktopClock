@@ -563,8 +563,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Loads from the default path in JSON format.
     /// </summary>
-    private static Settings LoadFromFile()
+    private static Settings LoadFromFile(out bool isLocked)
     {
+        isLocked = false;
         var settings = new Settings();
 
         // The file can be locked for a moment, such as while antivirus scans it at sign-in, and falling back to defaults here would save them over every setting. Give it about as long as saving does before giving up.
@@ -579,8 +580,11 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
             {
                 System.Threading.Thread.Sleep(250);
             }
-            catch
+            catch (Exception ex)
             {
+                // Still locked after waiting means the settings are in there but out of reach, so they must not be saved over.
+                isLocked = ex is IOException && Exists;
+
                 // Nothing could be read, including when there's no file yet, so start like a first run with colors that match the system theme.
                 var defaults = new Settings();
                 defaults.ApplySystemThemeDefaultsIfAvailable();
@@ -594,8 +598,10 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     private static Settings LoadAndAttemptSave()
     {
-        var settings = LoadFromFile();
-        CanBeSaved = settings.Save();
+        var settings = LoadFromFile(out var isLocked);
+
+        // Saving the defaults over a file that's still locked would wipe it once it's let go, so run without saving this time, like in a read-only folder.
+        CanBeSaved = !isLocked && settings.Save();
 
         return settings;
     }
