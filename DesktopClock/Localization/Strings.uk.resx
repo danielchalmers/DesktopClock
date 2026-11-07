@@ -66,6 +66,11 @@
 
 Якщо проблема не зникне, повідомте про неї за цим посиланням.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>Програму запущено з тимчасової папки, наприклад просто з ZIP-архіву, тому її налаштування не збережуться.
+
+Спочатку розпакуйте або скопіюйте її в іншу папку, а потім запустіть звідти.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Неправильний формат</value>
   </data>

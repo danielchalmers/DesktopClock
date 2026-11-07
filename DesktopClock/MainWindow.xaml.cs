@@ -488,6 +488,13 @@ public partial class MainWindow : Window
                 Loc.Get("CantSaveSettingsMessage"),
                 Title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+        else if (App.MainFileInfo.IsInTempFolder())
+        {
+            // Settings saved next to a copy opened straight from a zip are gone by the next start, since Windows makes a new copy each time.
+            MessageBox.Show(this,
+                Loc.Get("RunningFromTempFolderMessage"),
+                Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 
     private void Window_Closing(object sender, CancelEventArgs e)

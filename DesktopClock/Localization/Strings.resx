@@ -75,6 +75,12 @@ The official version is free at https://github.com/danielchalmers/DesktopClock. 
 If the problem persists, report it at that link.</value>
     <comment>Shown at startup when the app can't save its settings. Keep every point: move the app to another folder; the official version is free at the link and other copies may be stolen; ask for a refund if you paid; report it at that link if it continues.</comment>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>The app is running from a temporary folder, such as inside a zip file, so its settings won't be kept.
+
+Extract or copy it to another folder first, then run it from there.</value>
+    <comment>Shown at startup when the app runs from the temp folder, which is where Windows puts it when it's opened straight from inside a zip file.</comment>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Bad format</value>
     <comment>Shown on the clock when the format is invalid. Keep it very short.</comment>

@@ -66,6 +66,11 @@
 
 如果問題持續發生，請透過該連結回報。</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>應用程式正在從暫存資料夾執行，例如直接從 ZIP 檔案中開啟，因此不會保留設定。
+
+請先將應用程式解壓縮或複製到其他資料夾，再從該處執行。</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>格式錯誤</value>
   </data>

@@ -66,6 +66,11 @@
 
 如果问题仍然存在，请通过该链接报告。</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>应用正在从临时文件夹运行，例如直接从 ZIP 文件中打开，因此不会保留设置。
+
+请先将应用解压或复制到其他文件夹，再从那里运行。</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>格式错误</value>
   </data>

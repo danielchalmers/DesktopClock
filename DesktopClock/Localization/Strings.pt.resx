@@ -66,6 +66,11 @@ A versão oficial é gratuita em https://github.com/danielchalmers/DesktopClock.
 
 Se o problema persistir, informe-o nesse link.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>O aplicativo está sendo executado de uma pasta temporária, como de dentro de um arquivo ZIP, então as configurações dele não serão mantidas.
+
+Extraia ou copie o aplicativo para outra pasta primeiro e execute-o de lá.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Formato inválido</value>
   </data>

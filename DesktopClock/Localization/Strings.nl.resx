@@ -66,6 +66,11 @@ De officiële versie is gratis via https://github.com/danielchalmers/DesktopCloc
 
 Als het probleem blijft bestaan, meld het dan via die koppeling.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>De app wordt uitgevoerd vanuit een tijdelijke map, bijvoorbeeld rechtstreeks vanuit een zip-bestand, dus de instellingen worden niet bewaard.
+
+Pak de app eerst uit of kopieer hem naar een andere map en start hem daarvandaan.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Ongeldige notatie</value>
   </data>
