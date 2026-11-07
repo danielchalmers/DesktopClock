@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Altijd op voorgrond</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Aan _bureaublad vastmaken</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>_Laag</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Normaal</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Instellingen…</value>
   </data>
@@ -210,8 +219,17 @@ Pak de app eerst uit of kopieer hem naar een andere map en start hem daarvandaan
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Altijd op voorgrond</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>De klok boven andere vensters houden.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Aan bureaublad vastmaken</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Laag</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Normaal</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>“Altijd op voorgrond” houdt de klok boven andere vensters. “Aan bureaublad vastmaken” houdt hem erachter, en hij blijft zichtbaar als het bureaublad wordt weergegeven met Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Doorklikken</value>

@@ -34,6 +34,7 @@ public partial class MainWindow : Window
     private PixelShifter _pixelShifter;
     private bool _toldHowToShow;
     private FullscreenHideManager _fullscreenHideManager;
+    private DesktopPinner _desktopPinner;
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     /// <summary>
@@ -238,6 +239,7 @@ public partial class MainWindow : Window
 
         _trayIcon?.Dispose();
         _soundPlayer?.Dispose();
+        _desktopPinner?.Dispose();
 
         base.OnClosed(e);
     }
@@ -295,6 +297,19 @@ public partial class MainWindow : Window
                 this.SetClickThrough(Settings.Default.ClickThrough);
                 break;
 
+            // Always on top and Pin to desktop pull the clock in opposite directions, so turning one on turns the other off.
+            case nameof(Settings.Default.Topmost):
+                if (Settings.Default.Topmost)
+                    Settings.Default.PinToDesktop = false;
+                UpdateDesktopPinner();
+                break;
+
+            case nameof(Settings.Default.PinToDesktop):
+                if (Settings.Default.PinToDesktop)
+                    Settings.Default.Topmost = false;
+                UpdateDesktopPinner();
+                break;
+
             case nameof(Settings.Default.RunOnStartup):
                 App.SetRunOnStartup(Settings.Default.RunOnStartup);
                 break;
@@ -335,6 +350,22 @@ public partial class MainWindow : Window
 
         // After the fullscreen check, so a clock that is about to hide is never raised over the fullscreen app first.
         TryReassertTopmost();
+    }
+
+    /// <summary>
+    /// Starts or stops keeping the clock on the desktop, where Always on top wins if a hand-edited file turns both on.
+    /// </summary>
+    private void UpdateDesktopPinner()
+    {
+        if (Settings.Default.PinToDesktop && !Settings.Default.Topmost)
+        {
+            _desktopPinner ??= new DesktopPinner(this);
+        }
+        else
+        {
+            _desktopPinner?.Dispose();
+            _desktopPinner = null;
+        }
     }
 
     /// <summary>
@@ -473,6 +504,7 @@ public partial class MainWindow : Window
         this.RestorePlacement(Settings.Default.Placement);
         PixelShifter?.UpdateBasePosition(this);
         this.SnapWhileDragging();
+        UpdateDesktopPinner();
 
         // Apply click-through setting.
         this.SetClickThrough(Settings.Default.ClickThrough);

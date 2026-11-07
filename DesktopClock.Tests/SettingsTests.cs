@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -270,6 +272,63 @@ public class SettingsPersistenceTests
         public CanBeSavedScope() => _setCanBeSaved.Invoke(null, new object[] { true });
 
         public void Dispose() => _setCanBeSaved.Invoke(null, new object[] { _original });
+    }
+
+    [Theory]
+    [InlineData(ClockLayer.AlwaysOnTop, true, false)]
+    [InlineData(ClockLayer.Normal, false, false)]
+    [InlineData(ClockLayer.PinToDesktop, false, true)]
+    public void Layer_ShouldSetBothSwitches(ClockLayer layer, bool topmost, bool pinToDesktop)
+    {
+        var settings = CreateSettingsInstance();
+        settings.Topmost = !topmost;
+        settings.PinToDesktop = !pinToDesktop;
+
+        settings.Layer = layer;
+
+        Assert.Equal(topmost, settings.Topmost);
+        Assert.Equal(pinToDesktop, settings.PinToDesktop);
+        Assert.Equal(layer, settings.Layer);
+    }
+
+    [Fact]
+    public void Layer_ShouldBeAlwaysOnTop_WhenAFileHasBothSwitchesOn()
+    {
+        var settings = CreateSettingsInstance();
+        settings.Topmost = true;
+        settings.PinToDesktop = true;
+
+        Assert.Equal(ClockLayer.AlwaysOnTop, settings.Layer);
+    }
+
+    [Fact]
+    public void Layer_ShouldNotify_WhenEitherSwitchChanges()
+    {
+        var settings = CreateSettingsInstance();
+        settings.Topmost = true;
+        var changed = new List<string>();
+        settings.PropertyChanged += (_, e) => changed.Add(e.PropertyName);
+
+        settings.Topmost = false;
+        settings.PinToDesktop = true;
+
+        Assert.Equal(2, changed.Count(name => name == nameof(Settings.Layer)));
+    }
+
+    [Fact]
+    public void Save_ShouldKeepTheTwoSwitchesInsteadOfTheLayer()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var settings = CreateSettingsInstance();
+        settings.Layer = ClockLayer.PinToDesktop;
+
+        Assert.True(settings.Save());
+
+        var json = File.ReadAllText(Settings.FilePath);
+        Assert.Contains("\"Topmost\": false", json);
+        Assert.Contains("\"PinToDesktop\": true", json);
+        Assert.DoesNotContain("\"Layer\"", json);
     }
 
     private static Settings CreateSettingsInstance() =>

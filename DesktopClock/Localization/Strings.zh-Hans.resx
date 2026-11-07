@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>置顶(_T)</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>固定到桌面(_D)</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>层级(_L)</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>普通(_N)</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>设置(_S)…</value>
   </data>
@@ -210,8 +219,17 @@
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>置顶</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>使时钟始终位于其他窗口之上。</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>固定到桌面</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>层级</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>普通</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>“置顶”使时钟始终位于其他窗口之上。“固定到桌面”使时钟位于其他窗口之后，按 Win+D 显示桌面时仍然可见。</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>点击穿透</value>

@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Siempre visible</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>_Anclar al escritorio</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>Ca_pa</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Normal</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Con_figuración…</value>
   </data>
@@ -210,8 +219,17 @@ Extráela o cópiala primero a otra carpeta y ejecútala desde allí.</value>
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Siempre visible</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Mantiene el reloj encima de las demás ventanas.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Anclar al escritorio</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Capa</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>«Siempre visible» mantiene el reloj encima de las demás ventanas. «Anclar al escritorio» lo mantiene detrás de ellas, y sigue visible al mostrar el escritorio con Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Dejar pasar los clics</value>

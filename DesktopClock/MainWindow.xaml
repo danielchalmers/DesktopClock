@@ -65,9 +65,22 @@
                 </MenuItem.Header>
             </MenuItem>
 
-            <MenuItem Header="{local:Loc MenuAlwaysOnTop}"
-                      IsCheckable="True"
-                      IsChecked="{Binding Topmost, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+            <MenuItem Header="{local:Loc MenuLayer}">
+                <MenuItem Header="{local:Loc MenuAlwaysOnTop}"
+                          IsCheckable="True"
+                          local:RadioMenuItem.IsRadio="True"
+                          IsChecked="{Binding Layer, Source={x:Static p:Settings.Default}, Converter={local:ChoiceConverter}, ConverterParameter={x:Static p:ClockLayer.AlwaysOnTop}, Mode=TwoWay}" />
+
+                <MenuItem Header="{local:Loc MenuLayerNormal}"
+                          IsCheckable="True"
+                          local:RadioMenuItem.IsRadio="True"
+                          IsChecked="{Binding Layer, Source={x:Static p:Settings.Default}, Converter={local:ChoiceConverter}, ConverterParameter={x:Static p:ClockLayer.Normal}, Mode=TwoWay}" />
+
+                <MenuItem Header="{local:Loc MenuPinToDesktop}"
+                          IsCheckable="True"
+                          local:RadioMenuItem.IsRadio="True"
+                          IsChecked="{Binding Layer, Source={x:Static p:Settings.Default}, Converter={local:ChoiceConverter}, ConverterParameter={x:Static p:ClockLayer.PinToDesktop}, Mode=TwoWay}" />
+            </MenuItem>
 
             <MenuItem Command="{Binding OpenSettingsWindowCommand}"
                       Header="{local:Loc MenuSettings}">

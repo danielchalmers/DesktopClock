@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Sempre visível</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Fixar na área de _trabalho</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>Ca_mada</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Normal</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Con_figurações…</value>
   </data>
@@ -210,8 +219,17 @@ Extraia ou copie o aplicativo para outra pasta primeiro e execute-o de lá.</val
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Sempre visível</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Mantém o relógio acima das outras janelas.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Fixar na área de trabalho</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Camada</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>“Sempre visível” mantém o relógio acima das outras janelas. “Fixar na área de trabalho” o mantém atrás delas, e ele continua visível quando você mostra a área de trabalho com Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Deixar passar cliques</value>

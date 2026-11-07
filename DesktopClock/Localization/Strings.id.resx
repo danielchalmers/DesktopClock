@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>Selalu di _atas</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Sematkan ke _desktop</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>_Lapisan</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Normal</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Pengaturan…</value>
   </data>
@@ -210,8 +219,17 @@ Ekstrak atau salin aplikasi ke folder lain terlebih dahulu, lalu jalankan dari s
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Selalu di atas</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Pertahankan jam di atas jendela lain.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Sematkan ke desktop</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Lapisan</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>"Selalu di atas" menjaga jam di atas jendela lain. "Sematkan ke desktop" menjaga jam di belakang jendela lain, dan jam tetap terlihat saat Anda menampilkan desktop dengan Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Klik tembus</value>

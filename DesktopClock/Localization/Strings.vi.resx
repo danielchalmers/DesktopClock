@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Luôn ở trên cùng</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Ghim vào _màn hình nền</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>_Lớp</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Bình thường</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Cài đặt…</value>
   </data>
@@ -210,8 +219,17 @@ Hãy giải nén hoặc sao chép ứng dụng vào thư mục khác trước, r
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Luôn ở trên cùng</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Giữ đồng hồ ở trên các cửa sổ khác.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Ghim vào màn hình nền</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Lớp</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Bình thường</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>“Luôn ở trên cùng” giữ đồng hồ ở trên các cửa sổ khác. “Ghim vào màn hình nền” giữ đồng hồ phía sau các cửa sổ khác, và đồng hồ vẫn hiển thị khi bạn hiện màn hình nền bằng Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Bấm xuyên qua</value>

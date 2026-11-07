@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Toujours au premier plan</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Épingler au _bureau</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>P_lan</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Normal</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Paramètres…</value>
   </data>
@@ -210,8 +219,17 @@ Extrayez-la ou copiez-la d'abord dans un autre dossier, puis lancez-la depuis ce
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Toujours au premier plan</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Garder l'horloge au-dessus des autres fenêtres.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Épingler au bureau</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>« Toujours au premier plan » garde l'horloge au-dessus des autres fenêtres. « Épingler au bureau » la garde derrière elles, et elle reste visible quand vous affichez le bureau avec Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Clics traversants</value>

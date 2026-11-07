@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>항상 위에 표시(_T)</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>바탕 화면에 고정(_D)</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>레이어(_L)</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>일반(_N)</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>설정(_S)…</value>
   </data>
@@ -210,8 +219,17 @@
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>항상 위에 표시</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>시계를 다른 창보다 위에 표시합니다.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>바탕 화면에 고정</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>레이어</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>일반</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>'항상 위에 표시'는 시계를 다른 창보다 위에 표시합니다. '바탕 화면에 고정'은 시계를 다른 창 뒤에 표시하며, Win+D로 바탕 화면을 표시해도 계속 보입니다.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>클릭 통과</value>

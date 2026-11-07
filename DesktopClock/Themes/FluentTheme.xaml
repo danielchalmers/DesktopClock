@@ -712,60 +712,113 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
-                    <Border x:Name="Border"
-                            Background="Transparent"
-                            CornerRadius="{DynamicResource ControlCornerRadius}"
-                            Padding="10,7"
-                            Margin="2,1"
-                            SnapsToDevicePixels="True">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"
-                                                  SharedSizeGroup="MenuCheckColumn"
-                                                  MinWidth="24" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto"
-                                                  SharedSizeGroup="MenuGestureColumn" />
-                            </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Border x:Name="Border"
+                                Background="Transparent"
+                                CornerRadius="{DynamicResource ControlCornerRadius}"
+                                Padding="10,7"
+                                Margin="2,1"
+                                SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"
+                                                      SharedSizeGroup="MenuCheckColumn"
+                                                      MinWidth="24" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto"
+                                                      SharedSizeGroup="MenuGestureColumn" />
+                                </Grid.ColumnDefinitions>
 
-                            <!-- Checkmark -->
-                            <Path x:Name="CheckMark"
-                                  Grid.Column="0"
-                                  Data="M 2,5 L 5,8.5 L 11,1"
-                                  Stroke="{DynamicResource AccentBrush}"
-                                  StrokeThickness="1.5"
-                                  StrokeStartLineCap="Round"
-                                  StrokeEndLineCap="Round"
-                                  StrokeLineJoin="Round"
-                                  VerticalAlignment="Center"
-                                  Visibility="Collapsed"
-                                  Margin="0,0,6,0" />
+                                <!-- Checkmark -->
+                                <Path x:Name="CheckMark"
+                                      Grid.Column="0"
+                                      Data="M 2,5 L 5,8.5 L 11,1"
+                                      Stroke="{DynamicResource AccentBrush}"
+                                      StrokeThickness="1.5"
+                                      StrokeStartLineCap="Round"
+                                      StrokeEndLineCap="Round"
+                                      StrokeLineJoin="Round"
+                                      VerticalAlignment="Center"
+                                      Visibility="Collapsed"
+                                      Margin="0,0,6,0" />
 
-                            <!-- Icon -->
-                            <ContentPresenter x:Name="Icon"
-                                              Grid.Column="0"
-                                              Content="{TemplateBinding Icon}"
-                                              VerticalAlignment="Center"
-                                              Width="16"
-                                              Height="16"
-                                              Margin="0,0,6,0" />
+                                <!-- Dot for the picked one of several choices, like Windows menus -->
+                                <Ellipse x:Name="RadioMark"
+                                         Grid.Column="0"
+                                         Width="6"
+                                         Height="6"
+                                         Fill="{DynamicResource AccentBrush}"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         Visibility="Collapsed"
+                                         Margin="3,0,6,0" />
 
-                            <!-- Header -->
-                            <ContentPresenter Grid.Column="1"
-                                              ContentSource="Header"
-                                              RecognizesAccessKey="True"
-                                              VerticalAlignment="Center" />
+                                <!-- Icon -->
+                                <ContentPresenter x:Name="Icon"
+                                                  Grid.Column="0"
+                                                  Content="{TemplateBinding Icon}"
+                                                  VerticalAlignment="Center"
+                                                  Width="16"
+                                                  Height="16"
+                                                  Margin="0,0,6,0" />
 
-                            <!-- Input Gesture -->
-                            <TextBlock x:Name="GestureText"
-                                       Grid.Column="2"
-                                       Text="{TemplateBinding InputGestureText}"
-                                       Margin="24,0,0,0"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource TextSecondaryBrush}"
-                                       Visibility="Collapsed" />
-                        </Grid>
-                    </Border>
+                                <!-- Header -->
+                                <ContentPresenter Grid.Column="1"
+                                                  ContentSource="Header"
+                                                  RecognizesAccessKey="True"
+                                                  VerticalAlignment="Center" />
+
+                                <!-- Input Gesture -->
+                                <TextBlock x:Name="GestureText"
+                                           Grid.Column="2"
+                                           Text="{TemplateBinding InputGestureText}"
+                                           Margin="24,0,0,0"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           Visibility="Collapsed" />
+
+                                <!-- Arrow for an item that opens a submenu -->
+                                <TextBlock x:Name="SubmenuArrow"
+                                           Grid.Column="2"
+                                           Text="&#xE76C;"
+                                           Style="{StaticResource MenuIconGlyph}"
+                                           FontSize="12"
+                                           Margin="24,0,0,0"
+                                           Visibility="Collapsed" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Submenu, drawn like the context menu it opens from -->
+                        <Popup x:Name="PART_Popup"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               Placement="Right"
+                               HorizontalOffset="-6"
+                               VerticalOffset="-13"
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                            <Border Padding="8"
+                                    Background="Transparent">
+                                <Border Background="{DynamicResource MenuBackgroundBrush}"
+                                        BorderBrush="{DynamicResource CardBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="{DynamicResource MenuCornerRadius}"
+                                        Padding="2,4"
+                                        SnapsToDevicePixels="True">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="4"
+                                                          Direction="270"
+                                                          Opacity="0.14"
+                                                          BlurRadius="16"
+                                                          Color="#000000" />
+                                    </Border.Effect>
+                                    <StackPanel IsItemsHost="True"
+                                                Grid.IsSharedSizeScope="True"
+                                                KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                </Border>
+                            </Border>
+                        </Popup>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
@@ -777,13 +830,30 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsCheckable" Value="True" />
+                                <Condition Property="local:RadioMenuItem.IsRadio" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="RadioMark" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
                         <Trigger Property="InputGestureText" Value="">
                             <Setter TargetName="GestureText" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Role" Value="SubmenuHeader">
+                            <Setter TargetName="SubmenuArrow" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsSubmenuOpen" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource HoverBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsHighlighted" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource HoverBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                             <Setter TargetName="CheckMark" Property="Stroke" Value="{DynamicResource OnHoverTextBrush}" />
+                            <Setter TargetName="RadioMark" Property="Fill" Value="{DynamicResource OnHoverTextBrush}" />
                             <Setter TargetName="GestureText" Property="Foreground" Value="{DynamicResource OnHoverTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">

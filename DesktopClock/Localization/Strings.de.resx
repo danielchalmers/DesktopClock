@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>_Immer im Vordergrund</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>An _Desktop anheften</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>Ebe_ne</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Normal</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Einstellungen…</value>
   </data>
@@ -210,8 +219,17 @@ Bitte die App zuerst in einen anderen Ordner entpacken oder kopieren und dort st
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Immer im Vordergrund</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Die Uhr über anderen Fenstern halten.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>An Desktop anheften</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Ebene</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>„Immer im Vordergrund“ hält die Uhr über anderen Fenstern. „An Desktop anheften“ hält sie dahinter, und sie bleibt sichtbar, wenn Sie mit Win+D den Desktop anzeigen.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Klicks durchlassen</value>

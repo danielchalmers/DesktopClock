@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>Пове_рх всех окон</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Закрепить на рабочем с_толе</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>С_лой</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Обычный</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Параметры…</value>
   </data>
@@ -210,8 +219,17 @@
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Поверх всех окон</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Отображать часы поверх других окон.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Закрепить на рабочем столе</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Слой</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Обычный</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>«Поверх всех окон» держит часы над другими окнами. «Закрепить на рабочем столе» держит их позади других окон, и они остаются видимыми, когда вы показываете рабочий стол клавишами Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Пропускать щелчки</value>

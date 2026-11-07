@@ -24,6 +24,15 @@
   <data name="MenuAlwaysOnTop" xml:space="preserve">
     <value>Zawsze na _wierzchu</value>
   </data>
+  <data name="MenuPinToDesktop" xml:space="preserve">
+    <value>Przypnij do _pulpitu</value>
+  </data>
+  <data name="MenuLayer" xml:space="preserve">
+    <value>_Warstwa</value>
+  </data>
+  <data name="MenuLayerNormal" xml:space="preserve">
+    <value>_Normalnie</value>
+  </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>_Ustawienia…</value>
   </data>
@@ -210,8 +219,17 @@ Najpierw wypakuj lub skopiuj ją do innego folderu, a następnie uruchom ją sta
   <data name="AlwaysOnTop" xml:space="preserve">
     <value>Zawsze na wierzchu</value>
   </data>
-  <data name="AlwaysOnTopDescription" xml:space="preserve">
-    <value>Utrzymuj zegar nad innymi oknami.</value>
+  <data name="PinToDesktop" xml:space="preserve">
+    <value>Przypnij do pulpitu</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Warstwa</value>
+  </data>
+  <data name="LayerNormal" xml:space="preserve">
+    <value>Normalnie</value>
+  </data>
+  <data name="LayerDescription" xml:space="preserve">
+    <value>„Zawsze na wierzchu” utrzymuje zegar nad innymi oknami. „Przypnij do pulpitu” utrzymuje go za nimi, a zegar pozostaje widoczny, gdy pokazujesz pulpit za pomocą Win+D.</value>
   </data>
   <data name="ClickThrough" xml:space="preserve">
     <value>Przepuszczaj kliknięcia</value>
