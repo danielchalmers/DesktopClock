@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Media;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -26,6 +28,7 @@ public partial class MainWindow : Window
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
     private TimeZoneInfo _timeZone;
+    private CultureInfo _culture = CultureInfo.CurrentCulture;
     private SoundPlayer _soundPlayer;
     private PixelShifter _pixelShifter;
     private bool _toldHowToShow;
@@ -69,9 +72,44 @@ public partial class MainWindow : Window
         ThemeManager.ThemeChanged += ThemeManager_ThemeChanged;
 
         SystemEvents.TimeChanged += SystemEvents_TimeChanged;
+        SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
 
         UpdateSoundPlayerEnabled();
     }
+
+    /// <summary>
+    /// Picks up a new Windows regional format, such as a switch to a 24-hour clock, which .NET otherwise keeps until the app restarts.
+    /// </summary>
+    private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+    {
+        if (e.Category != UserPreferenceCategory.Locale)
+            return;
+
+        Dispatcher.BeginInvoke(new Action(() =>
+        {
+            // WPF pins the culture it started with on this thread and the timer's, so ask Windows for the new one and pass it along directly.
+            CultureInfo.CurrentCulture.ClearCachedData();
+            var name = new StringBuilder(LOCALE_NAME_MAX_LENGTH);
+            if (GetUserDefaultLocaleName(name, name.Capacity) == 0)
+                return;
+
+            try
+            {
+                CultureInfo.CurrentCulture = _culture = new CultureInfo(name.ToString());
+            }
+            catch (CultureNotFoundException)
+            {
+                return;
+            }
+
+            UpdateTimeString();
+        }));
+    }
+
+    private const int LOCALE_NAME_MAX_LENGTH = 85;
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+    private static extern int GetUserDefaultLocaleName(StringBuilder localeName, int size);
 
     /// <summary>
     /// Picks up a new Windows time zone, such as after traveling, which .NET otherwise keeps until the app restarts.
@@ -188,6 +226,7 @@ public partial class MainWindow : Window
         Settings.Default.PropertyChanged -= _settingsPropertyChanged;
         ThemeManager.ThemeChanged -= ThemeManager_ThemeChanged;
         SystemEvents.TimeChanged -= SystemEvents_TimeChanged;
+        SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
 
         _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
         _systemClockTimer.Dispose();
@@ -373,7 +412,7 @@ public partial class MainWindow : Window
             Settings.Default.CountdownTo,
             Settings.Default.Format,
             Settings.Default.CountdownFormat,
-            CultureInfo.CurrentCulture);
+            _culture);
     }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
