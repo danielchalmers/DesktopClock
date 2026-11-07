@@ -200,7 +200,7 @@ public partial class MainWindow : Window
     [RelayCommand]
     public void OpenSettingsWindow()
     {
-        App.ShowSingletonWindow<SettingsWindow>(this);
+        App.ShowSingletonWindow<SettingsWindow>();
     }
 
     [RelayCommand]

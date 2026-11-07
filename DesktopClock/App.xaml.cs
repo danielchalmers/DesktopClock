@@ -117,11 +117,12 @@ public partial class App : Application
     /// Otherwise, it creates and shows a new instance of the window.
     /// </summary>
     /// <typeparam name="T">The type of the window to show.</typeparam>
-    /// <param name="owner">The owner window for the singleton window.</param>
-    public static void ShowSingletonWindow<T>(Window owner) where T : Window, new()
+    /// <remarks>
+    /// It has no owner, because a window owned by the clock stays on top of other apps with it.
+    /// </remarks>
+    public static void ShowSingletonWindow<T>() where T : Window, new()
     {
         var window = Current.Windows.OfType<T>().FirstOrDefault() ?? new T();
-        window.Owner = owner;
 
         // Restore an existing window.
         if (window.IsVisible)
