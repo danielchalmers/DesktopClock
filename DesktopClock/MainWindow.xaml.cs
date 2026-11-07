@@ -30,6 +30,7 @@ public partial class MainWindow : Window
     private TimeZoneInfo _timeZone;
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private SoundPlayer _soundPlayer;
+    private DateTimeOffset _previousSecond;
     private PixelShifter _pixelShifter;
     private bool _toldHowToShow;
     private FullscreenHideManager _fullscreenHideManager;
@@ -344,10 +345,14 @@ public partial class MainWindow : Window
     /// </summary>
     private void TryPlaySound(DateTimeOffset second)
     {
+        // Track every tick, so turning the sound on later doesn't play for a countdown that ended before.
+        var previous = _previousSecond;
+        _previousSecond = second;
+
         if (_soundPlayer == null)
             return;
 
-        if (!DateTimeUtil.IsNowOrCountdownOnInterval(second, Settings.Default.CountdownTo, Settings.Default.WavFileInterval, TimeZoneInfo.Local))
+        if (!DateTimeUtil.IsNowOrCountdownOnInterval(second, previous, Settings.Default.CountdownTo, Settings.Default.WavFileInterval, TimeZoneInfo.Local))
             return;
 
         try

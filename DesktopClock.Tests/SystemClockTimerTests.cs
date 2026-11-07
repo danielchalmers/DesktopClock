@@ -57,7 +57,7 @@ public class SystemClockTimerTests
     {
         var second = TickAt(now);
 
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(second, Target.DateTime, TimeSpan.FromMinutes(1), TimeZoneInfo.Utc);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(second, second.AddSeconds(-1), Target.DateTime, TimeSpan.FromMinutes(1), TimeZoneInfo.Utc);
 
         Assert.Equal(expected, result);
     }

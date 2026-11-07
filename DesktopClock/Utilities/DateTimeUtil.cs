@@ -33,36 +33,16 @@ public static class DateTimeUtil
     public static DateTimeOffset TruncateToSecond(this DateTimeOffset dateTimeOffset) =>
         new(dateTimeOffset.Ticks - (dateTimeOffset.Ticks % TimeSpan.TicksPerSecond), dateTimeOffset.Offset);
 
-    public static bool EqualExcludingMillisecond(this DateTime dt1, DateTime dt2)
-    {
-        if (dt1.Year != dt2.Year)
-            return false;
-
-        if (dt1.Month != dt2.Month)
-            return false;
-
-        if (dt1.Day != dt2.Day)
-            return false;
-
-        if (dt1.Hour != dt2.Hour)
-            return false;
-
-        if (dt1.Minute != dt2.Minute)
-            return false;
-
-        if (dt1.Second != dt2.Second)
-            return false;
-
-        return true;
-    }
-
     /// <summary>
     /// The real time left until a target on the wall clock of the given time zone: the wall-clock difference, corrected by an hour when a daylight saving change falls in between.
     /// </summary>
     public static TimeSpan TimeUntil(DateTime target, DateTimeOffset now, TimeZoneInfo zone) =>
         target - now.DateTime - (zone.GetUtcOffset(target) - zone.GetUtcOffset(now));
 
-    public static bool IsNowOrCountdownOnInterval(DateTimeOffset now, DateTime countdown, TimeSpan interval, TimeZoneInfo countdownZone)
+    /// <summary>
+    /// Whether a sound is due: on the interval, or when the tick after <paramref name="previous"/> reaches the countdown.
+    /// </summary>
+    public static bool IsNowOrCountdownOnInterval(DateTimeOffset now, DateTimeOffset previous, DateTime countdown, TimeSpan interval, TimeZoneInfo countdownZone)
     {
         var time = countdown == default ? now.TimeOfDay : TimeUntil(countdown, now, countdownZone);
 
@@ -70,7 +50,9 @@ public static class DateTimeUtil
         var intervalSeconds = (long)interval.TotalSeconds;
         var isOnInterval = intervalSeconds > 0 && (long)time.TotalSeconds % intervalSeconds == 0;
 
-        var isCountdownReached = now.DateTime.EqualExcludingMillisecond(countdown);
+        // Reached when this tick passes the target, since sleep, a drag or a late tick can skip its exact second.
+        var isCountdownReached = countdown != default && previous != default &&
+            TimeUntil(countdown, previous, countdownZone) > TimeSpan.Zero && time <= TimeSpan.Zero;
 
         return isOnInterval || isCountdownReached;
     }
