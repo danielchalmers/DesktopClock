@@ -33,38 +33,27 @@ public static class DateTimeUtil
     public static DateTimeOffset TruncateToSecond(this DateTimeOffset dateTimeOffset) =>
         new(dateTimeOffset.Ticks - (dateTimeOffset.Ticks % TimeSpan.TicksPerSecond), dateTimeOffset.Offset);
 
-    public static bool EqualExcludingMillisecond(this DateTime dt1, DateTime dt2)
+    /// <summary>
+    /// The real time left until a target on the wall clock of the given time zone: the wall-clock difference, corrected by an hour when a daylight saving change falls in between.
+    /// </summary>
+    public static TimeSpan TimeUntil(DateTime target, DateTimeOffset now, TimeZoneInfo zone) =>
+        target - now.DateTime - (zone.GetUtcOffset(target) - zone.GetUtcOffset(now));
+
+    /// <summary>
+    /// Whether a sound is due: on the interval, or when the tick after <paramref name="previous"/> reaches the countdown.
+    /// The interval counts from midnight on the clock's time zone, or down to a countdown, which is local time like its display.
+    /// </summary>
+    public static bool IsNowOrCountdownOnInterval(DateTimeOffset now, DateTimeOffset previous, DateTime countdown, TimeSpan interval, TimeZoneInfo clockZone)
     {
-        if (dt1.Year != dt2.Year)
-            return false;
-
-        if (dt1.Month != dt2.Month)
-            return false;
-
-        if (dt1.Day != dt2.Day)
-            return false;
-
-        if (dt1.Hour != dt2.Hour)
-            return false;
-
-        if (dt1.Minute != dt2.Minute)
-            return false;
-
-        if (dt1.Second != dt2.Second)
-            return false;
-
-        return true;
-    }
-
-    public static bool IsNowOrCountdownOnInterval(DateTime now, DateTime countdown, TimeSpan interval)
-    {
-        var time = countdown == default ? now.TimeOfDay : countdown - now;
+        var time = countdown == default ? TimeZoneInfo.ConvertTime(now, clockZone).TimeOfDay : TimeUntil(countdown, now, TimeZoneInfo.Local);
 
         // Work in whole seconds as a long so a sub-second interval doesn't truncate to a zero divisor and a far-future countdown doesn't overflow int.
         var intervalSeconds = (long)interval.TotalSeconds;
         var isOnInterval = intervalSeconds > 0 && (long)time.TotalSeconds % intervalSeconds == 0;
 
-        var isCountdownReached = now.EqualExcludingMillisecond(countdown);
+        // Reached when this tick passes the target, since sleep, a drag or a late tick can skip its exact second.
+        var isCountdownReached = countdown != default && previous != default &&
+            TimeUntil(countdown, previous, TimeZoneInfo.Local) > TimeSpan.Zero && time <= TimeSpan.Zero;
 
         return isOnInterval || isCountdownReached;
     }

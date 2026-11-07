@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Media;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -30,6 +29,8 @@ public partial class MainWindow : Window
     private TimeZoneInfo _timeZone;
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private SoundPlayer _soundPlayer;
+    private DateTimeOffset _previousSecond;
+    private bool _soundFailed;
     private PixelShifter _pixelShifter;
     private bool _toldHowToShow;
     private FullscreenHideManager _fullscreenHideManager;
@@ -73,8 +74,6 @@ public partial class MainWindow : Window
 
         SystemEvents.TimeChanged += SystemEvents_TimeChanged;
         SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
-
-        UpdateSoundPlayerEnabled();
     }
 
     /// <summary>
@@ -298,7 +297,7 @@ public partial class MainWindow : Window
             case nameof(Settings.Default.WavFilePath):
             case nameof(Settings.Default.WavFileInterval):
             case nameof(Settings.Default.PlaySoundOnCountdown):
-                UpdateSoundPlayerEnabled();
+                ResetSoundPlayer();
                 break;
         }
     }
@@ -325,40 +324,44 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Creates the sound player for the specified file when enabled; otherwise clears it.
+    /// Drops the sound player after the sound settings change, so the next sound uses them.
     /// </summary>
-    private void UpdateSoundPlayerEnabled()
+    private void ResetSoundPlayer()
     {
         _soundPlayer?.Dispose();
-
-        var soundPlayerEnabled =
-            !string.IsNullOrWhiteSpace(Settings.Default.WavFilePath) &&
-            (Settings.Default.WavFileInterval != default || Settings.Default.PlaySoundOnCountdown) &&
-            File.Exists(Settings.Default.WavFilePath);
-
-        _soundPlayer = soundPlayerEnabled ? new(Settings.Default.WavFilePath) : null;
+        _soundPlayer = null;
+        _soundFailed = false;
     }
 
     /// <summary>
-    /// Plays a sound when the interval or countdown match and the file exists.
+    /// Plays a sound when the interval or countdown match.
     /// </summary>
     private void TryPlaySound(DateTimeOffset second)
     {
-        if (_soundPlayer == null)
+        // Track every tick, so turning the sound on later doesn't play for a countdown that ended before.
+        var previous = _previousSecond;
+        _previousSecond = second;
+
+        var path = Settings.Default.WavFilePath;
+        if (string.IsNullOrWhiteSpace(path) || (Settings.Default.WavFileInterval == default && !Settings.Default.PlaySoundOnCountdown))
             return;
 
-        if (!DateTimeUtil.IsNowOrCountdownOnInterval(second.DateTime, Settings.Default.CountdownTo, Settings.Default.WavFileInterval))
+        if (!DateTimeUtil.IsNowOrCountdownOnInterval(second, previous, Settings.Default.CountdownTo, Settings.Default.WavFileInterval, _timeZone))
             return;
 
         try
         {
-            _soundPlayer.Play();
+            // Load the file only when it's due, since it may be on a drive that connects after the clock starts.
+            var player = _soundPlayer ??= new(path);
+            player.Play();
         }
         catch
         {
-            // Stop trying until the sound settings change, otherwise a bad file shows this on every tick.
-            _soundPlayer = null;
-            TryShowNotification(Loc.Get("SoundFailedTitle"), Loc.Get("SoundFailedMessage"));
+            // Keep trying in case the file comes back, but only say so once until the sound settings change.
+            if (!_soundFailed)
+                TryShowNotification(Loc.Get("SoundFailedTitle"), Loc.Get("SoundFailedMessage"));
+
+            _soundFailed = true;
         }
     }
 
