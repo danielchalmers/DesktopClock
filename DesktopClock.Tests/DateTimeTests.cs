@@ -102,7 +102,7 @@ public class DateTimeTests
         var interval = TimeSpan.FromSeconds(intervalSeconds);
 
         // Act
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(dateTime, countdownTo, interval);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(new DateTimeOffset(dateTime, TimeSpan.Zero), countdownTo, interval, TimeZoneInfo.Utc);
 
         // Assert
         Assert.Equal(expected, result);
@@ -117,7 +117,7 @@ public class DateTimeTests
         var interval = TimeSpan.FromMinutes(30); // 1800 seconds
 
         // Act
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, countdownTo, interval);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(new DateTimeOffset(now, TimeSpan.Zero), countdownTo, interval, TimeZoneInfo.Utc);
 
         // Assert - 45000 % 1800 = 0, so should be on interval
         Assert.True(result);
@@ -132,7 +132,7 @@ public class DateTimeTests
         var interval = TimeSpan.Zero;
 
         // Act
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, countdownTo, interval);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(new DateTimeOffset(now, TimeSpan.Zero), countdownTo, interval, TimeZoneInfo.Utc);
 
         // Assert
         Assert.False(result);
@@ -147,10 +147,33 @@ public class DateTimeTests
         var interval = TimeSpan.Zero; // No interval
 
         // Act
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, countdownTo, interval);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(new DateTimeOffset(now, TimeSpan.Zero), countdownTo, interval, TimeZoneInfo.Utc);
 
         // Assert
         Assert.True(result);
+    }
+
+    private static readonly TimeZoneInfo London = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+
+    [Fact]
+    public void TimeUntil_CountsTheRealTimeLeftAcrossADaylightSavingChange()
+    {
+        // October 24 at noon in summer time; the clocks go back an hour before Christmas.
+        var now = new DateTimeOffset(2026, 10, 24, 12, 0, 0, TimeSpan.FromHours(1));
+
+        var left = DateTimeUtil.TimeUntil(new DateTime(2026, 12, 25), now, London);
+
+        Assert.Equal(new TimeSpan(61, 13, 0, 0), left);
+    }
+
+    [Fact]
+    public void TimeUntil_KeepsCountingDownWhenTheClocksGoBack()
+    {
+        // 01:59:59 summer time is followed by 01:00:00 winter time.
+        var before = DateTimeUtil.TimeUntil(new DateTime(2026, 12, 25), new DateTimeOffset(2026, 10, 25, 1, 59, 59, TimeSpan.FromHours(1)), London);
+        var after = DateTimeUtil.TimeUntil(new DateTime(2026, 12, 25), new DateTimeOffset(2026, 10, 25, 1, 0, 0, TimeSpan.Zero), London);
+
+        Assert.Equal(TimeSpan.FromSeconds(1), before - after);
     }
 
     [Theory]

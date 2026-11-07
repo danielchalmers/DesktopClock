@@ -56,15 +56,21 @@ public static class DateTimeUtil
         return true;
     }
 
-    public static bool IsNowOrCountdownOnInterval(DateTime now, DateTime countdown, TimeSpan interval)
+    /// <summary>
+    /// The real time left until a target on the wall clock of the given time zone: the wall-clock difference, corrected by an hour when a daylight saving change falls in between.
+    /// </summary>
+    public static TimeSpan TimeUntil(DateTime target, DateTimeOffset now, TimeZoneInfo zone) =>
+        target - now.DateTime - (zone.GetUtcOffset(target) - zone.GetUtcOffset(now));
+
+    public static bool IsNowOrCountdownOnInterval(DateTimeOffset now, DateTime countdown, TimeSpan interval, TimeZoneInfo countdownZone)
     {
-        var time = countdown == default ? now.TimeOfDay : countdown - now;
+        var time = countdown == default ? now.TimeOfDay : TimeUntil(countdown, now, countdownZone);
 
         // Work in whole seconds as a long so a sub-second interval doesn't truncate to a zero divisor and a far-future countdown doesn't overflow int.
         var intervalSeconds = (long)interval.TotalSeconds;
         var isOnInterval = intervalSeconds > 0 && (long)time.TotalSeconds % intervalSeconds == 0;
 
-        var isCountdownReached = now.EqualExcludingMillisecond(countdown);
+        var isCountdownReached = now.DateTime.EqualExcludingMillisecond(countdown);
 
         return isOnInterval || isCountdownReached;
     }

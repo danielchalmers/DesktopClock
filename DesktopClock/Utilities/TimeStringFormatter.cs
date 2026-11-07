@@ -27,7 +27,7 @@ public static class TimeStringFormatter
         }
         else
         {
-            var countdown = countdownTo - nowDateTime;
+            var countdown = DateTimeUtil.TimeUntil(countdownTo, now, TimeZoneInfo.Local);
             result = Tokenizer.FormatWithTokenizerOrFallBack(countdown, countdownFormat, formatProvider);
         }
 
