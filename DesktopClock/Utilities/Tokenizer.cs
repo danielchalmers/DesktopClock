@@ -50,8 +50,8 @@ public static class Tokenizer
             }
         }
 
-        // Fall back to the default format.
-        return formattable.ToString();
+        // Fall back to the default format, in the given regional format rather than the one this thread started with.
+        return formattable.ToString(null, formatProvider);
     }
 
     /// <summary>
