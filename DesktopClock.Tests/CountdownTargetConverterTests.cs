@@ -38,6 +38,15 @@ public class CountdownTargetConverterTests
     }
 
     [Fact]
+    public void Convert_ShowsATargetOutsideTheRegionalCalendarInsteadOfThrowing()
+    {
+        // The Hijri calendar of ar-SA ends in 2077.
+        var arabic = CultureInfo.GetCultureInfo("ar-SA");
+
+        Assert.Equal("2080-01-01 09:00", new CountdownTargetConverter().Convert(new DateTime(2080, 1, 1, 9, 0, 0), typeof(string), null, arabic));
+    }
+
+    [Fact]
     public void ConvertBack_RejectsText()
     {
         Assert.Equal(DependencyProperty.UnsetValue, new CountdownTargetConverter().ConvertBack("tomorrow", typeof(DateTime), null, German));
