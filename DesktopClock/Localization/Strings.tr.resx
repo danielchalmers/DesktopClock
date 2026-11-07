@@ -75,6 +75,11 @@ Resmi sürüm ücretsizdir: https://github.com/danielchalmers/DesktopClock. Uygu
 
 Sorun devam ederse bu bağlantıdan bildirin.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>Uygulama, bir ZIP dosyasının içi gibi geçici bir klasörden çalışıyor, bu yüzden ayarları korunmayacak.
+
+Önce uygulamayı başka bir klasöre çıkarın veya kopyalayın, ardından oradan çalıştırın.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Hatalı biçim</value>
   </data>
@@ -653,6 +658,9 @@ Devam edilsin mi?</value>
   </data>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Hafta numarası</value>
+  </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Yılın günü</value>
   </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>UTC farkı</value>

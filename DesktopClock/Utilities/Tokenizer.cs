@@ -50,18 +50,18 @@ public static class Tokenizer
             }
         }
 
-        // Fall back to the default format.
-        return formattable.ToString();
+        // Fall back to the default format, in the given regional format rather than the one this thread started with.
+        return formattable.ToString(null, formatProvider);
     }
 
     /// <summary>
-    /// Handles tokens that have no standard format string equivalent, such as ISO week numbers.
+    /// Handles tokens that have no standard format string equivalent, such as ISO week numbers and the day of the year.
     /// </summary>
     private static bool TryFormatCustomToken(IFormattable formattable, string token, IFormatProvider formatProvider, out string result)
     {
         result = null;
 
-        if (token != "week" && token != "weekYear")
+        if (token is not ("week" or "weekYear" or "dayOfYear"))
             return false;
 
         DateTime dateTime;
@@ -72,10 +72,15 @@ public static class Tokenizer
         else
             return false;
 
-        // ISO 8601 writes the week as two digits, like 2026-W05.
-        result = token == "week"
-            ? dateTime.GetIsoWeekOfYear().ToString("D2", formatProvider)
-            : dateTime.GetIsoWeekYear().ToString(formatProvider);
+        result = token switch
+        {
+            // ISO 8601 writes the week as two digits, like 2026-W05.
+            "week" => dateTime.GetIsoWeekOfYear().ToString("D2", formatProvider),
+            "weekYear" => dateTime.GetIsoWeekYear().ToString(formatProvider),
+
+            // Three digits, like the ordinal dates 2026-001 to 2026-365.
+            _ => dateTime.DayOfYear.ToString("D3", formatProvider),
+        };
         return true;
     }
 

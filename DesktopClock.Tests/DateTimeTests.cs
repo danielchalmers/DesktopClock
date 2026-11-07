@@ -5,76 +5,6 @@ namespace DesktopClock.Tests;
 
 public class DateTimeTests
 {
-    [Theory]
-    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-18T12:30:45.456Z", true)] // Different millisecond
-    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-18T12:30:46.123Z", false)] // Different second
-    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-18T12:31:45.123Z", false)] // Different minute
-    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-18T13:30:45.123Z", false)] // Different hour
-    [InlineData("2024-07-18T12:30:45.123Z", "2024-07-19T12:30:45.123Z", false)] // Different day
-    [InlineData("2024-07-18T12:30:45.123Z", "2024-08-18T12:30:45.123Z", false)] // Different month
-    [InlineData("2024-07-18T12:30:45.123Z", "2025-07-18T12:30:45.123Z", false)] // Different year
-    public void EqualExcludingMilliseconds(string dt1String, string dt2String, bool expected)
-    {
-        // Arrange
-        var dt1 = DateTime.Parse(dt1String);
-        var dt2 = DateTime.Parse(dt2String);
-
-        // Act
-        var result = dt1.EqualExcludingMillisecond(dt2);
-
-        // Assert
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void EqualExcludingMilliseconds_SameDateTime_ShouldBeTrue()
-    {
-        // Arrange
-        var dt1 = new DateTime(2024, 7, 18, 12, 30, 45, 123);
-        var dt2 = new DateTime(2024, 7, 18, 12, 30, 45, 123);
-
-        // Act
-        var result = dt1.EqualExcludingMillisecond(dt2);
-
-        // Assert
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void EqualExcludingMilliseconds_OnlyMillisecondsDiffer_ShouldBeTrue()
-    {
-        // Arrange
-        var dt1 = new DateTime(2024, 7, 18, 12, 30, 45, 0);
-        var dt2 = new DateTime(2024, 7, 18, 12, 30, 45, 999);
-
-        // Act
-        var result = dt1.EqualExcludingMillisecond(dt2);
-
-        // Assert
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void EqualExcludingMilliseconds_Reflexive_ShouldBeTrue()
-    {
-        // Arrange
-        var dt = DateTime.Now;
-
-        // Act & Assert
-        Assert.True(dt.EqualExcludingMillisecond(dt));
-    }
-
-    [Fact]
-    public void EqualExcludingMilliseconds_Symmetric_ShouldWork()
-    {
-        // Arrange
-        var dt1 = new DateTime(2024, 7, 18, 12, 30, 45, 100);
-        var dt2 = new DateTime(2024, 7, 18, 12, 30, 45, 200);
-
-        // Act & Assert
-        Assert.Equal(dt1.EqualExcludingMillisecond(dt2), dt2.EqualExcludingMillisecond(dt1));
-    }
-
     [Fact]
     public void TruncateToSecond_DropsTheFractionAndKeepsTheOffset()
     {
@@ -102,7 +32,7 @@ public class DateTimeTests
         var interval = TimeSpan.FromSeconds(intervalSeconds);
 
         // Act
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(dateTime, countdownTo, interval);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(new DateTimeOffset(dateTime, TimeSpan.Zero), new DateTimeOffset(dateTime.AddSeconds(-1), TimeSpan.Zero), countdownTo, interval, TimeZoneInfo.Utc);
 
         // Assert
         Assert.Equal(expected, result);
@@ -117,7 +47,7 @@ public class DateTimeTests
         var interval = TimeSpan.FromMinutes(30); // 1800 seconds
 
         // Act
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, countdownTo, interval);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(new DateTimeOffset(now, TimeSpan.Zero), new DateTimeOffset(now.AddSeconds(-1), TimeSpan.Zero), countdownTo, interval, TimeZoneInfo.Utc);
 
         // Assert - 45000 % 1800 = 0, so should be on interval
         Assert.True(result);
@@ -132,7 +62,7 @@ public class DateTimeTests
         var interval = TimeSpan.Zero;
 
         // Act
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, countdownTo, interval);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(new DateTimeOffset(now, TimeSpan.Zero), new DateTimeOffset(now.AddSeconds(-1), TimeSpan.Zero), countdownTo, interval, TimeZoneInfo.Utc);
 
         // Assert
         Assert.False(result);
@@ -147,10 +77,61 @@ public class DateTimeTests
         var interval = TimeSpan.Zero; // No interval
 
         // Act
-        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, countdownTo, interval);
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(new DateTimeOffset(now, TimeSpan.Zero), new DateTimeOffset(now.AddSeconds(-1), TimeSpan.Zero), countdownTo, interval, TimeZoneInfo.Utc);
 
         // Assert
         Assert.True(result);
+    }
+
+    [Theory]
+    [InlineData("12:30:43", "12:30:46", true)] // Sleep or a drag skipped the target second
+    [InlineData("12:30:45", "12:30:46", false)] // Already played on the target second
+    [InlineData(null, "12:30:46", false)] // Ended before the app started
+    public void IsOnInterval_CountdownPlaysOnceWhenATickPassesIt(string previousTime, string nowTime, bool expected)
+    {
+        var day = new DateTime(2024, 7, 18);
+        var previous = previousTime == null ? default : new DateTimeOffset(day + TimeSpan.Parse(previousTime, CultureInfo.InvariantCulture), TimeSpan.Zero);
+        var now = new DateTimeOffset(day + TimeSpan.Parse(nowTime, CultureInfo.InvariantCulture), TimeSpan.Zero);
+
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, previous, day + new TimeSpan(12, 30, 45), TimeSpan.Zero, TimeZoneInfo.Utc);
+
+        Assert.Equal(expected, result);
+    }
+
+    [Theory]
+    [InlineData("09:00:00", false)] // 14:30 on the clock
+    [InlineData("09:30:00", true)] // 15:00 on the clock
+    public void IsOnInterval_ChimesOnTheHourOfTheClocksTimeZone(string utcTime, bool expected)
+    {
+        var india = TimeZoneInfo.CreateCustomTimeZone("UtcPlus0530", new TimeSpan(5, 30, 0), "UtcPlus0530", "UtcPlus0530");
+        var now = new DateTimeOffset(new DateTime(2024, 7, 18) + TimeSpan.Parse(utcTime, CultureInfo.InvariantCulture), TimeSpan.Zero);
+
+        var result = DateTimeUtil.IsNowOrCountdownOnInterval(now, now.AddSeconds(-1), default, TimeSpan.FromHours(1), india);
+
+        Assert.Equal(expected, result);
+    }
+
+    private static readonly TimeZoneInfo London = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+
+    [Fact]
+    public void TimeUntil_CountsTheRealTimeLeftAcrossADaylightSavingChange()
+    {
+        // October 24 at noon in summer time; the clocks go back an hour before Christmas.
+        var now = new DateTimeOffset(2026, 10, 24, 12, 0, 0, TimeSpan.FromHours(1));
+
+        var left = DateTimeUtil.TimeUntil(new DateTime(2026, 12, 25), now, London);
+
+        Assert.Equal(new TimeSpan(61, 13, 0, 0), left);
+    }
+
+    [Fact]
+    public void TimeUntil_KeepsCountingDownWhenTheClocksGoBack()
+    {
+        // 01:59:59 summer time is followed by 01:00:00 winter time.
+        var before = DateTimeUtil.TimeUntil(new DateTime(2026, 12, 25), new DateTimeOffset(2026, 10, 25, 1, 59, 59, TimeSpan.FromHours(1)), London);
+        var after = DateTimeUtil.TimeUntil(new DateTime(2026, 12, 25), new DateTimeOffset(2026, 10, 25, 1, 0, 0, TimeSpan.Zero), London);
+
+        Assert.Equal(TimeSpan.FromSeconds(1), before - after);
     }
 
     [Theory]

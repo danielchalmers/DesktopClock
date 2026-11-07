@@ -75,6 +75,11 @@ La versión oficial es gratuita en https://github.com/danielchalmers/DesktopCloc
 
 Si el problema continúa, notifícalo en ese vínculo.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>La aplicación se está ejecutando desde una carpeta temporal, como dentro de un archivo ZIP, así que su configuración no se conservará.
+
+Extráela o cópiala primero a otra carpeta y ejecútala desde allí.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Formato no válido</value>
   </data>
@@ -653,6 +658,9 @@ Si la versión oficial también falla, notifícalo en ese vínculo e incluye est
   </data>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Número de semana</value>
+  </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Día del año</value>
   </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Desfase UTC</value>

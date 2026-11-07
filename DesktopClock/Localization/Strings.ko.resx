@@ -75,6 +75,11 @@
 
 문제가 계속되면 해당 링크에서 신고하세요.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>앱이 ZIP 파일 안과 같은 임시 폴더에서 실행되고 있어 설정이 유지되지 않습니다.
+
+먼저 앱을 다른 폴더에 압축 해제하거나 복사한 다음 그곳에서 실행하세요.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>잘못된 형식</value>
   </data>
@@ -653,6 +658,9 @@
   </data>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>주 번호</value>
+  </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>연중 일수</value>
   </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>UTC 오프셋</value>

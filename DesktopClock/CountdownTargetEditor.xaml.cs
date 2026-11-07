@@ -102,7 +102,7 @@ public partial class CountdownTargetEditor : UserControl
 
         PreviewText.Text = target == default
             ? Loc.Get("NoCountdownTarget")
-            : Loc.Format("CountdownPreview", target.ToString("f"), RelativeTimeFormatter.Format(target, DateTime.Now));
+            : Loc.Format("CountdownPreview", CountdownTargetConverter.Format(target, "f", CultureInfo.CurrentCulture), RelativeTimeFormatter.Format(target, DateTime.Now));
     }
 
     /// <summary>

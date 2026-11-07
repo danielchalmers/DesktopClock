@@ -75,6 +75,11 @@ Oficjalna wersja jest bezpłatna: https://github.com/danielchalmers/DesktopClock
 
 Jeśli problem będzie się powtarzał, zgłoś go pod tym linkiem.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>Aplikacja działa z folderu tymczasowego, na przykład bezpośrednio z pliku ZIP, więc jej ustawienia nie zostaną zachowane.
+
+Najpierw wypakuj lub skopiuj ją do innego folderu, a następnie uruchom ją stamtąd.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Błędny format</value>
   </data>
@@ -653,6 +658,9 @@ Czy kontynuować?</value>
   </data>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Numer tygodnia</value>
+  </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Dzień roku</value>
   </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Przesunięcie UTC</value>

@@ -329,7 +329,8 @@ public partial class SettingsWindow : Window
             return;
         }
 
-        Process.Start(new ProcessStartInfo("explorer.exe", folderPath) { UseShellExecute = true });
+        // Open the folder itself rather than passing it to explorer.exe, which splits its arguments on commas.
+        Process.Start(new ProcessStartInfo(folderPath) { UseShellExecute = true });
     }
 }
 

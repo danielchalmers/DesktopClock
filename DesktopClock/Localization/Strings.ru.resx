@@ -75,6 +75,11 @@
 
 Если проблема не исчезнет, сообщите о ней по этой ссылке.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>Приложение запущено из временной папки, например прямо из ZIP-архива, поэтому его параметры не сохранятся.
+
+Сначала распакуйте или скопируйте его в другую папку, а затем запустите оттуда.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Неверный формат</value>
   </data>
@@ -653,6 +658,9 @@
   </data>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Номер недели</value>
+  </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>День года</value>
   </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Смещение UTC</value>

@@ -93,6 +93,26 @@ public class SettingsPersistenceTests
     }
 
     [Fact]
+    public void Save_OverReadOnlyFile_ShouldFailWithoutLeavingTempFile()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var settings = CreateSettingsInstance();
+        Assert.True(settings.Save());
+        var file = new FileInfo(Settings.FilePath) { IsReadOnly = true };
+
+        try
+        {
+            Assert.False(settings.Save());
+            Assert.False(File.Exists(Settings.FilePath + ".tmp"));
+        }
+        finally
+        {
+            file.IsReadOnly = false;
+        }
+    }
+
+    [Fact]
     public void ChangingASetting_ShouldSaveItShortlyAfterwards()
     {
         using var _ = new TempSettingsFileScope();
@@ -152,6 +172,31 @@ public class SettingsPersistenceTests
         Assert.Equal("kept through a lock", loaded.Format);
     }
 
+    [Fact]
+    public void Load_WithFileLockedLongerThanItWaits_ShouldNotSaveDefaultsOverIt()
+    {
+        using var _ = new TempSettingsFileScope();
+
+        var original = CreateSettingsInstance();
+        original.Format = "kept through a long lock";
+        Assert.True(original.Save());
+
+        // Let go after loading gives up but while the startup save is still retrying, which is when the defaults used to replace the file.
+        var lockStream = new FileStream(Settings.FilePath, FileMode.Open, FileAccess.Read, FileShare.None);
+        var releaser = new System.Threading.Thread(() =>
+        {
+            System.Threading.Thread.Sleep(1100);
+            lockStream.Dispose();
+        });
+        releaser.Start();
+
+        LoadAndAttemptSave(out var canBeSaved);
+        releaser.Join();
+
+        Assert.Contains("kept through a long lock", File.ReadAllText(Settings.FilePath));
+        Assert.False(canBeSaved);
+    }
+
     [Theory]
     [InlineData("")] // Like issue #7, where the file was left empty by a shutdown.
     [InlineData("not settings")]
@@ -178,21 +223,28 @@ public class SettingsPersistenceTests
     /// <summary>
     /// Runs the app's startup load, restoring the static state it sets so other tests aren't affected.
     /// </summary>
-    private static Settings LoadAndAttemptSave()
+    private static Settings LoadAndAttemptSave() => LoadAndAttemptSave(out _);
+
+    /// <summary>
+    /// Runs the app's startup load, restoring the static state it sets so other tests aren't affected, and reports whether it decided the file can be saved.
+    /// </summary>
+    private static Settings LoadAndAttemptSave(out bool canBeSaved)
     {
-        var canBeSaved = typeof(Settings).GetProperty(nameof(Settings.CanBeSaved), BindingFlags.Public | BindingFlags.Static)!.GetSetMethod(nonPublic: true)!;
+        var setCanBeSaved = typeof(Settings).GetProperty(nameof(Settings.CanBeSaved), BindingFlags.Public | BindingFlags.Static)!.GetSetMethod(nonPublic: true)!;
         var originalCanBeSaved = Settings.CanBeSaved;
 
         try
         {
-            canBeSaved.Invoke(null, new object[] { false });
+            setCanBeSaved.Invoke(null, new object[] { false });
 
             var loadAndAttemptSave = typeof(Settings).GetMethod("LoadAndAttemptSave", BindingFlags.NonPublic | BindingFlags.Static)!;
-            return (Settings)loadAndAttemptSave.Invoke(null, null)!;
+            var settings = (Settings)loadAndAttemptSave.Invoke(null, null)!;
+            canBeSaved = Settings.CanBeSaved;
+            return settings;
         }
         finally
         {
-            canBeSaved.Invoke(null, new object[] { originalCanBeSaved });
+            setCanBeSaved.Invoke(null, new object[] { originalCanBeSaved });
         }
     }
 

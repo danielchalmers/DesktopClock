@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -64,7 +65,7 @@ public static class CrashHandler
     {
         var fileName = Path.GetFileNameWithoutExtension(App.MainFileInfo.Name) + ".log";
         var entry =
-            $"{DateTimeOffset.Now:yyyy-MM-dd HH:mm:ss zzz}\r\n" +
+            $"{DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss zzz", CultureInfo.InvariantCulture)}\r\n" +
             $"{App.MainFileDisplayText} on {RuntimeInformation.OSDescription.Trim()}, {RuntimeInformation.FrameworkDescription}\r\n" +
             $"{exception}\r\n\r\n";
 

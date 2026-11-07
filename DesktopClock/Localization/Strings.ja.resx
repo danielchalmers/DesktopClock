@@ -75,6 +75,11 @@
 
 問題が解決しない場合は、同じリンクから報告してください。</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>アプリが ZIP ファイル内などの一時フォルダーから実行されているため、設定は保持されません。
+
+先にアプリを別のフォルダーに展開またはコピーしてから、そこで実行してください。</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>書式エラー</value>
   </data>
@@ -653,6 +658,9 @@
   </data>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>週番号</value>
+  </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>年間通算日</value>
   </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>UTC オフセット</value>

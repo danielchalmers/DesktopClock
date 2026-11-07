@@ -12,7 +12,22 @@ namespace DesktopClock;
 public class CountdownTargetConverter : MarkupExtension, IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-        value is DateTime target && target != default ? target.ToString(culture) : string.Empty;
+        value is DateTime target && target != default ? Format(target, null, culture) : string.Empty;
+
+    /// <summary>
+    /// Formats the target in the culture, or as ISO when it's outside the culture's calendar, like after 2077 in the Hijri calendar of ar-SA.
+    /// </summary>
+    public static string Format(DateTime target, string format, CultureInfo culture)
+    {
+        try
+        {
+            return target.ToString(format, culture);
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            return target.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+        }
+    }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {

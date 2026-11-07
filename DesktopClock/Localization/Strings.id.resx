@@ -75,6 +75,11 @@ Versi resmi tersedia gratis di https://github.com/danielchalmers/DesktopClock. J
 
 Jika masalah berlanjut, laporkan di tautan tersebut.</value>
   </data>
+  <data name="RunningFromTempFolderMessage" xml:space="preserve">
+    <value>Aplikasi berjalan dari folder sementara, seperti dari dalam file ZIP, sehingga pengaturannya tidak akan dipertahankan.
+
+Ekstrak atau salin aplikasi ke folder lain terlebih dahulu, lalu jalankan dari sana.</value>
+  </data>
   <data name="BadFormat" xml:space="preserve">
     <value>Format salah</value>
   </data>
@@ -653,6 +658,9 @@ Lanjutkan?</value>
   </data>
   <data name="TokenWeekNumber" xml:space="preserve">
     <value>Nomor minggu</value>
+  </data>
+  <data name="TokenDayOfYear" xml:space="preserve">
+    <value>Hari dalam tahun</value>
   </data>
   <data name="TokenUtcOffset" xml:space="preserve">
     <value>Selisih UTC</value>
