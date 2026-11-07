@@ -29,16 +29,16 @@ public class TokenizerTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void FormatWithTokenizer_NullOrWhitespace_ShouldReturnDefaultToString(string format)
+    public void FormatWithTokenizer_NullOrWhitespace_ShouldReturnDefaultFormatOfTheGivenCulture(string format)
     {
         // Arrange
         var dateTime = new DateTime(2023, 09, 24, 12, 13, 14);
 
         // Act
-        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, CultureInfo.InvariantCulture);
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, new CultureInfo("de-DE"));
 
         // Assert
-        Assert.Equal(dateTime.ToString(), result);
+        Assert.Equal("24.09.2023 12:13:14", result);
     }
 
     [Fact]
