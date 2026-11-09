@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Media;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -551,6 +552,10 @@ public partial class MainWindow : Window
 
     private void Window_Closing(object sender, CancelEventArgs e)
     {
+        // Close Settings first, which commits a value still being typed, like a countdown target, so it's in the save below. Exiting closes it anyway, but only after this save.
+        foreach (var settingsWindow in Application.Current.Windows.OfType<SettingsWindow>().ToList())
+            settingsWindow.Close();
+
         // Save the last text and the placement to preserve dimensions and position of the clock.
         PixelShifter?.RestoreBasePosition(this);
         Settings.Default.LastDisplay = CurrentTimeOrCountdownString;
