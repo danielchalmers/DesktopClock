@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Windows.Media;
 using System.Windows.Threading;
 using DesktopClock.Properties;
@@ -109,6 +111,47 @@ public class SettingsPersistenceTests
         finally
         {
             file.IsReadOnly = false;
+        }
+    }
+
+    [Fact]
+    public void Save_AfterTheFolderIsGone_ShouldFailWithoutThrowing()
+    {
+        // A clock on a USB stick that was unplugged: turning the file watcher back on after the failed save used to throw, which showed the crash message.
+        var folder = Path.Combine(Path.GetTempPath(), "DesktopClock.Tests", Guid.NewGuid().ToString("N"));
+        using var _ = new TempSettingsFileScope(folder);
+
+        var settings = CreateSettingsInstance();
+        Assert.True(settings.Save());
+
+        Directory.Delete(folder, true);
+
+        Assert.False(settings.Save());
+    }
+
+    [Fact]
+    public void Load_InAFolderThatCantBeListed_ShouldStillWork()
+    {
+        // Some managed shares let users open files but not list the folder: watching it used to throw while the settings loaded, so the clock never appeared.
+        var folder = Path.Combine(Path.GetTempPath(), "DesktopClock.Tests", Guid.NewGuid().ToString("N"));
+        using var _ = new TempSettingsFileScope(folder);
+        var denyList = new FileSystemAccessRule(WindowsIdentity.GetCurrent().User, FileSystemRights.ListDirectory, AccessControlType.Deny);
+        var security = Directory.GetAccessControl(folder);
+        security.AddAccessRule(denyList);
+        Directory.SetAccessControl(folder, security);
+
+        try
+        {
+            var settings = CreateSettingsInstance();
+            settings.Format = "saved without listing";
+
+            Assert.True(settings.Save());
+            Assert.Contains("saved without listing", File.ReadAllText(Settings.FilePath));
+        }
+        finally
+        {
+            security.RemoveAccessRule(denyList);
+            Directory.SetAccessControl(folder, security);
         }
     }
 
@@ -347,12 +390,17 @@ public class SettingsPersistenceTests
     private sealed class TempSettingsFileScope : IDisposable
     {
         private readonly string _originalFilePath;
+        private readonly string _ownFolder;
 
-        public TempSettingsFileScope()
+        /// <summary>
+        /// Points settings at a new file in the shared test folder, or in the given folder, which is created now and deleted afterwards.
+        /// </summary>
+        public TempSettingsFileScope(string ownFolder = null)
         {
             _originalFilePath = Settings.FilePath;
+            _ownFolder = ownFolder;
 
-            var tempDir = Path.Combine(Path.GetTempPath(), "DesktopClock.Tests");
+            var tempDir = ownFolder ?? Path.Combine(Path.GetTempPath(), "DesktopClock.Tests");
             Directory.CreateDirectory(tempDir);
             var tempFilePath = Path.Combine(tempDir, $"{Guid.NewGuid():N}.settings");
 
@@ -368,6 +416,9 @@ public class SettingsPersistenceTests
             {
                 if (File.Exists(Settings.FilePath))
                     File.Delete(Settings.FilePath);
+
+                if (_ownFolder != null && Directory.Exists(_ownFolder))
+                    Directory.Delete(_ownFolder, true);
             }
             finally
             {

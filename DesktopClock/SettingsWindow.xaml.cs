@@ -178,7 +178,15 @@ public partial class SettingsWindow : Window
 
     private void OpenSettingsFolder(object sender, RoutedEventArgs e)
     {
-        OpenSettingsPath(Settings.FilePath);
+        var folderPath = Path.GetDirectoryName(Settings.FilePath);
+
+        if (string.IsNullOrWhiteSpace(folderPath))
+        {
+            return;
+        }
+
+        // Open the folder through the shell rather than passing it to explorer.exe, which splits its arguments on commas. The trailing separator makes it open as a folder, because the shell otherwise runs a program or shortcut next to it with the same name, like DesktopClock.exe next to an unzipped DesktopClock folder.
+        OpenUrl(folderPath.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar);
     }
 
     private void CreateNewClock(object sender, RoutedEventArgs e)
@@ -318,19 +326,6 @@ public partial class SettingsWindow : Window
                 Loc.Format("OpenUrlFailed", url),
                 Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
-    }
-
-    private static void OpenSettingsPath(string filePath)
-    {
-        var folderPath = Path.GetDirectoryName(filePath);
-
-        if (string.IsNullOrWhiteSpace(folderPath))
-        {
-            return;
-        }
-
-        // Open the folder itself rather than passing it to explorer.exe, which splits its arguments on commas.
-        Process.Start(new ProcessStartInfo(folderPath) { UseShellExecute = true });
     }
 }
 

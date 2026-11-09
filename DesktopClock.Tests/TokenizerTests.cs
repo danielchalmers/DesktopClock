@@ -41,6 +41,19 @@ public class TokenizerTests
         Assert.Equal("24.09.2023 12:13:14", result);
     }
 
+    [Theory]
+    [InlineData("")]
+    [InlineData("{d}")]
+    public void FormatWithTokenizer_DatePastTheEndOfTheRegionalCalendar_ShouldReturnErrorMessage(string format)
+    {
+        // The Saudi regional format's Um al-Qura calendar ends in November 2077, and the default format used to throw on later dates, which crashed the clock every second.
+        var dateTime = new DateTime(2078, 1, 1, 12, 13, 14);
+
+        var result = Tokenizer.FormatWithTokenizerOrFallBack(dateTime, format, new CultureInfo("ar-SA"));
+
+        Assert.Equal(Tokenizer.FormatErrorMessage, result);
+    }
+
     [Fact]
     public void FormatWithTokenizer_SingleToken_ShouldFormat()
     {

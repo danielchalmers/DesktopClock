@@ -653,7 +653,7 @@ Continue?</value>
   </data>
   <data name="OpenUrlFailed" xml:space="preserve">
     <value>Couldn't open {0}.</value>
-    <comment>{0} is a web address.</comment>
+    <comment>{0} is a web address or a folder.</comment>
   </data>
   <data name="CommonFormats" xml:space="preserve">
     <value>Common formats</value>

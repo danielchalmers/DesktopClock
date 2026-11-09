@@ -106,19 +106,53 @@ public class SystemClockTimerTests
             lock (seconds)
                 seconds.Add(second);
         };
-        var onTick = typeof(SystemClockTimer).GetMethod("OnTick", BindingFlags.NonPublic | BindingFlags.Instance);
-
         // Start early in a second so both ticks land in it.
         while (DateTimeOffset.Now.Millisecond > 500)
             Thread.Sleep(10);
 
-        onTick.Invoke(timer, null);
-        onTick.Invoke(timer, null);
+        timer.Start();
+        Tick(timer);
+        Tick(timer);
         timer.Stop();
 
         lock (seconds)
             Assert.Single(seconds);
     }
+
+    [Fact]
+    public void Stop_StaysStoppedWhenATickWasAlreadyOnItsWay()
+    {
+        // Dragging the clock stops the timer, and a tick that had already started used to schedule the next one, so pixel shifting could move the clock mid-drag.
+        var count = 0;
+        using var timer = new SystemClockTimer();
+        timer.SecondChanged += (_, _) => Interlocked.Increment(ref count);
+
+        timer.Start();
+        timer.Stop();
+        Tick(timer);
+        Thread.Sleep(2500);
+
+        Assert.Equal(0, Volatile.Read(ref count));
+    }
+
+    [Fact]
+    public void Dispose_DoesNotThrowWhenATickWasAlreadyOnItsWay()
+    {
+        // Closing the clock disposes the timer, and a tick that had already started used to throw on the thread pool, which showed the crash message.
+        var timer = new SystemClockTimer();
+
+        timer.Start();
+        timer.Dispose();
+        Tick(timer);
+        timer.Start();
+        timer.Stop();
+    }
+
+    /// <summary>
+    /// Runs a tick right now, the way the timer's thread would.
+    /// </summary>
+    private static void Tick(SystemClockTimer timer) =>
+        typeof(SystemClockTimer).GetMethod("OnTick", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(timer, null);
 
     /// <summary>
     /// Gets the second a tick raises when it lands at the given time on the target's day.

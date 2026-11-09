@@ -10,48 +10,48 @@ public static class Tokenizer
 
     /// <summary>
     /// <para>Returns a string formatted using a tokenized format or the default formatting method.</para>
-    /// <para>Returns a short error message when a non-empty format is malformed.</para>
+    /// <para>Returns a short error message when the format is malformed or the value can't be shown in it, such as a date past the end of the regional calendar.</para>
     /// </summary>
     /// <param name="formattable">The object to format.</param>
     /// <param name="format">The format to use.</param>
     /// <param name="formatProvider">The format provider.</param>
     public static string FormatWithTokenizerOrFallBack(IFormattable formattable, string format, IFormatProvider formatProvider)
     {
-        if (!string.IsNullOrWhiteSpace(format))
+        try
         {
-            try
+            // Fall back to the default format, in the given regional format rather than the one this thread started with.
+            if (string.IsNullOrWhiteSpace(format))
             {
-                if (UsesTokenSyntax(format))
+                return formattable.ToString(null, formatProvider);
+            }
+
+            if (UsesTokenSyntax(format))
+            {
+                if (!HasValidTokenSyntax(format))
                 {
-                    if (!HasValidTokenSyntax(format))
-                    {
-                        return FormatErrorMessage;
-                    }
-
-                    return _tokenizerRegex.Replace(format, (m) =>
-                    {
-                        var formatString = m.Groups[1].Value;
-
-                        if (TryFormatCustomToken(formattable, formatString, formatProvider, out var customResult))
-                        {
-                            return customResult;
-                        }
-
-                        return formattable.ToString(formatString, formatProvider);
-                    });
+                    return FormatErrorMessage;
                 }
 
-                // Use basic formatter if no special formatting tokens are present.
-                return formattable.ToString(format, formatProvider);
-            }
-            catch
-            {
-                return FormatErrorMessage;
-            }
-        }
+                return _tokenizerRegex.Replace(format, (m) =>
+                {
+                    var formatString = m.Groups[1].Value;
 
-        // Fall back to the default format, in the given regional format rather than the one this thread started with.
-        return formattable.ToString(null, formatProvider);
+                    if (TryFormatCustomToken(formattable, formatString, formatProvider, out var customResult))
+                    {
+                        return customResult;
+                    }
+
+                    return formattable.ToString(formatString, formatProvider);
+                });
+            }
+
+            // Use basic formatter if no special formatting tokens are present.
+            return formattable.ToString(format, formatProvider);
+        }
+        catch
+        {
+            return FormatErrorMessage;
+        }
     }
 
     /// <summary>

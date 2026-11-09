@@ -25,6 +25,9 @@ public partial class App : Application
 
     public App()
     {
+        // Handle crashes from the start, so a failure while loading settings shows the crash message and writes a log instead of the clock quietly never appearing.
+        CrashHandler.Register(this);
+
         // Switch to the language picked in settings before anything reads the UI language, including the text language below. This can't go in a static constructor because loading settings reads App's static fields.
         Loc.UseLanguage(Settings.Default.Language);
 
@@ -51,8 +54,6 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        CrashHandler.Register(this);
-
         // One clock per exe: starting it again shows the running clock and its settings instead of adding a second one that shares its settings and tray icon. Settings is the way back when click-through is on and the tray icon is out of reach, and its "New clock" makes a separate exe that runs side by side.
         _showClockSignal = new EventWaitHandle(false, EventResetMode.AutoReset, "DesktopClock-" + GetSha256Hash(MainFileInfo.FullName), out var isFirst);
         if (!isFirst)
