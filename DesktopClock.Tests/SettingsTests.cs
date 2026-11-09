@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Windows.Media;
 using System.Windows.Threading;
 using DesktopClock.Properties;
@@ -125,6 +127,32 @@ public class SettingsPersistenceTests
         Directory.Delete(folder, true);
 
         Assert.False(settings.Save());
+    }
+
+    [Fact]
+    public void Load_InAFolderThatCantBeListed_ShouldStillWork()
+    {
+        // Some managed shares let users open files but not list the folder: watching it used to throw while the settings loaded, so the clock never appeared.
+        var folder = Path.Combine(Path.GetTempPath(), "DesktopClock.Tests", Guid.NewGuid().ToString("N"));
+        using var _ = new TempSettingsFileScope(folder);
+        var denyList = new FileSystemAccessRule(WindowsIdentity.GetCurrent().User, FileSystemRights.ListDirectory, AccessControlType.Deny);
+        var security = Directory.GetAccessControl(folder);
+        security.AddAccessRule(denyList);
+        Directory.SetAccessControl(folder, security);
+
+        try
+        {
+            var settings = CreateSettingsInstance();
+            settings.Format = "saved without listing";
+
+            Assert.True(settings.Save());
+            Assert.Contains("saved without listing", File.ReadAllText(Settings.FilePath));
+        }
+        finally
+        {
+            security.RemoveAccessRule(denyList);
+            Directory.SetAccessControl(folder, security);
+        }
     }
 
     [Fact]

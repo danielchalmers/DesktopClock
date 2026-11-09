@@ -40,11 +40,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     private Settings()
     {
         // Watch for changes in the settings file.
-        _watcher = new(Path.GetDirectoryName(FilePath), Path.GetFileName(FilePath))
-        {
-            EnableRaisingEvents = true,
-        };
+        _watcher = new(Path.GetDirectoryName(FilePath), Path.GetFileName(FilePath));
         _watcher.Changed += FileChanged;
+        TryWatchFile();
 
         // Save shortly after a change instead of only on exit, so a crash, a forced close, or a shutdown that doesn't let the app exit normally only loses the last moment of changes. The short wait groups rapid changes, like dragging a slider, into one save.
         _saveTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
@@ -544,7 +542,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
-    /// Starts watching the settings file for edits made outside the app, unless its folder can't be watched right now, such as on a USB stick that was unplugged. The clock then runs without picking up those edits, and the next save tries again.
+    /// Starts watching the settings file for edits made outside the app, unless its folder can't be watched right now, such as on a USB stick that was unplugged or in a folder the user isn't allowed to list. The clock then runs without picking up those edits, and the next save tries again.
     /// </summary>
     private void TryWatchFile()
     {
