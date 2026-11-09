@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 namespace DesktopClock;
 
@@ -7,30 +6,19 @@ public static class TimeStringFormatter
 {
     public static string Format(
         DateTimeOffset now,
-        DateTime nowDateTime,
         TimeZoneInfo timeZone,
         DateTime countdownTo,
         string format,
         string countdownFormat,
         IFormatProvider formatProvider)
     {
-        var timeInSelectedZone = TimeZoneInfo.ConvertTime(now, timeZone);
-
-        string result;
         if (countdownTo == default)
-        {
-            result = Tokenizer.FormatWithTokenizerOrFallBack(timeInSelectedZone, format, formatProvider);
-        }
-        else if (string.IsNullOrWhiteSpace(countdownFormat))
-        {
-            result = RelativeTimeFormatter.Format(countdownTo, nowDateTime);
-        }
-        else
-        {
-            var countdown = DateTimeUtil.TimeUntil(countdownTo, now, TimeZoneInfo.Local);
-            result = Tokenizer.FormatWithTokenizerOrFallBack(countdown, countdownFormat, formatProvider);
-        }
+            return Tokenizer.FormatWithTokenizerOrFallBack(TimeZoneInfo.ConvertTime(now, timeZone), format, formatProvider);
 
-        return result;
+        if (string.IsNullOrWhiteSpace(countdownFormat))
+            return RelativeTimeFormatter.Format(countdownTo, now.DateTime);
+
+        var countdown = DateTimeUtil.TimeUntil(countdownTo, now, TimeZoneInfo.Local);
+        return Tokenizer.FormatWithTokenizerOrFallBack(countdown, countdownFormat, formatProvider);
     }
 }

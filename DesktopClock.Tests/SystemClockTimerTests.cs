@@ -19,7 +19,7 @@ public class SystemClockTimerTests
     {
         var second = TickAt(now);
 
-        var result = TimeStringFormatter.Format(second, second.DateTime, TimeZoneInfo.Utc, Target.DateTime, null, "{mm}:{ss}", CultureInfo.InvariantCulture);
+        var result = TimeStringFormatter.Format(second, TimeZoneInfo.Utc, Target.DateTime, null, "{mm}:{ss}", CultureInfo.InvariantCulture);
 
         Assert.Equal(expected, result);
     }
@@ -32,7 +32,7 @@ public class SystemClockTimerTests
     {
         var second = TickAt(now);
 
-        var result = TimeStringFormatter.Format(second, second.DateTime, TimeZoneInfo.Utc, Target.DateTime, null, null, CultureInfo.InvariantCulture);
+        var result = TimeStringFormatter.Format(second, TimeZoneInfo.Utc, Target.DateTime, null, null, CultureInfo.InvariantCulture);
 
         Assert.Equal(expected, result);
     }
@@ -43,7 +43,7 @@ public class SystemClockTimerTests
         // Issue #106: the "t" format showed values like 00:04:58.9870000.
         var second = TickAt("12:00:01.013");
 
-        var result = TimeStringFormatter.Format(second, second.DateTime, TimeZoneInfo.Utc, Target.DateTime, null, "t", CultureInfo.InvariantCulture);
+        var result = TimeStringFormatter.Format(second, TimeZoneInfo.Utc, Target.DateTime, null, "t", CultureInfo.InvariantCulture);
 
         Assert.Equal("00:04:59", result);
     }

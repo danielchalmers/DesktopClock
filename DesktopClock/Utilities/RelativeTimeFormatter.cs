@@ -58,7 +58,6 @@ public static class RelativeTimeFormatter
 
     private static string Days(int days, bool isFuture, CultureInfo culture) => days switch
     {
-        0 => Loc.Get("RelativeNow", culture),
         1 => Loc.Get(isFuture ? "RelativeTomorrow" : "RelativeYesterday", culture),
         _ => Phrase(days, "RelativeDays", isFuture, culture),
     };
@@ -88,7 +87,6 @@ public static class RelativeTimeFormatter
         {
             "ru" or "uk" => (mod10 == 1 && mod100 != 11) ? 0 : isFew ? 1 : 2,
             "pl" => count == 1 ? 0 : isFew ? 1 : 2,
-            "fr" or "pt" => count <= 1 ? 0 : 1,
             _ => count == 1 ? 0 : 1,
         };
     }

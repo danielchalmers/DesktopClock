@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using DesktopClock.Properties;
+using static DesktopClock.NativeMethods;
 
 namespace DesktopClock;
 
@@ -149,54 +150,8 @@ public static class WindowSnapper
     }
 
     [DllImport("user32.dll")]
-    private static extern IntPtr MonitorFromRect(ref NativeRect rect, uint flags);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern bool GetMonitorInfo(IntPtr monitor, ref MonitorInfo info);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern IntPtr FindWindowEx(IntPtr parent, IntPtr childAfter, string className, string windowName);
-
-    [DllImport("user32.dll")]
-    private static extern bool IsWindowVisible(IntPtr hwnd);
-
-    [DllImport("user32.dll")]
     private static extern bool IsIconic(IntPtr hwnd);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern int GetClassName(IntPtr hwnd, StringBuilder className, int maxCount);
-
-    [DllImport("user32.dll")]
-    private static extern bool GetWindowRect(IntPtr hwnd, out NativeRect rect);
 
     [DllImport("dwmapi.dll")]
     private static extern int DwmGetWindowAttribute(IntPtr hwnd, int attribute, out int value, int size);
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct MonitorInfo
-    {
-        public int cbSize;
-        public NativeRect rcMonitor;
-        public NativeRect rcWork;
-        public uint dwFlags;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct NativeRect
-    {
-        public int Left;
-        public int Top;
-        public int Right;
-        public int Bottom;
-
-        public readonly Rect ToRect() => new(Left, Top, Right - Left, Bottom - Top);
-
-        public void Offset(Vector offset)
-        {
-            Left += (int)offset.X;
-            Top += (int)offset.Y;
-            Right += (int)offset.X;
-            Bottom += (int)offset.Y;
-        }
-    }
 }

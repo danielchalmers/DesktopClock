@@ -37,7 +37,6 @@ public partial class MainWindow : Window
     private FullscreenHideManager _fullscreenHideManager;
     private DesktopPinner _desktopPinner;
     private readonly WheelNotches _wheelNotches = new();
-    private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     /// <summary>
     /// The current date and time in the selected time zone, or the formatted countdown text.
@@ -52,8 +51,7 @@ public partial class MainWindow : Window
 
         _timeZone = Settings.Default.TimeZoneInfo;
 
-        _settingsPropertyChanged = (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
-        Settings.Default.PropertyChanged += _settingsPropertyChanged;
+        Settings.Default.PropertyChanged += Settings_PropertyChanged;
 
         ApplyWindowVisibilitySettings();
 
@@ -137,9 +135,6 @@ public partial class MainWindow : Window
     /// </summary>
     private void ThemeManager_ThemeChanged(object sender, EventArgs e)
     {
-        if (_trayIcon == null)
-            return;
-
         // A new instance (x:Shared="False") resolves its DynamicResource colors against the current palette when it next opens.
         var menu = Resources["MainContextMenu"] as ContextMenu;
         menu.DataContext = this;
@@ -231,7 +226,7 @@ public partial class MainWindow : Window
 
     protected override void OnClosed(EventArgs e)
     {
-        Settings.Default.PropertyChanged -= _settingsPropertyChanged;
+        Settings.Default.PropertyChanged -= Settings_PropertyChanged;
         ThemeManager.ThemeChanged -= ThemeManager_ThemeChanged;
         SystemEvents.TimeChanged -= SystemEvents_TimeChanged;
         SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
@@ -239,7 +234,6 @@ public partial class MainWindow : Window
         _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
         _systemClockTimer.Dispose();
 
-        _trayIcon?.Dispose();
         _soundPlayer?.Dispose();
         _desktopPinner?.Dispose();
 
@@ -254,23 +248,20 @@ public partial class MainWindow : Window
 
     private void ConfigureTrayIcon()
     {
-        if (_trayIcon == null)
+        // Construct the tray icon from the XAML resources.
+        _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
+        _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
+        _trayIcon.ContextMenu.DataContext = this;
+        try
         {
-            // Construct the tray icon from the XAML resources.
-            _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
-            _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
-            _trayIcon.ContextMenu.DataContext = this;
-            try
-            {
-                _trayIcon.ForceCreate(enablesEfficiencyMode: false);
-            }
-            catch (InvalidOperationException)
-            {
-                // The taskbar isn't there yet, such as early in sign-in, and the icon is added once it starts.
-            }
-
-            _trayIcon.TrayLeftMouseDoubleClick += (_, _) => ShowClock();
+            _trayIcon.ForceCreate(enablesEfficiencyMode: false);
         }
+        catch (InvalidOperationException)
+        {
+            // The taskbar isn't there yet, such as early in sign-in, and the icon is added once it starts.
+        }
+
+        _trayIcon.TrayLeftMouseDoubleClick += (_, _) => ShowClock();
     }
 
     /// <summary>
@@ -460,7 +451,6 @@ public partial class MainWindow : Window
     {
         CurrentTimeOrCountdownString = TimeStringFormatter.Format(
             second,
-            second.DateTime,
             _timeZone,
             Settings.Default.CountdownTo,
             Settings.Default.Format,
@@ -563,13 +553,10 @@ public partial class MainWindow : Window
         Settings.Default.LastDisplay = CurrentTimeOrCountdownString;
         Settings.Default.Placement = this.GetPlacement();
 
-        // Stop the file watcher before saving.
-        Settings.Default.Dispose();
-
         if (Settings.CanBeSaved)
             Settings.Default.Save();
 
-        _trayIcon?.Dispose();
+        _trayIcon.Dispose();
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

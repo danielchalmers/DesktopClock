@@ -17,16 +17,16 @@ public class BackgroundBrushConverter : MarkupExtension, IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        var enabled = values.Length > 0 && values[0] is bool b && b;
+        var enabled = values[0] is bool b && b;
 
         // Background off means outlined text on a transparent window.
         if (!enabled)
             return Brushes.Transparent;
 
-        var path = values.Length > 1 ? values[1] as string : null;
-        var outerColor = values.Length > 2 && values[2] is Color color ? color : Colors.Transparent;
-        var opacity = values.Length > 3 && values[3] is double o ? o : 1d;
-        var stretch = values.Length > 4 && values[4] is Stretch s ? s : Stretch.Fill;
+        var path = values[1] as string;
+        var outerColor = values[2] is Color color ? color : Colors.Transparent;
+        var opacity = values[3] is double o ? o : 1d;
+        var stretch = values[4] is Stretch s ? s : Stretch.Fill;
 
         // Use the image when it loads; otherwise fall back to the solid color so the clock never ends up with an invisible background.
         var image = TryLoadImage(path);

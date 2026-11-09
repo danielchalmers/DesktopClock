@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using WpfWindowPlacement;
+using static DesktopClock.NativeMethods;
 
 namespace DesktopClock;
 
@@ -50,20 +51,7 @@ public static class WindowUtil
     private static readonly IntPtr HWND_TOPMOST = new(-1);
 
     [DllImport("user32.dll")]
-    private static extern int GetWindowLong(IntPtr hwnd, int index);
-
-    [DllImport("user32.dll")]
     private static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
-
-    [DllImport("user32.dll")]
-    private static extern bool SetWindowPos(
-        IntPtr hwnd,
-        IntPtr insertAfter,
-        int x,
-        int y,
-        int cx,
-        int cy,
-        uint flags);
 
     private const int ASFW_ANY = -1;
 
@@ -212,43 +200,7 @@ public static class WindowUtil
     private const uint MONITOR_DEFAULTTONULL = 0;
     private const uint MONITOR_DEFAULTTONEAREST = 2;
 
-    [DllImport("user32.dll")]
-    private static extern IntPtr MonitorFromRect(ref NativeRect rect, uint flags);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern bool GetMonitorInfo(IntPtr monitor, ref MonitorInfo info);
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct MonitorInfo
-    {
-        public int cbSize;
-        public NativeRect rcMonitor;
-        public NativeRect rcWork;
-        public uint dwFlags;
-    }
-
     private const uint GW_HWNDPREV = 3;
-
-    [DllImport("user32.dll")]
-    private static extern IntPtr GetWindow(IntPtr hwnd, uint command);
-
-    [DllImport("user32.dll")]
-    private static extern bool IsWindowVisible(IntPtr hwnd);
-
-    [DllImport("user32.dll")]
-    private static extern bool GetWindowRect(IntPtr hwnd, out NativeRect rect);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern int GetClassName(IntPtr hwnd, StringBuilder className, int maxCount);
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct NativeRect
-    {
-        public int Left;
-        public int Top;
-        public int Right;
-        public int Bottom;
-    }
 
     /// <summary>
     /// Returns the extended style that matches the requested taskbar and Alt+Tab behavior.
