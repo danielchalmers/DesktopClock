@@ -149,11 +149,10 @@ public partial class SettingsWindow : Window
 
     private void OpenSettingsFile(object sender, RoutedEventArgs e)
     {
-        // Save first if we can so it's up-to-date.
-        if (Settings.CanBeSaved)
-            Settings.Default.Save();
+        // Save first so it's up-to-date. The button is only enabled when settings can be saved.
+        Settings.Default.Save();
 
-        // If it doesn't even exist then it's probably somewhere that requires special access and we shouldn't even be at this point.
+        // A save can still fail later, like on an unplugged drive, which leaves no file to open.
         if (!Settings.Exists)
         {
             MessageBox.Show(this,
@@ -179,11 +178,6 @@ public partial class SettingsWindow : Window
     private void OpenSettingsFolder(object sender, RoutedEventArgs e)
     {
         var folderPath = Path.GetDirectoryName(Settings.FilePath);
-
-        if (string.IsNullOrWhiteSpace(folderPath))
-        {
-            return;
-        }
 
         // Open the folder through the shell rather than passing it to explorer.exe, which splits its arguments on commas. The trailing separator makes it open as a folder, because the shell otherwise runs a program or shortcut next to it with the same name, like DesktopClock.exe next to an unzipped DesktopClock folder.
         OpenUrl(folderPath.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar);

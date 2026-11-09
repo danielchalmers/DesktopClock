@@ -75,7 +75,7 @@ public static class ThemeManager
             return IntPtr.Zero;
 
         // Read the color at message time so theme changes while the window is open apply.
-        if (Application.Current?.TryFindResource("WindowBackgroundBrush") is not SolidColorBrush brush ||
+        if (Application.Current.TryFindResource("WindowBackgroundBrush") is not SolidColorBrush brush ||
             !GetClientRect(hwnd, out var clientRect))
         {
             return IntPtr.Zero;
@@ -101,14 +101,12 @@ public static class ThemeManager
             return;
         }
 
-        Application.Current?.Dispatcher.BeginInvoke(new Action(Apply));
+        Application.Current.Dispatcher.BeginInvoke(new Action(Apply));
     }
 
     private static void Apply()
     {
         var app = Application.Current;
-        if (app == null)
-            return;
 
         var highContrast = SystemParameters.HighContrast;
         IsDarkTheme = !highContrast && !SystemThemeService.IsLightTheme();

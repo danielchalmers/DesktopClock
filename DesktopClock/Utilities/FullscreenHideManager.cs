@@ -18,7 +18,7 @@ public sealed class FullscreenHideManager
 
     public FullscreenHideManager(Window window)
     {
-        _window = window ?? throw new ArgumentNullException(nameof(window));
+        _window = window;
     }
 
     public void Update()
