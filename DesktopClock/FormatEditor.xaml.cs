@@ -220,7 +220,7 @@ public partial class FormatEditor : UserControl
 
         if (Mode == FormatEditorMode.Clock)
         {
-            return TimeStringFormatter.Format(now, now.DateTime, timeZone, default, format, string.Empty, culture);
+            return TimeStringFormatter.Format(now, timeZone, default, format, string.Empty, culture);
         }
 
         // Preview against the real countdown target, or a sample one when none is set.
@@ -228,6 +228,6 @@ public partial class FormatEditor : UserControl
             Settings.Default.CountdownTo :
             now.DateTime.AddDays(3).AddHours(4).AddMinutes(30).AddSeconds(10);
 
-        return TimeStringFormatter.Format(now, now.DateTime, timeZone, countdownTo, string.Empty, format, culture);
+        return TimeStringFormatter.Format(now, timeZone, countdownTo, string.Empty, format, culture);
     }
 }

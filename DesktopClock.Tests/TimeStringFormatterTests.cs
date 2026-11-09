@@ -14,7 +14,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            now.DateTime,
             timeZone,
             default,
             "HH:mm",
@@ -32,7 +31,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            now.DateTime,
             TimeZoneInfo.Utc,
             default,
             "d",
@@ -51,7 +49,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            nowDateTime,
             TimeZoneInfo.Utc,
             countdownTo,
             "HH:mm",
@@ -71,7 +68,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            nowDateTime,
             TimeZoneInfo.Utc,
             countdownTo,
             "HH:mm",
@@ -90,7 +86,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            nowDateTime,
             TimeZoneInfo.Utc,
             countdownTo,
             "HH:mm",
@@ -115,7 +110,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            now.DateTime,
             TimeZoneInfo.Utc,
             countdownTo,
             "HH:mm",
@@ -133,7 +127,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            now.DateTime,
             timeZone,
             default,
             "HH:mm",
@@ -152,7 +145,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            now.DateTime,
             timeZone,
             default,
             "{weekYear}-W{week}",
@@ -169,7 +161,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            now.DateTime,
             TimeZoneInfo.Utc,
             default,
             "{Q}",
@@ -187,7 +178,6 @@ public class TimeStringFormatterTests
 
         var result = TimeStringFormatter.Format(
             now,
-            nowDateTime,
             TimeZoneInfo.Utc,
             nowDateTime.AddMinutes(30),
             "HH:mm",

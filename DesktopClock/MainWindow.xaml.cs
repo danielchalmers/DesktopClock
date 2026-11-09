@@ -451,7 +451,6 @@ public partial class MainWindow : Window
     {
         CurrentTimeOrCountdownString = TimeStringFormatter.Format(
             second,
-            second.DateTime,
             _timeZone,
             Settings.Default.CountdownTo,
             Settings.Default.Format,
