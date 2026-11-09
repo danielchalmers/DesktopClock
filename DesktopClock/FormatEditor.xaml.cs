@@ -93,6 +93,9 @@ public partial class FormatEditor : UserControl
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
             });
 
+            // Building blocks go in at the caret, which starts at the beginning, so a block clicked before clicking in the box would go in front of the format instead of after it.
+            FormatTextBox.CaretIndex = FormatTextBox.Text.Length;
+
             BuildPresetButtons();
             BuildTokenButtons();
         }
