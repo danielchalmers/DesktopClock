@@ -563,9 +563,6 @@ public partial class MainWindow : Window
         Settings.Default.LastDisplay = CurrentTimeOrCountdownString;
         Settings.Default.Placement = this.GetPlacement();
 
-        // Stop the file watcher before saving.
-        Settings.Default.Dispose();
-
         if (Settings.CanBeSaved)
             Settings.Default.Save();
 

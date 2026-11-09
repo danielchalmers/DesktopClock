@@ -11,7 +11,7 @@ using WpfWindowPlacement;
 
 namespace DesktopClock.Properties;
 
-public sealed class Settings : INotifyPropertyChanged, IDisposable
+public sealed class Settings : INotifyPropertyChanged
 {
     private readonly FileSystemWatcher _watcher;
     private readonly DispatcherTimer _saveTimer;
@@ -677,11 +677,5 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
 
         TextColor = textColor;
         OuterColor = outerColor;
-    }
-
-    public void Dispose()
-    {
-        // We don't dispose of the watcher anymore because it would actually hang indefinitely if you had multiple instances of the same clock open.
-        //_watcher?.Dispose();
     }
 }
