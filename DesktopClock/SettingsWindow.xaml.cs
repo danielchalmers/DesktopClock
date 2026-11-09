@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using Microsoft.Win32;
 
@@ -357,9 +357,16 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// </summary>
     public string AppVersion { get; }
 
+    public ICommand ResetWavFilePathCommand { get; }
+    public ICommand ResetWavFileIntervalCommand { get; }
+    public ICommand ResetBackgroundImagePathCommand { get; }
+
     public SettingsWindowViewModel(Settings settings)
     {
         Settings = settings;
+        ResetWavFilePathCommand = new RelayCommand(ResetWavFilePath);
+        ResetWavFileIntervalCommand = new RelayCommand(ResetWavFileInterval);
+        ResetBackgroundImagePathCommand = new RelayCommand(ResetBackgroundImagePath);
         AppVersion = FileVersionInfo.GetVersionInfo(App.MainFileInfo.FullName).FileVersion;
         FontStyles =
         [
@@ -457,7 +464,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// Clears the chime sound file path.
     /// </summary>
-    [RelayCommand]
     public void ResetWavFilePath()
     {
         Settings.WavFilePath = string.Empty;
@@ -466,7 +472,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// Resets the chime interval to the default value.
     /// </summary>
-    [RelayCommand]
     public void ResetWavFileInterval()
     {
         Settings.WavFileInterval = default;
@@ -475,7 +480,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// Clears the background image path.
     /// </summary>
-    [RelayCommand]
     public void ResetBackgroundImagePath()
     {
         Settings.BackgroundImagePath = string.Empty;
