@@ -27,6 +27,11 @@ public static class FileUtil
     }
 
     /// <summary>
+    /// Removes the quotes that Copy as path in Explorer puts around a path, so a pasted path works like a typed one.
+    /// </summary>
+    public static string UnquotePath(string path) => path?.Trim().Trim('"');
+
+    /// <summary>
     /// Whether the file is in the temp folder, which is where Windows puts an app opened straight from inside a zip, in a new folder each time.
     /// </summary>
     public static bool IsInTempFolder(this FileInfo fileInfo)

@@ -392,7 +392,7 @@ public partial class MainWindow : Window
         var previous = _previousSecond;
         _previousSecond = second;
 
-        var path = Settings.Default.WavFilePath;
+        var path = FileUtil.UnquotePath(Settings.Default.WavFilePath);
         if (string.IsNullOrWhiteSpace(path) || (Settings.Default.WavFileInterval == default && !Settings.Default.PlaySoundOnCountdown))
             return;
 
