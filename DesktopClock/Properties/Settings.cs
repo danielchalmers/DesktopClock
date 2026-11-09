@@ -506,8 +506,15 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Saves to the default path in JSON format.
     /// </summary>
-    public bool Save()
+    public bool Save() => Save(out _);
+
+    /// <summary>
+    /// Saves to the default path in JSON format, and tells whether it failed because the disk is full.
+    /// </summary>
+    private bool Save(out bool diskFull)
     {
+        diskFull = false;
+
         // Stop watching while saving, so this save isn't read back in as an edit.
         _watcher.EnableRaisingEvents = false;
 
@@ -522,6 +529,12 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
                 {
                     WriteAllTextAtomically(FilePath, json);
                     return true;
+                }
+                catch (IOException ex) when ((ex.HResult & 0xFFFF) is ERROR_HANDLE_DISK_FULL or ERROR_DISK_FULL)
+                {
+                    // Waiting won't make room, so don't hold up the clock retrying.
+                    diskFull = true;
+                    return false;
                 }
                 catch
                 {
@@ -593,6 +606,8 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         }
     }
 
+    private const int ERROR_HANDLE_DISK_FULL = 39;
+    private const int ERROR_DISK_FULL = 112;
     private const int MOVEFILE_REPLACE_EXISTING = 0x1;
     private const int MOVEFILE_WRITE_THROUGH = 0x8;
 
@@ -651,8 +666,9 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     {
         var settings = LoadFromFile(out var isLocked);
 
-        // Saving the defaults over a file that's still locked would wipe it once it's let go, so run without saving this time, like in a read-only folder.
-        CanBeSaved = !isLocked && settings.Save();
+        // Saving the defaults over a file that's still locked would wipe it once it's let go, so run without saving this time, like in a read-only folder. A full disk is different: keep saving, so changes are saved once there's room again.
+        var diskFull = false;
+        CanBeSaved = !isLocked && (settings.Save(out diskFull) || diskFull);
 
         return settings;
     }
