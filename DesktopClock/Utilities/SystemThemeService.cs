@@ -115,18 +115,6 @@ public static class SystemThemeService
                 value = intValue;
                 return true;
             }
-
-            if (key?.GetValue(valueName) is byte byteValue)
-            {
-                value = byteValue;
-                return true;
-            }
-
-            if (key?.GetValue(valueName) is uint uintValue)
-            {
-                value = unchecked((int)uintValue);
-                return true;
-            }
         }
         catch
         {
@@ -142,19 +130,11 @@ public static class SystemThemeService
     {
         color = default;
 
-        try
-        {
-            var result = DwmGetColorizationColor(out var colorizationColor, out _);
-            if (result != 0)
-                return false;
-
-            color = ColorFromArgbUint(colorizationColor);
-            return true;
-        }
-        catch
-        {
+        if (DwmGetColorizationColor(out var colorizationColor, out _) != 0)
             return false;
-        }
+
+        color = ColorFromArgbUint(colorizationColor);
+        return true;
     }
 
     /// <summary>
