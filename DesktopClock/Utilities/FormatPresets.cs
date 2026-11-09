@@ -17,7 +17,7 @@ public static class FormatPresets
     public static string DefaultClockFormat(CultureInfo culture)
     {
         var format = culture.DateTimeFormat;
-        return WithTime(culture, WeekdayAndDate(culture, "{ddd}", Token(ShortMonthDayPattern(format))), Token(format.LongTimePattern));
+        return WithTime(culture, WeekdayAndDate(culture, "{ddd}", Token(ShortMonthDayPattern(format))), Token(TimeWithSeconds(format)));
     }
 
     /// <summary>
@@ -34,7 +34,7 @@ public static class FormatPresets
         if (Uses12HourClock(format))
             presets.Add((Loc.Get("ClockPresetTime24"), "{HH:mm}"));
 
-        presets.Add((Loc.Get("ClockPresetTimeSeconds"), Token(format.LongTimePattern)));
+        presets.Add((Loc.Get("ClockPresetTimeSeconds"), Token(TimeWithSeconds(format))));
         presets.Add((Loc.Get("ClockPresetDayTime"), WithTime(culture, "{ddd}", time)));
         var dateTime = WithTime(culture, WeekdayAndDate(culture, "{ddd}", Token(ShortMonthDayPattern(format))), time);
         var fullDateTime = WithTime(culture, WeekdayAndDate(culture, "{dddd}", monthDay), time);
@@ -120,9 +120,24 @@ public static class FormatPresets
     }
 
     /// <summary>
-    /// Whether the regional time format uses a 12-hour clock. Quoted text is skipped so a literal like the "h" in Canadian French "HH 'h' mm" doesn't count.
+    /// Whether the regional time format uses a 12-hour clock.
     /// </summary>
-    public static bool Uses12HourClock(DateTimeFormatInfo format) => Regex.Replace(format.ShortTimePattern, "'[^']*'", "").Contains("h");
+    public static bool Uses12HourClock(DateTimeFormatInfo format) => Uses12Hours(format.ShortTimePattern);
+
+    /// <summary>
+    /// The regional time with seconds, such as "h:mm:ss tt" in the US. Where someone switched only the short time between 12 and 24 hours, which is what the taskbar shows, it follows the short time instead.
+    /// </summary>
+    private static string TimeWithSeconds(DateTimeFormatInfo format)
+    {
+        if (Uses12Hours(format.ShortTimePattern) == Uses12Hours(format.LongTimePattern))
+            return format.LongTimePattern;
+
+        var minutes = format.ShortTimePattern.IndexOf("mm", StringComparison.Ordinal);
+        return minutes < 0 ? format.ShortTimePattern : format.ShortTimePattern.Insert(minutes + 2, ":ss");
+    }
+
+    // Quoted text is skipped so a literal like the "h" in Canadian French "HH 'h' mm" doesn't count.
+    private static bool Uses12Hours(string pattern) => Regex.Replace(pattern, "'[^']*'", "").Contains("h");
 
     /// <summary>
     /// Puts the weekday and date in the order and with the punctuation the region uses: "Tue, Sep 22", "mar. 22 sept." in French, "22 Eyl Sal" in Turkish, and date first in Chinese, Japanese, and Korean, with a short weekday in parentheses where they use them ("9月22日(火)", "9월 22일 (화)").

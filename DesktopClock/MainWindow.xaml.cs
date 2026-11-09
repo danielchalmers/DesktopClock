@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Media;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -35,6 +36,7 @@ public partial class MainWindow : Window
     private bool _toldHowToShow;
     private FullscreenHideManager _fullscreenHideManager;
     private DesktopPinner _desktopPinner;
+    private readonly WheelNotches _wheelNotches = new();
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     /// <summary>
@@ -390,7 +392,7 @@ public partial class MainWindow : Window
         var previous = _previousSecond;
         _previousSecond = second;
 
-        var path = Settings.Default.WavFilePath;
+        var path = FileUtil.UnquotePath(Settings.Default.WavFilePath);
         if (string.IsNullOrWhiteSpace(path) || (Settings.Default.WavFileInterval == default && !Settings.Default.PlaySoundOnCountdown))
             return;
 
@@ -494,9 +496,10 @@ public partial class MainWindow : Window
         // Resize the window when scrolling if the Ctrl key is pressed.
         if (Keyboard.Modifiers == ModifierKeys.Control)
         {
-            // Amount of scroll that occurred and whether it was positive or negative.
-            var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
-            Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, steps);
+            // A fraction of a notch on its own rounds back to the same height, so touchpads only resize once they add up to a notch.
+            var notches = _wheelNotches.Add(e.Delta);
+            if (notches != 0)
+                Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, notches);
         }
     }
 
@@ -551,6 +554,10 @@ public partial class MainWindow : Window
 
     private void Window_Closing(object sender, CancelEventArgs e)
     {
+        // Close Settings first, which commits a value still being typed, like a countdown target, so it's in the save below. Exiting closes it anyway, but only after this save.
+        foreach (var settingsWindow in Application.Current.Windows.OfType<SettingsWindow>().ToList())
+            settingsWindow.Close();
+
         // Save the last text and the placement to preserve dimensions and position of the clock.
         PixelShifter?.RestoreBasePosition(this);
         Settings.Default.LastDisplay = CurrentTimeOrCountdownString;

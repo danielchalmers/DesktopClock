@@ -53,6 +53,21 @@ public class FormatPresetsTests
         Assert.Equal(expected, Tokenizer.FormatWithTokenizerOrFallBack(Sample, format, Region(culture)));
     }
 
+    // Windows lets people switch only the short time, which the taskbar shows, between 12 and 24 hours.
+    [Theory]
+    [InlineData("en-US", "HH:mm", "{HH:mm:ss}")]
+    [InlineData("en-US", "H:mm", "{H:mm:ss}")]
+    [InlineData("en-GB", "h:mm tt", "{h:mm:ss tt}")]
+    [InlineData("en-US", "hh:mm tt", "{h:mm:ss tt}")] // Still 12-hour, so the regional time with seconds stays.
+    public void TimeWithSeconds_FollowsAShortTimeSwitchedBetween12And24Hours(string culture, string shortTime, string expected)
+    {
+        var region = (CultureInfo)Region(culture).Clone();
+        region.DateTimeFormat.ShortTimePattern = shortTime;
+
+        Assert.Equal(expected, FormatPresets.ForClock(region).Single(p => p.Name == "Time with seconds").Format);
+        Assert.EndsWith(expected, FormatPresets.DefaultClockFormat(region));
+    }
+
     [Theory]
     [InlineData("en-US", "Tue, Sep 22, 1:01 PM")]
     [InlineData("fr-FR", "mar. 22 sept. 13:01")]

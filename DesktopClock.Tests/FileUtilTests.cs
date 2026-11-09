@@ -85,4 +85,13 @@ public class FileUtilTests
 
         Assert.False(exe.IsInTempFolder());
     }
+
+    [Theory]
+    [InlineData("\"C:\\My Sounds\\chime.wav\"", "C:\\My Sounds\\chime.wav")]
+    [InlineData("C:\\My Sounds\\chime.wav ", "C:\\My Sounds\\chime.wav")]
+    [InlineData("", "")]
+    public void UnquotePath_ShouldRemoveTheQuotesFromCopyAsPath(string path, string expected)
+    {
+        Assert.Equal(expected, FileUtil.UnquotePath(path));
+    }
 }

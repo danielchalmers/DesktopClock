@@ -51,7 +51,7 @@ public class BackgroundBrushConverter : MarkupExtension, IMultiValueConverter
             var bitmap = new BitmapImage();
             bitmap.BeginInit();
             bitmap.CacheOption = BitmapCacheOption.OnLoad; // Decode now so a missing or invalid file fails here, and don't hold the file locked.
-            bitmap.UriSource = new Uri(path, UriKind.Absolute);
+            bitmap.UriSource = new Uri(FileUtil.UnquotePath(path), UriKind.Absolute);
             bitmap.EndInit();
             bitmap.Freeze();
             return bitmap;
