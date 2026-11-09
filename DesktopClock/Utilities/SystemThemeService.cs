@@ -28,7 +28,7 @@ public static class SystemThemeService
     /// Tries to build default text/outer colors that match the system's light or dark theme.
     /// </summary>
     /// <remarks>
-    /// Returns <c>false</c> when the system theme cannot be read (older Windows or missing keys).
+    /// Returns <c>false</c> when the theme isn't in the registry.
     /// </remarks>
     public static bool TryGetThemeDefaults(out Color textColor, out Color outerColor)
     {

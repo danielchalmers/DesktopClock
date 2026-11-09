@@ -525,7 +525,7 @@ public sealed class Settings : INotifyPropertyChanged
                 }
                 catch
                 {
-                    // Wait before next attempt to read.
+                    // Wait before trying again.
                     System.Threading.Thread.Sleep(250);
                 }
             }
