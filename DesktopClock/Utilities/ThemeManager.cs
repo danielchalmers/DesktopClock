@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Microsoft.Win32;
+using static DesktopClock.NativeMethods;
 
 namespace DesktopClock.Utilities;
 
@@ -15,7 +16,6 @@ public static class ThemeManager
 {
     private const string PaletteFolder = "Themes/";
     private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
-    private const int DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1 = 19;
 
     private static readonly Uri LightPaletteUri = new(PaletteFolder + "LightPalette.xaml", UriKind.Relative);
     private static readonly Uri DarkPaletteUri = new(PaletteFolder + "DarkPalette.xaml", UriKind.Relative);
@@ -50,17 +50,7 @@ public static class ThemeManager
             return;
 
         var useDark = IsDarkTheme ? 1 : 0;
-
-        try
-        {
-            // Try the documented attribute first, then the pre-20H1 value for older Windows 10 builds.
-            if (DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDark, sizeof(int)) != 0)
-                DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1, ref useDark, sizeof(int));
-        }
-        catch
-        {
-            // DWM isn't available; keep the default title bar.
-        }
+        DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDark, sizeof(int));
     }
 
     /// <summary>
@@ -86,7 +76,7 @@ public static class ThemeManager
             return IntPtr.Zero;
 
         // Read the color at message time so theme changes while the window is open apply.
-        if (Application.Current?.TryFindResource("WindowBackgroundBrush") is not SolidColorBrush brush ||
+        if (Application.Current.TryFindResource("WindowBackgroundBrush") is not SolidColorBrush brush ||
             !GetClientRect(hwnd, out var clientRect))
         {
             return IntPtr.Zero;
@@ -112,14 +102,12 @@ public static class ThemeManager
             return;
         }
 
-        Application.Current?.Dispatcher.BeginInvoke(new Action(Apply));
+        Application.Current.Dispatcher.BeginInvoke(new Action(Apply));
     }
 
     private static void Apply()
     {
         var app = Application.Current;
-        if (app == null)
-            return;
 
         var highContrast = SystemParameters.HighContrast;
         IsDarkTheme = !highContrast && !SystemThemeService.IsLightTheme();
@@ -175,20 +163,14 @@ public static class ThemeManager
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attribute, ref int value, int size);
 
     [DllImport("user32.dll")]
-    private static extern bool GetClientRect(IntPtr hwnd, out RECT rect);
+    private static extern bool GetClientRect(IntPtr hwnd, out NativeRect rect);
 
     [DllImport("user32.dll")]
-    private static extern int FillRect(IntPtr hdc, ref RECT rect, IntPtr brush);
+    private static extern int FillRect(IntPtr hdc, ref NativeRect rect, IntPtr brush);
 
     [DllImport("gdi32.dll")]
     private static extern IntPtr CreateSolidBrush(uint colorRef);
 
     [DllImport("gdi32.dll")]
     private static extern bool DeleteObject(IntPtr obj);
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct RECT
-    {
-        public int Left, Top, Right, Bottom;
-    }
 }

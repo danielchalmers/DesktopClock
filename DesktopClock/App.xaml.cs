@@ -103,9 +103,6 @@ public partial class App : Application
 
     private static string GetSha256Hash(string text)
     {
-        if (string.IsNullOrEmpty(text))
-            return string.Empty;
-
         using var sha = new System.Security.Cryptography.SHA256Managed();
         var textData = System.Text.Encoding.UTF8.GetBytes(text);
         var hash = sha.ComputeHash(textData);

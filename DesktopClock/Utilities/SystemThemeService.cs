@@ -28,7 +28,7 @@ public static class SystemThemeService
     /// Tries to build default text/outer colors that match the system's light or dark theme.
     /// </summary>
     /// <remarks>
-    /// Returns <c>false</c> when the system theme cannot be read (older Windows or missing keys).
+    /// Returns <c>false</c> when the theme isn't in the registry.
     /// </remarks>
     public static bool TryGetThemeDefaults(out Color textColor, out Color outerColor)
     {
@@ -115,18 +115,6 @@ public static class SystemThemeService
                 value = intValue;
                 return true;
             }
-
-            if (key?.GetValue(valueName) is byte byteValue)
-            {
-                value = byteValue;
-                return true;
-            }
-
-            if (key?.GetValue(valueName) is uint uintValue)
-            {
-                value = unchecked((int)uintValue);
-                return true;
-            }
         }
         catch
         {
@@ -142,19 +130,11 @@ public static class SystemThemeService
     {
         color = default;
 
-        try
-        {
-            var result = DwmGetColorizationColor(out var colorizationColor, out _);
-            if (result != 0)
-                return false;
-
-            color = ColorFromArgbUint(colorizationColor);
-            return true;
-        }
-        catch
-        {
+        if (DwmGetColorizationColor(out var colorizationColor, out _) != 0)
             return false;
-        }
+
+        color = ColorFromArgbUint(colorizationColor);
+        return true;
     }
 
     /// <summary>

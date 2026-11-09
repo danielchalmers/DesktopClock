@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -110,37 +109,9 @@ public partial class FormatEditor : UserControl
 
         foreach (var (name, format) in presets)
         {
-            var title = new TextBlock
-            {
-                Text = name,
-                FontWeight = FontWeights.SemiBold,
-            };
-
-            var example = new TextBlock
-            {
-                Text = FormatPreview(format),
-                FontSize = 12,
-                TextTrimming = TextTrimming.CharacterEllipsis,
-            };
-            example.SetResourceReference(ForegroundProperty, "TextSecondaryBrush");
+            var toolTip = string.IsNullOrEmpty(format) ? Loc.Get("AutomaticTooltip") : format;
+            var example = PresetButton.Add(PresetsPanel, name, FormatPreview(format), () => SetFormat(format), toolTip);
             _presetExamples.Add((example, format));
-
-            var content = new StackPanel();
-            content.Children.Add(title);
-            content.Children.Add(example);
-
-            var button = new Button
-            {
-                Content = content,
-                MaxWidth = 280,
-                HorizontalContentAlignment = HorizontalAlignment.Left,
-                Margin = new Thickness(0, 0, 8, 4),
-                ToolTip = string.IsNullOrEmpty(format) ? Loc.Get("AutomaticTooltip") : format,
-            };
-            AutomationProperties.SetName(button, name);
-            button.Click += (_, _) => SetFormat(format);
-
-            PresetsPanel.Children.Add(button);
         }
     }
 
@@ -220,7 +191,7 @@ public partial class FormatEditor : UserControl
 
         if (Mode == FormatEditorMode.Clock)
         {
-            return TimeStringFormatter.Format(now, now.DateTime, timeZone, default, format, string.Empty, culture);
+            return TimeStringFormatter.Format(now, timeZone, default, format, string.Empty, culture);
         }
 
         // Preview against the real countdown target, or a sample one when none is set.
@@ -228,6 +199,6 @@ public partial class FormatEditor : UserControl
             Settings.Default.CountdownTo :
             now.DateTime.AddDays(3).AddHours(4).AddMinutes(30).AddSeconds(10);
 
-        return TimeStringFormatter.Format(now, now.DateTime, timeZone, countdownTo, string.Empty, format, culture);
+        return TimeStringFormatter.Format(now, timeZone, countdownTo, string.Empty, format, culture);
     }
 }

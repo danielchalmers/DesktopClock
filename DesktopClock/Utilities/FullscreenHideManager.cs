@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Interop;
 using DesktopClock.Properties;
+using static DesktopClock.NativeMethods;
 
 namespace DesktopClock;
 
@@ -18,7 +19,7 @@ public sealed class FullscreenHideManager
 
     public FullscreenHideManager(Window window)
     {
-        _window = window ?? throw new ArgumentNullException(nameof(window));
+        _window = window;
     }
 
     public void Update()
@@ -149,38 +150,5 @@ public sealed class FullscreenHideManager
     private static extern bool IsZoomed(IntPtr hwnd);
 
     [DllImport("user32.dll")]
-    private static extern int GetWindowLong(IntPtr hwnd, int index);
-
-    [DllImport("user32.dll")]
-    private static extern bool IsWindowVisible(IntPtr hwnd);
-
-    [DllImport("user32.dll")]
-    private static extern bool GetWindowRect(IntPtr hwnd, out NativeRect rect);
-
-    [DllImport("user32.dll")]
     private static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint flags);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern int GetClassName(IntPtr hwnd, StringBuilder className, int maxCount);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern bool GetMonitorInfo(IntPtr hMonitor, ref MonitorInfo info);
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct MonitorInfo
-    {
-        public int cbSize;
-        public NativeRect rcMonitor;
-        public NativeRect rcWork;
-        public uint dwFlags;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct NativeRect
-    {
-        public int Left;
-        public int Top;
-        public int Right;
-        public int Bottom;
-    }
 }

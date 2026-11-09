@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Automation;
 using System.Windows.Controls;
 using DesktopClock.Properties;
 
@@ -57,37 +56,10 @@ public partial class CountdownTargetEditor : UserControl
     {
         foreach (var (name, getTarget) in Presets)
         {
-            var title = new TextBlock
-            {
-                Text = name,
-                FontWeight = FontWeights.SemiBold,
-            };
-
-            var example = new TextBlock
-            {
-                Text = getTarget().ToString(FormatPresets.ShortDateTimePattern(CultureInfo.CurrentCulture)),
-                FontSize = 12,
-                TextTrimming = TextTrimming.CharacterEllipsis,
-            };
-            example.SetResourceReference(ForegroundProperty, "TextSecondaryBrush");
-
-            var content = new StackPanel();
-            content.Children.Add(title);
-            content.Children.Add(example);
-
-            var button = new Button
-            {
-                Content = content,
-                MaxWidth = 280,
-                HorizontalContentAlignment = HorizontalAlignment.Left,
-                Margin = new Thickness(0, 0, 8, 4),
-            };
-            AutomationProperties.SetName(button, name);
+            var example = getTarget().ToString(FormatPresets.ShortDateTimePattern(CultureInfo.CurrentCulture));
 
             // Saved as a wall-clock time like a typed date, since a local one is saved with its UTC offset and would move after a time zone change.
-            button.Click += (_, _) => Settings.Default.CountdownTo = DateTime.SpecifyKind(getTarget(), DateTimeKind.Unspecified);
-
-            PresetsPanel.Children.Add(button);
+            PresetButton.Add(PresetsPanel, name, example, () => Settings.Default.CountdownTo = DateTime.SpecifyKind(getTarget(), DateTimeKind.Unspecified));
         }
     }
 

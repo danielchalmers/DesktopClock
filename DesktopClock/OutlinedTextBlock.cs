@@ -14,7 +14,8 @@ public class OutlinedTextBlock : FrameworkElement
 {
     private void UpdatePen()
     {
-        _Pen = new Pen(Stroke, StrokeThickness)
+        // Twice as thick, since the outline is clipped to outside the text and the inner half is hidden.
+        _Pen = new Pen(Stroke, StrokeThickness * 2)
         {
             DashCap = PenLineCap.Round,
             EndLineCap = PenLineCap.Round,
@@ -22,25 +23,8 @@ public class OutlinedTextBlock : FrameworkElement
             StartLineCap = PenLineCap.Round
         };
 
-        if (StrokePosition is StrokePosition.Outside or StrokePosition.Inside)
-        {
-            _Pen.Thickness = StrokeThickness * 2;
-        }
-
         InvalidateVisual();
     }
-
-    public StrokePosition StrokePosition
-    {
-        get => (StrokePosition)GetValue(StrokePositionProperty);
-        set => SetValue(StrokePositionProperty, value);
-    }
-
-    public static readonly DependencyProperty StrokePositionProperty =
-        DependencyProperty.Register("StrokePosition",
-            typeof(StrokePosition),
-            typeof(OutlinedTextBlock),
-            new FrameworkPropertyMetadata(StrokePosition.Outside, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
       "Fill",
@@ -212,22 +196,10 @@ public class OutlinedTextBlock : FrameworkElement
             return;
         }
 
-        if (StrokePosition == StrokePosition.Outside)
-        {
-            _clipGeometry ??= BuildOutsideClipGeometry();
-            drawingContext.PushClip(_clipGeometry);
-        }
-        else if (StrokePosition == StrokePosition.Inside)
-        {
-            drawingContext.PushClip(_TextGeometry);
-        }
-
+        _clipGeometry ??= BuildOutsideClipGeometry();
+        drawingContext.PushClip(_clipGeometry);
         drawingContext.DrawGeometry(null, _Pen, _TextGeometry);
-
-        if (StrokePosition is StrokePosition.Outside or StrokePosition.Inside)
-        {
-            drawingContext.Pop();
-        }
+        drawingContext.Pop();
     }
 
     protected override Size MeasureOverride(Size availableSize)
@@ -341,15 +313,7 @@ public class OutlinedTextBlock : FrameworkElement
     private Geometry BuildOutsideClipGeometry()
     {
         // https://stackoverflow.com/questions/93650/apply-stroke-to-a-textblock-in-wpf/35262509#comment106994536_49636033.
-        //var boundsGeo = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
         var boundsGeo = new RectangleGeometry(new Rect(-(2 * StrokeThickness), -(2 * StrokeThickness), ActualWidth + (4 * StrokeThickness), ActualHeight + (4 * StrokeThickness)));
         return Geometry.Combine(boundsGeo, _TextGeometry, GeometryCombineMode.Exclude, null);
     }
-}
-
-public enum StrokePosition
-{
-    Center,
-    Outside,
-    Inside
 }
