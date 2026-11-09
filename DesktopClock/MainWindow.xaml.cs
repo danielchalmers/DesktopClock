@@ -36,6 +36,7 @@ public partial class MainWindow : Window
     private bool _toldHowToShow;
     private FullscreenHideManager _fullscreenHideManager;
     private DesktopPinner _desktopPinner;
+    private readonly WheelNotches _wheelNotches = new();
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     /// <summary>
@@ -495,9 +496,10 @@ public partial class MainWindow : Window
         // Resize the window when scrolling if the Ctrl key is pressed.
         if (Keyboard.Modifiers == ModifierKeys.Control)
         {
-            // Amount of scroll that occurred and whether it was positive or negative.
-            var steps = e.Delta / (double)Mouse.MouseWheelDeltaForOneLine;
-            Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, steps);
+            // A fraction of a notch on its own rounds back to the same height, so touchpads only resize once they add up to a notch.
+            var notches = _wheelNotches.Add(e.Delta);
+            if (notches != 0)
+                Settings.Default.Height = HeightScaleConverter.ScaleHeight(Settings.Default.Height, notches);
         }
     }
 
