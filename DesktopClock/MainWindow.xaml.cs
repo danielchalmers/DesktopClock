@@ -137,9 +137,6 @@ public partial class MainWindow : Window
     /// </summary>
     private void ThemeManager_ThemeChanged(object sender, EventArgs e)
     {
-        if (_trayIcon == null)
-            return;
-
         // A new instance (x:Shared="False") resolves its DynamicResource colors against the current palette when it next opens.
         var menu = Resources["MainContextMenu"] as ContextMenu;
         menu.DataContext = this;
@@ -239,7 +236,6 @@ public partial class MainWindow : Window
         _systemClockTimer.SecondChanged -= SystemClockTimer_SecondChanged;
         _systemClockTimer.Dispose();
 
-        _trayIcon?.Dispose();
         _soundPlayer?.Dispose();
         _desktopPinner?.Dispose();
 
@@ -254,23 +250,20 @@ public partial class MainWindow : Window
 
     private void ConfigureTrayIcon()
     {
-        if (_trayIcon == null)
+        // Construct the tray icon from the XAML resources.
+        _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
+        _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
+        _trayIcon.ContextMenu.DataContext = this;
+        try
         {
-            // Construct the tray icon from the XAML resources.
-            _trayIcon = Resources["TrayIcon"] as TaskbarIcon;
-            _trayIcon.ContextMenu = Resources["MainContextMenu"] as ContextMenu;
-            _trayIcon.ContextMenu.DataContext = this;
-            try
-            {
-                _trayIcon.ForceCreate(enablesEfficiencyMode: false);
-            }
-            catch (InvalidOperationException)
-            {
-                // The taskbar isn't there yet, such as early in sign-in, and the icon is added once it starts.
-            }
-
-            _trayIcon.TrayLeftMouseDoubleClick += (_, _) => ShowClock();
+            _trayIcon.ForceCreate(enablesEfficiencyMode: false);
         }
+        catch (InvalidOperationException)
+        {
+            // The taskbar isn't there yet, such as early in sign-in, and the icon is added once it starts.
+        }
+
+        _trayIcon.TrayLeftMouseDoubleClick += (_, _) => ShowClock();
     }
 
     /// <summary>
@@ -566,7 +559,7 @@ public partial class MainWindow : Window
         if (Settings.CanBeSaved)
             Settings.Default.Save();
 
-        _trayIcon?.Dispose();
+        _trayIcon.Dispose();
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
