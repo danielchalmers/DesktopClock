@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using Microsoft.Win32;
 
@@ -335,8 +334,13 @@ public static class NavButton
     public static void SetIsActive(DependencyObject obj, bool value) => obj.SetValue(IsActiveProperty, value);
 }
 
-public partial class SettingsWindowViewModel : ObservableObject
+public sealed class SettingsWindowViewModel : INotifyPropertyChanged
 {
+    // Nothing here changes after it's created, but bindings to an object without this event fall back to PropertyDescriptor change tracking, which is slower and can keep the object alive after the window closes.
+#pragma warning disable CS0067 // The event 'SettingsWindowViewModel.PropertyChanged' is never used.
+    public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
+
     // Enumerating fonts and time zones costs ~100 ms and the results don't change within a session, so they're fetched once on a background thread that the app kicks off while idle after startup.
     private static readonly Lazy<Task<(IList<string> Fonts, IList<TimeZoneInfo> TimeZones)>> _systemLists =
         new(() => Task.Run(() => (
@@ -350,9 +354,16 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// </summary>
     public string AppVersion { get; }
 
+    public ICommand ResetWavFilePathCommand { get; }
+    public ICommand ResetWavFileIntervalCommand { get; }
+    public ICommand ResetBackgroundImagePathCommand { get; }
+
     public SettingsWindowViewModel(Settings settings)
     {
         Settings = settings;
+        ResetWavFilePathCommand = new RelayCommand(ResetWavFilePath);
+        ResetWavFileIntervalCommand = new RelayCommand(ResetWavFileInterval);
+        ResetBackgroundImagePathCommand = new RelayCommand(ResetBackgroundImagePath);
         AppVersion = FileVersionInfo.GetVersionInfo(App.MainFileInfo.FullName).FileVersion;
         FontStyles =
         [
@@ -450,7 +461,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// Clears the chime sound file path.
     /// </summary>
-    [RelayCommand]
     public void ResetWavFilePath()
     {
         Settings.WavFilePath = string.Empty;
@@ -459,7 +469,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// Resets the chime interval to the default value.
     /// </summary>
-    [RelayCommand]
     public void ResetWavFileInterval()
     {
         Settings.WavFileInterval = default;
@@ -468,7 +477,6 @@ public partial class SettingsWindowViewModel : ObservableObject
     /// <summary>
     /// Clears the background image path.
     /// </summary>
-    [RelayCommand]
     public void ResetBackgroundImagePath()
     {
         Settings.BackgroundImagePath = string.Empty;

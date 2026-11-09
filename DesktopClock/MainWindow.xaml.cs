@@ -9,8 +9,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using DesktopClock.Properties;
 using DesktopClock.Utilities;
 using H.NotifyIcon;
@@ -22,8 +20,7 @@ namespace DesktopClock;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-[ObservableObject]
-public partial class MainWindow : Window
+public partial class MainWindow : Window, INotifyPropertyChanged
 {
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
@@ -38,14 +35,32 @@ public partial class MainWindow : Window
     private DesktopPinner _desktopPinner;
     private readonly WheelNotches _wheelNotches = new();
 
+#pragma warning disable CS0067 // The event 'MainWindow.PropertyChanged' is never used. Handled by Fody.
+    public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
+
     /// <summary>
     /// The current date and time in the selected time zone, or the formatted countdown text.
     /// </summary>
-    [ObservableProperty]
-    private string _currentTimeOrCountdownString;
+    public string CurrentTimeOrCountdownString { get; set; }
+
+    // The menu shared by the clock and the tray icon binds to these.
+    public ICommand CopyToClipboardCommand { get; }
+    public ICommand HideForNowCommand { get; }
+    public ICommand OpenSettingsWindowCommand { get; }
+    public ICommand OpenReleasesPageCommand { get; }
+    public ICommand OpenIssueTrackerCommand { get; }
+    public ICommand ExitCommand { get; }
 
     public MainWindow()
     {
+        CopyToClipboardCommand = new RelayCommand(CopyToClipboard);
+        HideForNowCommand = new RelayCommand(HideForNow);
+        OpenSettingsWindowCommand = new RelayCommand(OpenSettingsWindow);
+        OpenReleasesPageCommand = new RelayCommand(OpenReleasesPage);
+        OpenIssueTrackerCommand = new RelayCommand(OpenIssueTracker);
+        ExitCommand = new RelayCommand(Exit);
+
         InitializeComponent();
         DataContext = this;
 
@@ -144,7 +159,6 @@ public partial class MainWindow : Window
     /// <summary>
     /// Copies the current time string to the clipboard.
     /// </summary>
-    [RelayCommand]
     public void CopyToClipboard()
     {
         try
@@ -160,7 +174,6 @@ public partial class MainWindow : Window
     /// <summary>
     /// Minimizes the window.
     /// </summary>
-    [RelayCommand]
     public void HideForNow()
     {
         this.HideFromScreen();
@@ -195,19 +208,16 @@ public partial class MainWindow : Window
     /// <summary>
     /// Opens a new settings window or activates the existing one.
     /// </summary>
-    [RelayCommand]
     public void OpenSettingsWindow()
     {
         App.ShowSingletonWindow<SettingsWindow>();
     }
 
-    [RelayCommand]
     public void OpenReleasesPage()
     {
         OpenUrl("https://github.com/danielchalmers/DesktopClock/releases");
     }
 
-    [RelayCommand]
     public void OpenIssueTracker()
     {
         OpenUrl("https://github.com/danielchalmers/DesktopClock/issues");
@@ -216,7 +226,6 @@ public partial class MainWindow : Window
     /// <summary>
     /// Closes the app.
     /// </summary>
-    [RelayCommand]
     public void Exit()
     {
         Application.Current.Shutdown();
