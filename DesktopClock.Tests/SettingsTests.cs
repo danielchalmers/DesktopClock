@@ -113,6 +113,21 @@ public class SettingsPersistenceTests
     }
 
     [Fact]
+    public void Save_AfterTheFolderIsGone_ShouldFailWithoutThrowing()
+    {
+        // A clock on a USB stick that was unplugged: turning the file watcher back on after the failed save used to throw, which showed the crash message.
+        var folder = Path.Combine(Path.GetTempPath(), "DesktopClock.Tests", Guid.NewGuid().ToString("N"));
+        using var _ = new TempSettingsFileScope(folder);
+
+        var settings = CreateSettingsInstance();
+        Assert.True(settings.Save());
+
+        Directory.Delete(folder, true);
+
+        Assert.False(settings.Save());
+    }
+
+    [Fact]
     public void ChangingASetting_ShouldSaveItShortlyAfterwards()
     {
         using var _ = new TempSettingsFileScope();
@@ -347,12 +362,17 @@ public class SettingsPersistenceTests
     private sealed class TempSettingsFileScope : IDisposable
     {
         private readonly string _originalFilePath;
+        private readonly string _ownFolder;
 
-        public TempSettingsFileScope()
+        /// <summary>
+        /// Points settings at a new file in the shared test folder, or in the given folder, which is created now and deleted afterwards.
+        /// </summary>
+        public TempSettingsFileScope(string ownFolder = null)
         {
             _originalFilePath = Settings.FilePath;
+            _ownFolder = ownFolder;
 
-            var tempDir = Path.Combine(Path.GetTempPath(), "DesktopClock.Tests");
+            var tempDir = ownFolder ?? Path.Combine(Path.GetTempPath(), "DesktopClock.Tests");
             Directory.CreateDirectory(tempDir);
             var tempFilePath = Path.Combine(tempDir, $"{Guid.NewGuid():N}.settings");
 
@@ -368,6 +388,9 @@ public class SettingsPersistenceTests
             {
                 if (File.Exists(Settings.FilePath))
                     File.Delete(Settings.FilePath);
+
+                if (_ownFolder != null && Directory.Exists(_ownFolder))
+                    Directory.Delete(_ownFolder, true);
             }
             finally
             {

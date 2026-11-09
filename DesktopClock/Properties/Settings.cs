@@ -40,7 +40,7 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     private Settings()
     {
         // Watch for changes in the settings file.
-        _watcher = new(App.MainFileInfo.DirectoryName, Path.GetFileName(FilePath))
+        _watcher = new(Path.GetDirectoryName(FilePath), Path.GetFileName(FilePath))
         {
             EnableRaisingEvents = true,
         };
@@ -510,10 +510,8 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     /// </summary>
     public bool Save()
     {
-        var shouldResumeWatcher = _watcher.EnableRaisingEvents;
-
-        if (shouldResumeWatcher)
-            _watcher.EnableRaisingEvents = false;
+        // Stop watching while saving, so this save isn't read back in as an edit.
+        _watcher.EnableRaisingEvents = false;
 
         try
         {
@@ -539,11 +537,24 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
         }
         finally
         {
-            if (shouldResumeWatcher)
-                _watcher.EnableRaisingEvents = true;
+            TryWatchFile();
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Starts watching the settings file for edits made outside the app, unless its folder can't be watched right now, such as on a USB stick that was unplugged. The clock then runs without picking up those edits, and the next save tries again.
+    /// </summary>
+    private void TryWatchFile()
+    {
+        try
+        {
+            _watcher.EnableRaisingEvents = true;
+        }
+        catch (IOException)
+        {
+        }
     }
 
     /// <summary>
