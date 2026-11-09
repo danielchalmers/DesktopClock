@@ -672,12 +672,6 @@
                 <StackPanel Style="{StaticResource CardBodyPanel}">
                     <StackPanel>
                         <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/CommunityToolkit/dotnet"
-                                       RequestNavigate="Hyperlink_RequestNavigate">
-                                CommunityToolkit
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
                             <Hyperlink NavigateUri="https://github.com/Fody/Costura"
                                        RequestNavigate="Hyperlink_RequestNavigate">
                                 Costura.Fody
