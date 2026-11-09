@@ -15,7 +15,6 @@ public static class ThemeManager
 {
     private const string PaletteFolder = "Themes/";
     private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
-    private const int DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1 = 19;
 
     private static readonly Uri LightPaletteUri = new(PaletteFolder + "LightPalette.xaml", UriKind.Relative);
     private static readonly Uri DarkPaletteUri = new(PaletteFolder + "DarkPalette.xaml", UriKind.Relative);
@@ -50,17 +49,7 @@ public static class ThemeManager
             return;
 
         var useDark = IsDarkTheme ? 1 : 0;
-
-        try
-        {
-            // Try the documented attribute first, then the pre-20H1 value for older Windows 10 builds.
-            if (DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDark, sizeof(int)) != 0)
-                DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1, ref useDark, sizeof(int));
-        }
-        catch
-        {
-            // DWM isn't available; keep the default title bar.
-        }
+        DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDark, sizeof(int));
     }
 
     /// <summary>
