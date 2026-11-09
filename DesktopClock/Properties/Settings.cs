@@ -562,22 +562,34 @@ public sealed class Settings : INotifyPropertyChanged, IDisposable
     {
         var tempPath = path + ".tmp";
 
-        using (var stream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
-        using (var writer = new StreamWriter(stream))
+        try
         {
-            writer.Write(contents);
-            writer.Flush();
+            using (var stream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
+            using (var writer = new StreamWriter(stream))
+            {
+                writer.Write(contents);
+                writer.Flush();
 
-            // Make sure the new contents are on disk before they replace the old ones.
-            stream.Flush(flushToDisk: true);
+                // Make sure the new contents are on disk before they replace the old ones.
+                stream.Flush(flushToDisk: true);
+            }
+
+            // Swap it in with a single rename; File.Replace isn't safe here because it renames the old file away first, so being killed in between leaves no settings file at all.
+            if (!MoveFileEx(tempPath, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
+                throw new IOException($"Couldn't replace {path}.", Marshal.GetHRForLastWin32Error());
         }
-
-        // Swap it in with a single rename; File.Replace isn't safe here because it renames the old file away first, so being killed in between leaves no settings file at all.
-        if (!MoveFileEx(tempPath, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
+        catch
         {
-            var error = Marshal.GetHRForLastWin32Error();
-            File.Delete(tempPath);
-            throw new IOException($"Couldn't replace {path}.", error);
+            // Don't leave the temporary file behind when it couldn't be written or swapped in, such as on a full disk.
+            try
+            {
+                File.Delete(tempPath);
+            }
+            catch
+            {
+            }
+
+            throw;
         }
     }
 
