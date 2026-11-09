@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Microsoft.Win32;
+using static DesktopClock.NativeMethods;
 
 namespace DesktopClock.Utilities;
 
@@ -162,20 +163,14 @@ public static class ThemeManager
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attribute, ref int value, int size);
 
     [DllImport("user32.dll")]
-    private static extern bool GetClientRect(IntPtr hwnd, out RECT rect);
+    private static extern bool GetClientRect(IntPtr hwnd, out NativeRect rect);
 
     [DllImport("user32.dll")]
-    private static extern int FillRect(IntPtr hdc, ref RECT rect, IntPtr brush);
+    private static extern int FillRect(IntPtr hdc, ref NativeRect rect, IntPtr brush);
 
     [DllImport("gdi32.dll")]
     private static extern IntPtr CreateSolidBrush(uint colorRef);
 
     [DllImport("gdi32.dll")]
     private static extern bool DeleteObject(IntPtr obj);
-
-    [StructLayout(LayoutKind.Sequential)]
-    private struct RECT
-    {
-        public int Left, Top, Right, Bottom;
-    }
 }
