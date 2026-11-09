@@ -48,6 +48,9 @@ public class ColorTextConverterTests
     [InlineData("#FF000")]
     [InlineData("#GG0000")]
     [InlineData("Reddish")]
+    [InlineData("sc#")]
+    [InlineData("sc#1e999,0,0")]
+    [InlineData("ContextColor foo 1,2,3")]
     public void ConvertBack_RejectsUnreadableText(string text)
     {
         Assert.Equal(DependencyProperty.UnsetValue, new ColorTextConverter().ConvertBack(text, typeof(Color), null, Culture));

@@ -35,9 +35,9 @@ public class ColorTextConverter : MarkupExtension, IValueConverter
             _typedText = text;
             return _typedColor;
         }
-        catch (FormatException)
+        catch (Exception)
         {
-            // Unreadable text, like a half-typed color, leaves the color as it was and marks the box invalid.
+            // Unreadable text, like a half-typed color, leaves the color as it was and marks the box invalid. The error isn't always a FormatException: "sc#" gives an InvalidOperationException, and WPF doesn't catch what a converter throws.
             return DependencyProperty.UnsetValue;
         }
     }
