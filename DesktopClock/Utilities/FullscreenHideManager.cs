@@ -43,7 +43,7 @@ public sealed class FullscreenHideManager
         if (_window.Dispatcher.CheckAccess())
             Update();
         else
-            _window.Dispatcher.Invoke(Update);
+            _window.Dispatcher.BeginInvoke(new Action(Update));
     }
 
     private void Hide()

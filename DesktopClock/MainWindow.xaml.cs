@@ -334,6 +334,9 @@ public partial class MainWindow : Window
     /// <summary>
     /// Runs when the system clock timer ticks each second.
     /// </summary>
+    /// <remarks>
+    /// This runs on the timer's thread, so work for the window goes to the UI thread with BeginInvoke. Invoke would wait for it, and throws when the app shuts down first, such as on a tick during the save on exit.
+    /// </remarks>
     private void SystemClockTimer_SecondChanged(object sender, DateTimeOffset second)
     {
         UpdateTimeString(second);
@@ -421,12 +424,12 @@ public partial class MainWindow : Window
         if (!Settings.Default.Topmost)
             return;
 
-        Dispatcher.Invoke(() =>
+        Dispatcher.BeginInvoke(new Action(() =>
         {
             // Check again on the UI thread, because Stay on top may have been turned off while this was queued, and raising a window that isn't topmost would make it topmost again.
             if (Topmost && IsVisible && WindowState != WindowState.Minimized)
                 this.ReassertTopmost();
-        });
+        }));
     }
 
     private void TryShiftPixels(DateTimeOffset second)
@@ -434,13 +437,13 @@ public partial class MainWindow : Window
         if (!Settings.Default.BurnInMitigation || second.Second != 0)
             return;
 
-        Dispatcher.Invoke(() =>
+        Dispatcher.BeginInvoke(new Action(() =>
         {
             if (!IsVisible || WindowState == WindowState.Minimized)
                 return;
 
             PixelShifter?.ApplyShift(this);
-        });
+        }));
     }
 
     /// <summary>
