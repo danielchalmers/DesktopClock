@@ -37,7 +37,6 @@ public partial class MainWindow : Window
     private FullscreenHideManager _fullscreenHideManager;
     private DesktopPinner _desktopPinner;
     private readonly WheelNotches _wheelNotches = new();
-    private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
     /// <summary>
     /// The current date and time in the selected time zone, or the formatted countdown text.
@@ -52,8 +51,7 @@ public partial class MainWindow : Window
 
         _timeZone = Settings.Default.TimeZoneInfo;
 
-        _settingsPropertyChanged = (s, e) => Dispatcher.Invoke(() => Settings_PropertyChanged(s, e));
-        Settings.Default.PropertyChanged += _settingsPropertyChanged;
+        Settings.Default.PropertyChanged += Settings_PropertyChanged;
 
         ApplyWindowVisibilitySettings();
 
@@ -228,7 +226,7 @@ public partial class MainWindow : Window
 
     protected override void OnClosed(EventArgs e)
     {
-        Settings.Default.PropertyChanged -= _settingsPropertyChanged;
+        Settings.Default.PropertyChanged -= Settings_PropertyChanged;
         ThemeManager.ThemeChanged -= ThemeManager_ThemeChanged;
         SystemEvents.TimeChanged -= SystemEvents_TimeChanged;
         SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
