@@ -325,7 +325,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Settings.TextColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={local:ColorTextConverter}}" />
                         <Button Grid.Column="2"
                                 Style="{StaticResource ColorSwatchButton}"
                                 AutomationProperties.Name="{local:Loc TextColorPick}"
@@ -382,7 +382,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
-                                 Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Settings.OuterColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={local:ColorTextConverter}}" />
                         <Button Grid.Column="2"
                                 Style="{StaticResource ColorSwatchButton}"
                                 AutomationProperties.Name="{local:Loc OuterColorPick}"
