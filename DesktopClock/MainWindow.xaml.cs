@@ -9,7 +9,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
 using DesktopClock.Properties;
 using DesktopClock.Utilities;
 using H.NotifyIcon;
@@ -21,8 +20,7 @@ namespace DesktopClock;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-[ObservableObject]
-public partial class MainWindow : Window
+public partial class MainWindow : Window, INotifyPropertyChanged
 {
     private readonly SystemClockTimer _systemClockTimer;
     private TaskbarIcon _trayIcon;
@@ -38,11 +36,14 @@ public partial class MainWindow : Window
     private readonly WheelNotches _wheelNotches = new();
     private readonly PropertyChangedEventHandler _settingsPropertyChanged;
 
+#pragma warning disable CS0067 // The event 'MainWindow.PropertyChanged' is never used. Handled by Fody.
+    public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
+
     /// <summary>
     /// The current date and time in the selected time zone, or the formatted countdown text.
     /// </summary>
-    [ObservableProperty]
-    private string _currentTimeOrCountdownString;
+    public string CurrentTimeOrCountdownString { get; set; }
 
     // The menu shared by the clock and the tray icon binds to these.
     public ICommand CopyToClipboardCommand { get; }
