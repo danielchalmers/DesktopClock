@@ -3,7 +3,7 @@
 [![Latest Release](https://img.shields.io/github/release/danielchalmers/DesktopClock?include_prereleases)](https://github.com/danielchalmers/DesktopClock/releases)
 [![License](https://img.shields.io/github/license/danielchalmers/DesktopClock)](LICENSE)
 
-DesktopClock is a free, open-source digital clock widget for Windows. It keeps the time, a countdown, or another time zone visible on your desktop without opening a full calendar or timer app.
+DesktopClock is a free, open-source digital clock widget for Windows 10 and 11. It keeps the time, a countdown, or another time zone visible on your desktop without opening a full calendar or timer app.
 
 <img width="2400" height="1470" alt="DesktopClock showing themed clocks, the right-click menu, and the Settings window's format options" src="https://github.com/user-attachments/assets/8a3b198b-1793-4b8d-b31a-b72dba0abca7" />
 
@@ -11,6 +11,7 @@ DesktopClock is a free, open-source digital clock widget for Windows. It keeps t
 
 - Fully custom date and time format with a live preview, including seconds, 12/24-hour, etc.
 - Show any time zone, or count down to a date with an optional sound.
+- Run several clocks at once, each with its own format, time zone, and theme.
 - Theme presets, custom fonts, colors, opacity, and background images.
 - Run on startup, chime on an interval, and burn-in mitigation for OLED screens.
 - Follows your Windows language, with translations for 16 languages.
@@ -20,3 +21,8 @@ DesktopClock is a free, open-source digital clock widget for Windows. It keeps t
 Get the installer (`.msi`) or portable (`.zip`) version from the [Releases page](https://github.com/danielchalmers/DesktopClock/releases). x64 and ARM builds are available.
 
 ![Release download options showing the installer and portable builds](https://github.com/user-attachments/assets/d117e992-8d83-4df9-ad69-756d816b700c)
+
+## 🧰 More Windows tools
+
+- [Network Monitor](https://github.com/danielchalmers/Network-Monitor): live ping, download, and upload speed in a small desktop widget.
+- [Radial Actions](https://github.com/danielchalmers/RadialActions): a pie menu that launches apps, files, and shortcuts from a global hotkey.
