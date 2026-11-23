@@ -614,7 +614,7 @@
                         <TextBlock>
                             <Hyperlink NavigateUri="https://play.google.com/store/apps/details?id=com.danielchalmers.journalapp"
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                Good Diary
+                                Journal App
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock Text="{local:Loc GoodDiaryDescription}"
@@ -630,9 +630,9 @@
                                    Margin="0,0,0,16"
                                    Style="{StaticResource DescriptionTextBlock}" />
                         <TextBlock>
-                            <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryReplay"
+                            <Hyperlink NavigateUri="https://github.com/danielchalmers/SentryDeck"
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                Sentry Replay
+                                Sentry Deck
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock Text="{local:Loc SentryReplayDescription}"
